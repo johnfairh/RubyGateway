@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "CRuby",
+        "repositoryURL": "/Users/johnf/project/CRuby",
+        "state": {
+          "branch": null,
+          "revision": "b71588a33d14b2def07be57bfdb76c0dd27cb9f0",
+          "version": "0.9.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
