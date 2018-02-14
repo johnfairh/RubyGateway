@@ -41,6 +41,7 @@
 		0249234E20335B3D00E3AAF4 /* LinuxMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LinuxMain.swift; path = Tests/LinuxMain.swift; sourceTree = "<group>"; };
 		0249235020335C0D00E3AAF4 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		024923532034AA3E00E3AAF4 /* backwards.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = backwards.rb; path = Tests/TMLRubyTests/Fixtures/backwards.rb; sourceTree = SOURCE_ROOT; };
+		026E20072034B3A400543EB9 /* CRuby.swift.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CRuby.swift.txt; sourceTree = "<group>"; };
 		OBJ_11 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		"TMLRuby::TMLRuby::Product" /* TMLRuby.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TMLRuby.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
+				026E20072034B3A400543EB9 /* CRuby.swift.txt */,
 				OBJ_7 /* Sources */,
 				OBJ_12 /* Tests */,
 				OBJ_16 /* Dependencies */,
