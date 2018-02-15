@@ -21,3 +21,10 @@ extension RbError: CustomStringConvertible {
         }
     }
 }
+
+public struct RbException: Error {
+    public let value: VALUE
+    public init(rubyValue: VALUE) {
+        value = rubyValue
+    }
+}

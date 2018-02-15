@@ -11,6 +11,12 @@ import TMLRuby
 
 class TestVM: XCTestCase {
 
+    func testSanity() {
+        print("Size of VALUE is \(SIZEOF_VALUE)")
+        print("Uint.max is \(UInt.max)")
+        print("PRI_VALUE_PREFIX is \(PRI_VALUE_PREFIX)")
+    }
+
     /// Check we can bring up Ruby.
     func testInit() {
         let _ = Helpers.ruby
@@ -48,6 +54,17 @@ class TestVM: XCTestCase {
             // OK
         } catch {
             XCTFail("Unexpected error type")
+        }
+    }
+
+    func testRequireException() {
+        let vm = Helpers.ruby
+
+        do {
+            let rc = try vm.require(filename: "pddddp")
+            XCTFail("vm.require unexpectedly passed, rc=\(rc)")
+        } catch {
+            print("Got expected exception: \(error)")
         }
     }
 

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		022F3AAA2035F366009E69BE /* TMLRubyThunks.m in Sources */ = {isa = PBXBuildFile; fileRef = 022F3AA82035F366009E69BE /* TMLRubyThunks.m */; };
+		022F3AAF2035F839009E69BE /* TMLRuby.h in Headers */ = {isa = PBXBuildFile; fileRef = 022F3AAB2035F548009E69BE /* TMLRuby.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		022F3AB02035F843009E69BE /* TMLRubyThunks.h in Headers */ = {isa = PBXBuildFile; fileRef = 022F3AA92035F366009E69BE /* TMLRubyThunks.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		022F3AB220360B9F009E69BE /* CRubyMacros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3AB120360B9F009E69BE /* CRubyMacros.swift */; };
 		024923482031EE0400E3AAF4 /* RbVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024923462031EDE000E3AAF4 /* RbVM.swift */; };
 		0249234B20334AE500E3AAF4 /* RbError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0249234920334ADE00E3AAF4 /* RbError.swift */; };
 		0249234D20335ADB00E3AAF4 /* TestVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0249234C20335ADB00E3AAF4 /* TestVM.swift */; };
@@ -35,6 +39,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		022F3AA82035F366009E69BE /* TMLRubyThunks.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; name = TMLRubyThunks.m; path = TMLRubyThunks/TMLRubyThunks.m; sourceTree = SOURCE_ROOT; };
+		022F3AA92035F366009E69BE /* TMLRubyThunks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TMLRubyThunks.h; path = TMLRubyThunks/TMLRubyThunks.h; sourceTree = SOURCE_ROOT; };
+		022F3AAB2035F548009E69BE /* TMLRuby.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TMLRuby.h; path = TMLRubyThunks/TMLRuby.h; sourceTree = SOURCE_ROOT; };
+		022F3AB120360B9F009E69BE /* CRubyMacros.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRubyMacros.swift; sourceTree = "<group>"; };
 		024923462031EDE000E3AAF4 /* RbVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbVM.swift; sourceTree = "<group>"; };
 		0249234920334ADE00E3AAF4 /* RbError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbError.swift; sourceTree = "<group>"; };
 		0249234C20335ADB00E3AAF4 /* TestVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVM.swift; sourceTree = "<group>"; };
@@ -76,6 +84,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		022F3AAC2035F5F6009E69BE /* TMLRubyThunks */ = {
+			isa = PBXGroup;
+			children = (
+				022F3AA82035F366009E69BE /* TMLRubyThunks.m */,
+				022F3AA92035F366009E69BE /* TMLRubyThunks.h */,
+				022F3AAB2035F548009E69BE /* TMLRuby.h */,
+			);
+			name = TMLRubyThunks;
+			path = Sources/TMLRubyThunks;
+			sourceTree = SOURCE_ROOT;
+		};
 		024923522034AA2B00E3AAF4 /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_8 /* TMLRuby */,
+				022F3AAC2035F5F6009E69BE /* TMLRubyThunks */,
 				OBJ_10 /* TMLRubyClient */,
 			);
 			name = Sources;
@@ -157,12 +177,25 @@
 			children = (
 				024923462031EDE000E3AAF4 /* RbVM.swift */,
 				0249234920334ADE00E3AAF4 /* RbError.swift */,
+				022F3AB120360B9F009E69BE /* CRubyMacros.swift */,
 			);
 			name = TMLRuby;
 			path = Sources/TMLRuby;
 			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		022F3AAE2035F82F009E69BE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				022F3AAF2035F839009E69BE /* TMLRuby.h in Headers */,
+				022F3AB02035F843009E69BE /* TMLRubyThunks.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		"TMLRuby::SwiftPMPackageDescription" /* TMLRubyPackageDescription */ = {
@@ -183,6 +216,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = OBJ_46 /* Build configuration list for PBXNativeTarget "TMLRuby" */;
 			buildPhases = (
+				022F3AAE2035F82F009E69BE /* Headers */,
 				OBJ_49 /* Sources */,
 				OBJ_51 /* Frameworks */,
 			);
@@ -236,6 +270,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 9999;
+				TargetAttributes = {
+					"TMLRuby::TMLRuby" = {
+						LastSwiftMigration = 0920;
+					};
+				};
 			};
 			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "TMLRuby" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -289,6 +328,8 @@
 			files = (
 				0249234B20334AE500E3AAF4 /* RbError.swift in Sources */,
 				024923482031EE0400E3AAF4 /* RbVM.swift in Sources */,
+				022F3AB220360B9F009E69BE /* CRubyMacros.swift in Sources */,
+				022F3AAA2035F366009E69BE /* TMLRubyThunks.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,12 +482,16 @@
 		OBJ_47 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
+				HEADER_SEARCH_PATHS = "${SRCROOT}/CRuby";
 				INFOPLIST_FILE = TMLRuby.xcodeproj/TMLRuby_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = TMLRuby;
@@ -454,6 +499,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "${SRCROOT}/CRuby";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGET_NAME = TMLRuby;
 			};
@@ -462,12 +508,16 @@
 		OBJ_48 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
+				HEADER_SEARCH_PATHS = "${SRCROOT}/CRuby";
 				INFOPLIST_FILE = TMLRuby.xcodeproj/TMLRuby_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = TMLRuby;
