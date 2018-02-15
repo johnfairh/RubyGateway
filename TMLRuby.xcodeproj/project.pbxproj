@@ -39,9 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		022F3AA82035F366009E69BE /* TMLRubyThunks.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; name = TMLRubyThunks.m; path = TMLRubyThunks/TMLRubyThunks.m; sourceTree = SOURCE_ROOT; };
-		022F3AA92035F366009E69BE /* TMLRubyThunks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TMLRubyThunks.h; path = TMLRubyThunks/TMLRubyThunks.h; sourceTree = SOURCE_ROOT; };
-		022F3AAB2035F548009E69BE /* TMLRuby.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TMLRuby.h; path = TMLRubyThunks/TMLRuby.h; sourceTree = SOURCE_ROOT; };
+		022F3AA82035F366009E69BE /* TMLRubyThunks.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = TMLRubyThunks.m; sourceTree = "<group>"; };
+		022F3AA92035F366009E69BE /* TMLRubyThunks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMLRubyThunks.h; sourceTree = "<group>"; };
+		022F3AAB2035F548009E69BE /* TMLRuby.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TMLRuby.h; path = Sources/TMLRubyThunks/TMLRuby.h; sourceTree = SOURCE_ROOT; };
 		022F3AB120360B9F009E69BE /* CRubyMacros.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRubyMacros.swift; sourceTree = "<group>"; };
 		024923462031EDE000E3AAF4 /* RbVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbVM.swift; sourceTree = "<group>"; };
 		0249234920334ADE00E3AAF4 /* RbError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbError.swift; sourceTree = "<group>"; };
