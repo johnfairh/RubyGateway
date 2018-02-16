@@ -3,11 +3,11 @@
     "pins": [
       {
         "package": "CRuby",
-        "repositoryURL": "/Users/johnf/project/CRuby",
+        "repositoryURL": "/Users/johnf/project/TMLRuby/CRuby",
         "state": {
           "branch": null,
-          "revision": "b71588a33d14b2def07be57bfdb76c0dd27cb9f0",
-          "version": "0.9.0"
+          "revision": "e34d8056bf4064025b9ee47851b6b5237ce7f6b5",
+          "version": "0.9.3"
         }
       }
     ]
