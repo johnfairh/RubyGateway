@@ -8,6 +8,7 @@
 
 import Foundation
 import CRuby
+import TMLRubyHelpers
 
 // Carefully add all the numeric shit, add tests
 // Continue reviewing ruby.h for missing parts

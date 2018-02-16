@@ -6,6 +6,7 @@
 //
 
 import CRuby
+import TMLRubyHelpers
 
 // Various useful stuff from ruby.h that didn't make it through the clang importer.
 

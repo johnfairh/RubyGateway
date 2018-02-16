@@ -4,6 +4,7 @@
 //
 //  Created by John Fairhurst on 13/02/2018.
 //
+import CRuby
 
 /// Errors raised by `TMLRuby` objects.
 public enum RbError: Error {

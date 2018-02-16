@@ -1,5 +1,5 @@
 //
-//  TMLRubyThunks.m
+//  TMLRubyHelpers.m
 //  TMLRuby
 //
 //  Created by John Fairhurst on 15/02/2018.
@@ -8,7 +8,7 @@
 @import CRuby;
 
 //
-// # Thunks + Exceptions
+// # Thunks for Exception Handling
 //
 // If there is an unhandled exception then Ruby crashes the process.
 // We elect to never let this occur via TMLRuby APIs.
@@ -68,6 +68,17 @@ VALUE tml_ruby_require_protect(const char *fname, int *status)
 {
     return rb_protect(tml_ruby_require_thunk, (VALUE)(void *)fname, status);
 }
+
+//
+// # Difficult Macros
+//
+// Some of the ruby.h API is too groady for the Swift Clang Importer to
+// tolerate, usually because the C has difficult typecasts in it but sometimes
+// for no obvious reason.
+// 
+// Some of these APIs are pretty useful so we reimplement them here providing
+// a wrapper that looks type-safe for Swift to call.
+//
 
 int tml_ruby_rb_builtin_type(VALUE value)
 {

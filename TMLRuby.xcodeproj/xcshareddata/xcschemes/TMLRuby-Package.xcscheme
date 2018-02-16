@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "TMLRuby::TMLRubyClient"
-               BuildableName = "TMLRubyClient"
-               BlueprintName = "TMLRubyClient"
+               BlueprintIdentifier = "022F3AB62036D4DD009E69BE"
+               BuildableName = "libTMLRubyHelpers.a"
+               BlueprintName = "TMLRubyHelpers"
                ReferencedContainer = "container:TMLRuby.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -31,6 +31,20 @@
                BlueprintIdentifier = "TMLRuby::TMLRuby"
                BuildableName = "TMLRuby.framework"
                BlueprintName = "TMLRuby"
+               ReferencedContainer = "container:TMLRuby.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "TMLRuby::TMLRubyClient"
+               BuildableName = "TMLRubyClient"
+               BlueprintName = "TMLRubyClient"
                ReferencedContainer = "container:TMLRuby.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -55,6 +69,15 @@
             </BuildableReference>
          </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "TMLRuby::TMLRubyClient"
+            BuildableName = "TMLRubyClient"
+            BlueprintName = "TMLRubyClient"
+            ReferencedContainer = "container:TMLRuby.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -87,6 +110,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "TMLRuby::TMLRubyClient"
+            BuildableName = "TMLRubyClient"
+            BlueprintName = "TMLRubyClient"
+            ReferencedContainer = "container:TMLRuby.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

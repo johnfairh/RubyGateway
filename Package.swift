@@ -7,10 +7,7 @@ let package = Package(
     products: [
         .library(
             name: "TMLRuby",
-            targets: ["TMLRuby"]),
-        .executable(
-            name: "TMLRubyClient",
-            targets: ["TMLRubyClient"])
+            targets: ["TMLRuby", "TMLRubyHelpers"])
     ],
     dependencies: [
         .package(url: "CRuby/", from: "0.9.0"),
@@ -18,10 +15,10 @@ let package = Package(
     targets: [
         .target(
             name: "TMLRuby",
-            dependencies: []),
+            dependencies: ["TMLRubyHelpers"]),
         .target(
-            name: "TMLRubyClient",
-            dependencies: ["TMLRuby"]),
+            name: "TMLRubyHelpers",
+            dependencies: []),
         .testTarget(
             name: "TMLRubyTests",
             dependencies: ["TMLRuby"]),
