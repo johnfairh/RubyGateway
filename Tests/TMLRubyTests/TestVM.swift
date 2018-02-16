@@ -13,8 +13,11 @@ class TestVM: XCTestCase {
 
     func testSanity() {
         print("Size of VALUE is \(SIZEOF_VALUE)")
-        print("Uint.max is \(UInt.max)")
+        print("UInt.max is \(UInt.max)")
         print("PRI_VALUE_PREFIX is \(PRI_VALUE_PREFIX)")
+
+        print("FIX_MAX is \(RUBY_FIXNUM_MAX)")
+        print("FIX_MIN is \(RUBY_FIXNUM_MIN)")
     }
 
     /// Check we can bring up Ruby.

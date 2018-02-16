@@ -5,22 +5,21 @@
 //  Created by John Fairhurst on 12/02/2018.
 //
 // http://ruby-hacking-guide.github.io/gc.html
+// http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-core/60741
+// https://blog.heroku.com/incremental-gc
 
 import Foundation
 import CRuby
 import TMLRubyHelpers
 
 // Carefully add all the numeric shit, add tests
-// Continue reviewing ruby.h for missing parts
 //
 // CRuby - other Ruby headers exist!
-// CRuby - use intermediate header always to allow system paths
-// SPM - TMLRubyThunks
+// CRuby - use intermediate header always to allow system paths -> found by INCLUDE setting??
 //
 // VM functions - verbose / warning level, script name
 // Rewrite RbError to be just my errors
 // String encodings
-// Missing macro stuff
 // 4. load
 // 5. eval
 // 3. test for load path - will be eval require pp, eval require rouge (a gem), eval require 'does_not_exist'
