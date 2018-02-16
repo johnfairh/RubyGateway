@@ -84,3 +84,21 @@ int tml_ruby_rb_builtin_type(VALUE value)
 {
     return RB_BUILTIN_TYPE(value);
 }
+
+//
+// # Numeric conversions
+//
+
+int          tml_ruby_RB_NUM2INT(VALUE x)         { return RB_NUM2INT(x); }
+unsigned int tml_ruby_RB_NUM2UINT(VALUE x)        { return RB_NUM2UINT(x); }
+VALUE        tml_ruby_RB_INT2NUM(int v)           { return RB_INT2NUM(v); }
+VALUE        tml_ruby_RB_UINT2NUM(unsigned int v) { return RB_UINT2NUM(v); }
+
+//
+// # String methods
+// See implementation of these macros for why.
+
+VALUE                tml_ruby_StringValue(VALUE v)     { return StringValue(v); }
+const unsigned char *tml_ruby_StringValuePtr(VALUE v)  { return (const unsigned char *)StringValuePtr(v); }
+const char          *tml_ruby_StringValueCStr(VALUE v) { return StringValueCStr(v); }
+long                 tml_ruby_RSTRING_LEN(VALUE v)     { return RSTRING_LEN(v); }

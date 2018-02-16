@@ -20,3 +20,4 @@ xcuserdata
 *.hmap
 *.ipa
 Carthage/Build
+c/
