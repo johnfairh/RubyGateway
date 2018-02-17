@@ -107,36 +107,43 @@ public func RSTRING_LEN(_ str: VALUE) -> Int {
 
 // MARK: - More enum-y `VALUE` type enum
 
-// make this an actual enum?
-public let T_NONE: Int32 = Int32(RUBY_T_NONE.rawValue)
-public let T_NIL: Int32 = Int32(RUBY_T_NIL.rawValue)
-public let T_OBJECT: Int32 = Int32(RUBY_T_OBJECT.rawValue)
-public let T_CLASS: Int32 = Int32(RUBY_T_CLASS.rawValue)
-public let T_ICLASS: Int32 = Int32(RUBY_T_ICLASS.rawValue)
-public let T_MODULE: Int32 = Int32(RUBY_T_MODULE.rawValue)
-public let T_FLOAT: Int32 = Int32(RUBY_T_FLOAT.rawValue)
-public let T_STRING: Int32 = Int32(RUBY_T_STRING.rawValue)
-public let T_REGEXP: Int32 = Int32(RUBY_T_REGEXP.rawValue)
-public let T_ARRAY: Int32 = Int32(RUBY_T_ARRAY.rawValue)
-public let T_HASH: Int32 = Int32(RUBY_T_HASH.rawValue)
-public let T_STRUCT: Int32 = Int32(RUBY_T_STRUCT.rawValue)
-public let T_BIGNUM: Int32 = Int32(RUBY_T_BIGNUM.rawValue)
-public let T_FILE: Int32 = Int32(RUBY_T_FILE.rawValue)
-public let T_FIXNUM: Int32 = Int32(RUBY_T_FIXNUM.rawValue)
-public let T_TRUE: Int32 = Int32(RUBY_T_TRUE.rawValue)
-public let T_FALSE: Int32 = Int32(RUBY_T_FALSE.rawValue)
-public let T_DATA: Int32 = Int32(RUBY_T_DATA.rawValue)
-public let T_MATCH: Int32 = Int32(RUBY_T_MATCH.rawValue)
-public let T_SYMBOL: Int32 = Int32(RUBY_T_SYMBOL.rawValue)
-public let T_RATIONAL: Int32 = Int32(RUBY_T_RATIONAL.rawValue)
-public let T_COMPLEX: Int32 = Int32(RUBY_T_COMPLEX.rawValue)
-public let T_IMEMO: Int32 = Int32(RUBY_T_IMEMO.rawValue)
-public let T_UNDEF: Int32 = Int32(RUBY_T_UNDEF.rawValue)
-public let T_NODE: Int32 = Int32(RUBY_T_NODE.rawValue)
-public let T_ZOMBIE: Int32 = Int32(RUBY_T_ZOMBIE.rawValue)
-public let T_MASK: Int32 = Int32(RUBY_T_MASK.rawValue)
+// Swift-friendly value type.  Constants duplicated from Ruby headers,
+// should be low-risk.
+public enum RbType: Int32 {
+    case T_NONE     = 0x00
 
-//#define TYPE(x) rb_type((VALUE)(x)) -> enum?
+    case T_OBJECT   = 0x01
+    case T_CLASS    = 0x02
+    case T_MODULE   = 0x03
+    case T_FLOAT    = 0x04
+    case T_STRING   = 0x05
+    case T_REGEXP   = 0x06
+    case T_ARRAY    = 0x07
+    case T_HASH     = 0x08
+    case T_STRUCT   = 0x09
+    case T_BIGNUM   = 0x0a
+    case T_FILE     = 0x0b
+    case T_DATA     = 0x0c
+    case T_MATCH    = 0x0d
+    case T_COMPLEX  = 0x0e
+    case T_RATIONAL = 0x0f
+
+    case T_NIL      = 0x11
+    case T_TRUE     = 0x12
+    case T_FALSE    = 0x13
+    case T_SYMBOL   = 0x14
+    case T_FIXNUM   = 0x15
+    case T_UNDEF    = 0x16
+
+    case T_IMEMO    = 0x1a
+    case T_NODE     = 0x1b
+    case T_ICLASS   = 0x1c
+    case T_ZOMBIE   = 0x1d
+}
+
+public func TYPE(_ x: VALUE) -> RbType {
+    return RbType(rawValue: rb_type(x)) ?? .T_UNDEF
+}
 
 // MARK: - Testing whether a `VALUE` is of a particular type
 
@@ -178,6 +185,19 @@ public func RB_BUILTIN_TYPE(_ x: VALUE) -> Int32 {
     return tml_ruby_rb_builtin_type(x)
 }
 
+public func RB_TYPE_P(_ obj: VALUE, _ type: RbType) -> Bool {
+    switch type {
+    case .T_FIXNUM: return RB_FIXNUM_P(obj)
+    case .T_TRUE:   return obj == Qtrue
+    case .T_FALSE:  return obj == Qfalse
+    case .T_NIL:    return obj == Qnil
+    case .T_UNDEF:  return obj == Qundef
+    case .T_SYMBOL: return RB_SYMBOL_P(obj)
+    case .T_FLOAT:  return RB_FLOAT_TYPE_P(obj)
+    default:
+        return !RB_SPECIAL_CONST_P(obj) && RB_BUILTIN_TYPE(obj) == type.rawValue
+    }
+}
 //#define RB_TYPE_P(obj, type) ( \
 //((type) == RUBY_T_FIXNUM) ? RB_FIXNUM_P(obj) : \
 //((type) == RUBY_T_TRUE) ? ((obj) == RUBY_Qtrue) : \
@@ -190,6 +210,7 @@ public func RB_BUILTIN_TYPE(_ x: VALUE) -> Int32 {
 
 // MARK: - Garbage collection helpers
 
+// TODO: figure out
 //#define RB_OBJ_WB_UNPROTECT(x)      rb_obj_wb_unprotect(x, __FILE__, __LINE__)
 //#define RB_OBJ_WRITE(a, slot, b)       rb_obj_write((VALUE)(a), (VALUE *)(slot),(VALUE)(b), __FILE__, __LINE__)
 

@@ -14,6 +14,7 @@
 		022F3AC62036D85A009E69BE /* libTMLRubyHelpers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 022F3AB72036D4DD009E69BE /* libTMLRubyHelpers.a */; };
 		022F3AC92037153A009E69BE /* TestNumerics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3AC82037153A009E69BE /* TestNumerics.swift */; };
 		022F3ACB20375E01009E69BE /* TestStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3ACA20375E01009E69BE /* TestStrings.swift */; };
+		022F3ACD20385C3A009E69BE /* TestConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3ACC20385C3A009E69BE /* TestConstants.swift */; };
 		024923482031EE0400E3AAF4 /* RbVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024923462031EDE000E3AAF4 /* RbVM.swift */; };
 		0249234B20334AE500E3AAF4 /* RbError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0249234920334ADE00E3AAF4 /* RbError.swift */; };
 		0249234D20335ADB00E3AAF4 /* TestVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0249234C20335ADB00E3AAF4 /* TestVM.swift */; };
@@ -40,6 +41,7 @@
 		022F3AC32036D816009E69BE /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = include/module.modulemap; sourceTree = "<group>"; };
 		022F3AC82037153A009E69BE /* TestNumerics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestNumerics.swift; sourceTree = "<group>"; };
 		022F3ACA20375E01009E69BE /* TestStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestStrings.swift; sourceTree = "<group>"; };
+		022F3ACC20385C3A009E69BE /* TestConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConstants.swift; sourceTree = "<group>"; };
 		024923462031EDE000E3AAF4 /* RbVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbVM.swift; sourceTree = "<group>"; };
 		0249234920334ADE00E3AAF4 /* RbError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbError.swift; sourceTree = "<group>"; };
 		0249234C20335ADB00E3AAF4 /* TestVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVM.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				0249234C20335ADB00E3AAF4 /* TestVM.swift */,
 				022F3AC82037153A009E69BE /* TestNumerics.swift */,
 				022F3ACA20375E01009E69BE /* TestStrings.swift */,
+				022F3ACC20385C3A009E69BE /* TestConstants.swift */,
 				0249235020335C0D00E3AAF4 /* Helpers.swift */,
 				024923522034AA2B00E3AAF4 /* Fixtures */,
 			);
@@ -325,6 +328,7 @@
 			files = (
 				0249235120335C0D00E3AAF4 /* Helpers.swift in Sources */,
 				0249234D20335ADB00E3AAF4 /* TestVM.swift in Sources */,
+				022F3ACD20385C3A009E69BE /* TestConstants.swift in Sources */,
 				022F3ACB20375E01009E69BE /* TestStrings.swift in Sources */,
 				022F3AC92037153A009E69BE /* TestNumerics.swift in Sources */,
 			);

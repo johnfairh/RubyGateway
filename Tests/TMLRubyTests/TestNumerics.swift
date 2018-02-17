@@ -25,6 +25,7 @@ class TestNumerics: XCTestCase {
             XCTAssertTrue(RB_FIXABLE(val))
             let rubyVal = RB_LONG2FIX(val)
             XCTAssertTrue(RB_FIXNUM_P(rubyVal))
+            XCTAssertTrue(RB_TYPE_P(rubyVal, .T_FIXNUM) || RB_TYPE_P(rubyVal, .T_BIGNUM))
             let back = RB_FIX2LONG(rubyVal)
             XCTAssertEqual(val, back)
             if val > 0 {
@@ -128,6 +129,7 @@ class TestNumerics: XCTestCase {
             let rubyValue = DBL2NUM(val)
             XCTAssertTrue(RB_FLOAT_TYPE_P(rubyValue))
             XCTAssertTrue(!RB_FLONUM_P(rubyValue) || val == 0.0)
+            XCTAssertTrue(RB_TYPE_P(rubyValue, .T_FLOAT))
             let swiftVal  = NUM2DBL(rubyValue)
             XCTAssertTrue((val.isNaN && swiftVal.isNaN) ||
                           (val == swiftVal))

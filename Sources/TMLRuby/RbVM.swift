@@ -12,14 +12,12 @@ import Foundation
 import CRuby
 import TMLRubyHelpers
 
-// Carefully add all the numeric shit, add tests
-//
-// CRuby - other Ruby headers exist!
-// CRuby - use intermediate header always to allow system paths -> found by INCLUDE setting??
+// Macros - internal mostly
 //
 // VM functions - verbose / warning level, script name
 // Rewrite RbError to be just my errors
-// String encodings
+//
+// Dawning realization everything and their dog can raise
 // 4. load
 // 5. eval
 // 3. test for load path - will be eval require pp, eval require rouge (a gem), eval require 'does_not_exist'
