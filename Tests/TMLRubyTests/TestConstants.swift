@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import TMLRuby
+@testable import TMLRuby
 
 /// Some misc primitives
 class TestConstants: XCTestCase {

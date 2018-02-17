@@ -7,7 +7,7 @@
 
 import XCTest
 import CRuby
-import TMLRuby
+@testable import TMLRuby
 
 class TestVM: XCTestCase {
 

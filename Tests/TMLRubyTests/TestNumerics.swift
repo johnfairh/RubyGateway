@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import TMLRuby
+@testable import TMLRuby
 
 /// A bunch of the Ruby numeric conversion macros don't make it through
 /// the importer so are re-implemented in various ways.  These tests check

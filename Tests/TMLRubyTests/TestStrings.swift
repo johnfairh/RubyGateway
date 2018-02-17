@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import TMLRuby
+@testable import TMLRuby
 import CRuby
 
 /// Tests for String helpers
