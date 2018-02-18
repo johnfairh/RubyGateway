@@ -65,6 +65,8 @@ open class RbVM {
             cleanup()
             throw RbError.initError("Can't initialize Ruby, ruby_executable_node() gave node_status \(node_status) exit status \(exit_status)")
         }
+
+        scriptName = "RubyBridge"
     }
 
     /// Shut down the Ruby VM and release resources.  From the Ruby API headers:
@@ -84,30 +86,98 @@ open class RbVM {
     deinit {
         cleanup()
     }
+}
 
-    /// Debug mode for Ruby code, equivalent to `ruby --debug`
+// MARK: - VM settings - debug, verbose, script name
+
+extension RbVM {
+
+    /// Debug mode for Ruby code, sets `$DEBUG` / `$-d`
     public var debug: Bool {
         get {
             guard let debug_ptr = rb_ruby_debug_ptr() else {
-                // This isn't entirely documented so let's not crash
+                // Current implementation can't fail but let's not crash.
                 return false
             }
             return debug_ptr.pointee == Qtrue;
         }
         set {
             guard let debug_ptr = rb_ruby_debug_ptr() else {
-                // This isn't entirely documented so let's not crash
                 return
             }
             let newVal = newValue ? Qtrue : Qfalse
             debug_ptr.initialize(to: newVal)
         }
     }
+
+    /// Verbose setting for Ruby scripts - affects `Kernel#warn` etc.
+    public enum Verbosity {
+        case none
+        case medium
+        case full
+    }
+
+    /// Verbose mode for Ruby code, sets `$VERBOSE` / `$-v`
+    public var verbose: Verbosity {
+        get {
+            guard let verbose_ptr = rb_ruby_verbose_ptr() else {
+                // Current implementation can't fail but let's not crash.
+                return .none
+            }
+            switch verbose_ptr.pointee {
+            case Qnil: return .none
+            case Qfalse: return .medium
+            default: return .full
+            }
+        }
+        set {
+            guard let verbose_ptr = rb_ruby_verbose_ptr() else {
+                return
+            }
+            let newVal: VALUE
+            switch newValue {
+            case .none: newVal = Qnil
+            case .medium: newVal = Qfalse
+            case .full: newVal = Qtrue
+            }
+            verbose_ptr.initialize(to: newVal)
+        }
+    }
+
+    /// Set `$PROGRAM_NAME` / `$0` for Ruby code.
+    public var scriptName: String {
+        set {
+            ruby_script(newValue)
+        }
+        get {
+            // sigh
+            do {
+                // XXX fix me - globalv lookup plus string conversion...
+                let _ = try eval(ruby: "$PROGRAM_NAME")
+                return "This needs to be implemented"
+            } catch {
+                return "??"
+            }
+        }
+    }
 }
 
-// MARK: - require, load
+// MARK: - run code: eval, require, load
 
 extension RbVM {
+
+    /// Evaluate some Ruby and return the result.
+    /// XXX fix this up
+    public func eval(ruby: String) throws -> VALUE {
+        var state: Int32 = 0
+        let value = rb_eval_string_protect(ruby, &state)
+        if state != 0 {
+            let exception = rb_errinfo()
+            defer { rb_set_errinfo(Qnil) }
+            throw RbException(rubyValue: exception)
+        }
+        return value
+    }
 
     /// 'require' - see Ruby `Kernel#require`.  Load file once-only.
     ///
@@ -115,9 +185,8 @@ extension RbVM {
     /// - throws: RbException if a Ruby exception occurred.  (This usually means the
     ///           file couldn't be found.)
     public func require(filename: String) throws -> Bool {
-        let cString = filename.cString(using: String.defaultCStringEncoding)
         var state: Int32 = 0
-        let value = tml_ruby_require_protect(cString, &state);
+        let value = tml_ruby_require_protect(filename, &state);
         if state != 0 {
             let exception = rb_errinfo()
             defer { rb_set_errinfo(Qnil) }
