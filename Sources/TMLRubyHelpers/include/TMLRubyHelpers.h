@@ -30,9 +30,10 @@ VALUE        tml_ruby_RB_INT2NUM(int v);
 VALUE        tml_ruby_RB_UINT2NUM(unsigned int v);
 
 /// String APIs with un-Swift requirements
-VALUE                tml_ruby_StringValue(VALUE v);
-const unsigned char *tml_ruby_StringValuePtr(VALUE v);
-const char          *tml_ruby_StringValueCStr(VALUE v);
-long                 tml_ruby_RSTRING_LEN(VALUE v);
+VALUE       tml_ruby_StringValue(VALUE *v);
+const char *tml_ruby_StringValuePtr(VALUE *v);
+const char *tml_ruby_StringValueCStr(VALUE *v);
+long        tml_ruby_RSTRING_LEN(VALUE v);
+const char *tml_ruby_RSTRING_PTR(VALUE v);
 
 #endif /* TMLRubyHelpers_h */

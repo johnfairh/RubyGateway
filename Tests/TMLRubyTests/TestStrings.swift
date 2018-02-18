@@ -11,42 +11,44 @@ import CRuby
 
 /// Tests for String helpers
 ///
-/// TODO - explore utf8ness (emoji)
-///      - protect
-///      - embedded nulls!
+/// TODO - protect + failable inzn
+
 class TestStrings: XCTestCase {
 
     override func setUp() {
         let _ = Helpers.ruby
     }
 
-    // Round-trip in the normal way
-    func testRoundTrip_C() {
-        let testString = "A test string"
-        let rubyVal = testString.withCString { rb_str_new_cstr($0) }
-        let backString = String(cString: StringValueCStr(rubyVal))
-        XCTAssertEqual(testString, backString)
+    private func doTestRoundTrip(_ string: String) {
+        // Swift to Ruby
+        let rubyVal = string.withCString { rb_utf8_str_new($0, string.utf8.count) }
+        XCTAssertTrue(RB_TYPE_P(rubyVal, .T_STRING))
 
-        let rubyVal2 = StringValue(rubyVal)
-        let backString2 = String(cString: StringValueCStr(rubyVal2))
-        XCTAssertEqual(testString, backString2)
+        // Ruby to Swift - dance through Data to handle embedded nuls
+        let rubyLength = RSTRING_LEN(rubyVal)
+        let rubyPtr = RSTRING_PTR(rubyVal)
+        let rubyData = Data(bytes: rubyPtr, count: rubyLength)
+
+        guard let backString = String(data: rubyData, encoding: .utf8) else {
+            XCTFail("Oops, UTF8 not preserved??")
+            return
+        }
+        XCTAssertEqual(string, backString)
     }
 
-    // Round-trip the hard way, allowing for nuls
-    func testRoundTrip_Len() {
-        let testString = "A test string"
-        let rubyVal = testString.withCString { rb_str_new_cstr($0) }
+    func testEmpty() {
+        doTestRoundTrip("")
+    }
 
-        let rubyLength = RSTRING_LEN(rubyVal)
-        XCTAssertEqual(testString.utf8.count, rubyLength)
+    func testAscii() {
+        doTestRoundTrip("A test string")
+    }
 
-        let rubyChars = StringValuePtr(rubyVal)!
+    func testUtf8() {
+        doTestRoundTrip("abë🐽🇧🇷end")
+    }
 
-        var backString = String()
-        for x in 0..<rubyLength {
-            backString.append(Character(UnicodeScalar(rubyChars[x])))
-        }
-
-        XCTAssertEqual(testString, backString)
+    func testUtf8WithNulls() {
+        doTestRoundTrip("abë\0🐽🇧🇷en\0d")
     }
 }

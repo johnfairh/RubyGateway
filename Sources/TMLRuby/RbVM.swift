@@ -12,17 +12,6 @@ import Foundation
 import CRuby
 import TMLRubyHelpers
 
-// Macros - internal mostly
-//
-// VM functions - verbose / warning level, script name
-// Rewrite RbError to be just my errors
-//
-// Dawning realization everything and their dog can raise
-// 4. load
-// 5. eval
-// 3. test for load path - will be eval require pp, eval require rouge (a gem), eval require 'does_not_exist'
-
-
 /// An instance of a Ruby virtual machine.
 open class RbVM {
 

@@ -96,9 +96,36 @@ VALUE        tml_ruby_RB_UINT2NUM(unsigned int v) { return RB_UINT2NUM(v); }
 
 //
 // # String methods
-// See implementation of these macros for why.
+//
+// The StringValue routines are quite subtle because of the `to_s` issue,
+// they potentially create a new T_STRING that replaces the passed-in
+// VALUE.
+//
+// TODO: Take out/rephrase these?
 
-VALUE                tml_ruby_StringValue(VALUE v)     { return StringValue(v); }
-const unsigned char *tml_ruby_StringValuePtr(VALUE v)  { return (const unsigned char *)StringValuePtr(v); }
-const char          *tml_ruby_StringValueCStr(VALUE v) { return StringValueCStr(v); }
-long                 tml_ruby_RSTRING_LEN(VALUE v)     { return RSTRING_LEN(v); }
+VALUE tml_ruby_StringValue(VALUE *v)
+{   // #define StringValue(v) rb_string_value(&(v))
+    return rb_string_value(v);
+}
+
+const char *tml_ruby_StringValuePtr(VALUE *v)
+{   // #define StringValuePtr(v) rb_string_value_ptr(&(v))
+    return rb_string_value_ptr(v);
+}
+
+const char *tml_ruby_StringValueCStr(VALUE *v)
+{   //#define StringValueCStr(v) rb_string_value_cstr(&(v))
+    return rb_string_value_cstr(v);
+}
+
+// The RSTRING routines accesss the underlying structures
+// that have too many unions for Swift to access safely.
+long tml_ruby_RSTRING_LEN(VALUE v)
+{
+    return RSTRING_LEN(v);
+}
+
+const char *tml_ruby_RSTRING_PTR(VALUE v)
+{
+    return RSTRING_PTR(v);
+}

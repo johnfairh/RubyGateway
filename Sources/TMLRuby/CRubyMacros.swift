@@ -81,29 +81,35 @@ func CLASS_OF(_ v: VALUE) -> VALUE {
 
 // MARK: - String utilities
 
-// Suddenly we're passing values by reference + using CamelCase names!
+// TODO: Make this all safe + delete the unwanted APIs
 
-/// Do a `#to_s` on some object.  Can raise if not possible.
-func StringValue(_ v: VALUE) -> VALUE {
-    return tml_ruby_StringValue(v)
+/// Do a `#to_s` on some object.  Raise if not possible.
+/// Replaces the passed-in VALUE with the `to_s` result and returns the new value.
+func StringValue(_ v: inout VALUE) -> VALUE {
+    return tml_ruby_StringValue(&v)
 }
 
 /// Call `StringValue` and then give pointer to raw string buffer.
-func StringValuePtr(_ v: VALUE) -> UnsafePointer<UInt8>! {
-    return tml_ruby_StringValuePtr(v)
+/// If the passed-in value is not a string then it is replaced with the converted string.
+func StringValuePtr(_ v: inout VALUE) -> UnsafePointer<Int8>! {
+    return tml_ruby_StringValuePtr(&v)
 }
 
 /// Call `StringValue`, check string buffer has no NULs and return it.  Raises on error.
-func StringValueCStr(_ v: VALUE) -> UnsafePointer<Int8>! {
-    return tml_ruby_StringValueCStr(v)
+/// If the passed-in value is not a string then it is replaced with the converted string.
+func StringValueCStr(_ v: inout VALUE) -> UnsafePointer<Int8>! {
+    return tml_ruby_StringValueCStr(&v)
 }
 
-/// Number of bytes in the string
+/// Number of bytes in the string.
 func RSTRING_LEN(_ str: VALUE) -> Int {
     return tml_ruby_RSTRING_LEN(str)
 }
 
-// XXX much research to do re. encodings etc.
+/// Address of the string byte buffer.
+func RSTRING_PTR(_ str: VALUE) -> UnsafePointer<Int8> {
+    return tml_ruby_RSTRING_PTR(str)
+}
 
 // MARK: - More enum-y `VALUE` type enum
 
