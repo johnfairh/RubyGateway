@@ -3,24 +3,24 @@
 import PackageDescription
 
 let package = Package(
-    name: "TMLRuby",
+    name: "RubyBridge",
     products: [
         .library(
-            name: "TMLRuby",
-            targets: ["TMLRuby", "TMLRubyHelpers"])
+            name: "RubyBridge",
+            targets: ["RubyBridge", "RubyBridgeHelpers"])
     ],
     dependencies: [
         .package(url: "CRuby/", from: "0.9.0"),
     ],
     targets: [
         .target(
-            name: "TMLRuby",
-            dependencies: ["TMLRubyHelpers"]),
+            name: "RubyBridge",
+            dependencies: ["RubyBridgeHelpers"]),
         .target(
-            name: "TMLRubyHelpers",
+            name: "RubyBridgeHelpers",
             dependencies: []),
         .testTarget(
-            name: "TMLRubyTests",
-            dependencies: ["TMLRuby"]),
+            name: "RubyBridgeTests",
+            dependencies: ["RubyBridge"]),
     ]
 )

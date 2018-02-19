@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import TMLRuby
+@testable import RubyBridge
 
 /// Some misc primitives
 class TestConstants: XCTestCase {

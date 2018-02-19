@@ -10,7 +10,7 @@
 
 import Foundation
 import CRuby
-import TMLRubyHelpers
+import RubyBridgeHelpers
 
 /// An instance of a Ruby virtual machine.
 open class RbVM {
@@ -163,12 +163,12 @@ extension RbVM {
 
     /// The version number triple of Ruby being used, eg. "2.5.0".
     public var version: String {
-        return String(cString: tml_ruby_ruby_version())
+        return String(cString: rbb_ruby_version())
     }
 
     /// The full version string for the Ruby being used, eg. "ruby 2.5.0p0 (2017-12-25 revision 61468) [x86_64-darwin17]"
     public var versionDescription: String {
-        return String(cString: tml_ruby_ruby_description())
+        return String(cString: rbb_ruby_description())
     }
 }
 
@@ -196,7 +196,7 @@ extension RbVM {
     ///           file couldn't be found.)
     public func require(filename: String) throws -> Bool {
         var state: Int32 = 0
-        let value = tml_ruby_require_protect(filename, &state);
+        let value = rbb_require_protect(filename, &state);
         if state != 0 {
             let exception = rb_errinfo()
             defer { rb_set_errinfo(Qnil) }

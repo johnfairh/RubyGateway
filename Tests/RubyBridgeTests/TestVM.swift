@@ -7,7 +7,7 @@
 
 import XCTest
 import CRuby
-@testable import TMLRuby
+@testable import RubyBridge
 
 class TestVM: XCTestCase {
     /// Check we can bring up Ruby.

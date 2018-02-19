@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "022F3AB62036D4DD009E69BE"
-               BuildableName = "libTMLRubyHelpers.a"
-               BlueprintName = "TMLRubyHelpers"
-               ReferencedContainer = "container:TMLRuby.xcodeproj">
+               BuildableName = "libRubyBridgeHelpers.a"
+               BlueprintName = "RubyBridgeHelpers"
+               ReferencedContainer = "container:RubyBridge.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -30,8 +30,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "TMLRuby::TMLRuby"
                BuildableName = "TMLRuby.framework"
-               BlueprintName = "TMLRuby"
-               ReferencedContainer = "container:TMLRuby.xcodeproj">
+               BlueprintName = "RubyBridge"
+               ReferencedContainer = "container:RubyBridge.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -45,7 +45,7 @@
                BlueprintIdentifier = "TMLRuby::TMLRubyClient"
                BuildableName = "TMLRubyClient"
                BlueprintName = "TMLRubyClient"
-               ReferencedContainer = "container:TMLRuby.xcodeproj">
+               ReferencedContainer = "container:RubyBridge.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -63,9 +63,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "TMLRuby::TMLRubyTests"
-               BuildableName = "TMLRubyTests.xctest"
-               BlueprintName = "TMLRubyTests"
-               ReferencedContainer = "container:TMLRuby.xcodeproj">
+               BuildableName = "RubyBridgeTests.xctest"
+               BlueprintName = "RubyBridgeTests"
+               ReferencedContainer = "container:RubyBridge.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -75,7 +75,7 @@
             BlueprintIdentifier = "TMLRuby::TMLRubyClient"
             BuildableName = "TMLRubyClient"
             BlueprintName = "TMLRubyClient"
-            ReferencedContainer = "container:TMLRuby.xcodeproj">
+            ReferencedContainer = "container:RubyBridge.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -98,7 +98,7 @@
             BlueprintIdentifier = "TMLRuby::TMLRubyClient"
             BuildableName = "TMLRubyClient"
             BlueprintName = "TMLRubyClient"
-            ReferencedContainer = "container:TMLRuby.xcodeproj">
+            ReferencedContainer = "container:RubyBridge.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -116,7 +116,7 @@
             BlueprintIdentifier = "TMLRuby::TMLRubyClient"
             BuildableName = "TMLRubyClient"
             BlueprintName = "TMLRubyClient"
-            ReferencedContainer = "container:TMLRuby.xcodeproj">
+            ReferencedContainer = "container:RubyBridge.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

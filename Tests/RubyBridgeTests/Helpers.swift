@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import TMLRuby
+import RubyBridge
 
 /// Misc test helpers
 struct Helpers {

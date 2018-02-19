@@ -3,7 +3,7 @@
     "pins": [
       {
         "package": "CRuby",
-        "repositoryURL": "/Users/johnf/project/TMLRuby/CRuby",
+        "repositoryURL": "/Users/johnf/project/RubyBridge/CRuby",
         "state": {
           "branch": null,
           "revision": "e34d8056bf4064025b9ee47851b6b5237ce7f6b5",

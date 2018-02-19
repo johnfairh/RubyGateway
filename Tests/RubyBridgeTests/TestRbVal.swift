@@ -7,7 +7,7 @@
 
 import XCTest
 import CRuby
-@testable import TMLRuby
+@testable import RubyBridge
 
 /// Core Val tests
 class TestRbVal: XCTestCase {

@@ -6,7 +6,7 @@
 //
 
 import CRuby
-import TMLRubyHelpers
+import RubyBridgeHelpers
 
 //
 // Various useful stuff from ruby.h that didn't make it through the Clang importer.
@@ -28,8 +28,8 @@ import TMLRubyHelpers
 
 func RB_SHORT2NUM(_ v: Int16) -> VALUE   { return RB_INT2NUM(Int32(v)) }
 func RB_USHORT2NUM(_ v: UInt16) -> VALUE { return RB_UINT2NUM(UInt32(v)) }
-func RB_INT2NUM(_ v: Int32) -> VALUE     { return tml_ruby_RB_INT2NUM(v) }
-func RB_UINT2NUM(_ v: UInt32) -> VALUE   { return tml_ruby_RB_UINT2NUM(v) }
+func RB_INT2NUM(_ v: Int32) -> VALUE     { return rbb_RB_INT2NUM(v) }
+func RB_UINT2NUM(_ v: UInt32) -> VALUE   { return rbb_RB_UINT2NUM(v) }
 func RB_LONG2NUM(_ x: Int) -> VALUE      { return rb_long2num_inline(x) }
 func RB_ULONG2NUM(_ x: UInt) -> VALUE    { return rb_ulong2num_inline(x) }
 func LL2NUM(_ v: Int64) -> VALUE         { return rb_ll2inum(v) } /* Consistent with Ruby's inconsistency ;) */
@@ -41,8 +41,8 @@ func ULL2NUM(_ v: UInt64) -> VALUE       { return rb_ull2inum(v) }
 
 func RB_NUM2SHORT(_ x: VALUE) -> Int16   { return rb_num2short_inline(x) }
 func RB_NUM2USHORT(_ x: VALUE) -> UInt16 { return rb_num2ushort(x) }
-func RB_NUM2INT(_ x: VALUE) -> Int32     { return tml_ruby_RB_NUM2INT(x) }
-func RB_NUM2UINT(_ x: VALUE) -> UInt32   { return tml_ruby_RB_NUM2UINT(x) }
+func RB_NUM2INT(_ x: VALUE) -> Int32     { return rbb_RB_NUM2INT(x) }
+func RB_NUM2UINT(_ x: VALUE) -> UInt32   { return rbb_RB_NUM2UINT(x) }
 func RB_NUM2LONG(_ x: VALUE) -> Int      { return rb_num2long_inline(x) }
 func RB_NUM2ULONG(_ x: VALUE) -> UInt    { return rb_num2ulong_inline(x) }
 func RB_NUM2LL(_ x: VALUE) -> Int64      { return rb_num2ll_inline(x) }
@@ -86,29 +86,29 @@ func CLASS_OF(_ v: VALUE) -> VALUE {
 /// Do a `#to_s` on some object.  Raise if not possible.
 /// Replaces the passed-in VALUE with the `to_s` result and returns the new value.
 func StringValue(_ v: inout VALUE) -> VALUE {
-    return tml_ruby_StringValue(&v)
+    return rbb_StringValue(&v)
 }
 
 /// Call `StringValue` and then give pointer to raw string buffer.
 /// If the passed-in value is not a string then it is replaced with the converted string.
 func StringValuePtr(_ v: inout VALUE) -> UnsafePointer<Int8>! {
-    return tml_ruby_StringValuePtr(&v)
+    return rbb_StringValuePtr(&v)
 }
 
 /// Call `StringValue`, check string buffer has no NULs and return it.  Raises on error.
 /// If the passed-in value is not a string then it is replaced with the converted string.
 func StringValueCStr(_ v: inout VALUE) -> UnsafePointer<Int8>! {
-    return tml_ruby_StringValueCStr(&v)
+    return rbb_StringValueCStr(&v)
 }
 
 /// Number of bytes in the string.
 func RSTRING_LEN(_ str: VALUE) -> Int {
-    return tml_ruby_RSTRING_LEN(str)
+    return rbb_RSTRING_LEN(str)
 }
 
 /// Address of the string byte buffer.
 func RSTRING_PTR(_ str: VALUE) -> UnsafePointer<Int8> {
-    return tml_ruby_RSTRING_PTR(str)
+    return rbb_RSTRING_PTR(str)
 }
 
 // MARK: - More enum-y `VALUE` type enum
@@ -188,7 +188,7 @@ func RB_SPECIAL_CONST_P(_ x: VALUE) -> Bool {
 }
 
 func RB_BUILTIN_TYPE(_ x: VALUE) -> Int32 {
-    return tml_ruby_rb_builtin_type(x)
+    return rbb_RB_BUILTIN_TYPE(x)
 }
 
 func RB_TYPE_P(_ obj: VALUE, _ type: RbType) -> Bool {

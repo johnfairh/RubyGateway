@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import TMLRuby
+@testable import RubyBridge
 import CRuby
 
 /// Tests for String helpers

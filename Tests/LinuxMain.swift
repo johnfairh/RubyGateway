@@ -1,5 +1,5 @@
 import XCTest
-@testable import TMLRubyTests
+@testable import RubyBridgeTests
 
 XCTMain([
     testCase(TestVM.allTests),

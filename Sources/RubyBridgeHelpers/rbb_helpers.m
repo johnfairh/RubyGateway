@@ -6,7 +6,7 @@
 //
 
 @import CRuby;
-#import "TMLRubyHelpers.h"
+#import "rbb_helpers.h"
 
 //
 // # Thunks for Exception Handling
@@ -59,15 +59,15 @@
 // of `client_2` in regular C that is totally happy to be longjmp()d over.
 //
 
-static VALUE tml_ruby_require_thunk(VALUE value)
+static VALUE rbb_require_thunk(VALUE value)
 {
     const char *fname = (const char *)(void *)value;
     return rb_require(fname);
 }
 
-VALUE tml_ruby_require_protect(const char *fname, int *status)
+VALUE rbb_require_protect(const char *fname, int *status)
 {
-    return rb_protect(tml_ruby_require_thunk, (VALUE)(void *)fname, status);
+    return rb_protect(rbb_require_thunk, (VALUE)(void *)fname, status);
 }
 
 //
@@ -81,7 +81,7 @@ VALUE tml_ruby_require_protect(const char *fname, int *status)
 // a wrapper that looks type-safe for Swift to call.
 //
 
-int tml_ruby_rb_builtin_type(VALUE value)
+int rbb_RB_BUILTIN_TYPE(VALUE value)
 {
     return RB_BUILTIN_TYPE(value);
 }
@@ -90,10 +90,10 @@ int tml_ruby_rb_builtin_type(VALUE value)
 // # Numeric conversions
 //
 
-int          tml_ruby_RB_NUM2INT(VALUE x)         { return RB_NUM2INT(x); }
-unsigned int tml_ruby_RB_NUM2UINT(VALUE x)        { return RB_NUM2UINT(x); }
-VALUE        tml_ruby_RB_INT2NUM(int v)           { return RB_INT2NUM(v); }
-VALUE        tml_ruby_RB_UINT2NUM(unsigned int v) { return RB_UINT2NUM(v); }
+int          rbb_RB_NUM2INT(VALUE x)         { return RB_NUM2INT(x); }
+unsigned int rbb_RB_NUM2UINT(VALUE x)        { return RB_NUM2UINT(x); }
+VALUE        rbb_RB_INT2NUM(int v)           { return RB_INT2NUM(v); }
+VALUE        rbb_RB_UINT2NUM(unsigned int v) { return RB_UINT2NUM(v); }
 
 //
 // # String methods
@@ -104,29 +104,29 @@ VALUE        tml_ruby_RB_UINT2NUM(unsigned int v) { return RB_UINT2NUM(v); }
 //
 // TODO: Take out/rephrase these?
 
-VALUE tml_ruby_StringValue(VALUE *v)
+VALUE rbb_StringValue(VALUE *v)
 {   // #define StringValue(v) rb_string_value(&(v))
     return rb_string_value(v);
 }
 
-const char *tml_ruby_StringValuePtr(VALUE *v)
+const char *rbb_StringValuePtr(VALUE *v)
 {   // #define StringValuePtr(v) rb_string_value_ptr(&(v))
     return rb_string_value_ptr(v);
 }
 
-const char *tml_ruby_StringValueCStr(VALUE *v)
+const char *rbb_StringValueCStr(VALUE *v)
 {   //#define StringValueCStr(v) rb_string_value_cstr(&(v))
     return rb_string_value_cstr(v);
 }
 
 // The RSTRING routines accesss the underlying structures
 // that have too many unions for Swift to access safely.
-long tml_ruby_RSTRING_LEN(VALUE v)
+long rbb_RSTRING_LEN(VALUE v)
 {
     return RSTRING_LEN(v);
 }
 
-const char *tml_ruby_RSTRING_PTR(VALUE v)
+const char *rbb_RSTRING_PTR(VALUE v)
 {
     return RSTRING_PTR(v);
 }
@@ -137,12 +137,12 @@ const char *tml_ruby_RSTRING_PTR(VALUE v)
 // These are exported as char [] which don't get imported
 //
 
-const char *tml_ruby_ruby_version(void)
+const char *rbb_ruby_version(void)
 {
     return ruby_version;
 }
 
-const char *tml_ruby_ruby_description(void)
+const char *rbb_ruby_description(void)
 {
     return ruby_description;
 }
@@ -151,9 +151,9 @@ const char *tml_ruby_ruby_description(void)
 // # VALUE protection
 //
 
-TmlRubyValueBox * _Nonnull tml_ruby_valuebox_alloc(VALUE value)
+Rbb_value * _Nonnull rbb_value_alloc(VALUE value)
 {
-    TmlRubyValueBox *box = malloc(sizeof(*box));
+    Rbb_value *box = malloc(sizeof(*box));
     if (box == NULL) {
         /* No good way out here, don't want to make the RbEnv
            initializers failable.
@@ -165,12 +165,12 @@ TmlRubyValueBox * _Nonnull tml_ruby_valuebox_alloc(VALUE value)
     return box;
 }
 
-TmlRubyValueBox * _Nonnull tml_ruby_valuebox_dup(const TmlRubyValueBox * _Nonnull box)
+Rbb_value *rbb_value_dup(const Rbb_value * _Nonnull box)
 {
-    return tml_ruby_valuebox_alloc(box->value);
+    return rbb_value_alloc(box->value);
 }
 
-void tml_ruby_valuebox_free(TmlRubyValueBox *_Nonnull box)
+void rbb_value_free(Rbb_value * _Nonnull box)
 {
     rb_gc_unregister_address(&box->value);
     box->value = Qundef;

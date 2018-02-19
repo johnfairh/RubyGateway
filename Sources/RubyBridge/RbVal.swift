@@ -4,27 +4,27 @@
 //
 //  Created by John Fairhurst on 19/02/2018.
 //
-import TMLRubyHelpers
+import RubyBridgeHelpers
 
 /// Wrap up a Ruby value.
 open class RbVal {
-    private let valueBox: UnsafeMutablePointer<TmlRubyValueBox>
+    private let valueBox: UnsafeMutablePointer<Rbb_value>
 
     /// Wrap up a Ruby value returned by its API and keep it safe from GC.
     public init(rubyValue: VALUE) {
-        valueBox = tml_ruby_valuebox_alloc(rubyValue);
+        valueBox = rbb_value_alloc(rubyValue);
     }
 
     /// Create another Swift reference to an existing `RbVal`.
     /// The underlying Ruby value will not be GCed until both
     /// `RbVal`s have gone out of scope.
     public init(_ copy: RbVal) {
-        valueBox = tml_ruby_valuebox_dup(copy.valueBox);
+        valueBox = rbb_value_dup(copy.valueBox);
     }
 
     /// Allow this `VALUE` to be GCed when we go out of scope.
     deinit {
-        tml_ruby_valuebox_free(valueBox)
+        rbb_value_free(valueBox)
     }
 
     /// Access the `VALUE` object for use with the `CRuby` API.
