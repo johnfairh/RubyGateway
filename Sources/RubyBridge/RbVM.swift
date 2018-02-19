@@ -47,7 +47,7 @@ open class RbVM {
         // Calling ruby_options() sets up the loadpath nicely and does the bootstrapping of
         // rubygems so they can be required directly.
         // The -e part is to prevent it reading from stdin - empty script.
-        let arg1 = strdup("TMLRuby")
+        let arg1 = strdup("RubyBridge")
         let arg2 = strdup("-e ")
         defer {
             free(arg1)

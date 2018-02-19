@@ -1,6 +1,6 @@
 //
-//  TMLRubyHelpers.m
-//  TMLRuby
+//  rbb_helpers.m
+//  RubyBridgeHelpers
 //
 //  Created by John Fairhurst on 15/02/2018.
 //
@@ -12,7 +12,7 @@
 // # Thunks for Exception Handling
 //
 // If there is an unhandled exception then Ruby crashes the process.
-// We elect to never let this occur via TMLRuby APIs.
+// We elect to never let this occur via RubyBridge APIs.
 //
 // The way to handle an exception in the C API is to wrap the throwy
 // call in `rb_protect()`.

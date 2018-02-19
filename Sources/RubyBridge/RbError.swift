@@ -6,7 +6,7 @@
 //
 import CRuby
 
-/// Errors raised by `TMLRuby` objects.
+/// Errors raised by `RubyBridge` layer itself
 public enum RbError: Error {
     /// Ruby VM could not be initialized.
     case initError(String)
@@ -23,6 +23,7 @@ extension RbError: CustomStringConvertible {
     }
 }
 
+/// Corresponds to a Ruby exception
 public struct RbException: Error {
     public let value: VALUE
     public init(rubyValue: VALUE) {

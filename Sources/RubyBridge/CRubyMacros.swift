@@ -18,7 +18,7 @@ import RubyBridgeHelpers
 // Began keeping this in the same order as ruby.h but good grief the numeric functions
 // drove me crazy this way -- so reordered to group all like stuff together.
 //
-// TMLRuby uses the NUM abstraction layers exclusively so most stuff lower than that
+// RubyBridge uses the NUM abstraction layers exclusively so most stuff lower than that
 // is omitted.
 //
 

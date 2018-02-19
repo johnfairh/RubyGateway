@@ -1,6 +1,6 @@
 //
-//  TMLRubyHelpers.h
-//  TMLRuby
+//  rbb_helpers.h
+//  RubyBridgeHelpers
 //
 //  Created by John Fairhurst on 15/02/2018.
 //
@@ -12,12 +12,13 @@
  * Ruby API to hide some C-ish behaviour such as type-safety and longjmp()ing
  * from Swift.
  *
- * It would be part of the TMLRuby module directly but SPM does not approve.
+ * It would be part of the RubyBridge module directly but SPM does not approve.
  */
 
 /* Linux clang 5 is unhappy with @import syntax when processing this
- * lib's module map.  Linux issue or Clang issue? TBD, need something more
- * modern than Ubuntu 14.04 or figure out how to install clang > 5 there.
+ * lib's module map as part of building the Swift module RubyBridge.
+ * Linux issue or Clang issue? TBD, need something more modern than Ubuntu
+ * 14.04 or figure out how to install clang > 5 there.
  */
 #ifdef __linux__
 typedef unsigned long VALUE;

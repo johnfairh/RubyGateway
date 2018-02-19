@@ -18,34 +18,34 @@ class TestRbVal: XCTestCase {
 
     func testSimple() {
         let rbValue = Qtrue
-        let val = RbVal(rubyValue: rbValue)
-        XCTAssertEqual(rbValue, val.rubyValue)
+        let obj = RbObject(rubyValue: rbValue)
+        XCTAssertEqual(rbValue, obj.rubyValue)
     }
 
     // Try and test the GC-safe thing works.
     // Probably a bit pointless, the value is probably on the stack,
     // but at least tests that the gc registration doesn't hurt.
 
-    private func getRubyNum(_ u: UInt) -> RbVal {
-        return RbVal(rubyValue: RB_ULONG2NUM(u))
+    private func getRubyNum(_ u: UInt) -> RbObject {
+        return RbObject(rubyValue: RB_ULONG2NUM(u))
     }
 
     func testObject() {
         let testNum = UInt.max // will not fit in FIXNUM, Ruby heap allocation
-        let val = getRubyNum(testNum)
+        let obj = getRubyNum(testNum)
         rb_gc()
-        let backVal = RB_NUM2ULONG(val.rubyValue)
+        let backVal = RB_NUM2ULONG(obj.rubyValue)
         XCTAssertEqual(testNum, backVal)
     }
 
     func testCopy() {
         let testNum = UInt.max
-        let rbVal2: RbVal
+        let rbObj2: RbObject
         do {
-            let rbVal1 = RbVal(rubyValue: RB_ULONG2NUM(testNum))
-            rbVal2 = RbVal(rbVal1)
+            let rbObj1 = RbObject(rubyValue: RB_ULONG2NUM(testNum))
+            rbObj2 = RbObject(rbObj1)
         }
-        let backVal = RB_NUM2ULONG(rbVal2.rubyValue)
+        let backVal = RB_NUM2ULONG(rbObj2.rubyValue)
         XCTAssertEqual(testNum, backVal)
     }
 

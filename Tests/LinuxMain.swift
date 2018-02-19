@@ -6,4 +6,5 @@ XCTMain([
     testCase(TestNumerics.allTests),
     testCase(TestStrings.allTests),
     testCase(TestConstants.allTests),
+    testCase(TestRbObject.allTests),
 ])
