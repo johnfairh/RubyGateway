@@ -1,5 +1,10 @@
 // swift-tools-version:4.0
 
+//  Package.swift
+//  RubyBridge
+//
+//  Distributed under the MIT license, see LICENSE
+
 import PackageDescription
 
 let package = Package(

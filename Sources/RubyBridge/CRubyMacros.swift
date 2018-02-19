@@ -1,9 +1,9 @@
 //
 //  CRubyMacros.swift
-//  TMLRuby
+//  RubyBridge
 //
-//  Created by John Fairhurst on 15/02/2018.
-//
+//  Distributed under the MIT license, see LICENSE
+//  Portions of this file derived from Ruby and distributed under terms of its license.
 
 import CRuby
 import RubyBridgeHelpers

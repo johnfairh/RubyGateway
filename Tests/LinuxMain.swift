@@ -1,3 +1,10 @@
+//
+//  LinuxMain.swift
+//  RubyBridge
+//
+//  Distributed under the MIT license, see LICENSE
+//
+
 import XCTest
 @testable import RubyBridgeTests
 

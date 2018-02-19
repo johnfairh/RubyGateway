@@ -2,7 +2,7 @@
 //  rbb_helpers.m
 //  RubyBridgeHelpers
 //
-//  Created by John Fairhurst on 15/02/2018.
+//  Distributed under the MIT license, see LICENSE
 //
 
 @import CRuby;

@@ -1,8 +1,8 @@
 //
 //  RbObject.swift
-//  TMLRuby
+//  RubyBridge
 //
-//  Created by John Fairhurst on 19/02/2018.
+//  Distributed under the MIT license, see LICENSE
 //
 import RubyBridgeHelpers
 

@@ -1,8 +1,8 @@
 //
 //  TestConstants.swift
-//  TMLRubyTests
+//  RubyBridgeTests
 //
-//  Created by John Fairhurst on 17/02/2018.
+//  Distributed under the MIT license, see LICENSE
 //
 
 import XCTest

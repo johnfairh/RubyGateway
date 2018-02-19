@@ -1,8 +1,8 @@
 //
 //  RbVM.swift
-//  TMLRuby
+//  RubyBridge
 //
-//  Created by John Fairhurst on 12/02/2018.
+//  Distributed under the MIT license, see LICENSE
 //
 // http://ruby-hacking-guide.github.io/gc.html
 // http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-core/60741

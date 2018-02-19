@@ -1,8 +1,8 @@
 //
 //  RbError.swift
-//  TMLRuby
+//  RubyBridge
 //
-//  Created by John Fairhurst on 13/02/2018.
+//  Distributed under the MIT license, see LICENSE
 //
 import CRuby
 
