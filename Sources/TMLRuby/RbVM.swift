@@ -88,7 +88,7 @@ open class RbVM {
     }
 }
 
-// MARK: - VM settings - debug, verbose, script name
+// MARK: - VM settings - debug, verbose, script name, version
 
 extension RbVM {
 
@@ -159,6 +159,16 @@ extension RbVM {
                 return "??"
             }
         }
+    }
+
+    /// The version number triple of Ruby being used, eg. "2.5.0".
+    public var version: String {
+        return String(cString: tml_ruby_ruby_version())
+    }
+
+    /// The full version string for the Ruby being used, eg. "ruby 2.5.0p0 (2017-12-25 revision 61468) [x86_64-darwin17]"
+    public var versionDescription: String {
+        return String(cString: tml_ruby_ruby_description())
     }
 }
 

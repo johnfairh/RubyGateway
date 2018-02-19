@@ -119,7 +119,23 @@ class TestVM: XCTestCase {
         // XCTAssertEqual(testTitle, vm.scriptName)
     }
 
+    /// Version
+    func testVersion() {
+        let vm = Helpers.ruby
+        let version = vm.version
+        let description = vm.versionDescription
+
+        XCTAssertTrue(description.contains(version))
+    }
+
     static var allTests = [
         ("testInit", testInit),
+        ("testEndToEnd", testEndToEnd),
+        ("testSecondInit", testSecondInit),
+        ("testRequire", testRequire),
+        ("testDebug", testDebug),
+        ("testVerbose", testVerbose),
+        ("testScriptName", testScriptName),
+        ("testVersion", testVersion)
     ]
 }

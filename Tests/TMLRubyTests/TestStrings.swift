@@ -51,4 +51,11 @@ class TestStrings: XCTestCase {
     func testUtf8WithNulls() {
         doTestRoundTrip("abë\0🐽🇧🇷en\0d")
     }
+
+    static var allTests = [
+        ("testEmpty", testEmpty),
+        ("testAscii", testAscii),
+        ("testUtf8", testUtf8),
+        ("testUtf8WithNulls", testUtf8WithNulls)
+    ]
 }

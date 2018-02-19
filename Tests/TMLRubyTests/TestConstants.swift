@@ -28,4 +28,8 @@ class TestConstants: XCTestCase {
         XCTAssertEqual(.T_FALSE, TYPE(falseVal))
         XCTAssertEqual(.T_TRUE, TYPE(trueVal))
     }
+
+    static var allTests = [
+        ("testNilConstants", testNilConstants),
+    ]
 }

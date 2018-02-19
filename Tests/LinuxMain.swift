@@ -3,4 +3,7 @@ import XCTest
 
 XCTMain([
     testCase(TestVM.allTests),
+    testCase(TestNumerics.allTests),
+    testCase(TestStrings.allTests),
+    testCase(TestConstants.allTests),
 ])

@@ -18,7 +18,7 @@
 @import CRuby;
 
 /// Safely call `rb_require` and report exception status.
-VALUE tml_ruby_require_protect(const char *fname, int *status);
+VALUE tml_ruby_require_protect(const char * _Nonnull fname, int * _Nullable status);
 
 /// Wrap up RB_BUILTIN_TYPE for Swift
 int tml_ruby_rb_builtin_type(VALUE value);
@@ -30,10 +30,14 @@ VALUE        tml_ruby_RB_INT2NUM(int v);
 VALUE        tml_ruby_RB_UINT2NUM(unsigned int v);
 
 /// String APIs with un-Swift requirements
-VALUE       tml_ruby_StringValue(VALUE *v);
-const char *tml_ruby_StringValuePtr(VALUE *v);
-const char *tml_ruby_StringValueCStr(VALUE *v);
-long        tml_ruby_RSTRING_LEN(VALUE v);
-const char *tml_ruby_RSTRING_PTR(VALUE v);
+VALUE                 tml_ruby_StringValue(VALUE * _Nonnull v);
+const char * _Nonnull tml_ruby_StringValuePtr(VALUE * _Nonnull v);
+const char * _Nonnull tml_ruby_StringValueCStr(VALUE * _Nonnull v);
+long                  tml_ruby_RSTRING_LEN(VALUE v);
+const char * _Nonnull tml_ruby_RSTRING_PTR(VALUE v);
+
+/// Strings hidden from importer
+const char * _Nonnull tml_ruby_ruby_version(void);
+const char * _Nonnull tml_ruby_ruby_description(void);
 
 #endif /* TMLRubyHelpers_h */

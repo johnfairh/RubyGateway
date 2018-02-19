@@ -135,4 +135,17 @@ class TestNumerics: XCTestCase {
                           (val == swiftVal))
         }
     }
+
+    static var allTests = [
+        ("testFixnumRoundtrip", testFixnumRoundtrip),
+        ("testIntNumRoundtrip", testIntNumRoundtrip),
+        ("testUIntNumRoundtrip", testUIntNumRoundtrip),
+        ("testInt16NumRoundtrip", testInt16NumRoundtrip),
+        ("testUInt16NumRoundtrip", testUInt16NumRoundtrip),
+        ("testInt32NumRoundtrip", testInt32NumRoundtrip),
+        ("testUInt32NumRoundtrip", testUInt32NumRoundtrip),
+        ("testInt64NumRoundtrip", testInt64NumRoundtrip),
+        ("testUInt64NumRoundtrip", testUInt64NumRoundtrip),
+        ("testDoubleRoundtrip", testDoubleRoundtrip)
+    ]
 }
