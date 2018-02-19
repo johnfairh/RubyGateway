@@ -15,6 +15,8 @@
 		022F3AC92037153A009E69BE /* TestNumerics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3AC82037153A009E69BE /* TestNumerics.swift */; };
 		022F3ACB20375E01009E69BE /* TestStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3ACA20375E01009E69BE /* TestStrings.swift */; };
 		022F3ACD20385C3A009E69BE /* TestConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3ACC20385C3A009E69BE /* TestConstants.swift */; };
+		022F3ACF203AE707009E69BE /* RbVal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3ACE203AE707009E69BE /* RbVal.swift */; };
+		022F3AD1203AF8BA009E69BE /* TestRbVal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3AD0203AF8BA009E69BE /* TestRbVal.swift */; };
 		024923482031EE0400E3AAF4 /* RbVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024923462031EDE000E3AAF4 /* RbVM.swift */; };
 		0249234B20334AE500E3AAF4 /* RbError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0249234920334ADE00E3AAF4 /* RbError.swift */; };
 		0249234D20335ADB00E3AAF4 /* TestVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0249234C20335ADB00E3AAF4 /* TestVM.swift */; };
@@ -42,6 +44,8 @@
 		022F3AC82037153A009E69BE /* TestNumerics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestNumerics.swift; sourceTree = "<group>"; };
 		022F3ACA20375E01009E69BE /* TestStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestStrings.swift; sourceTree = "<group>"; };
 		022F3ACC20385C3A009E69BE /* TestConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConstants.swift; sourceTree = "<group>"; };
+		022F3ACE203AE707009E69BE /* RbVal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbVal.swift; sourceTree = "<group>"; };
+		022F3AD0203AF8BA009E69BE /* TestRbVal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRbVal.swift; sourceTree = "<group>"; };
 		024923462031EDE000E3AAF4 /* RbVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbVM.swift; sourceTree = "<group>"; };
 		0249234920334ADE00E3AAF4 /* RbError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbError.swift; sourceTree = "<group>"; };
 		0249234C20335ADB00E3AAF4 /* TestVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVM.swift; sourceTree = "<group>"; };
@@ -121,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				0249234C20335ADB00E3AAF4 /* TestVM.swift */,
+				022F3AD0203AF8BA009E69BE /* TestRbVal.swift */,
 				022F3AC82037153A009E69BE /* TestNumerics.swift */,
 				022F3ACA20375E01009E69BE /* TestStrings.swift */,
 				022F3ACC20385C3A009E69BE /* TestConstants.swift */,
@@ -175,6 +180,7 @@
 			children = (
 				024923462031EDE000E3AAF4 /* RbVM.swift */,
 				0249234920334ADE00E3AAF4 /* RbError.swift */,
+				022F3ACE203AE707009E69BE /* RbVal.swift */,
 				022F3AB120360B9F009E69BE /* CRubyMacros.swift */,
 			);
 			name = TMLRuby;
@@ -331,6 +337,7 @@
 				022F3ACD20385C3A009E69BE /* TestConstants.swift in Sources */,
 				022F3ACB20375E01009E69BE /* TestStrings.swift in Sources */,
 				022F3AC92037153A009E69BE /* TestNumerics.swift in Sources */,
+				022F3AD1203AF8BA009E69BE /* TestRbVal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +346,7 @@
 			buildActionMask = 0;
 			files = (
 				0249234B20334AE500E3AAF4 /* RbError.swift in Sources */,
+				022F3ACF203AE707009E69BE /* RbVal.swift in Sources */,
 				024923482031EE0400E3AAF4 /* RbVM.swift in Sources */,
 				022F3AB220360B9F009E69BE /* CRubyMacros.swift in Sources */,
 			);
@@ -402,7 +410,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "${SRCROOT}/CRuby";
+				HEADER_SEARCH_PATHS = (
+					"${SRCROOT}/CRuby",
+					"${SRCROOT}/Sources/TMLRubyHelpers/include",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -452,7 +463,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "${SRCROOT}/CRuby";
+				HEADER_SEARCH_PATHS = (
+					"${SRCROOT}/CRuby",
+					"${SRCROOT}/Sources/TMLRubyHelpers/include",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";

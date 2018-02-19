@@ -6,6 +6,7 @@
 //
 
 @import CRuby;
+#import "TMLRubyHelpers.h"
 
 //
 // # Thunks for Exception Handling
@@ -144,4 +145,34 @@ const char *tml_ruby_ruby_version(void)
 const char *tml_ruby_ruby_description(void)
 {
     return ruby_description;
+}
+
+//
+// # VALUE protection
+//
+
+TmlRubyValueBox * _Nonnull tml_ruby_valuebox_alloc(VALUE value)
+{
+    TmlRubyValueBox *box = malloc(sizeof(*box));
+    if (box == NULL) {
+        /* No good way out here, don't want to make the RbEnv
+           initializers failable.
+         */
+        abort();
+    }
+    box->value = value;
+    rb_gc_register_address(&box->value);
+    return box;
+}
+
+TmlRubyValueBox * _Nonnull tml_ruby_valuebox_dup(const TmlRubyValueBox * _Nonnull box)
+{
+    return tml_ruby_valuebox_alloc(box->value);
+}
+
+void tml_ruby_valuebox_free(TmlRubyValueBox *_Nonnull box)
+{
+    rb_gc_unregister_address(&box->value);
+    box->value = Qundef;
+    free(box);
 }

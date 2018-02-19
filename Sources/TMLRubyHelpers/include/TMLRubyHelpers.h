@@ -48,4 +48,13 @@ const char * _Nonnull tml_ruby_RSTRING_PTR(VALUE v);
 const char * _Nonnull tml_ruby_ruby_version(void);
 const char * _Nonnull tml_ruby_ruby_description(void);
 
+/// ValueBox - keep a VALUE safe so it does not get GC'ed
+typedef struct  {
+    VALUE value;
+} TmlRubyValueBox;
+
+TmlRubyValueBox * _Nonnull tml_ruby_valuebox_alloc(VALUE value);
+TmlRubyValueBox * _Nonnull tml_ruby_valuebox_dup(const TmlRubyValueBox * _Nonnull box);
+void                       tml_ruby_valuebox_free(TmlRubyValueBox *_Nonnull box);
+
 #endif /* TMLRubyHelpers_h */
