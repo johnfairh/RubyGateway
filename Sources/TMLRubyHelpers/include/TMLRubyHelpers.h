@@ -15,7 +15,15 @@
  * It would be part of the TMLRuby module directly but SPM does not approve.
  */
 
+/* Linux clang 5 is unhappy with @import syntax when processing this
+ * lib's module map.  Linux issue or Clang issue? TBD, need something more
+ * modern than Ubuntu 14.04 or figure out how to install clang > 5 there.
+ */
+#ifdef __linux__
+typedef unsigned long VALUE;
+#else
 @import CRuby;
+#endif
 
 /// Safely call `rb_require` and report exception status.
 VALUE tml_ruby_require_protect(const char * _Nonnull fname, int * _Nullable status);
