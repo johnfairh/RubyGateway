@@ -29,6 +29,12 @@ typedef unsigned long VALUE;
 /// Safely call `rb_require` and report exception status.
 VALUE rbb_require_protect(const char * _Nonnull fname, int * _Nullable status);
 
+/// Safely call `rb_intern` and report exception status.
+ID rbb_intern_protect(const char * _Nonnull name, int * _Nullable status);
+
+/// Safely call `rb_const_get_at` and report exception status.
+VALUE rbb_const_get_at_protect(VALUE value, ID id, int * _Nullable status);
+
 /// Wrap up RB_BUILTIN_TYPE for Swift
 int rbb_RB_BUILTIN_TYPE(VALUE value);
 

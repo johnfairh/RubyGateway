@@ -86,6 +86,9 @@ open class RbVM {
     deinit {
         cleanup()
     }
+
+    /// Cache of rb_intern() calls.
+    private static var idCache: [String: ID] = [:]
 }
 
 // MARK: - VM settings - debug, verbose, script name, version
@@ -195,7 +198,7 @@ extension RbVM {
     /// - throws: RbException if a Ruby exception occurred.  (This usually means the
     ///           file couldn't be found.)
     public func require(filename: String) throws -> Bool {
-        var state: Int32 = 0
+        var state = Int32(0)
         let value = rbb_require_protect(filename, &state);
         if state != 0 {
             let exception = rb_errinfo()
@@ -203,5 +206,42 @@ extension RbVM {
             throw RbException(rubyValue: exception)
         }
         return value == Qtrue
+    }
+}
+
+// MARK: - ID lookup
+
+extension RbVM {
+
+    /// Get an `ID` ready to call a method, for example.
+    ///
+    /// This is public for users to interop with `CRuby`, it is not
+    /// needed for regular `RubyBridge` use.
+    ///
+    /// - parameter name: name to look up, typically constant or method name.
+    /// - returns: the corresponding ID
+    /// - throws: `RbException` if Ruby raises -- probably means the `ID` space
+    ///   is full, which is fairly unlikely.
+    public static func getID(from name: String) throws -> ID {
+        if let rbId = idCache[name] {
+            return rbId
+        }
+        var state = Int32(0)
+        let rbId = rbb_intern_protect(name, &state)
+        if state != 0 {
+            let exception = rb_errinfo()
+            defer { rb_set_errinfo(Qnil) }
+            throw RbException(rubyValue: exception)
+        }
+        idCache[name] = rbId
+        return rbId
+    }
+}
+
+// MARK: - Constant access from an object
+
+extension RbVM: RbConstantScope {
+    var constantScopeValue: VALUE {
+        return rb_cObject
     }
 }

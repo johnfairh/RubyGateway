@@ -40,3 +40,9 @@ open class RbObject {
         return valueBox.pointee.value
     }
 }
+
+extension RbObject: RbConstantScope {
+    var constantScopeValue: VALUE {
+        return rubyValue
+    }
+}

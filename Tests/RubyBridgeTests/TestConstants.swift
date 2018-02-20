@@ -8,7 +8,7 @@
 import XCTest
 @testable import RubyBridge
 
-/// Some misc primitives
+/// Constants - fundamental and high-level ones
 class TestConstants: XCTestCase {
 
     func testNilConstants() {
@@ -29,7 +29,64 @@ class TestConstants: XCTestCase {
         XCTAssertEqual(.T_TRUE, TYPE(trueVal))
     }
 
+    func testConstantAccess() {
+        let ruby = Helpers.ruby
+
+        do {
+            let _ = try ruby.require(filename: Helpers.fixturePath("nesting.rb"))
+
+            let outerModule = try ruby.getConstant(name: "Outer")
+            XCTAssertEqual(.T_MODULE, TYPE(outerModule.rubyValue))
+
+            let outerConstant = try outerModule.getConstant(name: "OUTER_CONSTANT")
+            XCTAssertEqual(.T_FIXNUM, TYPE(outerConstant.rubyValue))
+        } catch {
+            XCTFail("Unexpected exception: \(error)")
+        }
+    }
+
+    func testNestedConstantAccess() {
+        let ruby = Helpers.ruby
+
+        do {
+            let _ = try ruby.require(filename: Helpers.fixturePath("nesting.rb"))
+
+            let innerClass = try ruby.getClass(name: "Outer::Middle::Inner")
+            XCTAssertEqual(.T_CLASS, TYPE(innerClass.rubyValue))
+        } catch {
+            XCTFail("Unexpected exception: \(error)")
+        }
+    }
+
+    func testFailedConstantAccess() {
+        let ruby = Helpers.ruby
+
+        do {
+            let _ = try ruby.require(filename: Helpers.fixturePath("nesting.rb"))
+
+            let outerModule = try ruby.getConstant(name: "Fish")
+            XCTFail("Managed to find 'Fish' constant: \(outerModule)")
+        } catch {
+        }
+
+        let middleModule = try! ruby.getConstant(name: "Outer::Middle")
+        do {
+            let outerModule = try middleModule.getConstant(name: "Outer")
+            XCTFail("Constant scope resolved upwards - \(outerModule)")
+        } catch {
+        }
+
+        do {
+            let innerConstant = try ruby.getConstant(name: "Outer::Middle::Fish")
+            XCTFail("Managed to find 'Fish' constant: \(innerConstant)")
+        } catch {
+        }
+    }
+
     static var allTests = [
         ("testNilConstants", testNilConstants),
+        ("testConstantAccess", testConstantAccess),
+        ("testNestedConstantAccess", testNestedConstantAccess),
+        ("testFailedConstantAccess", testFailedConstantAccess)
     ]
 }

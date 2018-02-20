@@ -70,6 +70,35 @@ VALUE rbb_require_protect(const char *fname, int *status)
     return rb_protect(rbb_require_thunk, (VALUE)(void *)fname, status);
 }
 
+static VALUE rbb_intern_thunk(VALUE value)
+{
+    const char *name = (const char *)(void *)value;
+    return rb_intern(name);
+}
+
+ID rbb_intern_protect(const char * _Nonnull name, int * _Nullable status)
+{
+    return rb_protect(rbb_intern_thunk, (VALUE)(void *)name, status);
+}
+
+typedef struct
+{
+    VALUE value;
+    ID    id;
+} Rbb_const_get_at_params;
+
+static VALUE rbb_const_get_at_thunk(VALUE value)
+{
+    Rbb_const_get_at_params *params = (Rbb_const_get_at_params *)(void *)value;
+    return rb_const_get_at(params->value, params->id);
+}
+
+VALUE rbb_const_get_at_protect(VALUE value, ID id, int * _Nullable status)
+{
+    Rbb_const_get_at_params params = { .value = value, .id = id };
+    return rb_protect(rbb_const_get_at_thunk, (VALUE)(void *)(&params), status);
+}
+
 //
 // # Difficult Macros
 //
