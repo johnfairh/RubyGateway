@@ -14,7 +14,7 @@ import XCTest
 class TestNumerics: XCTestCase {
 
     override class func setUp() {
-        let _ = Helpers.ruby
+        Helpers.initRuby()
     }
 
     /// Check we can round-trip values through fixnum, that our

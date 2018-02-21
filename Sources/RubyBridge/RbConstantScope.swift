@@ -12,24 +12,24 @@ import RubyBridgeHelpers
 /// nested under it.  This is either a regular class/module object or Object.class
 /// for top-level constants.
 protocol RbConstantScope {
-    var constantScopeValue: VALUE { get }
+    func constantScopeValue() throws -> VALUE
 }
 
 extension RbConstantScope {
     /// Get an `RbOBject` that represents a Ruby constant.
     ///
     /// In Ruby constants include things that users think of as constants like
-    /// `Math::PI` but also classes and modules.  You can use this routine with
+    /// `Math::PI`, classes, and modules.  You can use this routine with
     /// any kind of constant, but see `getClass` for a little more sugar.
     ///
     /// ```swift
-    /// let rubyPi = ruby.getConstant("Math::PI")
+    /// let rubyPi = Ruby.getConstant("Math::PI")
     /// let crumbs = rubyPi - Double.pi
     /// ```
     /// This is a dynamic call into Ruby that can cause calls to `const_missing`
     /// and autoloading.
     ///
-    /// For a version that does not throw, see `RbVM.failable` or `RbObject.failable`.
+    /// For a version that does not throw, see `RbBridge.failable` or `RbObject.failable`.
     ///
     /// - throws: `RbException` if the constant cannot be found,
     ///           `RbError` if the constant is found but is not a class.
@@ -38,12 +38,12 @@ extension RbConstantScope {
     ///   to drill down through nested classes and modules.
     ///
     ///   If you call this method on an `RbObject` then `name` is relative
-    ///   to that object, not the top level.
+    ///   to that object, not the top level. XXX wrong!
     ///
     /// - returns: an `RbObject` for the class
     ///
     public func getConstant(name: String) throws -> RbObject {
-        var nextValue = constantScopeValue
+        var nextValue = try constantScopeValue()
         try name.components(separatedBy: "::").forEach { name in
             let rbId = try RbVM.getID(from: name)
             var state = Int32(0)
@@ -79,7 +79,7 @@ extension RbConstantScope {
     /// This is a dynamic call into Ruby that can cause calls to `const_missing`
     /// and autoloading.
     ///
-    /// For a version that does not throw, see `RbVM.failable` or `RbObject.failable`.
+    /// For a version that does not throw, see `RbBridge.failable` or `RbObject.failable`.
     public func getClass(name: String) throws -> RbObject {
         let obj = try getConstant(name: name)
         guard RB_TYPE_P(obj.rubyValue, .T_CLASS) else {

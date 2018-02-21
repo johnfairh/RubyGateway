@@ -13,7 +13,7 @@ import CRuby
 class TestRbVal: XCTestCase {
 
     override class func setUp() {
-        let _ = Helpers.ruby
+        Helpers.initRuby()
     }
 
     func testSimple() {

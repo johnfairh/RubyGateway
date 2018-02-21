@@ -30,12 +30,10 @@ class TestConstants: XCTestCase {
     }
 
     func testConstantAccess() {
-        let ruby = Helpers.ruby
-
         do {
-            let _ = try ruby.require(filename: Helpers.fixturePath("nesting.rb"))
+            let _ = try Ruby.require(filename: Helpers.fixturePath("nesting.rb"))
 
-            let outerModule = try ruby.getConstant(name: "Outer")
+            let outerModule = try Ruby.getConstant(name: "Outer")
             XCTAssertEqual(.T_MODULE, TYPE(outerModule.rubyValue))
 
             let outerConstant = try outerModule.getConstant(name: "OUTER_CONSTANT")
@@ -46,12 +44,10 @@ class TestConstants: XCTestCase {
     }
 
     func testNestedConstantAccess() {
-        let ruby = Helpers.ruby
-
         do {
-            let _ = try ruby.require(filename: Helpers.fixturePath("nesting.rb"))
+            let _ = try Ruby.require(filename: Helpers.fixturePath("nesting.rb"))
 
-            let innerClass = try ruby.getClass(name: "Outer::Middle::Inner")
+            let innerClass = try Ruby.getClass(name: "Outer::Middle::Inner")
             XCTAssertEqual(.T_CLASS, TYPE(innerClass.rubyValue))
         } catch {
             XCTFail("Unexpected exception: \(error)")
@@ -59,17 +55,15 @@ class TestConstants: XCTestCase {
     }
 
     func testFailedConstantAccess() {
-        let ruby = Helpers.ruby
-
         do {
-            let _ = try ruby.require(filename: Helpers.fixturePath("nesting.rb"))
+            let _ = try Ruby.require(filename: Helpers.fixturePath("nesting.rb"))
 
-            let outerModule = try ruby.getConstant(name: "Fish")
+            let outerModule = try Ruby.getConstant(name: "Fish")
             XCTFail("Managed to find 'Fish' constant: \(outerModule)")
         } catch {
         }
 
-        let middleModule = try! ruby.getConstant(name: "Outer::Middle")
+        let middleModule = try! Ruby.getConstant(name: "Outer::Middle")
         do {
             let outerModule = try middleModule.getConstant(name: "Outer")
             XCTFail("Constant scope resolved upwards - \(outerModule)")
@@ -77,7 +71,7 @@ class TestConstants: XCTestCase {
         }
 
         do {
-            let innerConstant = try ruby.getConstant(name: "Outer::Middle::Fish")
+            let innerConstant = try Ruby.getConstant(name: "Outer::Middle::Fish")
             XCTFail("Managed to find 'Fish' constant: \(innerConstant)")
         } catch {
         }

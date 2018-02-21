@@ -16,7 +16,7 @@ import CRuby
 class TestStrings: XCTestCase {
 
     override func setUp() {
-        let _ = Helpers.ruby
+        Helpers.initRuby()
     }
 
     private func doTestRoundTrip(_ string: String) {

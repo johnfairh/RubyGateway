@@ -12,28 +12,38 @@ import CRuby
 class TestVM: XCTestCase {
     /// Check we can bring up Ruby.
     func testInit() {
-        let _ = Helpers.ruby
+        do {
+            try Ruby.check()
+        } catch {
+            XCTFail("Ruby init failed, \(error)")
+        }
     }
 
     /// Check whole thing is broadly functional
     func testEndToEnd() {
-        let _ = Helpers.ruby
-        rb_require(Helpers.fixturePath("backwards.rb"))
-        let string = "natural"
-        var stringArg = rb_str_new_cstr(string)
-        var result = rb_funcallv(0, rb_intern("backwards"), 1, &(stringArg))
-        let str = rb_string_value_cstr(&(result))
+        do {
+            let rc = try Ruby.require(filename: Helpers.fixturePath("backwards.rb"))
+            XCTAssertTrue(rc)
 
-        XCTAssertEqual(String(string.reversed()), String(cString: str!))
+            let string = "natural"
+            var stringArg = rb_str_new_cstr(string)
+            var result = rb_funcallv(0, rb_intern("backwards"), 1, &(stringArg))
+            let str = rb_string_value_cstr(&(result))
+
+            XCTAssertEqual(String(string.reversed()), String(cString: str!))
+        } catch {
+            XCTFail("Unexpected exception, \(error)")
+        }
     }
 
     /// Second init failure
     func testSecondInit() {
-        let _ = Helpers.ruby
+        testInit()
 
+        let vm2 = RbVM2()
         do {
-            let second = try RbVM()
-            XCTFail("Should not have worked: \(second)")
+            try vm2.check()
+            XCTFail("Unexpected pass of second init")
         } catch RbError.initError(_) {
             // OK
         } catch {
@@ -43,19 +53,17 @@ class TestVM: XCTestCase {
 
     /// 'require' works, path set up OK
     func testRequire() {
-        let vm = Helpers.ruby
-
         do {
-            let rc1 = try vm.require(filename: "pp") // Internal
+            let rc1 = try Ruby.require(filename: "pp") // Internal
             XCTAssertTrue(rc1)
 
-            let rc2 = try vm.require(filename: "pp") // Internal, repeat
+            let rc2 = try Ruby.require(filename: "pp") // Internal, repeat
             XCTAssertFalse(rc2)
 
-            let rc3 = try vm.require(filename: "rouge") // Gem
+            let rc3 = try Ruby.require(filename: "rouge") // Gem
             XCTAssertTrue(rc3)
 
-            let rc4 = try vm.require(filename: "not-ruby") // fail
+            let rc4 = try Ruby.require(filename: "not-ruby") // fail
             XCTFail("vm.require unexpectedly passed, rc=\(rc4)")
         } catch {
             print("Got expected exception: \(error)")
@@ -64,20 +72,18 @@ class TestVM: XCTestCase {
 
     /// debug flag
     func testDebug() {
-        let vm = Helpers.ruby
-
         do {
-            XCTAssertFalse(vm.debug)
-            let debugVal1 = try vm.eval(ruby: "$DEBUG")
+            XCTAssertFalse(Ruby.debug)
+            let debugVal1 = try Ruby.eval(ruby: "$DEBUG")
             XCTAssertTrue(!RB_TEST(debugVal1))
 
-            vm.debug = true
-            XCTAssertTrue(vm.debug)
-            let debugVal2 = try vm.eval(ruby: "$DEBUG")
+            Ruby.debug = true
+            XCTAssertTrue(Ruby.debug)
+            let debugVal2 = try Ruby.eval(ruby: "$DEBUG")
             XCTAssertTrue(RB_TEST(debugVal2))
 
-            vm.debug = false
-            XCTAssertFalse(vm.debug)
+            Ruby.debug = false
+            XCTAssertFalse(Ruby.debug)
         } catch {
             XCTFail("Unexpected exception: \(error)")
         }
@@ -85,25 +91,23 @@ class TestVM: XCTestCase {
 
     /// verbose flag
     func testVerbose() {
-        let vm = Helpers.ruby
-
         do {
-            XCTAssertEqual(RbVM.Verbosity.medium, vm.verbose)
-            let verboseVal1 = try vm.eval(ruby: "$VERBOSE")
+            XCTAssertEqual(.medium, Ruby.verbose)
+            let verboseVal1 = try Ruby.eval(ruby: "$VERBOSE")
             XCTAssertEqual(Qfalse, verboseVal1)
 
-            vm.verbose = .full
-            XCTAssertEqual(RbVM.Verbosity.full, vm.verbose)
-            let verboseVal2 = try vm.eval(ruby: "$VERBOSE")
+            Ruby.verbose = .full
+            XCTAssertEqual(.full, Ruby.verbose)
+            let verboseVal2 = try Ruby.eval(ruby: "$VERBOSE")
             XCTAssertEqual(Qtrue, verboseVal2)
 
-            vm.verbose = .none
-            XCTAssertEqual(RbVM.Verbosity.none, vm.verbose)
-            let verboseVal3 = try vm.eval(ruby: "$VERBOSE")
+            Ruby.verbose = .none
+            XCTAssertEqual(.none, Ruby.verbose)
+            let verboseVal3 = try Ruby.eval(ruby: "$VERBOSE")
             XCTAssertEqual(Qnil, verboseVal3)
 
-            vm.verbose = .medium
-            XCTAssertEqual(RbVM.Verbosity.medium, vm.verbose)
+            Ruby.verbose = .medium
+            XCTAssertEqual(.medium, Ruby.verbose)
         } catch {
             XCTFail("Unexpected exception: \(error)")
         }
@@ -111,9 +115,8 @@ class TestVM: XCTestCase {
 
     /// Script name
     func testScriptName() {
-        let vm = Helpers.ruby
         let testTitle = "My title"
-        vm.scriptName = testTitle
+        Ruby.scriptName = testTitle
 
         // XXX fix me
         // XCTAssertEqual(testTitle, vm.scriptName)
@@ -121,9 +124,8 @@ class TestVM: XCTestCase {
 
     /// Version
     func testVersion() {
-        let vm = Helpers.ruby
-        let version = vm.version
-        let description = vm.versionDescription
+        let version = Ruby.version
+        let description = Ruby.versionDescription
 
         XCTAssertTrue(description.contains(version))
     }

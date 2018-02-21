@@ -42,7 +42,7 @@ open class RbObject {
 }
 
 extension RbObject: RbConstantScope {
-    var constantScopeValue: VALUE {
+    func constantScopeValue() throws -> VALUE {
         return rubyValue
     }
 }
