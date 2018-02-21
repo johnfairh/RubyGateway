@@ -83,20 +83,27 @@ ID rbb_intern_protect(const char * _Nonnull name, int * _Nullable status)
 
 typedef struct
 {
-    VALUE value;
-    ID    id;
-} Rbb_const_get_at_params;
+    VALUE   value;
+    ID      id;
+    VALUE (*fn)(VALUE, ID);
+} Rbb_const_get_params;
 
-static VALUE rbb_const_get_at_thunk(VALUE value)
+static VALUE rbb_const_get_thunk(VALUE value)
 {
-    Rbb_const_get_at_params *params = (Rbb_const_get_at_params *)(void *)value;
-    return rb_const_get_at(params->value, params->id);
+    Rbb_const_get_params *params = (Rbb_const_get_params *)(void *)value;
+    return params->fn(params->value, params->id);
+}
+
+VALUE rbb_const_get_protect(VALUE value, ID id, int * _Nullable status)
+{
+    Rbb_const_get_params params = { .value = value, .id = id, .fn = rb_const_get };
+    return rb_protect(rbb_const_get_thunk, (VALUE)(void *)(&params), status);
 }
 
 VALUE rbb_const_get_at_protect(VALUE value, ID id, int * _Nullable status)
 {
-    Rbb_const_get_at_params params = { .value = value, .id = id };
-    return rb_protect(rbb_const_get_at_thunk, (VALUE)(void *)(&params), status);
+    Rbb_const_get_params params = { .value = value, .id = id, .fn = rb_const_get_at };
+    return rb_protect(rbb_const_get_thunk, (VALUE)(void *)(&params), status);
 }
 
 //

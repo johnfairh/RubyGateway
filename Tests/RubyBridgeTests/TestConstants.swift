@@ -54,6 +54,18 @@ class TestConstants: XCTestCase {
         }
     }
 
+    func testPopupConstantAccess() {
+        do {
+            let _ = try Ruby.require(filename: Helpers.fixturePath("nesting.rb"))
+
+            let innerClass = try Ruby.getClass(name: "Outer::Middle::Inner")
+
+            let _ = try innerClass.getConstant(name: "Outer")
+        } catch {
+            XCTFail("Unexpected exception: \(error)")
+        }
+    }
+
     func testFailedConstantAccess() {
         do {
             let _ = try Ruby.require(filename: Helpers.fixturePath("nesting.rb"))
@@ -65,8 +77,8 @@ class TestConstants: XCTestCase {
 
         let middleModule = try! Ruby.getConstant(name: "Outer::Middle")
         do {
-            let outerModule = try middleModule.getConstant(name: "Outer")
-            XCTFail("Constant scope resolved upwards - \(outerModule)")
+            let outerModule = try middleModule.getConstant(name: "Outer::Inner")
+            XCTFail("Constant scope resolved weirdly - \(outerModule)")
         } catch {
         }
 
@@ -77,10 +89,24 @@ class TestConstants: XCTestCase {
         }
     }
 
+    func testNotAClass() {
+        do {
+            let _ = try Ruby.require(filename: Helpers.fixturePath("nesting.rb"))
+
+            let notClass = try Ruby.getClass(name: "Outer")
+            XCTFail("Managed to get a class for module Outer: \(notClass)")
+        } catch RbError.notClass(_) {
+            // OK
+        } catch {
+            XCTFail("Unexpected exception \(error)")
+        }
+    }
+
     static var allTests = [
         ("testNilConstants", testNilConstants),
         ("testConstantAccess", testConstantAccess),
         ("testNestedConstantAccess", testNestedConstantAccess),
+        ("testPopupConstantAccess", testPopupConstantAccess),
         ("testFailedConstantAccess", testFailedConstantAccess)
     ]
 }

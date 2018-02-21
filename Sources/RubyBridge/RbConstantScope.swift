@@ -7,11 +7,13 @@
 
 import CRuby
 import RubyBridgeHelpers
+import Foundation
 
 /// Identify something that can have constants (classes, modules, actual constants)
 /// nested under it.  This is either a regular class/module object or Object.class
 /// for top-level constants.
 protocol RbConstantScope {
+    /// Get the value for the module to look relative to
     func constantScopeValue() throws -> VALUE
 }
 
@@ -37,17 +39,25 @@ extension RbConstantScope {
     /// - parameter name: The name of the constant to look up.  Can contain '::' sequences
     ///   to drill down through nested classes and modules.
     ///
-    ///   If you call this method on an `RbObject` then `name` is relative
-    ///   to that object, not the top level. XXX wrong!
+    ///   If you call this method on an `RbObject` then `name` is resolved like Ruby, looking
+    ///   up the inheritance chain if there is no local match.
     ///
     /// - returns: an `RbObject` for the class
     ///
     public func getConstant(name: String) throws -> RbObject {
         var nextValue = try constantScopeValue()
+        var first = true
         try name.components(separatedBy: "::").forEach { name in
-            let rbId = try RbVM.getID(from: name)
+            let rbId = try Ruby.getID(for: name)
             var state = Int32(0)
-            nextValue = rbb_const_get_at_protect(nextValue, rbId, &state)
+            if first {
+                // For the first item in the path, allow a hit here or above in the hierarchy
+                nextValue = rbb_const_get_protect(nextValue, rbId, &state)
+                first = false
+            } else {
+                // Once found a place to start, insist on stepping down from there.
+                nextValue = rbb_const_get_at_protect(nextValue, rbId, &state)
+            }
             if state != 0 {
                 let exception = rb_errinfo()
                 defer { rb_set_errinfo(Qnil) }
@@ -83,7 +93,7 @@ extension RbConstantScope {
     public func getClass(name: String) throws -> RbObject {
         let obj = try getConstant(name: name)
         guard RB_TYPE_P(obj.rubyValue, .T_CLASS) else {
-            throw RbError.initError("Fix me") // TODO: better
+            throw RbError.notClass("getClass(\(name)) failed, found the constant but it has type \(TYPE(obj.rubyValue).rawValue)")
         }
         return obj
     }

@@ -13,7 +13,7 @@ class TestVM: XCTestCase {
     /// Check we can bring up Ruby.
     func testInit() {
         do {
-            try Ruby.check()
+            try Ruby.setup()
         } catch {
             XCTFail("Ruby init failed, \(error)")
         }
@@ -40,11 +40,11 @@ class TestVM: XCTestCase {
     func testSecondInit() {
         testInit()
 
-        let vm2 = RbVM2()
+        let vm2 = RbVM()
         do {
-            try vm2.check()
+            try vm2.setup()
             XCTFail("Unexpected pass of second init")
-        } catch RbError.initError(_) {
+        } catch RbError.setup(_) {
             // OK
         } catch {
             XCTFail("Unexpected error type")

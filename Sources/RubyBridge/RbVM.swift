@@ -8,34 +8,68 @@
 // http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-core/60741
 // https://blog.heroku.com/incremental-gc
 
-import Foundation
 import CRuby
 import RubyBridgeHelpers
 
-final class RbVM2 {
+/// This class handles the setup and cleanup lifecycle events for the Ruby VM as well
+/// as storing data associated with the Ruby runtime.
+///
+/// There can only be one of these for a process which is enforced by this class not
+/// being public + `RbBridge` holding the only instance.
+final class RbVM {
 
+    /// State of Ruby lifecycle
     private enum State {
+        /// Never tried
         case unknown
+        /// Tried to set up, failed with something
         case setupError(Error)
+        /// Set up OK
         case setup
+        /// Cleaned up, can't be used
         case cleanedUp
     }
+    /// Current state of the VM
     private var state = State.unknown
 
-    func check() throws {
+    /// Cache of rb_intern() calls.
+    private var idCache: [String: ID] = [:]
+
+    /// Protect state (bit pointless given Ruby's state but feels bad not to)
+    private var mutex = pthread_mutex_t()
+
+    /// Set up data
+    init() {
+        state = .unknown
+        idCache = [:]
+
+        // Paranoid about reentrant symbol lookup during finalizers...
+        var attr = pthread_mutexattr_t()
+        pthread_mutexattr_settype(&attr, PTHREAD_MUTEX_RECURSIVE)
+        pthread_mutex_init(&mutex, &attr)
+    }
+
+    private func lock()   { pthread_mutex_lock(&mutex) }
+    private func unlock() { pthread_mutex_unlock(&mutex) }
+
+    /// Check the state of the VM, make it better if possible.
+    /// Returning means Ruby is working; throwing something means it is not.
+    func setup() throws {
+        lock(); defer { unlock() }
+
         switch state {
         case .setupError(let error):
             throw error
         case .setup:
             return
         case .cleanedUp:
-            throw RbError.initError("Can't initialize Ruby, already been cleaned up.")
+            throw RbError.setup("Can't set up Ruby, has already been cleaned up.")
         case .unknown:
             break
         }
 
         do {
-            try setup()
+            try doSetup()
             state = .setup
         } catch {
             state = .setupError(error)
@@ -43,7 +77,14 @@ final class RbVM2 {
         }
     }
 
+    /// Shut down the Ruby VM and release resources.  From the Ruby API headers:
+    ///
+    /// This includes calling `END{}` code and procs registered by `Kernel.#at_exit`.
+    ///
+    /// - returns: 0 if all is well, otherwise some error code.
     func cleanup() -> Int32 {
+        lock(); defer { unlock() }
+
         guard case .setup = state else {
             return 0;
         }
@@ -51,6 +92,7 @@ final class RbVM2 {
         return ruby_cleanup(0)
     }
 
+    /// Shut down Ruby at process exit if possible
     deinit {
         let _ = cleanup()
     }
@@ -60,14 +102,24 @@ final class RbVM2 {
         return rb_mKernel != 0
     }
 
-    private func setup() throws {
+    /// Initialize the Ruby VM for this process.  The VM resources are freed up by `RbVM.cleanup()`
+    /// or when there are no more refs to the `RbVM` object.
+    ///
+    /// There can only be one VM for a process.  This means that you cannot create a second `RbVM`
+    /// instance, even if the first instance has been cleaned up.
+    ///
+    /// The loadpath (where `require` looks) is set to the `lib/ruby` directories adjacent to the
+    /// `libruby` the program is linked against and `$RUBYLIB`.  Gems are enabled.
+    ///
+    /// - throws: `RbError.initError` if there is a problem starting Ruby.
+    private func doSetup() throws {
         guard !setupEver else {
-            throw RbError.initError("Can't initialize Ruby, already been done for this process.")
+            throw RbError.setup("Can't set up Ruby, already been done for this process.")
         }
 
         let setup_rc = ruby_setup()
         guard setup_rc == 0 else {
-            throw RbError.initError("Can't initialize Ruby, ruby_setup() failed: \(setup_rc)")
+            throw RbError.setup("Can't set up Ruby, ruby_setup() failed: \(setup_rc)")
         }
 
         // Calling ruby_options() sets up the loadpath nicely and does the bootstrapping of
@@ -89,184 +141,23 @@ final class RbVM2 {
         // `exit_status` should be 0 because it should be unmodified given `node` is a program.
         guard node_status == 1 && exit_status == 0 else {
             ruby_cleanup(0)
-            throw RbError.initError("Can't initialize Ruby, ruby_executable_node() gave node_status \(node_status) exit status \(exit_status)")
+            throw RbError.setup("Can't set up Ruby, ruby_executable_node() gave node_status \(node_status) exit status \(exit_status)")
         }
 
         // TODO: scriptName = "RubyBridge"
     }
-}
-
-public final class RbBridge {
-
-    init() {}
-
-    private static let vm = RbVM2()
-
-    public func check() throws {
-        try RbBridge.vm.check()
-    }
-
-    public func cleanup() -> Int32 {
-        return RbBridge.vm.cleanup()
-    }
-
-    private func softCheck() {
-        let _ = try? check()
-    }
-
-    /// Debug mode for Ruby code, sets `$DEBUG` / `$-d`
-    public var debug: Bool {
-        get {
-            softCheck()
-            guard let debug_ptr = rb_ruby_debug_ptr() else {
-                // Current implementation can't fail but let's not crash.
-                return false
-            }
-            return debug_ptr.pointee == Qtrue;
-        }
-        set {
-            softCheck()
-            guard let debug_ptr = rb_ruby_debug_ptr() else {
-                return
-            }
-            let newVal = newValue ? Qtrue : Qfalse
-            debug_ptr.initialize(to: newVal)
-        }
-    }
-
-    /// Verbose setting for Ruby scripts - affects `Kernel#warn` etc.
-    public enum Verbosity {
-        case none
-        case medium
-        case full
-    }
-
-    /// Verbose mode for Ruby code, sets `$VERBOSE` / `$-v`
-    public var verbose: Verbosity {
-        get {
-            softCheck()
-            guard let verbose_ptr = rb_ruby_verbose_ptr() else {
-                // Current implementation can't fail but let's not crash.
-                return .none
-            }
-            switch verbose_ptr.pointee {
-            case Qnil: return .none
-            case Qfalse: return .medium
-            default: return .full
-            }
-        }
-        set {
-            softCheck()
-            guard let verbose_ptr = rb_ruby_verbose_ptr() else {
-                return
-            }
-            let newVal: VALUE
-            switch newValue {
-            case .none: newVal = Qnil
-            case .medium: newVal = Qfalse
-            case .full: newVal = Qtrue
-            }
-            verbose_ptr.initialize(to: newVal)
-        }
-    }
-
-    /// Set `$PROGRAM_NAME` / `$0` for Ruby code.
-    public var scriptName: String {
-        set {
-            softCheck()
-            ruby_script(newValue)
-        }
-        get {
-            // sigh
-            do {
-                // XXX fix me - globalv lookup plus string conversion...
-                let _ = try eval(ruby: "$PROGRAM_NAME")
-                return "This needs to be implemented"
-            } catch {
-                return "??"
-            }
-        }
-    }
-
-    /// The version number triple of Ruby being used, eg. "2.5.0".
-    public var version: String {
-        return String(cString: rbb_ruby_version())
-    }
-
-    /// The full version string for the Ruby being used, eg. "ruby 2.5.0p0 (2017-12-25 revision 61468) [x86_64-darwin17]"
-    public var versionDescription: String {
-        return String(cString: rbb_ruby_description())
-    }
-}
-
-// MARK: - run code: eval, require, load
-
-extension RbBridge {
-
-    /// Evaluate some Ruby and return the result.
-    /// XXX fix this up [turn into 'call' of Object#eval?]
-    public func eval(ruby: String) throws -> VALUE {
-        try check()
-        var state: Int32 = 0
-        let value = rb_eval_string_protect(ruby, &state)
-        if state != 0 {
-            let exception = rb_errinfo()
-            defer { rb_set_errinfo(Qnil) }
-            throw RbException(rubyValue: exception)
-        }
-        return value
-    }
-
-    /// 'require' - see Ruby `Kernel#require`.  Load file once-only.
-    ///
-    /// - returns: `true` if the filed was opened OK, `false` if it is already loaded.
-    /// - throws: RbException if a Ruby exception occurred.  (This usually means the
-    ///           file couldn't be found.)
-    public func require(filename: String) throws -> Bool {
-        try check()
-        var state = Int32(0)
-        let value = rbb_require_protect(filename, &state);
-        if state != 0 {
-            let exception = rb_errinfo()
-            defer { rb_set_errinfo(Qnil) }
-            throw RbException(rubyValue: exception)
-        }
-        return value == Qtrue
-    }
-}
-
-// MARK: - Constant access from an object
-
-extension RbBridge: RbConstantScope {
-    func constantScopeValue() throws -> VALUE {
-        try check()
-        return rb_cObject
-    }
-}
-
-public let Ruby = RbBridge()
-
-/// An instance of a Ruby virtual machine.
-open class RbVM {
-
-    /// Cache of rb_intern() calls.
-    private static var idCache: [String: ID] = [:]
-}
-
-// MARK: - ID lookup
-
-extension RbVM {
 
     /// Get an `ID` ready to call a method, for example.
     ///
-    /// This is public for users to interop with `CRuby`, it is not
-    /// needed for regular `RubyBridge` use.
+    /// Cache this on the Swift side.
     ///
     /// - parameter name: name to look up, typically constant or method name.
     /// - returns: the corresponding ID
     /// - throws: `RbException` if Ruby raises -- probably means the `ID` space
     ///   is full, which is fairly unlikely.
-    public static func getID(from name: String) throws -> ID {
+    func getID(for name: String) throws -> ID {
+        lock(); defer { unlock() }
+
         if let rbId = idCache[name] {
             return rbId
         }

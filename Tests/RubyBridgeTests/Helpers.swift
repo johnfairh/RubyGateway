@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import RubyBridge
+@testable import RubyBridge
 
 /// Misc test helpers
 struct Helpers {
@@ -18,7 +18,7 @@ struct Helpers {
 
     // Need to review all callers, why do they need explicit init?
     static func initRuby() {
-        try! Ruby.check()
+        try! Ruby.setup()
     }
 
     /// Ruby files etc.
