@@ -134,10 +134,10 @@ VALUE        rbb_RB_UINT2NUM(unsigned int v) { return RB_UINT2NUM(v); }
 //
 // # String methods
 //
-// rb_string_value() returns the stringized value and, if TYPE(v) not
+// rb_string_value() returns the to_str'd value and, if TYPE(v) not
 // T_STRING, replaces the passed-in VALUE with the to-stringed value.
 // We don't want such side-effects.
-// Plus, it can raise if `to_s` is missing or `to_s` returns something
+// Plus, it can raise if `to_str` is missing or `to_str` returns something
 // that is not (ultimately) a string.
 //
 
@@ -164,6 +164,61 @@ const char *rbb_RSTRING_PTR(VALUE v)
 }
 
 //
+// # Numeric conversion
+//
+// Ruby allows implicit signed -> unsigned conversion which is too
+// slapdash for the Swift interface.  This seems to be remarkably
+// baked into Ruby's numerics, so we do some 'orrible rooting around
+// to figure it out.
+//
+
+static int rbb_numeric_ish_type(VALUE v)
+{
+    return NIL_P(v) ||
+           FIXNUM_P(v) ||
+           RB_TYPE_P(v, T_FLOAT) ||
+           RB_TYPE_P(v, T_BIGNUM);
+}
+
+static VALUE rbb_num2ulong_thunk(VALUE v)
+{
+    // Drill down through `to_int` layers to find something
+    // we can actually compare to zero.
+    while (!rbb_numeric_ish_type(v))
+    {
+        v = rb_to_int(v);
+    }
+
+    // Now decide if this looks negative
+    int negative = 0;
+
+    if (FIXNUM_P(v))
+    {
+        negative = (RB_FIX2LONG(v) < 0);
+    }
+    else if (RB_TYPE_P(v, T_FLOAT))
+    {
+        negative = (NUM2DBL(v) < 0);
+    }
+    else if (RB_TYPE_P(v, T_BIGNUM))
+    {   // don't @ me
+        negative = ((RBASIC(v)->flags & RUBY_FL_USER1) == 0);
+    }
+
+    if (negative)
+    {
+        rb_raise(rb_eTypeError, "Value is negative and cannot be expressed as unsigned.");
+    }
+
+    return rb_num2ulong(v);
+}
+
+unsigned long rbb_num2ulong_protect(VALUE v, int * _Nullable status)
+{
+    return rb_protect(rbb_num2ulong_thunk, v, status);
+}
+
+//
 // # Version constants
 //
 // These are exported as char [] which don't get imported
@@ -187,9 +242,8 @@ Rbb_value * _Nonnull rbb_value_alloc(VALUE value)
 {
     Rbb_value *box = malloc(sizeof(*box));
     if (box == NULL) {
-        /* No good way out here, don't want to make the RbEnv
-           initializers failable.
-         */
+        // No good way out here, don't want to make the RbEnv
+        // initializers failable.
         abort();
     }
     box->value = value;

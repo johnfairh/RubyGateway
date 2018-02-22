@@ -54,6 +54,10 @@ VALUE rbb_string_value_protect(VALUE v, int * _Nullable status);
 long                  rbb_RSTRING_LEN(VALUE v);
 const char * _Nonnull rbb_RSTRING_PTR(VALUE v);
 
+/// Safely call `rbb_num2ulong` and report exception status.
+/// Additionally, raise an exception if the number is negative.
+unsigned long rbb_num2ulong_protect(VALUE v, int * _Nullable status);
+
 /// Strings hidden from importer
 const char * _Nonnull rbb_ruby_version(void);
 const char * _Nonnull rbb_ruby_description(void);

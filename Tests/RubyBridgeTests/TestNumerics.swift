@@ -50,10 +50,25 @@ class TestNumerics: XCTestCase {
     func testUIntNumRoundtrip() {
         let values = [UInt.min, 0, UInt.max]
         values.forEach { val in
-            let rubyValue = RB_ULONG2NUM(val)
-            let swiftVal  = RB_NUM2ULONG(rubyValue)
+            let rubyObj  = RbObject(val)
+            let swiftVal = UInt(rubyObj)
             XCTAssertEqual(val, swiftVal)
         }
+    }
+
+    // Unsigned negative conversion failures
+    func testUIntNegativeUnconvertible() {
+        let negativeObjects = [ RbObject(rubyValue: RB_LONG2NUM(-2)),
+                                RbObject(rubyValue: RB_LONG2NUM(Int.min)),
+                                RbObject(rubyValue: DBL2NUM(-4.0))]
+        negativeObjects.forEach { obj in
+            if let num = UInt(obj) {
+                XCTFail("Managed to convert \(obj) to unsigned: \(num)")
+            }
+        }
+
+        // TODO: to_int then negative failure
+        // TODO: number is too big
     }
 
     /// Proper 'num' round-tripping -- Int16
@@ -110,8 +125,8 @@ class TestNumerics: XCTestCase {
     func testUInt64NumRoundtrip() {
         let values = [UInt64.min, 0, UInt64.max]
         values.forEach { val in
-            let rubyValue = ULL2NUM(val)
-            let swiftVal  = RB_NUM2ULL(rubyValue)
+            let rubyObj  = RbObject(val)
+            let swiftVal = UInt64(rubyObj)
             XCTAssertEqual(val, swiftVal)
         }
     }
@@ -140,6 +155,7 @@ class TestNumerics: XCTestCase {
         ("testFixnumRoundtrip", testFixnumRoundtrip),
         ("testIntNumRoundtrip", testIntNumRoundtrip),
         ("testUIntNumRoundtrip", testUIntNumRoundtrip),
+        ("testUIntNegativeUnconvertible", testUIntNegativeUnconvertible),
         ("testInt16NumRoundtrip", testInt16NumRoundtrip),
         ("testUInt16NumRoundtrip", testUInt16NumRoundtrip),
         ("testInt32NumRoundtrip", testInt32NumRoundtrip),

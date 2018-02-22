@@ -54,9 +54,19 @@ extension RbObject: RbObjectConvertible {
 
 extension String: RbObjectConvertible {
     /// Try to get a `String` representation of an `RbObject`.
-    /// This is equivalent to calling `to_s` on the Ruby object.
+    ///
+    /// This is equivalent to calling `to_str` on the Ruby object
+    /// which means that it succeeds only for objects that are
+    /// actually strings.
     ///
     /// See `RbException.history` to find out why a conversion failed.
+    ///
+    /// If you want the stringy version of an object then options are:
+    /// ```swift
+    /// let str = rbObject.call("to_s")
+    /// let str = rbObject.to_s           // Swift 5
+    /// let str = "\(rbObject)"           // calls to_s
+    /// ```
     public init?(_ value: RbObject) {
         var status = Int32(0)
         let stringVal = rbb_string_value_protect(value.rubyValue, &status)
@@ -127,3 +137,54 @@ extension RbObject: ExpressibleByNilLiteral {
         self.init(rubyValue: Qnil)
     }
 }
+
+// MARK: - Unsigned Integer
+
+extension UInt: RbObjectConvertible {
+    /// Try to get an unsigned integer representation of an `RbObject`.
+    ///
+    /// It fails if the Ruby value:
+    /// 1. Is numeric and negative; or
+    /// 2. Is numeric, positive, and does not fit into the Swift type; or
+    /// 3. Cannot be made into a suitable numeric via `to_int`.
+    ///
+    /// If the Ruby value is floating point then the integer part is returned.
+    public init?(_ value: RbObject) {
+        var status = Int32(0)
+        self = rbb_num2ulong_protect(value.rubyValue, &status)
+        guard status == 0 else {
+            let _ = rb_errinfo()
+            rb_set_errinfo(Qnil)
+            // TODO: RbException
+            return nil
+        }
+    }
+
+    /// Create a Ruby object for the number.
+    public var rubyObject: RbObject {
+        guard Ruby.softSetup() else {
+            return RbObject(rubyValue: Qnil)
+        }
+        return RbObject(rubyValue: RB_ULONG2NUM(self))
+    }
+}
+
+extension UInt64: RbObjectConvertible {
+    public init?(_ value: RbObject) {
+        guard let actual = UInt(value) else {
+            return nil
+        }
+        self.init(actual)
+    }
+
+    public var rubyObject: RbObject {
+        return UInt(self).rubyObject
+    }
+}
+
+//extension RbObject: ExpressibleByIntegerLiteral {
+//    public convenience init(integerLiteral value: Int) {
+//        self.init(value.rubyObject)
+//    }
+//}
+
