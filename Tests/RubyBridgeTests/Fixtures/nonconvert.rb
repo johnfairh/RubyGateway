@@ -1,0 +1,2 @@
+class Nonconvert < BasicObject
+end

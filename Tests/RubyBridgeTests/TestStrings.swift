@@ -15,22 +15,12 @@ import CRuby
 
 class TestStrings: XCTestCase {
 
-    override func setUp() {
-        Helpers.initRuby()
-    }
-
     private func doTestRoundTrip(_ string: String) {
-        // Swift to Ruby
-        let rubyVal = string.withCString { rb_utf8_str_new($0, string.utf8.count) }
-        XCTAssertTrue(RB_TYPE_P(rubyVal, .T_STRING))
+        let rubyObj = RbObject(string)
+        XCTAssertTrue(RB_TYPE_P(rubyObj.rubyValue, .T_STRING))
 
-        // Ruby to Swift - dance through Data to handle embedded nuls
-        let rubyLength = RSTRING_LEN(rubyVal)
-        let rubyPtr = RSTRING_PTR(rubyVal)
-        let rubyData = Data(bytes: rubyPtr, count: rubyLength)
-
-        guard let backString = String(data: rubyData, encoding: .utf8) else {
-            XCTFail("Oops, UTF8 not preserved??")
+        guard let backString = String(rubyObj) else {
+            XCTFail("Oops, to_s failed??")
             return
         }
         XCTAssertEqual(string, backString)
@@ -50,6 +40,23 @@ class TestStrings: XCTestCase {
 
     func testUtf8WithNulls() {
         doTestRoundTrip("abë\0🐽🇧🇷en\0d")
+    }
+
+    func testFailedStringConversion() {
+        try! Ruby.require(filename: Helpers.fixturePath("nonconvert.rb"))
+
+        let instance: VALUE
+        do {
+            instance = try Ruby.eval(ruby: "Nonconvert.new")
+            XCTAssertEqual(.T_OBJECT, TYPE(instance))
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+            return
+        }
+        let obj = RbObject(rubyValue: instance)
+        if let str = String(obj) {
+            XCTFail("Converted unconvertible: \(str)")
+        }
     }
 
     static var allTests = [

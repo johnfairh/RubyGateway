@@ -54,14 +54,15 @@ final class RbVM {
 
     /// Check the state of the VM, make it better if possible.
     /// Returning means Ruby is working; throwing something means it is not.
-    func setup() throws {
+    /// - returns: `true` on the actual setup, `false` subsequently.
+    func setup() throws -> Bool {
         lock(); defer { unlock() }
 
         switch state {
         case .setupError(let error):
             throw error
         case .setup:
-            return
+            return false
         case .cleanedUp:
             throw RbError.setup("Can't set up Ruby, has already been cleaned up.")
         case .unknown:
@@ -71,17 +72,17 @@ final class RbVM {
         do {
             try doSetup()
             state = .setup
+            return true
         } catch {
             state = .setupError(error)
             throw error
         }
     }
 
-    /// Shut down the Ruby VM and release resources.  From the Ruby API headers:
-    ///
-    /// This includes calling `END{}` code and procs registered by `Kernel.#at_exit`.
+    /// Shut down the Ruby VM and release resources.
     ///
     /// - returns: 0 if all is well, otherwise some error code.
+    @discardableResult
     func cleanup() -> Int32 {
         lock(); defer { unlock() }
 
@@ -93,8 +94,10 @@ final class RbVM {
     }
 
     /// Shut down Ruby at process exit if possible
+    /// (Swift seems to not call this for static-scope objects so we don't get here
+    /// ... there's a compensating atexit() in `RbBridge.setup()`.)
     deinit {
-        let _ = cleanup()
+        cleanup()
     }
 
     /// Has Ruby ever been set up in this process?
@@ -143,8 +146,6 @@ final class RbVM {
             ruby_cleanup(0)
             throw RbError.setup("Can't set up Ruby, ruby_executable_node() gave node_status \(node_status) exit status \(exit_status)")
         }
-
-        // TODO: scriptName = "RubyBridge"
     }
 
     /// Get an `ID` ready to call a method, for example.

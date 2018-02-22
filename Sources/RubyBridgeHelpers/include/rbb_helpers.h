@@ -47,10 +47,10 @@ unsigned int rbb_RB_NUM2UINT(VALUE x);
 VALUE        rbb_RB_INT2NUM(int v);
 VALUE        rbb_RB_UINT2NUM(unsigned int v);
 
+/// Safely call `rb_string_value` and report exception status.
+VALUE rbb_string_value_protect(VALUE v, int * _Nullable status);
+
 /// String APIs with un-Swift requirements
-VALUE                 rbb_StringValue(VALUE * _Nonnull v);
-const char * _Nonnull rbb_StringValuePtr(VALUE * _Nonnull v);
-const char * _Nonnull rbb_StringValueCStr(VALUE * _Nonnull v);
 long                  rbb_RSTRING_LEN(VALUE v);
 const char * _Nonnull rbb_RSTRING_PTR(VALUE v);
 

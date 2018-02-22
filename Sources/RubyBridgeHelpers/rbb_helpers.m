@@ -134,25 +134,21 @@ VALUE        rbb_RB_UINT2NUM(unsigned int v) { return RB_UINT2NUM(v); }
 //
 // # String methods
 //
-// The StringValue routines are quite subtle because of the `to_s` issue,
-// they potentially create a new T_STRING that replaces the passed-in
-// VALUE.
+// rb_string_value() returns the stringized value and, if TYPE(v) not
+// T_STRING, replaces the passed-in VALUE with the to-stringed value.
+// We don't want such side-effects.
+// Plus, it can raise if `to_s` is missing or `to_s` returns something
+// that is not (ultimately) a string.
 //
-// TODO: Take out/rephrase these?
 
-VALUE rbb_StringValue(VALUE *v)
-{   // #define StringValue(v) rb_string_value(&(v))
-    return rb_string_value(v);
+static VALUE rbb_string_value_thunk(VALUE v)
+{
+    return rb_string_value(&v);
 }
 
-const char *rbb_StringValuePtr(VALUE *v)
-{   // #define StringValuePtr(v) rb_string_value_ptr(&(v))
-    return rb_string_value_ptr(v);
-}
-
-const char *rbb_StringValueCStr(VALUE *v)
-{   //#define StringValueCStr(v) rb_string_value_cstr(&(v))
-    return rb_string_value_cstr(v);
+VALUE rbb_string_value_protect(VALUE v, int * _Nullable status)
+{
+    return rb_protect(rbb_string_value_thunk, v, status);
 }
 
 // The RSTRING routines accesss the underlying structures

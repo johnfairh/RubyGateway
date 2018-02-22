@@ -23,6 +23,7 @@
 		0249234D20335ADB00E3AAF4 /* TestVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0249234C20335ADB00E3AAF4 /* TestVM.swift */; };
 		0249235120335C0D00E3AAF4 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0249235020335C0D00E3AAF4 /* Helpers.swift */; };
 		02901338203E03530090C5C9 /* RbBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02901337203E03530090C5C9 /* RbBridge.swift */; };
+		0290133A203ED8D60090C5C9 /* RbObjectConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02901339203ED8D60090C5C9 /* RbObjectConversion.swift */; };
 		OBJ_26 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_44 /* RubyBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "TMLRuby::TMLRuby::Product" /* RubyBridge.framework */; };
 /* End PBXBuildFile section */
@@ -58,6 +59,8 @@
 		02571723203C984C001E3C43 /* nesting.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = nesting.rb; sourceTree = "<group>"; };
 		026E20072034B3A400543EB9 /* CRuby.swift.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CRuby.swift.txt; sourceTree = "<group>"; };
 		02901337203E03530090C5C9 /* RbBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbBridge.swift; sourceTree = "<group>"; };
+		02901339203ED8D60090C5C9 /* RbObjectConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbObjectConversion.swift; sourceTree = "<group>"; };
+		0290133B203EF0F60090C5C9 /* nonconvert.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = nonconvert.rb; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		"TMLRuby::TMLRuby::Product" /* RubyBridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RubyBridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"TMLRuby::TMLRubyTests::Product" /* RubyBridgeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = RubyBridgeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +116,7 @@
 			children = (
 				024923532034AA3E00E3AAF4 /* backwards.rb */,
 				02571723203C984C001E3C43 /* nesting.rb */,
+				0290133B203EF0F60090C5C9 /* nonconvert.rb */,
 			);
 			name = Fixtures;
 			path = Tests/RubyBridgeTests/Fixtures;
@@ -187,6 +191,7 @@
 				024923462031EDE000E3AAF4 /* RbVM.swift */,
 				02901337203E03530090C5C9 /* RbBridge.swift */,
 				022F3ACE203AE707009E69BE /* RbObject.swift */,
+				02901339203ED8D60090C5C9 /* RbObjectConversion.swift */,
 				022F3AD2203B6061009E69BE /* RbConstantScope.swift */,
 				0249234920334ADE00E3AAF4 /* RbError.swift */,
 				022F3AB120360B9F009E69BE /* CRubyMacros.swift */,
@@ -359,6 +364,7 @@
 				024923482031EE0400E3AAF4 /* RbVM.swift in Sources */,
 				02901338203E03530090C5C9 /* RbBridge.swift in Sources */,
 				022F3AB220360B9F009E69BE /* CRubyMacros.swift in Sources */,
+				0290133A203ED8D60090C5C9 /* RbObjectConversion.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

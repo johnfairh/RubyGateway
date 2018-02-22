@@ -81,26 +81,6 @@ func CLASS_OF(_ v: VALUE) -> VALUE {
 
 // MARK: - String utilities
 
-// TODO: Make this all safe + delete the unwanted APIs
-
-/// Do a `#to_s` on some object.  Raise if not possible.
-/// Replaces the passed-in VALUE with the `to_s` result and returns the new value.
-func StringValue(_ v: inout VALUE) -> VALUE {
-    return rbb_StringValue(&v)
-}
-
-/// Call `StringValue` and then give pointer to raw string buffer.
-/// If the passed-in value is not a string then it is replaced with the converted string.
-func StringValuePtr(_ v: inout VALUE) -> UnsafePointer<Int8>! {
-    return rbb_StringValuePtr(&v)
-}
-
-/// Call `StringValue`, check string buffer has no NULs and return it.  Raises on error.
-/// If the passed-in value is not a string then it is replaced with the converted string.
-func StringValueCStr(_ v: inout VALUE) -> UnsafePointer<Int8>! {
-    return rbb_StringValueCStr(&v)
-}
-
 /// Number of bytes in the string.
 func RSTRING_LEN(_ str: VALUE) -> Int {
     return rbb_RSTRING_LEN(str)

@@ -52,7 +52,7 @@ import RubyBridgeHelpers
 /// my html = Ruby.failable.do("Rouge")?.do("highlight", "let a = 1", "swift", "html")
 /// ```
 ///
-/// Or with dynamic-member-lookup:
+/// Or with Swift 5 dynamic member lookup & callable:
 /// ```swift
 /// my html = Ruby.Rouge?.highlight("let a = 1", "swift", "html")
 /// ```
@@ -64,9 +64,22 @@ open class RbBridge {
     /// Initialize Ruby.  Throw an error if Ruby is not working.
     /// Called by anything that might by the first op.
     func setup() throws {
-        try RbBridge.vm.setup()
+        if try RbBridge.vm.setup() {
+            // Work around Swift not calling static deinit...
+            atexit { RbBridge.vm.cleanup() }
+        }
     }
 
+    /// Explicitly shut down Ruby and release resources.
+    /// This includes calling `END{}` code and procs registered by `Kernel.#at_exit`.
+    ///
+    /// You generally don't need to call this, will be done automatically
+    /// as part of process exit.
+    ///
+    /// If called you cannot continue to use Ruby in this process, the VM cannot be
+    /// re-setup().
+    ///
+    /// - returns: 0 if the cleanup went fine, otherwise some error code from Ruby.
     public func cleanup() -> Int32 {
         return RbBridge.vm.cleanup()
     }
@@ -84,26 +97,38 @@ open class RbBridge {
         return try RbBridge.vm.getID(for: name)
     }
 
-    private func softSetup() {
-        let _ = try? setup()
+    /// Attempt to initialize Ruby but swallow any error.
+    ///
+    /// This is for use from places that could be the first use of Ruby but it
+    /// is not practical to throw an exception for API or aesthetic reasons.
+    ///
+    /// The idea is that callers can get by long enough for the user to call
+    /// `require()` or `send()` which will properly report the VM setup error.
+    public func softSetup() -> Bool {
+        do {
+            try setup()
+            return true
+        } catch {
+            return false
+        }
     }
 }
+
+// MARK: - VM properties
 
 extension RbBridge {
 
     /// Debug mode for Ruby code, sets `$DEBUG` / `$-d`
     public var debug: Bool {
         get {
-            softSetup()
-            guard let debug_ptr = rb_ruby_debug_ptr() else {
+            guard softSetup(), let debug_ptr = rb_ruby_debug_ptr() else {
                 // Current implementation can't fail but let's not crash.
                 return false
             }
             return debug_ptr.pointee == Qtrue;
         }
         set {
-            softSetup()
-            guard let debug_ptr = rb_ruby_debug_ptr() else {
+            guard softSetup(), let debug_ptr = rb_ruby_debug_ptr() else {
                 return
             }
             let newVal = newValue ? Qtrue : Qfalse
@@ -121,8 +146,7 @@ extension RbBridge {
     /// Verbose mode for Ruby code, sets `$VERBOSE` / `$-v`
     public var verbose: Verbosity {
         get {
-            softSetup()
-            guard let verbose_ptr = rb_ruby_verbose_ptr() else {
+            guard softSetup(), let verbose_ptr = rb_ruby_verbose_ptr() else {
                 // Current implementation can't fail but let's not crash.
                 return .none
             }
@@ -133,8 +157,7 @@ extension RbBridge {
             }
         }
         set {
-            softSetup()
-            guard let verbose_ptr = rb_ruby_verbose_ptr() else {
+            guard softSetup(), let verbose_ptr = rb_ruby_verbose_ptr() else {
                 return
             }
             let newVal: VALUE
@@ -150,8 +173,9 @@ extension RbBridge {
     /// Set `$PROGRAM_NAME` / `$0` for Ruby code.
     public var scriptName: String {
         set {
-            softSetup()
-            ruby_script(newValue)
+            if softSetup() {
+                ruby_script(newValue)
+            }
         }
         get {
             // sigh
