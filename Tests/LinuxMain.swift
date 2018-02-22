@@ -14,4 +14,5 @@ XCTMain([
     testCase(TestStrings.allTests),
     testCase(TestConstants.allTests),
     testCase(TestRbObject.allTests),
+    testCase(TestMiscObjTypes.allTests)
 ])

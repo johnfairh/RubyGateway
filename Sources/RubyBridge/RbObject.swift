@@ -40,6 +40,12 @@ public final class RbObject {
         return valueBox.pointee.value
     }
 
+    /// The Ruby type of this object.  This is fairly unfriendly enum but
+    /// might be useful for debugging.
+    public var rubyType: RbType {
+        return TYPE(rubyValue)
+    }
+
     /// Is the Ruby object truthy?
     public var isTruthy: Bool {
         return RB_TEST(rubyValue)

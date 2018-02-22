@@ -53,8 +53,8 @@ extension RbObject: RbObjectConvertible {
 // MARK: - String
 
 extension String: RbObjectConvertible {
-    /// Try to get a string representation of an `RbObject`.
-    /// This is the equivalent of calling `to_s` on the Ruby object.
+    /// Try to get a `String` representation of an `RbObject`.
+    /// This is equivalent to calling `to_s` on the Ruby object.
     ///
     /// See `RbException.history` to find out why a conversion failed.
     public init?(_ value: RbObject) {
@@ -86,6 +86,35 @@ extension String: RbObjectConvertible {
 extension RbObject: ExpressibleByStringLiteral {
     /// Creates an `RbObject` from a string literal
     public convenience init(stringLiteral value: String) {
+        self.init(value.rubyObject)
+    }
+}
+
+// MARK: - Boolean
+
+extension Bool: RbObjectConvertible {
+    /// Try to get a `Bool` representation of an `RbObject`.
+    ///
+    /// This is a strict conversion that fails if the Ruby object is not
+    /// an actual true/false.  Use `RbObject.isTruthy` to decide whether
+    /// an `RbObject` represents a truthy value to Ruby.
+    public init?(_ value: RbObject) {
+        switch value.rubyValue {
+        case Qtrue: self = true
+        case Qfalse: self = false
+        default: return nil
+        }
+    }
+
+    /// Create a Ruby object for the bool.
+    public var rubyObject: RbObject {
+        return RbObject(rubyValue: self ? Qtrue : Qfalse)
+    }
+}
+
+extension RbObject: ExpressibleByBooleanLiteral {
+    /// Creates an `RbObject from a boolean literal
+    public convenience init(booleanLiteral value: Bool) {
         self.init(value.rubyObject)
     }
 }

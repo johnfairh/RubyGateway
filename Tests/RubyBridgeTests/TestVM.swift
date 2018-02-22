@@ -42,7 +42,7 @@ class TestVM: XCTestCase {
 
         let vm2 = RbVM()
         do {
-            try vm2.setup()
+            let _ = try vm2.setup()
             XCTFail("Unexpected pass of second init")
         } catch RbError.setup(_) {
             // OK

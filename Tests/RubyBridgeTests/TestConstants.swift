@@ -8,26 +8,8 @@
 import XCTest
 @testable import RubyBridge
 
-/// Constants - fundamental and high-level ones
+/// Ruby constant access
 class TestConstants: XCTestCase {
-
-    func testNilConstants() {
-        let nilVal = Qnil
-        let falseVal = Qfalse
-        let trueVal = Qtrue
-
-        XCTAssertTrue(RB_NIL_P(nilVal))
-        XCTAssertFalse(RB_NIL_P(falseVal))
-        XCTAssertFalse(RB_NIL_P(trueVal))
-
-        XCTAssertFalse(RB_TEST(nilVal))
-        XCTAssertFalse(RB_TEST(falseVal))
-        XCTAssertTrue(RB_TEST(trueVal))
-
-        XCTAssertEqual(.T_NIL, TYPE(nilVal))
-        XCTAssertEqual(.T_FALSE, TYPE(falseVal))
-        XCTAssertEqual(.T_TRUE, TYPE(trueVal))
-    }
 
     func testConstantAccess() {
         do {
@@ -103,10 +85,10 @@ class TestConstants: XCTestCase {
     }
 
     static var allTests = [
-        ("testNilConstants", testNilConstants),
         ("testConstantAccess", testConstantAccess),
         ("testNestedConstantAccess", testNestedConstantAccess),
         ("testPopupConstantAccess", testPopupConstantAccess),
-        ("testFailedConstantAccess", testFailedConstantAccess)
+        ("testFailedConstantAccess", testFailedConstantAccess),
+        ("testNotAClass", testNotAClass)
     ]
 }

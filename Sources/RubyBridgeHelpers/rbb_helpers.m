@@ -193,7 +193,13 @@ Rbb_value * _Nonnull rbb_value_alloc(VALUE value)
         abort();
     }
     box->value = value;
-    rb_gc_register_address(&box->value);
+
+    // Subtlety - it would do no harm to register constants except that
+    // in the scenario where Ruby is not functioning we use Qnil etc. instead
+    // of actual values to avoid crashing.
+    if (!RB_SPECIAL_CONST_P(value)) {
+        rb_gc_register_address(&box->value);
+    }
     return box;
 }
 
@@ -204,7 +210,9 @@ Rbb_value *rbb_value_dup(const Rbb_value * _Nonnull box)
 
 void rbb_value_free(Rbb_value * _Nonnull box)
 {
-    rb_gc_unregister_address(&box->value);
+    if (!RB_SPECIAL_CONST_P(box->value)) {
+        rb_gc_unregister_address(&box->value);
+    }
     box->value = Qundef;
     free(box);
 }

@@ -20,6 +20,7 @@ class TestRbVal: XCTestCase {
         let rbValue = Qtrue
         let obj = RbObject(rubyValue: rbValue)
         XCTAssertEqual(rbValue, obj.rubyValue)
+        XCTAssertTrue(obj === obj.rubyObject)
     }
 
     // Try and test the GC-safe thing works.
