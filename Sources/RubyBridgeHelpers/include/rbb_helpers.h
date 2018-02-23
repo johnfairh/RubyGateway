@@ -41,8 +41,8 @@ VALUE rbb_const_get_at_protect(VALUE value, ID id, int * _Nullable status);
 /// Wrap up RB_BUILTIN_TYPE for Swift
 int rbb_RB_BUILTIN_TYPE(VALUE value);
 
-/// Safely call `rb_string_value` and report exception status.
-VALUE rbb_string_value_protect(VALUE v, int * _Nullable status);
+/// Safely call `rb_String` and report exception status.
+VALUE rbb_String_protect(VALUE v, int * _Nullable status);
 
 /// String APIs with un-Swift requirements
 long                  rbb_RSTRING_LEN(VALUE v);

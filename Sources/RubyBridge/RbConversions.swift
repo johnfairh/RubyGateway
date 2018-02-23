@@ -55,21 +55,13 @@ extension RbObject: RbObjectConvertible {
 extension String: RbObjectConvertible {
     /// Try to get a `String` representation of an `RbObject`.
     ///
-    /// This is equivalent to calling `to_str` on the Ruby object
-    /// which means that it succeeds only for objects that are
-    /// actually strings.
+    /// This is equivalent to calling `to_str` on the Ruby object,
+    /// and if that doesn't work calling `to_s`.
     ///
     /// See `RbException.history` to find out why a conversion failed.
-    ///
-    /// If you want the stringy version of an object then options are:
-    /// ```swift
-    /// let str = rbObject.call("to_s")
-    /// let str = rbObject.to_s           // Swift 5
-    /// let str = "\(rbObject)"           // calls to_s
-    /// ```
     public init?(_ value: RbObject) {
         var status = Int32(0)
-        let stringVal = rbb_string_value_protect(value.rubyValue, &status)
+        let stringVal = rbb_String_protect(value.rubyValue, &status)
         guard status == 0 else {
             let _ = rb_errinfo()
             rb_set_errinfo(Qnil)

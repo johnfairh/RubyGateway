@@ -125,21 +125,14 @@ int rbb_RB_BUILTIN_TYPE(VALUE value)
 //
 // # String methods
 //
-// rb_string_value() returns the to_str'd value and, if TYPE(v) not
-// T_STRING, replaces the passed-in VALUE with the to-stringed value.
-// We don't want such side-effects.
-// Plus, it can raise if `to_str` is missing or `to_str` returns something
-// that is not (ultimately) a string.
+// `rb_String` tries `to_str` then `to_s`.
+// It raises an exception if it can't get a T_STRING out of
+// one of those.
 //
 
-static VALUE rbb_string_value_thunk(VALUE v)
+VALUE rbb_String_protect(VALUE v, int * _Nullable status)
 {
-    return rb_string_value(&v);
-}
-
-VALUE rbb_string_value_protect(VALUE v, int * _Nullable status)
-{
-    return rb_protect(rbb_string_value_thunk, v, status);
+    return rb_protect(rb_String, v, status);
 }
 
 // The RSTRING routines accesss the underlying structures
@@ -159,7 +152,7 @@ const char *rbb_RSTRING_PTR(VALUE v)
 //
 // Ruby allows implicit signed -> unsigned conversion which is too
 // slapdash for the Swift interface.  This seems to be remarkably
-// baked into Ruby's numerics, so we do some 'orrible rooting around
+// baked into Ruby's numerics, so we do some 'orrible rootling around
 // to figure it out.
 //
 

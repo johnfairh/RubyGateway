@@ -1,3 +1,3 @@
 # class without to_*
-class Nonconvert
+class Nonconvert < BasicObject
 end
