@@ -58,6 +58,12 @@ const char * _Nonnull rbb_RSTRING_PTR(VALUE v);
 /// Additionally, raise an exception if the number is negative.
 unsigned long rbb_num2ulong_protect(VALUE v, int * _Nullable status);
 
+/// Safely call `rbb_num2long` and report exception status.
+long rbb_num2long_protect(VALUE v, int * _Nullable status);
+
+/// Safely call `rbb_num2double` and report exception status.
+double rbb_num2double_protect(VALUE v, int * _Nullable status);
+
 /// Strings hidden from importer
 const char * _Nonnull rbb_ruby_version(void);
 const char * _Nonnull rbb_ruby_description(void);

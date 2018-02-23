@@ -218,6 +218,36 @@ unsigned long rbb_num2ulong_protect(VALUE v, int * _Nullable status)
     return rb_protect(rbb_num2ulong_thunk, v, status);
 }
 
+static VALUE rbb_num2long_thunk(VALUE v)
+{
+    return (VALUE) RB_NUM2LONG(v);
+}
+
+long rbb_num2long_protect(VALUE v, int * _Nullable status)
+{
+    return (long) rb_protect(rbb_num2long_thunk, v, status);
+}
+
+typedef struct
+{
+    VALUE   value;
+    double  dblVal;
+} Rbb_num2double_params;
+
+static VALUE rbb_num2double_thunk(VALUE v)
+{
+    Rbb_num2double_params *params = (Rbb_num2double_params *)(void *)v;
+    params->dblVal = NUM2DBL(params->value);
+    return 0;
+}
+
+double rbb_num2double_protect(VALUE v, int * _Nullable status)
+{
+    Rbb_num2double_params params = { .value = v, .dblVal = 0 };
+    (void) rb_protect(rbb_num2double_thunk, (VALUE) (void *) &params, status);
+    return params.dblVal;
+}
+
 //
 // # Version constants
 //

@@ -123,7 +123,7 @@ extension Bool: RbObjectConvertible {
 }
 
 extension RbObject: ExpressibleByBooleanLiteral {
-    /// Creates an `RbObject from a boolean literal
+    /// Creates an `RbObject` from a boolean literal
     public convenience init(booleanLiteral value: Bool) {
         self.init(value.rubyObject)
     }
@@ -169,6 +169,79 @@ extension UInt: RbObjectConvertible {
     }
 }
 
+// MARK: - Signed Integer
+
+extension Int: RbObjectConvertible {
+    /// Try to get an signed integer representation of an `RbObject`.
+    ///
+    /// It fails if the Ruby value:
+    /// 1. Is numeric and does not fit into the Swift type; or
+    /// 2. Cannot be made into a suitable numeric via `to_int`.
+    ///
+    /// If the Ruby value is floating point then the integer part is returned.
+    public init?(_ value: RbObject) {
+        var status = Int32(0)
+        self = rbb_num2long_protect(value.rubyValue, &status)
+        guard status == 0 else {
+            let _ = rb_errinfo()
+            rb_set_errinfo(Qnil)
+            // TODO: RbException
+            return nil
+        }
+    }
+
+    /// Create a Ruby object for the number.
+    public var rubyObject: RbObject {
+        guard Ruby.softSetup() else {
+            return RbObject(rubyValue: Qnil)
+        }
+        return RbObject(rubyValue: RB_LONG2NUM(self))
+    }
+}
+
+extension RbObject: ExpressibleByIntegerLiteral {
+    public convenience init(integerLiteral value: Int) {
+        self.init(value.rubyObject)
+    }
+}
+
+// MARK: - Double
+
+extension Double: RbObjectConvertible {
+    /// Try to get a `Double` floating-point representation of an `RbObject`.
+    ///
+    /// It fails if the Ruby value:
+    /// 1. Is numeric and does not fit into the Swift type; or
+    /// 2. Cannot be made into a suitable numeric via `to_f`.
+    ///
+    /// If the Ruby value is floating point then the integer part is returned.
+    public init?(_ value: RbObject) {
+        var status = Int32(0)
+        self = rbb_num2double_protect(value.rubyValue, &status)
+        guard status == 0 else {
+            let _ = rb_errinfo()
+            rb_set_errinfo(Qnil)
+            // TODO: RbException
+            return nil
+        }
+    }
+
+    /// Create a Ruby object for the number.
+    public var rubyObject: RbObject {
+        guard Ruby.softSetup() else {
+            return RbObject(rubyValue: Qnil)
+        }
+        return RbObject(rubyValue: DBL2NUM(self))
+    }
+}
+
+extension RbObject: ExpressibleByFloatLiteral {
+    public convenience init(floatLiteral value: Double) {
+        self.init(value.rubyObject)
+    }
+}
+
+
 extension UInt64: RbObjectConvertible {
     public init?(_ value: RbObject) {
         guard let actual = UInt(value) else {
@@ -182,9 +255,4 @@ extension UInt64: RbObjectConvertible {
     }
 }
 
-//extension RbObject: ExpressibleByIntegerLiteral {
-//    public convenience init(integerLiteral value: Int) {
-//        self.init(value.rubyObject)
-//    }
-//}
 

@@ -1,3 +1,3 @@
-# class without to_str, to_int
+# class without to_*
 class Nonconvert
 end

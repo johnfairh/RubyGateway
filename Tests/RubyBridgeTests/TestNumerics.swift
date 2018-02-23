@@ -40,8 +40,8 @@ class TestNumerics: XCTestCase {
     func testIntNumRoundtrip() {
         let values = [Int.min, 0, Int.max]
         values.forEach { val in
-            let rubyValue = RB_LONG2NUM(val)
-            let swiftVal  = RB_NUM2LONG(rubyValue)
+            let rubyObj = RbObject(val)
+            let swiftVal = Int(rubyObj)
             XCTAssertEqual(val, swiftVal)
         }
     }
@@ -66,9 +66,6 @@ class TestNumerics: XCTestCase {
                 XCTFail("Managed to convert \(obj) to unsigned: \(num)")
             }
         }
-
-        // TODO: to_int then negative failure
-        // TODO: number is too big
     }
 
     /// Proper 'num' round-tripping -- Int16
@@ -141,14 +138,64 @@ class TestNumerics: XCTestCase {
                       Double.signalingNaN,
                       Double.infinity]
         values.forEach { val in
-            let rubyValue = DBL2NUM(val)
-            XCTAssertTrue(RB_FLOAT_TYPE_P(rubyValue))
-            XCTAssertTrue(!RB_FLONUM_P(rubyValue) || val == 0.0)
-            XCTAssertTrue(RB_TYPE_P(rubyValue, .T_FLOAT))
-            let swiftVal  = NUM2DBL(rubyValue)
+            let rubyObj = RbObject(val)
+            XCTAssertTrue(!RB_FLONUM_P(rubyObj.rubyValue) || val == 0.0)
+            guard let swiftVal = Double(rubyObj) else {
+                XCTFail("Couldn't convert \(val) back to Swift")
+                return
+            }
             XCTAssertTrue((val.isNaN && swiftVal.isNaN) ||
                           (val == swiftVal))
         }
+    }
+
+    // Misc unconvertible situations
+    func testMiscUnconvertible() {
+        try! Ruby.require(filename: Helpers.fixturePath("numbers.rb"))
+
+        // Number is too big to fit in 64 bits
+        let bigConstObj = try! Ruby.getConstant(name: "TestNumbers::BIG_NUM")
+
+        if let num = UInt(bigConstObj) {
+            XCTFail("Managed to express 2^80 in 64 bits: \(num)")
+            return
+        }
+
+        if let num = Int(bigConstObj) {
+            XCTFail("Managed to express 2^80 in 64 signed bits: \(num)")
+            return
+        }
+
+        // Object supports to_int but gives a negative number
+        let negaObjVal = try! Ruby.eval(ruby: "TestNumbers.new")
+        let negaObj = RbObject(rubyValue: negaObjVal)
+
+        if let num = UInt(negaObj) {
+            XCTFail("Managed to convert object to a negative number to unsigned: \(num)")
+        }
+
+        // Object has no to_f
+        try! Ruby.require(filename: Helpers.fixturePath("nonconvert.rb"))
+        let instObj = RbObject(rubyValue: try! Ruby.eval(ruby: "Nonconvert.new"))
+        if let dblNum = Double(instObj) {
+            XCTFail("Managed to convert object to double: \(dblNum)")
+        }
+    }
+
+    func testLiterals() {
+        let val1: RbObject = 22
+        let val2: RbObject = 4.14441
+
+        XCTAssertEqual(.T_FIXNUM, val1.rubyType)
+        XCTAssertTrue(RB_FLOAT_TYPE_P(val2.rubyValue))
+
+        guard let swVal1 = UInt(val1), let swVal2 = Double(val2) else {
+            XCTFail("Couldn't convert back to Swift")
+            return
+        }
+
+        XCTAssertEqual(22, swVal1)
+        XCTAssertEqual(4.14441, swVal2)
     }
 
     static var allTests = [
@@ -162,6 +209,8 @@ class TestNumerics: XCTestCase {
         ("testUInt32NumRoundtrip", testUInt32NumRoundtrip),
         ("testInt64NumRoundtrip", testInt64NumRoundtrip),
         ("testUInt64NumRoundtrip", testUInt64NumRoundtrip),
-        ("testDoubleRoundtrip", testDoubleRoundtrip)
+        ("testDoubleRoundtrip", testDoubleRoundtrip),
+        ("testMiscUnconvertible", testMiscUnconvertible),
+        ("testLiterals", testLiterals)
     ]
 }
