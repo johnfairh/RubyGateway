@@ -59,6 +59,26 @@ class TestStrings: XCTestCase {
         }
     }
 
+    // to_s, to_str, priority
+    func testConversion() {
+        try! Ruby.require(filename: Helpers.fixturePath("nonconvert.rb"))
+
+        let i1 = RbObject(rubyValue: try! Ruby.eval(ruby: "JustToS.new"))
+        let i2 = RbObject(rubyValue: try! Ruby.eval(ruby: "BothToSAndToStr.new"))
+
+        guard let _ = String(i1) else {
+            XCTFail("Couldn't convert JustToS")
+            return
+        }
+
+        guard let s2 = String(i2) else {
+            XCTFail("Couldn't convert BothToSAndToStr")
+            return
+        }
+
+        XCTAssertEqual("to_str", s2)
+    }
+
     func testLiteralPromotion() {
         let obj: RbObject = "test string"
         XCTAssertEqual("test string", String(obj))
@@ -70,6 +90,7 @@ class TestStrings: XCTestCase {
         ("testUtf8", testUtf8),
         ("testUtf8WithNulls", testUtf8WithNulls),
         ("testFailedStringConversion", testFailedStringConversion),
+        ("testConversion", testConversion),
         ("testLiteralPromotion", testLiteralPromotion)
     ]
 }

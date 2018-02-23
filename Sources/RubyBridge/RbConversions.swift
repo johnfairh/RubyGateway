@@ -138,7 +138,7 @@ extension UInt: RbObjectConvertible {
     /// It fails if the Ruby value:
     /// 1. Is numeric and negative; or
     /// 2. Is numeric, positive, and does not fit into the Swift type; or
-    /// 3. Cannot be made into a suitable numeric via `to_int`.
+    /// 3. Cannot be made into a suitable numeric via `to_int` or `to_i`.
     ///
     /// See `RbException.history` to find out why a conversion failed.
     ///
@@ -170,7 +170,7 @@ extension Int: RbObjectConvertible {
     ///
     /// It fails if the Ruby value:
     /// 1. Is numeric and does not fit into the Swift type; or
-    /// 2. Cannot be made into a suitable numeric via `to_int`.
+    /// 2. Cannot be made into a suitable numeric via `to_int` or `to_i`.
     ///
     /// See `RbException.history` to find out why a conversion failed.
     ///
@@ -212,7 +212,7 @@ extension Double: RbObjectConvertible {
     ///
     /// See `RbException.history` to find out why a conversion failed.
     ///
-    /// If the Ruby value is floating point then the integer part is returned.
+    /// Flavors of NaN are not preserved across the Ruby<->Swift interface.
     public init?(_ value: RbObject) {
         var status = Int32(0)
         self = rbb_num2double_protect(value.rubyValue, &status)

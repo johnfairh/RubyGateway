@@ -152,8 +152,10 @@ const char *rbb_RSTRING_PTR(VALUE v)
 //
 // Ruby allows implicit signed -> unsigned conversion which is too
 // slapdash for the Swift interface.  This seems to be remarkably
-// baked into Ruby's numerics, so we do some 'orrible rootling around
+// baked into Ruby's numerics, so we do some 'orrible rooting around
 // to figure it out.
+//
+// Further customization to use `to_i` when `to_int` is not available.
 //
 
 static int rbb_numeric_ish_type(VALUE v)
@@ -166,11 +168,10 @@ static int rbb_numeric_ish_type(VALUE v)
 
 static VALUE rbb_num2ulong_thunk(VALUE v)
 {
-    // Drill down through `to_int` layers to find something
-    // we can actually compare to zero.
+    // Drill down to find something we can actually compare to zero.
     while (!rbb_numeric_ish_type(v))
     {
-        v = rb_to_int(v);
+        v = rb_Integer(v);
     }
 
     // Now decide if this looks negative
@@ -204,7 +205,7 @@ unsigned long rbb_num2ulong_protect(VALUE v, int * _Nullable status)
 
 static VALUE rbb_num2long_thunk(VALUE v)
 {
-    return (VALUE) RB_NUM2LONG(v);
+    return (VALUE) RB_NUM2LONG(rb_Integer(v));
 }
 
 long rbb_num2long_protect(VALUE v, int * _Nullable status)
@@ -221,7 +222,7 @@ typedef struct
 static VALUE rbb_num2double_thunk(VALUE v)
 {
     Rbb_num2double_params *params = (Rbb_num2double_params *)(void *)v;
-    params->dblVal = NUM2DBL(params->value);
+    params->dblVal = NUM2DBL(rb_Float(params->value));
     return 0;
 }
 

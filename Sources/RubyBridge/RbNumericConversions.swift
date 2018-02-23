@@ -16,7 +16,7 @@ extension UInt64: RbObjectConvertible {
     /// It fails if the Ruby value:
     /// 1. Is numeric and negative; or
     /// 2. Is numeric, positive, and does not fit into the Swift type; or
-    /// 3. Cannot be made into a suitable numeric via `to_int`.
+    /// 3. Cannot be made into a suitable numeric via `to_int` or `to_i`.
     ///
     /// See `RbException.history` to find out why a conversion failed.
     ///
@@ -40,7 +40,7 @@ extension UInt32: RbObjectConvertible {
     /// It fails if the Ruby value:
     /// 1. Is numeric and negative; or
     /// 2. Is numeric, positive, and does not fit into the Swift type; or
-    /// 3. Cannot be made into a suitable numeric via `to_int`.
+    /// 3. Cannot be made into a suitable numeric via `to_int` or `to_i`.
     ///
     /// See `RbException.history` to find out why a conversion failed.
     ///
@@ -64,7 +64,7 @@ extension UInt16: RbObjectConvertible {
     /// It fails if the Ruby value:
     /// 1. Is numeric and negative; or
     /// 2. Is numeric, positive, and does not fit into the Swift type; or
-    /// 3. Cannot be made into a suitable numeric via `to_int`.
+    /// 3. Cannot be made into a suitable numeric via `to_int` or `to_i`.
     ///
     /// See `RbException.history` to find out why a conversion failed.
     ///
@@ -88,7 +88,7 @@ extension UInt8: RbObjectConvertible {
     /// It fails if the Ruby value:
     /// 1. Is numeric and negative; or
     /// 2. Is numeric, positive, and does not fit into the Swift type; or
-    /// 3. Cannot be made into a suitable numeric via `to_int`.
+    /// 3. Cannot be made into a suitable numeric via `to_int` or `to_i`.
     ///
     /// See `RbException.history` to find out why a conversion failed.
     ///
@@ -113,7 +113,7 @@ extension Int64: RbObjectConvertible {
     ///
     /// It fails if the Ruby value:
     /// 1. Is numeric and does not fit into the Swift type; or
-    /// 2. Cannot be made into a suitable numeric via `to_int`.
+    /// 2. Cannot be made into a suitable numeric via `to_int` or `to_i`.
     ///
     /// See `RbException.history` to find out why a conversion failed.
     ///
@@ -136,7 +136,7 @@ extension Int32: RbObjectConvertible {
     ///
     /// It fails if the Ruby value:
     /// 1. Is numeric and does not fit into the Swift type; or
-    /// 2. Cannot be made into a suitable numeric via `to_int`.
+    /// 2. Cannot be made into a suitable numeric via `to_int` or `to_i`.
     ///
     /// See `RbException.history` to find out why a conversion failed.
     ///
@@ -159,7 +159,7 @@ extension Int16: RbObjectConvertible {
     ///
     /// It fails if the Ruby value:
     /// 1. Is numeric and does not fit into the Swift type; or
-    /// 2. Cannot be made into a suitable numeric via `to_int`.
+    /// 2. Cannot be made into a suitable numeric via `to_int` or `to_i`.
     ///
     /// See `RbException.history` to find out why a conversion failed.
     ///
@@ -182,7 +182,7 @@ extension Int8: RbObjectConvertible {
     ///
     /// It fails if the Ruby value:
     /// 1. Is numeric and does not fit into the Swift type; or
-    /// 2. Cannot be made into a suitable numeric via `to_int`.
+    /// 2. Cannot be made into a suitable numeric via `to_int` or `to_i`.
     ///
     /// See `RbException.history` to find out why a conversion failed.
     ///
@@ -211,7 +211,7 @@ extension Float: RbObjectConvertible {
     ///
     /// See `RbException.history` to find out why a conversion failed.
     ///
-    /// If the Ruby value is floating point then the integer part is returned.
+    /// Flavors of NaN are not preserved across the Ruby<->Swift interface.
     public init?(_ value: RbObject) {
         guard let actual = Double(value) else {
             return nil

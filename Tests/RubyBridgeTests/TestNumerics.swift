@@ -271,6 +271,23 @@ class TestNumerics: XCTestCase {
         }
     }
 
+    // String to_i, to_f accessible
+    func testStringToNum() {
+        let str = RbObject("123")
+
+        guard let intFromStr = Int(str) else {
+            XCTFail("Couldn't convert string to int")
+            return
+        }
+        XCTAssertEqual(123, intFromStr)
+
+        guard let dblFromStr = Double(str) else {
+            XCTFail("Couldn't convert string to float")
+            return
+        }
+        XCTAssertEqual(123.0, dblFromStr)
+    }
+
     func testLiterals() {
         let val1: RbObject = 22
         let val2: RbObject = 4.14441
@@ -304,6 +321,7 @@ class TestNumerics: XCTestCase {
         ("testIntegerTooBig", testIntegerTooBig),
         ("testIntegerObjToNegative", testIntegerObjToNegative),
         ("testNoCustomFloatConversion", testNoCustomFloatConversion),
+        ("testStringToNum", testStringToNum),
         ("testLiterals", testLiterals)
     ]
 }
