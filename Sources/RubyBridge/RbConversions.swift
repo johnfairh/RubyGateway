@@ -1,5 +1,5 @@
 //
-//  RbObjectConversion.swift
+//  RbConversions.swift
 //  RubyBridge
 //
 //  Distributed under the MIT license, see LICENSE
@@ -148,6 +148,8 @@ extension UInt: RbObjectConvertible {
     /// 2. Is numeric, positive, and does not fit into the Swift type; or
     /// 3. Cannot be made into a suitable numeric via `to_int`.
     ///
+    /// See `RbException.history` to find out why a conversion failed.
+    ///
     /// If the Ruby value is floating point then the integer part is returned.
     public init?(_ value: RbObject) {
         var status = Int32(0)
@@ -177,6 +179,8 @@ extension Int: RbObjectConvertible {
     /// It fails if the Ruby value:
     /// 1. Is numeric and does not fit into the Swift type; or
     /// 2. Cannot be made into a suitable numeric via `to_int`.
+    ///
+    /// See `RbException.history` to find out why a conversion failed.
     ///
     /// If the Ruby value is floating point then the integer part is returned.
     public init?(_ value: RbObject) {
@@ -214,6 +218,8 @@ extension Double: RbObjectConvertible {
     /// 1. Is numeric and does not fit into the Swift type; or
     /// 2. Cannot be made into a suitable numeric via `to_f`.
     ///
+    /// See `RbException.history` to find out why a conversion failed.
+    ///
     /// If the Ruby value is floating point then the integer part is returned.
     public init?(_ value: RbObject) {
         var status = Int32(0)
@@ -240,19 +246,3 @@ extension RbObject: ExpressibleByFloatLiteral {
         self.init(value.rubyObject)
     }
 }
-
-
-extension UInt64: RbObjectConvertible {
-    public init?(_ value: RbObject) {
-        guard let actual = UInt(value) else {
-            return nil
-        }
-        self.init(actual)
-    }
-
-    public var rubyObject: RbObject {
-        return UInt(self).rubyObject
-    }
-}
-
-

@@ -18,7 +18,7 @@ protocol RbConstantScope {
 }
 
 extension RbConstantScope {
-    /// Get an `RbOBject` that represents a Ruby constant.
+    /// Get an `RbObject` that represents a Ruby constant.
     ///
     /// In Ruby constants include things that users think of as constants like
     /// `Math::PI`, classes, and modules.  You can use this routine with

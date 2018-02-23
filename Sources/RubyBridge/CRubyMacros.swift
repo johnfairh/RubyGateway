@@ -26,33 +26,10 @@ import RubyBridgeHelpers
 
 // From platform to NUM -- BIGNUM or FIXNUM depending on size.
 
-func RB_SHORT2NUM(_ v: Int16) -> VALUE   { return RB_INT2NUM(Int32(v)) }
-func RB_USHORT2NUM(_ v: UInt16) -> VALUE { return RB_UINT2NUM(UInt32(v)) }
-func RB_INT2NUM(_ v: Int32) -> VALUE     { return rbb_RB_INT2NUM(v) }
-func RB_UINT2NUM(_ v: UInt32) -> VALUE   { return rbb_RB_UINT2NUM(v) }
 func RB_LONG2NUM(_ x: Int) -> VALUE      { return rb_long2num_inline(x) }
 func RB_ULONG2NUM(_ x: UInt) -> VALUE    { return rb_ulong2num_inline(x) }
-func LL2NUM(_ v: Int64) -> VALUE         { return rb_ll2inum(v) } /* Consistent with Ruby's inconsistency ;) */
-func ULL2NUM(_ v: UInt64) -> VALUE       { return rb_ull2inum(v) }
-
-// From NUM to platform -- will raise exception if won't fit, need to
-// push these all into _protect layer (or just LL and check on Swift size.)
-// Rubyish - will call #to_i if no obvious conversion.
-
-func RB_NUM2SHORT(_ x: VALUE) -> Int16   { return rb_num2short_inline(x) }
-func RB_NUM2USHORT(_ x: VALUE) -> UInt16 { return rb_num2ushort(x) }
-func RB_NUM2INT(_ x: VALUE) -> Int32     { return rbb_RB_NUM2INT(x) }
-func RB_NUM2UINT(_ x: VALUE) -> UInt32   { return rbb_RB_NUM2UINT(x) }
-func RB_NUM2LONG(_ x: VALUE) -> Int      { return rb_num2long_inline(x) }
-func RB_NUM2ULONG(_ x: VALUE) -> UInt    { return rb_num2ulong_inline(x) }
-func RB_NUM2LL(_ x: VALUE) -> Int64      { return rb_num2ll_inline(x) }
-func RB_NUM2ULL(_ x: VALUE) -> UInt64    { return rb_num2ull(x) }
 
 // MARK: - Floating point conversions
-
-// From NUM to platform -- will raise exception if won't fit.
-// Rubyish - will call `#to_f` if no obvious conversion.
-func NUM2DBL(_ x: VALUE) -> Double { return rb_num2dbl(x) }
 
 // From platform to NUM -- FLONUM or CLASS(FLOAT) depending
 func DBL2NUM(_ dbl: Double) -> VALUE { return rb_float_new(dbl) }
@@ -72,11 +49,6 @@ func RB_TEST(_ v: VALUE) -> Bool {
 /// Is a `VALUE` equal to `nil`?  You probably want `!RB_TEST()` instead.
 func RB_NIL_P(_ v: VALUE) -> Bool {
     return !(v != Qnil)
-}
-
-// Not sure this one is useful
-func CLASS_OF(_ v: VALUE) -> VALUE {
-    return rb_class_of(v)
 }
 
 // MARK: - String utilities

@@ -54,10 +54,10 @@ public final class RbObject {
     /// Is the Ruby object `nil`?
     ///
     /// If you've got Swift `nil` -- that is, you don't have `.some(RbObject)` --
-    /// then Ruby failed - it raised an exception or something.
+    /// then Ruby failed - it probably raised an exception.
     ///
-    /// If you've got Ruby `nil` -- this is, you've got `RbObject.isNil` -- then
-    /// Ruby worked but the call evaluated to `nil`.
+    /// If you've got Ruby `nil` -- that is, you've got `RbObject.isNil` -- then
+    /// Ruby worked but the call evaluated to [Ruby] `nil`.
     public var isNil: Bool {
         return RB_NIL_P(rubyValue)
     }

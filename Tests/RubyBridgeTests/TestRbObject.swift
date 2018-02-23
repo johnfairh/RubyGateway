@@ -27,26 +27,21 @@ class TestRbVal: XCTestCase {
     // Probably a bit pointless, the value is probably on the stack,
     // but at least tests that the gc registration doesn't hurt.
 
-    private func getRubyNum(_ u: UInt) -> RbObject {
-        return RbObject(rubyValue: RB_ULONG2NUM(u))
-    }
-
     func testObject() {
-        let testNum = UInt.max // will not fit in FIXNUM, Ruby heap allocation
-        let obj = getRubyNum(testNum)
+        let obj = RbObject(UInt.max)
         rb_gc()
-        let backVal = RB_NUM2ULONG(obj.rubyValue)
-        XCTAssertEqual(testNum, backVal)
+        let backVal = UInt(obj)
+        XCTAssertEqual(UInt.max, backVal)
     }
 
     func testCopy() {
         let testNum = UInt.max
         let rbObj2: RbObject
         do {
-            let rbObj1 = RbObject(rubyValue: RB_ULONG2NUM(testNum))
+            let rbObj1 = RbObject(testNum)
             rbObj2 = RbObject(rbObj1)
         }
-        let backVal = RB_NUM2ULONG(rbObj2.rubyValue)
+        let backVal = UInt(rbObj2)
         XCTAssertEqual(testNum, backVal)
     }
 

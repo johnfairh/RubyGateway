@@ -25,7 +25,7 @@ class TestNumerics: XCTestCase {
             XCTAssertTrue(RB_FIXABLE(val))
             let rubyVal = RB_LONG2FIX(val)
             XCTAssertTrue(RB_FIXNUM_P(rubyVal))
-            XCTAssertTrue(RB_TYPE_P(rubyVal, .T_FIXNUM) || RB_TYPE_P(rubyVal, .T_BIGNUM))
+            XCTAssertTrue(RB_TYPE_P(rubyVal, .T_FIXNUM))
             let back = RB_FIX2LONG(rubyVal)
             XCTAssertEqual(val, back)
             if val > 0 {
@@ -68,12 +68,32 @@ class TestNumerics: XCTestCase {
         }
     }
 
+    /// Proper 'num' round-tripping -- Int8
+    func testInt8NumRoundtrip() {
+        let values = [Int8.min, 0, Int8.max]
+        values.forEach { val in
+            let rubyObj = RbObject(val)
+            let swiftVal = Int8(rubyObj)
+            XCTAssertEqual(val, swiftVal)
+        }
+    }
+
+    /// Proper 'num' round-tripping -- UInt8
+    func testUInt8NumRoundtrip() {
+        let values = [UInt8.min, 0, UInt8.max]
+        values.forEach { val in
+            let rubyObj = RbObject(val)
+            let swiftVal = UInt8(rubyObj)
+            XCTAssertEqual(val, swiftVal)
+        }
+    }
+
     /// Proper 'num' round-tripping -- Int16
     func testInt16NumRoundtrip() {
         let values = [Int16.min, 0, Int16.max]
         values.forEach { val in
-            let rubyValue = RB_SHORT2NUM(val)
-            let swiftVal  = RB_NUM2SHORT(rubyValue)
+            let rubyObj = RbObject(val)
+            let swiftVal = Int16(rubyObj)
             XCTAssertEqual(val, swiftVal)
         }
     }
@@ -82,8 +102,8 @@ class TestNumerics: XCTestCase {
     func testUInt16NumRoundtrip() {
         let values = [UInt16.min, 0, UInt16.max]
         values.forEach { val in
-            let rubyValue = RB_USHORT2NUM(val)
-            let swiftVal  = RB_NUM2USHORT(rubyValue)
+            let rubyObj = RbObject(val)
+            let swiftVal = UInt16(rubyObj)
             XCTAssertEqual(val, swiftVal)
         }
     }
@@ -92,8 +112,8 @@ class TestNumerics: XCTestCase {
     func testInt32NumRoundtrip() {
         let values = [Int32.min, 0, Int32.max]
         values.forEach { val in
-            let rubyValue = RB_INT2NUM(val)
-            let swiftVal  = RB_NUM2INT(rubyValue)
+            let rubyObj = RbObject(val)
+            let swiftVal = Int32(rubyObj)
             XCTAssertEqual(val, swiftVal)
         }
     }
@@ -102,8 +122,8 @@ class TestNumerics: XCTestCase {
     func testUInt32NumRoundtrip() {
         let values = [UInt32.min, 0, UInt32.max]
         values.forEach { val in
-            let rubyValue = RB_UINT2NUM(val)
-            let swiftVal  = RB_NUM2UINT(rubyValue)
+            let rubyObj = RbObject(val)
+            let swiftVal = UInt32(rubyObj)
             XCTAssertEqual(val, swiftVal)
         }
     }
@@ -112,8 +132,8 @@ class TestNumerics: XCTestCase {
     func testInt64NumRoundtrip() {
         let values = [Int64.min, 0, Int64.max]
         values.forEach { val in
-            let rubyValue = LL2NUM(val)
-            let swiftVal  = RB_NUM2LL(rubyValue)
+            let rubyObj = RbObject(val)
+            let swiftVal = Int64(rubyObj)
             XCTAssertEqual(val, swiftVal)
         }
     }
@@ -122,7 +142,7 @@ class TestNumerics: XCTestCase {
     func testUInt64NumRoundtrip() {
         let values = [UInt64.min, 0, UInt64.max]
         values.forEach { val in
-            let rubyObj  = RbObject(val)
+            let rubyObj = RbObject(val)
             let swiftVal = UInt64(rubyObj)
             XCTAssertEqual(val, swiftVal)
         }
@@ -149,15 +169,55 @@ class TestNumerics: XCTestCase {
         }
     }
 
-    // Misc unconvertible situations
-    func testMiscUnconvertible() {
+    /// Floating point
+    func testFloatRoundtrip() {
+        let values = [Float.leastNormalMagnitude,
+                      Float.leastNonzeroMagnitude,
+                      Float(0.0),
+                      Float.greatestFiniteMagnitude,
+                      Float.nan,
+                      Float.signalingNaN,
+                      Float.infinity]
+        values.forEach { val in
+            let rubyObj = RbObject(val)
+            XCTAssertTrue(RB_FLOAT_TYPE_P(rubyObj.rubyValue))
+            guard let swiftVal = Float(rubyObj) else {
+                XCTFail("Couldn't convert \(val) back to Swift")
+                return
+            }
+            XCTAssertTrue((val.isNaN && swiftVal.isNaN) ||
+                (val == swiftVal))
+        }
+    }
+
+    // Number is too big to fit in 64 bits
+    func testIntegerTooBig() {
         try! Ruby.require(filename: Helpers.fixturePath("numbers.rb"))
 
-        // Number is too big to fit in 64 bits
         let bigConstObj = try! Ruby.getConstant(name: "TestNumbers::BIG_NUM")
 
         if let num = UInt(bigConstObj) {
             XCTFail("Managed to express 2^80 in 64 bits: \(num)")
+            return
+        }
+
+        if let num = UInt64(bigConstObj) {
+            XCTFail("Managed to express 2^80 in 64 bits: \(num)")
+            return
+        }
+
+        if let num = UInt32(bigConstObj) {
+            XCTFail("Managed to express 2^80 in 32 bits: \(num)")
+            return
+        }
+
+        if let num = UInt16(bigConstObj) {
+            XCTFail("Managed to express 2^80 in 16 bits: \(num)")
+            return
+        }
+
+        if let num = UInt8(bigConstObj) {
+            XCTFail("Managed to express 2^80 in 8 bits: \(num)")
             return
         }
 
@@ -166,19 +226,48 @@ class TestNumerics: XCTestCase {
             return
         }
 
-        // Object supports to_int but gives a negative number
+        if let num = Int64(bigConstObj) {
+            XCTFail("Managed to express 2^80 in 64 signed bits: \(num)")
+            return
+        }
+
+        if let num = Int32(bigConstObj) {
+            XCTFail("Managed to express 2^80 in 32 bits: \(num)")
+            return
+        }
+
+        if let num = Int16(bigConstObj) {
+            XCTFail("Managed to express 2^80 in 16 bits: \(num)")
+            return
+        }
+
+        if let num = Int8(bigConstObj) {
+            XCTFail("Managed to express 2^80 in 8 bits: \(num)")
+            return
+        }
+    }
+
+    // Object supports to_int but gives a negative number
+    func testIntegerObjToNegative() {
+        try! Ruby.require(filename: Helpers.fixturePath("numbers.rb"))
+
         let negaObjVal = try! Ruby.eval(ruby: "TestNumbers.new")
         let negaObj = RbObject(rubyValue: negaObjVal)
 
         if let num = UInt(negaObj) {
             XCTFail("Managed to convert object to a negative number to unsigned: \(num)")
         }
+    }
 
-        // Object has no to_f
+    // Object has no to_f
+    func testNoCustomFloatConversion() {
         try! Ruby.require(filename: Helpers.fixturePath("nonconvert.rb"))
         let instObj = RbObject(rubyValue: try! Ruby.eval(ruby: "Nonconvert.new"))
         if let dblNum = Double(instObj) {
             XCTFail("Managed to convert object to double: \(dblNum)")
+        }
+        if let flNum = Float(instObj) {
+            XCTFail("Managed to convert object to float: \(flNum)")
         }
     }
 
@@ -203,6 +292,8 @@ class TestNumerics: XCTestCase {
         ("testIntNumRoundtrip", testIntNumRoundtrip),
         ("testUIntNumRoundtrip", testUIntNumRoundtrip),
         ("testUIntNegativeUnconvertible", testUIntNegativeUnconvertible),
+        ("testInt8NumRoundtrip", testInt8NumRoundtrip),
+        ("testUInt8NumRoundtrip", testUInt8NumRoundtrip),
         ("testInt16NumRoundtrip", testInt16NumRoundtrip),
         ("testUInt16NumRoundtrip", testUInt16NumRoundtrip),
         ("testInt32NumRoundtrip", testInt32NumRoundtrip),
@@ -210,7 +301,9 @@ class TestNumerics: XCTestCase {
         ("testInt64NumRoundtrip", testInt64NumRoundtrip),
         ("testUInt64NumRoundtrip", testUInt64NumRoundtrip),
         ("testDoubleRoundtrip", testDoubleRoundtrip),
-        ("testMiscUnconvertible", testMiscUnconvertible),
+        ("testIntegerTooBig", testIntegerTooBig),
+        ("testIntegerObjToNegative", testIntegerObjToNegative),
+        ("testNoCustomFloatConversion", testNoCustomFloatConversion),
         ("testLiterals", testLiterals)
     ]
 }

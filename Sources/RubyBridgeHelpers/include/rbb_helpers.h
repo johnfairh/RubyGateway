@@ -41,12 +41,6 @@ VALUE rbb_const_get_at_protect(VALUE value, ID id, int * _Nullable status);
 /// Wrap up RB_BUILTIN_TYPE for Swift
 int rbb_RB_BUILTIN_TYPE(VALUE value);
 
-/// Numeric conversions dependent on integer sizes
-int          rbb_RB_NUM2INT(VALUE x);
-unsigned int rbb_RB_NUM2UINT(VALUE x);
-VALUE        rbb_RB_INT2NUM(int v);
-VALUE        rbb_RB_UINT2NUM(unsigned int v);
-
 /// Safely call `rb_string_value` and report exception status.
 VALUE rbb_string_value_protect(VALUE v, int * _Nullable status);
 

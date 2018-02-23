@@ -123,15 +123,6 @@ int rbb_RB_BUILTIN_TYPE(VALUE value)
 }
 
 //
-// # Numeric conversions
-//
-
-int          rbb_RB_NUM2INT(VALUE x)         { return RB_NUM2INT(x); }
-unsigned int rbb_RB_NUM2UINT(VALUE x)        { return RB_NUM2UINT(x); }
-VALUE        rbb_RB_INT2NUM(int v)           { return RB_INT2NUM(v); }
-VALUE        rbb_RB_UINT2NUM(unsigned int v) { return RB_UINT2NUM(v); }
-
-//
 // # String methods
 //
 // rb_string_value() returns the to_str'd value and, if TYPE(v) not
