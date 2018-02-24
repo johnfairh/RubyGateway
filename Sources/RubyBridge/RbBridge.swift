@@ -206,8 +206,7 @@ extension RbBridge {
 extension RbBridge {
 
     /// Evaluate some Ruby and return the result.
-    /// XXX fix this up [turn into 'call' of Object#eval?]
-    public func eval(ruby: String) throws -> VALUE {
+    public func eval(ruby: String) throws -> RbObject {
         try setup()
         var state: Int32 = 0
         let value = rb_eval_string_protect(ruby, &state)
@@ -216,7 +215,7 @@ extension RbBridge {
             defer { rb_set_errinfo(Qnil) }
             throw RbException(rubyValue: exception)
         }
-        return value
+        return RbObject(rubyValue: value)
     }
 
     /// 'require' - see Ruby `Kernel#require`.  Load file once-only.

@@ -75,12 +75,12 @@ class TestVM: XCTestCase {
         do {
             XCTAssertFalse(Ruby.debug)
             let debugVal1 = try Ruby.eval(ruby: "$DEBUG")
-            XCTAssertTrue(!RB_TEST(debugVal1))
+            XCTAssertFalse(debugVal1.isTruthy)
 
             Ruby.debug = true
             XCTAssertTrue(Ruby.debug)
             let debugVal2 = try Ruby.eval(ruby: "$DEBUG")
-            XCTAssertTrue(RB_TEST(debugVal2))
+            XCTAssertTrue(debugVal2.isTruthy)
 
             Ruby.debug = false
             XCTAssertFalse(Ruby.debug)
@@ -94,17 +94,17 @@ class TestVM: XCTestCase {
         do {
             XCTAssertEqual(.medium, Ruby.verbose)
             let verboseVal1 = try Ruby.eval(ruby: "$VERBOSE")
-            XCTAssertEqual(Qfalse, verboseVal1)
+            XCTAssertEqual(Qfalse, verboseVal1.rubyValue)
 
             Ruby.verbose = .full
             XCTAssertEqual(.full, Ruby.verbose)
             let verboseVal2 = try Ruby.eval(ruby: "$VERBOSE")
-            XCTAssertEqual(Qtrue, verboseVal2)
+            XCTAssertEqual(Qtrue, verboseVal2.rubyValue)
 
             Ruby.verbose = .none
             XCTAssertEqual(.none, Ruby.verbose)
             let verboseVal3 = try Ruby.eval(ruby: "$VERBOSE")
-            XCTAssertEqual(Qnil, verboseVal3)
+            XCTAssertEqual(Qnil, verboseVal3.rubyValue)
 
             Ruby.verbose = .medium
             XCTAssertEqual(.medium, Ruby.verbose)
