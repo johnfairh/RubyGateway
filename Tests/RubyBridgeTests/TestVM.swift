@@ -70,6 +70,37 @@ class TestVM: XCTestCase {
         }
     }
 
+    /// 'load' works
+    func testLoad() {
+        do {
+            try Ruby.load(filename: Helpers.fixturePath("backwards.rb"))
+
+            try Ruby.load(filename: Helpers.fixturePath("backwards.rb"))
+
+            // TODO: need better test with some mutating state
+        } catch {
+            XCTFail("Unexpected exception: \(error)")
+        }
+    }
+
+    func testLoadFailBadPath() {
+        do {
+            try Ruby.load(filename: "Should fail")
+            XCTFail("Managed to load nonexistent file")
+        } catch {
+            // TODO: check sensible error
+        }
+    }
+
+    func testLoadFailException() {
+        do {
+            try Ruby.load(filename: Helpers.fixturePath("unloadable.rb"))
+            XCTFail("Managed to load unloadable file")
+        } catch {
+            // TODO: check sensible error
+        }
+    }
+
     /// debug flag
     func testDebug() {
         do {

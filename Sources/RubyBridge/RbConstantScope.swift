@@ -49,19 +49,17 @@ extension RbConstantScope {
         var first = true
         try name.components(separatedBy: "::").forEach { name in
             let rbId = try Ruby.getID(for: name)
-            var state = Int32(0)
             if first {
                 // For the first item in the path, allow a hit here or above in the hierarchy
-                nextValue = rbb_const_get_protect(nextValue, rbId, &state)
+                nextValue = try RbVM.doProtect {
+                    return rbb_const_get_protect(nextValue, rbId, nil)
+                }
                 first = false
             } else {
                 // Once found a place to start, insist on stepping down from there.
-                nextValue = rbb_const_get_at_protect(nextValue, rbId, &state)
-            }
-            if state != 0 {
-                let exception = rb_errinfo()
-                defer { rb_set_errinfo(Qnil) }
-                throw RbException(rubyValue: exception)
+                nextValue = try RbVM.doProtect {
+                    return rbb_const_get_at_protect(nextValue, rbId, nil)
+                }
             }
         }
         return RbObject(rubyValue: nextValue)

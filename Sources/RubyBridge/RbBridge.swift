@@ -208,32 +208,37 @@ extension RbBridge {
     /// Evaluate some Ruby and return the result.
     public func eval(ruby: String) throws -> RbObject {
         try setup()
-        var state: Int32 = 0
-        let value = rb_eval_string_protect(ruby, &state)
-        if state != 0 {
-            let exception = rb_errinfo()
-            defer { rb_set_errinfo(Qnil) }
-            throw RbException(rubyValue: exception)
-        }
-        return RbObject(rubyValue: value)
+        return RbObject(rubyValue: try RbVM.doProtect {
+            return rb_eval_string_protect(ruby, nil)
+        })
     }
 
     /// 'require' - see Ruby `Kernel#require`.  Load file once-only.
     ///
-    /// - returns: `true` if the filed was opened OK, `false` if it is already loaded.
+    /// - parameter filename: The name of the file to load.
+    /// - returns: `true` if the filed was loaded OK, `false` if it is already loaded.
     /// - throws: RbException if a Ruby exception occurred.  (This usually means the
     ///           file couldn't be found.)
     @discardableResult
     public func require(filename: String) throws -> Bool {
         try setup()
-        var state = Int32(0)
-        let value = rbb_require_protect(filename, &state);
-        if state != 0 {
-            let exception = rb_errinfo()
-            defer { rb_set_errinfo(Qnil) }
-            throw RbException(rubyValue: exception)
+        let rubyValue = try RbVM.doProtect {
+            return rbb_require_protect(filename, nil)
         }
-        return value == Qtrue
+        return rubyValue == Qtrue
+    }
+
+    /// 'load' - see Ruby `Kernel#load`. Load a file, reloads if already loaded.
+    ///
+    /// - parameter filename: The name of the file to load
+    /// - parameter wrap: If `true`, load the file into a fresh anonymous namespace
+    ///   instead of the current program.
+    /// - throws: `RbException` for any Ruby exception raised.
+    public func load(filename: String, wrap: Bool = false) throws {
+        try setup()
+        return try RbVM.doProtect {
+            rbb_load_protect(RbObject(filename).rubyValue, wrap ? 1 : 0, nil)
+        }
     }
 }
 

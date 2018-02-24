@@ -29,6 +29,9 @@ typedef unsigned long VALUE;
 /// Safely call `rb_require` and report exception status.
 VALUE rbb_require_protect(const char * _Nonnull fname, int * _Nullable status);
 
+/// Safely call `rb_load` and report exception status.
+void rbb_load_protect(VALUE fname, int wrap, int * _Nullable status);
+
 /// Safely call `rb_intern` and report exception status.
 ID rbb_intern_protect(const char * _Nonnull name, int * _Nullable status);
 

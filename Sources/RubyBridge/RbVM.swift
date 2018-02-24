@@ -162,14 +162,23 @@ final class RbVM {
         if let rbId = idCache[name] {
             return rbId
         }
-        var state = Int32(0)
-        let rbId = rbb_intern_protect(name, &state)
-        if state != 0 {
-            let exception = rb_errinfo()
-            defer { rb_set_errinfo(Qnil) }
-            throw RbException(rubyValue: exception)
+        let rbId = try RbVM.doProtect {
+            return rbb_intern_protect(name, nil)
         }
         idCache[name] = rbId
         return rbId
+    }
+
+    /// Helper to call a protected Ruby API function and propagate any Ruby exception
+    /// as a Swift `RbException`.
+    static func doProtect<T>(call: () -> T) throws -> T {
+        let result = call()
+
+        let exception = rb_errinfo()
+        if exception != Qnil {
+            defer { rb_set_errinfo(Qnil) }
+            throw RbException(rubyValue: exception)
+        }
+        return result
     }
 }

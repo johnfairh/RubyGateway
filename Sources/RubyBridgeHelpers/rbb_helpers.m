@@ -70,6 +70,36 @@ VALUE rbb_require_protect(const char *fname, int *status)
     return rb_protect(rbb_require_thunk, (VALUE)(void *)fname, status);
 }
 
+// rb_load -- rb_load_protect exists but doesn't protect against exceptions
+// raised by the file being loaded, just the filename lookup part.
+typedef struct
+{
+    VALUE fname;
+    int   wrap;
+} Rbb_load_params;
+
+static VALUE rbb_load_thunk(VALUE value)
+{
+    Rbb_load_params *params = (Rbb_load_params *)(void *)value;
+    rb_load(params->fname, params->wrap);
+    return Qundef;
+}
+
+void rbb_load_protect(VALUE fname, int wrap, int * _Nullable status)
+{
+    Rbb_load_params params = { .fname = fname, .wrap = wrap };
+
+    // rb_load_protect has another bug, if you send it null status
+    // then it accesses the pointer anyway.  Recent regression, will try to fix...
+    int tmpStatus = 0;
+    if (status == NULL)
+    {
+        status = &tmpStatus;
+    }
+
+    (void) rb_protect(rbb_load_thunk, (VALUE)(void *)(&params), status);
+}
+
 static VALUE rbb_intern_thunk(VALUE value)
 {
     const char *name = (const char *)(void *)value;
