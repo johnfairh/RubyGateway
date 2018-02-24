@@ -63,9 +63,18 @@ public final class RbObject {
     }
 }
 
+/// MARK: - Callable etc.
+
 /// Give access to classes/modules/constants nested under this class/object.
 extension RbObject: RbConstantScope {
     func constantScopeValue() throws -> VALUE {
+        return rubyValue
+    }
+}
+
+/// Give access to methods.
+extension RbObject: RbCallable {
+    func callableSelfValue() throws -> VALUE {
         return rubyValue
     }
 }

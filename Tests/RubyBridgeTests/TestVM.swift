@@ -26,11 +26,10 @@ class TestVM: XCTestCase {
             XCTAssertTrue(rc)
 
             let string = "natural"
-            var stringArg = rb_str_new_cstr(string)
-            var result = rb_funcallv(0, rb_intern("backwards"), 1, &(stringArg))
-            let str = rb_string_value_cstr(&(result))
 
-            XCTAssertEqual(String(string.reversed()), String(cString: str!))
+            let str = try Ruby.call(method: "backwards", args: [string])
+
+            XCTAssertEqual(String(string.reversed()), String(str))
         } catch {
             XCTFail("Unexpected exception, \(error)")
         }

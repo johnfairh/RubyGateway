@@ -251,6 +251,13 @@ extension RbBridge: RbConstantScope {
     }
 }
 
+extension RbBridge: RbCallable {
+    func callableSelfValue() throws -> VALUE {
+        try setup()
+        return rb_cObject
+    }
+}
+
 // MARK: - Global declaration
 
 public let Ruby = RbBridge()

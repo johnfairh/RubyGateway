@@ -141,6 +141,27 @@ VALUE rbb_inspect_protect(VALUE value, int * _Nullable status)
     return rb_protect(rb_inspect, value, status);
 }
 
+typedef struct
+{
+    VALUE        value;
+    ID           id;
+    int          argc;
+    const VALUE *argv;
+} Rbb_funcallv_params;
+
+static VALUE rbb_funcallv_thunk(VALUE value)
+{
+    Rbb_funcallv_params *params = (Rbb_funcallv_params *)(void *)value;
+    return rb_funcallv(params->value, params->id, params->argc, params->argv);
+}
+
+VALUE rbb_funcallv_protect(VALUE value, ID id,
+                           int argc, const VALUE * _Nonnull argv,
+                           int * _Nullable status)
+{
+    Rbb_funcallv_params params = { .value = value, .id = id, .argc = argc, .argv = argv };
+    return rb_protect(rbb_funcallv_thunk, (VALUE)(void *)(&params), status);
+}
 
 //
 // # Difficult Macros

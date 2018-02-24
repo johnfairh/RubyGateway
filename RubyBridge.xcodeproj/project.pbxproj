@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0205A89E204088F900076840 /* RbNumericConversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205A89D204088F900076840 /* RbNumericConversions.swift */; };
+		0205A8A22041F63B00076840 /* RbCallable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205A8A12041F63B00076840 /* RbCallable.swift */; };
 		022F3AB220360B9F009E69BE /* CRubyMacros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3AB120360B9F009E69BE /* CRubyMacros.swift */; };
 		022F3AC12036D72A009E69BE /* rbb_helpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 022F3ABE2036D721009E69BE /* rbb_helpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		022F3AC22036D731009E69BE /* rbb_helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 022F3ABD2036D721009E69BE /* rbb_helpers.m */; };
@@ -45,6 +46,7 @@
 		0205A89D204088F900076840 /* RbNumericConversions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbNumericConversions.swift; sourceTree = "<group>"; };
 		0205A89F2041A7BD00076840 /* unloadable.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = unloadable.rb; sourceTree = "<group>"; };
 		0205A8A02041EE4A00076840 /* inspectables.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = inspectables.rb; sourceTree = "<group>"; };
+		0205A8A12041F63B00076840 /* RbCallable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbCallable.swift; sourceTree = "<group>"; };
 		022F3AB120360B9F009E69BE /* CRubyMacros.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRubyMacros.swift; sourceTree = "<group>"; };
 		022F3AB72036D4DD009E69BE /* libRubyBridgeHelpers.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRubyBridgeHelpers.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		022F3ABD2036D721009E69BE /* rbb_helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rbb_helpers.m; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 				02901339203ED8D60090C5C9 /* RbConversions.swift */,
 				0205A89D204088F900076840 /* RbNumericConversions.swift */,
 				022F3AD2203B6061009E69BE /* RbConstantScope.swift */,
+				0205A8A12041F63B00076840 /* RbCallable.swift */,
 				0249234920334ADE00E3AAF4 /* RbError.swift */,
 				022F3AB120360B9F009E69BE /* CRubyMacros.swift */,
 			);
@@ -377,6 +380,7 @@
 				024923482031EE0400E3AAF4 /* RbVM.swift in Sources */,
 				02901338203E03530090C5C9 /* RbBridge.swift in Sources */,
 				0205A89E204088F900076840 /* RbNumericConversions.swift in Sources */,
+				0205A8A22041F63B00076840 /* RbCallable.swift in Sources */,
 				022F3AB220360B9F009E69BE /* CRubyMacros.swift in Sources */,
 				0290133A203ED8D60090C5C9 /* RbConversions.swift in Sources */,
 			);

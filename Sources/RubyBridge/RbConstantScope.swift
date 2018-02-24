@@ -13,7 +13,7 @@ import Foundation
 /// nested under it.  This is either a regular class/module object or Object.class
 /// for top-level constants.
 protocol RbConstantScope {
-    /// Get the value for the module to look relative to
+    /// Get the value to look relative to
     func constantScopeValue() throws -> VALUE
 }
 
