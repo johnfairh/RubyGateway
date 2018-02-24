@@ -10,9 +10,6 @@ import XCTest
 import CRuby
 
 /// Tests for String helpers
-///
-/// TODO - protect + failable inzn
-
 class TestStrings: XCTestCase {
 
     private func doTestRoundTrip(_ string: String) {
@@ -56,6 +53,8 @@ class TestStrings: XCTestCase {
         if let str = String(instance) {
             XCTFail("Converted unconvertible: \(str)")
         }
+        let descr = instance.description
+        XCTAssertNotEqual("", descr)
     }
 
     // to_s, to_str, priority

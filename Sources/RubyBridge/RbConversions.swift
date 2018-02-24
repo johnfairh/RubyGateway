@@ -97,15 +97,13 @@ extension RbObject: ExpressibleByStringLiteral {
 extension Bool: RbObjectConvertible {
     /// Try to get a `Bool` representation of an `RbObject`.
     ///
-    /// This is a strict conversion that fails if the Ruby object is not
-    /// an actual true/false.  Use `RbObject.isTruthy` to decide whether
-    /// an `RbObject` represents a truthy value to Ruby.
+    /// This is a loose, potentially lossy conversion that reflects
+    /// the truthiness of the Ruby object.
     public init?(_ value: RbObject) {
-        switch value.rubyValue {
-        case Qtrue: self = true
-        case Qfalse: self = false
-        default: return nil
+        guard value.rubyValue != Qundef else {
+            return nil
         }
+        self = value.isTruthy
     }
 
     /// Create a Ruby object for the bool.

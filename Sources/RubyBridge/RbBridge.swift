@@ -209,7 +209,7 @@ extension RbBridge {
     public func eval(ruby: String) throws -> RbObject {
         try setup()
         return RbObject(rubyValue: try RbVM.doProtect {
-            return rb_eval_string_protect(ruby, nil)
+            rb_eval_string_protect(ruby, nil)
         })
     }
 
@@ -223,7 +223,7 @@ extension RbBridge {
     public func require(filename: String) throws -> Bool {
         try setup()
         let rubyValue = try RbVM.doProtect {
-            return rbb_require_protect(filename, nil)
+            rbb_require_protect(filename, nil)
         }
         return rubyValue == Qtrue
     }

@@ -136,6 +136,12 @@ VALUE rbb_const_get_at_protect(VALUE value, ID id, int * _Nullable status)
     return rb_protect(rbb_const_get_thunk, (VALUE)(void *)(&params), status);
 }
 
+VALUE rbb_inspect_protect(VALUE value, int * _Nullable status)
+{
+    return rb_protect(rb_inspect, value, status);
+}
+
+
 //
 // # Difficult Macros
 //

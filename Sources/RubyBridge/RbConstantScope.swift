@@ -52,13 +52,13 @@ extension RbConstantScope {
             if first {
                 // For the first item in the path, allow a hit here or above in the hierarchy
                 nextValue = try RbVM.doProtect {
-                    return rbb_const_get_protect(nextValue, rbId, nil)
+                    rbb_const_get_protect(nextValue, rbId, nil)
                 }
                 first = false
             } else {
                 // Once found a place to start, insist on stepping down from there.
                 nextValue = try RbVM.doProtect {
-                    return rbb_const_get_at_protect(nextValue, rbId, nil)
+                    rbb_const_get_at_protect(nextValue, rbId, nil)
                 }
             }
         }

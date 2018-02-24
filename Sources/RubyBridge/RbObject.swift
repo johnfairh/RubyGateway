@@ -69,3 +69,37 @@ extension RbObject: RbConstantScope {
         return rubyValue
     }
 }
+
+/// MARK: - String convertible for various debugging APIs
+
+extension RbObject: CustomStringConvertible {
+    /// A string representation of the Ruby object.
+    /// This is the same as `String(rbObject)` which is approximately `Kernel#String`.
+    public var description: String {
+        guard let str = String(self) else {
+            return "[Indescribable]"
+        }
+        return str
+    }
+}
+
+extension RbObject: CustomDebugStringConvertible {
+    /// A developer-appropriate string representation of the Ruby object.
+    /// This is the result of `inspect` with a fallback to `description`.
+    public var debugDescription: String {
+        if let value = try? RbVM.doProtect { () -> VALUE in
+            rbb_inspect_protect(self.rubyValue, nil)},
+           let str = String(RbObject(rubyValue: value)) {
+            return str
+        }
+        return description
+    }
+}
+
+extension RbObject : CustomPlaygroundQuickLookable {
+    /// Something to display in Playgrounds right-hand bar.
+    /// This is just the text from `description`.
+    public var customPlaygroundQuickLook: PlaygroundQuickLook {
+        return .text(description)
+    }
+}

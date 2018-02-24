@@ -44,6 +44,7 @@
 		0205A89C2040522300076840 /* numbers.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = numbers.rb; sourceTree = "<group>"; };
 		0205A89D204088F900076840 /* RbNumericConversions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbNumericConversions.swift; sourceTree = "<group>"; };
 		0205A89F2041A7BD00076840 /* unloadable.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = unloadable.rb; sourceTree = "<group>"; };
+		0205A8A02041EE4A00076840 /* inspectables.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = inspectables.rb; sourceTree = "<group>"; };
 		022F3AB120360B9F009E69BE /* CRubyMacros.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRubyMacros.swift; sourceTree = "<group>"; };
 		022F3AB72036D4DD009E69BE /* libRubyBridgeHelpers.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRubyBridgeHelpers.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		022F3ABD2036D721009E69BE /* rbb_helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rbb_helpers.m; sourceTree = "<group>"; };
@@ -125,6 +126,7 @@
 				0290133B203EF0F60090C5C9 /* nonconvert.rb */,
 				0205A89C2040522300076840 /* numbers.rb */,
 				0205A89F2041A7BD00076840 /* unloadable.rb */,
+				0205A8A02041EE4A00076840 /* inspectables.rb */,
 			);
 			name = Fixtures;
 			path = Tests/RubyBridgeTests/Fixtures;

@@ -53,9 +53,9 @@ class TestMiscObjTypes: XCTestCase {
     }
 
     func testFailedBoolConversion() {
-        let obj = RbObject("Not a bool")
+        let obj = RbObject(rubyValue: Qundef)
         if let bool = Bool(obj) {
-            XCTFail("Converted string to bool - \(bool)")
+            XCTFail("Converted undef to bool - \(bool)")
         }
     }
 

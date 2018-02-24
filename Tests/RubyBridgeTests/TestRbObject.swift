@@ -45,6 +45,29 @@ class TestRbVal: XCTestCase {
         XCTAssertEqual(testNum, backVal)
     }
 
+    // trivial conversions
+    func testConversions() {
+        let string = "Test String"
+        let rubyObj = RbObject(string)
+        XCTAssertEqual(string, rubyObj.description)
+
+        let playgroundQL = rubyObj.customPlaygroundQuickLook
+        switch playgroundQL {
+        case let .text(str): XCTAssertEqual(string, str)
+        default: XCTFail("Unexpected playgroundquicklookable: \(playgroundQL)")
+        }
+    }
+
+    // inspect
+    func testInspect() {
+        try! Ruby.require(filename: Helpers.fixturePath("inspectables.rb"))
+        let uninspectable = try! Ruby.eval(ruby: "Uninspectable.new")
+        XCTAssertEqual("[Indescribable]", uninspectable.debugDescription)
+
+        let inspectable = try! Ruby.eval(ruby: "Inspectable.new")
+        print(inspectable.debugDescription)
+    }
+
     static var allTests = [
         ("testSimple", testSimple),
         ("testObject", testObject),
