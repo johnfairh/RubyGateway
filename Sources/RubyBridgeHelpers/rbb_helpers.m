@@ -155,8 +155,6 @@ const char *rbb_RSTRING_PTR(VALUE v)
 // baked into Ruby's numerics, so we do some 'orrible rooting around
 // to figure it out.
 //
-// Further customization to use `to_i` when `to_int` is not available.
-//
 
 static int rbb_numeric_ish_type(VALUE v)
 {
@@ -166,7 +164,7 @@ static int rbb_numeric_ish_type(VALUE v)
            RB_TYPE_P(v, T_BIGNUM);
 }
 
-static VALUE rbb_num2ulong_thunk(VALUE v)
+static VALUE rbb_obj2ulong_thunk(VALUE v)
 {
     // Drill down to find something we can actually compare to zero.
     while (!rbb_numeric_ish_type(v))
@@ -198,38 +196,38 @@ static VALUE rbb_num2ulong_thunk(VALUE v)
     return rb_num2ulong(v);
 }
 
-unsigned long rbb_num2ulong_protect(VALUE v, int * _Nullable status)
+unsigned long rbb_obj2ulong_protect(VALUE v, int * _Nullable status)
 {
-    return rb_protect(rbb_num2ulong_thunk, v, status);
+    return rb_protect(rbb_obj2ulong_thunk, v, status);
 }
 
-static VALUE rbb_num2long_thunk(VALUE v)
+static VALUE rbb_obj2long_thunk(VALUE v)
 {
     return (VALUE) RB_NUM2LONG(rb_Integer(v));
 }
 
-long rbb_num2long_protect(VALUE v, int * _Nullable status)
+long rbb_obj2long_protect(VALUE v, int * _Nullable status)
 {
-    return (long) rb_protect(rbb_num2long_thunk, v, status);
+    return (long) rb_protect(rbb_obj2long_thunk, v, status);
 }
 
 typedef struct
 {
-    VALUE   value;
-    double  dblVal;
-} Rbb_num2double_params;
+    VALUE  value;
+    double dblVal;
+} Rbb_obj2double_params;
 
-static VALUE rbb_num2double_thunk(VALUE v)
+static VALUE rbb_obj2double_thunk(VALUE v)
 {
-    Rbb_num2double_params *params = (Rbb_num2double_params *)(void *)v;
+    Rbb_obj2double_params *params = (Rbb_obj2double_params *)(void *)v;
     params->dblVal = NUM2DBL(rb_Float(params->value));
     return 0;
 }
 
-double rbb_num2double_protect(VALUE v, int * _Nullable status)
+double rbb_obj2double_protect(VALUE v, int * _Nullable status)
 {
-    Rbb_num2double_params params = { .value = v, .dblVal = 0 };
-    (void) rb_protect(rbb_num2double_thunk, (VALUE) (void *) &params, status);
+    Rbb_obj2double_params params = { .value = v, .dblVal = 0 };
+    (void) rb_protect(rbb_obj2double_thunk, (VALUE) (void *) &params, status);
     return params.dblVal;
 }
 

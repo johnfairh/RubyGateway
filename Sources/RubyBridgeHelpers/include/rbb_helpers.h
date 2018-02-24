@@ -48,15 +48,15 @@ VALUE rbb_String_protect(VALUE v, int * _Nullable status);
 long                  rbb_RSTRING_LEN(VALUE v);
 const char * _Nonnull rbb_RSTRING_PTR(VALUE v);
 
-/// Safely call `rbb_num2ulong` and report exception status.
+/// Safely call `rb_num2ulong(rb_Integer)` and report exception status.
 /// Additionally, raise an exception if the number is negative.
-unsigned long rbb_num2ulong_protect(VALUE v, int * _Nullable status);
+unsigned long rbb_obj2ulong_protect(VALUE v, int * _Nullable status);
 
-/// Safely call `rbb_num2long` and report exception status.
-long rbb_num2long_protect(VALUE v, int * _Nullable status);
+/// Safely call `rb_num2long(rb_Integer)` and report exception status.
+long rbb_obj2long_protect(VALUE v, int * _Nullable status);
 
-/// Safely call `rbb_num2double` and report exception status.
-double rbb_num2double_protect(VALUE v, int * _Nullable status);
+/// Safely call `rb_num2dbl(rb_Float)` and report exception status.
+double rbb_obj2double_protect(VALUE v, int * _Nullable status);
 
 /// Strings hidden from importer
 const char * _Nonnull rbb_ruby_version(void);
