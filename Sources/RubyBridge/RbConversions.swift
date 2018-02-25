@@ -33,13 +33,6 @@ extension RbObject {
 
 /// RbObject <-> RbObject
 extension RbObject: RbObjectConvertible {
-    /// Create another Swift reference to an existing `RbObject`.
-    /// The underlying Ruby object will not be GCed until both
-    /// `RbObject`s have gone out of scope.
-    public convenience init(_ value: RbObject) {
-        self.init(copy: value)
-    }
-
     /// Returns `self`, the `RbObject`.
     ///
     /// :nodoc:

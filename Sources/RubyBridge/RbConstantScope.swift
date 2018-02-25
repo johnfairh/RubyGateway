@@ -12,9 +12,9 @@ import Foundation
 /// Identify something that can have constants (classes, modules, actual constants)
 /// nested under it.  This is either a regular class/module object or Object.class
 /// for top-level constants.
-protocol RbConstantScope {
+public protocol RbConstantScope {
     /// Get the value to look relative to
-    func constantScopeValue() throws -> VALUE
+    func getSelfValue() throws -> VALUE
 }
 
 extension RbConstantScope {
@@ -45,7 +45,7 @@ extension RbConstantScope {
     /// - returns: an `RbObject` for the class
     ///
     public func getConstant(name: String) throws -> RbObject {
-        var nextValue = try constantScopeValue()
+        var nextValue = try getSelfValue()
         var first = true
         try name.components(separatedBy: "::").forEach { name in
             let rbId = try Ruby.getID(for: name)

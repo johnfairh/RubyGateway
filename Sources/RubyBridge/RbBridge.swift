@@ -245,15 +245,8 @@ extension RbBridge {
 
 // MARK: - Constant access from an object
 
-extension RbBridge: RbConstantScope {
-    func constantScopeValue() throws -> VALUE {
-        try setup()
-        return rb_cObject
-    }
-}
-
-extension RbBridge: RbCallable {
-    func callableSelfValue() throws -> VALUE {
+extension RbBridge: RbConstantScope, RbCallable {
+    public func getSelfValue() throws -> VALUE {
         try setup()
         return rb_cObject
     }

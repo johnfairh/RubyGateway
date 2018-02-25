@@ -19,8 +19,8 @@ public final class RbObject {
     /// Create another Swift reference to an existing `RbObject`.
     /// The underlying Ruby object will not be GCed until both
     /// `RbObject`s have gone out of scope.
-    init(copy: RbObject) {
-        valueBox = rbb_value_dup(copy.valueBox);
+    public init(_ value: RbObject) {
+        valueBox = rbb_value_dup(value.valueBox);
     }
 
     /// Allow the tracked object to be GCed when we go out of scope.
@@ -66,15 +66,8 @@ public final class RbObject {
 /// MARK: - Callable etc.
 
 /// Give access to classes/modules/constants nested under this class/object.
-extension RbObject: RbConstantScope {
-    func constantScopeValue() throws -> VALUE {
-        return rubyValue
-    }
-}
-
-/// Give access to methods.
-extension RbObject: RbCallable {
-    func callableSelfValue() throws -> VALUE {
+extension RbObject: RbConstantScope, RbCallable {
+    public func getSelfValue() throws -> VALUE {
         return rubyValue
     }
 }

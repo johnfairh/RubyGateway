@@ -9,9 +9,9 @@ import CRuby
 import RubyBridgeHelpers
 
 /// Identify something that supports Ruby message delivery
-protocol RbCallable {
+public protocol RbCallable {
     /// Get the value to send messages to
-    func callableSelfValue() throws -> VALUE
+    func getSelfValue() throws -> VALUE
 }
 
 extension Array where Element == RbObject {
@@ -40,7 +40,7 @@ extension RbCallable {
         if kwArgs.count > 0 {
             fatalError("TODO: kwArgs")
         }
-        let selfVal = try callableSelfValue()
+        let selfVal = try getSelfValue()
         let methodId = try Ruby.getID(for: method)
         let argObjects = args.map { $0.rubyObject }
         let resultVal = try argObjects.withRubyValues { argValues in
@@ -94,10 +94,10 @@ extension RbFailableCallable {
     }
 
     public func setAttribute(_ name: String, newValue: RbObjectConvertible) -> RbObject? {
-        return call("\(name)=", args: [newValue])
+        return try? callable.setAttribute(name, newValue: newValue)
     }
 
     public func getAttribute(_ name: String) -> RbObject? {
-        return call(name)
+        return try? callable.getAttribute(name)
     }
 }
