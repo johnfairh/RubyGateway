@@ -66,10 +66,7 @@ public final class RbObject {
 /// MARK: - Callable etc.
 
 /// Give access to classes/modules/constants nested under this class/object.
-extension RbObject: RbConstantScope, RbCallable {
-    public func getSelfValue() throws -> VALUE {
-        return rubyValue
-    }
+extension RbObject: RbConstantAccess, RbMethodAccess {
 }
 
 /// MARK: - String convertible for various debugging APIs

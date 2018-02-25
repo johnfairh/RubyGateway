@@ -1,5 +1,5 @@
 //
-//  RbCallable.swift
+//  RbMethodAccess.swift
 //  RubyBridge
 //
 //  Distributed under the MIT license, see LICENSE
@@ -9,9 +9,9 @@ import CRuby
 import RubyBridgeHelpers
 
 /// Identify something that supports Ruby message delivery
-public protocol RbCallable {
-    /// Get the value to send messages to
-    func getSelfValue() throws -> VALUE
+public protocol RbMethodAccess {
+    /// The `VALUE` identifying the object to send messages to
+    var rubyValue: VALUE { get }
 }
 
 extension Array where Element == RbObject {
@@ -23,7 +23,7 @@ extension Array where Element == RbObject {
     }
 }
 
-extension RbCallable {
+extension RbMethodAccess {
     /// Call a Ruby object method
     ///
     /// - parameter method: The name of the method to call.
@@ -40,12 +40,12 @@ extension RbCallable {
         if kwArgs.count > 0 {
             fatalError("TODO: kwArgs")
         }
-        let selfVal = try getSelfValue()
+        try Ruby.setup()
         let methodId = try Ruby.getID(for: method)
         let argObjects = args.map { $0.rubyObject }
         let resultVal = try argObjects.withRubyValues { argValues in
             try RbVM.doProtect {
-                rbb_funcallv_protect(selfVal, methodId, Int32(argValues.count), argValues, nil)
+                rbb_funcallv_protect(self.rubyValue, methodId, Int32(argValues.count), argValues, nil)
             }
         }
 
@@ -83,7 +83,7 @@ extension RbCallable {
 
 protocol RbFailableCallable {
     /// The underlying throwing callable
-    var callable: RbCallable { get }
+    var callable: RbMethodAccess { get }
 }
 
 extension RbFailableCallable {

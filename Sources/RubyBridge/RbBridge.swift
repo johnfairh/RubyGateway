@@ -243,11 +243,10 @@ extension RbBridge {
     }
 }
 
-// MARK: - Constant access from an object
+// MARK: - Constant and method access
 
-extension RbBridge: RbConstantScope, RbCallable {
-    public func getSelfValue() throws -> VALUE {
-        try setup()
+extension RbBridge: RbConstantAccess, RbMethodAccess {
+    public var rubyValue: VALUE {
         return rb_cObject
     }
 }

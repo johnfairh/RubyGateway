@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0205A89E204088F900076840 /* RbNumericConversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205A89D204088F900076840 /* RbNumericConversions.swift */; };
-		0205A8A22041F63B00076840 /* RbCallable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205A8A12041F63B00076840 /* RbCallable.swift */; };
+		0205A8A22041F63B00076840 /* RbMethodAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205A8A12041F63B00076840 /* RbMethodAccess.swift */; };
 		0205A8A42042DA3600076840 /* TestCallable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205A8A32042DA3600076840 /* TestCallable.swift */; };
 		022F3AB220360B9F009E69BE /* CRubyMacros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3AB120360B9F009E69BE /* CRubyMacros.swift */; };
 		022F3AC12036D72A009E69BE /* rbb_helpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 022F3ABE2036D721009E69BE /* rbb_helpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -20,7 +20,7 @@
 		022F3ACD20385C3A009E69BE /* TestConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3ACC20385C3A009E69BE /* TestConstants.swift */; };
 		022F3ACF203AE707009E69BE /* RbObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3ACE203AE707009E69BE /* RbObject.swift */; };
 		022F3AD1203AF8BA009E69BE /* TestRbObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3AD0203AF8BA009E69BE /* TestRbObject.swift */; };
-		022F3AD4203B6068009E69BE /* RbConstantScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3AD2203B6061009E69BE /* RbConstantScope.swift */; };
+		022F3AD4203B6068009E69BE /* RbConstantAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3AD2203B6061009E69BE /* RbConstantAccess.swift */; };
 		024923482031EE0400E3AAF4 /* RbVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024923462031EDE000E3AAF4 /* RbVM.swift */; };
 		0249234B20334AE500E3AAF4 /* RbError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0249234920334ADE00E3AAF4 /* RbError.swift */; };
 		0249234D20335ADB00E3AAF4 /* TestVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0249234C20335ADB00E3AAF4 /* TestVM.swift */; };
@@ -47,7 +47,7 @@
 		0205A89D204088F900076840 /* RbNumericConversions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbNumericConversions.swift; sourceTree = "<group>"; };
 		0205A89F2041A7BD00076840 /* unloadable.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = unloadable.rb; sourceTree = "<group>"; };
 		0205A8A02041EE4A00076840 /* inspectables.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = inspectables.rb; sourceTree = "<group>"; };
-		0205A8A12041F63B00076840 /* RbCallable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbCallable.swift; sourceTree = "<group>"; };
+		0205A8A12041F63B00076840 /* RbMethodAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbMethodAccess.swift; sourceTree = "<group>"; };
 		0205A8A32042DA3600076840 /* TestCallable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCallable.swift; sourceTree = "<group>"; };
 		0205A8A52042DC3F00076840 /* methods.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = methods.rb; sourceTree = "<group>"; };
 		022F3AB120360B9F009E69BE /* CRubyMacros.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRubyMacros.swift; sourceTree = "<group>"; };
@@ -60,7 +60,7 @@
 		022F3ACC20385C3A009E69BE /* TestConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConstants.swift; sourceTree = "<group>"; };
 		022F3ACE203AE707009E69BE /* RbObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbObject.swift; sourceTree = "<group>"; };
 		022F3AD0203AF8BA009E69BE /* TestRbObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRbObject.swift; sourceTree = "<group>"; };
-		022F3AD2203B6061009E69BE /* RbConstantScope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbConstantScope.swift; sourceTree = "<group>"; };
+		022F3AD2203B6061009E69BE /* RbConstantAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbConstantAccess.swift; sourceTree = "<group>"; };
 		024923462031EDE000E3AAF4 /* RbVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbVM.swift; sourceTree = "<group>"; };
 		0249234920334ADE00E3AAF4 /* RbError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbError.swift; sourceTree = "<group>"; };
 		0249234C20335ADB00E3AAF4 /* TestVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVM.swift; sourceTree = "<group>"; };
@@ -211,8 +211,8 @@
 				022F3ACE203AE707009E69BE /* RbObject.swift */,
 				02901339203ED8D60090C5C9 /* RbConversions.swift */,
 				0205A89D204088F900076840 /* RbNumericConversions.swift */,
-				022F3AD2203B6061009E69BE /* RbConstantScope.swift */,
-				0205A8A12041F63B00076840 /* RbCallable.swift */,
+				022F3AD2203B6061009E69BE /* RbConstantAccess.swift */,
+				0205A8A12041F63B00076840 /* RbMethodAccess.swift */,
 				0249234920334ADE00E3AAF4 /* RbError.swift */,
 				022F3AB120360B9F009E69BE /* CRubyMacros.swift */,
 			);
@@ -381,12 +381,12 @@
 			buildActionMask = 0;
 			files = (
 				0249234B20334AE500E3AAF4 /* RbError.swift in Sources */,
-				022F3AD4203B6068009E69BE /* RbConstantScope.swift in Sources */,
+				022F3AD4203B6068009E69BE /* RbConstantAccess.swift in Sources */,
 				022F3ACF203AE707009E69BE /* RbObject.swift in Sources */,
 				024923482031EE0400E3AAF4 /* RbVM.swift in Sources */,
 				02901338203E03530090C5C9 /* RbBridge.swift in Sources */,
 				0205A89E204088F900076840 /* RbNumericConversions.swift in Sources */,
-				0205A8A22041F63B00076840 /* RbCallable.swift in Sources */,
+				0205A8A22041F63B00076840 /* RbMethodAccess.swift in Sources */,
 				022F3AB220360B9F009E69BE /* CRubyMacros.swift in Sources */,
 				0290133A203ED8D60090C5C9 /* RbConversions.swift in Sources */,
 			);

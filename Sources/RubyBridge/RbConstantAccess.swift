@@ -1,5 +1,5 @@
 //
-//  RbConstantScope.swift
+//  RbConstantAccess.swift
 //  RubyBridge
 //
 //  Distributed under the MIT license, see LICENSE
@@ -12,12 +12,12 @@ import Foundation
 /// Identify something that can have constants (classes, modules, actual constants)
 /// nested under it.  This is either a regular class/module object or Object.class
 /// for top-level constants.
-public protocol RbConstantScope {
-    /// Get the value to look relative to
-    func getSelfValue() throws -> VALUE
+public protocol RbConstantAccess {
+    /// Get the value to look for constants relative to
+    var rubyValue: VALUE { get }
 }
 
-extension RbConstantScope {
+extension RbConstantAccess {
     /// Get an `RbObject` that represents a Ruby constant.
     ///
     /// In Ruby constants include things that users think of as constants like
@@ -45,7 +45,8 @@ extension RbConstantScope {
     /// - returns: an `RbObject` for the class
     ///
     public func getConstant(name: String) throws -> RbObject {
-        var nextValue = try getSelfValue()
+        try Ruby.setup()
+        var nextValue = rubyValue
         var first = true
         try name.components(separatedBy: "::").forEach { name in
             let rbId = try Ruby.getID(for: name)
@@ -101,7 +102,7 @@ extension RbConstantScope {
 
 protocol RbFailableConstantScope {
     /// The underlying throwing constant scope
-    var constantScope: RbConstantScope { get }
+    var constantScope: RbConstantAccess { get }
 }
 
 extension RbFailableConstantScope {
