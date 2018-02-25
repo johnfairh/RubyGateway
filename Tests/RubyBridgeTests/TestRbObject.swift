@@ -9,8 +9,8 @@ import XCTest
 import CRuby
 @testable import RubyBridge
 
-/// Core Val tests
-class TestRbVal: XCTestCase {
+/// Core object tests
+class TestRbObject: XCTestCase {
 
     override class func setUp() {
         Helpers.initRuby()

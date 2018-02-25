@@ -232,12 +232,13 @@ extension RbBridge {
     ///
     /// - parameter filename: The name of the file to load
     /// - parameter wrap: If `true`, load the file into a fresh anonymous namespace
-    ///   instead of the current program.
+    ///   instead of the current program.  See `Kernel#load`.
     /// - throws: `RbException` for any Ruby exception raised.
     public func load(filename: String, wrap: Bool = false) throws {
         try setup()
+        let filenameObj = RbObject(filename)
         return try RbVM.doProtect {
-            rbb_load_protect(RbObject(filename).rubyValue, wrap ? 1 : 0, nil)
+            rbb_load_protect(filenameObj.rubyValue, wrap ? 1 : 0, nil)
         }
     }
 }

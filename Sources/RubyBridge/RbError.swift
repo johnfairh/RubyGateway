@@ -27,9 +27,12 @@ extension RbError: CustomStringConvertible {
 }
 
 /// Corresponds to a Ruby exception
-public struct RbException: Error {
-    public let value: VALUE
+public struct RbException: Error, CustomStringConvertible {
+    public let exception: RbObject
     public init(rubyValue: VALUE) {
-        value = rubyValue
+        exception = RbObject(rubyValue: rubyValue)
+    }
+    public var description: String {
+        return String(exception) ?? "[Indescribable]"
     }
 }

@@ -14,18 +14,27 @@ protocol RbCallable {
     func callableSelfValue() throws -> VALUE
 }
 
+extension Array where Element == RbObject {
+    // Helper to get hold of the `VALUE`s associated with an array of `RbObject`s
+    // This prevents Swift from dealloc'ing the `RbObject` before we are done
+    // with the `VALUE`s.
+    func withRubyValues<T>(call: ([VALUE]) throws -> T) rethrows -> T {
+        return try call(map { $0.rubyValue })
+    }
+}
+
 extension RbCallable {
     /// Call a Ruby object method
     ///
-    /// - parameter method: The name of the method to call
-    /// - parameter args: The positional arguments to the method
-    /// - parameter kwArgs: The keyword arguments to the method
-    /// - returns: The result of calling the method
+    /// - parameter method: The name of the method to call.
+    /// - parameter args: The positional arguments to the method.  None by default.
+    /// - parameter kwArgs: The keyword arguments to the method.  None by default.
+    /// - returns: The result of calling the method.
     /// - throws: `RbException` if there is a Ruby exception.
     ///
     /// TODO: blocks.
     @discardableResult
-    public func call(method: String,
+    public func call(_ method: String,
                      args: [RbObjectConvertible] = [],
                      kwArgs: [(String, RbObjectConvertible)] = []) throws -> RbObject {
         if kwArgs.count > 0 {
@@ -33,12 +42,13 @@ extension RbCallable {
         }
         let selfVal = try callableSelfValue()
         let methodId = try Ruby.getID(for: method)
-        let argObjects = args.map { $0.rubyObject } // slightly concerned Swift won't keep these alive...
-        let argValues = argObjects.map { $0.rubyValue }
-
-        let resultVal = try RbVM.doProtect {
-            rbb_funcallv_protect(selfVal, methodId, Int32(argValues.count), argValues, nil)
+        let argObjects = args.map { $0.rubyObject }
+        let resultVal = try argObjects.withRubyValues { argValues in
+            try RbVM.doProtect {
+                rbb_funcallv_protect(selfVal, methodId, Int32(argValues.count), argValues, nil)
+            }
         }
+
         return RbObject(rubyValue: resultVal)
     }
 
@@ -47,13 +57,13 @@ extension RbCallable {
     /// Attributes are declared with `:attr_accessor` and so on -- this routine is a
     /// wrapper around the `attrname=` method.
     ///
-    /// - parameter attribute: The name of the attribute to set
+    /// - parameter name: The name of the attribute to set
     /// - parameter value: The new value of the attribute
     /// - returns: whatever the attribute setter returns, usually the new value
     /// - throws: `RbException` if there is a Ruby exception, probably means `attribute` doesn't exist.
     @discardableResult
-    public func set(attribute: String, to value: RbObjectConvertible) throws -> RbObject {
-        return try call(method: "\(attribute)=", args: [value])
+    public func setAttribute(_ name: String, newValue: RbObjectConvertible) throws -> RbObject {
+        return try call("\(name)=", args: [newValue])
     }
 
     /// Get an attribute of a Ruby object.
@@ -61,11 +71,11 @@ extension RbCallable {
     /// Attributes are declared with `:attr_accessor` and so on -- this routine is a
     /// simple wrapper around `call(...)` for symmetry with `set(...)`.
     ///
-    /// - parameter attribute: The name of the attribute to get
-    /// - returns: The value of the attribute
+    /// - parameter name: The name of the attribute to get.
+    /// - returns: The value of the attribute.
     /// - throws: `RbException` if there is a Ruby exception, probably means `attribute` doesn't exist.
-    public func get(attribute: String) throws -> RbObject {
-        return try call(method: attribute)
+    public func getAttribute(_ name: String) throws -> RbObject {
+        return try call(name)
     }
 }
 
@@ -77,23 +87,17 @@ protocol RbFailableCallable {
 }
 
 extension RbFailableCallable {
-    /// Get an `RbObject` that represents a Ruby constant.
-    ///
-    /// - parameter name: The name of the constant to look up.
-    /// - returns: an `RbObject` for the class or `nil` if an error occurred.
-    ///
-    /// This is a non-throwing version of `RbConstantScope.getConstant(name:)`.
-    public func call(method: String,
+    public func call(_ method: String,
                      args: [RbObjectConvertible] = [],
                      kwArgs: [(String, RbObjectConvertible)] = []) -> RbObject? {
-        return try? callable.call(method: method, args: args, kwArgs: kwArgs)
+        return try? callable.call(method, args: args, kwArgs: kwArgs)
     }
 
-    public func set(attribute: String, to value: RbObjectConvertible) -> RbObject? {
-        return call(method: "\(attribute)=", args: [value])
+    public func setAttribute(_ name: String, newValue: RbObjectConvertible) -> RbObject? {
+        return call("\(name)=", args: [newValue])
     }
 
-    public func get(attribute: String) -> RbObject? {
-        return call(method: attribute)
+    public func getAttribute(_ name: String) -> RbObject? {
+        return call(name)
     }
 }

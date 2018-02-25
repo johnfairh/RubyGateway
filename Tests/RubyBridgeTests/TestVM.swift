@@ -27,7 +27,7 @@ class TestVM: XCTestCase {
 
             let string = "natural"
 
-            let str = try Ruby.call(method: "backwards", args: [string])
+            let str = try Ruby.call("backwards", args: [string])
 
             XCTAssertEqual(String(string.reversed()), String(str))
         } catch {
