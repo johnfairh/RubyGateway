@@ -52,4 +52,41 @@ class TestVars: XCTestCase {
             XCTFail("Unexpected exception \(error)")
         }
     }
+
+    // name check...
+    func testGlobalVarNameCheck() {
+        do {
+            try Ruby.setGlobalVar("LOVELY_GVAR", newValue: 22)
+            XCTFail("Managed to set global without $name")
+        } catch {
+        }
+    }
+
+    // instance vars - create/get/set/check
+    func testNewInstanceVar() {
+        do {
+            let varName = "@new_main_ivar"
+            let obj = try Ruby.getInstanceVar(varName)
+            XCTAssertTrue(obj.isNil)
+
+            let testValue = 1002
+
+            try Ruby.setInstanceVar(varName, newValue: testValue)
+
+            // various ways of reading it
+            func check(_ obj: RbObject) throws {
+                guard let intVal = Int(obj) else {
+                    XCTFail("Not numeric point: \(obj)")
+                    return
+                }
+                XCTAssertEqual(testValue, intVal)
+            }
+
+            try check(Ruby.getInstanceVar(varName))
+            try check(Ruby.get(varName))
+            try check(Ruby.eval(ruby: varName))
+        } catch {
+            XCTFail("Unexpected exception \(error)")
+        }
+    }
 }
