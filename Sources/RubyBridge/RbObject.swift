@@ -40,6 +40,11 @@ public final class RbObject: RbConstantAccess, RbInstanceAccess {
         return valueBox.pointee.value
     }
 
+    /// Get temporary guaranteed-safe access to the object's `VALUE`.
+    func withRubyValue<T>(call: (VALUE) throws -> T) rethrows -> T {
+        return try call(rubyValue)
+    }
+
     /// The Ruby type of this object.  This is fairly unfriendly enum but
     /// might be useful for debugging.
     public var rubyType: RbType {
@@ -61,6 +66,9 @@ public final class RbObject: RbConstantAccess, RbInstanceAccess {
     public var isNil: Bool {
         return RB_NIL_P(rubyValue)
     }
+
+    /// An `RbObject` that means `nil` to Ruby.
+    public static let nilObject = RbObject(rubyValue: Qnil)
 }
 
 /// MARK: - String convertible for various debugging APIs

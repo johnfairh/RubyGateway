@@ -8,8 +8,15 @@
 import CRuby
 import RubyBridgeHelpers
 
-/// Identify something that supports Ruby object message delivery and variables
+/// Identify something that supports Ruby object message delivery and variable access.
 public protocol RbInstanceAccess {
+    /// Get the value of a Ruby instance variable.  Creates a new one with a nil value
+    /// if it doesn't exist yet.
+    ///
+    /// - parameter name: Name of ivar to get.  Should begin with single `@`.
+    /// - returns: Value of the ivar or nil if it has not been assigned yet.
+    /// - throws: `RbError` if `name` looks wrong. `RbException` if Ruby has a problem.
+    func getInstanceVar(_ name: String) throws -> RbObject
 
     /// Set a Ruby instance variable.  Creates a new one if it doesn't exist yet.
     ///
@@ -17,29 +24,15 @@ public protocol RbInstanceAccess {
     /// - parameter newValue: New value to set.
     /// - returns: the value that was set.
     /// - throws: `RbError` if `name` looks wrong. `RbException` if Ruby has a problem.
-    ///
-    /// Calling this on `RbBridge` is like doing `@f = 3` at the top level, it sets an
-    /// instance variable in the `main` object.
     @discardableResult
     func setInstanceVar(_ name: String, newValue: RbObjectConvertible) throws -> RbObject
-
-    /// Get the value of a Ruby instance variable.  Creates a new one with a nil value
-    /// if it doesn't exist yet.
-    ///
-    /// - parameter name: Name of ivar to get.  Should begin with single `@`.
-    /// - returns: Value of the ivar or nil if it has not been assigned yet.
-    /// - throws: `RbError` if `name` looks wrong. `RbException` if Ruby has a problem.
-    ///
-    /// Calling this on `RbBridge` is like doing `@f` at the top level, it gets an
-    /// instance variable from the `main` object.
-    func getInstanceVar(_ name: String) throws -> RbObject
 
     /// The `VALUE` identifying the object to send messages to
     var rubyValue: VALUE { get }
 }
 
 extension RbInstanceAccess {
-    /// Call a Ruby object method
+    /// Call a Ruby object method.
     ///
     /// - parameter method: The name of the method to call.
     /// - parameter args: The positional arguments to the method.  None by default.
@@ -68,6 +61,20 @@ extension RbInstanceAccess {
         return RbObject(rubyValue: resultVal)
     }
 
+    /// Get an attribute of a Ruby object.
+    ///
+    /// Attributes are declared with `:attr_accessor` and so on -- this routine is a
+    /// simple wrapper around `call(...)` for symmetry with `set(...)`.
+    ///
+    /// - parameter name: The name of the attribute to get.
+    /// - returns: The value of the attribute.
+    /// - throws: `RbException` if there is a Ruby exception, probably means `attribute` doesn't exist.
+    ///           `RbError` if `name` does not look like a Ruby attribute name.
+    public func getAttribute(_ name: String) throws -> RbObject {
+        try name.checkRubyMethodName()
+        return try call(name)
+    }
+
     /// Set an attribute of a Ruby object.
     ///
     /// Attributes are declared with `:attr_accessor` and so on -- this routine is a
@@ -84,21 +91,16 @@ extension RbInstanceAccess {
         return try call("\(name)=", args: [newValue])
     }
 
-    /// Get an attribute of a Ruby object.
-    ///
-    /// Attributes are declared with `:attr_accessor` and so on -- this routine is a
-    /// simple wrapper around `call(...)` for symmetry with `set(...)`.
-    ///
-    /// - parameter name: The name of the attribute to get.
-    /// - returns: The value of the attribute.
-    /// - throws: `RbException` if there is a Ruby exception, probably means `attribute` doesn't exist.
-    ///           `RbError` if `name` does not look like a Ruby attribute name.
-    public func getAttribute(_ name: String) throws -> RbObject {
-        try name.checkRubyMethodName()
-        return try call(name)
+    /// By default access an instance variable of the wrapped `rubyValue`.
+    public func getInstanceVar(_ name: String) throws -> RbObject {
+        try Ruby.setup()
+        try name.checkRubyInstanceVarName()
+        let id = try Ruby.getID(for: name)
+
+        return RbObject(rubyValue: rb_ivar_get(rubyValue, id))
     }
 
-    /// By default access an instance variable on the wrapped `rubyValue`.
+    /// By default access an instance variable of the wrapped `rubyValue`.
     @discardableResult
     public func setInstanceVar(_ name: String, newValue: RbObjectConvertible) throws -> RbObject {
         try Ruby.setup()
@@ -110,13 +112,24 @@ extension RbInstanceAccess {
         })
     }
 
-    /// By default access an instance variable on the wrapped `rubyValue`.
-    public func getInstanceVar(_ name: String) throws -> RbObject {
+    /// Get the value of a Ruby global variable.
+    ///
+    /// - parameter name: Name of global variable to get.  Should begin with `$`.
+    /// - returns: Value of the variable, or Ruby nil if not set before.
+    /// - throws: `RbError` if `name` looks wrong.
+    ///
+    /// (This method is present in this protocol meaning you can call it on any
+    /// `RbObject` as well as `RbBridge` without any difference in effect.  This is
+    /// purely convenience to put all these getter/setter pairs in the same place and
+    /// make construction of `RbFailableAccess` a bit easier.  Best practice probably
+    /// to avoid calling the `RbObject` version.)
+    public func getGlobalVar(_ name: String) throws -> RbObject {
         try Ruby.setup()
-        try name.checkRubyInstanceVarName()
-        let id = try Ruby.getID(for: name)
+        try name.checkRubyGlobalVarName()
 
-        return RbObject(rubyValue: rb_ivar_get(rubyValue, id))
+        return RbObject(rubyValue: name.withCString { cstr in
+            rb_gv_get(cstr)
+        })
     }
 
     /// Set a Ruby global variable.  Creates a new one if it doesn't exist yet.
@@ -140,26 +153,6 @@ extension RbInstanceAccess {
             return name.withCString { cstr in
                 return rb_gv_set(cstr, rubyValue)
             }
-        })
-    }
-
-    /// Get the value of a Ruby global variable.
-    ///
-    /// - parameter name: Name of global variable to get.  Should begin with `$`.
-    /// - returns: Value of the variable, or Ruby nil if not set before.
-    /// - throws: `RbError` if `name` looks wrong.
-    ///
-    /// (This method is present in this protocol meaning you can call it on any
-    /// `RbObject` as well as `RbBridge` without any difference in effect.  This is
-    /// purely convenience to put all these getter/setter pairs in the same place and
-    /// make construction of `RbFailableAccess` a bit easier.  Best practice probably
-    /// to avoid calling the `RbObject` version.)
-    public func getGlobalVar(_ name: String) throws -> RbObject {
-        try Ruby.setup()
-        try name.checkRubyGlobalVarName()
-
-        return RbObject(rubyValue: name.withCString { cstr in
-            rb_gv_get(cstr)
         })
     }
 }
@@ -187,12 +180,6 @@ extension RbInstanceAccess where Self: RbConstantAccess {
             return try getInstanceVar(name)
         }
         return try call(name)
-    }
-}
-
-extension RbObject {
-    func withRubyValue<T>(call: (VALUE) throws -> T) rethrows -> T {
-        return try call(rubyValue)
     }
 }
 

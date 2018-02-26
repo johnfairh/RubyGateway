@@ -30,8 +30,10 @@ class TestMiscObjTypes: XCTestCase {
         XCTAssertEqual(.T_TRUE, TYPE(trueVal))
     }
 
+    // Used to support ExpressibleAsNilLiteral but turns out is not so useful
+    // and docs say not to do so... 
     func testNilLiteralPromotion() {
-        let obj: RbObject = nil
+        let obj: RbObject = RbObject.nilObject
         XCTAssertFalse(obj.isTruthy)
         XCTAssertTrue(obj.isNil)
         XCTAssertEqual(Qnil, obj.rubyValue)

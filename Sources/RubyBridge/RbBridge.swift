@@ -30,7 +30,7 @@ import RubyBridgeHelpers
 ///
 /// do {
 ///    try Ruby.require("rouge")
-///    my html = try Ruby.getModule("Rouge").call("highlight", args: ["let a = 1", "swift", "html"])
+///    let html = try Ruby.getModule("Rouge").call("highlight", args: ["let a = 1", "swift", "html"])
 /// } catch {
 /// }
 /// ```
@@ -40,7 +40,7 @@ import RubyBridgeHelpers
 /// ```swift
 /// do {
 ///    try Ruby.require("rouge")
-///    my html = try Ruby.do("Rouge").do("highlight", args: ["let a = 1", "swift", "html"])
+///    let html = try Ruby.do("Rouge").do("highlight", args: ["let a = 1", "swift", "html"])
 /// } catch {
 /// }
 /// ```
@@ -49,12 +49,12 @@ import RubyBridgeHelpers
 ///
 /// ```swift
 /// try! Ruby.require("rouge")
-/// my html = Ruby.failable.do("Rouge")?.do("highlight", "let a = 1", "swift", "html")
+/// let html = Ruby.failable.do("Rouge")?.do("highlight", "let a = 1", "swift", "html")
 /// ```
 ///
 /// Or with Swift 5 dynamic member lookup & callable:
 /// ```swift
-/// my html = Ruby.Rouge?.highlight("let a = 1", "swift", "html")
+/// let html = Ruby.Rouge?.highlight("let a = 1", "swift", "html")
 /// ```
 public final class RbBridge: RbConstantAccess, RbInstanceAccess {
 
@@ -115,7 +115,7 @@ public final class RbBridge: RbConstantAccess, RbInstanceAccess {
 
     /// The id of the Ruby `Object` class.  Used to provide access to constants from the
     /// top level and global functions via the `RbConstantAccess` and `RbInstanceAccess`
-    /// protocols.
+    /// protocols. :nodoc:
     public var rubyValue: VALUE {
         return rb_cObject
     }
@@ -256,26 +256,43 @@ extension RbBridge {
 // we have to use `eval` these.  Reading is easy enough; writing an arbitrary
 // VALUE is impossible to do without shenanigans.
 
-// 1. move withRubyValue somewhere better
-// 2. add static Qnil
-// 3. put this as a constant
-// 4. check jazzy re. comments
-
 extension RbBridge {
-    @discardableResult
-    public func setInstanceVar(_ name: String, newValue: RbObjectConvertible) throws -> RbObject {
-        try setup()
-        try name.checkRubyInstanceVarName()
-        try setGlobalVar("$RbBridgeTopSelfIvarWorkaround", newValue: newValue.rubyObject)
-        defer { let _ = try? setGlobalVar("$RbBridgeTopSelfIvarWorkaround", newValue: RbObject(rubyValue: Qnil)) }
-        return try eval(ruby: "\(name) = $RbBridgeTopSelfIvarWorkaround")
-    }
 
-    /// By default access an instance variable on the wrapped `rubyValue`.
+    private static var ivarWorkaroundName: String {
+        return "$RbBridgeTopSelfIvarWorkaround"
+    }
+    
+    /// Get the value of a top-level instance variable.  Creates a new one with a nil value
+    /// if it doesn't exist yet.
+    ///
+    /// This is like doing `@f` at the top level of a Ruby script.
+    ///
+    /// - parameter name: Name of ivar to get.  Should begin with single `@`.
+    /// - returns: Value of the ivar or nil if it has not been assigned yet.
+    /// - throws: `RbError` if `name` looks wrong. `RbException` if Ruby has a problem.
     public func getInstanceVar(_ name: String) throws -> RbObject {
         try setup()
         try name.checkRubyInstanceVarName()
         return try eval(ruby: name)
+    }
+
+    /// Set a top-level instance variable.  Creates a new one if it doesn't exist yet.
+    ///
+    /// This is like doing `@f = 3` at the top level of a Ruby script.
+    ///
+    /// - parameter name: Name of ivar to set.  Should begin with single `@`.
+    /// - parameter newValue: New value to set.
+    /// - returns: The value that was set.
+    /// - throws: `RbError` if `name` looks wrong. `RbException` if Ruby has a problem.
+    @discardableResult
+    public func setInstanceVar(_ name: String, newValue: RbObjectConvertible) throws -> RbObject {
+        try setup()
+        try name.checkRubyInstanceVarName()
+        let oldValue = try getGlobalVar(RbBridge.ivarWorkaroundName)
+        try setGlobalVar(RbBridge.ivarWorkaroundName, newValue: newValue)
+        defer { let _ = try? setGlobalVar(RbBridge.ivarWorkaroundName, newValue: oldValue) }
+        return try eval(ruby: "\(name) = \(RbBridge.ivarWorkaroundName)")
+        // TODO: could simplify if we had hooked global vars...
     }
 }
 

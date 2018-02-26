@@ -112,15 +112,6 @@ extension RbObject: ExpressibleByBooleanLiteral {
     }
 }
 
-// MARK: - Nil
-
-extension RbObject: ExpressibleByNilLiteral {
-    /// Creates an `RbObject` for `nil`
-    public convenience init(nilLiteral: ()) {
-        self.init(rubyValue: Qnil)
-    }
-}
-
 // MARK: - Unsigned Integer
 
 extension UInt: RbObjectConvertible {

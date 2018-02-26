@@ -62,7 +62,7 @@ class TestVars: XCTestCase {
         }
     }
 
-    // instance vars - create/get/set/check
+    // instance vars - top self - create/get/set/check
     func testTopInstanceVar() {
         do {
             let varName = "@new_main_ivar"
@@ -74,17 +74,32 @@ class TestVars: XCTestCase {
             try Ruby.setInstanceVar(varName, newValue: testValue)
 
             // various ways of reading it
-            func check(_ obj: RbObject) throws {
-                guard let intVal = Int(obj) else {
-                    XCTFail("Not numeric: \(obj)")
-                    return
-                }
-                XCTAssertEqual(testValue, intVal)
-            }
 
-            try check(Ruby.getInstanceVar(varName))
-            try check(Ruby.get(varName))
-            try check(Ruby.eval(ruby: varName))
+            try XCTAssertEqual(testValue, Int(Ruby.getInstanceVar(varName)))
+            try XCTAssertEqual(testValue, Int(Ruby.get(varName)))
+            try XCTAssertEqual(testValue, Int(Ruby.eval(ruby: varName)))
+        } catch {
+            XCTFail("Unexpected exception \(error)")
+        }
+    }
+
+    // instance vars - regular objects
+    func testInstanceVar() {
+        do {
+            try Ruby.require(filename: Helpers.fixturePath("methods.rb"))
+
+            let obj = try Ruby.get("MethodsTest").call("new")
+
+            let ivarName = "@property"
+            let ivarObj = try obj.getInstanceVar(ivarName)
+            XCTAssertEqual("Default", String(ivarObj))
+
+            let newValue = "Changed"
+
+            try obj.setInstanceVar(ivarName, newValue: newValue)
+
+            try XCTAssertEqual(newValue, String(obj.getInstanceVar(ivarName)))
+            try XCTAssertEqual(newValue, String(obj.get(ivarName)))
         } catch {
             XCTFail("Unexpected exception \(error)")
         }
