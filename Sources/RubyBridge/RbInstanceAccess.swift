@@ -31,6 +31,33 @@ public protocol RbInstanceAccess {
     var rubyValue: VALUE { get }
 }
 
+// MARK: - Default implementations
+
+extension RbInstanceAccess {
+    /// By default access an instance variable of the wrapped `rubyValue`.
+    public func getInstanceVar(_ name: String) throws -> RbObject {
+        try Ruby.setup()
+        try name.checkRubyInstanceVarName()
+        let id = try Ruby.getID(for: name)
+
+        return RbObject(rubyValue: rb_ivar_get(rubyValue, id))
+    }
+
+    /// By default access an instance variable of the wrapped `rubyValue`.
+    @discardableResult
+    public func setInstanceVar(_ name: String, newValue: RbObjectConvertible) throws -> RbObject {
+        try Ruby.setup()
+        try name.checkRubyInstanceVarName()
+        let id = try Ruby.getID(for: name)
+
+        return RbObject(rubyValue: newValue.rubyObject.withRubyValue { newRubyValue in
+            return rb_ivar_set(rubyValue, id, newRubyValue)
+        })
+    }
+}
+
+// MARK: - Extension methods
+
 extension RbInstanceAccess {
     /// Call a Ruby object method.
     ///
@@ -91,25 +118,54 @@ extension RbInstanceAccess {
         return try call("\(name)=", args: [newValue])
     }
 
-    /// By default access an instance variable of the wrapped `rubyValue`.
-    public func getInstanceVar(_ name: String) throws -> RbObject {
-        try Ruby.setup()
-        try name.checkRubyInstanceVarName()
-        let id = try Ruby.getID(for: name)
-
-        return RbObject(rubyValue: rb_ivar_get(rubyValue, id))
+    // Check the associated rubyValue is for a class.
+    private func checkClass() throws {
+        guard RB_TYPE_P(rubyValue, .T_CLASS) else {
+            throw RbError.notClass("\(rubyValue) is not a class, cannot access cvars on it")
+        }
     }
 
-    /// By default access an instance variable of the wrapped `rubyValue`.
-    @discardableResult
-    public func setInstanceVar(_ name: String, newValue: RbObjectConvertible) throws -> RbObject {
+    /// Get the value of a Ruby class variable that has already been written.
+    ///
+    /// The behavior of accessing a non-existent cvar is not consistent with ivars
+    /// or gvars.  This is how Ruby works; one more reason to avoid cvars.
+    ///
+    /// - parameter name: Name of cvar to get.  Should begin with `@@`.
+    /// - returns: Value of the cvar.
+    /// - throws: `RbError` if `name` looks wrong. `RbException` if Ruby has a problem.
+    ///           In particular, `RbException` if the cvar does not exist.
+    public func getClassVar(_ name: String) throws -> RbObject {
         try Ruby.setup()
-        try name.checkRubyInstanceVarName()
+        try name.checkRubyClassVarName()
+        try checkClass()
+
         let id = try Ruby.getID(for: name)
 
-        return RbObject(rubyValue: newValue.rubyObject.withRubyValue { newRubyValue in
-            return rb_ivar_set(rubyValue, id, newRubyValue)
+        return try RbObject(rubyValue: RbVM.doProtect {
+            rbb_cvar_get_protect(self.rubyValue, id, nil)
         })
+    }
+
+    /// Set a Ruby class variable.  Creates a new one if it doesn't exist yet.
+    /// Must be called on an `RbObject` for a class -- the top-level `RbBridge`
+    /// aliases to `Object.class` so that works fine.
+    ///
+    /// - parameter name: Name of cvar to set.  Should begin with `@@`.
+    /// - parameter newValue: New value to set.
+    /// - returns: the value that was set.
+    /// - throws: `RbError` if `name` looks wrong or the object is not a class.
+    ///           `RbException` if Ruby has a problem.
+    @discardableResult
+    public func setClassVar(_ name: String, newValue: RbObjectConvertible) throws -> RbObject {
+        try Ruby.setup()
+        try name.checkRubyClassVarName()
+        try checkClass()
+
+        let id = try Ruby.getID(for: name)
+
+        let newValueObj = newValue.rubyObject
+        rb_cvar_set(rubyValue, id, newValueObj.rubyValue) /* bizarrely no return value on these */
+        return newValueObj
     }
 
     /// Get the value of a Ruby global variable.
@@ -178,6 +234,8 @@ extension RbInstanceAccess where Self: RbConstantAccess {
             return try getGlobalVar(name)
         } else if name.isRubyInstanceVarName {
             return try getInstanceVar(name)
+        } else if name.isRubyClassVarName {
+            return try getClassVar(name)
         }
         return try call(name)
     }

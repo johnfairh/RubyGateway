@@ -257,11 +257,10 @@ extension RbBridge {
 // VALUE is impossible to do without shenanigans.
 
 extension RbBridge {
-
     private static var ivarWorkaroundName: String {
         return "$RbBridgeTopSelfIvarWorkaround"
     }
-    
+
     /// Get the value of a top-level instance variable.  Creates a new one with a nil value
     /// if it doesn't exist yet.
     ///

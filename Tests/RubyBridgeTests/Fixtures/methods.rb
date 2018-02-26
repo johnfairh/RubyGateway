@@ -3,6 +3,8 @@ class MethodsTest
 
     def initialize
         self.property = "Default"
+
+        @@property = "ClassDefault"
     end
 
     def noArgsMethod

@@ -104,4 +104,85 @@ class TestVars: XCTestCase {
             XCTFail("Unexpected exception \(error)")
         }
     }
+
+    // name check...
+    func testIVarNameCheck() {
+        do {
+            try Ruby.setInstanceVar("LOVELY_IVAR", newValue: 22)
+            XCTFail("Managed to set ivar without @name")
+        } catch {
+        }
+
+        do {
+            try Ruby.setInstanceVar("@@LOVELY_IVAR", newValue: 22)
+            XCTFail("Managed to set ivar with @@name")
+        } catch {
+        }
+    }
+
+    // class vars special rule
+    func testAbsentClassVar() {
+        do {
+            let varName = "@@new_main_cvar"
+            let obj = try Ruby.getClassVar(varName)
+            XCTFail("Managed to read non-existent cvar: \(obj)")
+        } catch {
+        }
+    }
+
+    // cvar round-trip
+    func testWriteClassVar() {
+        do {
+            let varName = "@@new_cvar"
+            let value = 103.8
+
+            // top level is cObject so all works...
+
+            try Ruby.setClassVar(varName, newValue: RbObject(value))
+
+            try XCTAssertEqual(value, Double(Ruby.getClassVar(varName)))
+            try XCTAssertEqual(value, Double(Ruby.get(varName)))
+            try XCTAssertEqual(value, Double(Ruby.eval(ruby: varName)))
+        } catch {
+            XCTFail("Unexpected exception \(error)")
+        }
+    }
+
+    // cvar on not-class
+    func testNotClassClassVar() {
+        do {
+            let obj = RbObject("AString")
+
+            try obj.setClassVar("@@new_cvar", newValue: 105)
+            XCTFail("Managed to set class var on non-class")
+        } catch RbError.notClass(_) {
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+
+        do {
+            let obj = RbObject("AString")
+
+            let cvar = try obj.getClassVar("@@new_cvar")
+            XCTFail("Managed to get class var on non-class: \(cvar)")
+        } catch RbError.notClass(_) {
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+    }
+
+    // cvar name check
+    func testCVarNameCheck() {
+        do {
+            try Ruby.setClassVar("LOVELY_CVAR", newValue: 22)
+            XCTFail("Managed to set cvar without @@name")
+        } catch {
+        }
+
+        do {
+            try Ruby.setClassVar("@LOVELY_CVAR", newValue: 22)
+            XCTFail("Managed to set cvar with @name")
+        } catch {
+        }
+    }
 }

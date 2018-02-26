@@ -163,6 +163,24 @@ VALUE rbb_funcallv_protect(VALUE value, ID id,
     return rb_protect(rbb_funcallv_thunk, (VALUE)(void *)(&params), status);
 }
 
+typedef struct
+{
+    VALUE clazz;
+    ID    id;
+} Rbb_cvar_get_params;
+
+static VALUE rbb_cvar_get_thunk(VALUE value)
+{
+    Rbb_cvar_get_params *params = (Rbb_cvar_get_params *)(void *)value;
+    return rb_cvar_get(params->clazz, params->id);
+}
+
+VALUE rbb_cvar_get_protect(VALUE clazz, ID id, int * _Nullable status)
+{
+    Rbb_cvar_get_params params = { .clazz = clazz, .id = id };
+    return rb_protect(rbb_cvar_get_thunk, (VALUE)(void *)(&params), status);
+}
+
 //
 // # Difficult Macros
 //
