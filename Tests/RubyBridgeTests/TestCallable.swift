@@ -110,4 +110,16 @@ class TestRbCallable: XCTestCase {
         } catch {
         }
     }
+
+    // 'get' chaining
+    func testGetChaining() {
+        let _ = getNewMethodTest()
+
+        do {
+            let v = try Ruby.get("MethodsTest").get("classMethod")
+            XCTAssertEqual(Qtrue, v.rubyValue)
+        } catch {
+            XCTFail("Unexpected exception \(error)")
+        }
+    }
 }

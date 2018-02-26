@@ -70,7 +70,7 @@ extension RbInstanceAccess {
     /// - throws: `RbException` if there is a Ruby exception, probably means `attribute` doesn't exist.
     ///           `RbError` if `name` does not look like a Ruby attribute name.
     public func getAttribute(_ name: String) throws -> RbObject {
-        try name.checkRubyGlobalVarName()
+        try name.checkRubyMethodName()
         return try call(name)
     }
 
@@ -87,6 +87,7 @@ extension RbInstanceAccess {
     /// to avoid calling the `RbObject` version.)
     @discardableResult
     public func setGlobalVar(_ name: String, newValue: RbObjectConvertible) throws -> RbObject {
+        try Ruby.setup()
         try name.checkRubyGlobalVarName()
 
         return RbObject(rubyValue: newValue.rubyObject.withRubyValue { rubyValue in
@@ -96,7 +97,7 @@ extension RbInstanceAccess {
         })
     }
 
-    /// Get the value of a Ruby global variable.  Creates a new one with value `Qundef`
+    /// Get the value of a Ruby global variable.  Creates a new one with a nil value
     /// if it doesn't exist yet.
     ///
     /// - parameter name: Name of global variable to get.  Should begin with `$`.
@@ -108,6 +109,7 @@ extension RbInstanceAccess {
     /// make construction of `RbFailableAccess` a bit easier.  Best practice probably
     /// to avoid calling the `RbObject` version.)
     public func getGlobalVar(_ name: String) throws -> RbObject {
+        try Ruby.setup()
         try name.checkRubyGlobalVarName()
 
         return RbObject(rubyValue: name.withCString { cstr in
@@ -135,9 +137,8 @@ extension RbInstanceAccess where Self: RbConstantAccess {
             return try getConstant(name)
         } else if name.isRubyGlobalVarName {
             return try getGlobalVar(name)
-        } else {
-            return try call(name)
         }
+        return try call(name)
     }
 }
 

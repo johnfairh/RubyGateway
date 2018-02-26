@@ -21,4 +21,8 @@ class MethodsTest
         end
         "OK"
     end
+
+    def self.classMethod
+        true
+    end
 end

@@ -11,6 +11,13 @@
 import CRuby
 
 extension String {
+
+    /// Helper to test type and throw if wrong
+    private func check(_ predPath: KeyPath<String, Bool>, _ type: String) throws {
+        guard self[keyPath: predPath] else {
+            throw RbError.badIdentifier(type: type, id: self)
+        }
+    }
     /// Does the string look like a Ruby constant name?
     var isRubyConstantName: Bool {
         // Ruby supports full utf8 character set for identifiers.
@@ -34,7 +41,7 @@ extension String {
 
     /// Throw if the string does not look like a global variable name.
     func checkRubyGlobalVarName() throws {
-        try check(\String.isRubyGlobalVarName, "instance var (@)")
+        try check(\String.isRubyGlobalVarName, "global var ($)")
     }
 
     /// Does the string look like a Ruby instance variable name?
@@ -65,12 +72,5 @@ extension String {
     /// Throw if the string does not look like a method name.
     func checkRubyMethodName() throws {
         try check(\String.isRubyMethodName, "method")
-    }
-
-    /// Helper to test type and throw if wrong
-    private func check(_ predPath: KeyPath<String, Bool>, _ type: String) throws {
-        guard !self[keyPath: predPath] else {
-            throw RbError.badIdentifier(type: type, id: self)
-        }
     }
 }
