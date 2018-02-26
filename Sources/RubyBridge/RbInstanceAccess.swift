@@ -8,8 +8,32 @@
 import CRuby
 import RubyBridgeHelpers
 
-/// Identify something that supports Ruby message delivery
+/// Identify something that supports Ruby object message delivery and variables
 public protocol RbInstanceAccess {
+
+    /// Set a Ruby instance variable.  Creates a new one if it doesn't exist yet.
+    ///
+    /// - parameter name: Name of ivar to set.  Should begin with single `@`.
+    /// - parameter newValue: New value to set.
+    /// - returns: the value that was set.
+    /// - throws: `RbError` if `name` looks wrong. `RbException` if Ruby has a problem.
+    ///
+    /// Calling this on `RbBridge` is like doing `@f = 3` at the top level, it sets an
+    /// instance variable in the `main` object.
+    @discardableResult
+    func setInstanceVar(_ name: String, newValue: RbObjectConvertible) throws -> RbObject
+
+    /// Get the value of a Ruby instance variable.  Creates a new one with a nil value
+    /// if it doesn't exist yet.
+    ///
+    /// - parameter name: Name of ivar to get.  Should begin with single `@`.
+    /// - returns: Value of the ivar or nil if it has not been assigned yet.
+    /// - throws: `RbError` if `name` looks wrong. `RbException` if Ruby has a problem.
+    ///
+    /// Calling this on `RbBridge` is like doing `@f` at the top level, it gets an
+    /// instance variable from the `main` object.
+    func getInstanceVar(_ name: String) throws -> RbObject
+
     /// The `VALUE` identifying the object to send messages to
     var rubyValue: VALUE { get }
 }
@@ -74,15 +98,7 @@ extension RbInstanceAccess {
         return try call(name)
     }
 
-    /// Set a Ruby instance variable.  Creates a new one if it doesn't exist yet.
-    ///
-    /// - parameter name: Name of ivar to set.  Should begin with single `@`.
-    /// - parameter newValue: New value to set.
-    /// - returns: the value that was set.
-    /// - throws: `RbError` if `name` looks wrong. `RbException` if Ruby has a problem.
-    ///
-    /// Calling this on `RbBridge` is like doing `@f = 3` at the top level, it sets an
-    /// instance variable in the `main` object.
+    /// By default access an instance variable on the wrapped `rubyValue`.
     @discardableResult
     public func setInstanceVar(_ name: String, newValue: RbObjectConvertible) throws -> RbObject {
         try Ruby.setup()
@@ -94,15 +110,7 @@ extension RbInstanceAccess {
         })
     }
 
-    /// Get the value of a Ruby instance variable.  Creates a new one with a nil value
-    /// if it doesn't exist yet.
-    ///
-    /// - parameter name: Name of ivar to get.  Should begin with single `@`.
-    /// - returns: Value of the ivar or nil if it has not been assigned yet.
-    /// - throws: `RbError` if `name` looks wrong. `RbException` if Ruby has a problem.
-    ///
-    /// Calling this on `RbBridge` is like doing `@f` at the top level, it gets an
-    /// instance variable from the `main` object.
+    /// By default access an instance variable on the wrapped `rubyValue`.
     public func getInstanceVar(_ name: String) throws -> RbObject {
         try Ruby.setup()
         try name.checkRubyInstanceVarName()
@@ -182,7 +190,7 @@ extension RbInstanceAccess where Self: RbConstantAccess {
     }
 }
 
-fileprivate extension RbObject {
+extension RbObject {
     func withRubyValue<T>(call: (VALUE) throws -> T) rethrows -> T {
         return try call(rubyValue)
     }

@@ -63,7 +63,7 @@ class TestVars: XCTestCase {
     }
 
     // instance vars - create/get/set/check
-    func testNewInstanceVar() {
+    func testTopInstanceVar() {
         do {
             let varName = "@new_main_ivar"
             let obj = try Ruby.getInstanceVar(varName)
@@ -76,7 +76,7 @@ class TestVars: XCTestCase {
             // various ways of reading it
             func check(_ obj: RbObject) throws {
                 guard let intVal = Int(obj) else {
-                    XCTFail("Not numeric point: \(obj)")
+                    XCTFail("Not numeric: \(obj)")
                     return
                 }
                 XCTAssertEqual(testValue, intVal)

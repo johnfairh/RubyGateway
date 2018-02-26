@@ -249,6 +249,36 @@ extension RbBridge {
     }
 }
 
+// MARK: - Instance variable access
+
+// Instance variables at the top level are associated with the 'top' object
+// that is unfortunately hidden from the public API (`rb_vm_top_self()`).  So
+// we have to use `eval` these.  Reading is easy enough; writing an arbitrary
+// VALUE is impossible to do without shenanigans.
+
+// 1. move withRubyValue somewhere better
+// 2. add static Qnil
+// 3. put this as a constant
+// 4. check jazzy re. comments
+
+extension RbBridge {
+    @discardableResult
+    public func setInstanceVar(_ name: String, newValue: RbObjectConvertible) throws -> RbObject {
+        try setup()
+        try name.checkRubyInstanceVarName()
+        try setGlobalVar("$RbBridgeTopSelfIvarWorkaround", newValue: newValue.rubyObject)
+        defer { let _ = try? setGlobalVar("$RbBridgeTopSelfIvarWorkaround", newValue: RbObject(rubyValue: Qnil)) }
+        return try eval(ruby: "\(name) = $RbBridgeTopSelfIvarWorkaround")
+    }
+
+    /// By default access an instance variable on the wrapped `rubyValue`.
+    public func getInstanceVar(_ name: String) throws -> RbObject {
+        try setup()
+        try name.checkRubyInstanceVarName()
+        return try eval(ruby: name)
+    }
+}
+
 // MARK: - Global declaration
 
 public let Ruby = RbBridge()
