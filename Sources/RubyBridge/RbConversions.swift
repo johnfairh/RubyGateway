@@ -220,3 +220,48 @@ extension RbObject: ExpressibleByFloatLiteral {
         self.init(value.rubyObject)
     }
 }
+
+// MARK: - Dictionary
+//extension Dictionary: RbObjectConvertible where Key: RbObjectConvertible, Value: RbObjectConvertible {
+//    /// Try to get a `Dictionary` representation of an `RbObject` that is a Ruby hash.
+//    ///
+//    /// It fails if the Ruby value is not a hash.
+//    ///
+//    /// See `RbException.history` to find out why a conversion failed.
+//    public init?(_ value: RbObject) {
+//        return nil
+//    }
+//
+//    /// Create a Ruby object for the number.
+//    public var rubyObject: RbObject {
+//        guard Ruby.softSetup() else {
+//            return RbObject(rubyValue: Qnil)
+//        }
+//        return dictToRubyObj(self)
+//    }
+//}
+
+func dictToRubyObj(dict: [String: RbObjectConvertible]) -> RbObject {
+    let hashObj = RbObject(rubyValue: rb_hash_new())
+    dict.forEach { key, value in
+        let id = try! Ruby.getID(for: key)
+        let sym = rb_id2sym(id)
+        value.rubyObject.withRubyValue { valueRubyValue in
+            rb_hash_aset(hashObj.rubyValue, sym, valueRubyValue)
+        }
+    }
+    return hashObj
+}
+//
+//func dictToRubyObj<K>(dict: [K: RbObjectConvertible]) -> RbObject where K: RbObjectConvertible {
+//    let hashObj = RbObject(rubyValue: rb_hash_new())
+//    dict.forEach { key, value in
+//        key.rubyObject.withRubyValue { keyRubyValue in
+//            value.rubyObject.withRubyValue { valueRubyValue in
+//                rb_hash_aset(hashObj.rubyValue, keyRubyValue, valueRubyValue)
+//            }
+//        }
+//    }
+//    return hashObj
+//}
+

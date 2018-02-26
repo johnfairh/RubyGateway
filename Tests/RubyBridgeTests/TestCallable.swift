@@ -122,4 +122,16 @@ class TestRbCallable: XCTestCase {
             XCTFail("Unexpected exception \(error)")
         }
     }
+
+    // kw args
+    func testKwArgs() {
+        let obj = getNewMethodTest()
+
+        do {
+            let v = try obj.call("kwArgsMethod", args: [214], kwArgs: [("aSecond", 32)])
+            XCTAssertEqual(214 + 32 * 1, Int(v))
+        } catch {
+            XCTFail("Unexpected exception \(error)")
+        }
+    }
 }

@@ -27,4 +27,8 @@ class MethodsTest
     def self.classMethod
         true
     end
+
+    def kwArgsMethod(aFirst, aSecond:, aThird: 1)
+        aFirst + aSecond * aThird
+    end
 end

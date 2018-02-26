@@ -14,6 +14,8 @@ public enum RbError: Error {
     case notClass(String)
     /// Identifier looks wrong
     case badIdentifier(type: String, id: String)
+    /// Duplicate keyword arg
+    case duplicateKwArg(first: RbObject, second: RbObject)
 }
 
 // MARK: - CustomStringConvertible
@@ -24,7 +26,10 @@ extension RbError: CustomStringConvertible {
         switch self {
         case let .setup(msg): return msg
         case let .notClass(msg): return msg
-        case let .badIdentifier(type, id): return "Bad Ruby identifier: '\(id)' does not look like \(type) name"
+        case let .badIdentifier(type, id):
+            return "Bad Ruby identifier: '\(id)' does not look like \(type) name."
+        case let .duplicateKwArg(first, second):
+            return "Duplicate keyword arg on call.  First value \(first), second value \(second)."
         }
     }
 }

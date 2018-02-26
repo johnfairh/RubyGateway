@@ -41,6 +41,7 @@ public final class RbObject: RbConstantAccess, RbInstanceAccess {
     }
 
     /// Get temporary guaranteed-safe access to the object's `VALUE`.
+    @discardableResult
     func withRubyValue<T>(call: (VALUE) throws -> T) rethrows -> T {
         return try call(rubyValue)
     }

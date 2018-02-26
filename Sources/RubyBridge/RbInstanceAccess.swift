@@ -67,18 +67,24 @@ extension RbInstanceAccess {
     /// - returns: The result of calling the method.
     /// - throws: `RbException` if there is a Ruby exception.  No checking here on the
     ///           spelling of `name` on top of that done by Ruby.
+    ///           `RbError` if there are duplicate keywords in `kwArgs`.
     ///
     /// TODO: blocks.
     @discardableResult
     public func call(_ method: String,
                      args: [RbObjectConvertible] = [],
                      kwArgs: [(String, RbObjectConvertible)] = []) throws -> RbObject {
-        if kwArgs.count > 0 {
-            fatalError("TODO: kwArgs")
-        }
         try Ruby.setup()
         let methodId = try Ruby.getID(for: method)
-        let argObjects = args.map { $0.rubyObject }
+        var argObjects = args.map { $0.rubyObject }
+
+        if kwArgs.count > 0 {
+            let kwArgsDict = try Dictionary(kwArgs) { first, second in
+                throw RbError.duplicateKwArg(first: first.rubyObject, second: second.rubyObject)
+            }
+            argObjects.append(dictToRubyObj(dict: kwArgsDict))
+        }
+
         let resultVal = try argObjects.withRubyValues { argValues in
             try RbVM.doProtect {
                 rbb_funcallv_protect(self.rubyValue, methodId, Int32(argValues.count), argValues, nil)
