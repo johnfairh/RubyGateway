@@ -148,8 +148,7 @@ class TestVM: XCTestCase {
         let testTitle = "My title"
         Ruby.scriptName = testTitle
 
-        // XXX fix me
-        // XCTAssertEqual(testTitle, vm.scriptName)
+        XCTAssertEqual(testTitle, Ruby.scriptName)
     }
 
     /// Version

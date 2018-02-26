@@ -194,7 +194,7 @@ class TestNumerics: XCTestCase {
     func testIntegerTooBig() {
         try! Ruby.require(filename: Helpers.fixturePath("numbers.rb"))
 
-        let bigConstObj = try! Ruby.getConstant(name: "TestNumbers::BIG_NUM")
+        let bigConstObj = try! Ruby.getConstant("TestNumbers::BIG_NUM")
 
         if let num = UInt(bigConstObj) {
             XCTFail("Managed to express 2^80 in 64 bits: \(num)")

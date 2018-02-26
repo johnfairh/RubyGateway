@@ -15,10 +15,10 @@ class TestConstants: XCTestCase {
         do {
             let _ = try Ruby.require(filename: Helpers.fixturePath("nesting.rb"))
 
-            let outerModule = try Ruby.getConstant(name: "Outer")
+            let outerModule = try Ruby.getConstant("Outer")
             XCTAssertEqual(.T_MODULE, TYPE(outerModule.rubyValue))
 
-            let outerConstant = try outerModule.getConstant(name: "OUTER_CONSTANT")
+            let outerConstant = try outerModule.getConstant("OUTER_CONSTANT")
             XCTAssertEqual(.T_FIXNUM, TYPE(outerConstant.rubyValue))
         } catch {
             XCTFail("Unexpected exception: \(error)")
@@ -29,7 +29,7 @@ class TestConstants: XCTestCase {
         do {
             let _ = try Ruby.require(filename: Helpers.fixturePath("nesting.rb"))
 
-            let innerClass = try Ruby.getClass(name: "Outer::Middle::Inner")
+            let innerClass = try Ruby.getClass("Outer::Middle::Inner")
             XCTAssertEqual(.T_CLASS, TYPE(innerClass.rubyValue))
         } catch {
             XCTFail("Unexpected exception: \(error)")
@@ -40,9 +40,9 @@ class TestConstants: XCTestCase {
         do {
             let _ = try Ruby.require(filename: Helpers.fixturePath("nesting.rb"))
 
-            let innerClass = try Ruby.getClass(name: "Outer::Middle::Inner")
+            let innerClass = try Ruby.getClass("Outer::Middle::Inner")
 
-            let _ = try innerClass.getConstant(name: "Outer")
+            let _ = try innerClass.getConstant("Outer")
         } catch {
             XCTFail("Unexpected exception: \(error)")
         }
@@ -52,20 +52,20 @@ class TestConstants: XCTestCase {
         do {
             let _ = try Ruby.require(filename: Helpers.fixturePath("nesting.rb"))
 
-            let outerModule = try Ruby.getConstant(name: "Fish")
+            let outerModule = try Ruby.getConstant("Fish")
             XCTFail("Managed to find 'Fish' constant: \(outerModule)")
         } catch {
         }
 
-        let middleModule = try! Ruby.getConstant(name: "Outer::Middle")
+        let middleModule = try! Ruby.getConstant("Outer::Middle")
         do {
-            let outerModule = try middleModule.getConstant(name: "Outer::Inner")
+            let outerModule = try middleModule.getConstant("Outer::Inner")
             XCTFail("Constant scope resolved weirdly - \(outerModule)")
         } catch {
         }
 
         do {
-            let innerConstant = try Ruby.getConstant(name: "Outer::Middle::Fish")
+            let innerConstant = try Ruby.getConstant("Outer::Middle::Fish")
             XCTFail("Managed to find 'Fish' constant: \(innerConstant)")
         } catch {
         }
@@ -75,7 +75,7 @@ class TestConstants: XCTestCase {
         do {
             let _ = try Ruby.require(filename: Helpers.fixturePath("nesting.rb"))
 
-            let notClass = try Ruby.getClass(name: "Outer")
+            let notClass = try Ruby.getClass("Outer")
             XCTFail("Managed to get a class for module Outer: \(notClass)")
         } catch RbError.notClass(_) {
             // OK

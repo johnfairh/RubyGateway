@@ -7,7 +7,7 @@
 import RubyBridgeHelpers
 
 /// Wraps a Ruby object
-public final class RbObject {
+public final class RbObject: RbConstantAccess, RbInstanceAccess {
     private let valueBox: UnsafeMutablePointer<Rbb_value>
 
     /// Wrap up a Ruby object using the `VALUE` handle
@@ -61,12 +61,6 @@ public final class RbObject {
     public var isNil: Bool {
         return RB_NIL_P(rubyValue)
     }
-}
-
-/// MARK: - Callable etc.
-
-/// Give access to classes/modules/constants nested under this class/object.
-extension RbObject: RbConstantAccess, RbMethodAccess {
 }
 
 /// MARK: - String convertible for various debugging APIs

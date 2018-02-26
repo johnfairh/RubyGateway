@@ -44,7 +44,7 @@ extension RbConstantAccess {
     ///
     /// - returns: an `RbObject` for the class
     ///
-    public func getConstant(name: String) throws -> RbObject {
+    public func getConstant(_ name: String) throws -> RbObject {
         try Ruby.setup()
         var nextValue = rubyValue
         var first = true
@@ -89,40 +89,11 @@ extension RbConstantAccess {
     /// and autoloading.
     ///
     /// For a version that does not throw, see `RbBridge.failable` or `RbObject.failable`.
-    public func getClass(name: String) throws -> RbObject {
-        let obj = try getConstant(name: name)
+    public func getClass(_ name: String) throws -> RbObject {
+        let obj = try getConstant(name)
         guard RB_TYPE_P(obj.rubyValue, .T_CLASS) else {
             throw RbError.notClass("getClass(\(name)) failed, found the constant but it has type \(TYPE(obj.rubyValue).rawValue)")
         }
         return obj
-    }
-}
-
-// MARK: - FailableConstantScope
-
-protocol RbFailableConstantScope {
-    /// The underlying throwing constant scope
-    var constantScope: RbConstantAccess { get }
-}
-
-extension RbFailableConstantScope {
-    /// Get an `RbObject` that represents a Ruby constant.
-    ///
-    /// - parameter name: The name of the constant to look up.
-    /// - returns: an `RbObject` for the class or `nil` if an error occurred.
-    ///
-    /// This is a non-throwing version of `RbConstantScope.getConstant(name:)`.
-    public func getConstant(name: String) -> RbObject? {
-        return try? constantScope.getConstant(name: name)
-    }
-
-    /// Get an `RbObject` that represents a Ruby class.
-    ///
-    /// - parameter name: The name of the class to look up.
-    /// - returns: an `RbObject` for the class or `nil` if an error occurred.
-    ///
-    /// This is a non-throwing version of `RbConstantScope.getClass(name:)`.
-    public func getClass(name: String) -> RbObject? {
-        return try? constantScope.getClass(name: name)
     }
 }

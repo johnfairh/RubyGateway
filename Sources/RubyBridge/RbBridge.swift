@@ -29,8 +29,8 @@ import RubyBridgeHelpers
 /// print("Ruby version is \(Ruby.version)")
 ///
 /// do {
-///    Ruby.require("rouge")
-///    my html = Ruby.getModule("Rouge").call("highlight", "let a = 1", "swift", "html")
+///    try Ruby.require("rouge")
+///    my html = try Ruby.getModule("Rouge").call("highlight", args: ["let a = 1", "swift", "html"])
 /// } catch {
 /// }
 /// ```
@@ -39,8 +39,8 @@ import RubyBridgeHelpers
 ///
 /// ```swift
 /// do {
-///    Ruby.require("rouge")
-///    my html = Ruby.do("Rouge").do("highlight", "let a = 1", "swift", "html")
+///    try Ruby.require("rouge")
+///    my html = try Ruby.do("Rouge").do("highlight", args: ["let a = 1", "swift", "html"])
 /// } catch {
 /// }
 /// ```
@@ -48,7 +48,7 @@ import RubyBridgeHelpers
 /// Or if you don't like exceptions:
 ///
 /// ```swift
-/// Ruby.require("rouge")
+/// try! Ruby.require("rouge")
 /// my html = Ruby.failable.do("Rouge")?.do("highlight", "let a = 1", "swift", "html")
 /// ```
 ///
@@ -56,7 +56,7 @@ import RubyBridgeHelpers
 /// ```swift
 /// my html = Ruby.Rouge?.highlight("let a = 1", "swift", "html")
 /// ```
-open class RbBridge {
+public final class RbBridge: RbConstantAccess, RbInstanceAccess {
 
     /// The VM - not intialized until `setup()` is called.
     private static let vm = RbVM()
@@ -111,6 +111,13 @@ open class RbBridge {
         } catch {
             return false
         }
+    }
+
+    /// The id of the Ruby `Object` class.  Used to provide access to constants from the
+    /// top level and global functions via the `RbConstantAccess` and `RbInstanceAccess`
+    /// protocols.
+    public var rubyValue: VALUE {
+        return rb_cObject
     }
 }
 
@@ -179,13 +186,12 @@ extension RbBridge {
         }
         get {
             // sigh
-            do {
-                // XXX fix me - globalv lookup plus string conversion...
-                let _ = try eval(ruby: "$PROGRAM_NAME")
-                return "This needs to be implemented"
-            } catch {
+            guard softSetup(),
+                let nameObj = try? getGlobalVar("$PROGRAM_NAME"),
+                let name = String(nameObj) else {
                 return "??"
             }
+            return name
         }
     }
 
@@ -240,14 +246,6 @@ extension RbBridge {
         return try RbVM.doProtect {
             rbb_load_protect(filenameObj.rubyValue, wrap ? 1 : 0, nil)
         }
-    }
-}
-
-// MARK: - Constant and method access
-
-extension RbBridge: RbConstantAccess, RbMethodAccess {
-    public var rubyValue: VALUE {
-        return rb_cObject
     }
 }
 

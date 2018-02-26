@@ -12,6 +12,8 @@ public enum RbError: Error {
     case setup(String)
     /// Constant is not a Class
     case notClass(String)
+    /// Identifier looks wrong
+    case badIdentifier(type: String, id: String)
 }
 
 // MARK: - CustomStringConvertible
@@ -22,6 +24,7 @@ extension RbError: CustomStringConvertible {
         switch self {
         case let .setup(msg): return msg
         case let .notClass(msg): return msg
+        case let .badIdentifier(type, id): return "Bad Ruby identifier: '\(id)' does not look like \(type) name"
         }
     }
 }
