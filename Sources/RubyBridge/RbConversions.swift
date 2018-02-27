@@ -53,12 +53,8 @@ extension String: RbObjectConvertible {
     ///
     /// See `RbException.history` to find out why a conversion failed.
     public init?(_ value: RbObject) {
-        var status = Int32(0)
-        let stringVal = rbb_String_protect(value.rubyValue, &status)
-        guard status == 0 else {
-            let _ = rb_errinfo()
-            rb_set_errinfo(Qnil)
-            // TODO: RbException
+        let stringVal = rbb_String_protect(value.rubyValue, nil)
+        if RbException.ignoreAnyPending() {
             return nil
         }
 
@@ -126,12 +122,8 @@ extension UInt: RbObjectConvertible {
     ///
     /// If the Ruby value is floating point then the integer part is returned.
     public init?(_ value: RbObject) {
-        var status = Int32(0)
-        self = rbb_obj2ulong_protect(value.rubyValue, &status)
-        guard status == 0 else {
-            let _ = rb_errinfo()
-            rb_set_errinfo(Qnil)
-            // TODO: RbException
+        self = rbb_obj2ulong_protect(value.rubyValue, nil)
+        if RbException.ignoreAnyPending() {
             return nil
         }
     }
@@ -158,12 +150,8 @@ extension Int: RbObjectConvertible {
     ///
     /// If the Ruby value is floating point then the integer part is returned.
     public init?(_ value: RbObject) {
-        var status = Int32(0)
-        self = rbb_obj2long_protect(value.rubyValue, &status)
-        guard status == 0 else {
-            let _ = rb_errinfo()
-            rb_set_errinfo(Qnil)
-            // TODO: RbException
+        self = rbb_obj2long_protect(value.rubyValue, nil)
+        if RbException.ignoreAnyPending() {
             return nil
         }
     }
@@ -196,12 +184,8 @@ extension Double: RbObjectConvertible {
     ///
     /// Flavors of NaN are not preserved across the Ruby<->Swift interface.
     public init?(_ value: RbObject) {
-        var status = Int32(0)
-        self = rbb_obj2double_protect(value.rubyValue, &status)
-        guard status == 0 else {
-            let _ = rb_errinfo()
-            rb_set_errinfo(Qnil)
-            // TODO: RbException
+        self = rbb_obj2double_protect(value.rubyValue, nil)
+        if RbException.ignoreAnyPending() {
             return nil
         }
     }

@@ -64,7 +64,7 @@ final class RbVM {
         case .setup:
             return false
         case .cleanedUp:
-            throw RbError.setup("Can't set up Ruby, has already been cleaned up.")
+            try RbError.recordAndThrow(error: .setup("Ruby has already been cleaned up."))
         case .unknown:
             break
         }
@@ -117,12 +117,12 @@ final class RbVM {
     /// - throws: `RbError.initError` if there is a problem starting Ruby.
     private func doSetup() throws {
         guard !setupEver else {
-            throw RbError.setup("Can't set up Ruby, already been done for this process.")
+            try RbError.recordAndThrow(error: .setup("Has already been done (via C API?) for this process."))
         }
 
         let setup_rc = ruby_setup()
         guard setup_rc == 0 else {
-            throw RbError.setup("Can't set up Ruby, ruby_setup() failed: \(setup_rc)")
+            try RbError.recordAndThrow(error: .setup("ruby_setup() failed: \(setup_rc)"))
         }
 
         // Calling ruby_options() sets up the loadpath nicely and does the bootstrapping of
@@ -144,7 +144,7 @@ final class RbVM {
         // `exit_status` should be 0 because it should be unmodified given `node` is a program.
         guard node_status == 1 && exit_status == 0 else {
             ruby_cleanup(0)
-            throw RbError.setup("Can't set up Ruby, ruby_executable_node() gave node_status \(node_status) exit status \(exit_status)")
+            try RbError.recordAndThrow(error: .setup("ruby_executable_node() gave node_status \(node_status) exit status \(exit_status)"))
         }
     }
 
@@ -172,12 +172,21 @@ final class RbVM {
     /// Helper to call a protected Ruby API function and propagate any Ruby exception
     /// as a Swift `RbException`.
     static func doProtect<T>(call: () -> T) throws -> T {
+        // Caught between two stools right now about exception detection etc.
+        // All the _protect() APIs have the 'status' out-param which is set to
+        // the Ruby TAG value.  This appears to be redundant in that we can just
+        // check `rb_errinfo`.
+        //
+        // BUT when we start calling Ruby proc's from Swift, I have a feeling that
+        // we will get TAG_RETURN etc. with Qnil errinfo and have to figure out how
+        // to propagate that nonsense back to Ruby or wherever.
+        //
+        // So, all TBD until we have proc's working - for now we don't pass an Int32*
+        // through here and the C layer just gets NULL for the param.
         let result = call()
 
-        let exception = rb_errinfo()
-        if exception != Qnil {
-            defer { rb_set_errinfo(Qnil) }
-            throw RbException(rubyValue: exception)
+        if let exception = RbException() {
+            try RbError.recordAndThrow(error: .rubyException(exception))
         }
         return result
     }

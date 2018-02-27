@@ -98,7 +98,7 @@ extension RbObject: CustomDebugStringConvertible {
     }
 }
 
-extension RbObject : CustomPlaygroundQuickLookable {
+extension RbObject: CustomPlaygroundQuickLookable {
     /// Something to display in Playgrounds right-hand bar.
     /// This is just the text from `description`.
     public var customPlaygroundQuickLook: PlaygroundQuickLook {

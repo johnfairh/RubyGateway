@@ -77,7 +77,7 @@ class TestConstants: XCTestCase {
 
             let notClass = try Ruby.getClass("Outer")
             XCTFail("Managed to get a class for module Outer: \(notClass)")
-        } catch RbError.notClass(_) {
+        } catch RbError.badType(_) {
             // OK
         } catch {
             XCTFail("Unexpected exception \(error)")

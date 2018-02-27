@@ -155,7 +155,7 @@ class TestVars: XCTestCase {
 
             try obj.setClassVar("@@new_cvar", newValue: 105)
             XCTFail("Managed to set class var on non-class")
-        } catch RbError.notClass(_) {
+        } catch RbError.badType(_) {
         } catch {
             XCTFail("Unexpected error: \(error)")
         }
@@ -165,7 +165,7 @@ class TestVars: XCTestCase {
 
             let cvar = try obj.getClassVar("@@new_cvar")
             XCTFail("Managed to get class var on non-class: \(cvar)")
-        } catch RbError.notClass(_) {
+        } catch RbError.badType(_) {
         } catch {
             XCTFail("Unexpected error: \(error)")
         }

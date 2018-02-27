@@ -98,7 +98,7 @@ extension RbInstanceAccess {
         try kwArgs.forEach { (key, value) in
             let symKey = try rb_id2sym(Ruby.getID(for: key))
             if rb_hash_lookup(hash.rubyValue, symKey) != Qnil {
-                throw RbError.duplicateKwArg(key: key)
+                try RbError.recordAndThrow(error: .duplicateKwArg(key))
             }
             rb_hash_aset(hash.rubyValue, symKey, value.rubyObject.rubyValue)
         }
@@ -138,7 +138,7 @@ extension RbInstanceAccess {
     // Check the associated rubyValue is for a class.
     private func checkClass() throws {
         guard RB_TYPE_P(rubyValue, .T_CLASS) else {
-            throw RbError.notClass("\(rubyValue) is not a class, cannot access cvars on it")
+            try RbError.recordAndThrow(error: .badType("\(rubyValue) is not a class, cannot get/setClassVar() on it."))
         }
     }
 
