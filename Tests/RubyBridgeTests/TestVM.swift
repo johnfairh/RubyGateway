@@ -59,11 +59,15 @@ class TestVM: XCTestCase {
             let rc2 = try Ruby.require(filename: "pp") // Internal, repeat
             XCTAssertFalse(rc2)
 
-            let rc3 = try Ruby.require(filename: "rouge") // Gem
+            let rc3 = try Ruby.require(filename: "minitest") // Gem shipped since 2.3ish
             XCTAssertTrue(rc3)
+        } catch {
+            XCTFail("Unexpected exception: \(error)")
+        }
 
-            let rc4 = try Ruby.require(filename: "not-ruby") // fail
-            XCTFail("vm.require unexpectedly passed, rc=\(rc4)")
+        do {
+            let rc = try Ruby.require(filename: "not-ruby") // fail
+            XCTFail("vm.require unexpectedly passed, rc=\(rc)")
         } catch {
             print("Got expected exception: \(error)")
         }

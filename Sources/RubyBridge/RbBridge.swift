@@ -227,11 +227,9 @@ extension RbBridge {
     ///           file couldn't be found.)
     @discardableResult
     public func require(filename: String) throws -> Bool {
-        try setup()
-        let rubyValue = try RbVM.doProtect {
-            rbb_require_protect(filename, nil)
-        }
-        return rubyValue == Qtrue
+        // Have to use eval so that gems work - rubygems/kernel_require.rb replaces
+        // `Kernel#require` so it can do the gem thing, so `rb_require` is no good.
+        return try eval(ruby: "require '\(filename)'").isTruthy
     }
 
     /// 'load' - see Ruby `Kernel#load`. Load a file, reloads if already loaded.

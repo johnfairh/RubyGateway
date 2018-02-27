@@ -26,9 +26,6 @@ typedef unsigned long VALUE;
 @import CRuby;
 #endif
 
-/// Safely call `rb_require` and report exception status.
-VALUE rbb_require_protect(const char * _Nonnull fname, int * _Nullable status);
-
 /// Safely call `rb_load` and report exception status.
 void rbb_load_protect(VALUE fname, int wrap, int * _Nullable status);
 

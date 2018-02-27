@@ -24,6 +24,7 @@
 		022F3ACF203AE707009E69BE /* RbObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3ACE203AE707009E69BE /* RbObject.swift */; };
 		022F3AD1203AF8BA009E69BE /* TestRbObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3AD0203AF8BA009E69BE /* TestRbObject.swift */; };
 		022F3AD4203B6068009E69BE /* RbConstantAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3AD2203B6061009E69BE /* RbConstantAccess.swift */; };
+		0230075C2045B27E00044B8E /* TestDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230075B2045B27E00044B8E /* TestDemo.swift */; };
 		024923482031EE0400E3AAF4 /* RbVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024923462031EDE000E3AAF4 /* RbVM.swift */; };
 		0249234B20334AE500E3AAF4 /* RbError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0249234920334ADE00E3AAF4 /* RbError.swift */; };
 		0249234D20335ADB00E3AAF4 /* TestVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0249234C20335ADB00E3AAF4 /* TestVM.swift */; };
@@ -67,6 +68,7 @@
 		022F3ACE203AE707009E69BE /* RbObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbObject.swift; sourceTree = "<group>"; };
 		022F3AD0203AF8BA009E69BE /* TestRbObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRbObject.swift; sourceTree = "<group>"; };
 		022F3AD2203B6061009E69BE /* RbConstantAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbConstantAccess.swift; sourceTree = "<group>"; };
+		0230075B2045B27E00044B8E /* TestDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDemo.swift; sourceTree = "<group>"; };
 		024923462031EDE000E3AAF4 /* RbVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbVM.swift; sourceTree = "<group>"; };
 		0249234920334ADE00E3AAF4 /* RbError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbError.swift; sourceTree = "<group>"; };
 		0249234C20335ADB00E3AAF4 /* TestVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVM.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				0249234C20335ADB00E3AAF4 /* TestVM.swift */,
+				0230075B2045B27E00044B8E /* TestDemo.swift */,
 				022F3AD0203AF8BA009E69BE /* TestRbObject.swift */,
 				022F3AC82037153A009E69BE /* TestNumerics.swift */,
 				0290133C203F42820090C5C9 /* TestMiscObjTypes.swift */,
@@ -378,6 +381,7 @@
 				0249234D20335ADB00E3AAF4 /* TestVM.swift in Sources */,
 				022F3ACD20385C3A009E69BE /* TestConstants.swift in Sources */,
 				022F3ACB20375E01009E69BE /* TestStrings.swift in Sources */,
+				0230075C2045B27E00044B8E /* TestDemo.swift in Sources */,
 				0205A8AB204423E400076840 /* TestVars.swift in Sources */,
 				0290133D203F42820090C5C9 /* TestMiscObjTypes.swift in Sources */,
 				0205A8A42042DA3600076840 /* TestCallable.swift in Sources */,

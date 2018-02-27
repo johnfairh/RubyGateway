@@ -59,17 +59,6 @@
 // of `client_2` in regular C that is totally happy to be longjmp()d over.
 //
 
-static VALUE rbb_require_thunk(VALUE value)
-{
-    const char *fname = (const char *)(void *)value;
-    return rb_require(fname);
-}
-
-VALUE rbb_require_protect(const char *fname, int *status)
-{
-    return rb_protect(rbb_require_thunk, (VALUE)(void *)fname, status);
-}
-
 // rb_load -- rb_load_protect exists but doesn't protect against exceptions
 // raised by the file being loaded, just the filename lookup part.
 typedef struct
