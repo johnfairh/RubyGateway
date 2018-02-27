@@ -79,10 +79,7 @@ extension RbInstanceAccess {
         var argObjects = args.map { $0.rubyObject }
 
         if kwArgs.count > 0 {
-            let kwArgsDict = try Dictionary(kwArgs) { first, second in
-                throw RbError.duplicateKwArg(first: first.rubyObject, second: second.rubyObject)
-            }
-            argObjects.append(dictToRubyObj(dict: kwArgsDict))
+            try argObjects.append(buildKwArgsHash(from: kwArgs))
         }
 
         let resultVal = try argObjects.withRubyValues { argValues in
@@ -92,6 +89,20 @@ extension RbInstanceAccess {
         }
 
         return RbObject(rubyValue: resultVal)
+    }
+
+    /// Build a keyword args hash.  The keys are symbol VALUE of the intern'd name
+    /// of the keyword.
+    private func buildKwArgsHash(from kwArgs: [(String, RbObjectConvertible)]) throws -> RbObject {
+        let hash = RbObject(rubyValue: rb_hash_new())
+        try kwArgs.forEach { (key, value) in
+            let symKey = try rb_id2sym(Ruby.getID(for: key))
+            if rb_hash_lookup(hash.rubyValue, symKey) != Qnil {
+                throw RbError.duplicateKwArg(key: key)
+            }
+            rb_hash_aset(hash.rubyValue, symKey, value.rubyObject.rubyValue)
+        }
+        return hash
     }
 
     /// Get an attribute of a Ruby object.

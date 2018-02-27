@@ -232,7 +232,7 @@ extension RbObject: ExpressibleByFloatLiteral {
 //        return nil
 //    }
 //
-//    /// Create a Ruby object for the number.
+//    /// Create a Ruby hash object for the dictionary.
 //    public var rubyObject: RbObject {
 //        guard Ruby.softSetup() else {
 //            return RbObject(rubyValue: Qnil)
@@ -241,17 +241,6 @@ extension RbObject: ExpressibleByFloatLiteral {
 //    }
 //}
 
-func dictToRubyObj(dict: [String: RbObjectConvertible]) -> RbObject {
-    let hashObj = RbObject(rubyValue: rb_hash_new())
-    dict.forEach { key, value in
-        let id = try! Ruby.getID(for: key)
-        let sym = rb_id2sym(id)
-        value.rubyObject.withRubyValue { valueRubyValue in
-            rb_hash_aset(hashObj.rubyValue, sym, valueRubyValue)
-        }
-    }
-    return hashObj
-}
 //
 //func dictToRubyObj<K>(dict: [K: RbObjectConvertible]) -> RbObject where K: RbObjectConvertible {
 //    let hashObj = RbObject(rubyValue: rb_hash_new())

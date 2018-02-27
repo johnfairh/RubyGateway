@@ -15,7 +15,7 @@ public enum RbError: Error {
     /// Identifier looks wrong
     case badIdentifier(type: String, id: String)
     /// Duplicate keyword arg
-    case duplicateKwArg(first: RbObject, second: RbObject)
+    case duplicateKwArg(key: String)
 }
 
 // MARK: - CustomStringConvertible
@@ -28,8 +28,8 @@ extension RbError: CustomStringConvertible {
         case let .notClass(msg): return msg
         case let .badIdentifier(type, id):
             return "Bad Ruby identifier: '\(id)' does not look like \(type) name."
-        case let .duplicateKwArg(first, second):
-            return "Duplicate keyword arg on call.  First value \(first), second value \(second)."
+        case let .duplicateKwArg(key):
+            return "Duplicate keyword arg \(key) on call()."
         }
     }
 }

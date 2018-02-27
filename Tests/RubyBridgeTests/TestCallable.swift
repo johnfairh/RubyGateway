@@ -134,4 +134,18 @@ class TestRbCallable: XCTestCase {
             XCTFail("Unexpected exception \(error)")
         }
     }
+
+    // kw args, dup
+    func testDupKwArgs() {
+        let obj = getNewMethodTest()
+
+        do {
+            let v = try obj.call("kwArgsMethod", args: [214], kwArgs: [("aSecond", 32), ("aSecond", 38)])
+            XCTFail("Managed to pass duplicate keyword args to Ruby, got \(v)")
+        } catch RbError.duplicateKwArg(let key) {
+            XCTAssertEqual("aSecond", key)
+        } catch {
+            XCTFail("Unexpected error \(error)")
+        }
+    }
 }
