@@ -19,11 +19,48 @@ public enum RbError: Error {
     /// Ruby exception occurred.
     case rubyException(RbException)
 
-    public static func recordAndThrow(error: RbError) throws -> Never {
+    /// Holds the most recent errors thrown by `RubyBridge`.
+    /// This can be useful when error throwing is disabled - although
+    /// the API returns `nil` the error is still generated internally
+    /// and stashed here.
+    public struct History {
+        /// The error history.  The oldest error recorded is at index 0;
+        /// the most recent is at the end of the array.  See `mostRecent`.
+        public private(set) var errors: [RbError] = []
+
+        /// The most recent error thrown by `RubyBridge`.
+        public var mostRecent: RbError? {
+            return errors.last
+        }
+
+        /// Clear the error history.
+        public mutating func clear() {
+            errors = []
+        }
+
+        /// Loads more than useful...
+        private let MAX_RECENT_ERRORS = 12
+
+        mutating func record(error: RbError) {
+            errors.append(error)
+            if errors.count > MAX_RECENT_ERRORS {
+                errors = Array(errors.dropFirst())
+            }
+        }
+
+        mutating func record(exception: RbException) {
+            record(error: .rubyException(exception))
+        }
+    }
+
+    static func raise(error: RbError) throws -> Never {
+        history.record(error: error)
         throw error
     }
-    public static func record(exception: RbException) {
-    }
+
+    /// A short history of errors thrown by `RubyBridge`
+    public static var history = History()
+    // TODO: locking....
 }
 
 // MARK: - CustomStringConvertible
@@ -70,7 +107,7 @@ public struct RbException: CustomStringConvertible {
         guard let exception = RbException() else {
             return false
         }
-        RbError.record(exception: exception)
+        RbError.history.record(exception: exception)
         return true
     }
 
@@ -86,6 +123,6 @@ public struct RbException: CustomStringConvertible {
 
     /// The Ruby exception's message
     public var description: String {
-        return String(exception) ?? "[Indescribable]"
+        return String(exception)! // all exceptions have to_s
     }
 }

@@ -92,7 +92,7 @@ extension RbConstantAccess {
     public func getClass(_ name: String) throws -> RbObject {
         let obj = try getConstant(name)
         guard RB_TYPE_P(obj.rubyValue, .T_CLASS) else {
-            try RbError.recordAndThrow(error: .badType("Found constant called \(name) but it is not a class."))
+            try RbError.raise(error: .badType("Found constant called \(name) but it is not a class."))
         }
         return obj
     }

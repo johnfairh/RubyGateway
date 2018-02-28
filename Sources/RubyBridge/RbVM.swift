@@ -64,7 +64,7 @@ final class RbVM {
         case .setup:
             return false
         case .cleanedUp:
-            try RbError.recordAndThrow(error: .setup("Ruby has already been cleaned up."))
+            try RbError.raise(error: .setup("Ruby has already been cleaned up."))
         case .unknown:
             break
         }
@@ -117,12 +117,12 @@ final class RbVM {
     /// - throws: `RbError.initError` if there is a problem starting Ruby.
     private func doSetup() throws {
         guard !setupEver else {
-            try RbError.recordAndThrow(error: .setup("Has already been done (via C API?) for this process."))
+            try RbError.raise(error: .setup("Has already been done (via C API?) for this process."))
         }
 
         let setup_rc = ruby_setup()
         guard setup_rc == 0 else {
-            try RbError.recordAndThrow(error: .setup("ruby_setup() failed: \(setup_rc)"))
+            try RbError.raise(error: .setup("ruby_setup() failed: \(setup_rc)"))
         }
 
         // Calling ruby_options() sets up the loadpath nicely and does the bootstrapping of
@@ -144,7 +144,7 @@ final class RbVM {
         // `exit_status` should be 0 because it should be unmodified given `node` is a program.
         guard node_status == 1 && exit_status == 0 else {
             ruby_cleanup(0)
-            try RbError.recordAndThrow(error: .setup("ruby_executable_node() gave node_status \(node_status) exit status \(exit_status)"))
+            try RbError.raise(error: .setup("ruby_executable_node() gave node_status \(node_status) exit status \(exit_status)"))
         }
     }
 
@@ -186,7 +186,7 @@ final class RbVM {
         let result = call()
 
         if let exception = RbException() {
-            try RbError.recordAndThrow(error: .rubyException(exception))
+            try RbError.raise(error: .rubyException(exception))
         }
         return result
     }
