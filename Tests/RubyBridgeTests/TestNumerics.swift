@@ -6,17 +6,12 @@
 //
 
 import XCTest
-@testable import RubyBridge
+@testable /* various macros */ import RubyBridge
 
 /// A bunch of the Ruby numeric conversion macros don't make it through
 /// the importer so are re-implemented in various ways.  These tests check
 /// they're OK.
 class TestNumerics: XCTestCase {
-
-    override class func setUp() {
-        Helpers.initRuby()
-    }
-
     /// Check we can round-trip values through fixnum, that our
     /// understanding matches Ruby's.
     func testFixnumRoundtrip() {

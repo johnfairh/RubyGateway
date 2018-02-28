@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import RubyBridge
+import RubyBridge
 
 /// Ruby constant access
 class TestConstants: XCTestCase {
@@ -16,10 +16,10 @@ class TestConstants: XCTestCase {
             let _ = try Ruby.require(filename: Helpers.fixturePath("nesting.rb"))
 
             let outerModule = try Ruby.getConstant("Outer")
-            XCTAssertEqual(.T_MODULE, TYPE(outerModule.rubyValue))
+            XCTAssertEqual(.T_MODULE, outerModule.rubyType)
 
             let outerConstant = try outerModule.getConstant("OUTER_CONSTANT")
-            XCTAssertEqual(.T_FIXNUM, TYPE(outerConstant.rubyValue))
+            XCTAssertEqual(.T_FIXNUM, outerConstant.rubyType)
         } catch {
             XCTFail("Unexpected exception: \(error)")
         }
@@ -30,7 +30,7 @@ class TestConstants: XCTestCase {
             let _ = try Ruby.require(filename: Helpers.fixturePath("nesting.rb"))
 
             let innerClass = try Ruby.getClass("Outer::Middle::Inner")
-            XCTAssertEqual(.T_CLASS, TYPE(innerClass.rubyValue))
+            XCTAssertEqual(.T_CLASS, innerClass.rubyType)
         } catch {
             XCTFail("Unexpected exception: \(error)")
         }

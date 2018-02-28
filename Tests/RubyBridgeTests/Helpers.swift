@@ -6,7 +6,6 @@
 //
 
 import Foundation
-@testable import RubyBridge
 
 /// Misc test helpers
 struct Helpers {
@@ -15,11 +14,6 @@ struct Helpers {
     ///
     /// To test that 'cleanup' actually works we will need a second test target (and hope
     /// that the test runner will treat that as a separate process.)
-
-    // Need to review all callers, why do they need explicit init?
-    static func initRuby() {
-        try! Ruby.setup()
-    }
 
     /// Ruby files etc.
     private static var fixturesDir: String = {  URL(fileURLWithPath: #file).deletingLastPathComponent().path + "/Fixtures" }()

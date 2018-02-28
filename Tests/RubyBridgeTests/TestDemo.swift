@@ -7,7 +7,7 @@
 
 import XCTest
 import CRuby
-@testable import RubyBridge
+import RubyBridge
 
 /// Some higher-level demos - skipped if gems are missing
 class TestDemo: XCTestCase {

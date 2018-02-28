@@ -6,8 +6,7 @@
 //
 
 import XCTest
-import CRuby
-@testable import RubyBridge
+@testable /* for raw RbVM and setup() access */ import RubyBridge
 
 class TestVM: XCTestCase {
     /// Check we can bring up Ruby.

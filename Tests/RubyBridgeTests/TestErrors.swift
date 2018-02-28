@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import RubyBridge
+@testable /* ErrHistory internals */ import RubyBridge
 
 /// Tedious tests for error + exception classes
 class TestErrors: XCTestCase {

@@ -7,7 +7,7 @@
 
 import XCTest
 import CRuby
-@testable import RubyBridge
+@testable /* Qtrue */ import RubyBridge
 
 /// Message send tests
 class TestRbCallable: XCTestCase {

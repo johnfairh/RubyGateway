@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import RubyBridge
+import RubyBridge
 import CRuby
 
 /// Tests for String helpers
@@ -14,7 +14,7 @@ class TestStrings: XCTestCase {
 
     private func doTestRoundTrip(_ string: String) {
         let rubyObj = RbObject(string)
-        XCTAssertTrue(RB_TYPE_P(rubyObj.rubyValue, .T_STRING))
+        XCTAssertEqual(.T_STRING, rubyObj.rubyType)
 
         guard let backString = String(rubyObj) else {
             XCTFail("Oops, to_s failed??")

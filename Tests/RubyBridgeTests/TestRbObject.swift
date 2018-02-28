@@ -7,20 +7,22 @@
 
 import XCTest
 import CRuby
-@testable import RubyBridge
+@testable /* Qtrue */ import RubyBridge
 
 /// Core object tests
 class TestRbObject: XCTestCase {
-
-    override class func setUp() {
-        Helpers.initRuby()
-    }
-
+    // obj construction
     func testSimple() {
         let rbValue = Qtrue
         let obj = RbObject(rubyValue: rbValue)
         XCTAssertEqual(rbValue, obj.rubyValue)
         XCTAssertTrue(obj === obj.rubyObject)
+        var called = false
+        obj.withRubyValue { val in
+            XCTAssertEqual(rbValue, val)
+            called = true
+        }
+        XCTAssertTrue(called)
     }
 
     // Try and test the GC-safe thing works.
