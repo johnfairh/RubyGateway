@@ -59,7 +59,7 @@ import RubyBridgeHelpers
 public final class RbBridge: RbConstantAccess, RbInstanceAccess {
 
     /// The VM - not intialized until `setup()` is called.
-    private static let vm = RbVM()
+    static let vm = RbVM()
 
     /// Initialize Ruby.  Throw an error if Ruby is not working.
     /// Called by anything that might by the first op.
@@ -105,12 +105,10 @@ public final class RbBridge: RbConstantAccess, RbInstanceAccess {
     /// The idea is that callers can get by long enough for the user to call
     /// `require()` or `send()` which will properly report the VM setup error.
     public func softSetup() -> Bool {
-        do {
-            try setup()
+        if let _ = try? setup() {
             return true
-        } catch {
-            return false
         }
+        return false
     }
 
     /// The id of the Ruby `Object` class.  Used to provide access to constants from the
@@ -189,7 +187,7 @@ extension RbBridge {
             guard softSetup(),
                 let nameObj = try? getGlobalVar("$PROGRAM_NAME"),
                 let name = String(nameObj) else {
-                return "??"
+                return ""
             }
             return name
         }

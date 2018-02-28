@@ -187,7 +187,7 @@ func RB_SYM2ID(_ x: VALUE) -> ID {
 // Probably don't need these any more.
 
 /// The signed-integer type of the same width as `VALUE`
-typealias SIGNED_VALUE = Int
+internal typealias SIGNED_VALUE = Int
 
 let RUBY_FIXNUM_MAX = SIGNED_VALUE.max >> 1
 let RUBY_FIXNUM_MIN = SIGNED_VALUE.min >> 1

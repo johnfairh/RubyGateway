@@ -25,6 +25,22 @@ class TestConstants: XCTestCase {
         }
     }
 
+    private func testBadName(_ name: String) {
+        do {
+            let const = try Ruby.getConstant(name)
+            XCTFail("Managed to find constant called '\(name)': \(const)")
+        } catch RbError.badIdentifier(_, let id) {
+            XCTAssertEqual(name, id)
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+    }
+
+    func testConstantName() {
+        testBadName("lowercase")
+        testBadName("")
+    }
+
     func testNestedConstantAccess() {
         do {
             let _ = try Ruby.require(filename: Helpers.fixturePath("nesting.rb"))
@@ -86,6 +102,7 @@ class TestConstants: XCTestCase {
 
     static var allTests = [
         ("testConstantAccess", testConstantAccess),
+        ("testConstantName", testConstantName),
         ("testNestedConstantAccess", testNestedConstantAccess),
         ("testPopupConstantAccess", testPopupConstantAccess),
         ("testFailedConstantAccess", testFailedConstantAccess),

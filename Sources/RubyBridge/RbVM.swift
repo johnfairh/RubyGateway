@@ -72,11 +72,11 @@ final class RbVM {
         do {
             try doSetup()
             state = .setup
-            return true
         } catch {
             state = .setupError(error)
             throw error
         }
+        return true
     }
 
     /// Shut down the Ruby VM and release resources.
@@ -146,6 +146,23 @@ final class RbVM {
             ruby_cleanup(0)
             try RbError.raise(error: .setup("ruby_executable_node() gave node_status \(node_status) exit status \(exit_status)"))
         }
+    }
+
+    /// Test hook to fake out 'setup error' state.
+    func utSetSetupError() {
+        let error = RbError.setup("Unit test setup failure")
+        RbError.history.record(error: error)
+        state = .setupError(error)
+    }
+
+    /// Test hook to fake out 'cleaned up' state.
+    func utSetCleanedUp() {
+        state = .cleanedUp
+    }
+
+    /// Test hook to get back to normal.
+    func utSetSetup() {
+        state = .setup
     }
 
     /// Get an `ID` ready to call a method, for example.

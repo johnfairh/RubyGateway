@@ -85,6 +85,12 @@ class TestRbCallable: XCTestCase {
             XCTFail("Managed to get \(val) out of invalid method")
         } catch {
         }
+
+        do {
+            let val = try obj.call("")
+            XCTFail("Managed to get \(val) out of invalid method")
+        } catch {
+        }
     }
 
     // multi-arg-type call

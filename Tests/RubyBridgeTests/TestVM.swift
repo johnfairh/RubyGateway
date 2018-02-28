@@ -162,6 +162,67 @@ class TestVM: XCTestCase {
         XCTAssertTrue(description.contains(version))
     }
 
+    /// Setup failure
+    func testSetupFailures() {
+        try! Ruby.setup()
+
+        RbBridge.vm.utSetSetupError()
+        defer { RbBridge.vm.utSetSetup() }
+
+        // explicit setup() call fails
+        do {
+            try Ruby.setup()
+            XCTFail("Unexpected setup OK in setupError")
+        } catch {
+        }
+
+        // API call doesn't make it to Ruby
+        // (could be a lot more exhaustive...)
+        do {
+            let ret = try Ruby.eval(ruby: "exit!")
+            XCTFail("Unexpected exit pass in setupError - \(ret)")
+        } catch {
+        }
+
+        // scriptname fail-safe
+        XCTAssertEqual("", Ruby.scriptName)
+
+        // verbose fail-safe
+        XCTAssertEqual(.none, Ruby.verbose)
+        Ruby.verbose = .full  // swallowed
+        XCTAssertEqual(.none, Ruby.verbose)
+
+        // debug fail-safe
+        XCTAssertFalse(Ruby.debug)
+        Ruby.debug = true // swallowed
+        XCTAssertFalse(Ruby.debug)
+
+        // type construction fails out safely
+        let strObj: RbObject = "test"
+        let uintObj = RbObject(UInt(200))
+        let intObj: RbObject = -200
+        let dblObj: RbObject = 100.2
+
+        [strObj, uintObj, intObj, dblObj].forEach { obj in
+            XCTAssertTrue(obj.isNil)
+        }
+    }
+
+    /// Cleaned-up state
+    func testCleanedUpFailure() {
+        try! Ruby.setup()
+
+        RbBridge.vm.utSetCleanedUp()
+        defer { RbBridge.vm.utSetSetup() }
+
+        // explicit setup() call fails
+        do {
+            try Ruby.setup()
+            XCTFail("Unexpected setup OK in setupError")
+        } catch {
+        }
+    }
+
     static var allTests = [
         ("testInit", testInit),
         ("testEndToEnd", testEndToEnd),
@@ -173,6 +234,8 @@ class TestVM: XCTestCase {
         ("testDebug", testDebug),
         ("testVerbose", testVerbose),
         ("testScriptName", testScriptName),
-        ("testVersion", testVersion)
+        ("testVersion", testVersion),
+        ("testSetupFailures", testSetupFailures),
+        ("testCleanedUpFailure", testCleanedUpFailure)
     ]
 }

@@ -46,16 +46,17 @@ extension RbConstantAccess {
     ///
     public func getConstant(_ name: String) throws -> RbObject {
         try Ruby.setup()
+        try name.checkRubyConstantName()
+
         var nextValue = rubyValue
-        var first = true
+
         try name.components(separatedBy: "::").forEach { name in
             let rbId = try Ruby.getID(for: name)
-            if first {
+            if nextValue == rubyValue {
                 // For the first item in the path, allow a hit here or above in the hierarchy
                 nextValue = try RbVM.doProtect {
                     rbb_const_get_protect(nextValue, rbId, nil)
                 }
-                first = false
             } else {
                 // Once found a place to start, insist on stepping down from there.
                 nextValue = try RbVM.doProtect {

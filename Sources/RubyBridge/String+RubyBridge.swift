@@ -11,13 +11,13 @@
 import CRuby
 
 extension String {
-
     /// Helper to test type and throw if wrong
     private func check(_ predPath: KeyPath<String, Bool>, _ type: String) throws {
         guard self[keyPath: predPath] else {
             throw RbError.badIdentifier(type: type, id: self)
         }
     }
+
     /// Does the string look like a Ruby constant name?
     var isRubyConstantName: Bool {
         // Ruby supports full utf8 character set for identifiers.
