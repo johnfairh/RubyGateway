@@ -185,4 +185,17 @@ class TestVars: XCTestCase {
         } catch {
         }
     }
+
+    static var allTests = [
+        ("testBuiltinGlobalVar", testBuiltinGlobalVar),
+        ("testNewGlobalVar", testNewGlobalVar),
+        ("testGlobalVarNameCheck", testGlobalVarNameCheck),
+        ("testTopInstanceVar", testTopInstanceVar),
+        ("testInstanceVar", testInstanceVar),
+        ("testIVarNameCheck", testIVarNameCheck),
+        ("testAbsentClassVar", testAbsentClassVar),
+        ("testWriteClassVar", testWriteClassVar),
+        ("testNotClassClassVar", testNotClassClassVar),
+        ("testCVarNameCheck", testCVarNameCheck)
+    ]
 }

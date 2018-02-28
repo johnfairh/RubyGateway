@@ -10,9 +10,13 @@ import XCTest
 
 XCTMain([
     testCase(TestVM.allTests),
+    testCase(TestDemo.allTests),
+    testCase(TestRbObject.allTests),
     testCase(TestNumerics.allTests),
+    testCase(TestMiscObjTypes.allTests),
     testCase(TestStrings.allTests),
     testCase(TestConstants.allTests),
-    testCase(TestRbObject.allTests),
-    testCase(TestMiscObjTypes.allTests)
+    testCase(TestVars.allTests),
+    testCase(TestCallable.allTests),
+    testCase(TestErrors.allTests)
 ])

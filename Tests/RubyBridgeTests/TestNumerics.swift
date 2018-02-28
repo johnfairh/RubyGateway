@@ -312,6 +312,7 @@ class TestNumerics: XCTestCase {
         ("testInt64NumRoundtrip", testInt64NumRoundtrip),
         ("testUInt64NumRoundtrip", testUInt64NumRoundtrip),
         ("testDoubleRoundtrip", testDoubleRoundtrip),
+        ("testFloatRoundtrip", testFloatRoundtrip),
         ("testIntegerTooBig", testIntegerTooBig),
         ("testIntegerObjToNegative", testIntegerObjToNegative),
         ("testNoCustomFloatConversion", testNoCustomFloatConversion),

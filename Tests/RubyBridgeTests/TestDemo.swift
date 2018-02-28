@@ -43,4 +43,9 @@ class TestDemo: XCTestCase {
             XCTFail("Unexpected error: \(error)")
         }
     }
+
+    static var allTests = [
+        ("testRouge", testRouge),
+        ("testWikipedia", testWikipedia)
+    ]
 }

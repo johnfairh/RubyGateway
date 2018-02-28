@@ -32,6 +32,9 @@ class TestRbObject: XCTestCase {
     func testObject() {
         let obj = RbObject(UInt.max)
         rb_gc()
+        rb_gc()
+        rb_gc()
+        rb_gc()
         let backVal = UInt(obj)
         XCTAssertEqual(UInt.max, backVal)
     }
@@ -73,6 +76,8 @@ class TestRbObject: XCTestCase {
     static var allTests = [
         ("testSimple", testSimple),
         ("testObject", testObject),
-        ("testCopy", testCopy)
+        ("testCopy", testCopy),
+        ("testConversions", testConversions),
+        ("testInspect", testInspect)
     ]
 }

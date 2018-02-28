@@ -13,7 +13,6 @@ import CRuby
 class TestRbCallable: XCTestCase {
 
     // array, hash
-    // kw-param - works, excess, missing, optional
 
     // 'global' function
     func testCallGlobal() {
@@ -148,4 +147,17 @@ class TestRbCallable: XCTestCase {
             XCTFail("Unexpected error \(error)")
         }
     }
+
+    static var allTests = [
+        ("testCallGlobal", testCallGlobal),
+        ("testCallGlobalFailure", testCallGlobalFailure),
+        ("testAttribute", testAttribute),
+        ("testVoidCall", testVoidCall),
+        ("testInvalidCall", testInvalidCall),
+        ("testMultiArgCall", testMultiArgCall),
+        ("testMissingArgCall", testMissingArgCall),
+        ("testGetChaining", testGetChaining),
+        ("testKwArgs", testKwArgs),
+        ("testDupKwArgs", testDupKwArgs)
+    ]
 }
