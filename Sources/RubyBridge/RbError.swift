@@ -83,6 +83,8 @@ extension RbError: CustomStringConvertible {
     }
 }
 
+// MARK: - RbException
+
 /// Corresponds to a Ruby exception
 public struct RbException: CustomStringConvertible {
     /// The underlying Ruby exception
@@ -123,6 +125,7 @@ public struct RbException: CustomStringConvertible {
 
     /// The Ruby exception's message
     public var description: String {
-        return String(exception)! // all exceptions have to_s
+        let exceptionClass = try! exception.get("class")
+        return "\(exceptionClass): \(exception)"
     }
 }
