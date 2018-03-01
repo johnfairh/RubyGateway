@@ -128,12 +128,12 @@ class TestVM: XCTestCase {
     func testDebug() {
         do {
             XCTAssertFalse(Ruby.debug)
-            let debugVal1 = try Ruby.eval(ruby: "$DEBUG")
+            let debugVal1 = try Ruby.getGlobalVar("$DEBUG")
             XCTAssertFalse(debugVal1.isTruthy)
 
             Ruby.debug = true
             XCTAssertTrue(Ruby.debug)
-            let debugVal2 = try Ruby.eval(ruby: "$DEBUG")
+            let debugVal2 = try Ruby.getGlobalVar("$DEBUG")
             XCTAssertTrue(debugVal2.isTruthy)
 
             Ruby.debug = false
@@ -147,17 +147,17 @@ class TestVM: XCTestCase {
     func testVerbose() {
         do {
             XCTAssertEqual(.medium, Ruby.verbose)
-            let verboseVal1 = try Ruby.eval(ruby: "$VERBOSE")
+            let verboseVal1 = try Ruby.getGlobalVar("$VERBOSE")
             XCTAssertEqual(Qfalse, verboseVal1.rubyValue)
 
             Ruby.verbose = .full
             XCTAssertEqual(.full, Ruby.verbose)
-            let verboseVal2 = try Ruby.eval(ruby: "$VERBOSE")
+            let verboseVal2 = try Ruby.getGlobalVar("$VERBOSE")
             XCTAssertEqual(Qtrue, verboseVal2.rubyValue)
 
             Ruby.verbose = .none
             XCTAssertEqual(.none, Ruby.verbose)
-            let verboseVal3 = try Ruby.eval(ruby: "$VERBOSE")
+            let verboseVal3 = try Ruby.getGlobalVar("$VERBOSE")
             XCTAssertEqual(Qnil, verboseVal3.rubyValue)
 
             Ruby.verbose = .medium

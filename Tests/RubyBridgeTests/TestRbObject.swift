@@ -66,10 +66,10 @@ class TestRbObject: XCTestCase {
     // inspect
     func testInspect() {
         try! Ruby.require(filename: Helpers.fixturePath("inspectables.rb"))
-        let uninspectable = try! Ruby.eval(ruby: "Uninspectable.new")
+        let uninspectable = try! Ruby.get("Uninspectable").call("new")
         XCTAssertEqual("[Indescribable]", uninspectable.debugDescription)
 
-        let inspectable = try! Ruby.eval(ruby: "Inspectable.new")
+        let inspectable = try! Ruby.get("Inspectable").call("new")
         print(inspectable.debugDescription)
     }
 

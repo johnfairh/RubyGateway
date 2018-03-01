@@ -44,7 +44,7 @@ class TestStrings: XCTestCase {
 
         let instance: RbObject
         do {
-            instance = try Ruby.eval(ruby: "Nonconvert.new")
+            instance = try Ruby.get("Nonconvert").call("new")
             XCTAssertEqual(.T_OBJECT, instance.rubyType)
         } catch {
             XCTFail("Unexpected error: \(error)")
@@ -61,8 +61,8 @@ class TestStrings: XCTestCase {
     func testConversion() {
         try! Ruby.require(filename: Helpers.fixturePath("nonconvert.rb"))
 
-        let i1 = try! Ruby.eval(ruby: "JustToS.new")
-        let i2 = try! Ruby.eval(ruby: "BothToSAndToStr.new")
+        let i1 = try! Ruby.get("JustToS").call("new")
+        let i2 = try! Ruby.get("BothToSAndToStr").call("new")
 
         guard let _ = String(i1) else {
             XCTFail("Couldn't convert JustToS")
