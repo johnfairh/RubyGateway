@@ -21,14 +21,17 @@ class TestVM: XCTestCase {
     /// Check whole thing is broadly functional
     func testEndToEnd() {
         do {
-            let rc = try Ruby.require(filename: Helpers.fixturePath("backwards.rb"))
+            let rc = try Ruby.require(filename: Helpers.fixturePath("endtoend.rb"))
             XCTAssertTrue(rc)
 
-            let string = "natural"
+            let ver = 1.2
+            let name = "fred"
 
-            let str = try Ruby.call("backwards", args: [string])
+            let obj = try Ruby.get("RubyBridge").get("EndToEnd").call("new", args: [ver], kwArgs: [("name", name)])
 
-            XCTAssertEqual(String(string.reversed()), String(str))
+            try XCTAssertEqual(ver, Double(obj.get("version")))
+            try XCTAssertEqual(name, String(obj.get("name")))
+            XCTAssertEqual("\(name) (version \(ver))", obj.description)
         } catch {
             XCTFail("Unexpected exception, \(error)")
         }
@@ -67,19 +70,33 @@ class TestVM: XCTestCase {
         do {
             let rc = try Ruby.require(filename: "not-ruby") // fail
             XCTFail("vm.require unexpectedly passed, rc=\(rc)")
+        } catch RbError.rubyException(let exn) {
+            XCTAssertTrue(exn.description.contains("LoadError: cannot load such file"))
         } catch {
-            print("Got expected exception: \(error)")
+            XCTFail("Unexpected exception: \(error)")
         }
     }
 
     /// 'load' works
     func testLoad() {
         do {
-            try Ruby.load(filename: Helpers.fixturePath("backwards.rb"))
+            // load wrapped version - no access
+            try Ruby.load(filename: Helpers.fixturePath("backwards.rb"), wrap: true)
 
-            try Ruby.load(filename: Helpers.fixturePath("backwards.rb"))
+            let str = "forwards"
 
-            // TODO: need better test with some mutating state
+            do {
+                let rc = try Ruby.call("backwards", args: [str])
+                XCTFail("Managed to resolve backwards global: \(rc)")
+            } catch {
+            }
+
+            // now load unwrapped
+            try Ruby.load(filename: Helpers.fixturePath("backwards.rb"), wrap: false)
+
+            let rc = try Ruby.call("backwards", args: [str])
+            XCTAssertEqual(String(str.reversed()), String(rc))
+
         } catch {
             XCTFail("Unexpected exception: \(error)")
         }
@@ -89,8 +106,10 @@ class TestVM: XCTestCase {
         do {
             try Ruby.load(filename: "Should fail")
             XCTFail("Managed to load nonexistent file")
+        } catch RbError.rubyException(let exn) {
+            XCTAssertTrue(exn.description.contains("LoadError: cannot load such file"))
         } catch {
-            // TODO: check sensible error
+            XCTFail("Unexpected error: \(error)")
         }
     }
 
@@ -98,8 +117,10 @@ class TestVM: XCTestCase {
         do {
             try Ruby.load(filename: Helpers.fixturePath("unloadable.rb"))
             XCTFail("Managed to load unloadable file")
+        } catch RbError.rubyException(let exn) {
+            XCTAssertTrue(exn.description.contains("SyntaxError:"))
         } catch {
-            // TODO: check sensible error
+            XCTFail("Unexpected error: \(error)")
         }
     }
 

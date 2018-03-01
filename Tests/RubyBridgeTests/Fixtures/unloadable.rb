@@ -1,1 +1,1 @@
-require 'does not exist'
+this is not ruby
