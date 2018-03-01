@@ -37,7 +37,7 @@ class TestCallable: XCTestCase {
     private func getNewMethodTest() -> RbObject {
         do {
             try Ruby.require(filename: Helpers.fixturePath("methods.rb"))
-            return try Ruby.getClass("MethodsTest").call("new")
+            return RbObject(ofClass: "MethodsTest")!
         } catch {
             XCTFail("Unexpected exception: \(error)")
             return RbObject(rubyValue: Qundef)

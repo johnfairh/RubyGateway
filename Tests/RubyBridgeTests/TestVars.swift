@@ -88,7 +88,10 @@ class TestVars: XCTestCase {
         do {
             try Ruby.require(filename: Helpers.fixturePath("methods.rb"))
 
-            let obj = try Ruby.get("MethodsTest").call("new")
+            guard let obj = RbObject(ofClass: "MethodsTest") else {
+                XCTFail("Couldn't create object")
+                return
+            }
 
             let ivarName = "@property"
             let ivarObj = try obj.getInstanceVar(ivarName)

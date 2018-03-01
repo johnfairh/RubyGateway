@@ -72,6 +72,28 @@ public final class RbObject: RbConstantAccess, RbInstanceAccess {
     public static let nilObject = RbObject(rubyValue: Qnil)
 }
 
+/// MARK: - Useful compound initializers
+
+extension RbObject {
+    /// Create an instance of a given Ruby class.
+    ///
+    /// Fails (returns `nil`) if anything goes wrong along the way - check `RbError.history` to
+    /// find out what failed.
+    ///
+    /// - parameter ofClass: Name of the class to instantiate.  Can contain `::` to drill
+    ///             down into module/etc. scope.
+    /// - parameter args: positional arguments to pass to `new` call for the object.  Default none.
+    /// - parameter kwArgs: keyword arguments to pass to the `new` call for the object.  Default none.
+    public convenience init?(ofClass className: String,
+                             args: [RbObjectConvertible] = [],
+                             kwArgs: [(String, RbObjectConvertible)] = []) {
+        guard let obj = try? Ruby.get(className).call("new", args: args, kwArgs: kwArgs) else {
+            return nil
+        }
+        self.init(obj)
+    }
+}
+
 /// MARK: - String convertible for various debugging APIs
 
 extension RbObject: CustomStringConvertible {
@@ -90,7 +112,7 @@ extension RbObject: CustomDebugStringConvertible {
     /// This is the result of `inspect` with a fallback to `description`.
     public var debugDescription: String {
         if let value = try? RbVM.doProtect { () -> VALUE in
-            rbb_inspect_protect(self.rubyValue, nil)},
+            rbb_inspect_protect(rubyValue, nil)},
            let str = String(RbObject(rubyValue: value)) {
             return str
         }

@@ -244,7 +244,10 @@ class TestNumerics: XCTestCase {
     func testIntegerObjToNegative() {
         try! Ruby.require(filename: Helpers.fixturePath("numbers.rb"))
 
-        let negaObj = try! Ruby.get("TestNumbers").call("new")
+        guard let negaObj = RbObject(ofClass: "TestNumbers") else {
+            XCTFail("Couldn't create object")
+            return
+        }
 
         if let num = UInt(negaObj) {
             XCTFail("Managed to convert object to a negative number to unsigned: \(num)")
@@ -254,7 +257,10 @@ class TestNumerics: XCTestCase {
     // Object has no to_f
     func testNoCustomFloatConversion() {
         try! Ruby.require(filename: Helpers.fixturePath("nonconvert.rb"))
-        let instObj = try! Ruby.get("Nonconvert").call("new")
+        guard let instObj = RbObject(ofClass: "Nonconvert") else {
+            XCTFail("Couldn't create object")
+            return
+        }
         if let dblNum = Double(instObj) {
             XCTFail("Managed to convert object to double: \(dblNum)")
         }

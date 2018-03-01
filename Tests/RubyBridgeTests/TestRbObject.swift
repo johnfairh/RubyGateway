@@ -66,11 +66,24 @@ class TestRbObject: XCTestCase {
     // inspect
     func testInspect() {
         try! Ruby.require(filename: Helpers.fixturePath("inspectables.rb"))
-        let uninspectable = try! Ruby.get("Uninspectable").call("new")
+        guard let uninspectable = RbObject(ofClass: "Uninspectable") else {
+            XCTFail("Couldn't create object")
+            return
+        }
         XCTAssertEqual("[Indescribable]", uninspectable.debugDescription)
 
-        let inspectable = try! Ruby.get("Inspectable").call("new")
+        guard let inspectable = RbObject(ofClass: "Inspectable") else {
+            XCTFail("Couldn't create object")
+            return
+        }
         print(inspectable.debugDescription)
+    }
+
+    // new helper (goodpath covered elsewhere)
+    func testNewInstance() {
+        if let obj = RbObject(ofClass: "DoesNotExist") {
+            XCTFail("Managed to create object of odd class: \(obj)")
+        }
     }
 
     static var allTests = [
@@ -78,6 +91,7 @@ class TestRbObject: XCTestCase {
         ("testObject", testObject),
         ("testCopy", testCopy),
         ("testConversions", testConversions),
-        ("testInspect", testInspect)
+        ("testInspect", testInspect),
+        ("testNewInstance", testNewInstance)
     ]
 }

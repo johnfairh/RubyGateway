@@ -27,7 +27,10 @@ class TestVM: XCTestCase {
             let ver = 1.2
             let name = "fred"
 
-            let obj = try Ruby.get("RubyBridge").get("EndToEnd").call("new", args: [ver], kwArgs: [("name", name)])
+            guard let obj = RbObject(ofClass: "RubyBridge::EndToEnd", args: [ver], kwArgs: [("name", name)]) else {
+                XCTFail("Couldn't create object")
+                return
+            }
 
             try XCTAssertEqual(ver, Double(obj.get("version")))
             try XCTAssertEqual(name, String(obj.get("name")))
