@@ -49,9 +49,6 @@ VALUE rbb_funcallv_protect(VALUE value, ID id,
 /// Safely call `rb_cvar_get` and report exception status.
 VALUE rbb_cvar_get_protect(VALUE clazz, ID id, int * _Nullable status);
 
-/// Wrap up RB_BUILTIN_TYPE for Swift
-int rbb_RB_BUILTIN_TYPE(VALUE value);
-
 /// Safely call `rb_String` and report exception status.
 VALUE rbb_String_protect(VALUE v, int * _Nullable status);
 

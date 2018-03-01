@@ -137,7 +137,7 @@ extension RbInstanceAccess {
 
     // Check the associated rubyValue is for a class.
     private func checkClass() throws {
-        guard RB_TYPE_P(rubyValue, .T_CLASS) else {
+        guard TYPE(rubyValue) == .T_CLASS else {
             try RbError.raise(error: .badType("\(rubyValue) is not a class, cannot get/setClassVar() on it."))
         }
     }

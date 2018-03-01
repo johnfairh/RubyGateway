@@ -19,8 +19,7 @@ class TestNumerics: XCTestCase {
         values.forEach { val in
             XCTAssertTrue(RB_FIXABLE(val))
             let rubyVal = RB_LONG2FIX(val)
-            XCTAssertTrue(RB_FIXNUM_P(rubyVal))
-            XCTAssertTrue(RB_TYPE_P(rubyVal, .T_FIXNUM))
+            XCTAssertEqual(.T_FIXNUM, TYPE(rubyVal))
             let back = RB_FIX2LONG(rubyVal)
             XCTAssertEqual(val, back)
             if val > 0 {
@@ -154,7 +153,6 @@ class TestNumerics: XCTestCase {
                       Double.infinity]
         values.forEach { val in
             let rubyObj = RbObject(val)
-            XCTAssertTrue(!RB_FLONUM_P(rubyObj.rubyValue) || val == 0.0)
             guard let swiftVal = Double(rubyObj) else {
                 XCTFail("Couldn't convert \(val) back to Swift")
                 return
@@ -175,7 +173,7 @@ class TestNumerics: XCTestCase {
                       Float.infinity]
         values.forEach { val in
             let rubyObj = RbObject(val)
-            XCTAssertTrue(RB_FLOAT_TYPE_P(rubyObj.rubyValue))
+            XCTAssertEqual(.T_FLOAT, rubyObj.rubyType)
             guard let swiftVal = Float(rubyObj) else {
                 XCTFail("Couldn't convert \(val) back to Swift")
                 return
@@ -287,7 +285,7 @@ class TestNumerics: XCTestCase {
         let val2: RbObject = 4.14441
 
         XCTAssertEqual(.T_FIXNUM, val1.rubyType)
-        XCTAssertTrue(RB_FLOAT_TYPE_P(val2.rubyValue))
+        XCTAssertEqual(.T_FLOAT, val2.rubyType)
 
         guard let swVal1 = UInt(val1), let swVal2 = Double(val2) else {
             XCTFail("Couldn't convert back to Swift")

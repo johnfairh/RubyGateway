@@ -181,11 +181,6 @@ VALUE rbb_cvar_get_protect(VALUE clazz, ID id, int * _Nullable status)
 // a wrapper that looks type-safe for Swift to call.
 //
 
-int rbb_RB_BUILTIN_TYPE(VALUE value)
-{
-    return RB_BUILTIN_TYPE(value);
-}
-
 //
 // # String methods
 //
