@@ -15,13 +15,13 @@
  * It would be part of the RubyBridge module directly but SPM does not approve.
  */
 
-/* Linux clang 5 is unhappy with @import syntax when processing this
+/* Linux Clang 6 is unhappy with @import syntax when processing this
  * lib's module map as part of building the Swift module RubyBridge.
- * Linux issue or Clang issue? TBD, need something more modern than Ubuntu
- * 14.04 or figure out how to install clang > 5 there.
+ * ???
  */
 #ifdef __linux__
 typedef unsigned long VALUE;
+typedef VALUE ID;
 #else
 @import CRuby;
 #endif

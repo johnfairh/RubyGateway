@@ -10,7 +10,7 @@ import CRuby
 @testable /* Qtrue */ import RubyBridge
 
 /// Message send tests
-class TestRbCallable: XCTestCase {
+class TestCallable: XCTestCase {
 
     // array, hash
 

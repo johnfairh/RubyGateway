@@ -18,7 +18,8 @@ class TestDemo: XCTestCase {
         }
 
         do {
-            let swiftText = try String(contentsOf: URL(fileURLWithPath: #file))
+            // Careful to avoid String methods that are unimplemented on Linux....
+            let swiftText = try String(contentsOfFile: URL(fileURLWithPath: #file).path, encoding: .utf8)
 
             let html = try Ruby.get("Rouge").call("highlight", args: [swiftText, "swift", "html"])
 

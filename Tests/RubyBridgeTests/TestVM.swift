@@ -61,7 +61,7 @@ class TestVM: XCTestCase {
             let rc2 = try Ruby.require(filename: "pp") // Internal, repeat
             XCTAssertFalse(rc2)
 
-            let rc3 = try Ruby.require(filename: "minitest") // Gem shipped since 2.3ish
+            let rc3 = try Ruby.require(filename: "rdoc") // Gem shipped apparently everywhere??
             XCTAssertTrue(rc3)
         } catch {
             XCTFail("Unexpected exception: \(error)")
