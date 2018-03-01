@@ -61,24 +61,89 @@
 // of `client_2` in regular C that is totally happy to be longjmp()d over.
 //
 
-// rb_load -- rb_load_protect exists but doesn't protect against exceptions
-// raised by the file being loaded, just the filename lookup part.
-typedef struct
-{
-    VALUE fname;
-    bool  wrap;
-} Rbb_load_params;
+// Just use a single type with a cookie to pass params down the stack.
+// I had a lovely version using blocks but then tried to build it on Linux ;-(
 
-static VALUE rbb_load_thunk(VALUE value)
+typedef enum {
+    RBB_JOB_LOAD,
+    RBB_JOB_INTERN,
+    RBB_JOB_CONST_GET,
+    RBB_JOB_CONST_GET_AT,
+    RBB_JOB_FUNCALLV,
+    RBB_JOB_CVAR_GET,
+    RBB_JOB_TO_ULONG,
+    RBB_JOB_TO_LONG,
+    RBB_JOB_TO_DOUBLE,
+} Rbb_job;
+
+typedef struct {
+    Rbb_job       job;
+
+    VALUE         value;
+    ID            id;
+
+    bool          loadWrap;
+    const char   *internName;
+    int           funcallvArgc;
+    const VALUE  *funcallvArgv;
+    double        toDoubleResult;
+} Rbb_protect_data;
+
+#define RBB_PDATA_TO_VALUE(pdata) ((uintptr_t)(void *)(pdata))
+#define RBB_VALUE_TO_PDATA(value) ((Rbb_protect_data *)(void *)(uintptr_t)(value))
+
+static VALUE rbb_obj2ulong(VALUE v);
+
+/// Callback made by Ruby from `rb_protect` -- OK to raise exceptions from here.
+static VALUE rbb_protect_thunk(VALUE value)
 {
-    Rbb_load_params *params = (Rbb_load_params *)(void *)(uintptr_t)value;
-    rb_load(params->fname, params->wrap);
-    return Qundef;
+    Rbb_protect_data *d = RBB_VALUE_TO_PDATA(value);
+    VALUE rc = Qundef;
+
+    switch (d->job)
+    {
+    case RBB_JOB_LOAD:
+        rb_load(d->value, d->loadWrap);
+        break;
+    case RBB_JOB_INTERN:
+        rc = (VALUE) rb_intern(d->internName);
+        break;
+    case RBB_JOB_CONST_GET:
+        rc = rb_const_get(d->value, d->id);
+        break;
+    case RBB_JOB_CONST_GET_AT:
+        rc = rb_const_get_at(d->value, d->id);
+        break;
+    case RBB_JOB_FUNCALLV:
+        rc = rb_funcallv(d->value, d->id, d->funcallvArgc, d->funcallvArgv);
+        break;
+    case RBB_JOB_CVAR_GET:
+        rc = rb_cvar_get(d->value, d->id);
+        break;
+    case RBB_JOB_TO_ULONG:
+        rc = rbb_obj2ulong(d->value);
+        break;
+    case RBB_JOB_TO_LONG:
+        rc = (VALUE) RB_NUM2LONG(rb_Integer(d->value));
+        break;
+    case RBB_JOB_TO_DOUBLE:
+        d->toDoubleResult = NUM2DBL(rb_Float(d->value));
+        break;
+    }
+    return rc;
 }
 
+/// Run the job described by `data` and report exception status in `status`.
+static VALUE rbb_protect(Rbb_protect_data * _Nonnull data, int * _Nullable status)
+{
+    return rb_protect(rbb_protect_thunk, RBB_PDATA_TO_VALUE(data), status);
+}
+
+// rb_load -- rb_load_protect exists but doesn't protect against exceptions
+// raised by the file being loaded, just the filename lookup part.
 void rbb_load_protect(VALUE fname, int wrap, int * _Nullable status)
 {
-    Rbb_load_params params = { .fname = fname, .wrap = (bool) wrap };
+    Rbb_protect_data data = { .job = RBB_JOB_LOAD, .value = fname, .loadWrap = wrap };
 
     // rb_load_protect has another bug, if you send it null status
     // then it accesses the pointer anyway.  Recent regression, will try to fix...
@@ -88,105 +153,61 @@ void rbb_load_protect(VALUE fname, int wrap, int * _Nullable status)
         status = &tmpStatus;
     }
 
-    (void) rb_protect(rbb_load_thunk, (uintptr_t)(void *)(&params), status);
+    (void) rbb_protect(&data, status);
 }
 
-static VALUE rbb_intern_thunk(VALUE value)
-{
-    const char *name = (const char *)(void *)value;
-    return rb_intern(name);
-}
-
+// rb_intern - can technically run out of IDs....
 ID rbb_intern_protect(const char * _Nonnull name, int * _Nullable status)
 {
-    return rb_protect(rbb_intern_thunk, (VALUE)(void *)name, status);
+    Rbb_protect_data data = { .job = RBB_JOB_INTERN, .internName = name };
+    return (ID) rbb_protect(&data, status);
 }
 
-typedef struct
-{
-    VALUE   value;
-    ID      id;
-    VALUE (*fn)(VALUE, ID);
-} Rbb_const_get_params;
-
-static VALUE rbb_const_get_thunk(VALUE value)
-{
-    Rbb_const_get_params *params = (Rbb_const_get_params *)(void *)value;
-    return params->fn(params->value, params->id);
-}
-
+// rb_const_get - raises if not found
 VALUE rbb_const_get_protect(VALUE value, ID id, int * _Nullable status)
 {
-    Rbb_const_get_params params = { .value = value, .id = id, .fn = rb_const_get };
-    return rb_protect(rbb_const_get_thunk, (VALUE)(void *)(&params), status);
+    Rbb_protect_data data = { .job = RBB_JOB_CONST_GET, .value = value, .id = id };
+    return rbb_protect(&data, status);
 }
 
+// rb_const_get_at - raises if not found
 VALUE rbb_const_get_at_protect(VALUE value, ID id, int * _Nullable status)
 {
-    Rbb_const_get_params params = { .value = value, .id = id, .fn = rb_const_get_at };
-    return rb_protect(rbb_const_get_thunk, (VALUE)(void *)(&params), status);
+    Rbb_protect_data data = { .job = RBB_JOB_CONST_GET_AT, .value = value, .id = id };
+    return rbb_protect(&data, status);
 }
 
+// rb_inspect - raises if can't get a string out
 VALUE rbb_inspect_protect(VALUE value, int * _Nullable status)
 {
     return rb_protect(rb_inspect, value, status);
 }
 
-typedef struct
-{
-    VALUE        value;
-    ID           id;
-    int          argc;
-    const VALUE *argv;
-} Rbb_funcallv_params;
-
-static VALUE rbb_funcallv_thunk(VALUE value)
-{
-    Rbb_funcallv_params *params = (Rbb_funcallv_params *)(void *)value;
-    return rb_funcallv(params->value, params->id, params->argc, params->argv);
-}
-
+// rb_funcallv - run arbitrary code
 VALUE rbb_funcallv_protect(VALUE value, ID id,
                            int argc, const VALUE * _Nonnull argv,
                            int * _Nullable status)
 {
-    Rbb_funcallv_params params = { .value = value, .id = id, .argc = argc, .argv = argv };
-    return rb_protect(rbb_funcallv_thunk, (VALUE)(void *)(&params), status);
+    Rbb_protect_data data = { .job = RBB_JOB_FUNCALLV, .value = value, .id = id,
+                              .funcallvArgc = argc, .funcallvArgv = argv };
+    return rbb_protect(&data, status);
 }
 
-typedef struct
-{
-    VALUE clazz;
-    ID    id;
-} Rbb_cvar_get_params;
-
-static VALUE rbb_cvar_get_thunk(VALUE value)
-{
-    Rbb_cvar_get_params *params = (Rbb_cvar_get_params *)(void *)value;
-    return rb_cvar_get(params->clazz, params->id);
-}
-
+// rb_cvar_get - raises if you look at it funny
 VALUE rbb_cvar_get_protect(VALUE clazz, ID id, int * _Nullable status)
 {
-    Rbb_cvar_get_params params = { .clazz = clazz, .id = id };
-    return rb_protect(rbb_cvar_get_thunk, (VALUE)(void *)(&params), status);
+    Rbb_protect_data data = { .job = RBB_JOB_CVAR_GET, .value = clazz, .id = id };
+    return rbb_protect(&data, status);
 }
 
-//
-// # String methods
-//
-// `rb_String` tries `to_str` then `to_s`.
-// It raises an exception if it can't get a T_STRING out of
-// one of those.
-//
-
+// rb_String - raises if it can't get a string out.
 VALUE rbb_String_protect(VALUE v, int * _Nullable status)
 {
     return rb_protect(rb_String, v, status);
 }
 
 //
-// # Numeric conversion
+// Integer numeric conversion
 //
 // Ruby allows implicit signed -> unsigned conversion which is too
 // slapdash for the Swift interface.  This seems to be remarkably
@@ -202,7 +223,7 @@ static int rbb_numeric_ish_type(VALUE v)
            RB_TYPE_P(v, T_BIGNUM);
 }
 
-static VALUE rbb_obj2ulong_thunk(VALUE v)
+static VALUE rbb_obj2ulong(VALUE v)
 {
     // Drill down to find something we can actually compare to zero.
     while (!rbb_numeric_ish_type(v))
@@ -234,37 +255,24 @@ static VALUE rbb_obj2ulong_thunk(VALUE v)
     return rb_num2ulong(v);
 }
 
+// rb_obj2ulong - raises if can't do conversion
 unsigned long rbb_obj2ulong_protect(VALUE v, int * _Nullable status)
 {
-    return rb_protect(rbb_obj2ulong_thunk, v, status);
+    Rbb_protect_data data = { .job = RBB_JOB_TO_ULONG, .value = v };
+    return rbb_protect(&data, status);
 }
 
-static VALUE rbb_obj2long_thunk(VALUE v)
-{
-    return (VALUE) RB_NUM2LONG(rb_Integer(v));
-}
-
+// rb_num2long etc. - raises if can't do conversion
 long rbb_obj2long_protect(VALUE v, int * _Nullable status)
 {
-    return (long) rb_protect(rbb_obj2long_thunk, v, status);
+    Rbb_protect_data data = { .job = RBB_JOB_TO_LONG, .value = v };
+    return rbb_protect(&data, status);
 }
 
-typedef struct
-{
-    VALUE  value;
-    double dblVal;
-} Rbb_obj2double_params;
-
-static VALUE rbb_obj2double_thunk(VALUE v)
-{
-    Rbb_obj2double_params *params = (Rbb_obj2double_params *)(void *)v;
-    params->dblVal = NUM2DBL(rb_Float(params->value));
-    return 0;
-}
-
+// rb_Float - raises if can't do conversion.
 double rbb_obj2double_protect(VALUE v, int * _Nullable status)
 {
-    Rbb_obj2double_params params = { .value = v, .dblVal = 0 };
-    (void) rb_protect(rbb_obj2double_thunk, (VALUE) (void *) &params, status);
-    return params.dblVal;
+    Rbb_protect_data data = { .job = RBB_JOB_TO_DOUBLE, .value = v };
+    rbb_protect(&data, status);
+    return data.toDoubleResult;
 }

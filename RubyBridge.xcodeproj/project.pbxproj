@@ -15,7 +15,7 @@
 		0205A8AB204423E400076840 /* TestVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205A8AA204423E400076840 /* TestVars.swift */; };
 		022F3AB220360B9F009E69BE /* CRubyMacros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3AB120360B9F009E69BE /* CRubyMacros.swift */; };
 		022F3AC12036D72A009E69BE /* rbb_helpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 022F3ABE2036D721009E69BE /* rbb_helpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		022F3AC22036D731009E69BE /* rbb_helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 022F3ABD2036D721009E69BE /* rbb_helpers.m */; };
+		022F3AC22036D731009E69BE /* rbb_protect.m in Sources */ = {isa = PBXBuildFile; fileRef = 022F3ABD2036D721009E69BE /* rbb_protect.m */; };
 		022F3AC42036D82F009E69BE /* module.modulemap in Headers */ = {isa = PBXBuildFile; fileRef = 022F3AC32036D816009E69BE /* module.modulemap */; settings = {ATTRIBUTES = (Public, ); }; };
 		022F3AC62036D85A009E69BE /* libRubyBridgeHelpers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 022F3AB72036D4DD009E69BE /* libRubyBridgeHelpers.a */; };
 		022F3AC92037153A009E69BE /* TestNumerics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3AC82037153A009E69BE /* TestNumerics.swift */; };
@@ -62,7 +62,7 @@
 		0205A8AA204423E400076840 /* TestVars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVars.swift; sourceTree = "<group>"; };
 		022F3AB120360B9F009E69BE /* CRubyMacros.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRubyMacros.swift; sourceTree = "<group>"; };
 		022F3AB72036D4DD009E69BE /* libRubyBridgeHelpers.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRubyBridgeHelpers.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		022F3ABD2036D721009E69BE /* rbb_helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rbb_helpers.m; sourceTree = "<group>"; };
+		022F3ABD2036D721009E69BE /* rbb_protect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rbb_protect.m; sourceTree = "<group>"; };
 		022F3ABE2036D721009E69BE /* rbb_helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = rbb_helpers.h; path = include/rbb_helpers.h; sourceTree = "<group>"; };
 		022F3AC32036D816009E69BE /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = include/module.modulemap; sourceTree = "<group>"; };
 		022F3AC82037153A009E69BE /* TestNumerics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestNumerics.swift; sourceTree = "<group>"; };
@@ -126,7 +126,7 @@
 			children = (
 				022F3AC32036D816009E69BE /* module.modulemap */,
 				022F3ABE2036D721009E69BE /* rbb_helpers.h */,
-				022F3ABD2036D721009E69BE /* rbb_helpers.m */,
+				022F3ABD2036D721009E69BE /* rbb_protect.m */,
 				02300761204805B500044B8E /* rbb_value.m */,
 				023007632048075500044B8E /* rbb_macros.m */,
 			);
@@ -375,7 +375,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02300762204805B500044B8E /* rbb_value.m in Sources */,
-				022F3AC22036D731009E69BE /* rbb_helpers.m in Sources */,
+				022F3AC22036D731009E69BE /* rbb_protect.m in Sources */,
 				023007642048075500044B8E /* rbb_macros.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
