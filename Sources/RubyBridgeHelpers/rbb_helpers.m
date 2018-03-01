@@ -7,6 +7,8 @@
 
 @import CRuby;
 #import "rbb_helpers.h"
+#import <stdbool.h>
+#import <stdint.h>
 
 //
 // # Thunks for Exception Handling
@@ -64,19 +66,19 @@
 typedef struct
 {
     VALUE fname;
-    int   wrap;
+    bool  wrap;
 } Rbb_load_params;
 
 static VALUE rbb_load_thunk(VALUE value)
 {
-    Rbb_load_params *params = (Rbb_load_params *)(void *)value;
+    Rbb_load_params *params = (Rbb_load_params *)(void *)(uintptr_t)value;
     rb_load(params->fname, params->wrap);
     return Qundef;
 }
 
 void rbb_load_protect(VALUE fname, int wrap, int * _Nullable status)
 {
-    Rbb_load_params params = { .fname = fname, .wrap = wrap };
+    Rbb_load_params params = { .fname = fname, .wrap = (bool) wrap };
 
     // rb_load_protect has another bug, if you send it null status
     // then it accesses the pointer anyway.  Recent regression, will try to fix...
@@ -86,7 +88,7 @@ void rbb_load_protect(VALUE fname, int wrap, int * _Nullable status)
         status = &tmpStatus;
     }
 
-    (void) rb_protect(rbb_load_thunk, (VALUE)(void *)(&params), status);
+    (void) rb_protect(rbb_load_thunk, (uintptr_t)(void *)(&params), status);
 }
 
 static VALUE rbb_intern_thunk(VALUE value)
@@ -171,17 +173,6 @@ VALUE rbb_cvar_get_protect(VALUE clazz, ID id, int * _Nullable status)
 }
 
 //
-// # Difficult Macros
-//
-// Some of the ruby.h API is too groady for the Swift Clang Importer to
-// tolerate, usually because the C has difficult typecasts in it but sometimes
-// for no obvious reason.
-// 
-// Some of these APIs are pretty useful so we reimplement them here providing
-// a wrapper that looks type-safe for Swift to call.
-//
-
-//
 // # String methods
 //
 // `rb_String` tries `to_str` then `to_s`.
@@ -192,18 +183,6 @@ VALUE rbb_cvar_get_protect(VALUE clazz, ID id, int * _Nullable status)
 VALUE rbb_String_protect(VALUE v, int * _Nullable status)
 {
     return rb_protect(rb_String, v, status);
-}
-
-// The RSTRING routines accesss the underlying structures
-// that have too many unions for Swift to access safely.
-long rbb_RSTRING_LEN(VALUE v)
-{
-    return RSTRING_LEN(v);
-}
-
-const char *rbb_RSTRING_PTR(VALUE v)
-{
-    return RSTRING_PTR(v);
 }
 
 //
@@ -288,57 +267,4 @@ double rbb_obj2double_protect(VALUE v, int * _Nullable status)
     Rbb_obj2double_params params = { .value = v, .dblVal = 0 };
     (void) rb_protect(rbb_obj2double_thunk, (VALUE) (void *) &params, status);
     return params.dblVal;
-}
-
-//
-// # Version constants
-//
-// These are exported as char [] which don't get imported
-//
-
-const char *rbb_ruby_version(void)
-{
-    return ruby_version;
-}
-
-const char *rbb_ruby_description(void)
-{
-    return ruby_description;
-}
-
-//
-// # VALUE protection
-//
-
-Rbb_value * _Nonnull rbb_value_alloc(VALUE value)
-{
-    Rbb_value *box = malloc(sizeof(*box));
-    if (box == NULL) {
-        // No good way out here, don't want to make the RbEnv
-        // initializers failable.
-        abort();
-    }
-    box->value = value;
-
-    // Subtlety - it would do no harm to register constants except that
-    // in the scenario where Ruby is not functioning we use Qnil etc. instead
-    // of actual values to avoid crashing.
-    if (!RB_SPECIAL_CONST_P(value)) {
-        rb_gc_register_address(&box->value);
-    }
-    return box;
-}
-
-Rbb_value *rbb_value_dup(const Rbb_value * _Nonnull box)
-{
-    return rbb_value_alloc(box->value);
-}
-
-void rbb_value_free(Rbb_value * _Nonnull box)
-{
-    if (!RB_SPECIAL_CONST_P(box->value)) {
-        rb_gc_unregister_address(&box->value);
-    }
-    box->value = Qundef;
-    free(box);
 }
