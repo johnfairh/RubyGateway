@@ -12,8 +12,6 @@ import CRuby
 /// Message send tests
 class TestCallable: XCTestCase {
 
-    // array, hash
-
     // 'global' function
     func testCallGlobal() {
         do {
@@ -154,6 +152,35 @@ class TestCallable: XCTestCase {
         }
     }
 
+    // call via symbol
+    func testCallViaSymbol() {
+        let obj = getNewMethodTest()
+
+        do {
+            let methodSym = try obj.getInstanceVar("@doubleMethod")
+            XCTAssertEqual(.T_SYMBOL, methodSym.rubyType)
+
+            let val = 38
+            let result = try obj.call(symbol: methodSym, args: [38])
+            XCTAssertEqual(val * 2, Int(result))
+        } catch {
+            XCTFail("Unexpected exception \(error)")
+        }
+    }
+
+    // call via symbol - error case
+    func testCallViaSymbolNotSymbol() {
+        let obj = getNewMethodTest()
+
+        do {
+            let res = try obj.call(symbol: RbObject("double"), args:[100])
+            XCTFail("Managed to call something: \(res)")
+        } catch RbError.badType(_) {
+        } catch {
+            XCTFail("Unexpected exception: \(error)")
+        }
+    }
+
     static var allTests = [
         ("testCallGlobal", testCallGlobal),
         ("testCallGlobalFailure", testCallGlobalFailure),
@@ -164,6 +191,7 @@ class TestCallable: XCTestCase {
         ("testMissingArgCall", testMissingArgCall),
         ("testGetChaining", testGetChaining),
         ("testKwArgs", testKwArgs),
-        ("testDupKwArgs", testDupKwArgs)
+        ("testDupKwArgs", testDupKwArgs),
+        ("testCallViaSymbol", testCallViaSymbol)
     ]
 }

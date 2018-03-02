@@ -6,7 +6,7 @@
 //
 
 // This file has tedious repetitions of the numeric convertible adoption
-// for the fixed-width integer types and float.
+// and their doc comments for the fixed-width integer types and float.
 
 // MARK: - Unsigned
 
@@ -18,7 +18,7 @@ extension UInt64: RbObjectConvertible {
     /// 2. Is numeric, positive, and does not fit into the Swift type; or
     /// 3. Cannot be made into a suitable numeric via `to_int` or `to_i`.
     ///
-    /// See `RbException.history` to find out why a conversion failed.
+    /// See `RbError.history` to find out why a conversion failed.
     ///
     /// If the Ruby value is floating point then the integer part is returned.
     public init?(_ value: RbObject) {
@@ -42,7 +42,7 @@ extension UInt32: RbObjectConvertible {
     /// 2. Is numeric, positive, and does not fit into the Swift type; or
     /// 3. Cannot be made into a suitable numeric via `to_int` or `to_i`.
     ///
-    /// See `RbException.history` to find out why a conversion failed.
+    /// See `RbError.history` to find out why a conversion failed.
     ///
     /// If the Ruby value is floating point then the integer part is returned.
     public init?(_ value: RbObject) {
@@ -66,7 +66,7 @@ extension UInt16: RbObjectConvertible {
     /// 2. Is numeric, positive, and does not fit into the Swift type; or
     /// 3. Cannot be made into a suitable numeric via `to_int` or `to_i`.
     ///
-    /// See `RbException.history` to find out why a conversion failed.
+    /// See `RbError.history` to find out why a conversion failed.
     ///
     /// If the Ruby value is floating point then the integer part is returned.
     public init?(_ value: RbObject) {
@@ -90,7 +90,7 @@ extension UInt8: RbObjectConvertible {
     /// 2. Is numeric, positive, and does not fit into the Swift type; or
     /// 3. Cannot be made into a suitable numeric via `to_int` or `to_i`.
     ///
-    /// See `RbException.history` to find out why a conversion failed.
+    /// See `RbError.history` to find out why a conversion failed.
     ///
     /// If the Ruby value is floating point then the integer part is returned.
     public init?(_ value: RbObject) {
@@ -115,7 +115,7 @@ extension Int64: RbObjectConvertible {
     /// 1. Is numeric and does not fit into the Swift type; or
     /// 2. Cannot be made into a suitable numeric via `to_int` or `to_i`.
     ///
-    /// See `RbException.history` to find out why a conversion failed.
+    /// See `RbError.history` to find out why a conversion failed.
     ///
     /// If the Ruby value is floating point then the integer part is returned.
     public init?(_ value: RbObject) {
@@ -138,7 +138,7 @@ extension Int32: RbObjectConvertible {
     /// 1. Is numeric and does not fit into the Swift type; or
     /// 2. Cannot be made into a suitable numeric via `to_int` or `to_i`.
     ///
-    /// See `RbException.history` to find out why a conversion failed.
+    /// See `RbError.history` to find out why a conversion failed.
     ///
     /// If the Ruby value is floating point then the integer part is returned.
     public init?(_ value: RbObject) {
@@ -161,7 +161,7 @@ extension Int16: RbObjectConvertible {
     /// 1. Is numeric and does not fit into the Swift type; or
     /// 2. Cannot be made into a suitable numeric via `to_int` or `to_i`.
     ///
-    /// See `RbException.history` to find out why a conversion failed.
+    /// See `RbError.history` to find out why a conversion failed.
     ///
     /// If the Ruby value is floating point then the integer part is returned.
     public init?(_ value: RbObject) {
@@ -184,7 +184,7 @@ extension Int8: RbObjectConvertible {
     /// 1. Is numeric and does not fit into the Swift type; or
     /// 2. Cannot be made into a suitable numeric via `to_int` or `to_i`.
     ///
-    /// See `RbException.history` to find out why a conversion failed.
+    /// See `RbError.history` to find out why a conversion failed.
     ///
     /// If the Ruby value is floating point then the integer part is returned.
     public init?(_ value: RbObject) {
@@ -209,7 +209,7 @@ extension Float: RbObjectConvertible {
     /// 1. Is numeric and does not fit into the Swift type; or
     /// 2. Cannot be made into a suitable numeric via `to_f`.
     ///
-    /// See `RbException.history` to find out why a conversion failed.
+    /// See `RbError.history` to find out why a conversion failed.
     ///
     /// Flavors of NaN are not preserved across the Ruby<->Swift interface.
     public init?(_ value: RbObject) {

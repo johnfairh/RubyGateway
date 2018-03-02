@@ -61,7 +61,7 @@ extension RbInstanceAccess {
 extension RbInstanceAccess {
     /// Call a Ruby object method.
     ///
-    /// - parameter method: The name of the method to call.
+    /// - parameter methodName: The name of the method to call.
     /// - parameter args: The positional arguments to the method.  None by default.
     /// - parameter kwArgs: The keyword arguments to the method.  None by default.
     /// - returns: The result of calling the method.
@@ -71,11 +71,41 @@ extension RbInstanceAccess {
     ///
     /// TODO: blocks.
     @discardableResult
-    public func call(_ method: String,
+    public func call(_ methodName: String,
                      args: [RbObjectConvertible] = [],
                      kwArgs: [(String, RbObjectConvertible)] = []) throws -> RbObject {
         try Ruby.setup()
-        let methodId = try Ruby.getID(for: method)
+        let methodId = try Ruby.getID(for: methodName)
+        return try doCall(id: methodId, args: args, kwArgs: kwArgs)
+    }
+
+    /// Call a Ruby object method via a symbol.
+    ///
+    /// - parameter symbol: A symbol for the method to call.
+    /// - parameter args: The positional arguments to the method.  None by default.
+    /// - parameter kwArgs: The keyword arguments to the method.  None by default.
+    /// - returns: The result of calling the method.
+    /// - throws: `RbError.rubyException` if there is a Ruby exception.
+    ///           `RbError.badType` if `symbol` is not a symbol.
+    ///           `RbError.duplicateKwArg` if there are duplicate keywords in `kwArgs`.
+    ///
+    /// TODO: blocks.
+    @discardableResult
+    public func call(symbol: RbObject,
+                     args: [RbObjectConvertible] = [],
+                     kwArgs: [(String, RbObjectConvertible)] = []) throws -> RbObject {
+        try Ruby.setup()
+        guard symbol.rubyType == .T_SYMBOL else {
+            throw RbError.badType("Expected T_SYMBOL, got \(symbol.rubyType.rawValue) \(symbol)")
+        }
+        let methodId = rb_sym2id(symbol.rubyValue) // cannot raise if known to be T_SYMBOL
+        return try doCall(id: methodId, args: args, kwArgs: kwArgs)
+    }
+
+    /// Backend to method-call / message-send.
+    private func doCall(id: ID,
+                        args: [RbObjectConvertible],
+                        kwArgs: [(String, RbObjectConvertible)]) throws -> RbObject {
         var argObjects = args.map { $0.rubyObject }
 
         if kwArgs.count > 0 {
@@ -84,23 +114,22 @@ extension RbInstanceAccess {
 
         let resultVal = try argObjects.withRubyValues { argValues in
             try RbVM.doProtect {
-                rbb_funcallv_protect(self.rubyValue, methodId, Int32(argValues.count), argValues, nil)
+                rbb_funcallv_protect(self.rubyValue, id, Int32(argValues.count), argValues, nil)
             }
         }
 
         return RbObject(rubyValue: resultVal)
     }
 
-    /// Build a keyword args hash.  The keys are symbol VALUE of the intern'd name
-    /// of the keyword.
+    /// Build a keyword args hash.  The keys are Symbols of the keywords.
     private func buildKwArgsHash(from kwArgs: [(String, RbObjectConvertible)]) throws -> RbObject {
         let hash = RbObject(rubyValue: rb_hash_new())
         try kwArgs.forEach { (key, value) in
-            let symKey = try rb_id2sym(Ruby.getID(for: key))
-            if rb_hash_lookup(hash.rubyValue, symKey) != Qnil {
+            let symKey = RbObject(symbolName: key)
+            if rb_hash_lookup(hash.rubyValue, symKey.rubyValue) != Qnil {
                 try RbError.raise(error: .duplicateKwArg(key))
             }
-            rb_hash_aset(hash.rubyValue, symKey, value.rubyObject.rubyValue)
+            rb_hash_aset(hash.rubyValue, symKey.rubyValue, value.rubyObject.rubyValue)
         }
         return hash
     }

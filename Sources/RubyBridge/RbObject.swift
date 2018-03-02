@@ -72,7 +72,7 @@ public final class RbObject: RbConstantAccess, RbInstanceAccess {
     public static let nilObject = RbObject(rubyValue: Qnil)
 }
 
-/// MARK: - Useful compound initializers
+// MARK: - Useful convenience initializers
 
 extension RbObject {
     /// Create an instance of a given Ruby class.
@@ -92,9 +92,21 @@ extension RbObject {
         }
         self.init(obj)
     }
+
+    /// Create a Ruby `Symbol` object from a string.  Symbols are written `:name` in Ruby.
+    ///
+    /// - parameter symbolName: Name of the symbol.
+    public convenience init(symbolName: String) {
+        guard Ruby.softSetup(),
+              let id = try? Ruby.getID(for: symbolName) else {
+            self.init(rubyValue: Qnil)
+            return
+        }
+        self.init(rubyValue: rb_id2sym(id))
+    }
 }
 
-/// MARK: - String convertible for various debugging APIs
+// MARK: - String convertible for various debugging APIs
 
 extension RbObject: CustomStringConvertible {
     /// A string representation of the Ruby object.

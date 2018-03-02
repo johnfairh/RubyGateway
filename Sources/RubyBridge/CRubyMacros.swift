@@ -13,7 +13,6 @@ import RubyBridgeHelpers
 //
 // Mostly to do with numeric types, stuffing into and out of FIXNUM format, plus
 // type-reasoning macros.
-// Punt to C to get the actual platform macro for stuff dependent on integer widths.
 //
 // Began keeping this in the same order as ruby.h but good grief the numeric functions
 // drove me crazy this way -- so reordered to group all like stuff together.

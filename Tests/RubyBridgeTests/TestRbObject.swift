@@ -86,12 +86,26 @@ class TestRbObject: XCTestCase {
         }
     }
 
+    // symbol helper
+    func testSymbols() {
+        let symName = "symname"
+        let symbolObj = RbObject(symbolName: symName)
+        XCTAssertEqual(.T_SYMBOL, symbolObj.rubyType)
+
+        XCTAssertEqual(symName, symbolObj.description)
+
+        let strObj = RbObject(rubyValue: rb_sym2str(symbolObj.rubyValue))
+
+        XCTAssertEqual(symName, String(strObj))
+    }
+
     static var allTests = [
         ("testSimple", testSimple),
         ("testObject", testObject),
         ("testCopy", testCopy),
         ("testConversions", testConversions),
         ("testInspect", testInspect),
-        ("testNewInstance", testNewInstance)
+        ("testNewInstance", testNewInstance),
+        ("testSymbols", testSymbols)
     ]
 }

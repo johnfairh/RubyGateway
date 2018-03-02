@@ -5,6 +5,8 @@ class MethodsTest
         self.property = "Default"
 
         @@property = "ClassDefault"
+
+        @doubleMethod = :double
     end
 
     def noArgsMethod
@@ -30,5 +32,9 @@ class MethodsTest
 
     def kwArgsMethod(aFirst, aSecond:, aThird: 1)
         aFirst + aSecond * aThird
+    end
+
+    def double(x)
+        return x * 2
     end
 end
