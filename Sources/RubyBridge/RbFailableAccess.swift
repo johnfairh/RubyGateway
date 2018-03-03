@@ -5,13 +5,14 @@
 //  Distributed under the MIT license, see LICENSE
 //
 
+final class RbFailableAccess {
+    /// The underlying throwing accessor
+    private var access: RbObjectAccess
 
-protocol RbFailableAccess {
-    /// The underlying throwing callable
-    var access: RbInstanceAccess { get }
-}
+    init(access: RbObjectAccess) {
+        self.access = access
+    }
 
-extension RbFailableAccess {
     public func call(_ method: String,
                      args: [RbObjectConvertible] = [],
                      kwArgs: [(String, RbObjectConvertible)] = []) -> RbObject? {
@@ -25,14 +26,7 @@ extension RbFailableAccess {
     public func getAttribute(_ name: String) -> RbObject? {
         return try? access.getAttribute(name)
     }
-}
 
-protocol RbFailableConstantScope {
-    /// The underlying throwing constant scope
-    var constantScope: RbConstantAccess { get }
-}
-
-extension RbFailableConstantScope {
     /// Get an `RbObject` that represents a Ruby constant.
     ///
     /// - parameter name: The name of the constant to look up.
@@ -40,7 +34,7 @@ extension RbFailableConstantScope {
     ///
     /// This is a non-throwing version of `RbConstantScope.getConstant(name:)`.
     public func getConstant(_ name: String) -> RbObject? {
-        return try? constantScope.getConstant(name)
+        return try? access.getConstant(name)
     }
 
     /// Get an `RbObject` that represents a Ruby class.
@@ -50,6 +44,6 @@ extension RbFailableConstantScope {
     ///
     /// This is a non-throwing version of `RbConstantScope.getClass(name:)`.
     public func getClass(_ name: String) -> RbObject? {
-        return try? constantScope.getClass(name)
+        return try? access.getClass(name)
     }
 }

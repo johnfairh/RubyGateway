@@ -7,13 +7,14 @@
 import RubyBridgeHelpers
 
 /// Wraps a Ruby object
-public final class RbObject: RbConstantAccess, RbInstanceAccess {
+public final class RbObject: RbObjectAccess {
     private let valueBox: UnsafeMutablePointer<Rbb_value>
 
     /// Wrap up a Ruby object using the `VALUE` handle
     /// returned by its API, keep the object safe from garbage collection.
     public init(rubyValue: VALUE) {
         valueBox = rbb_value_alloc(rubyValue);
+        super.init(getValue: { rubyValue })
     }
 
     /// Create another Swift reference to an existing `RbObject`.
@@ -21,6 +22,8 @@ public final class RbObject: RbConstantAccess, RbInstanceAccess {
     /// `RbObject`s have gone out of scope.
     public init(_ value: RbObject) {
         valueBox = rbb_value_dup(value.valueBox);
+        let rubyValue = valueBox.pointee.value
+        super.init(getValue: { rubyValue })
     }
 
     /// Allow the tracked object to be GCed when we go out of scope.
@@ -28,16 +31,15 @@ public final class RbObject: RbConstantAccess, RbInstanceAccess {
         rbb_value_free(valueBox)
     }
 
-    /// Access the `VALUE` object handle for use with the `CRuby` API.
-    ///
-    /// If you keep hold of this `VALUE` after the `RbObject` has been
-    /// deinitialized then you are responsible for making sure Ruby
-    /// does not garbage collect it before you are done with it.
-    ///
-    /// It works best to keep the `RbObject` around and use this attribute
-    /// accessor directly with the API
-    public var rubyValue: VALUE {
+    /// Access the raw `VALUE` object handle.  Very restricted use because
+    /// too hard to use safely outside of the instance!  Use `withRubyValue(...)` instead.
+    fileprivate var rubyValue: VALUE {
         return valueBox.pointee.value
+    }
+
+    /// Temp access to the handle
+    internal var unsafeRubyValue: VALUE {
+        return rubyValue
     }
 
     /// Safely access the `VALUE` object handle for use with the Ruby C API.

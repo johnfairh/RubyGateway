@@ -1,5 +1,5 @@
 //
-//  RbInstanceAccess.swift
+//  RbObjectAccess.swift
 //  RubyBridge
 //
 //  Distributed under the MIT license, see LICENSE
@@ -8,15 +8,33 @@
 import CRuby
 import RubyBridgeHelpers
 
-/// Identify something that supports Ruby object message delivery and variable access.
-public protocol RbInstanceAccess {
+public class RbObjectAccess {
+    /// Getter for the `VALUE` associated with this object
+    private let getValue: () -> VALUE
+
+    /// Set up Swift access to a Ruby object.
+    /// - parameter getValue: Getter for the `VALUE` to be accessed.
+    init(getValue: @escaping () -> VALUE) {
+        self.getValue = getValue
+    }
+
+    // MARK: - IVars
+
+    // These guys need to be overridden for top self + can't do if in extension....
+
     /// Get the value of a Ruby instance variable.  Creates a new one with a nil value
     /// if it doesn't exist yet.
     ///
     /// - parameter name: Name of ivar to get.  Should begin with single `@`.
     /// - returns: Value of the ivar or nil if it has not been assigned yet.
     /// - throws: `RbError` if `name` looks wrong. `RbException` if Ruby has a problem.
-    func getInstanceVar(_ name: String) throws -> RbObject
+    public func getInstanceVar(_ name: String) throws -> RbObject {
+        try Ruby.setup()
+        try name.checkRubyInstanceVarName()
+        let id = try Ruby.getID(for: name)
+
+        return RbObject(rubyValue: rb_ivar_get(getValue(), id))
+    }
 
     /// Set a Ruby instance variable.  Creates a new one if it doesn't exist yet.
     ///
@@ -25,40 +43,104 @@ public protocol RbInstanceAccess {
     /// - returns: the value that was set.
     /// - throws: `RbError` if `name` looks wrong. `RbException` if Ruby has a problem.
     @discardableResult
-    func setInstanceVar(_ name: String, newValue: RbObjectConvertible) throws -> RbObject
-
-    /// The `VALUE` identifying the object to send messages to
-    var rubyValue: VALUE { get }
-}
-
-// MARK: - Default implementations
-
-extension RbInstanceAccess {
-    /// By default access an instance variable of the wrapped `rubyValue`.
-    public func getInstanceVar(_ name: String) throws -> RbObject {
-        try Ruby.setup()
-        try name.checkRubyInstanceVarName()
-        let id = try Ruby.getID(for: name)
-
-        return RbObject(rubyValue: rb_ivar_get(rubyValue, id))
-    }
-
-    /// By default access an instance variable of the wrapped `rubyValue`.
-    @discardableResult
     public func setInstanceVar(_ name: String, newValue: RbObjectConvertible) throws -> RbObject {
         try Ruby.setup()
         try name.checkRubyInstanceVarName()
         let id = try Ruby.getID(for: name)
 
         return RbObject(rubyValue: newValue.rubyObject.withRubyValue { newRubyValue in
-            return rb_ivar_set(rubyValue, id, newRubyValue)
+            return rb_ivar_set(getValue(), id, newRubyValue)
         })
     }
 }
 
-// MARK: - Extension methods
+// MARK: - Constant access
 
-extension RbInstanceAccess {
+extension RbObjectAccess {
+    /// Get an `RbObject` that represents a Ruby constant.
+    ///
+    /// In Ruby constants include things that users think of as constants like
+    /// `Math::PI`, classes, and modules.  You can use this routine with
+    /// any kind of constant, but see `getClass` for a little more sugar.
+    ///
+    /// ```swift
+    /// let rubyPi = Ruby.getConstant("Math::PI")
+    /// let crumbs = rubyPi - Double.pi
+    /// ```
+    /// This is a dynamic call into Ruby that can cause calls to `const_missing`
+    /// and autoloading.
+    ///
+    /// For a version that does not throw, see `RbBridge.failable` or `RbObject.failable`.
+    ///
+    /// - throws: `RbException` if the constant cannot be found,
+    ///           `RbError` if the constant is found but is not a class.
+    ///
+    /// - parameter name: The name of the constant to look up.  Can contain '::' sequences
+    ///   to drill down through nested classes and modules.
+    ///
+    ///   If you call this method on an `RbObject` then `name` is resolved like Ruby, looking
+    ///   up the inheritance chain if there is no local match.
+    ///
+    /// - returns: an `RbObject` for the class
+    ///
+    public func getConstant(_ name: String) throws -> RbObject {
+        try Ruby.setup()
+        try name.checkRubyConstantName()
+
+        var nextValue = getValue()
+
+        try name.components(separatedBy: "::").forEach { name in
+            let rbId = try Ruby.getID(for: name)
+            if nextValue == getValue() {
+                // For the first item in the path, allow a hit here or above in the hierarchy
+                nextValue = try RbVM.doProtect {
+                    rbb_const_get_protect(nextValue, rbId, nil)
+                }
+            } else {
+                // Once found a place to start, insist on stepping down from there.
+                nextValue = try RbVM.doProtect {
+                    rbb_const_get_at_protect(nextValue, rbId, nil)
+                }
+            }
+        }
+        return RbObject(rubyValue: nextValue)
+    }
+
+    /// Get an `RbObject` that represents a Ruby class.
+    ///
+    /// - throws: `RbException` if the constant cannot be found,
+    ///           `RbError` if the constant is found but is not a class.
+    ///
+    /// - parameter name: The name of the class to look up.  Can contain '::' sequences
+    ///   to drill down through nested classes and modules.
+    ///
+    ///   If you call this method on an `RbObject` then `name` is relative
+    ///   to that object, not the top level.
+    ///
+    /// - returns: an `RbObject` for the class
+    ///
+    /// One way of creating an empty array:
+    /// ```swift
+    /// let arrayClass = ruby.getClass("Array")
+    /// let array = arrayClass.call("new")
+    /// ```
+    ///
+    /// This is a dynamic call into Ruby that can cause calls to `const_missing`
+    /// and autoloading.
+    ///
+    /// For a version that does not throw, see `RbBridge.failable` or `RbObject.failable`.
+    public func getClass(_ name: String) throws -> RbObject {
+        let obj = try getConstant(name)
+        guard obj.rubyType == .T_CLASS else {
+            try RbError.raise(error: .badType("Found constant called \(name) but it is not a class."))
+        }
+        return obj
+    }
+}
+
+// MARK: - Method call / message send
+
+extension RbObjectAccess {
     /// Call a Ruby object method.
     ///
     /// - parameter methodName: The name of the method to call.
@@ -115,7 +197,7 @@ extension RbInstanceAccess {
 
         let resultVal = try argObjects.withRubyValues { argValues in
             try RbVM.doProtect {
-                rbb_funcallv_protect(self.rubyValue, id, Int32(argValues.count), argValues, nil)
+                rbb_funcallv_protect(getValue(), id, Int32(argValues.count), argValues, nil)
             }
         }
 
@@ -128,10 +210,10 @@ extension RbInstanceAccess {
         let hash = RbObject(rubyValue: rb_hash_new())
         try kwArgs.forEach { (key, value) in
             let symKey = RbObject(symbolName: key)
-            if rb_hash_lookup(hash.rubyValue, symKey.rubyValue) != Qnil {
+            if rb_hash_lookup(hash.unsafeRubyValue, symKey.unsafeRubyValue) != Qnil {
                 try RbError.raise(error: .duplicateKwArg(key))
             }
-            rb_hash_aset(hash.rubyValue, symKey.rubyValue, value.rubyObject.rubyValue)
+            rb_hash_aset(hash.unsafeRubyValue, symKey.unsafeRubyValue, value.rubyObject.unsafeRubyValue)
         }
         return hash
     }
@@ -165,11 +247,15 @@ extension RbInstanceAccess {
         try name.checkRubyMethodName()
         return try call("\(name)=", args: [newValue])
     }
+}
 
-    // Check the associated rubyValue is for a class.
+// MARK: - CVars
+
+extension RbObjectAccess {
+    /// Check the associated rubyValue is for a class.
     private func checkClass() throws {
-        guard TYPE(rubyValue) == .T_CLASS else {
-            try RbError.raise(error: .badType("\(rubyValue) is not a class, cannot get/setClassVar() on it."))
+        guard TYPE(getValue()) == .T_CLASS else {
+            try RbError.raise(error: .badType("\(getValue()) is not a class, cannot get/setClassVar() on it."))
         }
     }
 
@@ -190,7 +276,7 @@ extension RbInstanceAccess {
         let id = try Ruby.getID(for: name)
 
         return try RbObject(rubyValue: RbVM.doProtect {
-            rbb_cvar_get_protect(self.rubyValue, id, nil)
+            rbb_cvar_get_protect(getValue(), id, nil)
         })
     }
 
@@ -212,10 +298,14 @@ extension RbInstanceAccess {
         let id = try Ruby.getID(for: name)
 
         let newValueObj = newValue.rubyObject
-        newValueObj.withRubyValue { newRbVal in rb_cvar_set(rubyValue, id, newRbVal) }
+        newValueObj.withRubyValue { newRbVal in rb_cvar_set(getValue(), id, newRbVal) }
         return newValueObj
     }
+}
 
+// MARK: - Global Vars
+
+extension RbObjectAccess {
     /// Get the value of a Ruby global variable.
     ///
     /// - parameter name: Name of global variable to get.  Should begin with `$`.
@@ -261,7 +351,9 @@ extension RbInstanceAccess {
     }
 }
 
-extension RbInstanceAccess where Self: RbConstantAccess {
+// MARK: - Polymorphic getter
+
+extension RbObjectAccess {
     /// Get some kind of Ruby object based on the `name` parameter:
     /// * If it starts with a capital letter then access a constant under this object;
     /// * If it starts with @ or @@ then access an ivar/cvar for a class object;

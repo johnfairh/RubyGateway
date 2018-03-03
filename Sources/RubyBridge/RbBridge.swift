@@ -56,10 +56,14 @@ import RubyBridgeHelpers
 /// ```swift
 /// let html = Ruby.Rouge?.highlight("let a = 1", "swift", "html")
 /// ```
-public final class RbBridge: RbConstantAccess, RbInstanceAccess {
+public final class RbBridge: RbObjectAccess {
 
     /// The VM - not intialized until `setup()` is called.
     static let vm = RbVM()
+
+    init() {
+        super.init(getValue: { rb_cObject })
+    }
 
     /// Initialize Ruby.  Throw an error if Ruby is not working.
     /// Called by anything that might by the first op.
@@ -111,11 +115,46 @@ public final class RbBridge: RbConstantAccess, RbInstanceAccess {
         return false
     }
 
-    /// The id of the Ruby `Object` class.  Used to provide access to constants from the
-    /// top level and global functions via the `RbConstantAccess` and `RbInstanceAccess`
-    /// protocols. :nodoc:
-    public var rubyValue: VALUE {
-        return rb_cObject
+    // MARK: - Instance variable access overrides
+
+    // Instance variables at the top level are associated with the 'top' object
+    // that is unfortunately hidden from the public API (`rb_vm_top_self()`).  So
+    // we have to use `eval` these.  Reading is easy enough; writing an arbitrary
+    // VALUE is impossible to do without shenanigans.
+
+    private static var ivarWorkaroundName = "$RbBridgeTopSelfIvarWorkaround"
+
+    /// Get the value of a top-level instance variable.  Creates a new one with a nil value
+    /// if it doesn't exist yet.
+    ///
+    /// This is like doing `@f` at the top level of a Ruby script.
+    ///
+    /// - parameter name: Name of ivar to get.  Should begin with single `@`.
+    /// - returns: Value of the ivar or nil if it has not been assigned yet.
+    /// - throws: `RbError` if `name` looks wrong. `RbException` if Ruby has a problem.
+    public override func getInstanceVar(_ name: String) throws -> RbObject {
+        try setup()
+        try name.checkRubyInstanceVarName()
+        return try eval(ruby: name)
+    }
+
+    /// Set a top-level instance variable.  Creates a new one if it doesn't exist yet.
+    ///
+    /// This is like doing `@f = 3` at the top level of a Ruby script.
+    ///
+    /// - parameter name: Name of ivar to set.  Should begin with single `@`.
+    /// - parameter newValue: New value to set.
+    /// - returns: The value that was set.
+    /// - throws: `RbError` if `name` looks wrong. `RbException` if Ruby has a problem.
+    @discardableResult
+    public override func setInstanceVar(_ name: String, newValue: RbObjectConvertible) throws -> RbObject {
+        try setup()
+        try name.checkRubyInstanceVarName()
+        let oldValue = try getGlobalVar(RbBridge.ivarWorkaroundName)
+        try setGlobalVar(RbBridge.ivarWorkaroundName, newValue: newValue)
+        defer { let _ = try? setGlobalVar(RbBridge.ivarWorkaroundName, newValue: oldValue) }
+        return try eval(ruby: "\(name) = \(RbBridge.ivarWorkaroundName)")
+        // TODO: could simplify if we had hooked global vars...
     }
 }
 
@@ -246,51 +285,6 @@ extension RbBridge {
     }
 }
 
-// MARK: - Instance variable access
-
-// Instance variables at the top level are associated with the 'top' object
-// that is unfortunately hidden from the public API (`rb_vm_top_self()`).  So
-// we have to use `eval` these.  Reading is easy enough; writing an arbitrary
-// VALUE is impossible to do without shenanigans.
-
-extension RbBridge {
-    private static var ivarWorkaroundName: String {
-        return "$RbBridgeTopSelfIvarWorkaround"
-    }
-
-    /// Get the value of a top-level instance variable.  Creates a new one with a nil value
-    /// if it doesn't exist yet.
-    ///
-    /// This is like doing `@f` at the top level of a Ruby script.
-    ///
-    /// - parameter name: Name of ivar to get.  Should begin with single `@`.
-    /// - returns: Value of the ivar or nil if it has not been assigned yet.
-    /// - throws: `RbError` if `name` looks wrong. `RbException` if Ruby has a problem.
-    public func getInstanceVar(_ name: String) throws -> RbObject {
-        try setup()
-        try name.checkRubyInstanceVarName()
-        return try eval(ruby: name)
-    }
-
-    /// Set a top-level instance variable.  Creates a new one if it doesn't exist yet.
-    ///
-    /// This is like doing `@f = 3` at the top level of a Ruby script.
-    ///
-    /// - parameter name: Name of ivar to set.  Should begin with single `@`.
-    /// - parameter newValue: New value to set.
-    /// - returns: The value that was set.
-    /// - throws: `RbError` if `name` looks wrong. `RbException` if Ruby has a problem.
-    @discardableResult
-    public func setInstanceVar(_ name: String, newValue: RbObjectConvertible) throws -> RbObject {
-        try setup()
-        try name.checkRubyInstanceVarName()
-        let oldValue = try getGlobalVar(RbBridge.ivarWorkaroundName)
-        try setGlobalVar(RbBridge.ivarWorkaroundName, newValue: newValue)
-        defer { let _ = try? setGlobalVar(RbBridge.ivarWorkaroundName, newValue: oldValue) }
-        return try eval(ruby: "\(name) = \(RbBridge.ivarWorkaroundName)")
-        // TODO: could simplify if we had hooked global vars...
-    }
-}
 
 // MARK: - Global declaration
 
