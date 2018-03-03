@@ -36,7 +36,9 @@ class TestMiscObjTypes: XCTestCase {
         let obj: RbObject = RbObject.nilObject
         XCTAssertFalse(obj.isTruthy)
         XCTAssertTrue(obj.isNil)
-        XCTAssertEqual(Qnil, obj.rubyValue)
+        obj.withRubyValue { rubyVal in
+            XCTAssertEqual(Qnil, rubyVal)
+        }
     }
 
     private func doTestBoolRoundTrip(_ val: Bool) {

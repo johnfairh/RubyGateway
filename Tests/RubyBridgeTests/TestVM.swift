@@ -151,17 +151,17 @@ class TestVM: XCTestCase {
         do {
             XCTAssertEqual(.medium, Ruby.verbose)
             let verboseVal1 = try Ruby.getGlobalVar("$VERBOSE")
-            XCTAssertEqual(Qfalse, verboseVal1.rubyValue)
+            XCTAssertFalse(Bool(verboseVal1)!)
 
             Ruby.verbose = .full
             XCTAssertEqual(.full, Ruby.verbose)
             let verboseVal2 = try Ruby.getGlobalVar("$VERBOSE")
-            XCTAssertEqual(Qtrue, verboseVal2.rubyValue)
+            XCTAssertTrue(Bool(verboseVal2)!)
 
             Ruby.verbose = .none
             XCTAssertEqual(.none, Ruby.verbose)
             let verboseVal3 = try Ruby.getGlobalVar("$VERBOSE")
-            XCTAssertEqual(Qnil, verboseVal3.rubyValue)
+            XCTAssertTrue(verboseVal3.isNil)
 
             Ruby.verbose = .medium
             XCTAssertEqual(.medium, Ruby.verbose)

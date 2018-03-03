@@ -288,12 +288,3 @@ extension RbInstanceAccess where Self: RbConstantAccess {
         return try call(name)
     }
 }
-
-fileprivate extension Array where Element == RbObject {
-    // Helper to get hold of the `VALUE`s associated with an array of `RbObject`s
-    // This prevents Swift from dealloc'ing the `RbObject` before we are done
-    // with the `VALUE`s.
-    func withRubyValues<T>(call: ([VALUE]) throws -> T) rethrows -> T {
-        return try call(map { $0.rubyValue })
-    }
-}

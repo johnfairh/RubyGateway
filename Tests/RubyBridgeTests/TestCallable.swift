@@ -120,7 +120,7 @@ class TestCallable: XCTestCase {
 
         do {
             let v = try Ruby.get("MethodsTest").get("classMethod")
-            XCTAssertEqual(Qtrue, v.rubyValue)
+            XCTAssertTrue(Bool(v)!)
         } catch {
             XCTFail("Unexpected exception \(error)")
         }

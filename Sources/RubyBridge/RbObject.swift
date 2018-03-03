@@ -40,9 +40,13 @@ public final class RbObject: RbConstantAccess, RbInstanceAccess {
         return valueBox.pointee.value
     }
 
-    /// Get temporary guaranteed-safe access to the object's `VALUE`.
+    /// Safely access the `VALUE` object handle for use with the Ruby C API.
+    ///
+    /// There is no direct access to the `VALUE` to prevent accidental use
+    /// outside the corresponding `RbObject`'s lifetime.
+    /// - parameter call: The closure to pass the object's `VALUE` on to.
     @discardableResult
-    func withRubyValue<T>(call: (VALUE) throws -> T) rethrows -> T {
+    public func withRubyValue<T>(call: (VALUE) throws -> T) rethrows -> T {
         return try call(rubyValue)
     }
 
@@ -59,8 +63,9 @@ public final class RbObject: RbConstantAccess, RbInstanceAccess {
 
     /// Is the Ruby object `nil`?
     ///
-    /// If you've got Swift `nil` -- that is, you don't have `.some(RbObject)` --
-    /// then Ruby failed - it probably raised an exception.
+    /// If you have Swift `nil` -- that is, you don't have `.some(RbObject)` --
+    /// then Ruby failed -- there was probably an exception.  Check `RbError.history`
+    /// for a list of recent exceptions.
     ///
     /// If you've got Ruby `nil` -- that is, you've got `RbObject.isNil` -- then
     /// Ruby worked but the call evaluated to [Ruby] `nil`.
@@ -124,7 +129,8 @@ extension RbObject: CustomDebugStringConvertible {
     /// This is the result of `inspect` with a fallback to `description`.
     public var debugDescription: String {
         if let value = try? RbVM.doProtect { () -> VALUE in
-            rbb_inspect_protect(rubyValue, nil)},
+               rbb_inspect_protect(rubyValue, nil)
+           },
            let str = String(RbObject(rubyValue: value)) {
             return str
         }
@@ -137,5 +143,16 @@ extension RbObject: CustomPlaygroundQuickLookable {
     /// This is just the text from `description`.
     public var customPlaygroundQuickLook: PlaygroundQuickLook {
         return .text(description)
+    }
+}
+
+// MARK: - Array<RbObject> helper
+
+extension Array where Element == RbObject {
+    /// Access the `VALUE`s associated with an array of `RbObject`s.
+    /// Prevents Swift from dealloc'ing the objects for the duration of the call.
+    /// - parameter call: Closure to pass the `VALUE`s on to.
+    internal func withRubyValues<T>(call: ([VALUE]) throws -> T) rethrows -> T {
+        return try call(map { $0.rubyValue })
     }
 }

@@ -15,7 +15,9 @@ class TestRbObject: XCTestCase {
     func testSimple() {
         let rbValue = Qtrue
         let obj = RbObject(rubyValue: rbValue)
-        XCTAssertEqual(rbValue, obj.rubyValue)
+        obj.withRubyValue { rubyValue in
+            XCTAssertEqual(rbValue, rubyValue)
+        }
         XCTAssertTrue(obj === obj.rubyObject)
         var called = false
         obj.withRubyValue { val in
@@ -94,9 +96,10 @@ class TestRbObject: XCTestCase {
 
         XCTAssertEqual(symName, symbolObj.description)
 
-        let strObj = RbObject(rubyValue: rb_sym2str(symbolObj.rubyValue))
-
-        XCTAssertEqual(symName, String(strObj))
+        symbolObj.withRubyValue { symValue in
+            let strObj = RbObject(rubyValue: rb_sym2str(symValue))
+            XCTAssertEqual(symName, String(strObj))
+        }
     }
 
     static var allTests = [
