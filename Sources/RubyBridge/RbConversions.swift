@@ -53,7 +53,7 @@ extension String: RbObjectConvertible {
     ///
     /// See `RbException.history` to find out why a conversion failed.
     public init?(_ value: RbObject) {
-        let stringVal = rbb_String_protect(value.rubyValue, nil)
+        let stringVal = value.withRubyValue { rbVal in rbb_String_protect(rbVal, nil) }
         if RbException.ignoreAnyPending() {
             return nil
         }
@@ -68,7 +68,7 @@ extension String: RbObjectConvertible {
     /// Create a Ruby object for the string.
     public var rubyObject: RbObject {
         guard Ruby.softSetup() else {
-            return RbObject(rubyValue: Qnil)
+            return RbObject.nilObject
         }
         return RbObject(rubyValue: withCString { rb_utf8_str_new($0, utf8.count) })
     }
@@ -89,7 +89,7 @@ extension Bool: RbObjectConvertible {
     /// This is a loose, potentially lossy conversion that reflects
     /// the truthiness of the Ruby object.
     public init?(_ value: RbObject) {
-        guard value.rubyValue != Qundef else {
+        guard value.rubyType != .T_UNDEF else {
             return nil
         }
         self = value.isTruthy
@@ -122,7 +122,7 @@ extension UInt: RbObjectConvertible {
     ///
     /// If the Ruby value is floating point then the integer part is returned.
     public init?(_ value: RbObject) {
-        self = rbb_obj2ulong_protect(value.rubyValue, nil)
+        self = value.withRubyValue { rbVal in rbb_obj2ulong_protect(rbVal, nil) }
         if RbException.ignoreAnyPending() {
             return nil
         }
@@ -131,7 +131,7 @@ extension UInt: RbObjectConvertible {
     /// Create a Ruby object for the number.
     public var rubyObject: RbObject {
         guard Ruby.softSetup() else {
-            return RbObject(rubyValue: Qnil)
+            return RbObject.nilObject
         }
         return RbObject(rubyValue: RB_ULONG2NUM(self))
     }
@@ -150,7 +150,7 @@ extension Int: RbObjectConvertible {
     ///
     /// If the Ruby value is floating point then the integer part is returned.
     public init?(_ value: RbObject) {
-        self = rbb_obj2long_protect(value.rubyValue, nil)
+        self = value.withRubyValue { rbVal in rbb_obj2long_protect(rbVal, nil) }
         if RbException.ignoreAnyPending() {
             return nil
         }
@@ -159,7 +159,7 @@ extension Int: RbObjectConvertible {
     /// Create a Ruby object for the number.
     public var rubyObject: RbObject {
         guard Ruby.softSetup() else {
-            return RbObject(rubyValue: Qnil)
+            return RbObject.nilObject
         }
         return RbObject(rubyValue: RB_LONG2NUM(self))
     }
@@ -184,7 +184,7 @@ extension Double: RbObjectConvertible {
     ///
     /// Flavors of NaN are not preserved across the Ruby<->Swift interface.
     public init?(_ value: RbObject) {
-        self = rbb_obj2double_protect(value.rubyValue, nil)
+        self = value.withRubyValue { rbVal in rbb_obj2double_protect(rbVal, nil) }
         if RbException.ignoreAnyPending() {
             return nil
         }
@@ -193,7 +193,7 @@ extension Double: RbObjectConvertible {
     /// Create a Ruby object for the number.
     public var rubyObject: RbObject {
         guard Ruby.softSetup() else {
-            return RbObject(rubyValue: Qnil)
+            return RbObject.nilObject
         }
         return RbObject(rubyValue: DBL2NUM(self))
     }

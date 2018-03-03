@@ -98,8 +98,9 @@ extension RbInstanceAccess {
         guard symbol.rubyType == .T_SYMBOL else {
             throw RbError.badType("Expected T_SYMBOL, got \(symbol.rubyType.rawValue) \(symbol)")
         }
-        let methodId = rb_sym2id(symbol.rubyValue) // cannot raise if known to be T_SYMBOL
-        return try doCall(id: methodId, args: args, kwArgs: kwArgs)
+        return try symbol.withRubyValue { symValue in
+            try doCall(id: rb_sym2id(symValue), args: args, kwArgs: kwArgs)
+        }
     }
 
     /// Backend to method-call / message-send.
@@ -123,6 +124,7 @@ extension RbInstanceAccess {
 
     /// Build a keyword args hash.  The keys are Symbols of the keywords.
     private func buildKwArgsHash(from kwArgs: [(String, RbObjectConvertible)]) throws -> RbObject {
+        // TODO: Build Swift dict then convert to Ruby hash via conformance
         let hash = RbObject(rubyValue: rb_hash_new())
         try kwArgs.forEach { (key, value) in
             let symKey = RbObject(symbolName: key)
@@ -210,7 +212,7 @@ extension RbInstanceAccess {
         let id = try Ruby.getID(for: name)
 
         let newValueObj = newValue.rubyObject
-        rb_cvar_set(rubyValue, id, newValueObj.rubyValue) /* bizarrely no return value on these */
+        newValueObj.withRubyValue { newRbVal in rb_cvar_set(rubyValue, id, newRbVal) }
         return newValueObj
     }
 
@@ -252,8 +254,8 @@ extension RbInstanceAccess {
         try name.checkRubyGlobalVarName()
 
         return RbObject(rubyValue: newValue.rubyObject.withRubyValue { rubyValue in
-            return name.withCString { cstr in
-                return rb_gv_set(cstr, rubyValue)
+            name.withCString { cstr in
+                rb_gv_set(cstr, rubyValue)
             }
         })
     }

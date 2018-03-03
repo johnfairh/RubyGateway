@@ -238,9 +238,10 @@ extension RbBridge {
     /// - throws: `RbException` for any Ruby exception raised.
     public func load(filename: String, wrap: Bool = false) throws {
         try setup()
-        let filenameObj = RbObject(filename)
-        return try RbVM.doProtect {
-            rbb_load_protect(filenameObj.rubyValue, wrap ? 1 : 0, nil)
+        return try RbObject(filename).withRubyValue { rubyValue in
+            try RbVM.doProtect {
+                rbb_load_protect(rubyValue, wrap ? 1 : 0, nil)
+            }
         }
     }
 }

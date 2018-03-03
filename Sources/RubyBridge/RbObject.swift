@@ -46,7 +46,7 @@ public final class RbObject: RbConstantAccess, RbInstanceAccess {
         return try call(rubyValue)
     }
 
-    /// The Ruby type of this object.  This is fairly unfriendly enum but
+    /// The Ruby type of this object.  This is a fairly unfriendly enum but
     /// might be useful for debugging.
     public var rubyType: RbType {
         return TYPE(rubyValue)
