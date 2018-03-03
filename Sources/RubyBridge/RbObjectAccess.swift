@@ -8,6 +8,20 @@
 import CRuby
 import RubyBridgeHelpers
 
+/// This class provides services to manipulate a Ruby object:
+/// * Call methods;
+/// * Access properties and instance variables;
+/// * Access class variables;
+/// * Access global variables;
+/// * Find constants, classes, and modules.
+///
+/// This class is abstract.  You use it via `RbObject` and the global `Ruby` instance
+/// of `RbBridge`.
+///
+/// By default all methods throw `RbError`s if anything goes wrong including
+/// when Ruby raises an exception.  Use the `failable` adapter to get an alternative
+/// API that returns `nil` on errors instead.  You can still access any Ruby exceptions
+/// via `RbError.history`.
 public class RbObjectAccess {
     /// Getter for the `VALUE` associated with this object
     private let getValue: () -> VALUE
@@ -22,12 +36,15 @@ public class RbObjectAccess {
 
     // These guys need to be overridden for top self + can't do if in extension....
 
-    /// Get the value of a Ruby instance variable.  Creates a new one with a nil value
+    /// Get the value of a Ruby instance variable.  Creates a new one with a `nil` value
     /// if it doesn't exist yet.
     ///
-    /// - parameter name: Name of ivar to get.  Should begin with single `@`.
-    /// - returns: Value of the ivar or nil if it has not been assigned yet.
-    /// - throws: `RbError` if `name` looks wrong. `RbException` if Ruby has a problem.
+    /// For a version that does not throw, see `failable`.
+    ///
+    /// - parameter name: Name of ivar to get.  Must begin with a single `@`.
+    /// - returns: Value of the ivar or Ruby `nil` if it has not been assigned yet.
+    /// - throws: `RbError.badIdentifier` if `name` looks wrong.
+    ///           `RbError.rubyException` if Ruby has a problem.
     public func getInstanceVar(_ name: String) throws -> RbObject {
         try Ruby.setup()
         try name.checkRubyInstanceVarName()
@@ -38,10 +55,13 @@ public class RbObjectAccess {
 
     /// Set a Ruby instance variable.  Creates a new one if it doesn't exist yet.
     ///
-    /// - parameter name: Name of ivar to set.  Should begin with single `@`.
+    /// For a version that does not throw, see `failable`.
+    ///
+    /// - parameter name: Name of ivar to set.  Must begin with a single `@`.
     /// - parameter newValue: New value to set.
-    /// - returns: the value that was set.
-    /// - throws: `RbError` if `name` looks wrong. `RbException` if Ruby has a problem.
+    /// - returns: The value that was set.
+    /// - throws: `RbError.badIdentifier` if `name` looks wrong.
+    ///           `RbError.rubyException` if Ruby has a problem.
     @discardableResult
     public func setInstanceVar(_ name: String, newValue: RbObjectConvertible) throws -> RbObject {
         try Ruby.setup()
@@ -61,7 +81,7 @@ extension RbObjectAccess {
     ///
     /// In Ruby constants include things that users think of as constants like
     /// `Math::PI`, classes, and modules.  You can use this routine with
-    /// any kind of constant, but see `getClass` for a little more sugar.
+    /// any kind of constant, but see `getClass(...)` for a little more sugar.
     ///
     /// ```swift
     /// let rubyPi = Ruby.getConstant("Math::PI")
@@ -70,19 +90,15 @@ extension RbObjectAccess {
     /// This is a dynamic call into Ruby that can cause calls to `const_missing`
     /// and autoloading.
     ///
-    /// For a version that does not throw, see `RbBridge.failable` or `RbObject.failable`.
-    ///
-    /// - throws: `RbException` if the constant cannot be found,
-    ///           `RbError` if the constant is found but is not a class.
+    /// For a version that does not throw, see `failable`.
     ///
     /// - parameter name: The name of the constant to look up.  Can contain '::' sequences
     ///   to drill down through nested classes and modules.
     ///
     ///   If you call this method on an `RbObject` then `name` is resolved like Ruby, looking
     ///   up the inheritance chain if there is no local match.
-    ///
     /// - returns: an `RbObject` for the class
-    ///
+    /// - throws: `RbError.rubyException` if the constant cannot be found.
     public func getConstant(_ name: String) throws -> RbObject {
         try Ruby.setup()
         try name.checkRubyConstantName()
@@ -108,27 +124,30 @@ extension RbObjectAccess {
 
     /// Get an `RbObject` that represents a Ruby class.
     ///
-    /// - throws: `RbException` if the constant cannot be found,
-    ///           `RbError` if the constant is found but is not a class.
+    /// This is a dynamic call into Ruby that can cause calls to `const_missing`
+    /// and autoloading.
+    ///
+    /// One way of creating an instance of a class:
+    /// ```swift
+    /// let myClass = try Ruby.getClass("MyModule::MyClass")
+    /// let myObj = try myClass.call("new")
+    /// ```
+    ///
+    /// Although it is easier to write:
+    /// ```swift
+    /// let myObj = try RbObject(ofClass: "MyModule::MyClass")
+    /// ```
+    ///
+    /// For a version that does not throw, see `failable`.
     ///
     /// - parameter name: The name of the class to look up.  Can contain '::' sequences
     ///   to drill down through nested classes and modules.
     ///
-    ///   If you call this method on an `RbObject` then `name` is relative
-    ///   to that object, not the top level.
-    ///
+    ///   If you call this method on an `RbObject` then `name` is resolved like Ruby,
+    ///   looking up the inheritance chain if there is no match.
     /// - returns: an `RbObject` for the class
-    ///
-    /// One way of creating an empty array:
-    /// ```swift
-    /// let arrayClass = ruby.getClass("Array")
-    /// let array = arrayClass.call("new")
-    /// ```
-    ///
-    /// This is a dynamic call into Ruby that can cause calls to `const_missing`
-    /// and autoloading.
-    ///
-    /// For a version that does not throw, see `RbBridge.failable` or `RbObject.failable`.
+    /// - throws: `RbError.rubyException` if the constant cannot be found.
+    ///           `RbError.badType` if the constant is found but is not a class.
     public func getClass(_ name: String) throws -> RbObject {
         let obj = try getConstant(name)
         guard obj.rubyType == .T_CLASS else {
@@ -147,9 +166,10 @@ extension RbObjectAccess {
     /// - parameter args: The positional arguments to the method.  None by default.
     /// - parameter kwArgs: The keyword arguments to the method.  None by default.
     /// - returns: The result of calling the method.
-    /// - throws: `RbException` if there is a Ruby exception.  No checking here on the
-    ///           spelling of `name` on top of that done by Ruby.
-    ///           `RbError` if there are duplicate keywords in `kwArgs`.
+    /// - throws: `RbError.rubyException` if there is a Ruby exception.
+    ///           `RbError.duplicateKwArg` if there are duplicate keywords in `kwArgs`.
+    ///
+    /// For a version that does not throw, see `failable`.
     ///
     /// TODO: blocks.
     @discardableResult
@@ -161,15 +181,17 @@ extension RbObjectAccess {
         return try doCall(id: methodId, args: args, kwArgs: kwArgs)
     }
 
-    /// Call a Ruby object method via a symbol.
+    /// Call a Ruby object method using a symbol.
     ///
-    /// - parameter symbol: A symbol for the method to call.
+    /// - parameter symbol: The symbol for the name of the method to call.
     /// - parameter args: The positional arguments to the method.  None by default.
     /// - parameter kwArgs: The keyword arguments to the method.  None by default.
     /// - returns: The result of calling the method.
     /// - throws: `RbError.rubyException` if there is a Ruby exception.
     ///           `RbError.badType` if `symbol` is not a symbol.
     ///           `RbError.duplicateKwArg` if there are duplicate keywords in `kwArgs`.
+    ///
+    /// For a version that does not throw, see `failable`.
     ///
     /// TODO: blocks.
     @discardableResult
@@ -223,10 +245,13 @@ extension RbObjectAccess {
     /// Attributes are declared with `:attr_accessor` and so on -- this routine is a
     /// simple wrapper around `call(...)` for symmetry with `set(...)`.
     ///
+    /// For a version that does not throw, see `failable`.
+    ///
     /// - parameter name: The name of the attribute to get.
     /// - returns: The value of the attribute.
-    /// - throws: `RbException` if there is a Ruby exception, probably means `attribute` doesn't exist.
-    ///           `RbError` if `name` does not look like a Ruby attribute name.
+    /// - throws: `RbError.badIdentifier` if `name` looks wrong.
+    ///           `RbError.rubyException` if Ruby has a problem, probably means
+    ///           `attribute` doesn't exist.
     public func getAttribute(_ name: String) throws -> RbObject {
         try name.checkRubyMethodName()
         return try call(name)
@@ -235,13 +260,16 @@ extension RbObjectAccess {
     /// Set an attribute of a Ruby object.
     ///
     /// Attributes are declared with `:attr_accessor` and so on -- this routine is a
-    /// wrapper around the `attrname=` method.
+    /// wrapper around a call to the `attrname=` method.
+    ///
+    /// For a version that does not throw, see `failable`.
     ///
     /// - parameter name: The name of the attribute to set
     /// - parameter value: The new value of the attribute
     /// - returns: whatever the attribute setter returns, usually the new value
-    /// - throws: `RbException` if there is a Ruby exception, probably means `attribute` doesn't exist.
-    ///           `RbError` if `name` does not look like a Ruby attribute name.
+    /// - throws: `RbError.badIdentifier` if `name` looks wrong.
+    ///           `RbError.rubyException` if Ruby has a problem, probably means
+    ///           `attribute` doesn't exist.
     @discardableResult
     public func setAttribute(_ name: String, newValue: RbObjectConvertible) throws -> RbObject {
         try name.checkRubyMethodName()
@@ -261,13 +289,21 @@ extension RbObjectAccess {
 
     /// Get the value of a Ruby class variable that has already been written.
     ///
+    /// Must be called on an `RbObject` for a class, or `RbBridge`.  **Note** this
+    /// is different from Ruby as-written where you write `@@fred` in an object
+    /// context to get a CVar on the object's class.
+    ///
     /// The behavior of accessing a non-existent cvar is not consistent with ivars
     /// or gvars.  This is how Ruby works; one more reason to avoid cvars.
     ///
-    /// - parameter name: Name of cvar to get.  Should begin with `@@`.
+    /// For a version that does not throw, see `failable`.
+    ///
+    /// - parameter name: Name of cvar to get.  Must begin with `@@`.
     /// - returns: Value of the cvar.
-    /// - throws: `RbError` if `name` looks wrong. `RbException` if Ruby has a problem.
-    ///           In particular, `RbException` if the cvar does not exist.
+    /// - throws: `RbError.badIdentifier` if `name` looks wrong.
+    ///           `RbError.badType` if the object is not a class.
+    ///           `RbError.rubyException` if Ruby has a problem -- in particular,
+    ///           if the cvar does not exist.
     public func getClassVar(_ name: String) throws -> RbObject {
         try Ruby.setup()
         try name.checkRubyClassVarName()
@@ -281,14 +317,19 @@ extension RbObjectAccess {
     }
 
     /// Set a Ruby class variable.  Creates a new one if it doesn't exist yet.
-    /// Must be called on an `RbObject` for a class -- the top-level `RbBridge`
-    /// aliases to `Object.class` so that works fine.
     ///
-    /// - parameter name: Name of cvar to set.  Should begin with `@@`.
+    /// Must be called on an `RbObject` for a class, or `RbBridge`.  **Note** this
+    /// is different from Ruby as-written where you write `@@fred = thing` in an
+    /// object context to set a CVar on the object's class.
+    ///
+    /// For a version that does not throw, see `failable`.
+    ///
+    /// - parameter name: Name of cvar to set.  Must begin with `@@`.
     /// - parameter newValue: New value to set.
     /// - returns: the value that was set.
-    /// - throws: `RbError` if `name` looks wrong or the object is not a class.
-    ///           `RbException` if Ruby has a problem.
+    /// - throws: `RbError.badIdentifier` if `name` looks wrong.
+    ///           `RbError.badType` if the object is not a class.
+    ///           `RbError.rubyException` if Ruby has a problem.
     @discardableResult
     public func setClassVar(_ name: String, newValue: RbObjectConvertible) throws -> RbObject {
         try Ruby.setup()
@@ -298,7 +339,7 @@ extension RbObjectAccess {
         let id = try Ruby.getID(for: name)
 
         let newValueObj = newValue.rubyObject
-        newValueObj.withRubyValue { newRbVal in rb_cvar_set(getValue(), id, newRbVal) }
+        newValueObj.withRubyValue { rb_cvar_set(getValue(), id, $0) }
         return newValueObj
     }
 }
@@ -308,7 +349,9 @@ extension RbObjectAccess {
 extension RbObjectAccess {
     /// Get the value of a Ruby global variable.
     ///
-    /// - parameter name: Name of global variable to get.  Should begin with `$`.
+    /// For a version that does not throw, see `failable`.
+    ///
+    /// - parameter name: Name of global variable to get.  Must begin with `$`.
     /// - returns: Value of the variable, or Ruby nil if not set before.
     /// - throws: `RbError` if `name` looks wrong.
     ///
@@ -321,14 +364,14 @@ extension RbObjectAccess {
         try Ruby.setup()
         try name.checkRubyGlobalVarName()
 
-        return RbObject(rubyValue: name.withCString { cstr in
-            rb_gv_get(cstr)
-        })
+        return RbObject(rubyValue: name.withCString { rb_gv_get($0) })
     }
 
     /// Set a Ruby global variable.  Creates a new one if it doesn't exist yet.
     ///
-    /// - parameter name: Name of global variable to set.  Should begin with `$`.
+    /// For a version that does not throw, see `failable`.
+    ///
+    /// - parameter name: Name of global variable to set.  Must begin with `$`.
     /// - parameter newValue: New value to set.
     /// - returns: The value that was set.
     /// - throws: `RbError` if `name` looks wrong.
@@ -355,17 +398,19 @@ extension RbObjectAccess {
 
 extension RbObjectAccess {
     /// Get some kind of Ruby object based on the `name` parameter:
-    /// * If it starts with a capital letter then access a constant under this object;
-    /// * If it starts with @ or @@ then access an ivar/cvar for a class object;
-    /// * If it starts with $ then access a global variable;
+    /// * If `name` starts with a capital letter then access a constant under this object;
+    /// * If `name` starts with @ or @@ then access an ivar/cvar for a class object;
+    /// * If `name` starts with $ then access a global variable;
     /// * Otherwise call a zero-args method.
     ///
     /// This is a convenience helper to let you access Ruby structures without
     /// worrying about precisely what they are.
     ///
+    /// For a version that does not throw, see `failable`.
+    ///
     /// - parameter name: Name to access.
-    /// - throws: `RbError` if the name is wrong for the object; `RbException` if
-    ///           something goes wrong in Ruby.
+    /// - throws: `RbError.rubyException` if Ruby has a problem.
+    ///           `RbError` of some other kind if `name` looks wrong in some way.
     @discardableResult
     public func get(_ name: String) throws -> RbObject {
         if name.isRubyConstantName {

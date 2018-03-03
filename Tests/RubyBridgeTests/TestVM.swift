@@ -226,8 +226,9 @@ class TestVM: XCTestCase {
         let uintObj = RbObject(UInt(200))
         let intObj: RbObject = -200
         let dblObj: RbObject = 100.2
+        let symObj = RbObject(symbolName: "test")
 
-        [strObj, uintObj, intObj, dblObj].forEach { obj in
+        [strObj, uintObj, intObj, dblObj, symObj].forEach { obj in
             XCTAssertTrue(obj.isNil)
         }
     }

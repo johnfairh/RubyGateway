@@ -117,6 +117,8 @@ public final class RbBridge: RbObjectAccess {
 
     // MARK: - Instance variable access overrides
 
+    // Can't put this lot in an extension because overrides....
+
     // Instance variables at the top level are associated with the 'top' object
     // that is unfortunately hidden from the public API (`rb_vm_top_self()`).  So
     // we have to use `eval` these.  Reading is easy enough; writing an arbitrary

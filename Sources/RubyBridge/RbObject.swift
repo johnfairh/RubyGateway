@@ -6,20 +6,65 @@
 //
 import RubyBridgeHelpers
 
-/// Wraps a Ruby object
+/// A Ruby object.
+///
+/// All Ruby objects whatever their type or class are represented using this
+/// Swift type.
+///
+/// Use `RbObject.init(ofClass:args:kwArgs)` to create a new Ruby object of
+/// some class:
+/// ```swift
+/// let myObj = RbObject(ofClass: "MyModule::MyClass", args: ["arg1", 25.3])
+/// ```
+///
+/// See `RbObjectAccess` for ways to call methods, access properties, and find
+/// constants from an `RbObject`:
+/// ```swift
+/// try myObj.set("name", "fred")
+///
+/// let results = try myObj.call("process", args: ["arg1", 100])
+/// ```
+///
+/// Or in Swift 5 dynamic-member style:
+/// ```swift
+/// myObj.name = "fred"
+///
+/// let results = myObj.process(arg1, 100)
+/// ```
+///
+/// See `RbBridge` and its global instance `Ruby` for access to the Ruby 'top self'
+/// object to get started finding constants or calling global functions.
+///
+/// Convert `RbObject`s to Swift types using failable initializers:
+/// ```swift
+/// let height = Double(myObj)
+/// let heightDb = Dictionary<String, Double>(myObj) // one day!
+/// ```
+/// Check `RbError.history` to see the cause of failed initializations.
+///
+/// In the reverse direction, Swift types convert implicitly to `RbObject`
+/// when passed as arguments via the `RbObjectConvertible` protocol.
+///
+/// + arithmetic, comparison, hashable
 public final class RbObject: RbObjectAccess {
     private let valueBox: UnsafeMutablePointer<Rbb_value>
 
-    /// Wrap up a Ruby object using the `VALUE` handle
-    /// returned by its API, keep the object safe from garbage collection.
+    /// Wrap up a Ruby object using the its `VALUE` API handle.
+    ///
+    /// The Ruby object is kept safe from garbage collection until
+    /// the Swift object is deallocated.
+    ///
+    /// This initializer is public to let you use it with other parts
+    /// of the Ruby API, shouldn't normally be needed.
     public init(rubyValue: VALUE) {
         valueBox = rbb_value_alloc(rubyValue);
         super.init(getValue: { rubyValue })
     }
 
     /// Create another Swift reference to an existing `RbObject`.
-    /// The underlying Ruby object will not be GCed until both
-    /// `RbObject`s have gone out of scope.
+    ///
+    /// The underlying Ruby object will not be garbage-collected until
+    /// both `RbObject`s have been deallocated.
     public init(_ value: RbObject) {
         valueBox = rbb_value_dup(value.valueBox);
         let rubyValue = valueBox.pointee.value
@@ -32,7 +77,8 @@ public final class RbObject: RbObjectAccess {
     }
 
     /// Access the raw `VALUE` object handle.  Very restricted use because
-    /// too hard to use safely outside of the instance!  Use `withRubyValue(...)` instead.
+    /// too hard to use safely outside of the instance!
+    /// Use `withRubyValue(...)` instead.
     fileprivate var rubyValue: VALUE {
         return valueBox.pointee.value
     }
