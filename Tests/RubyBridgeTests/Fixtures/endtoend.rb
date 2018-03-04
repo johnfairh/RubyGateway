@@ -1,6 +1,6 @@
 module RubyBridge
     class EndToEnd
-        attr_reader :name
+        attr_accessor :name
         attr_reader :version
 
         def initialize(version, name:)

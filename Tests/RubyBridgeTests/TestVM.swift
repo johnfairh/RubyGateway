@@ -21,8 +21,7 @@ class TestVM: XCTestCase {
     /// Check whole thing is broadly functional
     func testEndToEnd() {
         do {
-            let rc = try Ruby.require(filename: Helpers.fixturePath("endtoend.rb"))
-            XCTAssertTrue(rc)
+            let _ = try Ruby.require(filename: Helpers.fixturePath("endtoend.rb"))
 
             let ver = 1.2
             let name = "fred"
