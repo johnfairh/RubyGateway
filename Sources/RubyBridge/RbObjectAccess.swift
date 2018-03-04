@@ -408,7 +408,8 @@ extension RbObjectAccess {
     ///
     /// For a version that does not throw, see `failable`.
     ///
-    /// - parameter name: Name to access.
+    /// - parameter name: Name of thing to access.
+    /// - returns: The accessed thing .
     /// - throws: `RbError.rubyException` if Ruby has a problem.
     ///           `RbError` of some other kind if `name` looks wrong in some way.
     @discardableResult
