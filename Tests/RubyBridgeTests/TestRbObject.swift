@@ -102,6 +102,35 @@ class TestRbObject: XCTestCase {
         }
     }
 
+    // hashable
+    func testHashing() {
+        let objs: [RbObject] = [123.4, 0, "str"]
+        objs.forEach { obj in
+            guard obj.hashValue != 0 else {
+                XCTFail("Suspicious hashvalue 0")
+                return
+            }
+        }
+    }
+
+    // comparable
+    func testComparable() {
+        let objneg = RbObject(Int.min)
+        let objpos1 = RbObject(UInt.max)
+        let objpos1copy = RbObject(objpos1)
+        let objstr1 = RbObject("str")
+        let objstr2 = RbObject("utr")
+
+        XCTAssertTrue(objneg == objneg)
+        XCTAssertFalse(objneg == objpos1)
+        XCTAssertTrue(objpos1 == objpos1copy)
+        XCTAssertFalse(objneg == objstr1)
+
+        XCTAssertTrue(objneg < objpos1)
+        XCTAssertFalse(objpos1 < objpos1)
+        XCTAssertTrue(objstr1 < objstr2)
+    }
+
     static var allTests = [
         ("testSimple", testSimple),
         ("testObject", testObject),
@@ -109,6 +138,7 @@ class TestRbObject: XCTestCase {
         ("testConversions", testConversions),
         ("testInspect", testInspect),
         ("testNewInstance", testNewInstance),
-        ("testSymbols", testSymbols)
+        ("testSymbols", testSymbols),
+        ("testHashing", testHashing),
     ]
 }

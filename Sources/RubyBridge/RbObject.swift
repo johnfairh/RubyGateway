@@ -35,6 +35,8 @@ import RubyBridgeHelpers
 /// See `RbBridge` and its global instance `Ruby` for access to the Ruby 'top self'
 /// object to get started finding constants or calling global functions.
 ///
+/// ## Converting to and from Swift types
+///
 /// Convert `RbObject`s to Swift types using failable initializers:
 /// ```swift
 /// let height = Double(myObj)
@@ -45,7 +47,18 @@ import RubyBridgeHelpers
 /// In the reverse direction, Swift types convert implicitly to `RbObject`
 /// when passed as arguments via the `RbObjectConvertible` protocol.
 ///
-/// + arithmetic, comparison, hashable
+/// ## Standard library conformances
+///
+/// `RbObject` conforms to `Hashable`, `Equatable`, and `Comparable` protocols by
+/// forwarding to the corresponding Ruby methods.  Beware though that it is easy
+/// to trigger Ruby errors here that currently cause `RubyBridge` to crash.  For
+/// example this is poison:
+/// ```swift
+/// `RbObject(3) < RbObject("barney")`
+/// ```
+/// I plan to add more control over what happens here.
+///
+/// + arithmetic
 public final class RbObject: RbObjectAccess {
     private let valueBox: UnsafeMutablePointer<Rbb_value>
 
@@ -125,7 +138,7 @@ public final class RbObject: RbObjectAccess {
     public static let nilObject = RbObject(rubyValue: Qnil)
 }
 
-// MARK: - Useful convenience initializers
+// MARK: - Useful initializers
 
 extension RbObject {
     /// Create an instance of a given Ruby class.
@@ -159,10 +172,11 @@ extension RbObject {
     }
 }
 
-// MARK: - String convertible for various debugging APIs
+// MARK: - String convertible
 
 extension RbObject: CustomStringConvertible {
     /// A string representation of the Ruby object.
+    ///
     /// This is the same as `String(rbObject)` which is approximately `Kernel#String`.
     public var description: String {
         guard let str = String(self) else {
@@ -174,6 +188,7 @@ extension RbObject: CustomStringConvertible {
 
 extension RbObject: CustomDebugStringConvertible {
     /// A developer-appropriate string representation of the Ruby object.
+    ///
     /// This is the result of `inspect` with a fallback to `description`.
     public var debugDescription: String {
         if let value = try? RbVM.doProtect { () -> VALUE in
@@ -188,9 +203,65 @@ extension RbObject: CustomDebugStringConvertible {
 
 extension RbObject: CustomPlaygroundQuickLookable {
     /// Something to display in Playgrounds right-hand bar.
+    ///
     /// This is just the text from `description`.
     public var customPlaygroundQuickLook: PlaygroundQuickLook {
         return .text(description)
+    }
+}
+
+// MARK: - Hashable etc.
+
+extension RbObject: Hashable, Equatable, Comparable {
+    /// The hash value for the Ruby object.
+    ///
+    /// Calls the Ruby `hash` method.
+    /// - note: Crashes the process (`fatalError`) if the object does not support `hash`
+    ///   or if the `hash` call returns something that can't be converted to `Int`.
+    public var hashValue: Int {
+        // not super happy about this - could we instead call hash just once, cache
+        // result + use some arbitrary value on failure?
+        do {
+            let hashObj = try call("hash")
+            guard let hash = Int(hashObj) else {
+                fatalError("Hash value for \(self) not numeric: \(hashObj)")
+            }
+            return hash
+        } catch {
+            fatalError("Calling 'hash' on \(self) failed: \(error)")
+        }
+    }
+
+    /// Returns a Boolean value indicating whether two values are equal.
+    ///
+    /// Calls the Ruby `==` method of the `lhs` passing `rhs` as the parameter.
+    /// - note: Crashes the process (`fatalError`) if the call to `==` goes wrong.
+    /// - returns: Whether the objects are the same under `==`.
+    public static func ==(lhs: RbObject, rhs: RbObject) -> Bool {
+        do {
+            let result = try lhs.call("==", args: [rhs])
+            return result.isTruthy
+        } catch {
+            // again could just say 'false' here - but worried about inconsistent
+            // behaviour over time.  Maybe dumb to worry given actively hostile
+            // Ruby code could just do that in-band.
+            fatalError("Calling '==' on \(lhs) with \(rhs) failed: \(error)")
+        }
+    }
+
+    /// Returns a Boolean value indicating whether the value of the first
+    /// argument is less than that of the second argument.
+    ///
+    /// Calls the Ruby `<` method of `lhs` passing `rhs` as the parameter.
+    /// - note: Crashes the process (`fatalError`) if the call to `<` goes wrong.
+    public static func <(lhs: RbObject, rhs: RbObject) -> Bool {
+        do {
+            let result = try lhs.call("<", args: [rhs])
+            return result.isTruthy
+        } catch {
+            // once more could just say 'false' here...
+            fatalError("Calling '<' on \(lhs) with \(rhs) failed: \(error)")
+        }
     }
 }
 
