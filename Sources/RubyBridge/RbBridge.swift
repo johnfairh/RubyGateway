@@ -8,21 +8,27 @@
 import CRuby
 import RubyBridgeHelpers
 
-/// This is a top-level wrapper to Ruby.  It provides information about the VM,
-/// some control over how code is run, and services to access the various kinds
-/// of Ruby objects.
+/// Provides information about the Ruby VM, some control over how code is run,
+/// and services to access various kinds of Ruby objects from the top level.
 ///
-/// The Ruby VM is initialized when it is first accessed and normally not stopped
-/// until the process ends.  The VM can be manually shut down by calling `RbBridge.cleanup()`
-/// but once this has been done the VM cannot be restarted.
+/// Clients cannot instantiate this type.  Instead the `RubyBridge` module
+/// exports a public instance `Ruby`.  Among other things this permits dynamic
+/// member lookup and callable style programming in Swift 5.
+///
+/// The Ruby VM is initialized when the object is first accessed and is
+/// automatically stopped when the process ends.  The VM can be manually shut
+/// down before process exit by calling `RbBridge.cleanup()` but once this has
+/// been done the VM cannot be restarted and subsequent calls to `RubyBridge`
+/// services will fail.
 ///
 /// The loadpath (where `require` looks) is set to the `lib/ruby` directories
 /// adjacent to the `libruby` the program is linked against and `$RUBYLIB`.
-/// Gems are enabled.
+/// RubyGems are enabled.
 ///
-/// There is a built-in instance of `RbBridge` called `Ruby`.  This lets you
-/// write things like
+/// ## Accessing Ruby objects
 ///
+/// The class inherits from `RbObjectAccess` which lets you look up constants
+/// or call functions as you would at the top level of a Ruby script, for example:
 /// ```swift
 /// import RubyBridge
 ///
@@ -30,32 +36,18 @@ import RubyBridgeHelpers
 ///
 /// do {
 ///    try Ruby.require("rouge")
-///    let html = try Ruby.getModule("Rouge").call("highlight", args: ["let a = 1", "swift", "html"])
+///    let html = try Ruby.get("Rouge").call("highlight", args: ["let a = 1", "swift", "html"])
 /// } catch {
 /// }
-/// ```
-///
-/// Or with a simpler syntax:
-///
-/// ```swift
-/// do {
-///    try Ruby.require("rouge")
-///    let html = try Ruby.do("Rouge").do("highlight", args: ["let a = 1", "swift", "html"])
-/// } catch {
-/// }
-/// ```
-///
-/// Or if you don't like exceptions:
-///
-/// ```swift
-/// try! Ruby.require("rouge")
-/// let html = Ruby.failable.do("Rouge")?.do("highlight", "let a = 1", "swift", "html")
 /// ```
 ///
 /// Or with Swift 5 dynamic member lookup & callable:
 /// ```swift
 /// let html = Ruby.Rouge?.highlight("let a = 1", "swift", "html")
 /// ```
+///
+/// If you just want to create a Ruby object of some class, see
+/// `RbObject.init?(ofClass:args:kwArgs:)`.
 public final class RbBridge: RbObjectAccess {
 
     /// The VM - not intialized until `setup()` is called.
@@ -81,7 +73,7 @@ public final class RbBridge: RbObjectAccess {
     /// as part of process exit.
     ///
     /// If called you cannot continue to use Ruby in this process, the VM cannot be
-    /// re-setup().
+    /// re-setup.
     ///
     /// - returns: 0 if the cleanup went fine, otherwise some error code from Ruby.
     public func cleanup() -> Int32 {
@@ -108,7 +100,7 @@ public final class RbBridge: RbObjectAccess {
     ///
     /// The idea is that callers can get by long enough for the user to call
     /// `require()` or `send()` which will properly report the VM setup error.
-    public func softSetup() -> Bool {
+    func softSetup() -> Bool {
         if let _ = try? setup() {
             return true
         }
@@ -126,14 +118,17 @@ public final class RbBridge: RbObjectAccess {
 
     private static var ivarWorkaroundName = "$RbBridgeTopSelfIvarWorkaround"
 
-    /// Get the value of a top-level instance variable.  Creates a new one with a nil value
-    /// if it doesn't exist yet.
+    /// Get the value of a top-level instance variable.  Creates a new one with a `nil`
+    /// value if it doesn't exist yet.
     ///
     /// This is like doing `@f` at the top level of a Ruby script.
     ///
-    /// - parameter name: Name of ivar to get.  Should begin with single `@`.
-    /// - returns: Value of the ivar or nil if it has not been assigned yet.
-    /// - throws: `RbError` if `name` looks wrong. `RbException` if Ruby has a problem.
+    /// For a version that does not throw, see `RbObjectAccess.failable`.
+    ///
+    /// - parameter name: Name of ivar to get.  Must begin with a single `@`.
+    /// - returns: Value of the ivar or Ruby `nil` if it has not been assigned yet.
+    /// - throws: `RbError.badIdentifier` if `name` looks wrong.
+    ///           `RbError.rubyException` if Ruby has a problem.
     public override func getInstanceVar(_ name: String) throws -> RbObject {
         try setup()
         try name.checkRubyInstanceVarName()
@@ -144,10 +139,13 @@ public final class RbBridge: RbObjectAccess {
     ///
     /// This is like doing `@f = 3` at the top level of a Ruby script.
     ///
-    /// - parameter name: Name of ivar to set.  Should begin with single `@`.
+    /// For a version that does not throw, see `RbObjectAccess.failable`.
+    ///
+    /// - parameter name: Name of ivar to set.  Must begin with a single `@`.
     /// - parameter newValue: New value to set.
     /// - returns: The value that was set.
-    /// - throws: `RbError` if `name` looks wrong. `RbException` if Ruby has a problem.
+    /// - throws: `RbError.badIdentifier` if `name` looks wrong.
+    ///           `RbError.rubyException` if Ruby has a problem.
     @discardableResult
     public override func setInstanceVar(_ name: String, newValue: RbObjectConvertible) throws -> RbObject {
         try setup()
@@ -156,14 +154,13 @@ public final class RbBridge: RbObjectAccess {
         try setGlobalVar(RbBridge.ivarWorkaroundName, newValue: newValue)
         defer { let _ = try? setGlobalVar(RbBridge.ivarWorkaroundName, newValue: oldValue) }
         return try eval(ruby: "\(name) = \(RbBridge.ivarWorkaroundName)")
-        // TODO: could simplify if we had hooked global vars...
+        // TODO: simplify when we have hooked global vars...
     }
 }
 
 // MARK: - VM properties
 
 extension RbBridge {
-
     /// Debug mode for Ruby code, sets `$DEBUG` / `$-d`
     public var debug: Bool {
         get {
@@ -182,10 +179,13 @@ extension RbBridge {
         }
     }
 
-    /// Verbose setting for Ruby scripts - affects `Kernel#warn` etc.
+    /// Verbosity setting for Ruby scripts - affects `Kernel#warn` etc.
     public enum Verbosity {
+        /// Silent verbosity mode.
         case none
+        /// Medium verbosity mode.  The Ruby default.
         case medium
+        /// Full verbosity mode.
         case full
     }
 
@@ -216,7 +216,7 @@ extension RbBridge {
         }
     }
 
-    /// Set `$PROGRAM_NAME` / `$0` for Ruby code.
+    /// Value of Ruby `$PROGRAM_NAME` / `$0`.
     public var scriptName: String {
         set {
             if softSetup() {
@@ -240,6 +240,7 @@ extension RbBridge {
     }
 
     /// The full version string for the Ruby being used.
+    ///
     /// For example "ruby 2.5.0p0 (2017-12-25 revision 61468) [x86_64-darwin17]".
     public var versionDescription: String {
         return String(cString: rbb_ruby_description())
@@ -251,6 +252,10 @@ extension RbBridge {
 extension RbBridge {
 
     /// Evaluate some Ruby and return the result.
+    ///
+    /// - parameter ruby: Ruby code to execute at the top level.
+    /// - returns: The result of executing the code.
+    /// - throws: `RbError` if something goes wrong.
     public func eval(ruby: String) throws -> RbObject {
         try setup()
         return RbObject(rubyValue: try RbVM.doProtect {
@@ -258,12 +263,14 @@ extension RbBridge {
         })
     }
 
-    /// 'require' - see Ruby `Kernel#require`.  Load file once-only.
+    /// Load a Ruby file once-only.  See `Kernel#require`, but note this
+    /// method is dispatched dynamically so it will invoke any replacements of
+    /// `require`.
     ///
     /// - parameter filename: The name of the file to load.
     /// - returns: `true` if the filed was loaded OK, `false` if it is already loaded.
-    /// - throws: RbException if a Ruby exception occurred.  (This usually means the
-    ///           file couldn't be found.)
+    /// - throws: `RbError` if something goes wrong.  This usually means that Ruby
+    ///           couldn't find the file.
     @discardableResult
     public func require(filename: String) throws -> Bool {
         // Have to use eval so that gems work - rubygems/kernel_require.rb replaces
@@ -271,12 +278,12 @@ extension RbBridge {
         return try eval(ruby: "require '\(filename)'").isTruthy
     }
 
-    /// 'load' - see Ruby `Kernel#load`. Load a file, reloads if already loaded.
+    /// See Ruby `Kernel#load`. Load a file, reloads if already loaded.
     ///
     /// - parameter filename: The name of the file to load
     /// - parameter wrap: If `true`, load the file into a fresh anonymous namespace
     ///   instead of the current program.  See `Kernel#load`.
-    /// - throws: `RbException` for any Ruby exception raised.
+    /// - throws: `RbError` if something goes wrong.
     public func load(filename: String, wrap: Bool = false) throws {
         try setup()
         return try RbObject(filename).withRubyValue { rubyValue in
@@ -290,4 +297,5 @@ extension RbBridge {
 
 // MARK: - Global declaration
 
+/// The shared instance of `RbBridge`.
 public let Ruby = RbBridge()
