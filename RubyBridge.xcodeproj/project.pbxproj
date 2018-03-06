@@ -86,7 +86,6 @@
 		0249235020335C0D00E3AAF4 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		024923532034AA3E00E3AAF4 /* backwards.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = backwards.rb; path = Tests/RubyBridgeTests/Fixtures/backwards.rb; sourceTree = SOURCE_ROOT; };
 		02571723203C984C001E3C43 /* nesting.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = nesting.rb; sourceTree = "<group>"; };
-		026E20072034B3A400543EB9 /* CRuby.swift.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CRuby.swift.txt; sourceTree = "<group>"; };
 		02706176204EB47600C336B8 /* RbOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbOperators.swift; sourceTree = "<group>"; };
 		02706178204EC36E00C336B8 /* TestOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestOperators.swift; sourceTree = "<group>"; };
 		02901337203E03530090C5C9 /* RbBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbBridge.swift; sourceTree = "<group>"; };
@@ -214,7 +213,6 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
-				026E20072034B3A400543EB9 /* CRuby.swift.txt */,
 				OBJ_7 /* Sources */,
 				OBJ_12 /* Tests */,
 				OBJ_16 /* Dependencies */,
