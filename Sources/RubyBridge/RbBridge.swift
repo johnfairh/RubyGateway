@@ -13,7 +13,7 @@ import RubyBridgeHelpers
 ///
 /// Clients cannot instantiate this type.  Instead the `RubyBridge` module
 /// exports a public instance `Ruby`.  Among other things this permits dynamic
-/// member lookup and callable style programming in Swift 5.
+/// member lookup and callable-style programming in Swift 5.
 ///
 /// The Ruby VM is initialized when the object is first accessed and is
 /// automatically stopped when the process ends.  The VM can be manually shut
@@ -47,7 +47,7 @@ import RubyBridgeHelpers
 /// ```
 ///
 /// If you just want to create a Ruby object of some class, see
-/// `RbObject.init?(ofClass:args:kwArgs:)`.
+/// `RbObject.init(ofClass:args:kwArgs:)`.
 public final class RbBridge: RbObjectAccess {
 
     /// The VM - not intialized until `setup()` is called.
@@ -69,11 +69,11 @@ public final class RbBridge: RbObjectAccess {
     /// Explicitly shut down Ruby and release resources.
     /// This includes calling `END{}` code and procs registered by `Kernel.#at_exit`.
     ///
-    /// You generally don't need to call this, will be done automatically
-    /// as part of process exit.
+    /// You generally don't need to call this: it happens automatically as part of
+    /// process exit.
     ///
-    /// If called you cannot continue to use Ruby in this process, the VM cannot be
-    /// re-setup.
+    /// Once called you cannot continue to use Ruby in this process: the VM cannot
+    /// be re-setup.
     ///
     /// - returns: 0 if the cleanup went fine, otherwise some error code from Ruby.
     public func cleanup() -> Int32 {
@@ -82,13 +82,13 @@ public final class RbBridge: RbObjectAccess {
 
     /// Get an `ID` ready to call a method, for example.
     ///
-    /// This is public for users to interop with `CRuby`, it is not
+    /// This is public for users to interop with `CRuby`.  It is not
     /// needed for regular `RubyBridge` use.
     ///
-    /// - parameter name: name to look up, typically constant or method name.
-    /// - returns: the corresponding ID
-    /// - throws: `RbException` if Ruby raises -- probably means the `ID` space
-    ///   is full, which is fairly unlikely.
+    /// - parameter name: Name to look up, typically constant or method name.
+    /// - returns: The corresponding ID.
+    /// - throws: `RbException` if Ruby raises an exception.  This probably means
+    ///   the `ID` space is full, which is fairly unlikely.
     public func getID(for name: String) throws -> ID {
         return try RbBridge.vm.getID(for: name)
     }
@@ -161,7 +161,7 @@ public final class RbBridge: RbObjectAccess {
 // MARK: - VM properties
 
 extension RbBridge {
-    /// Debug mode for Ruby code, sets `$DEBUG` / `$-d`
+    /// Debug mode for Ruby code, sets `$DEBUG` / `$-d`.
     public var debug: Bool {
         get {
             guard softSetup(), let debug_ptr = rb_ruby_debug_ptr() else {
@@ -189,7 +189,7 @@ extension RbBridge {
         case full
     }
 
-    /// Verbose mode for Ruby code, sets `$VERBOSE` / `$-v`
+    /// Verbose mode for Ruby code, sets `$VERBOSE` / `$-v`.
     public var verbose: Verbosity {
         get {
             guard softSetup(), let verbose_ptr = rb_ruby_verbose_ptr() else {
@@ -234,14 +234,14 @@ extension RbBridge {
         }
     }
 
-    /// The version number triple of Ruby being used, for example "2.5.0".
+    /// The version number triple of Ruby being used, for example *2.5.0*.
     public var version: String {
         return String(cString: rbb_ruby_version())
     }
 
     /// The full version string for the Ruby being used.
     ///
-    /// For example "ruby 2.5.0p0 (2017-12-25 revision 61468) [x86_64-darwin17]".
+    /// For example *ruby 2.5.0p0 (2017-12-25 revision 61468) [x86_64-darwin17]*.
     public var versionDescription: String {
         return String(cString: rbb_ruby_description())
     }
@@ -250,7 +250,6 @@ extension RbBridge {
 // MARK: - run code: eval, require, load
 
 extension RbBridge {
-
     /// Evaluate some Ruby and return the result.
     ///
     /// - parameter ruby: Ruby code to execute at the top level.
@@ -268,7 +267,7 @@ extension RbBridge {
     /// `require`.
     ///
     /// - parameter filename: The name of the file to load.
-    /// - returns: `true` if the filed was loaded OK, `false` if it is already loaded.
+    /// - returns: `true` if the file was loaded OK, `false` if it is already loaded.
     /// - throws: `RbError` if something goes wrong.  This usually means that Ruby
     ///           couldn't find the file.
     @discardableResult

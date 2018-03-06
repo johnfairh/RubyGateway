@@ -1,0 +1,12 @@
+author: John Fairhurst
+author_url: http://github.com/johnfairh
+module: RubyBridge
+copyright: Distributed under the MIT license.  Maintained by John Fairhurst.
+readme: README.md
+github_url: https://github.com/johnfairh/RubyBridge
+hide_documentation_coverage: true
+xcodebuild_arguments:
+    - "-target"
+    - "RubyBridge"
+sdk: macosx
+theme: fullwidth

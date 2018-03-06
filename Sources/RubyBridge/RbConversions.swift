@@ -17,13 +17,13 @@ public protocol RbObjectConvertible {
     /// Try to create an instance of this type from the Ruby object.
     ///
     /// Returns `nil` if the object cannot be converted, for example a
-    /// complete type mismatch, or a numeric type that won't fit.
+    /// complete type mismatch or a numeric type that won't fit.
     init?(_ value: RbObject)
 
     /// A fresh Ruby object matching the current state of the Swift object.
     ///
-    /// If Ruby is not working (VM init failure) then the vended object is
-    /// some invalid value.  The VM init failure is reported at the point
+    /// If Ruby is not working (VM setup failure) then the vended object is
+    /// some invalid value.  The VM setup failure is reported at the point
     /// the object is used.
     var rubyObject: RbObject { get }
 }
@@ -130,7 +130,7 @@ extension UInt: RbObjectConvertible {
     ///
     /// See `RbException.history` to find out why a conversion failed.
     ///
-    /// If the Ruby value is floating point then the integer part is returned.
+    /// If the Ruby value is floating-point then the integer part is used.
     public init?(_ value: RbObject) {
         self = value.withRubyValue { rbb_obj2ulong_protect($0, nil) }
         if RbException.ignoreAnyPending() {
@@ -156,9 +156,9 @@ extension Int: RbObjectConvertible {
     /// 1. Is numeric and does not fit into the Swift type; or
     /// 2. Cannot be made into a suitable numeric via `to_int` or `to_i`.
     ///
-    /// See `RbException.history` to find out why a conversion failed.
+    /// See `RbError.history` to find out why a conversion failed.
     ///
-    /// If the Ruby value is floating point then the integer part is returned.
+    /// If the Ruby value is floating-point then the integer part is used.
     public init?(_ value: RbObject) {
         self = value.withRubyValue { rbb_obj2long_protect($0, nil) }
         if RbException.ignoreAnyPending() {
@@ -191,7 +191,7 @@ extension Double: RbObjectConvertible {
     /// 1. Is numeric and does not fit into the Swift type; or
     /// 2. Cannot be made into a suitable numeric via `to_f`.
     ///
-    /// See `RbException.history` to find out why a conversion failed.
+    /// See `RbError.history` to find out why a conversion failed.
     ///
     /// Flavors of NaN are not preserved across the Ruby<->Swift interface.
     public init?(_ value: RbObject) {

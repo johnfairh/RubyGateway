@@ -20,7 +20,7 @@ extension UInt64: RbObjectConvertible {
     ///
     /// See `RbError.history` to find out why a conversion failed.
     ///
-    /// If the Ruby value is floating point then the integer part is returned.
+    /// If the Ruby value is floating-point then the integer part is used.
     public init?(_ value: RbObject) {
         guard let actual = UInt(value) else {
             return nil
@@ -44,7 +44,7 @@ extension UInt32: RbObjectConvertible {
     ///
     /// See `RbError.history` to find out why a conversion failed.
     ///
-    /// If the Ruby value is floating point then the integer part is returned.
+    /// If the Ruby value is floating-point then the integer part is used.
     public init?(_ value: RbObject) {
         guard let actual = UInt(value) else {
             return nil
@@ -68,7 +68,7 @@ extension UInt16: RbObjectConvertible {
     ///
     /// See `RbError.history` to find out why a conversion failed.
     ///
-    /// If the Ruby value is floating point then the integer part is returned.
+    /// If the Ruby value is floating-point then the integer part is used.
     public init?(_ value: RbObject) {
         guard let actual = UInt(value) else {
             return nil
@@ -92,7 +92,7 @@ extension UInt8: RbObjectConvertible {
     ///
     /// See `RbError.history` to find out why a conversion failed.
     ///
-    /// If the Ruby value is floating point then the integer part is returned.
+    /// If the Ruby value is floating-point then the integer part is used.
     public init?(_ value: RbObject) {
         guard let actual = UInt(value) else {
             return nil
@@ -117,7 +117,7 @@ extension Int64: RbObjectConvertible {
     ///
     /// See `RbError.history` to find out why a conversion failed.
     ///
-    /// If the Ruby value is floating point then the integer part is returned.
+    /// If the Ruby value is floating-point then the integer part is used.
     public init?(_ value: RbObject) {
         guard let actual = Int(value) else {
             return nil
@@ -140,7 +140,7 @@ extension Int32: RbObjectConvertible {
     ///
     /// See `RbError.history` to find out why a conversion failed.
     ///
-    /// If the Ruby value is floating point then the integer part is returned.
+    /// If the Ruby value is floating-point then the integer part is used.
     public init?(_ value: RbObject) {
         guard let actual = Int(value) else {
             return nil
@@ -163,7 +163,7 @@ extension Int16: RbObjectConvertible {
     ///
     /// See `RbError.history` to find out why a conversion failed.
     ///
-    /// If the Ruby value is floating point then the integer part is returned.
+    /// If the Ruby value is floating-point then the integer part is used.
     public init?(_ value: RbObject) {
         guard let actual = Int(value) else {
             return nil
@@ -186,7 +186,7 @@ extension Int8: RbObjectConvertible {
     ///
     /// See `RbError.history` to find out why a conversion failed.
     ///
-    /// If the Ruby value is floating point then the integer part is returned.
+    /// If the Ruby value is floating-point then the integer part is used.
     public init?(_ value: RbObject) {
         guard let actual = Int(value) else {
             return nil

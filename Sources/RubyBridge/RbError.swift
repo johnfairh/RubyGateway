@@ -12,15 +12,22 @@ import CRuby
 public enum RbError: Error {
     /// The Ruby VM could not be set up.
     case setup(String)
-    /// Some object has the wrong type for an operation.  Raised for
-    /// example when setting a CVar on a non-class object.
+
+    /// An object has the wrong type for an operation.
+    ///
+    /// Raised for example when setting a CVar on a non-class object.
     case badType(String)
-    /// An identifier looks wrong.  Raised for example when an IVar name
-    /// does not begin with '@'.
+
+    /// An identifier looks to be spelt wrong.
+    ///
+    /// Raised for example when an IVar name does not begin with '@'.
     case badIdentifier(type: String, id: String)
-    /// A keyword argument is duplicated.  Raised when a `kwArgs` parameter
-    /// is passed and the list contains duplicate argument keywords.
+
+    /// A keyword argument is duplicated.
+    ///
+    /// Raised when a `kwArgs` parameter is passed and the list contains duplicate argument keywords.
     case duplicateKwArg(String)
+
     /// A Ruby exception occurred.
     case rubyException(RbException)
 
@@ -31,7 +38,7 @@ public enum RbError: Error {
     /// still been generated internally and is stashed here.
     ///
     /// These `nil` results happen during type conversion to Swift, for example
-    /// `String.init(value:)`, and when using the `RbObjectAccess.failable`
+    /// `String.init(_:)`, and when using the `RbObjectAccess.failable`
     /// adapter that suppresses throwing.
     public struct History {
         /// The error history.  The oldest error recorded is at index 0;

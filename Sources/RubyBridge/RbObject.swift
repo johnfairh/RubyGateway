@@ -11,7 +11,7 @@ import RubyBridgeHelpers
 /// All Ruby objects whatever their type or class are represented using this
 /// Swift type.
 ///
-/// Use `RbObject.init(ofClass:args:kwArgs)` to create a new Ruby object of
+/// Use `RbObject.init(ofClass:args:kwArgs:)` to create a new Ruby object of
 /// some class:
 /// ```swift
 /// let myObj = RbObject(ofClass: "MyModule::MyClass", args: ["arg1", 25.3])
@@ -54,7 +54,7 @@ import RubyBridgeHelpers
 /// to trigger Ruby errors here that currently cause `RubyBridge` to crash.  For
 /// example this is poison:
 /// ```swift
-/// `RbObject(3) < RbObject("barney")`
+/// RbObject(3) < RbObject("barney")
 /// ```
 /// I plan to add more control over what happens here.
 ///
