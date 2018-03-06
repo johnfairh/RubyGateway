@@ -34,20 +34,6 @@
                ReferencedContainer = "container:RubyBridge.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "TMLRuby::TMLRubyClient"
-               BuildableName = "TMLRubyClient"
-               BlueprintName = "TMLRubyClient"
-               ReferencedContainer = "container:RubyBridge.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -92,15 +78,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "TMLRuby::TMLRubyClient"
-            BuildableName = "TMLRubyClient"
-            BlueprintName = "TMLRubyClient"
-            ReferencedContainer = "container:RubyBridge.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -110,15 +87,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "TMLRuby::TMLRubyClient"
-            BuildableName = "TMLRubyClient"
-            BlueprintName = "TMLRubyClient"
-            ReferencedContainer = "container:RubyBridge.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
