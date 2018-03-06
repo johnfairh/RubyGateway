@@ -216,7 +216,7 @@ extension RbObject: CustomPlaygroundQuickLookable {
     }
 }
 
-// MARK: - Hashable etc.
+// MARK: - Standard library conformances
 
 extension RbObject: Hashable, Equatable, Comparable {
     /// The hash value for the Ruby object.
