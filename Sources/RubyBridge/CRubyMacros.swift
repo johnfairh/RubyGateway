@@ -65,36 +65,66 @@ func RSTRING_PTR(_ str: VALUE) -> UnsafePointer<Int8> {
 // MARK: - More enum-y `VALUE` type enum
 
 // Swift-friendly value type.  Constants duplicated from Ruby headers,
-// should be low-risk.
+// can't see how not to; should be low-risk.
+
+/// The type of a Ruby VALUE as wrapped by `RbObject`.
+///
+/// Not generally useful, maybe for debugging.
 public enum RbType: Int32 {
+    /// RUBY_T_NONE
     case T_NONE     = 0x00
 
+    /// RUBY_T_OBJECT
     case T_OBJECT   = 0x01
+    /// RUBY_T_CLASS
     case T_CLASS    = 0x02
+    /// RUBY_T_MODULE
     case T_MODULE   = 0x03
+    /// RUBY_T_FLOAT
     case T_FLOAT    = 0x04
+    /// RUBY_T_STRING
     case T_STRING   = 0x05
+    /// RUBY_T_REGEXP
     case T_REGEXP   = 0x06
+    /// RUBY_T_ARRAY
     case T_ARRAY    = 0x07
+    /// RUBY_T_HASH
     case T_HASH     = 0x08
+    /// RUBY_T_STRUCT
     case T_STRUCT   = 0x09
+    /// RUBY_T_BIGNUM
     case T_BIGNUM   = 0x0a
+    /// RUBY_T_FILE
     case T_FILE     = 0x0b
+    /// RUBY_T_DATA
     case T_DATA     = 0x0c
+    /// RUBY_T_MATCH
     case T_MATCH    = 0x0d
+    /// RUBY_T_COMPLEX
     case T_COMPLEX  = 0x0e
+    /// RUBY_T_RATIONAL
     case T_RATIONAL = 0x0f
 
+    /// RUBY_T_NIL
     case T_NIL      = 0x11
+    /// RUBY_T_TRUE
     case T_TRUE     = 0x12
+    /// RUBY_T_FALSE
     case T_FALSE    = 0x13
+    /// RUBY_T_SYMBOL
     case T_SYMBOL   = 0x14
+    /// RUBY_T_FIXNUM
     case T_FIXNUM   = 0x15
+    /// RUBY_T_UNDEF
     case T_UNDEF    = 0x16
 
+    /// RUBY_T_IMEMO
     case T_IMEMO    = 0x1a
+    /// RUBY_T_NODE
     case T_NODE     = 0x1b
+    /// RUBY_T_ICLASS
     case T_ICLASS   = 0x1c
+    /// RUBY_T_ZOMBIE
     case T_ZOMBIE   = 0x1d
 }
 
