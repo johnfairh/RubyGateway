@@ -19,7 +19,10 @@
 // MARK: - Numeric operators
 
 extension RbObject: SignedNumeric {
-
+    /// Subtraction operator for `RbObject`s.
+    ///
+    /// - note: Calls Ruby `-` method.  Crashes the process (`fatalError`)
+    ///         if the objects do not support subtraction.
     public static func -(lhs: RbObject, rhs: RbObject) -> RbObject {
         do {
             return try lhs.call("-", args: [rhs])
@@ -28,6 +31,10 @@ extension RbObject: SignedNumeric {
         }
     }
 
+    /// Addition operator for `RbObject`s.
+    ///
+    /// - note: Calls Ruby `+` method.  Crashes the process (`fatalError`)
+    ///         if the objects do not support addition.
     public static func +(lhs: RbObject, rhs: RbObject) -> RbObject {
         do {
             return try lhs.call("+", args: [rhs])
@@ -36,6 +43,10 @@ extension RbObject: SignedNumeric {
         }
     }
 
+    /// Multiplication operator for `RbObject`s.
+    ///
+    /// - note: Calls Ruby `*` method.  Crashes the process (`fatalError`)
+    ///         if the objects do not support multiplication.
     public static func *(lhs: RbObject, rhs: RbObject) -> RbObject {
         do {
             return try lhs.call("*", args: [rhs])
@@ -44,18 +55,55 @@ extension RbObject: SignedNumeric {
         }
     }
 
+    /// Division operator for `RbObject`s.
+    ///
+    /// - note: Calls Ruby `/` method.  Crashes the process (`fatalError`)
+    ///         if the objects do not support division.
+    public static func /(lhs: RbObject, rhs: RbObject) -> RbObject {
+        do {
+            return try lhs.call("/", args: [rhs])
+        } catch {
+            fatalError("Calling '/' on \(lhs) with \(rhs) failed: \(error)")
+        }
+    }
+
+    /// Remainder operator for `RbObject`s.
+    ///
+    /// - note: Calls Ruby `%` method.  Crashes the process (`fatalError`)
+    ///         if the objects do not support remaindering.
+    public static func %(lhs: RbObject, rhs: RbObject) -> RbObject {
+        do {
+            return try lhs.call("%", args: [rhs])
+        } catch {
+            fatalError("Calling '%' on \(lhs) with \(rhs) failed: \(error)")
+        }
+    }
+
     // OK why do these not have default implementations?
 
+    /// Addition-assignment operator for `RbObject`s.
     public static func +=(lhs: inout RbObject, rhs: RbObject) {
         lhs = lhs + rhs
     }
 
+    /// Subtraction-assignment operator for `RbObject`s.
     public static func -=(lhs: inout RbObject, rhs: RbObject) {
         lhs = lhs - rhs
     }
 
+    /// Multiplication-assignment operator for `RbObject`s.
     public static func *=(lhs: inout RbObject, rhs: RbObject) {
         lhs = lhs * rhs
+    }
+
+    /// Division-assignment operator for `RbObject`s.
+    public static func /=(lhs: inout RbObject, rhs: RbObject) {
+        lhs = lhs / rhs
+    }
+
+    /// Remainder-assignment operator for `RbObject`s.
+    public static func %=(lhs: inout RbObject, rhs: RbObject) {
+        lhs = lhs % rhs
     }
 
     /// Create a Ruby object from some type conforming to `BinaryInteger`
@@ -68,7 +116,8 @@ extension RbObject: SignedNumeric {
 
     /// The magnitude of the value.
     ///
-    /// Calls Ruby `magnitude`.
+    /// - note: Calls Ruby `magnitude` method.  Crashes the process (`fatalError`)
+    ///         if the object does not support magnitude.
     public var magnitude: RbObject {
         do {
             return try call("magnitude")
@@ -79,7 +128,8 @@ extension RbObject: SignedNumeric {
 
     /// The negated version of the value.
     ///
-    /// Calls Ruby unary -.
+    /// - note: Calls Ruby unary - method.  Crashes the process (`fatalError`)
+    ///         if the object does not support this.
     public static prefix func -(_ operand: RbObject) -> RbObject {
         do {
             return try operand.call("-@")
@@ -90,29 +140,13 @@ extension RbObject: SignedNumeric {
 
     /// Unary plus operator.
     ///
-    /// Calls Ruby unary +.
+    /// - note: Calls Ruby unary + method.  Crashes the process (`fatalError`)
+    ///         if the object does not support this.
     public static prefix func +(_ operand: RbObject) -> RbObject {
         do {
             return try operand.call("+@")
         } catch {
             fatalError("Calling '+@' on \(operand) failed: \(error)")
         }
-    }
-}
-
-// Add in division...
-
-extension RbObject {
-
-    public static func /(lhs: RbObject, rhs: RbObject) -> RbObject {
-        do {
-            return try lhs.call("/", args: [rhs])
-        } catch {
-            fatalError("Calling '/' on \(lhs) with \(rhs) failed: \(error)")
-        }
-    }
-
-    public static func /=(lhs: inout RbObject, rhs: RbObject) {
-        lhs = lhs / rhs
     }
 }

@@ -58,7 +58,16 @@ import RubyBridgeHelpers
 /// ```
 /// I plan to add more control over what happens here.
 ///
-/// + arithmetic
+/// ## Arithmetic operators
+///
+/// `RbObject` conforms to the `SignedNumeric` protocol by forwarding the regular
+/// arithmetic operators to the corresponding Ruby methods.  This means you can
+/// write `let a = b + c` where all are `RbObject`s and get a valid value for `a`
+/// provided `b` and `c` are any of the Ruby numeric values or any Ruby class that
+/// happens to support those operators.
+///
+/// Again you must take ensure that your Ruby objects support these operators or
+/// the program will crash.
 public final class RbObject: RbObjectAccess {
     private let valueBox: UnsafeMutablePointer<Rbb_value>
 
