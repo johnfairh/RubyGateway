@@ -78,6 +78,12 @@ public final class RbObject: RbObjectAccess {
     ///
     /// The underlying Ruby object will not be garbage-collected until
     /// both `RbObject`s have been deallocated.
+    ///
+    /// There is still just one Ruby object in the system.  To create
+    /// a separate Ruby object do:
+    /// ```swift
+    /// let myClone = myObject.call("clone")
+    /// ```
     public init(_ value: RbObject) {
         valueBox = rbb_value_dup(value.valueBox);
         let rubyValue = valueBox.pointee.value

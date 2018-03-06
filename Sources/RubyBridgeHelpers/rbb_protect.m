@@ -232,7 +232,7 @@ static VALUE rbb_obj2ulong(VALUE v)
     }
 
     // Now decide if this looks negative
-    int negative = 0;
+    bool negative = false;
 
     if (FIXNUM_P(v))
     {

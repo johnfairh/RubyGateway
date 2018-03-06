@@ -15,17 +15,25 @@ import RubyBridgeHelpers
 /// Protocol adopted by types that can be converted to and from RbObjects.
 public protocol RbObjectConvertible {
     /// Try to create an instance of this type from the Ruby object.
+    ///
     /// Returns `nil` if the object cannot be converted, for example a
     /// complete type mismatch, or a numeric type that won't fit.
     init?(_ value: RbObject)
 
-    /// Get a Ruby version of this type.
+    /// A fresh Ruby object matching the current state of the Swift object.
+    ///
+    /// If Ruby is not working (VM init failure) then the vended object is
+    /// some invalid value.  The VM init failure is reported at the point
+    /// the object is used.
     var rubyObject: RbObject { get }
 }
 
 /// Anything -> RbObject
 extension RbObject {
-    /// Explicitly create an RbObject from something else.
+    /// Create an `RbObject` from a Swift type.
+    ///
+    /// `RubyBridge` conforms most of the Swift standard library types
+    /// to `RbObjectConvertible`.
     public convenience init(_ value: RbObjectConvertible) {
         self.init(value.rubyObject)
     }
@@ -40,7 +48,9 @@ extension RbObject: RbObjectConvertible {
     // Quick sanity check here: RbObject is a ref type so this `return self` is OK,
     // it returns a second ref-counted ptr to the single `RbObj` which has a single
     // `Rbb_val`.  There is no aliasing of `Rbb_val` ownership.
-    // WBN to not see this property though.
+    //
+    // Although semantics of `rubyObject` suggest we need to provide clone here.
+    // TBD.  Perhaps need two accessors with default implementation.
 }
 
 // MARK: - String
@@ -48,12 +58,12 @@ extension RbObject: RbObjectConvertible {
 extension String: RbObjectConvertible {
     /// Try to get a `String` representation of an `RbObject`.
     ///
-    /// This is equivalent to calling `to_str` on the Ruby object,
-    /// and if that doesn't work calling `to_s`.
+    /// This calls Ruby `Kernel#String` on the object, which tries
+    /// `to_str` followed by `to_s`.
     ///
     /// See `RbException.history` to find out why a conversion failed.
     public init?(_ value: RbObject) {
-        let stringVal = value.withRubyValue { rbVal in rbb_String_protect(rbVal, nil) }
+        let stringVal = value.withRubyValue { rbb_String_protect($0, nil) }
         if RbException.ignoreAnyPending() {
             return nil
         }
@@ -65,17 +75,17 @@ extension String: RbObjectConvertible {
         self.init(data: rubyData, encoding: .utf8)
     }
 
-    /// Create a Ruby object for the string.
+    /// A Ruby object for the string.
     public var rubyObject: RbObject {
         guard Ruby.softSetup() else {
-            return RbObject.nilObject
+            return .nilObject
         }
         return RbObject(rubyValue: withCString { rb_utf8_str_new($0, utf8.count) })
     }
 }
 
 extension RbObject: ExpressibleByStringLiteral {
-    /// Creates an `RbObject` from a string literal
+    /// Creates an `RbObject` from a string literal.
     public convenience init(stringLiteral value: String) {
         self.init(value.rubyObject)
     }
@@ -95,14 +105,14 @@ extension Bool: RbObjectConvertible {
         self = value.isTruthy
     }
 
-    /// Create a Ruby object for the bool.
+    /// A Ruby object for the boolean value.
     public var rubyObject: RbObject {
         return RbObject(rubyValue: self ? Qtrue : Qfalse)
     }
 }
 
 extension RbObject: ExpressibleByBooleanLiteral {
-    /// Creates an `RbObject` from a boolean literal
+    /// Creates an `RbObject` from a boolean literal.
     public convenience init(booleanLiteral value: Bool) {
         self.init(value.rubyObject)
     }
@@ -122,16 +132,16 @@ extension UInt: RbObjectConvertible {
     ///
     /// If the Ruby value is floating point then the integer part is returned.
     public init?(_ value: RbObject) {
-        self = value.withRubyValue { rbVal in rbb_obj2ulong_protect(rbVal, nil) }
+        self = value.withRubyValue { rbb_obj2ulong_protect($0, nil) }
         if RbException.ignoreAnyPending() {
             return nil
         }
     }
 
-    /// Create a Ruby object for the number.
+    /// A Ruby object for the number.
     public var rubyObject: RbObject {
         guard Ruby.softSetup() else {
-            return RbObject.nilObject
+            return .nilObject
         }
         return RbObject(rubyValue: RB_ULONG2NUM(self))
     }
@@ -150,22 +160,23 @@ extension Int: RbObjectConvertible {
     ///
     /// If the Ruby value is floating point then the integer part is returned.
     public init?(_ value: RbObject) {
-        self = value.withRubyValue { rbVal in rbb_obj2long_protect(rbVal, nil) }
+        self = value.withRubyValue { rbb_obj2long_protect($0, nil) }
         if RbException.ignoreAnyPending() {
             return nil
         }
     }
 
-    /// Create a Ruby object for the number.
+    /// A Ruby object for the number.
     public var rubyObject: RbObject {
         guard Ruby.softSetup() else {
-            return RbObject.nilObject
+            return .nilObject
         }
         return RbObject(rubyValue: RB_LONG2NUM(self))
     }
 }
 
 extension RbObject: ExpressibleByIntegerLiteral {
+    /// Creates an `RbObject` from an integer literal.
     public convenience init(integerLiteral value: Int) {
         self.init(value.rubyObject)
     }
@@ -184,22 +195,23 @@ extension Double: RbObjectConvertible {
     ///
     /// Flavors of NaN are not preserved across the Ruby<->Swift interface.
     public init?(_ value: RbObject) {
-        self = value.withRubyValue { rbVal in rbb_obj2double_protect(rbVal, nil) }
+        self = value.withRubyValue { rbb_obj2double_protect($0, nil) }
         if RbException.ignoreAnyPending() {
             return nil
         }
     }
 
-    /// Create a Ruby object for the number.
+    /// A Ruby object for the number.
     public var rubyObject: RbObject {
         guard Ruby.softSetup() else {
-            return RbObject.nilObject
+            return .nilObject
         }
         return RbObject(rubyValue: DBL2NUM(self))
     }
 }
 
 extension RbObject: ExpressibleByFloatLiteral {
+    /// Creates an `RbObject` from a floating-point literal.
     public convenience init(floatLiteral value: Double) {
         self.init(value.rubyObject)
     }
@@ -237,4 +249,3 @@ extension RbObject: ExpressibleByFloatLiteral {
 //    }
 //    return hashObj
 //}
-
