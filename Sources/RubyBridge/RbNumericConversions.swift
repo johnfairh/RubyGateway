@@ -5,7 +5,7 @@
 //  Distributed under the MIT license, see LICENSE
 //
 
-// This file has tedious repetitions of the numeric convertible adoption
+// This file has tedious repetitions of the numeric convertible conformance
 // and their doc comments for the fixed-width integer types and float.
 
 // MARK: - Unsigned
@@ -28,7 +28,7 @@ extension UInt64: RbObjectConvertible {
         self.init(actual)
     }
 
-    /// Create a Ruby object for the number.
+    /// A Ruby object for the number.
     public var rubyObject: RbObject {
         return UInt(self).rubyObject
     }
@@ -52,7 +52,7 @@ extension UInt32: RbObjectConvertible {
         self.init(exactly: actual)
     }
 
-    /// Create a Ruby object for the number.
+    /// A Ruby object for the number.
     public var rubyObject: RbObject {
         return UInt(self).rubyObject
     }
@@ -76,7 +76,7 @@ extension UInt16: RbObjectConvertible {
         self.init(exactly: actual)
     }
 
-    /// Create a Ruby object for the number.
+    /// A Ruby object for the number.
     public var rubyObject: RbObject {
         return UInt(self).rubyObject
     }
@@ -100,7 +100,7 @@ extension UInt8: RbObjectConvertible {
         self.init(exactly: actual)
     }
 
-    /// Create a Ruby object for the number.
+    /// A Ruby object for the number.
     public var rubyObject: RbObject {
         return UInt(self).rubyObject
     }
@@ -125,7 +125,7 @@ extension Int64: RbObjectConvertible {
         self.init(exactly: actual)
     }
 
-    /// Create a Ruby object for the number.
+    /// A Ruby object for the number.
     public var rubyObject: RbObject {
         return Int(self).rubyObject
     }
@@ -148,7 +148,7 @@ extension Int32: RbObjectConvertible {
         self.init(exactly: actual)
     }
 
-    /// Create a Ruby object for the number.
+    /// A Ruby object for the number.
     public var rubyObject: RbObject {
         return Int(self).rubyObject
     }
@@ -171,7 +171,7 @@ extension Int16: RbObjectConvertible {
         self.init(exactly: actual)
     }
 
-    /// Create a Ruby object for the number.
+    /// A Ruby object for the number.
     public var rubyObject: RbObject {
         return Int(self).rubyObject
     }
@@ -194,7 +194,7 @@ extension Int8: RbObjectConvertible {
         self.init(exactly: actual)
     }
 
-    /// Create a Ruby object for the number.
+    /// A Ruby object for the number.
     public var rubyObject: RbObject {
         return Int(self).rubyObject
     }
@@ -224,7 +224,7 @@ extension Float: RbObjectConvertible {
         }
     }
 
-    /// Create a Ruby object for the number.
+    /// A Ruby object for the number.
     public var rubyObject: RbObject {
         return Double(self).rubyObject
     }
