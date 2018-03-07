@@ -27,9 +27,36 @@ are collection types and calling Swift code from Ruby.
 
 ## Examples
 
-- rouge
+A couple of examples:
 
-- object type thing
+### Service invocation
+
+[Rouge](https://github.com/jneen/rouge) is a code highlighter.  In Ruby:
+```ruby
+require 'rouge'
+html = Rouge.highlight("let a = 3", "swift", "html")
+puts(html)
+```
+
+In Swift 4 with similar [lack of] error checking:
+```swift
+import RubyBridge
+
+try! Ruby.require("rouge")
+let html = try! Ruby.get("Rouge").call("highlight", args: ["let a = 3", "swift", "html"])
+print(html)
+```
+
+In future Swift:
+```swift
+import RubyBridge
+
+try! Ruby.require("rouge")
+let html = Ruby.Rouge!.highlight("let a = 3", "swift", "html")!
+print(html)
+```
+
+### Objects
 
 ## Documentation
 
