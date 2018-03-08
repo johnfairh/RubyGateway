@@ -111,11 +111,6 @@ public final class RbObject: RbObjectAccess {
         return valueBox.pointee.value
     }
 
-    /// Temp access to the handle
-    internal var unsafeRubyValue: VALUE {
-        return rubyValue
-    }
-
     /// Safely access the `VALUE` object handle for use with the Ruby C API.
     ///
     /// There is no direct access to the `VALUE` to prevent accidental use

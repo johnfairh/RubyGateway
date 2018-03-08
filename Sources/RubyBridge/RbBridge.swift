@@ -43,7 +43,7 @@ import RubyBridgeHelpers
 ///
 /// Or with Swift 5 dynamic member lookup & callable:
 /// ```swift
-/// let html = Ruby.Rouge?.highlight("let a = 1", "swift", "html")
+/// let html = Ruby.Rouge!.highlight("let a = 1", "swift", "html")!
 /// ```
 ///
 /// If you just want to create a Ruby object of some class, see

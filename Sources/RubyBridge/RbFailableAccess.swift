@@ -18,8 +18,7 @@
 /// ```
 /// This interface makes it easier to ignore errors especially on setters where
 /// there is often no apparent need to check the result.  This may be construed
-/// as a feature.  However I'm not really convinced it pulls its weight over just
-/// typing `try?`.
+/// as a feature; I'm not really convinced it pulls its weight over `try?`.
 ///
 /// If any methods in this interface do return `nil` then an `RbError` has been raised
 /// and suppressed.  You can access the most recent `RbError`s whether suppressed or not

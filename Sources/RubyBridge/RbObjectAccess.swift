@@ -229,17 +229,18 @@ extension RbObjectAccess {
 
     /// Build a keyword args hash.  The keys are Symbols of the keywords.
     private func buildKwArgsHash(from kwArgs: [(String, RbObjectConvertible)]) throws -> RbObject {
-        // TODO: Build Swift dict then convert to Ruby hash via conformance
-        let hash = RbObject(rubyValue: rb_hash_new())
+        let hashValue = rb_hash_new()
         try kwArgs.forEach { (key, value) in
             try RbSymbol(key).rubyObject.withRubyValue { symValue in
-                if rb_hash_lookup(hash.unsafeRubyValue, symValue) != Qnil {
+                if rb_hash_lookup(hashValue, symValue) != Qnil {
                     try RbError.raise(error: .duplicateKwArg(key))
                 }
-                rb_hash_aset(hash.unsafeRubyValue, symValue, value.rubyObject.unsafeRubyValue)
+                value.rubyObject.withRubyValue {
+                    rb_hash_aset(hashValue, symValue, $0)
+                }
             }
         }
-        return hash
+        return RbObject(rubyValue: hashValue)
     }
 
     /// Get an attribute of a Ruby object.
