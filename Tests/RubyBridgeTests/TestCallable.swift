@@ -192,6 +192,7 @@ class TestCallable: XCTestCase {
         ("testGetChaining", testGetChaining),
         ("testKwArgs", testKwArgs),
         ("testDupKwArgs", testDupKwArgs),
-        ("testCallViaSymbol", testCallViaSymbol)
+        ("testCallViaSymbol", testCallViaSymbol),
+        ("testCallViaSymbolNotSymbol", testCallViaSymbolNotSymbol)
     ]
 }

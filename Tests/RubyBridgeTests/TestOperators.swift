@@ -70,4 +70,8 @@ class TestOperators: XCTestCase {
         XCTAssertEqual(aVal, Double(aValObj))
     }
 
+    static var allTests = [
+        ("testBasicIntegers", testBasicIntegers),
+        ("testMutating", testMutating)
+    ]
 }

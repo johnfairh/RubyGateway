@@ -84,6 +84,7 @@ class TestDemo: XCTestCase {
 
     static var allTests = [
         ("testRouge", testRouge),
-        ("testWikipedia", testWikipedia)
+        ("testWikipedia", testWikipedia),
+        ("testDemo", testDemo)
     ]
 }

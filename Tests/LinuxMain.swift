@@ -14,9 +14,11 @@ XCTMain([
     testCase(TestRbObject.allTests),
     testCase(TestNumerics.allTests),
     testCase(TestMiscObjTypes.allTests),
+    testCase(TestOperators.allTests),
     testCase(TestStrings.allTests),
     testCase(TestConstants.allTests),
     testCase(TestVars.allTests),
     testCase(TestCallable.allTests),
-    testCase(TestErrors.allTests)
+    testCase(TestErrors.allTests),
+    testCase(TestFailable.allTests)
 ])

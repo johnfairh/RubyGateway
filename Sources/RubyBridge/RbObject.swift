@@ -173,36 +173,6 @@ extension RbObject {
         }
         self.init(obj)
     }
-
-    /// Create a Ruby `Symbol` object from a string.  Symbols are written `:name` in Ruby.
-    ///
-    /// - parameter symbolName: Name of the symbol.
-    public convenience init(symbolName: String) {
-        guard Ruby.softSetup(),
-              let id = try? Ruby.getID(for: symbolName) else {
-            self.init(rubyValue: Qnil)
-            return
-        }
-        self.init(rubyValue: rb_id2sym(id))
-    }
-}
-
-public struct RbSymbol: RbObjectConvertible {
-    private let name: String
-    public init(_ name: String) {
-        self.name = name
-    }
-    public init?(_ value: RbObject) {
-        return nil
-    }
-
-    public var rubyObject: RbObject {
-        guard Ruby.softSetup(),
-            let id = try? Ruby.getID(for: name) else {
-                return .nilObject
-        }
-        return RbObject(rubyValue: rb_id2sym(id))
-    }
 }
 
 // MARK: - String convertible

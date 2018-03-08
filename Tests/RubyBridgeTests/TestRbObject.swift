@@ -140,5 +140,6 @@ class TestRbObject: XCTestCase {
         ("testNewInstance", testNewInstance),
         ("testSymbols", testSymbols),
         ("testHashing", testHashing),
+        ("testComparable", testComparable)
     ]
 }

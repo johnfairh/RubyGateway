@@ -71,11 +71,23 @@ class TestMiscObjTypes: XCTestCase {
         XCTAssertEqual(.T_FALSE, falseObj.rubyType)
     }
 
+    func testSymbols() {
+        let sym = RbSymbol("name")
+        XCTAssertEqual("RbSymbol(name)", sym.description)
+        let obj = sym.rubyObject
+        XCTAssertEqual(.T_SYMBOL, obj.rubyType)
+
+        if let backSym = RbSymbol(obj) {
+            XCTFail("Managed to create symbol from object: \(backSym)")
+        }
+    }
+
     static var allTests = [
         ("testNilConstants", testNilConstants),
         ("testNilLiteralPromotion", testNilLiteralPromotion),
         ("testBoolRoundTrip", testBoolRoundTrip),
         ("testFailedBoolConversion", testFailedBoolConversion),
-        ("testBoolLiteralPromotion", testBoolLiteralPromotion)
+        ("testBoolLiteralPromotion", testBoolLiteralPromotion),
+        ("testSymbols", testSymbols)
     ]
 }
