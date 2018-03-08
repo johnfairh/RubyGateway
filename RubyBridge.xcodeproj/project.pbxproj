@@ -88,6 +88,7 @@
 		02571723203C984C001E3C43 /* nesting.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = nesting.rb; sourceTree = "<group>"; };
 		02706176204EB47600C336B8 /* RbOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbOperators.swift; sourceTree = "<group>"; };
 		02706178204EC36E00C336B8 /* TestOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestOperators.swift; sourceTree = "<group>"; };
+		0270617A20514DF600C336B8 /* demo.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = demo.rb; sourceTree = "<group>"; };
 		02901337203E03530090C5C9 /* RbBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbBridge.swift; sourceTree = "<group>"; };
 		02901339203ED8D60090C5C9 /* RbConversions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbConversions.swift; sourceTree = "<group>"; };
 		0290133B203EF0F60090C5C9 /* nonconvert.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = nonconvert.rb; sourceTree = "<group>"; };
@@ -147,6 +148,7 @@
 		024923522034AA2B00E3AAF4 /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
+				0270617A20514DF600C336B8 /* demo.rb */,
 				024923532034AA3E00E3AAF4 /* backwards.rb */,
 				023007602047F7DA00044B8E /* endtoend.rb */,
 				02571723203C984C001E3C43 /* nesting.rb */,
