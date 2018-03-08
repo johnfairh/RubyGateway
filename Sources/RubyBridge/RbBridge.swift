@@ -11,9 +11,9 @@ import RubyBridgeHelpers
 /// Provides information about the Ruby VM, some control over how code is run,
 /// and services to access various kinds of Ruby objects from the top level.
 ///
-/// Clients cannot instantiate this type.  Instead the `RubyBridge` module
-/// exports a public instance `Ruby`.  Among other things this permits dynamic
-/// member lookup and callable-style programming in Swift 5.
+/// You cannot instantiate this type.  Instead `RubyBridge` exports a public
+/// instance `Ruby`.  Among other things this permits dynamic member lookup
+/// and callable-style programming in Swift 5.
 ///
 /// The Ruby VM is initialized when the object is first accessed and is
 /// automatically stopped when the process ends.  The VM can be manually shut
@@ -82,7 +82,7 @@ public final class RbBridge: RbObjectAccess {
 
     /// Get an `ID` ready to call a method, for example.
     ///
-    /// This is public for users to interop with `CRuby`.  It is not
+    /// This is public to permit interop with `CRuby`.  It is not
     /// needed for regular `RubyBridge` use.
     ///
     /// - parameter name: Name to look up, typically constant or method name.
@@ -107,7 +107,7 @@ public final class RbBridge: RbObjectAccess {
         return false
     }
 
-    // MARK: - Instance variable access overrides
+    // MARK: - Top self instance variable access
 
     // Can't put this lot in an extension because overrides....
 
@@ -125,8 +125,8 @@ public final class RbBridge: RbObjectAccess {
     ///
     /// For a version that does not throw, see `RbObjectAccess.failable`.
     ///
-    /// - parameter name: Name of ivar to get.  Must begin with a single `@`.
-    /// - returns: Value of the ivar or Ruby `nil` if it has not been assigned yet.
+    /// - parameter name: Name of IVar to get.  Must begin with a single '@'.
+    /// - returns: Value of the IVar or Ruby `nil` if it has not been assigned yet.
     /// - throws: `RbError.badIdentifier` if `name` looks wrong.
     ///           `RbError.rubyException` if Ruby has a problem.
     public override func getInstanceVar(_ name: String) throws -> RbObject {
@@ -141,7 +141,7 @@ public final class RbBridge: RbObjectAccess {
     ///
     /// For a version that does not throw, see `RbObjectAccess.failable`.
     ///
-    /// - parameter name: Name of ivar to set.  Must begin with a single `@`.
+    /// - parameter name: Name of IVar to set.  Must begin with a single '@'.
     /// - parameter newValue: New value to set.
     /// - returns: The value that was set.
     /// - throws: `RbError.badIdentifier` if `name` looks wrong.
@@ -296,5 +296,5 @@ extension RbBridge {
 
 // MARK: - Global declaration
 
-/// The shared instance of `RbBridge`.
+/// The shared instance of `RbBridge`. :nodoc:
 public let Ruby = RbBridge()

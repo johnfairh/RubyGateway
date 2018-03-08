@@ -41,8 +41,13 @@ public enum RbError: Error {
     /// `String.init(_:)`, and when using the `RbObjectAccess.failable`
     /// adapter that suppresses throwing.
     public struct History {
-        /// The error history.  The oldest error recorded is at index 0;
-        /// the most recent is at the end of the array.  See `mostRecent`.
+        /// The error history.
+        ///
+        /// The oldest error recorded is at index 0; the most recent is at the
+        /// end of the array.  See `mostRecent`.
+        ///
+        /// The list is automatically pruned, there is no need to worry about
+        /// this consuming all your memory.
         public private(set) var errors: [RbError] = []
 
         /// The most recent error encountered by `RubyBridge`.
@@ -108,7 +113,7 @@ extension RbError: CustomStringConvertible {
 /// A Ruby exception.
 ///
 /// This provides some convenience methods on top of the underlying `Exception`
-/// object.  `RbBridge` does not throw these directly, it always wraps them in
+/// object.  `RubyBridge` does not throw these directly, it always wraps them in
 /// an `RbError` instance.
 public struct RbException: CustomStringConvertible, Error {
     /// The underlying Ruby exception object

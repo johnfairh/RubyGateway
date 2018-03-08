@@ -12,7 +12,7 @@ import CRuby
 import Foundation
 import RubyBridgeHelpers
 
-/// Protocol adopted by types that can be converted to and from RbObjects.
+/// Protocol adopted by types that can be converted to and from `RbObject`s.
 public protocol RbObjectConvertible {
     /// Try to create an instance of this type from the Ruby object.
     ///
@@ -61,7 +61,7 @@ extension String: RbObjectConvertible {
     /// This calls Ruby `Kernel#String` on the object, which tries
     /// `to_str` followed by `to_s`.
     ///
-    /// See `RbException.history` to find out why a conversion failed.
+    /// See `RbError.history` to find out why a conversion failed.
     public init?(_ value: RbObject) {
         let stringVal = value.withRubyValue { rbb_String_protect($0, nil) }
         if RbException.ignoreAnyPending() {
@@ -128,7 +128,7 @@ extension UInt: RbObjectConvertible {
     /// 2. Is numeric, positive, and does not fit into the Swift type; or
     /// 3. Cannot be made into a suitable numeric via `to_int` or `to_i`.
     ///
-    /// See `RbException.history` to find out why a conversion failed.
+    /// See `RbError.history` to find out why a conversion failed.
     ///
     /// If the Ruby value is floating-point then the integer part is used.
     public init?(_ value: RbObject) {
@@ -223,7 +223,7 @@ extension RbObject: ExpressibleByFloatLiteral {
 //    ///
 //    /// It fails if the Ruby value is not a hash.
 //    ///
-//    /// See `RbException.history` to find out why a conversion failed.
+//    /// See `RbError.history` to find out why a conversion failed.
 //    public init?(_ value: RbObject) {
 //        return nil
 //    }

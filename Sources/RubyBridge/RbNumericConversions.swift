@@ -8,7 +8,7 @@
 // This file has tedious repetitions of the numeric convertible conformance
 // and their doc comments for the fixed-width integer types and float.
 
-// MARK: - Unsigned
+// MARK: - Fixed-width Unsigned Integer
 
 extension UInt64: RbObjectConvertible {
     /// Try to get a 64-bit unsigned integer representation of an `RbObject`.
@@ -106,7 +106,7 @@ extension UInt8: RbObjectConvertible {
     }
 }
 
-// MARK: - Signed
+// MARK: - Fixed-width Signed Integer
 
 extension Int64: RbObjectConvertible {
     /// Try to get a 64-bit signed integer representation of an `RbObject`.

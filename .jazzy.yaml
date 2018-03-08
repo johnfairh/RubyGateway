@@ -1,7 +1,7 @@
 author: John Fairhurst
 author_url: http://github.com/johnfairh
 module: RubyBridge
-copyright: Distributed under the MIT license.  Maintained by John Fairhurst.
+copyright: Distributed under the MIT license.  Maintained by [John Fairhurst](mailto:johnfairh@gmail.com).
 readme: README.md
 github_url: https://github.com/johnfairh/RubyBridge
 hide_documentation_coverage: true
@@ -10,3 +10,46 @@ xcodebuild_arguments:
     - "RubyBridge"
 sdk: macosx
 theme: fullwidth
+documentation: SourceDocs/*md
+abstract: SourceDocs/Abstracts/*md
+
+custom_categories:
+    - name: Guides
+      children:
+          - User Guide
+          - TODO
+
+    - name: Main API
+      children:
+          - RbBridge
+          - RbObject
+          - RbObjectAccess
+
+    - name: Other API
+      children:
+          - RbSymbol
+          - RbType
+
+    - name: Error Handling
+      children:
+          - RbError
+          - RbException
+          - RbFailableAccess
+
+    - name: Swift Interop
+      children:
+          - String
+          - Bool
+          - UInt
+          - UInt64
+          - UInt32
+          - UInt16
+          - UInt8
+          - Int
+          - Int64
+          - Int32
+          - Int16
+          - Int8
+          - Double
+          - Float
+          - RbObjectConvertible

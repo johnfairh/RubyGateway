@@ -76,8 +76,8 @@ public final class RbObject: RbObjectAccess {
     /// The Ruby object is kept safe from garbage collection until
     /// the Swift object is deallocated.
     ///
-    /// This initializer is public to let you use it with other parts
-    /// of the Ruby API, shouldn't normally be needed.
+    /// This initializer is public to allow use with other parts
+    /// of the Ruby API.  It is not normally needed.
     public init(rubyValue: VALUE) {
         valueBox = rbb_value_alloc(rubyValue);
         super.init(getValue: { rubyValue })
@@ -200,9 +200,7 @@ extension RbObject: CustomDebugStringConvertible {
 }
 
 extension RbObject: CustomPlaygroundQuickLookable {
-    /// Something to display in Playgrounds right-hand bar.
-    ///
-    /// This is just the text from `description`.
+    /// The text from `description`.
     public var customPlaygroundQuickLook: PlaygroundQuickLook {
         return .text(description)
     }

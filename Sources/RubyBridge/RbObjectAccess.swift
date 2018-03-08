@@ -41,7 +41,7 @@ public class RbObjectAccess {
     ///
     /// For a version that does not throw, see `failable`.
     ///
-    /// - parameter name: Name of IVar to get.  Must begin with a single `@`.
+    /// - parameter name: Name of IVar to get.  Must begin with a single '@'.
     /// - returns: Value of the IVar or Ruby `nil` if it has not been assigned yet.
     /// - throws: `RbError.badIdentifier` if `name` looks wrong.
     ///           `RbError.rubyException` if Ruby has a problem.
@@ -57,7 +57,7 @@ public class RbObjectAccess {
     ///
     /// For a version that does not throw, see `failable`.
     ///
-    /// - parameter name: Name of Ivar to set.  Must begin with a single `@`.
+    /// - parameter name: Name of Ivar to set.  Must begin with a single '@'.
     /// - parameter newValue: New value to set.
     /// - returns: The value that was set.
     /// - throws: `RbError.badIdentifier` if `name` looks wrong.
@@ -95,8 +95,8 @@ extension RbObjectAccess {
     /// - parameter name: The name of the constant to look up.  Can contain '::' sequences
     ///   to drill down through nested classes and modules.
     ///
-    ///   If you call this method on an `RbObject` then `name` is resolved like Ruby, looking
-    ///   up the inheritance chain if there is no local match.
+    ///   If you call this method on an `RbObject` then `name` is resolved like Ruby does,
+    ///   looking up the inheritance chain if there is no local match.
     /// - returns: An `RbObject` for the constant.
     /// - throws: `RbError.rubyException` if the constant cannot be found.
     public func getConstant(_ name: String) throws -> RbObject {
@@ -143,7 +143,7 @@ extension RbObjectAccess {
     /// - parameter name: The name of the class to look up.  Can contain '::' sequences
     ///   to drill down through nested classes and modules.
     ///
-    ///   If you call this method on an `RbObject` then `name` is resolved like Ruby,
+    ///   If you call this method on an `RbObject` then `name` is resolved like Ruby does,
     ///   looking up the inheritance chain if there is no match.
     /// - returns: An `RbObject` for the class.
     /// - throws: `RbError.rubyException` if the constant cannot be found.
@@ -301,7 +301,7 @@ extension RbObjectAccess {
     ///
     /// For a version that does not throw, see `failable`.
     ///
-    /// - parameter name: Name of CVar to get.  Must begin with `@@`.
+    /// - parameter name: Name of CVar to get.  Must begin with '@@'.
     /// - returns: The value of the CVar.
     /// - throws: `RbError.badIdentifier` if `name` looks wrong.
     ///           `RbError.badType` if the object is not a class.
@@ -327,7 +327,7 @@ extension RbObjectAccess {
     ///
     /// For a version that does not throw, see `failable`.
     ///
-    /// - parameter name: Name of the CVar to set.  Must begin with `@@`.
+    /// - parameter name: Name of the CVar to set.  Must begin with '@@'.
     /// - parameter newValue: The new value to set.
     /// - returns: The value that was set.
     /// - throws: `RbError.badIdentifier` if `name` looks wrong.
@@ -354,7 +354,7 @@ extension RbObjectAccess {
     ///
     /// For a version that does not throw, see `failable`.
     ///
-    /// - parameter name: Name of global variable to get.  Must begin with `$`.
+    /// - parameter name: Name of global variable to get.  Must begin with '$'.
     /// - returns: Value of the variable, or Ruby nil if not set before.
     /// - throws: `RbError` if `name` looks wrong.
     ///
@@ -374,7 +374,7 @@ extension RbObjectAccess {
     ///
     /// For a version that does not throw, see `failable`.
     ///
-    /// - parameter name: Name of global variable to set.  Must begin with `$`.
+    /// - parameter name: Name of global variable to set.  Must begin with '$'.
     /// - parameter newValue: New value to set.
     /// - returns: The value that was set.
     /// - throws: `RbError` if `name` looks wrong.
@@ -402,8 +402,8 @@ extension RbObjectAccess {
 extension RbObjectAccess {
     /// Get some kind of Ruby object based on the `name` parameter:
     /// * If `name` starts with a capital letter then access a constant under this object;
-    /// * If `name` starts with @ or @@ then access an IVar/CVar for a class object;
-    /// * If `name` starts with $ then access a global variable;
+    /// * If `name` starts with '@' or '@@' then access an IVar/CVar for a class object;
+    /// * If `name` starts with '$' then access a global variable;
     /// * Otherwise call a zero-args method.
     ///
     /// This is a convenience helper to let you access Ruby structures without
