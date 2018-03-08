@@ -6,10 +6,10 @@ Distributed under the MIT license, see LICENSE.
 
 # RubyBridge
 
+<!--
 [![CI](https://travis-ci.org/johnfairh/RubyBridge.svg?branch=master)](https://travis-ci.org/johnfairh/RubyBridge)
 [![codecov](https://codecov.io/gh/johnfairh/RubyBridge/branch/master/graph/badge.svg)](https://codecov.io/gh/johnfairh/RubyBridge)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-<!--
 ![Pod](https://cocoapod-badges.herokuapp.com/v/RubyBridge/badge.png)
 ![Platforms](https://cocoapod-badges.herokuapp.com/p/RubyBridge/badge.png)
 ![License](https://cocoapod-badges.herokuapp.com/l/RubyBridge/badge.png)
@@ -23,13 +23,18 @@ programs.  It's easy to pass Swift datatypes into Ruby and turn Ruby objects
 back into Swift types.
 
 This project is [young](TODO.md): biggest missing features right now
-are collection types and calling Swift code from Ruby.
+are collection types and calling Swift code from Ruby.  The eventual goal is
+to allow implementation of Ruby classes in Swift to enable Ruby as a sandboxed
+DSL/scripting language for Swift applications.
+
+See [CRuby](https://github.com/johnfairh/CRuby) if you are looking for a
+low-level Ruby C API wrapper.
 
 ## Examples
 
 A couple of examples:
 
-### Service invocation
+### Services
 
 [Rouge](https://github.com/jneen/rouge) is a code highlighter.  In Ruby:
 ```ruby
@@ -58,6 +63,29 @@ print(html)
 
 ### Objects
 
+```swift
+// Create an object.  Use keyword arguments with initializer
+let student = RbObject(ofClass: "Academy::Student", kwArgs: [("name", "barney")])!
+
+// Acess an attribute
+print("Name is \(student.get("name"))"
+
+// Fix their name by poking an ivar
+try! student.setInstanceVar("@name", newValue: "Barney")
+
+// Get a Swift version of `:reading`
+let readingSubject = RbSymbol("reading")
+
+// Call a method with mixed Swift data types
+try! student.call("add_score", args: [readingSubject, 30])
+try! student.call("add_score", args: [readingSubject, 35])
+
+// Get a result as floating point
+let avgScoreObj = try! student.call("mean_score_for_subject", args: [readingSubject])
+let avgScore = Double(avgScoreObj)!
+print("Mean score is \(avgScore)")
+```
+
 ## Documentation
 
 * User guide forthcoming!
@@ -67,7 +95,7 @@ print(html)
 
 ## Requirements
 
-* Swift 4 or later, from swift.org or Xcode 9.2.
+* Swift 4 or later, from swift.org or Xcode 9.2+.
 * macOS (tested on 10.13.3) or Linux (tested on Ubuntu Xenial/16.04 on x86_64)
 * Ruby 2.0 or later including development files:
   * For macOS, this comes with Xcode.
@@ -76,9 +104,11 @@ print(html)
 
 ## Installation
 
-For macOS, if you are happy to use the system Ruby, you just need to include the
-RubyBridge framework as a dependency.  If you are building on Linux or want to
-use a different Ruby then you also need to configure CRuby.
+For macOS, if you are happy to use the system Ruby then you just need to include
+the RubyBridge framework as a dependency.  If you are building on Linux or want
+to use a different Ruby then you also need to configure CRuby.
+
+RubyBridge requires 'original' MRI/YARV/CRuby Ruby - no JRuby/Rubinius/etc.
 
 ### Getting the framework
 
@@ -92,7 +122,7 @@ Swift package manager for macOS or Linux:
 .package(url: "https://github.com/johnfairh/RubyBridge", from: "0.1.0")
 ```
 
-CocoaPods in the works.
+CocoaPods soon&trade;.
 
 ### Configuring CRuby
 
