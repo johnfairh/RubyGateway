@@ -58,8 +58,7 @@ class TestFailable: XCTestCase {
             return
         }
 
-        let sym = RbObject(symbolName: "to_s")
-        guard let _ = inst.failable.call(symbol: sym) else {
+        guard let _ = inst.failable.call(symbol: RbSymbol("to_s")) else {
             XCTFail("Couldn't call via symbol")
             return
         }

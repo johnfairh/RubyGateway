@@ -195,14 +195,15 @@ extension RbObjectAccess {
     ///
     /// TODO: blocks.
     @discardableResult
-    public func call(symbol: RbObject,
+    public func call(symbol: RbObjectConvertible,
                      args: [RbObjectConvertible] = [],
                      kwArgs: [(String, RbObjectConvertible)] = []) throws -> RbObject {
         try Ruby.setup()
-        guard symbol.rubyType == .T_SYMBOL else {
-            throw RbError.badType("Expected T_SYMBOL, got \(symbol.rubyType.rawValue) \(symbol)")
+        let symbolObj = symbol.rubyObject
+        guard symbolObj.rubyType == .T_SYMBOL else {
+            throw RbError.badType("Expected T_SYMBOL, got \(symbolObj.rubyType.rawValue) \(symbol)")
         }
-        return try symbol.withRubyValue { symValue in
+        return try symbolObj.withRubyValue { symValue in
             try doCall(id: rb_sym2id(symValue), args: args, kwArgs: kwArgs)
         }
     }
@@ -231,11 +232,12 @@ extension RbObjectAccess {
         // TODO: Build Swift dict then convert to Ruby hash via conformance
         let hash = RbObject(rubyValue: rb_hash_new())
         try kwArgs.forEach { (key, value) in
-            let symKey = RbObject(symbolName: key)
-            if rb_hash_lookup(hash.unsafeRubyValue, symKey.unsafeRubyValue) != Qnil {
-                try RbError.raise(error: .duplicateKwArg(key))
+            try RbSymbol(key).rubyObject.withRubyValue { symValue in
+                if rb_hash_lookup(hash.unsafeRubyValue, symValue) != Qnil {
+                    try RbError.raise(error: .duplicateKwArg(key))
+                }
+                rb_hash_aset(hash.unsafeRubyValue, symValue, value.rubyObject.unsafeRubyValue)
             }
-            rb_hash_aset(hash.unsafeRubyValue, symKey.unsafeRubyValue, value.rubyObject.unsafeRubyValue)
         }
         return hash
     }

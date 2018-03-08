@@ -187,6 +187,24 @@ extension RbObject {
     }
 }
 
+public struct RbSymbol: RbObjectConvertible {
+    private let name: String
+    public init(_ name: String) {
+        self.name = name
+    }
+    public init?(_ value: RbObject) {
+        return nil
+    }
+
+    public var rubyObject: RbObject {
+        guard Ruby.softSetup(),
+            let id = try? Ruby.getID(for: name) else {
+                return .nilObject
+        }
+        return RbObject(rubyValue: rb_id2sym(id))
+    }
+}
+
 // MARK: - String convertible
 
 extension RbObject: CustomStringConvertible {

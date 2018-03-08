@@ -91,7 +91,7 @@ class TestRbObject: XCTestCase {
     // symbol helper
     func testSymbols() {
         let symName = "symname"
-        let symbolObj = RbObject(symbolName: symName)
+        let symbolObj = RbObject(RbSymbol(symName))
         XCTAssertEqual(.T_SYMBOL, symbolObj.rubyType)
 
         XCTAssertEqual(symName, symbolObj.description)

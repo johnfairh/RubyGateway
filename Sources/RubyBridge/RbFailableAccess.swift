@@ -72,7 +72,7 @@ extension RbFailableAccess {
     /// - parameter kwArgs: The keyword arguments to the method, none by default.
     /// - returns: An `RbObject` for the result of the method, or `nil` if an error occurred.
     @discardableResult
-    public func call(symbol: RbObject,
+    public func call(symbol: RbObjectConvertible,
                      args: [RbObjectConvertible] = [],
                      kwArgs: [(String, RbObjectConvertible)] = []) -> RbObject? {
         return try? access.call(symbol: symbol, args: args, kwArgs: kwArgs)

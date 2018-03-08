@@ -58,13 +58,16 @@ class TestDemo: XCTestCase {
             try XCTAssertEqual("Barney", String(student.get("name")))
 
             // Manually add some reading test results
-            let readingSubject = RbObject(symbolName: "reading")
+            let readingSubject = RbSymbol("reading")
 
             try student.call("add_score", args: [readingSubject, 30])
             try student.call("add_score", args: [readingSubject, 36.5])
 
-            let avgReadingScore = try student.call("mean_score_for_subject", args: [readingSubject])
-            XCTAssertEqual(33.25, Double(avgReadingScore))
+            guard let avgReadingScore = try Double(student.call("mean_score_for_subject", args: [readingSubject])) else {
+                XCTFail("Couldn't get double result out")
+                return
+            }
+            XCTAssertEqual(33.25, avgReadingScore)
 
             // Create a year group + put barney in it
             let yearGroup = RbObject(ofClass: "Academy::YearGroup")!
