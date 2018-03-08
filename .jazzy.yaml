@@ -19,13 +19,13 @@ custom_categories:
           - User Guide
           - TODO
 
-    - name: Main API
+    - name: Main APIs
       children:
           - RbBridge
           - RbObject
           - RbObjectAccess
 
-    - name: Other API
+    - name: Other APIs
       children:
           - RbSymbol
           - RbType
@@ -38,6 +38,7 @@ custom_categories:
 
     - name: Swift Interop
       children:
+          - RbObjectConvertible
           - String
           - Bool
           - UInt
@@ -52,4 +53,3 @@ custom_categories:
           - Int8
           - Double
           - Float
-          - RbObjectConvertible

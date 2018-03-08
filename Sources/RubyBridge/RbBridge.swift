@@ -107,7 +107,7 @@ public final class RbBridge: RbObjectAccess {
         return false
     }
 
-    // MARK: - Top self instance variable access
+    // MARK: - Top Self Instance Variables
 
     // Can't put this lot in an extension because overrides....
 
@@ -158,7 +158,7 @@ public final class RbBridge: RbObjectAccess {
     }
 }
 
-// MARK: - VM properties
+// MARK: - VM Properties
 
 extension RbBridge {
     /// Debug mode for Ruby code, sets `$DEBUG` / `$-d`.
@@ -247,7 +247,7 @@ extension RbBridge {
     }
 }
 
-// MARK: - run code: eval, require, load
+// MARK: - Run Ruby Code
 
 extension RbBridge {
     /// Evaluate some Ruby and return the result.

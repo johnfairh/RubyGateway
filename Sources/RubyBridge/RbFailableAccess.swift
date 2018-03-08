@@ -33,7 +33,7 @@ public struct RbFailableAccess {
     }
 }
 
-// MARK: - Failable access
+// MARK: - Failable Access
 
 extension RbObjectAccess {
     /// Get a version of this API that returns `nil` instead of throwing errors.
@@ -43,7 +43,7 @@ extension RbObjectAccess {
     }
 }
 
-// MARK: - Method call / msg send
+// MARK: - Method Call
 
 extension RbFailableAccess {
     /// Call a method of a Ruby object.
@@ -127,7 +127,7 @@ extension RbFailableAccess {
     }
 }
 
-// MARK: - IVars
+// MARK: - Instance Variables
 
 extension RbFailableAccess {
     /// Get the value of a Ruby instance variable.
@@ -155,7 +155,7 @@ extension RbFailableAccess {
     }
 }
 
-// MARK: - CVars
+// MARK: - Class Variables
 
 extension RbFailableAccess {
     /// Get the value of a Ruby class variable.
@@ -187,7 +187,7 @@ extension RbFailableAccess {
     }
 }
 
-// MARK: - Global Vars
+// MARK: - Global Variables
 
 extension RbFailableAccess {
     /// Get the value of a Ruby global variable.
@@ -215,7 +215,7 @@ extension RbFailableAccess {
     }
 }
 
-// MARK: - Polymorphic getter
+// MARK: - Polymorphic Getter
 
 extension RbFailableAccess {
     /// Get some kind of Ruby object based on the `name` parameter.

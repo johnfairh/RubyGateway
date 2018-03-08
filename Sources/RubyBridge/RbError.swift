@@ -10,6 +10,9 @@ import CRuby
 /// generate `RbError.rubyException`, the other cases correspond
 /// to error conditions encountered by the Swift software.
 public enum RbError: Error {
+
+    // MARK: - Cases
+
     /// The Ruby VM could not be set up.
     case setup(String)
 
@@ -30,6 +33,8 @@ public enum RbError: Error {
 
     /// A Ruby exception occurred.
     case rubyException(RbException)
+
+    // MARK: - Error History
 
     /// Holds the most recent errors thrown by `RubyBridge`.
     ///

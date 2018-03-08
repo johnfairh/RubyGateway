@@ -28,7 +28,8 @@ public protocol RbObjectConvertible {
     var rubyObject: RbObject { get }
 }
 
-/// Anything -> RbObject
+// MARK: - RbObjectConvertible
+
 extension RbObject {
     /// Create an `RbObject` from a Swift type.
     ///
@@ -84,6 +85,8 @@ extension String: RbObjectConvertible {
     }
 }
 
+// MARK: - StringLiteral
+
 extension RbObject: ExpressibleByStringLiteral {
     /// Creates an `RbObject` from a string literal.
     public convenience init(stringLiteral value: String) {
@@ -110,6 +113,8 @@ extension Bool: RbObjectConvertible {
         return RbObject(rubyValue: self ? Qtrue : Qfalse)
     }
 }
+
+// MARK: - BooleanLiteral
 
 extension RbObject: ExpressibleByBooleanLiteral {
     /// Creates an `RbObject` from a boolean literal.
@@ -175,6 +180,8 @@ extension Int: RbObjectConvertible {
     }
 }
 
+// MARK: - IntegerLiteral
+
 extension RbObject: ExpressibleByIntegerLiteral {
     /// Creates an `RbObject` from an integer literal.
     public convenience init(integerLiteral value: Int) {
@@ -209,6 +216,8 @@ extension Double: RbObjectConvertible {
         return RbObject(rubyValue: DBL2NUM(self))
     }
 }
+
+// MARK: - FloatLiteral
 
 extension RbObject: ExpressibleByFloatLiteral {
     /// Creates an `RbObject` from a floating-point literal.

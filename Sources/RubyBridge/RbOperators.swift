@@ -16,9 +16,17 @@
 // More concerning is the lack of error handling - need to refactor in future
 // similar to `Hashable` etc. to enable less shakey policy.
 
-// MARK: - Numeric operators
+// MARK: - SignedNumeric
 
 extension RbObject: SignedNumeric {
+    /// Create a Ruby object from some type conforming to `BinaryInteger`
+    public convenience init<T : BinaryInteger>(exactly value: T) {
+        self.init(Int(value))
+    }
+
+    /// Type to express the magnitude of a signed number. :nodoc:
+    public typealias Magnitude = RbObject
+
     /// Subtraction operator for `RbObject`s.
     ///
     /// - note: Calls Ruby `-` method.  Crashes the process (`fatalError`)
@@ -105,14 +113,6 @@ extension RbObject: SignedNumeric {
     public static func %=(lhs: inout RbObject, rhs: RbObject) {
         lhs = lhs % rhs
     }
-
-    /// Create a Ruby object from some type conforming to `BinaryInteger`
-    public convenience init<T : BinaryInteger>(exactly value: T) {
-        self.init(Int(value))
-    }
-
-    /// Type to express the magnitude of a signed number. :nodoc:
-    public typealias Magnitude = RbObject
 
     /// The magnitude of the value.
     ///

@@ -32,7 +32,7 @@ public class RbObjectAccess {
         self.getValue = getValue
     }
 
-    // MARK: - IVars
+    // MARK: - Instance Variables
 
     // These guys need to be overridden for top self + can't do if in extension....
 
@@ -74,7 +74,7 @@ public class RbObjectAccess {
     }
 }
 
-// MARK: - Constant access
+// MARK: - Constants
 
 extension RbObjectAccess {
     /// Get an `RbObject` that represents a Ruby constant.
@@ -157,7 +157,7 @@ extension RbObjectAccess {
     }
 }
 
-// MARK: - Method call / message send
+// MARK: - Method Call
 
 extension RbObjectAccess {
     /// Call a Ruby object method.
@@ -280,7 +280,7 @@ extension RbObjectAccess {
     }
 }
 
-// MARK: - CVars
+// MARK: - Class Variables
 
 extension RbObjectAccess {
     /// Check the associated rubyValue is for a class.
@@ -347,7 +347,7 @@ extension RbObjectAccess {
     }
 }
 
-// MARK: - Global Vars
+// MARK: - Global Variables
 
 extension RbObjectAccess {
     /// Get the value of a Ruby global variable.
@@ -397,7 +397,7 @@ extension RbObjectAccess {
     }
 }
 
-// MARK: - Polymorphic getter
+// MARK: - Polymorphic Getter
 
 extension RbObjectAccess {
     /// Get some kind of Ruby object based on the `name` parameter:

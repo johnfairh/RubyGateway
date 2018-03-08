@@ -148,7 +148,7 @@ public final class RbObject: RbObjectAccess {
     public static let nilObject = RbObject(rubyValue: Qnil)
 }
 
-// MARK: - Useful initializers
+// MARK: - Useful Initializers
 
 extension RbObject {
     /// Create an instance of a given Ruby class.
@@ -170,9 +170,11 @@ extension RbObject {
     }
 }
 
-// MARK: - String convertible
+// MARK: - String Convertible
 
-extension RbObject: CustomStringConvertible {
+extension RbObject: CustomStringConvertible,
+                    CustomDebugStringConvertible,
+                    CustomPlaygroundQuickLookable {
     /// A string representation of the Ruby object.
     ///
     /// This is the same as `String(rbObject)` which is approximately `Kernel#String`.
@@ -182,9 +184,7 @@ extension RbObject: CustomStringConvertible {
         }
         return str
     }
-}
 
-extension RbObject: CustomDebugStringConvertible {
     /// A developer-appropriate string representation of the Ruby object.
     ///
     /// This is the result of `inspect` with a fallback to `description`.
@@ -197,16 +197,14 @@ extension RbObject: CustomDebugStringConvertible {
         }
         return description
     }
-}
 
-extension RbObject: CustomPlaygroundQuickLookable {
     /// The text from `description`.
     public var customPlaygroundQuickLook: PlaygroundQuickLook {
         return .text(description)
     }
 }
 
-// MARK: - Standard library conformances
+// MARK: - Standard Library Conformances
 
 extension RbObject: Hashable, Equatable, Comparable {
     /// The hash value for the Ruby object.
