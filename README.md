@@ -22,13 +22,21 @@ running on macOS or Linux painlessly and safely run and interact with Ruby
 programs.  It's easy to pass Swift datatypes into Ruby and turn Ruby objects
 back into Swift types.
 
-This project is [young](TODO.md): biggest missing features right now
-are collection types and calling Swift code from Ruby.  The eventual goal is
-to allow implementation of Ruby classes in Swift to enable Ruby as a sandboxed
-DSL/scripting language for Swift applications.
+This project is [young](https://johnfairh.github.io/RubyBridge/todo.html):
+biggest missing features right now are collection types and calling Swift code
+from Ruby.  The eventual goal is to allow implementation of Ruby classes in
+Swift to enable Ruby as a sandboxed DSL/scripting language for Swift applications.
 
 See [CRuby](https://github.com/johnfairh/CRuby) if you are looking for a
 low-level Ruby C API wrapper.
+
+Contents:
+* [Examples](#examples)
+* [Documentation](#documentation)
+* [Requirements](#requirement)
+* [Installation](#installation)
+* [Contributions](#contributions)
+* [License](#license)
 
 ## Examples
 
@@ -88,9 +96,8 @@ print("Mean score is \(avgScore)")
 
 ## Documentation
 
-* User guide forthcoming!
-* [API documentation](https://johnfairh.github.io/RubyBridge) online.
-* Or in the docs/ folder of a local copy of the project.
+* [User guide](https://johnfairh.github.io/RubyBridge/user-guide.html).
+* [API documentation](https://johnfairh.github.io/RubyBridge).
 * Docset for Dash at [docs/docsets/RubyBridge.tgz](https://johnfairh.github.io/RubyBridge/docsets/RubyBridge.tgz).
 
 ## Requirements
@@ -108,7 +115,7 @@ For macOS, if you are happy to use the system Ruby then you just need to include
 the RubyBridge framework as a dependency.  If you are building on Linux or want
 to use a different Ruby then you also need to configure CRuby.
 
-RubyBridge requires 'original' MRI/YARV/CRuby Ruby - no JRuby/Rubinius/etc.
+RubyBridge requires 'original' MRI/CRuby Ruby - no JRuby/Rubinius/etc.
 
 ### Getting the framework
 
