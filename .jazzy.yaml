@@ -11,7 +11,7 @@ xcodebuild_arguments:
 sdk: macosx
 theme: fullwidth
 documentation: SourceDocs/*md
-abstract: SourceDocs/Abstracts/*md
+custom_category_marks: false
 
 custom_categories:
     - name: Guides
@@ -20,23 +20,27 @@ custom_categories:
           - TODO
 
     - name: Main APIs
+      abstract: These types form the main API to RubyBridge.
       children:
           - RbBridge
           - RbObject
           - RbObjectAccess
 
     - name: Other APIs
+      abstract: These types are used less often than those in [`Main APIs`](Main%20APIs.html).
       children:
           - RbSymbol
           - RbType
 
     - name: Error Handling
+      abstract: These types are used to deal with error conditions.
       children:
           - RbError
           - RbException
           - RbFailableAccess
 
     - name: Swift Interop
+      abstract: These types are used to convert Swift datatypes to Ruby and vice versa.
       children:
           - RbObjectConvertible
           - String
