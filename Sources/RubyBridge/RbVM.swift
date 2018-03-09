@@ -3,10 +3,6 @@
 //  RubyBridge
 //
 //  Distributed under the MIT license, see LICENSE
-//
-// http://ruby-hacking-guide.github.io/gc.html
-// http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-core/60741
-// https://blog.heroku.com/incremental-gc
 
 import CRuby
 import RubyBridgeHelpers

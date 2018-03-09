@@ -30,7 +30,6 @@ Swift to enable Ruby as a sandboxed DSL/scripting language for Swift application
 See [CRuby](https://github.com/johnfairh/CRuby) if you are looking for a
 low-level Ruby C API wrapper.
 
-Contents:
 * [Examples](#examples)
 * [Documentation](#documentation)
 * [Requirements](#requirement)
@@ -98,7 +97,7 @@ print("Mean score is \(avgScore)")
 
 * [User guide](https://johnfairh.github.io/RubyBridge/user-guide.html).
 * [API documentation](https://johnfairh.github.io/RubyBridge).
-* Docset for Dash at [docs/docsets/RubyBridge.tgz](https://johnfairh.github.io/RubyBridge/docsets/RubyBridge.tgz).
+* [Docset for Dash](https://johnfairh.github.io/RubyBridge/docsets/RubyBridge.tgz).
 
 ## Requirements
 
