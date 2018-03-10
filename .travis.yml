@@ -5,14 +5,14 @@ git:
 before_install:
     - sed -ie 's/git@github.com:/https:\/\/github.com\//' .gitmodules
     - git submodule update --init --recursive
-    - brew install gmp
 script:
     - swift package edit CRuby
     - Packages/CRuby/cfg-cruby --mode rvm --name ruby-2.4.2
     - cat Packages/CRuby/CRuby.pc
-#    - sed -ie 's/-lgmp//' Packages/CRuby/CRuby.pc
-    - export PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH
-    - swift test
-#    - xcodebuild build test -sdk macosx -project RubyBridge.xcodeproj -scheme RubyBridge-Package CODE_SIGNING_REQUIRED=NO -enableCodeCoverage YES VALID_ARCHS=x86_64
+    - sed -ie 's/-lgmp//' Packages/CRuby/CRuby.pc
+    - cp -f Packages/CRuby/* CRuby/
+    - ./travis-xcodebuild
 #after_success:
 #    - bash <(curl -s https://codecov.io/bash) -J 'RubyBridge' -X gcov -X coveragepy
+#   - export PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH
+#   - swift test
