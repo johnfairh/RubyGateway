@@ -10,9 +10,9 @@ script:
     - Packages/CRuby/cfg-cruby --mode rvm --name ruby-2.4.2
     - cat Packages/CRuby/CRuby.pc
     - sed -ie 's/-lgmp//' Packages/CRuby/CRuby.pc
+    - export PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH
+    - swift test
     - cp -f Packages/CRuby/* CRuby/
     - ./travis-xcodebuild
-#after_success:
-#    - bash <(curl -s https://codecov.io/bash) -J 'RubyBridge' -X gcov -X coveragepy
-#   - export PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH
-#   - swift test
+after_success:
+    - bash <(curl -s https://codecov.io/bash) -J 'RubyBridge' -X gcov -X coveragepy
