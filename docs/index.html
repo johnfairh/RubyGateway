@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>RubyBridge  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+
+    <a title="RubyBridge  Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="index.html">
+          RubyBridge Docs
+        </a>
+         (100% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/johnfairh/RubyBridge">
+            <img class="header-icon" src="img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="index.html">RubyBridge Reference</a>
+      <img class="carat" src="img/carat.png" />
+      RubyBridge  Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="user-guide.html">User Guide</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="todo.html">TODO</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Main APIs.html">Main APIs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/RbBridge.html">RbBridge</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/RbBridge/Verbosity.html">– Verbosity</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/RbObject.html">RbObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/RbObjectAccess.html">RbObjectAccess</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Other APIs.html">Other APIs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/RbSymbol.html">RbSymbol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/RbType.html">RbType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Error Handling.html">Error Handling</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/RbError.html">RbError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/RbError/History.html">– History</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/RbException.html">RbException</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/RbFailableAccess.html">RbFailableAccess</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Swift Interop.html">Swift Interop</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/String.html">String</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Bool.html">Bool</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/UInt.html">UInt</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/UInt64.html">UInt64</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/UInt32.html">UInt32</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/UInt16.html">UInt16</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/UInt8.html">UInt8</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Int.html">Int</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Int64.html">Int64</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Int32.html">Int32</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Int16.html">Int16</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Int8.html">Int8</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Double.html">Double</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Float.html">Float</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content">
+            
+            <!--
+RubyBridge
+README.md
+Distributed under the MIT license, see LICENSE.
+-->
+<h1 id='rubybridge' class='heading'>RubyBridge</h1>
+
+<!--
+[![CI](https://travis-ci.org/johnfairh/RubyBridge.svg?branch=master)](https://travis-ci.org/johnfairh/RubyBridge)
+[![codecov](https://codecov.io/gh/johnfairh/RubyBridge/branch/master/graph/badge.svg)](https://codecov.io/gh/johnfairh/RubyBridge)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+![Pod](https://cocoapod-badges.herokuapp.com/v/RubyBridge/badge.png)
+![Platforms](https://cocoapod-badges.herokuapp.com/p/RubyBridge/badge.png)
+![License](https://cocoapod-badges.herokuapp.com/l/RubyBridge/badge.png)
+-->
+
+<p>Embed Ruby in Swift: load Gems, run Ruby scripts, get results.</p>
+
+<p>RubyBridge is a framework built on the Ruby C API that lets Swift programs
+running on macOS or Linux painlessly and safely run and interact with Ruby
+programs.  It&rsquo;s easy to pass Swift datatypes into Ruby and turn Ruby objects
+back into Swift types.</p>
+
+<p>This project is <a href="https://johnfairh.github.io/RubyBridge/todo.html">young</a>:
+biggest missing features right now are collection types and calling Swift code
+from Ruby.  The eventual goal is to allow implementation of Ruby classes in
+Swift to enable Ruby as a sandboxed DSL/scripting language for Swift applications.</p>
+
+<p>See <a href="https://github.com/johnfairh/CRuby">CRuby</a> if you are looking for a
+low-level Ruby C API wrapper.</p>
+
+<ul>
+<li><a href="#examples">Examples</a></li>
+<li><a href="#documentation">Documentation</a></li>
+<li><a href="#requirement">Requirements</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#contributions">Contributions</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+<h2 id='examples' class='heading'>Examples</h2>
+
+<p>A couple of examples:</p>
+<h3 id='services' class='heading'>Services</h3>
+
+<p><a href="https://github.com/jneen/rouge">Rouge</a> is a code highlighter.  In Ruby:</p>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'rouge'</span>
+<span class="n">html</span> <span class="o">=</span> <span class="no">Rouge</span><span class="p">.</span><span class="nf">highlight</span><span class="p">(</span><span class="s2">"let a = 3"</span><span class="p">,</span> <span class="s2">"swift"</span><span class="p">,</span> <span class="s2">"html"</span><span class="p">)</span>
+<span class="nb">puts</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+</code></pre>
+
+<p>In Swift 4 with similar [lack of] error checking:</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">RubyBridge</span>
+
+<span class="k">try!</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">require</span><span class="p">(</span><span class="s">"rouge"</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">html</span> <span class="o">=</span> <span class="k">try!</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"Rouge"</span><span class="p">)</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"highlight"</span><span class="p">,</span> <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="s">"let a = 3"</span><span class="p">,</span> <span class="s">"swift"</span><span class="p">,</span> <span class="s">"html"</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+</code></pre>
+
+<p>In future Swift:</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">RubyBridge</span>
+
+<span class="k">try!</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">require</span><span class="p">(</span><span class="s">"rouge"</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">html</span> <span class="o">=</span> <span class="kt">Ruby</span><span class="o">.</span><span class="kt">Rouge</span><span class="o">!.</span><span class="nf">highlight</span><span class="p">(</span><span class="s">"let a = 3"</span><span class="p">,</span> <span class="s">"swift"</span><span class="p">,</span> <span class="s">"html"</span><span class="p">)</span><span class="o">!</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+</code></pre>
+<h3 id='objects' class='heading'>Objects</h3>
+<pre class="highlight swift"><code><span class="c1">// Create an object.  Use keyword arguments with initializer</span>
+<span class="k">let</span> <span class="nv">student</span> <span class="o">=</span> <span class="kt">RbObject</span><span class="p">(</span><span class="nv">ofClass</span><span class="p">:</span> <span class="s">"Academy::Student"</span><span class="p">,</span> <span class="nv">kwArgs</span><span class="p">:</span> <span class="p">[(</span><span class="s">"name"</span><span class="p">,</span> <span class="s">"barney"</span><span class="p">)])</span><span class="o">!</span>
+
+<span class="c1">// Acess an attribute</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">"Name is </span><span class="se">\(</span><span class="n">student</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"name"</span><span class="p">)</span><span class="se">)</span><span class="s">"</span>
+
+<span class="c1">// Fix their name by poking an ivar</span>
+<span class="k">try!</span> <span class="n">student</span><span class="o">.</span><span class="nf">setInstanceVar</span><span class="p">(</span><span class="s">"@name"</span><span class="p">,</span> <span class="nv">newValue</span><span class="p">:</span> <span class="s">"Barney"</span><span class="p">)</span>
+
+<span class="c1">// Get a Swift version of `:reading`</span>
+<span class="k">let</span> <span class="nv">readingSubject</span> <span class="o">=</span> <span class="kt">RbSymbol</span><span class="p">(</span><span class="s">"reading"</span><span class="p">)</span>
+
+<span class="c1">// Call a method with mixed Swift data types</span>
+<span class="k">try!</span> <span class="n">student</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"add_score"</span><span class="p">,</span> <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="n">readingSubject</span><span class="p">,</span> <span class="mi">30</span><span class="p">])</span>
+<span class="k">try!</span> <span class="n">student</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"add_score"</span><span class="p">,</span> <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="n">readingSubject</span><span class="p">,</span> <span class="mi">35</span><span class="p">])</span>
+
+<span class="c1">// Get a result as floating point</span>
+<span class="k">let</span> <span class="nv">avgScoreObj</span> <span class="o">=</span> <span class="k">try!</span> <span class="n">student</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"mean_score_for_subject"</span><span class="p">,</span> <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="n">readingSubject</span><span class="p">])</span>
+<span class="k">let</span> <span class="nv">avgScore</span> <span class="o">=</span> <span class="kt">Double</span><span class="p">(</span><span class="n">avgScoreObj</span><span class="p">)</span><span class="o">!</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">"Mean score is </span><span class="se">\(</span><span class="n">avgScore</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+</code></pre>
+<h2 id='documentation' class='heading'>Documentation</h2>
+
+<ul>
+<li><a href="https://johnfairh.github.io/RubyBridge/user-guide.html">User guide</a>.</li>
+<li><a href="https://johnfairh.github.io/RubyBridge">API documentation</a>.</li>
+<li><a href="https://johnfairh.github.io/RubyBridge/docsets/RubyBridge.tgz">Docset for Dash</a>.</li>
+</ul>
+<h2 id='requirements' class='heading'>Requirements</h2>
+
+<ul>
+<li>Swift 4 or later, from swift.org or Xcode 9.2+.</li>
+<li>macOS (tested on 10.13.3) or Linux (tested on Ubuntu Xenial/16.04 on x86_64) with Clang 6+.</li>
+<li>Ruby 2.0 or later including development files:
+
+<ul>
+<li>For macOS, this comes with Xcode.</li>
+<li>For Linux you may need to install a -dev package depending on how your Ruby
+is installed.</li>
+</ul></li>
+</ul>
+<h2 id='installation' class='heading'>Installation</h2>
+
+<p>For macOS, if you are happy to use the system Ruby then you just need to include
+the RubyBridge framework as a dependency.  If you are building on Linux or want
+to use a different Ruby then you also need to configure CRuby.</p>
+
+<p>RubyBridge requires &lsquo;original&rsquo; MRI/CRuby Ruby - no JRuby/Rubinius/etc.</p>
+<h3 id='getting-the-framework' class='heading'>Getting the framework</h3>
+
+<p>Carthage for macOS:</p>
+<pre class="highlight plaintext"><code>github "johnfairh/RubyBridge"
+</code></pre>
+
+<p>Swift package manager for macOS or Linux:</p>
+<pre class="highlight plaintext"><code>.package(url: "https://github.com/johnfairh/RubyBridge", from: "0.1.0")
+</code></pre>
+
+<p>CocoaPods soon&trade;.</p>
+<h3 id='configuring-cruby' class='heading'>Configuring CRuby</h3>
+
+<p>CRuby is the glue between RubyBridge and your Ruby installation.  It is a
+<a href="https://github.com/johnfairh/CRuby">separate github project</a> but RubyBridge
+includes it as submodule so you do not install or require it separately.</p>
+
+<p>By default it points to the macOS system Ruby.  Follow the <a href="https://github.com/johnfairh/CRuby/README.md#usage">CRuby usage
+instructions</a> to change
+this.  For example on Linux using <a href="https://www.brightbox.com/docs/ruby/ubuntu/">Brightbox Ruby</a>
+2.5:</p>
+<pre class="highlight shell"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>ruby2.5 ruby2.5-dev pkg-config
+<span class="nb">mkdir </span>MyProject
+swift package init
+vi Package.swift    <span class="c"># add RubyBridge as a dependency (NOT CRuby)</span>
+<span class="nb">echo</span> <span class="s2">"import RubyBridge; print(Ruby.versionDescription)"</span> <span class="o">&gt;</span> Sources/MyProject/MyProject.swift
+swift package edit CRuby
+Packages/CRuby/cfg-cruby <span class="nt">--mode</span> pkg-config <span class="nt">--name</span> ruby-2.5
+<span class="nv">PKG_CONFIG_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/Packages/CRuby:<span class="nv">$PKG_CONFIG_PATH</span> swift run
+</code></pre>
+<h2 id='contributions' class='heading'>Contributions</h2>
+
+<p>Welcome: open an issue / <a href="mailto:johnfairh@gmail.com">johnfairh@gmail.com</a> </p>
+<h2 id='license' class='heading'>License</h2>
+
+<p>Distributed under the MIT license.</p>
+
+          </div>
+        </section>
+
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>Distributed under the MIT license.  Maintained by <a class="link" href="mailto:johnfairh@gmail.com" target="_blank" rel="external">John Fairhurst</a>.</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>-<a class="link" href="https://github.com/johnfairh/jazzy" target="_blank" rel="external">bebop</a>, originally a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>

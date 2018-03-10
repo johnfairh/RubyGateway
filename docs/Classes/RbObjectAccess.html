@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>RbObjectAccess Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Class/RbObjectAccess" class="dashAnchor"></a>
+
+    <a title="RbObjectAccess Class Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          RubyBridge Docs
+        </a>
+         (100% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/johnfairh/RubyBridge">
+            <img class="header-icon" src="../img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">RubyBridge Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      RbObjectAccess Class Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../user-guide.html">User Guide</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../todo.html">TODO</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Main APIs.html">Main APIs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RbBridge.html">RbBridge</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RbBridge/Verbosity.html">– Verbosity</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RbObject.html">RbObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RbObjectAccess.html">RbObjectAccess</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Other APIs.html">Other APIs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RbSymbol.html">RbSymbol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RbType.html">RbType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Error Handling.html">Error Handling</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RbError.html">RbError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RbError/History.html">– History</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RbException.html">RbException</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RbFailableAccess.html">RbFailableAccess</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Swift Interop.html">Swift Interop</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/String.html">String</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Bool.html">Bool</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UInt.html">UInt</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UInt64.html">UInt64</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UInt32.html">UInt32</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UInt16.html">UInt16</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UInt8.html">UInt8</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Int.html">Int</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Int64.html">Int64</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Int32.html">Int32</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Int16.html">Int16</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Int8.html">Int8</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Double.html">Double</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Float.html">Float</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content">
+            <h1>RbObjectAccess</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">RbObjectAccess</span></code></pre>
+
+                </div>
+              </div>
+            <p>Provides services to manipulate a Ruby object:</p>
+
+<ul>
+<li>Call methods;</li>
+<li>Access properties and instance variables;</li>
+<li>Access class variables;</li>
+<li>Access global variables;</li>
+<li>Find constants, classes, and modules.</li>
+</ul>
+
+<p>The class is abstract.  You use it via <code><a href="../Classes/RbObject.html">RbObject</a></code> and the global <code>Ruby</code> instance
+of <code><a href="../Classes/RbBridge.html">RbBridge</a></code>.</p>
+
+<p>By default all methods throw <code><a href="../Enums/RbError.html">RbError</a></code>s if anything goes wrong including
+when Ruby raises an exception.  Use the <code><a href="../Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC8failableAA0c8FailableE0Vv">RbObjectAccess.failable</a></code> adapter to
+access an alternative API that returns <code>nil</code> on errors instead.  You can still
+see any Ruby exceptions via <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7HistoryVvZ">RbError.history</a></code>.</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Instance%20Variables"></a>
+                <a name="//apple_ref/swift/Section/Instance Variables" class="dashAnchor"></a>
+                <a href="#/Instance%20Variables">
+                  <h3 class="section-name">Instance Variables</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10RubyBridge14RbObjectAccessC14getInstanceVarAA0cD0CSSKF"></a>
+                    <a name="//apple_ref/swift/Method/getInstanceVar(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RubyBridge14RbObjectAccessC14getInstanceVarAA0cD0CSSKF">getInstanceVar(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get the value of a Ruby instance variable.  Creates a new one with a <code>nil</code> value
+if it doesn&rsquo;t exist yet.</p>
+
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO13badIdentifierACSS4type_SS2idtcACmF">RbError.badIdentifier</a></code> if <code>name</code> looks wrong.
+      <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if Ruby has a problem.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getInstanceVar</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Name of IVar to get.  Must begin with a single &lsquo;@&rsquo;.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Value of the IVar or Ruby <code>nil</code> if it has not been assigned yet.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbObjectAccess.swift#L48-L54">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10RubyBridge14RbObjectAccessC14setInstanceVarAA0cD0CSS_AA0cD11Convertible_p8newValuetKF"></a>
+                    <a name="//apple_ref/swift/Method/setInstanceVar(_:newValue:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RubyBridge14RbObjectAccessC14setInstanceVarAA0cD0CSS_AA0cD11Convertible_p8newValuetKF">setInstanceVar(_:newValue:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set a Ruby instance variable.  Creates a new one if it doesn&rsquo;t exist yet.</p>
+
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO13badIdentifierACSS4type_SS2idtcACmF">RbError.badIdentifier</a></code> if <code>name</code> looks wrong.
+      <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if Ruby has a problem.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span> 
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">setInstanceVar</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">newValue</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Name of Ivar to set.  Must begin with a single &lsquo;@&rsquo;.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>newValue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>New value to set.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The value that was set.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbObjectAccess.swift#L66-L74">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Constants"></a>
+                <a name="//apple_ref/swift/Section/Constants" class="dashAnchor"></a>
+                <a href="#/Constants">
+                  <h3 class="section-name">Constants</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10RubyBridge14RbObjectAccessC11getConstantAA0cD0CSSKF"></a>
+                    <a name="//apple_ref/swift/Method/getConstant(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RubyBridge14RbObjectAccessC11getConstantAA0cD0CSSKF">getConstant(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get an <code><a href="../Classes/RbObject.html">RbObject</a></code> that represents a Ruby constant.</p>
+
+<p>In Ruby constants include things that users think of as constants like
+<code>Math::PI</code>, classes, and modules.  You can use this routine with
+any kind of constant, but see <code><a href="../Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC8getClassAA0cD0CSSKF">getClass(...)</a></code> for a little more sugar.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">rubyPi</span> <span class="o">=</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">getConstant</span><span class="p">(</span><span class="s">"Math::PI"</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">crumbs</span> <span class="o">=</span> <span class="n">rubyPi</span> <span class="o">-</span> <span class="kt">Double</span><span class="o">.</span><span class="n">pi</span>
+</code></pre>
+
+<p>This is a dynamic call into Ruby that can cause calls to <code>const_missing</code>
+and autoloading.</p>
+
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+
+<p>If you call this method on an <code><a href="../Classes/RbObject.html">RbObject</a></code> then <code>name</code> is resolved like Ruby does,
+  looking up the inheritance chain if there is no local match.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if the constant cannot be found.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getConstant</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the constant to look up.  Can contain &lsquo;::&rsquo; sequences
+to drill down through nested classes and modules.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the constant.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbObjectAccess.swift#L102-L123">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10RubyBridge14RbObjectAccessC8getClassAA0cD0CSSKF"></a>
+                    <a name="//apple_ref/swift/Method/getClass(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RubyBridge14RbObjectAccessC8getClassAA0cD0CSSKF">getClass(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get an <code><a href="../Classes/RbObject.html">RbObject</a></code> that represents a Ruby class.</p>
+
+<p>This is a dynamic call into Ruby that can cause calls to <code>const_missing</code>
+and autoloading.</p>
+
+<p>One way of creating an instance of a class:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">myClass</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">getClass</span><span class="p">(</span><span class="s">"MyModule::MyClass"</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">myObj</span> <span class="o">=</span> <span class="k">try</span> <span class="n">myClass</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"new"</span><span class="p">)</span>
+</code></pre>
+
+<p>Although it is easier to write:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">myObj</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">RbObject</span><span class="p">(</span><span class="nv">ofClass</span><span class="p">:</span> <span class="s">"MyModule::MyClass"</span><span class="p">)</span>
+</code></pre>
+
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+
+<p>If you call this method on an <code><a href="../Classes/RbObject.html">RbObject</a></code> then <code>name</code> is resolved like Ruby does,
+  looking up the inheritance chain if there is no match.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if the constant cannot be found.
+      <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7badTypeACSScACmF">RbError.badType</a></code> if the constant is found but is not a class.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getClass</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the class to look up.  Can contain &lsquo;::&rsquo; sequences
+to drill down through nested classes and modules.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the class.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbObjectAccess.swift#L151-L157">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Method%20Call"></a>
+                <a name="//apple_ref/swift/Section/Method Call" class="dashAnchor"></a>
+                <a href="#/Method%20Call">
+                  <h3 class="section-name">Method Call</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10RubyBridge14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pG4argsSaySS_AaG_ptG6kwArgstKF"></a>
+                    <a name="//apple_ref/swift/Method/call(_:args:kwArgs:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RubyBridge14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pG4argsSaySS_AaG_ptG6kwArgstKF">call(_:args:kwArgs:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Call a Ruby object method.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if there is a Ruby exception.
+      <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO14duplicateKwArgACSScACmF">RbError.duplicateKwArg</a></code> if there are duplicate keywords in <code>kwArgs</code>.
+
+</div>
+
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+
+<p>TODO: blocks.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">call</span><span class="p">(</span><span class="n">_</span> <span class="nv">methodName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+                 <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>
+                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="p">[(</span><span class="kt">String</span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)]</span> <span class="o">=</span> <span class="p">[])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>methodName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the method to call.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>args</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The positional arguments to the method.  None by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>kwArgs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The keyword arguments to the method.  None by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The result of calling the method.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbObjectAccess.swift#L176-L182">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10RubyBridge14RbObjectAccessC4callAA0cD0CAA0cD11Convertible_p6symbol_SayAaG_pG4argsSaySS_AaG_ptG6kwArgstKF"></a>
+                    <a name="//apple_ref/swift/Method/call(symbol:args:kwArgs:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RubyBridge14RbObjectAccessC4callAA0cD0CAA0cD11Convertible_p6symbol_SayAaG_pG4argsSaySS_AaG_ptG6kwArgstKF">call(symbol:args:kwArgs:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Call a Ruby object method using a symbol.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if there is a Ruby exception.
+      <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7badTypeACSScACmF">RbError.badType</a></code> if <code>symbol</code> is not a symbol.
+      <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO14duplicateKwArgACSScACmF">RbError.duplicateKwArg</a></code> if there are duplicate keywords in <code>kwArgs</code>.
+
+</div>
+
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+
+<p>TODO: blocks.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">call</span><span class="p">(</span><span class="nv">symbol</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">,</span>
+                 <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>
+                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="p">[(</span><span class="kt">String</span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)]</span> <span class="o">=</span> <span class="p">[])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>symbol</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The symbol for the name of the method to call.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>args</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The positional arguments to the method.  None by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>kwArgs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The keyword arguments to the method.  None by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The result of calling the method.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbObjectAccess.swift#L198-L209">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10RubyBridge14RbObjectAccessC12getAttributeAA0cD0CSSKF"></a>
+                    <a name="//apple_ref/swift/Method/getAttribute(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RubyBridge14RbObjectAccessC12getAttributeAA0cD0CSSKF">getAttribute(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get an attribute of a Ruby object.</p>
+
+<p>Attributes are declared with <code>:attr_accessor</code> and so on &ndash; this routine is a
+simple wrapper around <code><a href="../Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pG4argsSaySS_AaG_ptG6kwArgstKF">call(...)</a></code> for symmetry with <code>set(...)</code>.</p>
+
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO13badIdentifierACSS4type_SS2idtcACmF">RbError.badIdentifier</a></code> if <code>name</code> looks wrong.
+      <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if Ruby has a problem, probably means
+      <code>attribute</code> doesn&rsquo;t exist.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getAttribute</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the attribute to get.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The value of the attribute.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbObjectAccess.swift#L258-L261">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10RubyBridge14RbObjectAccessC12setAttributeAA0cD0CSS_AA0cD11Convertible_p8newValuetKF"></a>
+                    <a name="//apple_ref/swift/Method/setAttribute(_:newValue:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RubyBridge14RbObjectAccessC12setAttributeAA0cD0CSS_AA0cD11Convertible_p8newValuetKF">setAttribute(_:newValue:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set an attribute of a Ruby object.</p>
+
+<p>Attributes are declared with <code>:attr_accessor</code> and so on &ndash; this routine is a
+wrapper around a call to the <code>attrname=</code> method.</p>
+
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO13badIdentifierACSS4type_SS2idtcACmF">RbError.badIdentifier</a></code> if <code>name</code> looks wrong.
+      <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if Ruby has a problem, probably means
+      <code>attribute</code> doesn&rsquo;t exist.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span> 
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">setAttribute</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">newValue</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the attribute to set.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The new value of the attribute.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Whatever the attribute setter returns, typically the new value.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbObjectAccess.swift#L277-L280">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Class%20Variables"></a>
+                <a name="//apple_ref/swift/Section/Class Variables" class="dashAnchor"></a>
+                <a href="#/Class%20Variables">
+                  <h3 class="section-name">Class Variables</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10RubyBridge14RbObjectAccessC11getClassVarAA0cD0CSSKF"></a>
+                    <a name="//apple_ref/swift/Method/getClassVar(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RubyBridge14RbObjectAccessC11getClassVarAA0cD0CSSKF">getClassVar(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get the value of a Ruby class variable that has already been written.</p>
+
+<p>Must be called on an <code><a href="../Classes/RbObject.html">RbObject</a></code> for a class, or <code><a href="../Classes/RbBridge.html">RbBridge</a></code>.  <strong>Note</strong> this
+is different from Ruby as-written where you write <code>@@fred</code> in an object
+context to get a CVar on the object&rsquo;s class.</p>
+
+<p>The behavior of accessing a non-existent CVar is not consistent with IVars
+or GVars.  This is how Ruby works; one more reason to avoid CVars.</p>
+
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO13badIdentifierACSS4type_SS2idtcACmF">RbError.badIdentifier</a></code> if <code>name</code> looks wrong.
+      <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7badTypeACSScACmF">RbError.badType</a></code> if the object is not a class.
+      <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if Ruby has a problem &ndash; in particular,
+      if the CVar does not exist.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getClassVar</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Name of CVar to get.  Must begin with &lsquo;@@&rsquo;.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The value of the CVar.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbObjectAccess.swift#L310-L320">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10RubyBridge14RbObjectAccessC11setClassVarAA0cD0CSS_AA0cD11Convertible_p8newValuetKF"></a>
+                    <a name="//apple_ref/swift/Method/setClassVar(_:newValue:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RubyBridge14RbObjectAccessC11setClassVarAA0cD0CSS_AA0cD11Convertible_p8newValuetKF">setClassVar(_:newValue:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set a Ruby class variable.  Creates a new one if it doesn&rsquo;t exist yet.</p>
+
+<p>Must be called on an <code><a href="../Classes/RbObject.html">RbObject</a></code> for a class, or <code><a href="../Classes/RbBridge.html">RbBridge</a></code>.  <strong>Note</strong> this
+is different from Ruby as-written where you write <code>@@fred = thing</code> in an
+object context to set a CVar on the object&rsquo;s class.</p>
+
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO13badIdentifierACSS4type_SS2idtcACmF">RbError.badIdentifier</a></code> if <code>name</code> looks wrong.
+      <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7badTypeACSScACmF">RbError.badType</a></code> if the object is not a class.
+      <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if Ruby has a problem.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span> 
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">setClassVar</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">newValue</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Name of the CVar to set.  Must begin with &lsquo;@@&rsquo;.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>newValue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The new value to set.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The value that was set.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbObjectAccess.swift#L337-L347">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Global%20Variables"></a>
+                <a name="//apple_ref/swift/Section/Global Variables" class="dashAnchor"></a>
+                <a href="#/Global%20Variables">
+                  <h3 class="section-name">Global Variables</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10RubyBridge14RbObjectAccessC12getGlobalVarAA0cD0CSSKF"></a>
+                    <a name="//apple_ref/swift/Method/getGlobalVar(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RubyBridge14RbObjectAccessC12getGlobalVarAA0cD0CSSKF">getGlobalVar(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get the value of a Ruby global variable.</p>
+
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code><a href="../Enums/RbError.html">RbError</a></code> if <code>name</code> looks wrong.
+
+</div>
+
+<p>(This method is present in this class meaning you can call it on any
+<code><a href="../Classes/RbObject.html">RbObject</a></code> as well as <code><a href="../Classes/RbBridge.html">RbBridge</a></code> without any difference in effect.  This is
+purely convenience to put all these getter/setter pairs in the same place and
+make construction of <code><a href="../Structs/RbFailableAccess.html">RbFailableAccess</a></code> a bit easier.  Best practice probably
+to avoid calling the <code><a href="../Classes/RbObject.html">RbObject</a></code> version.)</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getGlobalVar</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Name of global variable to get.  Must begin with &lsquo;$&rsquo;.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Value of the variable, or Ruby nil if not set before.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbObjectAccess.swift#L366-L371">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10RubyBridge14RbObjectAccessC12setGlobalVarAA0cD0CSS_AA0cD11Convertible_p8newValuetKF"></a>
+                    <a name="//apple_ref/swift/Method/setGlobalVar(_:newValue:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RubyBridge14RbObjectAccessC12setGlobalVarAA0cD0CSS_AA0cD11Convertible_p8newValuetKF">setGlobalVar(_:newValue:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set a Ruby global variable.  Creates a new one if it doesn&rsquo;t exist yet.</p>
+
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code><a href="../Enums/RbError.html">RbError</a></code> if <code>name</code> looks wrong.
+
+</div>
+
+<p>(This method is present in this class meaning you can call it on any
+<code><a href="../Classes/RbObject.html">RbObject</a></code> as well as <code><a href="../Classes/RbBridge.html">RbBridge</a></code> without any difference in effect.  This is
+purely convenience to put all these getter/setter pairs in the same place and
+make construction of <code><a href="../Structs/RbFailableAccess.html">RbFailableAccess</a></code> a bit easier.  Best practice probably
+to avoid calling the <code><a href="../Classes/RbObject.html">RbObject</a></code> version.)</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span> 
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">setGlobalVar</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">newValue</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Name of global variable to set.  Must begin with &lsquo;$&rsquo;.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>newValue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>New value to set.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The value that was set.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbObjectAccess.swift#L388-L397">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Polymorphic%20Getter"></a>
+                <a name="//apple_ref/swift/Section/Polymorphic Getter" class="dashAnchor"></a>
+                <a href="#/Polymorphic%20Getter">
+                  <h3 class="section-name">Polymorphic Getter</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10RubyBridge14RbObjectAccessC3getAA0cD0CSSKF"></a>
+                    <a name="//apple_ref/swift/Method/get(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RubyBridge14RbObjectAccessC3getAA0cD0CSSKF">get(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get some kind of Ruby object based on the <code>name</code> parameter:</p>
+
+<ul>
+<li>If <code>name</code> starts with a capital letter then access a constant under this object;</li>
+<li>If <code>name</code> starts with &lsquo;@&rsquo; or &lsquo;@@&rsquo; then access an IVar/CVar for a class object;</li>
+<li>If <code>name</code> starts with &lsquo;$&rsquo; then access a global variable;</li>
+<li>Otherwise call a zero-args method.</li>
+</ul>
+
+<p>This is a convenience helper to let you access Ruby structures without
+worrying about precisely what they are.</p>
+
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if Ruby has a problem.
+      <code><a href="../Enums/RbError.html">RbError</a></code> of some other kind if <code>name</code> looks wrong in some way.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span> 
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">get</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Name of thing to access.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The accessed thing .</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbObjectAccess.swift#L419-L430">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Failable%20Access"></a>
+                <a name="//apple_ref/swift/Section/Failable Access" class="dashAnchor"></a>
+                <a href="#/Failable%20Access">
+                  <h3 class="section-name">Failable Access</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10RubyBridge14RbObjectAccessC8failableAA0c8FailableE0Vv"></a>
+                    <a name="//apple_ref/swift/Property/failable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RubyBridge14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get a version of this API that returns <code>nil</code> instead of throwing errors.
+See <code><a href="../Structs/RbFailableAccess.html">RbFailableAccess</a></code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">failable</span><span class="p">:</span> <span class="kt"><a href="../Structs/RbFailableAccess.html">RbFailableAccess</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L41-L43">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>Distributed under the MIT license.  Maintained by <a class="link" href="mailto:johnfairh@gmail.com" target="_blank" rel="external">John Fairhurst</a>.</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>-<a class="link" href="https://github.com/johnfairh/jazzy" target="_blank" rel="external">bebop</a>, originally a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>

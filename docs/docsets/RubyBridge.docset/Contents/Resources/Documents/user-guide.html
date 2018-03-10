@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>User Guide  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+
+    <a title="User Guide  Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="index.html">
+          RubyBridge Docs
+        </a>
+         (100% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/johnfairh/RubyBridge">
+            <img class="header-icon" src="img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="index.html">RubyBridge Reference</a>
+      <img class="carat" src="img/carat.png" />
+      User Guide  Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="user-guide.html">User Guide</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="todo.html">TODO</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Main APIs.html">Main APIs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/RbBridge.html">RbBridge</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/RbBridge/Verbosity.html">– Verbosity</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/RbObject.html">RbObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/RbObjectAccess.html">RbObjectAccess</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Other APIs.html">Other APIs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/RbSymbol.html">RbSymbol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/RbType.html">RbType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Error Handling.html">Error Handling</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/RbError.html">RbError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/RbError/History.html">– History</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/RbException.html">RbException</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/RbFailableAccess.html">RbFailableAccess</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Swift Interop.html">Swift Interop</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/String.html">String</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Bool.html">Bool</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/UInt.html">UInt</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/UInt64.html">UInt64</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/UInt32.html">UInt32</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/UInt16.html">UInt16</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/UInt8.html">UInt8</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Int.html">Int</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Int64.html">Int64</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Int32.html">Int32</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Int16.html">Int16</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Int8.html">Int8</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Double.html">Double</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Float.html">Float</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content">
+            
+            <h1 id='using-rubybridge' class='heading'>Using RubyBridge</h1>
+
+<p>This document contains notes on using <code>RubyBridge</code>.  For installation tips
+see <a href="index.html">the README</a>.</p>
+
+<ul>
+<li><a href="#general-usage">How to use the framework</a></li>
+<li><a href="#how-to">How to do various Ruby tasks</a></li>
+<li><a href="#error-handling">Error handling approach</a></li>
+<li><a href="#concurrency">Concurrency and multi-threading</a></li>
+<li><a href="#caveats-and-gotchas">Health warning</a></li>
+<li><a href="#using-the-cruby-api">Using the libruby API</a></li>
+</ul>
+<h2 id='general-usage' class='heading'>General Usage</h2>
+
+<p>The Ruby VM is initialized when you first try to use it and shut down when the
+process ends.  Load Ruby code using <code><a href="Classes/RbBridge.html#/s:10RubyBridge02RbB0C4loadySS8filename_Sb4wraptKF">RbBridge.load(filename:wrap:)</a></code> or
+<code><a href="Classes/RbBridge.html#/s:10RubyBridge02RbB0C7requireSbSS8filename_tKF">RbBridge.require(filename:)</a></code>.  Or just run some Ruby code and get the result
+using <code><a href="Classes/RbBridge.html#/s:10RubyBridge02RbB0C4evalAA0C6ObjectCSS4ruby_tKF">RbBridge.eval(ruby:)</a></code>.  There already is a global instance of <code><a href="Classes/RbBridge.html">RbBridge</a></code>
+called <code>Ruby</code> so the code looks like:</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">RubyBridge</span>
+
+<span class="k">do</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">eval</span><span class="p">(</span><span class="nv">ruby</span><span class="p">:</span> <span class="s">"'a' * 4"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Create objects using <code><a href="Classes/RbObject.html#/s:10RubyBridge8RbObjectCACSgSS7ofClass_SayAA0cD11Convertible_pG4argsSaySS_AaF_ptG6kwArgstcfc">RbObject.init(ofClass:args:kwArgs:)</a></code>.  Pass Swift types
+or <code><a href="Classes/RbObject.html">RbObject</a></code>s to the <code>args</code> parameter.</p>
+
+<p>Use <code>RbObject.call(_:args:kwArgs)</code> [link: <code>RbObjectAccess.call(_:args:kwArgs)</code>]
+to call methods on the object.  See <code><a href="Classes/RbObjectAccess.html">RbObjectAccess</a></code> for more object
+operations.  Again pass Swift types or <code><a href="Classes/RbObject.html">RbObject</a></code>s in the <code>args</code> parameter.</p>
+
+<p>Use optional initializers to convert from <code><a href="Classes/RbObject.html">RbObject</a></code>s back to Swift types, or
+implicitly/explicitly access <code><a href="Classes/RbObject.html#/s:10RubyBridge8RbObjectC11descriptionSSv">RbObject.description</a></code> if you just want <code>String</code>.</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">RubyBridge</span>
+
+<span class="k">do</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">require</span><span class="p">(</span><span class="nv">filename</span><span class="p">:</span> <span class="s">"academy"</span><span class="p">)</span>
+    <span class="k">let</span> <span class="nv">student</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">RbObject</span><span class="p">(</span><span class="nv">ofClass</span><span class="p">:</span> <span class="s">"Academy::Student"</span><span class="p">,</span>
+                               <span class="nv">kwArgs</span><span class="p">:</span> <span class="p">[(</span><span class="s">"name"</span><span class="p">,</span> <span class="s">"Betty"</span><span class="p">)])</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">bettyGpa</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Double</span><span class="p">(</span><span class="n">student</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"gpa"</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nf">processScore</span><span class="p">(</span><span class="nv">gpa</span><span class="p">:</span> <span class="n">bettyGpa</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+<span class="p">}</span>
+</code></pre>
+<h2 id='how-to' class='heading'>How to &hellip;</h2>
+<h3 id='pass-a-symbol-as-an-argument' class='heading'>Pass a symbol as an argument</h3>
+
+<p>Use <code><a href="Structs/RbSymbol.html">RbSymbol</a></code>.  Ruby:</p>
+<pre class="highlight ruby"><code><span class="n">res</span> <span class="o">=</span> <span class="n">obj</span><span class="p">.</span><span class="nf">meth</span><span class="p">(</span><span class="ss">:value</span><span class="p">)</span>
+</code></pre>
+
+<p>RubyBridge:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">res</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"meth"</span><span class="p">,</span> <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt">RbSymbol</span><span class="p">(</span><span class="s">"value"</span><span class="p">)])</span>
+</code></pre>
+<h3 id='access-class-variables' class='heading'>Access class variables</h3>
+
+<p>Use <code><a href="Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC11getClassVarAA0cD0CSSKF">RbObjectAccess.getClassVar(_:)</a></code> <strong>on the class</strong>: RubyBridge goes like the
+Ruby API not Ruby as written.  Ruby:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">MyClass</span>
+  <span class="vc">@@count</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">def</span> <span class="nf">initialize</span>
+    <span class="vc">@@count</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>RubyBridge:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">myClass</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">getClass</span><span class="p">(</span><span class="s">"MyClass"</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">count</span> <span class="o">=</span> <span class="k">try</span> <span class="n">myClass</span><span class="o">.</span><span class="nf">getClassVar</span><span class="p">(</span><span class="s">"@@count"</span><span class="p">)</span>
+</code></pre>
+<h3 id='run-finalizers-before-process-exit' class='heading'>Run finalizers before process exit</h3>
+
+<p>If you want to stop using Ruby and get on with something else, and
+never come back to Ruby in the process, use <code><a href="Classes/RbBridge.html#/s:10RubyBridge02RbB0C7cleanups5Int32VyF">RbBridge.cleanup()</a></code>.</p>
+<h3 id='can-39-t-do-yet' class='heading'>Can&rsquo;t do yet</h3>
+
+<ul>
+<li>Arrays Hashes Sets</li>
+<li>Ranges</li>
+<li>Rational Complex</li>
+<li>Symbol as blocks</li>
+<li>Code as block</li>
+</ul>
+<h2 id='error-handling' class='heading'>Error Handling</h2>
+
+<p>RubyBridge is very explicit about failure points.  Any Ruby method call can
+raise an exception instead of terminating normally and this is reflected in the
+throwable nature of most of the interesting RubyBridge methods.</p>
+
+<p>Normally when writing Ruby scripts one doesn&rsquo;t care about this and just lets
+the program crash, which happens very rarely after the debugging phase.  If you
+are using RubyBridge though, there is presumably a lot more happening for you
+and your users than the Ruby stuff &ndash; otherwise you&rsquo;d be writing Ruby, not
+Swift.  I feel it does not make sense for a subsystem like this to decide how to
+handle errors, so RubyBridge propagates all errors (<a href="#caveats-and-gotchas">except when it doesn&rsquo;t</a>).</p>
+
+<p>And <code>try!</code> is always available for quick don&rsquo;t-care-about-errors environments.</p>
+<h3 id='errors-exceptions' class='heading'>Errors + Exceptions</h3>
+
+<p>All errors thrown are <code><a href="Enums/RbError.html">RbError</a></code> which is an enum of various interface errors
+detected by RubyBridge and one case <code><a href="Enums/RbError.html#/s:10RubyBridge7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> that covers all
+Ruby exceptions.</p>
+
+<p>RubyBridge remembers the last few <code><a href="Enums/RbError.html">RbError</a></code>s that were generated and stores
+them in the publicly available <code><a href="Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7HistoryVvZ">RbError.history</a></code>.</p>
+<h3 id='code-nil-code-failures' class='heading'><code>nil</code> failures</h3>
+
+<p>Converting Ruby values to Swift types works differently: it happens using
+failable initializers such as <code><a href="Extensions/String.html#/s:SS10RubyBridgeESSSgAA8RbObjectCcfc">String.init(_:)</a></code>.  These can fail for a variety
+of reasons.  When they do, RubyBridge still internally generates an <code><a href="Enums/RbError.html">RbError</a></code>
+and stores a copy in <code><a href="Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7HistoryVvZ">RbError.history</a></code> even though it is not thrown.  This
+means you can diagnose why a conversion failed:</p>
+<pre class="highlight swift"><code><span class="k">guard</span> <span class="k">let</span> <span class="nv">score</span> <span class="o">=</span> <span class="kt">Float</span><span class="p">(</span><span class="n">scoreObj</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Failed to get score back from Ruby: </span><span class="se">\(</span><span class="kt">RbError</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">mostRecent</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+    <span class="k">return</span>
+<span class="p">}</span>
+</code></pre>
+<h3 id='failable-adapter' class='heading'>Failable Adapter</h3>
+
+<p><code><a href="Structs/RbFailableAccess.html">RbFailableAccess</a></code> is a non-throwing adapter for <code><a href="Classes/RbObject.html">RbObject</a></code> and <code><a href="Classes/RbBridge.html">RbBridge</a></code> that
+returns <code>nil</code> when there is an error.  All it does is <code>try?</code> the
+corresponding throwing method, meaning that the details of the failure are
+available in <code><a href="Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7HistoryVvZ">RbError.history</a></code>.</p>
+
+<p>This is a steal of rough approach (the name is my fault) from the Python DML
+sandbox with an eye to adding direct member lookup/callable to RubyBridge &ndash;
+Swift subscripts can&rsquo;t throw.</p>
+
+<p>I&rsquo;m not sure this is better than just writing <code>try?</code> which at least makes it
+very difficult for readers to ignore the possibility of errors.</p>
+<h2 id='concurrency' class='heading'>Concurrency</h2>
+
+<p><em>more details to understand</em></p>
+
+<p>Do not access RubyBridge APIs from more than one thread ever.</p>
+<h2 id='caveats-and-gotchas' class='heading'>Caveats and Gotchas</h2>
+
+<p>Certain <code><a href="Classes/RbObject.html">RbObject</a></code> methods forward to Ruby calls and crash (<code>fatalError()</code>)
+if Ruby fails / the object doesn&rsquo;t support the method.  It&rsquo;s up to you to be
+sure the Ruby objects you&rsquo;re dealing with are of the right type.  See
+<code><a href="Classes/RbObject.html">RbObject</a></code> for more information on which these methods are.</p>
+
+<p>Running arbitrary Ruby code is a bad idea unless the process itself is
+sandboxed - there are no restrictions on what the Ruby VM can do including
+call <code>exit!</code>.</p>
+<h2 id='using-the-cruby-api' class='heading'>Using the CRuby API</h2>
+
+<p>The <a href="https://github.com/johnfairh/CRuby">CRuby</a> package provides access to as
+much of the <code>libruby</code> API as makes it through the importer.  You can use this
+in conjunction with RubyBridge to access more of the API than RubyBridge itself
+provides.</p>
+
+<p>Each <code><a href="Classes/RbObject.html">RbObject</a></code> wraps one <code>VALUE</code> keeping it safe from garbage collection.  You
+can access that <code>VALUE</code> using <code><a href="Classes/RbObject.html#/s:10RubyBridge8RbObjectC04withA5ValuexxSuKc4call_tKlF">RbObject.withRubyValue(call:)</a></code>.</p>
+
+<p>RubyBridge caches intern&#39;ed Ruby strings - you can access the cache using
+<code><a href="Classes/RbBridge.html#/s:10RubyBridge02RbB0C5getIDSuSS3for_tKF">RbBridge.getID(for:)</a></code>.</p>
+
+<p>Note that when you call the Ruby API and Ruby raises an exception, the process
+immediately crashes unless you are running inside <code>rb_protect()</code> or equivalent.</p>
+<h3 id='references' class='heading'>References</h3>
+
+<ul>
+<li><a href="http://silverhammermba.github.io/emberb/">Ruby C API Guide</a> - great guide to
+the API.</li>
+<li><a href="http://ruby-hacking-guide.github.io">Ruby Hacking Guide</a> - in-depth on how
+Ruby (an old version of) works.</li>
+<li><a href="https://blog.heroku.com/incremental-gc">Incremental GC in Ruby</a> - very
+interesting overview of GC pre + @ 2.2.</li>
+</ul>
+
+          </div>
+        </section>
+
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>Distributed under the MIT license.  Maintained by <a class="link" href="mailto:johnfairh@gmail.com" target="_blank" rel="external">John Fairhurst</a>.</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>-<a class="link" href="https://github.com/johnfairh/jazzy" target="_blank" rel="external">bebop</a>, originally a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>
