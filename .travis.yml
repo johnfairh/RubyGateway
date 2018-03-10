@@ -1,5 +1,10 @@
 language: objective-c
 osx_image: xcode9
+git:
+    submodules: false
+before_install:
+    - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+    - git submodule update --init --recursive
 script:
     - xcodebuild build test -sdk macosx -project RubyBridge.xcodeproj -scheme RubyBridge-Package CODE_SIGNING_REQUIRED=NO -enableCodeCoverage YES VALID_ARCHS=x86_64
 after_success:
