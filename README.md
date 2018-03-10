@@ -103,18 +103,17 @@ print("Mean score is \(avgScore)")
 
 * Swift 4 or later, from swift.org or Xcode 9.2+.
 * macOS (tested on 10.13.3) or Linux (tested on Ubuntu Xenial/16.04 on x86_64) with Clang 6+.
-* Ruby 2.0 or later including development files:
+* Ruby 2.3 or later including development files:
   * For macOS, this comes with Xcode.
   * For Linux you may need to install a -dev package depending on how your Ruby
     is installed.
+  * RubyBridge requires 'original' MRI/CRuby Ruby - no JRuby/Rubinius/etc.
 
 ## Installation
 
 For macOS, if you are happy to use the system Ruby then you just need to include
 the RubyBridge framework as a dependency.  If you are building on Linux or want
 to use a different Ruby then you also need to configure CRuby.
-
-RubyBridge requires 'original' MRI/CRuby Ruby - no JRuby/Rubinius/etc.
 
 ### Getting the framework
 
@@ -137,7 +136,7 @@ CRuby is the glue between RubyBridge and your Ruby installation.  It is a
 includes it as submodule so you do not install or require it separately.
 
 By default it points to the macOS system Ruby.  Follow the [CRuby usage
-instructions](https://github.com/johnfairh/CRuby/README.md#usage) to change
+instructions](https://github.com/johnfairh/CRuby#usage) to change
 this.  For example on Linux using [Brightbox Ruby](https://www.brightbox.com/docs/ruby/ubuntu/)
 2.5:
 ```shell
