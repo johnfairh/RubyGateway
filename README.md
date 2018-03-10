@@ -6,10 +6,10 @@ Distributed under the MIT license, see LICENSE.
 
 # RubyBridge
 
-<!--
 [![CI](https://travis-ci.org/johnfairh/RubyBridge.svg?branch=master)](https://travis-ci.org/johnfairh/RubyBridge)
 [![codecov](https://codecov.io/gh/johnfairh/RubyBridge/branch/master/graph/badge.svg)](https://codecov.io/gh/johnfairh/RubyBridge)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+<!--
 ![Pod](https://cocoapod-badges.herokuapp.com/v/RubyBridge/badge.png)
 ![Platforms](https://cocoapod-badges.herokuapp.com/p/RubyBridge/badge.png)
 ![License](https://cocoapod-badges.herokuapp.com/l/RubyBridge/badge.png)
