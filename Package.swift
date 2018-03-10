@@ -15,7 +15,7 @@ let package = Package(
             targets: ["RubyBridge", "RubyBridgeHelpers"])
     ],
     dependencies: [
-        .package(url: "CRuby/", from: "0.9.0"),
+        .package(url: "CRuby/", from: "1.0.0"),
     ],
     targets: [
         .target(

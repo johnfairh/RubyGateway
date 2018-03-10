@@ -22,3 +22,4 @@ xcuserdata
 Carthage/Build
 c/
 *.swp
+Package.resolved
