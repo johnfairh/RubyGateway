@@ -70,6 +70,10 @@ double rbb_obj2double_protect(VALUE v, int * _Nullable status);
 const char * _Nonnull rbb_ruby_version(void);
 const char * _Nonnull rbb_ruby_description(void);
 
+/// Cross Ruby version support
+unsigned long rbb_fix2ulong(VALUE v);
+long          rbb_fix2long(VALUE v);
+
 /// Rbb_value - keep a VALUE safe so it does not get GC'ed
 typedef struct  {
     VALUE value;

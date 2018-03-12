@@ -103,7 +103,7 @@ print("Mean score is \(avgScore)")
 
 * Swift 4 or later, from swift.org or Xcode 9.2+.
 * macOS (tested on 10.13.3) or Linux (tested on Ubuntu Xenial/16.04 on x86_64) with Clang 6+.
-* Ruby 2.3 or later including development files:
+* Ruby 2.2 or later including development files:
   * For macOS, this comes with Xcode.
   * For Linux you may need to install a -dev package depending on how your Ruby
     is installed.

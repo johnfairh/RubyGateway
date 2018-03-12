@@ -65,7 +65,8 @@ func RSTRING_PTR(_ str: VALUE) -> UnsafePointer<Int8> {
 // MARK: - More enum-y `VALUE` type enum
 
 // Swift-friendly value type.  Constants duplicated from Ruby headers,
-// can't see how not to; should be low-risk.
+// can't see how not to.  Is low-risk but is going to require review
+// annually to spot things like the 2.3 renumbering.
 
 /// The type of a Ruby VALUE as wrapped by `RbObject`.
 ///
@@ -129,7 +130,18 @@ public enum RbType: Int32 {
 }
 
 func TYPE(_ x: VALUE) -> RbType {
-    return RbType(rawValue: rb_type(x)) ?? .T_UNDEF
+    var rbType = rb_type(x)
+    let (major, minor, _) = ruby_api_version
+    if major == 2 && minor < 3 {
+        switch rbType {
+        case 0x1b: rbType = RbType.T_UNDEF.rawValue
+        case 0x1c: rbType = RbType.T_NODE.rawValue
+        case 0x1d: rbType = RbType.T_ICLASS.rawValue
+        case 0x1e: rbType = RbType.T_ZOMBIE.rawValue
+        default: break
+        }
+    }
+    return RbType(rawValue: rbType) ?? .T_UNDEF
 }
 
 // MARK: - Garbage collection helpers
@@ -151,11 +163,11 @@ func RB_LONG2FIX(_ i: Int) -> VALUE {
 }
 
 func RB_FIX2LONG(_ v: VALUE) -> Int {
-    return rb_fix2long(v)
+    return rbb_fix2long(v)
 }
 
 func RB_FIX2ULONG(_ v: VALUE) -> UInt {
-    return rb_fix2ulong(v)
+    return rbb_fix2ulong(v)
 }
 
 func RB_POSFIXABLE(_ f: SIGNED_VALUE) -> Bool {

@@ -8,6 +8,12 @@
 @import CRuby;
 #import "rbb_helpers.h"
 
+// Fixups for Ruby < 2.3
+
+#ifndef RB_SPECIAL_CONST_P
+#define RB_SPECIAL_CONST_P SPECIAL_CONST_P
+#endif
+
 //
 // # VALUE protection.
 //

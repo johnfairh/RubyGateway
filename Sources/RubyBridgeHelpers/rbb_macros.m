@@ -31,3 +31,21 @@ const char *rbb_ruby_description(void)
 {
     return ruby_description;
 }
+
+// Ruby pre-2.3
+#ifndef RB_FIX2ULONG
+#define RB_FIX2ULONG FIX2ULONG
+#endif
+
+#ifndef RB_FIX2LONG
+#define RB_FIX2LONG FIX2LONG
+#endif
+
+unsigned long rbb_fix2ulong(VALUE v)
+{
+    return RB_FIX2ULONG(v);
+}
+long rbb_fix2long(VALUE v)
+{
+    return RB_FIX2LONG(v);
+}

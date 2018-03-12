@@ -10,6 +10,24 @@
 #import <stdbool.h>
 #import <stdint.h>
 
+// Fixups for Ruby < 2.3
+
+#ifndef RB_NUM2LONG
+#define RB_NUM2LONG NUM2LONG
+#endif
+
+#ifndef RB_FIX2LONG
+#define RB_FIX2LONG FIX2LONG
+#endif
+
+#ifndef RB_FIX2ULONG
+#define RB_FIX2ULONG FIX2ULONG
+#endif
+
+#ifndef RUBY_FL_USER1
+#define RUBY_FL_USER1 FL_USER1
+#endif
+
 //
 // # Thunks for Exception Handling
 //
