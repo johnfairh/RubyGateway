@@ -234,6 +234,11 @@ extension RbBridge {
         }
     }
 
+    /// The component major/minor/teeny version numbers of Ruby being used.
+    public var apiVersion: (Int32, Int32, Int32) {
+        return ruby_api_version
+    }
+
     /// The version number triple of Ruby being used, for example *2.5.0*.
     public var version: String {
         return String(cString: rbb_ruby_version())
