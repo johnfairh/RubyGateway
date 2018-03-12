@@ -1,10 +1,6 @@
 language: objective-c
 osx_image: xcode9.2
-git:
-    submodules: false
 before_install:
-    - sed -ie 's/git@github.com:/https:\/\/github.com\//' .gitmodules
-    - git submodule update --init --recursive
     - gem install rouge
     - gem install wikipedia-client
 script:
@@ -18,3 +14,9 @@ script:
     - ./travis-xcodebuild
 after_success:
     - bash <(curl -s https://codecov.io/bash) -J 'RubyBridge$' -X gcov -X coveragepy
+
+#git:
+#    submodules: false
+#before_install:
+#    - sed -ie 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+#    - git submodule update --init --recursive
