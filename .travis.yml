@@ -4,6 +4,7 @@ before_install:
     - gem install rouge
     - gem install wikipedia-client
 script:
+    - swift package update
     - swift package edit CRuby
     - Packages/CRuby/cfg-cruby --mode rvm --name ruby-2.4.2
     - cat Packages/CRuby/CRuby.pc
@@ -14,9 +15,3 @@ script:
     - ./travis-xcodebuild
 after_success:
     - bash <(curl -s https://codecov.io/bash) -J 'RubyBridge$' -X gcov -X coveragepy
-
-#git:
-#    submodules: false
-#before_install:
-#    - sed -ie 's/git@github.com:/https:\/\/github.com\//' .gitmodules
-#    - git submodule update --init --recursive
