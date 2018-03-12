@@ -142,9 +142,12 @@ this.  For example on Linux using [Brightbox Ruby](https://www.brightbox.com/doc
 ```shell
 sudo apt-get install ruby2.5 ruby2.5-dev pkg-config
 mkdir MyProject
-swift package init
-vi Package.swift    # add RubyBridge as a dependency (NOT CRuby)
-echo "import RubyBridge; print(Ruby.versionDescription)" > Sources/MyProject/MyProject.swift
+swift package init --type executable
+vi Package.swift
+# add RubyBridge as a package dependency (NOT CRuby)
+# add RubyBridge as a target dependency
+echo "import RubyBridge; print(Ruby.versionDescription)" > Sources/MyProject/main.swift
+swift package update
 swift package edit CRuby
 Packages/CRuby/cfg-cruby --mode pkg-config --name ruby-2.5
 PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH swift run
