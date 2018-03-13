@@ -8,6 +8,11 @@
 import CRuby
 import RubyBridgeHelpers
 
+private func block_callback(context: UnsafeMutableRawPointer?, argc: Int32, argv: UnsafePointer<VALUE>) -> VALUE {
+    return Qtrue
+}
+
+
 /// Provides services to manipulate a Ruby object:
 /// * Call methods;
 /// * Access properties and instance variables;
@@ -226,6 +231,34 @@ extension RbObjectAccess {
 
         return RbObject(rubyValue: resultVal)
     }
+
+    /// Start sketching version of call accepting Swift code as block.
+    @discardableResult
+    public func call(_ methodName: String,
+                     args: [RbObjectConvertible] = [],
+                     kwArgs: [(String, RbObjectConvertible)] = [],
+                     block: ([RbObject]) -> RbObject) throws -> RbObject {
+        try Ruby.setup()
+        let methodId = try Ruby.getID(for: methodName)
+        var argObjects = args.map { $0.rubyObject }
+
+        if kwArgs.count > 0 {
+            try argObjects.append(buildKwArgsHash(from: kwArgs))
+        }
+
+        let resultVal = try argObjects.withRubyValues { argValues in
+            try RbVM.doProtect {
+                rbb_block_call_protect(getValue(), methodId,
+                                       Int32(argValues.count), argValues,
+                                       block_callback, nil,
+                                       nil)
+            }
+        }
+
+        return RbObject(rubyValue: resultVal)
+
+    }
+
 
     /// Build a keyword args hash.  The keys are Symbols of the keywords.
     private func buildKwArgsHash(from kwArgs: [(String, RbObjectConvertible)]) throws -> RbObject {

@@ -211,6 +211,18 @@ VALUE rbb_funcallv_protect(VALUE value, ID id,
     return rbb_protect(&data, status);
 }
 
+VALUE rbb_block_call_protect(VALUE value, ID id,
+                             int argc, const VALUE * _Nonnull argv,
+                             Rbb_swift_block_call _Nonnull block,
+                             void * _Nullable context,
+                             int * _Nullable status)
+{
+    Rbb_protect_data data = { .job = RBB_JOB_FUNCALLV, .value = value, .id = id,
+        .funcallvArgc = argc, .funcallvArgv = argv };
+    return rbb_protect(&data, status);
+}
+
+
 // rb_cvar_get - raises if you look at it funny
 VALUE rbb_cvar_get_protect(VALUE clazz, ID id, int * _Nullable status)
 {

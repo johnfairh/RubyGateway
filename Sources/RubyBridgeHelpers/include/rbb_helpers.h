@@ -46,6 +46,15 @@ VALUE rbb_funcallv_protect(VALUE value, ID id,
                            int argc, const VALUE * _Nonnull argv,
                            int * _Nullable status);
 
+typedef VALUE (*Rbb_swift_block_call)(void * _Nullable context,
+                                      int argc, const VALUE * _Nonnull argv);
+
+VALUE rbb_block_call_protect(VALUE value, ID id,
+                             int argc, const VALUE * _Nonnull argv,
+                             Rbb_swift_block_call _Nonnull block,
+                             void * _Nullable context,
+                             int * _Nullable status);
+
 /// Safely call `rb_cvar_get` and report exception status.
 VALUE rbb_cvar_get_protect(VALUE clazz, ID id, int * _Nullable status);
 
