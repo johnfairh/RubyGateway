@@ -24,16 +24,23 @@ fileprivate class RbProcContext {
     init(procCallback: @escaping ProcCallback) {
         self.procCallback = procCallback
     }
+
+    static func from(raw: UnsafeMutableRawPointer) -> RbProcContext {
+        return Unmanaged<RbProcContext>.fromOpaque(raw).takeUnretainedValue()
+    }
+
+    func withRaw<T>(callback: (UnsafeMutableRawPointer) throws -> T) rethrows -> T {
+        let unmanaged = Unmanaged.passRetained(self)
+        defer { unmanaged.release() }
+        return try callback(unmanaged.toOpaque())
+    }
 }
 
 private func rbproc_block_callback(yielded_arg: VALUE,
-                                   rawContext: UnsafeMutableRawPointer?,
+                                   rawContext: UnsafeMutableRawPointer,
                                    argc: Int32, argv: UnsafePointer<VALUE>,
                                    blockarg: VALUE) -> VALUE {
-    guard let rawContext = rawContext else {
-        fatalError("Bang")
-    }
-    let context = Unmanaged<RbProcContext>.fromOpaque(rawContext).takeUnretainedValue()
+    let context = RbProcContext.from(raw: rawContext)
     let obj = context.procCallback([])
     return obj.withRubyValue { $0 }
 }
@@ -43,13 +50,13 @@ public struct RbProc {
     internal static func doBlockCall(value: VALUE, methodId: ID, argValues: [VALUE], procCallback: ProcCallback) throws -> VALUE {
         return try withoutActuallyEscaping(procCallback) { escapable in
             let context = RbProcContext(procCallback: escapable)
-            let unmanaged = Unmanaged.passRetained(context)
-            defer { unmanaged.release() }
-            return try RbVM.doProtect {
-                rbb_block_call_protect(value, methodId,
-                                       Int32(argValues.count), argValues,
-                                       rbproc_block_callback, unmanaged.toOpaque(),
-                                       nil)
+            return try context.withRaw { rawContext in
+                return try RbVM.doProtect {
+                    rbb_block_call_protect(value, methodId,
+                                           Int32(argValues.count), argValues,
+                                           rbproc_block_callback, rawContext,
+                                           nil)
+                }
             }
         }
     }

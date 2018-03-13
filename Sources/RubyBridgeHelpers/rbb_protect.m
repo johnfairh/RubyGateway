@@ -220,7 +220,7 @@ VALUE rbb_funcallv_protect(VALUE value, ID id,
 VALUE rbb_block_call_protect(VALUE value, ID id,
                              int argc, const VALUE * _Nonnull argv,
                              Rbb_swift_block_call _Nonnull block,
-                             void * _Nullable context,
+                             void * _Nonnull context,
                              int * _Nullable status)
 {
     Rbb_protect_data data = { .job = RBB_JOB_BLOCK_CALL, .value = value, .id = id,
