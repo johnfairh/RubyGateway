@@ -46,8 +46,12 @@ VALUE rbb_funcallv_protect(VALUE value, ID id,
                            int argc, const VALUE * _Nonnull argv,
                            int * _Nullable status);
 
-typedef VALUE (*Rbb_swift_block_call)(void * _Nullable context,
-                                      int argc, const VALUE * _Nonnull argv);
+
+typedef VALUE (*Rbb_swift_block_call)(VALUE yielded_arg,
+                                      void * _Nullable callback_arg,
+                                      int argc,
+                                      const VALUE * _Nonnull argv,
+                                      VALUE blockarg);
 
 VALUE rbb_block_call_protect(VALUE value, ID id,
                              int argc, const VALUE * _Nonnull argv,

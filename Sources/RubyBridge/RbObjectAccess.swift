@@ -8,11 +8,6 @@
 import CRuby
 import RubyBridgeHelpers
 
-private func block_callback(context: UnsafeMutableRawPointer?, argc: Int32, argv: UnsafePointer<VALUE>) -> VALUE {
-    return Qtrue
-}
-
-
 /// Provides services to manipulate a Ruby object:
 /// * Call methods;
 /// * Access properties and instance variables;
@@ -246,13 +241,9 @@ extension RbObjectAccess {
             try argObjects.append(buildKwArgsHash(from: kwArgs))
         }
 
-        let resultVal = try argObjects.withRubyValues { argValues in
-            try RbVM.doProtect {
-                rbb_block_call_protect(getValue(), methodId,
-                                       Int32(argValues.count), argValues,
-                                       block_callback, nil,
-                                       nil)
-            }
+        let resultVal = try argObjects.withRubyValues {
+            try RbProc.doBlockCall(value: getValue(), methodId: methodId,
+                                   argValues: $0, procCallback: block)
         }
 
         return RbObject(rubyValue: resultVal)

@@ -181,6 +181,21 @@ class TestCallable: XCTestCase {
         }
     }
 
+    // call with a Swift block
+    func testCallWithBlock() {
+        let obj = getNewMethodTest()
+
+        do {
+            let res = try obj.call("yielder") { args in
+                print("args.count = \(args.count)")
+                return .nilObject
+            }
+            print("res: \(res)")
+        } catch {
+            XCTFail("Unexpected exception: \(error)")
+        }
+    }
+
     static var allTests = [
         ("testCallGlobal", testCallGlobal),
         ("testCallGlobalFailure", testCallGlobalFailure),

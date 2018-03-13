@@ -88,6 +88,7 @@ typedef enum {
     RBB_JOB_CONST_GET,
     RBB_JOB_CONST_GET_AT,
     RBB_JOB_FUNCALLV,
+    RBB_JOB_BLOCK_CALL,
     RBB_JOB_CVAR_GET,
     RBB_JOB_TO_ULONG,
     RBB_JOB_TO_LONG,
@@ -105,6 +106,8 @@ typedef struct {
     int           funcallvArgc;
     const VALUE  *funcallvArgv;
     double        toDoubleResult;
+    Rbb_swift_block_call blockcallCall;
+    void                *blockcallContext;
 } Rbb_protect_data;
 
 #define RBB_PDATA_TO_VALUE(pdata) ((uintptr_t)(void *)(pdata))
@@ -134,6 +137,9 @@ static VALUE rbb_protect_thunk(VALUE value)
         break;
     case RBB_JOB_FUNCALLV:
         rc = rb_funcallv(d->value, d->id, d->funcallvArgc, d->funcallvArgv);
+        break;
+    case RBB_JOB_BLOCK_CALL:
+        rc = rb_block_call(d->value, d->id, d->funcallvArgc, d->funcallvArgv, d->blockcallCall, (VALUE) d->blockcallContext);
         break;
     case RBB_JOB_CVAR_GET:
         rc = rb_cvar_get(d->value, d->id);
@@ -217,11 +223,11 @@ VALUE rbb_block_call_protect(VALUE value, ID id,
                              void * _Nullable context,
                              int * _Nullable status)
 {
-    Rbb_protect_data data = { .job = RBB_JOB_FUNCALLV, .value = value, .id = id,
-        .funcallvArgc = argc, .funcallvArgv = argv };
+    Rbb_protect_data data = { .job = RBB_JOB_BLOCK_CALL, .value = value, .id = id,
+        .funcallvArgc = argc, .funcallvArgv = argv,
+        .blockcallCall = block, .blockcallContext = context };
     return rbb_protect(&data, status);
 }
-
 
 // rb_cvar_get - raises if you look at it funny
 VALUE rbb_cvar_get_protect(VALUE clazz, ID id, int * _Nullable status)

@@ -37,4 +37,9 @@ class MethodsTest
     def double(x)
         return x * 2
     end
+
+    def yielder
+        raise "No block given" unless block_given?
+        yield(22, "fish")
+    end
 end
