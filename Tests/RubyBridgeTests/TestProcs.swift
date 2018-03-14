@@ -25,9 +25,7 @@ class TestProcs: XCTestCase {
                 XCTAssertEqual(expectedArg1, Double(args[1]))
                 return RbObject(expectedResult)
             }
-            let procObj = proc.rubyObject
 
-//            let result = try procObj.callProc(args: [expectedArg0, expectedArg1])
             let result = try proc.rubyObject.call("call", args: [expectedArg0, expectedArg1])
 
             XCTAssertEqual(expectedResult, Int(result))

@@ -232,7 +232,7 @@ extension RbObjectAccess {
     public func call(_ methodName: String,
                      args: [RbObjectConvertible] = [],
                      kwArgs: [(String, RbObjectConvertible)] = [],
-                     block: ([RbObject]) -> RbObject) throws -> RbObject {
+                     block: RbProcCallback) throws -> RbObject {
         try Ruby.setup()
         let methodId = try Ruby.getID(for: methodName)
         var argObjects = args.map { $0.rubyObject }
@@ -242,8 +242,8 @@ extension RbObjectAccess {
         }
 
         let resultVal = try argObjects.withRubyValues {
-            try RbProc.doBlockCall(value: getValue(), methodId: methodId,
-                                   argValues: $0, procCallback: block)
+            try RbProcUtils.doBlockCall(value: getValue(), methodId: methodId,
+                                        argValues: $0, procCallback: block)
         }
 
         return RbObject(rubyValue: resultVal)
@@ -265,8 +265,8 @@ extension RbObjectAccess {
 
         let resultVal = try block.rubyObject.withRubyValue { procValue in
             try argObjects.withRubyValues {
-                try RbProc.doBlockCall(value: getValue(), methodId: methodId,
-                                       argValues: $0, procValue: procValue)
+                try RbProcUtils.doBlockCall(value: getValue(), methodId: methodId,
+                                            argValues: $0, procValue: procValue)
             }
         }
 

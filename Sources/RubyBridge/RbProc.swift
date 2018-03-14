@@ -35,17 +35,23 @@ import RubyBridgeHelpers
 //   proxy thing to provide similar level of function.
 //
 
+/// The type of a Proc or block implemented in Swift.
+///
+/// See `RbProc` and `RbObjectAccess.call(_:args:kwArgs:block:)`.
+public typealias RbProcCallback = ([RbObject]) -> RbObject
 
-public typealias ProcCallback = ([RbObject]) -> RbObject
+// MARK: - Swift -> Ruby -> Swift call context
 
-fileprivate class RbProcContext {
-    enum CallType {
-        case callback(ProcCallback)
+/// Context passed to block callbacks, wrapping up either a Swift closure
+/// or a Ruby Proc to pass on control to.
+private class RbProcContext {
+    private enum CallType {
+        case callback(RbProcCallback)
         case value(VALUE)
     }
-    let type: CallType
+    private let type: CallType
 
-    init(procCallback: @escaping ProcCallback) {
+    init(procCallback: @escaping RbProcCallback) {
         type = .callback(procCallback)
     }
 
@@ -53,48 +59,131 @@ fileprivate class RbProcContext {
         type = .value(procValue)
     }
 
-    static func from(raw: UnsafeMutableRawPointer) -> RbProcContext {
-        return Unmanaged<RbProcContext>.fromOpaque(raw).takeUnretainedValue()
-    }
-
+    /// Call a function passing it a `void *` representation of the `RbProcContext`
     func withRaw<T>(callback: (UnsafeMutableRawPointer) throws -> T) rethrows -> T {
         let unmanaged = Unmanaged.passRetained(self)
         defer { unmanaged.release() }
         return try callback(unmanaged.toOpaque())
     }
-}
 
-private func rbproc_block_callback(yielded_arg: VALUE,
-                                   rawContext: UnsafeMutableRawPointer,
-                                   argc: Int32, argv: UnsafePointer<VALUE>,
-                                   blockarg: VALUE) -> VALUE {
-    let context = RbProcContext.from(raw: rawContext)
+    /// Retrieve an `RbProcContext` from its `void *` representation
+    static func from(raw: UnsafeMutableRawPointer) -> RbProcContext {
+        return Unmanaged<RbProcContext>.fromOpaque(raw).takeUnretainedValue()
+    }
 
-    switch context.type {
-    case let .callback(procCallback):
-        var args: [RbObject] = []
-        for i in 0..<Int(argc) {
-            args.append(RbObject(rubyValue: (argv + i).pointee))
+    /// Pass on the proc arguments from Ruby to the wrapped code.
+    func invoke(argc: Int32, argv: UnsafePointer<VALUE>, blockArg: VALUE) -> VALUE {
+        switch type {
+        case let .callback(procCallback):
+            // Swift closure - turn everything into RbObjects and call it.
+            var args: [RbObject] = []
+            for i in 0..<Int(argc) {
+                args.append(RbObject(rubyValue: (argv + i).pointee))
+            }
+            let obj = procCallback(args)
+            // TODO: exceptions etc.
+            return obj.withRubyValue { $0 }
+
+        case let .value(procValue):
+            // Ruby Proc.  Use the API to call it.
+            if let value = try? RbVM.doProtect(call: {
+                rbb_proc_call_with_block_protect(procValue, argc, argv, blockArg, nil)
+            }) {
+                return value
+            }
+            // TODO: handle this
+            return Qnil
         }
-        let obj = procCallback(args)
-        return obj.withRubyValue { $0 }
-
-    case let .value(procValue):
-        if let value = try? RbVM.doProtect(call: {
-            rbb_proc_call_with_block_protect(procValue, argc, argv, blockarg, nil)
-        }) {
-            return value
-        }
-        // TODO!
-        return Qnil
     }
 }
 
-// -> enum and make the magic happen at `rubyObject` time.
+/// The callback from Ruby for all blocks + procs we get involved in.
+private func rbproc_block_callback(yielded_arg: VALUE,
+                                   rawContext: UnsafeMutableRawPointer,
+                                   argc: Int32, argv: UnsafePointer<VALUE>,
+                                   blockArg: VALUE) -> VALUE {
+    let context = RbProcContext.from(raw: rawContext)
+    return context.invoke(argc: argc, argv: argv, blockArg: blockArg)
+}
+
+// MARK: - Utilities for setting up Proc callbacks
+
+/// Enum for namespace
+internal enum RbProcUtils {
+
+    /// Call a method on an object passing a Swift closure as its block
+    internal static func doBlockCall(value: VALUE, methodId: ID, argValues: [VALUE], procCallback: RbProcCallback) throws -> VALUE {
+        return try withoutActuallyEscaping(procCallback) { escapable in
+            let context = RbProcContext(procCallback: escapable)
+            return try doBlockCall(value: value, methodId: methodId, argValues: argValues, procContext: context)
+        }
+    }
+
+    /// Call a method on an object passing a Proc object as its block
+    internal static func doBlockCall(value: VALUE, methodId: ID, argValues: [VALUE], procValue: VALUE) throws -> VALUE {
+        let context = RbProcContext(procValue: procValue)
+        return try doBlockCall(value: value, methodId: methodId, argValues: argValues, procContext: context)
+    }
+
+    /// Call a method on an object passing something as a block.
+    private static func doBlockCall(value: VALUE, methodId: ID, argValues: [VALUE], procContext: RbProcContext) throws -> VALUE {
+        return try procContext.withRaw { rawContext in
+            try RbVM.doProtect {
+                rbb_block_call_protect(value, methodId,
+                                       Int32(argValues.count), argValues,
+                                       rbproc_block_callback, rawContext,
+                                       nil)
+            }
+        }
+    }
+
+    /// Create a Proc object from a Swift closure
+    fileprivate static func makeProc(procCallback: @escaping RbProcCallback) throws -> RbObject {
+        let context = RbProcContext(procCallback: procCallback)
+        let procValue = try context.withRaw { rawContext in
+            try RbVM.doProtect {
+                rbb_proc_new_protect(rbproc_block_callback, rawContext, nil)
+            }
+        }
+        let procObject = RbObject(rubyValue: procValue)
+        procObject.associate(object: context)
+        return procObject
+    }
+}
+
+// MARK: - RbProc
+
+/// A Ruby Proc.
+///
+/// Use this to create a Ruby `Proc` object from either a symbol (or any
+/// Ruby object supporting `to_proc`) or a Swift closure.
+///
+/// The first form is most useful when passing a block to a method:
+/// ```swift
+/// // Ruby: mapped = names.map(&:downcase)
+/// let mapped = names.call("map", block: RbProc(RbSymbol("downcase")))
+/// ```
+///
+/// The second form is for when you need to pass an explicit `Proc`
+/// implemented in Swift:
+/// ```swift
+/// let myProc = RbProc() { args in
+///     args.forEach { doSomething(String($0)) }
+///     return .nilObject
+/// }
+///
+/// myRubyObj.set("responseProc", args: [myProc])
+/// ```
+///
+/// If you want to pass Swift code to a method as a block then just call
+/// `RbObjectAccess.call(_:args:kwArgs:block:)` directly, no need for an
+/// `RbProc`.
 public enum RbProc: RbObjectConvertible {
 
+    /// A proc implemented via a Ruby value :nodoc:
     case rubyObject(RbObjectConvertible)
-    case callback(ProcCallback)
+    /// A proc implemented by a Swift closure :nodoc:
+    case callback(RbProcCallback)
 
     /// Create from a Ruby object.
     public init(object: RbObjectConvertible) {
@@ -102,68 +191,52 @@ public enum RbProc: RbObjectConvertible {
     }
 
     /// Create from a Swift closure.
-    public init(callback: @escaping ProcCallback) {
+    public init(callback: @escaping RbProcCallback) {
         self = .callback(callback)
     }
 
     /// Try to create an `RbProc` from an `RbObject`.
-    /// Always succeeds
-    /// :nodoc:
+    /// Succeeds if the object can be used as a Proc (has `to_proc`).
     public init?(_ value: RbObject) {
+        guard (try? value.call("respond_to", args: ["to_proc"])) != nil else {
+            return nil
+        }
         self.init(object: value)
     }
 
     /// A Ruby object for the Proc
+    ///
+    /// - warning: You must be sure that Ruby code does not use this Proc after
+    ///   the returned `RbObject` has been deallocated.  This normally happens naturally
+    ///   but if you are wrapping a Swift closure to pass to a Ruby service that retains
+    ///   the Proc for later use, watch out.  Part of the mechanics of invoking the Swift
+    ///   closure is tied to the `RbObject` and the program is likely to crash or worse
+    ///   if it has been deallocated when the Proc is called.
     public var rubyObject: RbObject {
         guard Ruby.softSetup() else {
             return .nilObject
         }
         switch self {
         case let .callback(callback):
-            let context = RbProcContext(procCallback: callback)
-            guard let procValue = try? RbProc.makeProc(context: context) else {
-                return .nilObject
-            }
-            let rbObject = RbObject(rubyValue: procValue)
-            rbObject.associate(object: context)
-            return rbObject
+            return (try? RbProcUtils.makeProc(procCallback: callback)) ?? .nilObject
 
-        default:
-            fatalError("bang")
+        case let .rubyObject(convertible):
+            // TODO: get object, to_proc it
+            fatalError("bang: \(convertible)")
         }
     }
+}
 
-    fileprivate static func makeProc(context: RbProcContext) throws -> VALUE {
-        return try context.withRaw { rawContext in
-            try RbVM.doProtect {
-                rbb_proc_new_protect(rbproc_block_callback, rawContext, nil)
-            }
-        }
-    }
+// MARK: - CustomStringConvertible
 
-    internal static func doBlockCall(value: VALUE, methodId: ID, argValues: [VALUE], procCallback: ProcCallback) throws -> VALUE {
-        return try withoutActuallyEscaping(procCallback) { escapable in
-            let context = RbProcContext(procCallback: escapable)
-            return try context.withRaw { rawContext in
-                try RbVM.doProtect {
-                    rbb_block_call_protect(value, methodId,
-                                           Int32(argValues.count), argValues,
-                                           rbproc_block_callback, rawContext,
-                                           nil)
-                }
-            }
-        }
-    }
-
-    internal static func doBlockCall(value: VALUE, methodId: ID, argValues: [VALUE], procValue: VALUE) throws -> VALUE {
-        let context = RbProcContext(procValue: procValue)
-        return try context.withRaw { rawContext in
-            try RbVM.doProtect {
-                rbb_block_call_protect(value, methodId,
-                                       Int32(argValues.count), argValues,
-                                       rbproc_block_callback, rawContext,
-                                       nil)
-            }
+extension RbProc: CustomStringConvertible {
+    /// A textual representation of the `RbProc`
+    public var description: String {
+        switch self {
+        case .callback:
+            return "RbProc(swift closure)"
+        case .rubyObject:
+            return "RbProc(ruby object)"
         }
     }
 }
