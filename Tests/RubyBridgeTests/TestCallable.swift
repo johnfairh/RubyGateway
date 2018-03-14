@@ -196,6 +196,22 @@ class TestCallable: XCTestCase {
         }
     }
 
+    // call with a Proc'd Swift block
+    func testCallWithProcBlock() {
+        let obj = getNewMethodTest()
+
+        do {
+            let proc = RbProc() { args in
+                print("args.count = \(args.count)")
+                return .nilObject
+            }
+            let res = try obj.call("yielder", block: proc)
+            print("res: \(res)")
+        } catch {
+            XCTFail("Unexpected exception: \(error)")
+        }
+    }
+
     static var allTests = [
         ("testCallGlobal", testCallGlobal),
         ("testCallGlobalFailure", testCallGlobalFailure),

@@ -93,6 +93,8 @@ typedef enum {
     RBB_JOB_TO_ULONG,
     RBB_JOB_TO_LONG,
     RBB_JOB_TO_DOUBLE,
+    RBB_JOB_PROC_NEW,
+    RBB_JOB_PROC_CALL,
 } Rbb_job;
 
 typedef struct {
@@ -103,11 +105,12 @@ typedef struct {
 
     bool          loadWrap;
     const char   *internName;
-    int           funcallvArgc;
-    const VALUE  *funcallvArgv;
+    int           argc;
+    const VALUE  *argv;
     double        toDoubleResult;
-    Rbb_swift_block_call blockcallCall;
-    void                *blockcallContext;
+    Rbb_swift_block_call block;
+    void                *blockContext;
+    VALUE                blockArg;
 } Rbb_protect_data;
 
 #define RBB_PDATA_TO_VALUE(pdata) ((uintptr_t)(void *)(pdata))
@@ -136,10 +139,10 @@ static VALUE rbb_protect_thunk(VALUE value)
         rc = rb_const_get_at(d->value, d->id);
         break;
     case RBB_JOB_FUNCALLV:
-        rc = rb_funcallv(d->value, d->id, d->funcallvArgc, d->funcallvArgv);
+        rc = rb_funcallv(d->value, d->id, d->argc, d->argv);
         break;
     case RBB_JOB_BLOCK_CALL:
-        rc = rb_block_call(d->value, d->id, d->funcallvArgc, d->funcallvArgv, d->blockcallCall, (VALUE) d->blockcallContext);
+        rc = rb_block_call(d->value, d->id, d->argc, d->argv, d->block, (VALUE) d->blockContext);
         break;
     case RBB_JOB_CVAR_GET:
         rc = rb_cvar_get(d->value, d->id);
@@ -152,6 +155,12 @@ static VALUE rbb_protect_thunk(VALUE value)
         break;
     case RBB_JOB_TO_DOUBLE:
         d->toDoubleResult = NUM2DBL(rb_Float(d->value));
+        break;
+    case RBB_JOB_PROC_NEW:
+        rc = rb_proc_new(d->block, (VALUE) d->blockContext);
+        break;
+    case RBB_JOB_PROC_CALL:
+        rc = rb_proc_call_with_block(d->value, d->argc, d->argv, d->blockArg);
         break;
     }
     return rc;
@@ -213,10 +222,11 @@ VALUE rbb_funcallv_protect(VALUE value, ID id,
                            int * _Nullable status)
 {
     Rbb_protect_data data = { .job = RBB_JOB_FUNCALLV, .value = value, .id = id,
-                              .funcallvArgc = argc, .funcallvArgv = argv };
+                              .argc = argc, .argv = argv };
     return rbb_protect(&data, status);
 }
 
+// rb_block_call - run arbitrary code twice
 VALUE rbb_block_call_protect(VALUE value, ID id,
                              int argc, const VALUE * _Nonnull argv,
                              Rbb_swift_block_call _Nonnull block,
@@ -224,8 +234,8 @@ VALUE rbb_block_call_protect(VALUE value, ID id,
                              int * _Nullable status)
 {
     Rbb_protect_data data = { .job = RBB_JOB_BLOCK_CALL, .value = value, .id = id,
-        .funcallvArgc = argc, .funcallvArgv = argv,
-        .blockcallCall = block, .blockcallContext = context };
+                              .argc = argc, .argv = argv,
+                              .block = block, .blockContext = context };
     return rbb_protect(&data, status);
 }
 
@@ -311,4 +321,24 @@ double rbb_obj2double_protect(VALUE v, int * _Nullable status)
     Rbb_protect_data data = { .job = RBB_JOB_TO_DOUBLE, .value = v };
     rbb_protect(&data, status);
     return data.toDoubleResult;
+}
+
+// rb_proc_new - raises in various conditions.
+VALUE rbb_proc_new_protect(Rbb_swift_block_call _Nonnull block,
+                           void * _Nonnull context,
+                           int * _Nullable status)
+{
+    Rbb_protect_data data = { .job = RBB_JOB_PROC_NEW, .block = block, .blockContext = context };
+    return rbb_protect(&data, status);
+}
+
+// rb_proc_call - arbitrary code
+VALUE rbb_proc_call_with_block_protect(VALUE value,
+                                       int argc, const VALUE * _Nonnull argv,
+                                       VALUE blockArg,
+                                       int * _Nullable status)
+{
+    Rbb_protect_data data = { .job = RBB_JOB_PROC_CALL, .value = value,
+        .argc = argc, .argv = argv, .blockArg = blockArg };
+    return rbb_protect(&data, status);
 }

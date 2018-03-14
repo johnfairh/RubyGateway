@@ -59,6 +59,17 @@ VALUE rbb_block_call_protect(VALUE value, ID id,
                              void * _Nonnull context,
                              int * _Nullable status);
 
+/// Safely call `rb_proc_new` and report exception status.
+VALUE rbb_proc_new_protect(Rbb_swift_block_call _Nonnull block,
+                           void * _Nonnull context,
+                           int * _Nullable status);
+
+/// Safely call `rb_proc_call_with_block` and report exception status.
+VALUE rbb_proc_call_with_block_protect(VALUE value,
+                                       int argc, const VALUE * _Nonnull argv,
+                                       VALUE blockArg,
+                                       int * _Nullable status);
+
 /// Safely call `rb_cvar_get` and report exception status.
 VALUE rbb_cvar_get_protect(VALUE clazz, ID id, int * _Nullable status);
 

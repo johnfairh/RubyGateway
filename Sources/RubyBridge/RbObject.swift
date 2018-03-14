@@ -71,6 +71,9 @@ import RubyBridgeHelpers
 public final class RbObject: RbObjectAccess {
     private let valueBox: UnsafeMutablePointer<Rbb_value>
 
+    /// Swift objects whose lifetimes need to be tied to this `RbObject`
+    private var associatedObjects: [AnyObject]?
+
     /// Wrap up a Ruby object using the its `VALUE` API handle.
     ///
     /// The Ruby object is kept safe from garbage collection until
@@ -95,12 +98,24 @@ public final class RbObject: RbObjectAccess {
     /// ```
     public init(_ value: RbObject) {
         valueBox = rbb_value_dup(value.valueBox);
+        associatedObjects = value.associatedObjects
         let rubyValue = valueBox.pointee.value
         super.init(getValue: { rubyValue })
     }
 
-    /// Allow the tracked object to be GCed when we go out of scope.
+    /// Add a Swift object to be forgotten about when this one is.
+    func associate(object: AnyObject) {
+        if var associatedObjects = associatedObjects {
+            associatedObjects.append(object)
+        } else {
+            associatedObjects = [object]
+        }
+    }
+
+    /// Allow the tracked Ruby object to be GCed when we go out of scope.
+    /// Also allow any associated Swift objects to be freed.
     deinit {
+        associatedObjects = nil
         rbb_value_free(valueBox)
     }
 

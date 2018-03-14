@@ -247,7 +247,30 @@ extension RbObjectAccess {
         }
 
         return RbObject(rubyValue: resultVal)
+    }
 
+    /// Start sketching version of call accepting Ruby proc as block.
+    @discardableResult
+    public func call(_ methodName: String,
+                     args: [RbObjectConvertible] = [],
+                     kwArgs: [(String, RbObjectConvertible)] = [],
+                     block: RbObjectConvertible) throws -> RbObject {
+        try Ruby.setup()
+        let methodId = try Ruby.getID(for: methodName)
+        var argObjects = args.map { $0.rubyObject }
+
+        if kwArgs.count > 0 {
+            try argObjects.append(buildKwArgsHash(from: kwArgs))
+        }
+
+        let resultVal = try block.rubyObject.withRubyValue { procValue in
+            try argObjects.withRubyValues {
+                try RbProc.doBlockCall(value: getValue(), methodId: methodId,
+                                       argValues: $0, procValue: procValue)
+            }
+        }
+
+        return RbObject(rubyValue: resultVal)
     }
 
 
