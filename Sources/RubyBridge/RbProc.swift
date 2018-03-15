@@ -37,7 +37,7 @@ import RubyBridgeHelpers
 
 /// The type of a Proc or block implemented in Swift.
 ///
-/// See `RbProc` and `RbObjectAccess.call(_:args:kwArgs:block:)`.
+/// See `RbProc` and `RbObjectAccess.call(_:args:kwArgs:block:blockCall:)`.
 public typealias RbProcCallback = ([RbObject]) -> RbObject
 
 // MARK: - Swift -> Ruby -> Swift call context
@@ -112,11 +112,9 @@ private func rbproc_block_callback(yielded_arg: VALUE,
 internal enum RbProcUtils {
 
     /// Call a method on an object passing a Swift closure as its block
-    internal static func doBlockCall(value: VALUE, methodId: ID, argValues: [VALUE], procCallback: RbProcCallback) throws -> VALUE {
-        return try withoutActuallyEscaping(procCallback) { escapable in
-            let context = RbProcContext(procCallback: escapable)
-            return try doBlockCall(value: value, methodId: methodId, argValues: argValues, procContext: context)
-        }
+    internal static func doBlockCall(value: VALUE, methodId: ID, argValues: [VALUE], procCallback: @escaping RbProcCallback) throws -> VALUE {
+        let context = RbProcContext(procCallback: procCallback)
+        return try doBlockCall(value: value, methodId: methodId, argValues: argValues, procContext: context)
     }
 
     /// Call a method on an object passing a Proc object as its block
@@ -176,8 +174,8 @@ internal enum RbProcUtils {
 /// ```
 ///
 /// If you want to pass Swift code to a method as a block then just call
-/// `RbObjectAccess.call(_:args:kwArgs:block:)` directly, no need for an
-/// `RbProc`.
+/// `RbObjectAccess.call(_:args:kwArgs:blockCall:)` directly, no need for
+/// an `RbProc`.
 public enum RbProc: RbObjectConvertible {
 
     /// A proc implemented via a Ruby value :nodoc:

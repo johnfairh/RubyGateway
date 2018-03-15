@@ -163,6 +163,24 @@ public final class RbObject: RbObjectAccess {
     public static let nilObject = RbObject(rubyValue: Qnil)
 }
 
+// MARK: - In-module utility
+
+extension RbObject {
+    /// Check object is a symbol
+    func checkIsSymbol() throws {
+        guard rubyType == .T_SYMBOL else {
+            throw RbError.badType("Expected T_SYMBOL, got \(rubyType.rawValue) \(self)")
+        }
+    }
+
+    /// Check object is a proc
+    func checkIsProc() throws {
+        guard rb_obj_is_proc(rubyValue) == Qtrue else {
+            throw RbError.badType("Expected proc, actual type: \(rubyType)")
+        }
+    }
+}
+
 // MARK: - Useful Initializers
 
 extension RbObject {
