@@ -37,26 +37,24 @@ import RubyBridgeHelpers
 
 /// The type of a Proc or block implemented in Swift.
 ///
-/// See `RbProc` and `RbObjectAccess.call(_:args:kwArgs:block:blockCall:)`.
+/// See `RbProc` and `RbObjectAccess.call(_:args:kwArgs:blockCall:)`.
 public typealias RbProcCallback = ([RbObject]) -> RbObject
 
 // MARK: - Swift -> Ruby -> Swift call context
 
+/// Some code to be run
+enum RbProcCallType {
+    case callback(RbProcCallback)
+    case value(VALUE)
+}
+
 /// Context passed to block callbacks, wrapping up either a Swift closure
 /// or a Ruby Proc to pass on control to.
 private class RbProcContext {
-    private enum CallType {
-        case callback(RbProcCallback)
-        case value(VALUE)
-    }
-    private let type: CallType
+    private let type: RbProcCallType
 
-    init(procCallback: @escaping RbProcCallback) {
-        type = .callback(procCallback)
-    }
-
-    init(procValue: VALUE) {
-        type = .value(procValue)
+    init(_ type: RbProcCallType) {
+        self.type = type
     }
 
     /// Call a function passing it a `void *` representation of the `RbProcContext`
@@ -111,21 +109,10 @@ private func rbproc_block_callback(yielded_arg: VALUE,
 /// Enum for namespace
 internal enum RbProcUtils {
 
-    /// Call a method on an object passing a Swift closure as its block
-    internal static func doBlockCall(value: VALUE, methodId: ID, argValues: [VALUE], procCallback: @escaping RbProcCallback) throws -> VALUE {
-        let context = RbProcContext(procCallback: procCallback)
-        return try doBlockCall(value: value, methodId: methodId, argValues: argValues, procContext: context)
-    }
-
-    /// Call a method on an object passing a Proc object as its block
-    internal static func doBlockCall(value: VALUE, methodId: ID, argValues: [VALUE], procValue: VALUE) throws -> VALUE {
-        let context = RbProcContext(procValue: procValue)
-        return try doBlockCall(value: value, methodId: methodId, argValues: argValues, procContext: context)
-    }
-
-    /// Call a method on an object passing something as a block.
-    private static func doBlockCall(value: VALUE, methodId: ID, argValues: [VALUE], procContext: RbProcContext) throws -> VALUE {
-        return try procContext.withRaw { rawContext in
+    /// Call a method on an object passing something as its block
+    internal static func doBlockCall(value: VALUE, methodId: ID, argValues: [VALUE], block: RbProcCallType) throws -> VALUE {
+        let context = RbProcContext(block)
+        return try context.withRaw { rawContext in
             try RbVM.doProtect {
                 rbb_block_call_protect(value, methodId,
                                        Int32(argValues.count), argValues,
@@ -137,7 +124,7 @@ internal enum RbProcUtils {
 
     /// Create a Proc object from a Swift closure
     fileprivate static func makeProc(procCallback: @escaping RbProcCallback) throws -> RbObject {
-        let context = RbProcContext(procCallback: procCallback)
+        let context = RbProcContext(.callback(procCallback))
         let procValue = try context.withRaw { rawContext in
             try RbVM.doProtect {
                 rbb_proc_new_protect(rbproc_block_callback, rawContext, nil)
@@ -207,9 +194,9 @@ public enum RbProc: RbObjectConvertible {
     /// - warning: You must be sure that Ruby code does not use this Proc after
     ///   the returned `RbObject` has been deallocated.  This normally happens naturally
     ///   but if you are wrapping a Swift closure to pass to a Ruby service that retains
-    ///   the Proc for later use, watch out.  Part of the mechanics of invoking the Swift
-    ///   closure is tied to the `RbObject` and the program is likely to crash or worse
-    ///   if it has been deallocated when the Proc is called.
+    ///   the Proc for later use, then watch out.  Parts of the mechanics of invoking the
+    ///   Swift closure are tied to the `RbObject` and the program is likely to crash or
+    ///   worse if it has been deallocated when the Proc is called.
     public var rubyObject: RbObject {
         guard Ruby.softSetup() else {
             return .nilObject

@@ -38,13 +38,14 @@ import RubyBridgeHelpers
 /// ...to:
 /// ```swift
 /// do {
-///     result = try obj.call(.symbol(myMethodSymbol),
-///                           args: [1, "3.5", myHash],
-///                           kwArgs: [("mode", RbSymbol("debug")]) { blockArgs in
-///                               blockArgs.each {
-///                                   process($0)
-///                               }
+///     let result =
+///          try obj.call(myMethodSymbol,
+///                       args: [1, "3.5", myHash],
+///                       kwArgs: [("mode", RbSymbol("debug")]) { blockArgs in
+///                           blockArgs.each {
+///                               process($0)
 ///                           }
+///                       }
 /// } catch RbError.rubyException(let exn) {
 ///     handleErrors(error)
 /// } catch {
@@ -186,29 +187,6 @@ extension RbObjectAccess {
     }
 }
 
-//public enum RbMethodSpec: RbMethodSpecConvertible, ExpressibleByStringLiteral {
-//    case name(String)
-//    case symbol(RbObjectConvertible)
-//
-//    var methodSpec: RbMethodSpec {
-//        return self
-//    }
-//
-//    public init(stringLiteral value: String) { /// need this if have S:RMSC?
-//        self = .name(value)
-//    }
-//}
-//
-//protocol RbMethodSpecConvertible {
-//    var methodSpec: RbMethodSpec { get }
-//}
-//
-//extension String: RbMethodSpecConvertible {
-//    var methodSpec: RbMethodSpec {
-//        return .name(self)
-//    }
-//}
-
 // MARK: - Method Call
 
 extension RbObjectAccess {
@@ -281,12 +259,53 @@ extension RbObjectAccess {
     /// - parameter symbol: The symbol for the name of the method to call.
     /// - parameter args: The positional arguments to the method.  None by default.
     /// - parameter kwArgs: The keyword arguments to the method.  None by default.
-    /// - parameter block: A Ruby proc to pass as a block to the method, or `nil`
-    ///             indicating no Ruby proc.  Default `nil`.  Do not set both this
-    ///             and `blockCall`.
-    /// - parameter blockCall: Swift code to pass as a block to the method, or `nil`
-    ///             indicating no Swift block.  Default `nil`.  Do not set both this
-    ///             and `block`.
+    /// - returns: The result of calling the method.
+    /// - throws: `RbError.rubyException` if there is a Ruby exception.
+    ///           `RbError.badType` if `symbol` is not a symbol.
+    ///           `RbError.duplicateKwArg` if there are duplicate keywords in `kwArgs`.
+    ///
+    /// For a version that does not throw, see `failable`.
+    @discardableResult
+    public func call(symbol: RbObjectConvertible,
+                     args: [RbObjectConvertible] = [],
+                     kwArgs: [(String, RbObjectConvertible)] = []) throws -> RbObject {
+        try Ruby.setup()
+        return try symbol.rubyObject.withSymbolId { methodId in
+            try doCall(id: methodId, args: args, kwArgs: kwArgs, block: nil, blockCall: nil)
+        }
+    }
+
+    /// Call a Ruby object method using a symbol passing Swift code as a block.
+    ///
+    /// - parameter symbol: The symbol for the name of the method to call.
+    /// - parameter args: The positional arguments to the method.  None by default.
+    /// - parameter kwArgs: The keyword arguments to the method.  None by default.
+    /// - parameter blockCall: Swift code to pass as a block to the method.
+    /// - returns: The result of calling the method.
+    /// - throws: `RbError.rubyException` if there is a Ruby exception.
+    ///           `RbError.badType` if `symbol` is not a symbol.
+    ///           `RbError.duplicateKwArg` if there are duplicate keywords in `kwArgs`.
+    ///
+    /// For a version that does not throw, see `failable`.
+    @discardableResult
+    public func call(symbol: RbObjectConvertible,
+                     args: [RbObjectConvertible] = [],
+                     kwArgs: [(String, RbObjectConvertible)] = [],
+                     blockCall: RbProcCallback) throws -> RbObject {
+        try Ruby.setup()
+        return try symbol.rubyObject.withSymbolId { methodId in
+            try withoutActuallyEscaping(blockCall) { escapingBlockCall in
+                try doCall(id: methodId, args: args, kwArgs: kwArgs, block: nil, blockCall: escapingBlockCall)
+            }
+        }
+    }
+
+    /// Call a Ruby object method using a symbol passing a Ruby Proc as a block.
+    ///
+    /// - parameter symbol: The symbol for the name of the method to call.
+    /// - parameter args: The positional arguments to the method.  None by default.
+    /// - parameter kwArgs: The keyword arguments to the method.  None by default.
+    /// - parameter block: A Ruby proc to pass as a block to the method.
     /// - returns: The result of calling the method.
     /// - throws: `RbError.rubyException` if there is a Ruby exception.
     ///           `RbError.badType` if `symbol` is not a symbol.
@@ -298,13 +317,10 @@ extension RbObjectAccess {
     public func call(symbol: RbObjectConvertible,
                      args: [RbObjectConvertible] = [],
                      kwArgs: [(String, RbObjectConvertible)] = [],
-                     block: RbObjectConvertible? = nil,
-                     blockCall: RbProcCallback? = nil) throws -> RbObject {
+                     block: RbObjectConvertible) throws -> RbObject {
         try Ruby.setup()
-        let symbolObj = symbol.rubyObject
-        try symbolObj.checkIsSymbol()
-        return try symbolObj.withRubyValue { symValue in
-            try doCall(id: rb_sym2id(symValue), args: args, kwArgs: kwArgs, block: block, blockCall: blockCall)
+        return try symbol.rubyObject.withSymbolId { methodId in
+            try doCall(id: methodId, args: args, kwArgs: kwArgs, block: block, blockCall: nil)
         }
     }
 
@@ -335,12 +351,12 @@ extension RbObjectAccess {
             if let blockCall = blockCall {
                 return try RbProcUtils.doBlockCall(value: getValue(), methodId: id,
                                                    argValues: argValues,
-                                                   procCallback: blockCall)
+                                                   block: .callback(blockCall))
             } else if let blockObj = blockObj {
                 return try blockObj.withRubyValue { blockValue in
                     try RbProcUtils.doBlockCall(value: getValue(), methodId: id,
                                                 argValues: argValues,
-                                                procValue: blockValue)
+                                                block: .value(blockValue))
                 }
             }
             return try RbVM.doProtect {

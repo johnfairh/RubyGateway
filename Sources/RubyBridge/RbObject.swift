@@ -173,6 +173,12 @@ extension RbObject {
         }
     }
 
+    /// Get the 'id' associated with this symbol object
+    func withSymbolId<T>(call: (ID) throws -> T) throws -> T {
+        try checkIsSymbol()
+        return try call(rb_sym2id(rubyValue))
+    }
+
     /// Check object is a proc
     func checkIsProc() throws {
         guard rb_obj_is_proc(rubyValue) == Qtrue else {
