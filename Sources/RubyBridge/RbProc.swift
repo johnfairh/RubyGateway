@@ -183,7 +183,8 @@ public enum RbProc: RbObjectConvertible {
     /// Try to create an `RbProc` from an `RbObject`.
     /// Succeeds if the object can be used as a Proc (has `to_proc`).
     public init?(_ value: RbObject) {
-        guard (try? value.call("respond_to", args: ["to_proc"])) != nil else {
+        guard let obj = try? value.call("respond_to?", args: ["to_proc"]),
+            obj.isTruthy else {
             return nil
         }
         self.init(object: value)

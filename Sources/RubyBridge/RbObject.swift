@@ -105,8 +105,8 @@ public final class RbObject: RbObjectAccess {
 
     /// Add a Swift object to be forgotten about when this one is.
     func associate(object: AnyObject) {
-        if var associatedObjects = associatedObjects {
-            associatedObjects.append(object)
+        if associatedObjects != nil {
+            associatedObjects?.append(object)
         } else {
             associatedObjects = [object]
         }

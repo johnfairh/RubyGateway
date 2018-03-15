@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import RubyBridge
+@testable /* checkIsProc */ import RubyBridge
 
 /// Proc tests
 class TestProcs: XCTestCase {
@@ -34,7 +34,42 @@ class TestProcs: XCTestCase {
         }
     }
 
+    /// Proc detection
+    func testNotProc() {
+        let proc = RbProc() { args in .nilObject }
+        print(proc)
+        let object = proc.rubyObject
+        do {
+            try object.checkIsProc()
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+        do {
+            try RbObject.nilObject.checkIsProc()
+            XCTFail("Believe nil is proc")
+        } catch RbError.badType(_) {
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+    }
+
+    /// Failable proc conversion
+    func testProcConversion() {
+        if let nilProc = RbProc(RbObject.nilObject) {
+            XCTFail("Managed to wrap 'nil' in a proc: \(nilProc)")
+            return
+        }
+
+        guard let symproc = RbProc(RbSymbol("something").rubyObject) else {
+            XCTFail("Couldn't recognize symbol as to_proc supporting")
+            return
+        }
+        print(symproc)
+    }
+
     static var allTests = [
-        ("testCall", testCall)
+        ("testCall", testCall),
+        ("testNotProc", testNotProc),
+        ("testProcConversion", testProcConversion)
     ]
 }

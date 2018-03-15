@@ -131,6 +131,34 @@ class TestRbObject: XCTestCase {
         XCTAssertTrue(objstr1 < objstr2)
     }
 
+    // assoc objects
+    static var testObjDeinitCount = 0
+
+    class TestObj {
+        private let name: String
+        init(_ name: String) {
+            self.name = name
+        }
+        deinit {
+            TestRbObject.testObjDeinitCount += 1
+        }
+    }
+
+    func testAssociatedObjects() {
+        var obj: RbObject? = RbObject(24)
+        TestRbObject.testObjDeinitCount = 0
+        do {
+            let t1 = TestObj("a")
+            obj?.associate(object: t1)
+
+            let t2 = TestObj("b")
+            obj?.associate(object: t2)
+        }
+        XCTAssertEqual(0, TestRbObject.testObjDeinitCount)
+        obj = nil
+        XCTAssertEqual(2, TestRbObject.testObjDeinitCount)
+    }
+
     static var allTests = [
         ("testSimple", testSimple),
         ("testObject", testObject),
@@ -140,6 +168,7 @@ class TestRbObject: XCTestCase {
         ("testNewInstance", testNewInstance),
         ("testSymbols", testSymbols),
         ("testHashing", testHashing),
-        ("testComparable", testComparable)
+        ("testComparable", testComparable),
+        ("testAssociatedObjects", testAssociatedObjects)
     ]
 }

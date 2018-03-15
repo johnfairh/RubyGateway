@@ -181,8 +181,11 @@ class TestVM: XCTestCase {
     func testVersion() {
         let version = Ruby.version
         let description = Ruby.versionDescription
+        let (mj, mn, _) = Ruby.apiVersion
 
         XCTAssertTrue(description.contains(version))
+        XCTAssertEqual(2, mj)
+        XCTAssertTrue(version.starts(with: "\(mj).\(mn)"))
     }
 
     /// Setup failure
@@ -226,8 +229,9 @@ class TestVM: XCTestCase {
         let intObj: RbObject = -200
         let dblObj: RbObject = 100.2
         let symObj = RbObject(RbSymbol("test"))
+        let procObj = RbProc(callback: { args in .nilObject }).rubyObject
 
-        [strObj, uintObj, intObj, dblObj, symObj].forEach { obj in
+        [strObj, uintObj, intObj, dblObj, symObj, procObj].forEach { obj in
             XCTAssertTrue(obj.isNil)
         }
     }

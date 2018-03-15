@@ -64,6 +64,70 @@ class TestFailable: XCTestCase {
         }
     }
 
+    // Blocks - Swift
+    func testBlockCalls() {
+        setup()
+
+        let inst = getInstance()
+
+        guard let _ = inst.failable.call("give_name", blockCall: { args in
+            XCTAssertEqual("barney", String(args[0]))
+            return .nilObject
+        }) else {
+            XCTFail("Couldn't pass block")
+            return
+        }
+
+        if let res = inst.failable.call("always_raise", blockCall: { args in .nilObject }) {
+            XCTFail("Managed to avoid raise: \(res)")
+            return
+        }
+
+        // symbol
+        guard let _ = inst.failable.call(symbol: RbSymbol("give_name"), blockCall: { args in
+            XCTAssertEqual("barney", String(args[0]))
+            return .nilObject
+        }) else {
+            XCTFail("Couldn't pass block")
+            return
+        }
+
+        if let res = inst.failable.call(symbol: RbSymbol("always_raise"), blockCall: { args in .nilObject }) {
+            XCTFail("Managed to avoid raise: \(res)")
+            return
+        }
+    }
+
+    // Blocks - Proc
+    func testBlockProcCalls() {
+        setup()
+
+        let inst = getInstance()
+
+        let proc = RbProc() { args in .nilObject }
+
+        guard let _ = inst.failable.call("give_name", block: proc) else {
+            XCTFail("Couldn't pass proc")
+            return
+        }
+
+        if let res = inst.failable.call("always_raise", block: proc) {
+            XCTFail("Managed to avoid raise: \(res)")
+            return
+        }
+
+        // symbol
+        guard let _ = inst.failable.call(symbol: RbSymbol("give_name"), block: proc) else {
+            XCTFail("Couldn't pass block")
+            return
+        }
+
+        if let res = inst.failable.call(symbol: RbSymbol("always_raise"), block: proc) {
+            XCTFail("Managed to avoid raise: \(res)")
+            return
+        }
+    }
+
     // ivars
     func testIvars() {
         setup()
@@ -145,6 +209,8 @@ class TestFailable: XCTestCase {
     static var allTests = [
         ("testConstants", testConstants),
         ("testCallAttrs", testCallAttrs),
+        ("testBlockCalls", testBlockCalls),
+        ("testBlockProcCalls", testBlockProcCalls),
         ("testIvars", testIvars),
         ("testCvars", testCvars),
         ("testGlobals", testGlobals)
