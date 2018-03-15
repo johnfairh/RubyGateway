@@ -186,11 +186,25 @@ class TestCallable: XCTestCase {
         let obj = getNewMethodTest()
 
         do {
+            let expectedRes = "answer"
+
             let res = try obj.call("yielder") { args in
-                print("args.count = \(args.count)")
-                return .nilObject
+                XCTAssertEqual(2, args.count)
+                XCTAssertEqual(22, Int(args[0]))
+                XCTAssertEqual("fish", String(args[1]))
+                return RbObject(expectedRes)
             }
-            print("res: \(res)")
+            XCTAssertEqual(expectedRes, String(res))
+
+            // sym version
+            let res2 = try obj.call(symbol: RbSymbol("yielder")) { args in
+                XCTAssertEqual(2, args.count)
+                XCTAssertEqual(22, Int(args[0]))
+                XCTAssertEqual("fish", String(args[1]))
+                return RbObject(expectedRes)
+            }
+            XCTAssertEqual(expectedRes, String(res2))
+
         } catch {
             XCTFail("Unexpected exception: \(error)")
         }
@@ -201,12 +215,19 @@ class TestCallable: XCTestCase {
         let obj = getNewMethodTest()
 
         do {
+            let expectedRes = "answer"
             let proc = RbProc() { args in
-                print("args.count = \(args.count)")
-                return .nilObject
+                XCTAssertEqual(2, args.count)
+                XCTAssertEqual(22, Int(args[0]))
+                XCTAssertEqual("fish", String(args[1]))
+                return RbObject(expectedRes)
             }
             let res = try obj.call("yielder", block: proc)
-            print("res: \(res)")
+            XCTAssertEqual(expectedRes, String(res))
+
+            // sym version
+            let res2 = try obj.call(symbol: RbSymbol("yielder"), block: proc)
+            XCTAssertEqual(expectedRes, String(res2))
         } catch {
             XCTFail("Unexpected exception: \(error)")
         }
@@ -224,6 +245,8 @@ class TestCallable: XCTestCase {
         ("testKwArgs", testKwArgs),
         ("testDupKwArgs", testDupKwArgs),
         ("testCallViaSymbol", testCallViaSymbol),
-        ("testCallViaSymbolNotSymbol", testCallViaSymbolNotSymbol)
+        ("testCallViaSymbolNotSymbol", testCallViaSymbolNotSymbol),
+        ("testCallWithBlock", testCallWithBlock),
+        ("testCallWithProcBlock", testCallWithProcBlock)
     ]
 }

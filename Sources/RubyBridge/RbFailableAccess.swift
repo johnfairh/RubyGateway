@@ -61,6 +61,40 @@ extension RbFailableAccess {
         return try? access.call(method, args: args, kwArgs: kwArgs)
     }
 
+    /// Call a method of a Ruby object passing Swift code as a block.
+    ///
+    /// This is a non-throwing version of `RbObjectAccess.call(_:args:kwArgs:blockCall:)`.
+    /// See `RbError.history` to retrieve error details.
+    ///
+    /// - parameter method: The name of the method to call.
+    /// - parameter args: The positional arguments to the method, none by default.
+    /// - parameter kwArgs: The keyword arguments to the method, none by default.
+    /// - parameter blockCall: Swift code to pass as a block to the method.
+    /// - returns: An `RbObject` for the result of the method, or `nil` if an error occurred.
+    public func call(_ method: String,
+                     args: [RbObjectConvertible] = [],
+                     kwArgs: [(String, RbObjectConvertible)] = [],
+                     blockCall: RbProcCallback) -> RbObject? {
+        return try? access.call(method, args: args, kwArgs: kwArgs, blockCall: blockCall)
+    }
+
+    /// Call a method of a Ruby object passing a Ruby Proc as a block.
+    ///
+    /// This is a non-throwing version of `RbObjectAccess.call(_:args:kwArgs:block:)`.
+    /// See `RbError.history` to retrieve error details.
+    ///
+    /// - parameter method: The name of the method to call.
+    /// - parameter args: The positional arguments to the method, none by default.
+    /// - parameter kwArgs: The keyword arguments to the method, none by default.
+    /// - parameter block: A Ruby proc to pass as a block to the method.
+    /// - returns: An `RbObject` for the result of the method, or `nil` if an error occurred.
+    public func call(_ method: String,
+                     args: [RbObjectConvertible] = [],
+                     kwArgs: [(String, RbObjectConvertible)] = [],
+                     block: RbObjectConvertible) -> RbObject? {
+        return try? access.call(method, args: args, kwArgs: kwArgs, block: block)
+    }
+
     /// Call a method of a Ruby object using a symbol.
     ///
     /// This is a non-throwing version of `RbObjectAccess.call(symbol:args:kwArgs:)`.
@@ -75,6 +109,42 @@ extension RbFailableAccess {
                      args: [RbObjectConvertible] = [],
                      kwArgs: [(String, RbObjectConvertible)] = []) -> RbObject? {
         return try? access.call(symbol: symbol, args: args, kwArgs: kwArgs)
+    }
+
+    /// Call a method of a Ruby object using a symbol passing Swift code as a block.
+    ///
+    /// This is a non-throwing version of `RbObjectAccess.call(symbol:args:kwArgs:blockCall:)`.
+    /// See `RbError.history` to retrieve error details.
+    ///
+    /// - parameter symbol: A symbol for the method to call.
+    /// - parameter args: The positional arguments to the method, none by default.
+    /// - parameter kwArgs: The keyword arguments to the method, none by default.
+    /// - parameter blockCall: Swift code to pass as a block to the method.
+    /// - returns: An `RbObject` for the result of the method, or `nil` if an error occurred.
+    @discardableResult
+    public func call(symbol: RbObjectConvertible,
+                     args: [RbObjectConvertible] = [],
+                     kwArgs: [(String, RbObjectConvertible)] = [],
+                     blockCall: RbProcCallback) -> RbObject? {
+        return try? access.call(symbol: symbol, args: args, kwArgs: kwArgs, blockCall: blockCall)
+    }
+
+    /// Call a method of a Ruby object using a symbol passing a Ruby Proc as a block.
+    ///
+    /// This is a non-throwing version of `RbObjectAccess.call(symbol:args:kwArgs:block:)`.
+    /// See `RbError.history` to retrieve error details.
+    ///
+    /// - parameter symbol: A symbol for the method to call.
+    /// - parameter args: The positional arguments to the method, none by default.
+    /// - parameter kwArgs: The keyword arguments to the method, none by default.
+    /// - parameter block: A Ruby proc to pass as a block to the method.
+    /// - returns: An `RbObject` for the result of the method, or `nil` if an error occurred.
+    @discardableResult
+    public func call(symbol: RbObjectConvertible,
+                     args: [RbObjectConvertible] = [],
+                     kwArgs: [(String, RbObjectConvertible)] = [],
+                     block: RbObjectConvertible) -> RbObject? {
+        return try? access.call(symbol: symbol, args: args, kwArgs: kwArgs, block: block)
     }
 
     /// Get an attribute of a Ruby object.
