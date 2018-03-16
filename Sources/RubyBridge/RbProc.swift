@@ -207,8 +207,8 @@ public enum RbProc: RbObjectConvertible {
             return (try? RbProcUtils.makeProc(procCallback: callback)) ?? .nilObject
 
         case let .rubyObject(convertible):
-            // TODO: get object, to_proc it
-            fatalError("bang: \(convertible)")
+            let obj = convertible.rubyObject
+            return (try? obj.call("to_proc")) ?? .nilObject
         }
     }
 }

@@ -67,9 +67,48 @@ class TestProcs: XCTestCase {
         print(symproc)
     }
 
+    /// Procs from Ruby objects - success
+    func testRubyObjectProc() {
+        do {
+            /// assertSame( "AAA", Array("aaa").map(&:upcase).pop )
+            let testStr = "aaa"
+
+            let symproc = RbProc(object: RbSymbol("upcase"))
+
+            let array = try Ruby.call("Array", args: [testStr])
+
+            let mappedArr = try array.call("map", block: symproc)
+
+            let mappedVal = try mappedArr.call("pop")
+
+            XCTAssertEqual(testStr.uppercased(), String(mappedVal))
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+    }
+
+    /// Procs from Ruby objects - fail
+    func testRubyObjectProcFail() {
+        do {
+            let notAProc = RbProc(object: "upcase")
+
+            let array = try Ruby.call("Array", args: [1])
+
+            do {
+                let mappedArr = try array.call("map", block: notAProc)
+                XCTFail("Managed to procify a string: \(mappedArr)")
+            } catch {
+            }
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+    }
+
     static var allTests = [
         ("testCall", testCall),
         ("testNotProc", testNotProc),
-        ("testProcConversion", testProcConversion)
+        ("testProcConversion", testProcConversion),
+        ("testRubyObjectProc", testRubyObjectProc),
+        ("testRubyObjectProcFail", testRubyObjectProcFail)
     ]
 }

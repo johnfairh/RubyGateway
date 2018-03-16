@@ -323,7 +323,7 @@ double rbb_obj2double_protect(VALUE v, int * _Nullable status)
     return data.toDoubleResult;
 }
 
-// rb_proc_new - raises in various conditions.
+// rb_proc_new - probably can't raise but complicated enough not to be sure...
 VALUE rbb_proc_new_protect(Rbb_swift_block_call _Nonnull block,
                            void * _Nonnull context,
                            int * _Nullable status)
