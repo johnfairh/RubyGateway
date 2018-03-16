@@ -90,7 +90,15 @@ private class RbProcContext {
     }
 }
 
+extension UnsafeMutablePointer where Pointee == Rbb_return_value {
+    func set(type: Rbb_return_type, value: VALUE) {
+        pointee.type = type
+        pointee.value = value
+    }
+}
+
 /// The callback from Ruby for all blocks + procs we get involved in.
+/// VALUE scoping all a bit dodgy here but probably fine in practice...
 private func rbproc_block_callback(rawContext: UnsafeMutableRawPointer,
                                    argc: Int32, argv: UnsafePointer<VALUE>,
                                    blockArg: VALUE,
@@ -98,10 +106,18 @@ private func rbproc_block_callback(rawContext: UnsafeMutableRawPointer,
     let context = RbProcContext.from(raw: rawContext)
     do {
         let retVal = try context.invoke(argc: argc, argv: argv, blockArg: blockArg)
-        returnValue.pointee.type = RBB_RT_VALUE
-        returnValue.pointee.value = retVal
+        returnValue.set(type: RBB_RT_VALUE, value: retVal)
+    } catch RbError.rubyException(let exn) {
+        // RubyBridge/Ruby code threw exception
+        returnValue.set(type: RBB_RT_RAISE, value: exn.exception.withRubyValue { $0 })
+    } catch let exn as RbException {
+        // User Swift code generated Ruby exception
+        returnValue.set(type: RBB_RT_RAISE, value: exn.exception.withRubyValue { $0 })
     } catch {
-        fatalError("Bang: \(error)")
+        // User Swift code or RubyBridge threw Swift error.  Oh for typed throws.
+        // Wrap it up in a Ruby exception and raise that instead!
+        let rbExn = RbException(message: "Unexpected Swift error thrown: \(error)")
+        returnValue.set(type: RBB_RT_RAISE, value: rbExn.exception.withRubyValue { $0 })
     }
 }
 

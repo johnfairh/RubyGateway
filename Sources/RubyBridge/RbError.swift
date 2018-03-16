@@ -137,6 +137,14 @@ public struct RbException: CustomStringConvertible, Error {
         self.exception = exceptionObj
     }
 
+    /// Construct a new Ruby exception with the given message
+    public init(message: String) {
+        exception = message.withCString { cstr in
+            RbObject(rubyValue: rb_exc_new(rb_eRuntimeError, cstr, message.utf8.count))
+        }
+        RbError.history.record(exception: self)
+    }
+
     /// Check + clear exception status.  Record any exception so it can
     /// be inspected later on.  Return whether an exception was swallowed.
     static func ignoreAnyPending() -> Bool {

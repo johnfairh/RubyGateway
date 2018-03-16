@@ -105,15 +105,64 @@ class TestProcs: XCTestCase {
     }
 
     /// Exception cases:
-    /// 1) RbException thrown.  Propagate.
+    /// 1) RbError.rubyException thrown.  Propagate.
+    /// 1b) RbException thrown.  Propagate.
     /// 2) Some other Error thrown.  Raise fresh Ruby exception
     /// 3) 'break' issued.  Do 'break' thing.
 
+    /// 1) Cause Ruby to raise exception by calling from Swift PRoc
+    ///      -> Detect and convert to Swift RbError
+    ///      -> Catch that and re-raise Ruby exception
+    ///      -> Detect that and convert to Swift RbError again,
+    ///         wrapping original Ruby exception.
+    func testProcRubyException() {
+        do {
+            let badString = "Nope"
+
+            let proc = RbProc() { args in
+                // call nonexistant method -> NoMethodError mentioning `badString`
+                try args[0].call(badString)
+            }
+
+            do {
+                try proc.rubyObject.call("call", args: [120])
+                XCTFail("Managed to survive call to throwing proc")
+            } catch RbError.rubyException(let exn) {
+                // catch the NoMethodError, hopefully
+                XCTAssertTrue(exn.description.contains(badString))
+            }
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+    }
+
+    /// 1b - throw 'ruby' exception from Swift
+    func testProcRubyException2() {
+        do {
+            let msg = "Ruby Exception!"
+
+            let proc = RbProc() { args in
+                throw RbException(message: msg)
+            }
+
+            do {
+                try proc.rubyObject.call("call")
+                XCTFail("Managed to survive call to throwing proc")
+            } catch RbError.rubyException(let exn) {
+                // catch the RbException, hopefully
+                XCTAssertTrue(exn.description.contains(msg))
+            }
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+    }
+
     /// 2) Some other Error thrown.
-    func skip_testProcException() {
+    func testProcWeirdException() {
+        struct S: Error {}
         do {
             let proc = RbProc() { args in
-                throw RbError.badType("bad")
+                throw S()
             }
 
             do {
@@ -132,7 +181,9 @@ class TestProcs: XCTestCase {
         ("testNotProc", testNotProc),
         ("testProcConversion", testProcConversion),
         ("testRubyObjectProc", testRubyObjectProc),
-        ("testRubyObjectProcFail", testRubyObjectProcFail)//,
-//        ("testProcException", testProcException)
+        ("testRubyObjectProcFail", testRubyObjectProcFail),
+        ("testProcRubyException", testProcRubyException),
+        ("testProcRubyException2", testProcRubyException2),
+        ("testProcWeirdException", testProcWeirdException)
     ]
 }
