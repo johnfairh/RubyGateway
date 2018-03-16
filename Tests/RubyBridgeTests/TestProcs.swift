@@ -104,11 +104,35 @@ class TestProcs: XCTestCase {
         }
     }
 
+    /// Exception cases:
+    /// 1) RbException thrown.  Propagate.
+    /// 2) Some other Error thrown.  Raise fresh Ruby exception
+    /// 3) 'break' issued.  Do 'break' thing.
+
+    /// 2) Some other Error thrown.
+    func skip_testProcException() {
+        do {
+            let proc = RbProc() { args in
+                throw RbError.badType("bad")
+            }
+
+            do {
+                try proc.rubyObject.call("call")
+                XCTFail("Managed to survive call to throwing proc")
+            } catch RbError.rubyException(let exn) {
+                print("Got Ruby exception \(exn)")
+            }
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+    }
+
     static var allTests = [
         ("testCall", testCall),
         ("testNotProc", testNotProc),
         ("testProcConversion", testProcConversion),
         ("testRubyObjectProc", testRubyObjectProc),
-        ("testRubyObjectProcFail", testRubyObjectProcFail)
+        ("testRubyObjectProcFail", testRubyObjectProcFail)//,
+//        ("testProcException", testProcException)
     ]
 }

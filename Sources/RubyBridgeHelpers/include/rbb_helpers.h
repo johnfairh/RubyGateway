@@ -46,22 +46,46 @@ VALUE rbb_funcallv_protect(VALUE value, ID id,
                            int argc, const VALUE * _Nonnull argv,
                            int * _Nullable status);
 
+/// Things a Swift callback can ask Ruby to do
+typedef enum {
+    /// Return a VALUE - normal case
+    RBB_RT_VALUE,
+    /// Raise an exception
+    RBB_RT_RAISE,
+    /// Do 'break' - rare use in iterator blocks
+    RBB_RT_BREAK,
+    /// Do 'break' with a value - rare use in iterator blocks
+    RBB_RT_BREAK_VALUE
+} Rbb_return_type;
 
-typedef VALUE (*Rbb_swift_block_call)(VALUE yielded_arg,
-                                      void * _Nonnull context,
-                                      int argc,
-                                      const VALUE * _Nonnull argv,
-                                      VALUE blockarg);
+/// Express what a Swift callback wants Ruby to do
+typedef struct {
+    /// What Swift wants to do
+    Rbb_return_type type;
+    /// Value to return or exception to raise
+    VALUE           value;
+} Rbb_return_value;
 
+/// Callback into Swift code for a block
+typedef void (*Rbb_swift_block_call)(void * _Nonnull context,
+                                     int argc,
+                                     const VALUE * _Nonnull argv,
+                                     VALUE blockarg,
+                                     Rbb_return_value * _Nonnull returnValue);
+
+/// Set the single function where all block/proc calls go
+void rbb_register_block_proc_callback(Rbb_swift_block_call _Nonnull);
+
+/// Safely call `rb_block_call`, invoking the registered block handler
+/// with the given context as the block.  And report exception status.
 VALUE rbb_block_call_protect(VALUE value, ID id,
                              int argc, const VALUE * _Nonnull argv,
-                             Rbb_swift_block_call _Nonnull block,
                              void * _Nonnull context,
                              int * _Nullable status);
 
-/// Safely call `rb_proc_new` and report exception status.
-VALUE rbb_proc_new_protect(Rbb_swift_block_call _Nonnull block,
-                           void * _Nonnull context,
+/// Safely call `rb_proc_new` using the registered block handler as the
+/// callback and the provided context.  And report exception status.
+VALUE rbb_proc_new_protect(void * _Nonnull context,
                            int * _Nullable status);
 
 /// Safely call `rb_proc_call_with_block` and report exception status.

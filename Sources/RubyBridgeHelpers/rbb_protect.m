@@ -108,15 +108,17 @@ typedef struct {
     int           argc;
     const VALUE  *argv;
     double        toDoubleResult;
-    Rbb_swift_block_call block;
-    void                *blockContext;
-    VALUE                blockArg;
+    void         *blockContext;
+    VALUE         blockArg;
 } Rbb_protect_data;
 
 #define RBB_PDATA_TO_VALUE(pdata) ((uintptr_t)(void *)(pdata))
 #define RBB_VALUE_TO_PDATA(value) ((Rbb_protect_data *)(void *)(uintptr_t)(value))
 
 static VALUE rbb_obj2ulong(VALUE v);
+
+static VALUE rbb_block_callback(VALUE yieldedArg, VALUE callbackArg,
+                                int argc, VALUE *argv, VALUE blockArg);
 
 /// Callback made by Ruby from `rb_protect` -- OK to raise exceptions from here.
 static VALUE rbb_protect_thunk(VALUE value)
@@ -142,7 +144,7 @@ static VALUE rbb_protect_thunk(VALUE value)
         rc = rb_funcallv(d->value, d->id, d->argc, d->argv);
         break;
     case RBB_JOB_BLOCK_CALL:
-        rc = rb_block_call(d->value, d->id, d->argc, d->argv, d->block, (VALUE) d->blockContext);
+        rc = rb_block_call(d->value, d->id, d->argc, d->argv, rbb_block_callback, (VALUE) d->blockContext);
         break;
     case RBB_JOB_CVAR_GET:
         rc = rb_cvar_get(d->value, d->id);
@@ -157,7 +159,7 @@ static VALUE rbb_protect_thunk(VALUE value)
         d->toDoubleResult = NUM2DBL(rb_Float(d->value));
         break;
     case RBB_JOB_PROC_NEW:
-        rc = rb_proc_new(d->block, (VALUE) d->blockContext);
+        rc = rb_proc_new(rbb_block_callback, (VALUE) d->blockContext);
         break;
     case RBB_JOB_PROC_CALL:
         rc = rb_proc_call_with_block(d->value, d->argc, d->argv, d->blockArg);
@@ -226,16 +228,15 @@ VALUE rbb_funcallv_protect(VALUE value, ID id,
     return rbb_protect(&data, status);
 }
 
-// rb_block_call - run arbitrary code twice
+// rb_block_call - run two lots of arbitrary code
 VALUE rbb_block_call_protect(VALUE value, ID id,
                              int argc, const VALUE * _Nonnull argv,
-                             Rbb_swift_block_call _Nonnull block,
                              void * _Nonnull context,
                              int * _Nullable status)
 {
     Rbb_protect_data data = { .job = RBB_JOB_BLOCK_CALL, .value = value, .id = id,
                               .argc = argc, .argv = argv,
-                              .block = block, .blockContext = context };
+                              .blockContext = context };
     return rbb_protect(&data, status);
 }
 
@@ -324,11 +325,10 @@ double rbb_obj2double_protect(VALUE v, int * _Nullable status)
 }
 
 // rb_proc_new - probably can't raise but complicated enough not to be sure...
-VALUE rbb_proc_new_protect(Rbb_swift_block_call _Nonnull block,
-                           void * _Nonnull context,
+VALUE rbb_proc_new_protect(void * _Nonnull context,
                            int * _Nullable status)
 {
-    Rbb_protect_data data = { .job = RBB_JOB_PROC_NEW, .block = block, .blockContext = context };
+    Rbb_protect_data data = { .job = RBB_JOB_PROC_NEW, .blockContext = context };
     return rbb_protect(&data, status);
 }
 
@@ -341,4 +341,55 @@ VALUE rbb_proc_call_with_block_protect(VALUE value,
     Rbb_protect_data data = { .job = RBB_JOB_PROC_CALL, .value = value,
         .argc = argc, .argv = argv, .blockArg = blockArg };
     return rbb_protect(&data, status);
+}
+
+//
+// Procs/blocks written in Swift
+//
+// Indirection here to allow Swift code to raise Ruby exceptions by
+// passing status back to this C layer which then uses the Ruby API
+// to actually do the raising.
+//
+
+/// Single staticly registered Swift callback.
+/// This is `rbproc_block_callback` in RbProc.swift.
+///
+/// We have this registered instead of passed per-call
+/// to avoid running out of context space.
+static Rbb_swift_block_call rbb_swift_block_call;
+
+void rbb_register_block_proc_callback(Rbb_swift_block_call callback)
+{
+    rbb_swift_block_call = callback;
+}
+
+/// All block/proc callbacks come into here from Ruby core.
+/// We get in the way to let the Swift implementation do its thing and
+/// get safely off the callstack, passing back to us what it wants to
+/// do next.  Then we can either pass the result back to Ruby or
+/// invoke some API function to longjmp off somewhere else without
+/// skipping over any Swift frames.
+static VALUE rbb_block_callback(VALUE yieldedArg,
+                                VALUE callbackArg,
+                                int argc,
+                                VALUE *argv,
+                                VALUE blockArg)
+{
+    Rbb_return_value return_value = { 0 };
+
+    rbb_swift_block_call((void *) callbackArg, argc, argv, blockArg, &return_value);
+
+    switch (return_value.type)
+    {
+        case RBB_RT_VALUE:
+            return return_value.value;
+        case RBB_RT_BREAK:
+            rb_iter_break();    /* does not return */
+        case RBB_RT_BREAK_VALUE:
+            rb_iter_break_value(return_value.value);   /* does not return */
+        case RBB_RT_RAISE:
+            rb_exc_raise(return_value.value);    /* does not return */
+        default:
+            rb_raise(rb_eRuntimeError, "Mangled Swift retval from proc: %u", return_value.type);
+    }
 }
