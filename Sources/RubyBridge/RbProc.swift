@@ -113,6 +113,13 @@ private func rbproc_block_callback(rawContext: UnsafeMutableRawPointer,
     } catch let exn as RbException {
         // User Swift code generated Ruby exception
         returnValue.set(type: RBB_RT_RAISE, value: exn.exception.withRubyValue { $0 })
+    } catch let brk as RbBreak {
+        // 'break' from iterator
+        if let brkObject = brk.object {
+            returnValue.set(type: RBB_RT_BREAK_VALUE, value: brkObject.withRubyValue{ $0 })
+        } else {
+            returnValue.set(type: RBB_RT_BREAK, value: Qundef)
+        }
     } catch {
         // User Swift code or RubyBridge threw Swift error.  Oh for typed throws.
         // Wrap it up in a Ruby exception and raise that instead!

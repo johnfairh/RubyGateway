@@ -176,6 +176,45 @@ class TestProcs: XCTestCase {
         }
     }
 
+    /// 3) Break.
+    func testProcBreak() {
+        do {
+            let array = try Ruby.call("Array", args: [1])
+            try array.call("push", args: [2, 3])
+
+            var counter = 0
+
+            let retVal = try array.call("each") { args in
+                counter += 1
+                if args[0] == 2 {
+                    try RbBreak.doBreak()
+                }
+                return .nilObject
+            }
+
+            XCTAssertEqual(2, counter) // break forced iter to end early
+            XCTAssertEqual(RbObject.nilObject, retVal)
+
+            // Now try breaking with a value
+            counter = 0
+
+            let breakVal = "Answer"
+
+            let retVal2 = try array.call("each") { args in
+                counter += 1
+                if args[0] == 2 {
+                    try RbBreak.doBreak(with: breakVal)
+                }
+                return .nilObject
+            }
+
+            XCTAssertEqual(2, counter)
+            XCTAssertEqual(breakVal, String(retVal2))
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+    }
+
     static var allTests = [
         ("testCall", testCall),
         ("testNotProc", testNotProc),
@@ -184,6 +223,7 @@ class TestProcs: XCTestCase {
         ("testRubyObjectProcFail", testRubyObjectProcFail),
         ("testProcRubyException", testProcRubyException),
         ("testProcRubyException2", testProcRubyException2),
-        ("testProcWeirdException", testProcWeirdException)
+        ("testProcWeirdException", testProcWeirdException),
+        ("testProcBreak", testProcBreak)
     ]
 }

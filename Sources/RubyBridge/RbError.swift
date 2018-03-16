@@ -113,6 +113,35 @@ extension RbError: CustomStringConvertible {
     }
 }
 
+// MARK: - RbBreak
+
+/// `RbBreak.doBreak(with:)` provides the way of terminating and giving an
+/// overall result to a Ruby block-based iteration like the Ruby `break`.
+///
+/// ```swift
+/// let result = myobj.call("each") { item in
+///                  let derived = f(item)
+///                  if g(derived) {
+///                      try RbBreak.doBreak(with: derived)
+///                  }
+///              }
+/// ```
+public struct RbBreak: Error {
+    let object: RbObject?
+
+    init(with object: RbObject?) {
+        self.object = object
+    }
+
+    /// Break out from a Ruby iterator.
+    ///
+    /// - parameter object: the value to give as the result of the iteration.
+    ///                     Default `nil` equivalent to raw `break` in Ruby.
+    public static func doBreak(with object: RbObjectConvertible? = nil) throws -> Never {
+        throw RbBreak(with: object?.rubyObject)
+    }
+}
+
 // MARK: - RbException
 
 /// A Ruby exception.
