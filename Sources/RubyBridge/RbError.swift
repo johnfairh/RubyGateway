@@ -115,30 +115,26 @@ extension RbError: CustomStringConvertible {
 
 // MARK: - RbBreak
 
-/// `RbBreak.doBreak(with:)` provides the way of terminating and giving an
-/// overall result to a Ruby block-based iteration like the Ruby `break`.
+/// Throwing an instance of this type terminates and gives an overall
+/// result to a Ruby block-based iteration like the Ruby `break` keyword.
 ///
 /// ```swift
 /// let result = myobj.call("each") { item in
 ///                  let derived = f(item)
 ///                  if g(derived) {
-///                      try RbBreak.doBreak(with: derived)
+///                      throw RbBreak(with: derived)
 ///                  }
 ///              }
 /// ```
 public struct RbBreak: Error {
     let object: RbObject?
 
-    init(with object: RbObject?) {
-        self.object = object
-    }
-
-    /// Break out from a Ruby iterator.
+    /// Create an object to break out from a Ruby iterator.
     ///
     /// - parameter object: the value to give as the result of the iteration.
     ///                     Default `nil` equivalent to raw `break` in Ruby.
-    public static func doBreak(with object: RbObjectConvertible? = nil) throws -> Never {
-        throw RbBreak(with: object?.rubyObject)
+    public init(with object: RbObjectConvertible? = nil) {
+        self.object = object?.rubyObject
     }
 }
 
@@ -166,7 +162,9 @@ public struct RbException: CustomStringConvertible, Error {
         self.exception = exceptionObj
     }
 
-    /// Construct a new Ruby exception with the given message
+    /// Construct a new Ruby `RuntimeError` exception with the given message.
+    ///
+    /// Use `Kernel#raise` directly to raise a different type of exception.
     public init(message: String) {
         exception = message.withCString { cstr in
             RbObject(rubyValue: rb_exc_new(rb_eRuntimeError, cstr, message.utf8.count))

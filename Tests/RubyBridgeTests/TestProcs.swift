@@ -187,7 +187,7 @@ class TestProcs: XCTestCase {
             let retVal = try array.call("each") { args in
                 counter += 1
                 if args[0] == 2 {
-                    try RbBreak.doBreak()
+                    throw RbBreak()
                 }
                 return .nilObject
             }
@@ -203,7 +203,7 @@ class TestProcs: XCTestCase {
             let retVal2 = try array.call("each") { args in
                 counter += 1
                 if args[0] == 2 {
-                    try RbBreak.doBreak(with: breakVal)
+                    throw RbBreak(with: breakVal)
                 }
                 return .nilObject
             }
