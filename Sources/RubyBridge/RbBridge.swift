@@ -87,8 +87,8 @@ public final class RbBridge: RbObjectAccess {
     ///
     /// - parameter name: Name to look up, typically constant or method name.
     /// - returns: The corresponding ID.
-    /// - throws: `RbException` if Ruby raises an exception.  This probably means
-    ///   the `ID` space is full, which is fairly unlikely.
+    /// - throws: `RbError.rubyException` if Ruby raises an exception.  This
+    ///   probably means the `ID` space is full, which is fairly unlikely.
     public func getID(for name: String) throws -> ID {
         return try RbBridge.vm.getID(for: name)
     }

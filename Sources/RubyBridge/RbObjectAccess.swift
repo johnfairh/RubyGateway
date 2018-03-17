@@ -23,6 +23,8 @@ import RubyBridgeHelpers
 /// access an alternative API that returns `nil` on errors instead.  You can still
 /// see any Ruby exceptions via `RbError.history`.
 ///
+/// ## Calling methods
+///
 /// Ruby has a few different ways to call methods that are reflected in the
 /// various Swift methods here and their types.  The degrees of freedom are:
 /// 1. Call method by name or by symbol;
@@ -31,7 +33,7 @@ import RubyBridgeHelpers
 ///    a Ruby Proc.
 /// 4. Method can raise an exception, or return a value that can be ignored.
 ///
-/// At the simple end:
+/// From the simple end:
 /// ```swift
 /// try! obj.call("myMethod")
 /// ```
@@ -42,7 +44,7 @@ import RubyBridgeHelpers
 ///          try obj.call(myMethodSymbol,
 ///                       args: [1, "3.5", myHash],
 ///                       kwArgs: [("mode", RbSymbol("debug")]) { blockArgs in
-///                           blockArgs.each {
+///                           blockArgs.forEach {
 ///                               process($0)
 ///                           }
 ///                       }
@@ -382,11 +384,15 @@ extension RbObjectAccess {
         }
         return RbObject(rubyValue: hashValue)
     }
+}
 
+// MARK: - Attributes
+
+extension RbObjectAccess {
     /// Get an attribute of a Ruby object.
     ///
     /// Attributes are declared with `:attr_accessor` and so on -- this routine is a
-    /// simple wrapper around `call(...)` for symmetry with `set(...)`.
+    /// simple wrapper around `call(...)` for symmetry with `setAttribute(...)`.
     ///
     /// For a version that does not throw, see `failable`.
     ///

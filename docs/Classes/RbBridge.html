@@ -62,7 +62,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Main APIs.html">Main APIs</a>
+            <a class="nav-group-name-link" href="../Main%20APIs.html">Main APIs</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RbBridge.html">RbBridge</a>
@@ -79,8 +79,17 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Other APIs.html">Other APIs</a>
+            <a class="nav-group-name-link" href="../Other%20APIs.html">Other APIs</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RbBreak.html">RbBreak</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RbProc.html">RbProc</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20APIs.html#/s:10RubyBridge14RbProcCallbacka">RbProcCallback</a>
+              </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/RbSymbol.html">RbSymbol</a>
               </li>
@@ -90,7 +99,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Error Handling.html">Error Handling</a>
+            <a class="nav-group-name-link" href="../Error%20Handling.html">Error Handling</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/RbError.html">RbError</a>
@@ -107,7 +116,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Swift Interop.html">Swift Interop</a>
+            <a class="nav-group-name-link" href="../Swift%20Interop.html">Swift Interop</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>
@@ -274,8 +283,8 @@ be re-setup.</p>
 needed for regular <code>RubyBridge</code> use.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Structs/RbException.html">RbException</a></code> if Ruby raises an exception.  This probably means
-the <code>ID</code> space is full, which is fairly unlikely.
+    <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if Ruby raises an exception.  This
+probably means the <code>ID</code> space is full, which is fairly unlikely.
 
 </div>
 
@@ -603,6 +612,36 @@ value if it doesn&rsquo;t exist yet.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:10RubyBridge02RbB0C10apiVersions5Int32V_A2Ftv"></a>
+                    <a name="//apple_ref/swift/Property/apiVersion" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RubyBridge02RbB0C10apiVersions5Int32V_A2Ftv">apiVersion</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The component major/minor/teeny version numbers of Ruby being used.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">apiVersion</span><span class="p">:</span> <span class="p">(</span><span class="kt">Int32</span><span class="p">,</span> <span class="kt">Int32</span><span class="p">,</span> <span class="kt">Int32</span><span class="p">)</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbBridge.swift#L238-L240">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:10RubyBridge02RbB0C7versionSSv"></a>
                     <a name="//apple_ref/swift/Property/version" class="dashAnchor"></a>
                     <a class="token" href="#/s:10RubyBridge02RbB0C7versionSSv">version</a>
@@ -625,7 +664,7 @@ value if it doesn&rsquo;t exist yet.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbBridge.swift#L238-L240">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbBridge.swift#L243-L245">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -657,7 +696,7 @@ value if it doesn&rsquo;t exist yet.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbBridge.swift#L245-L247">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbBridge.swift#L250-L252">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -726,7 +765,7 @@ value if it doesn&rsquo;t exist yet.</p>
                         <p>The result of executing the code.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbBridge.swift#L258-L263">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbBridge.swift#L263-L268">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -788,7 +827,7 @@ method is dispatched dynamically so it will invoke any replacements of
                         <p><code>true</code> if the file was loaded OK, <code>false</code> if it is already loaded.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbBridge.swift#L274-L278">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbBridge.swift#L279-L283">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -855,7 +894,7 @@ instead of the current program.  See <code>Kernel#load</code>.</p>
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbBridge.swift#L286-L293">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbBridge.swift#L291-L298">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

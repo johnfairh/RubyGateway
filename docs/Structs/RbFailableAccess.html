@@ -62,7 +62,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Main APIs.html">Main APIs</a>
+            <a class="nav-group-name-link" href="../Main%20APIs.html">Main APIs</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RbBridge.html">RbBridge</a>
@@ -79,8 +79,17 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Other APIs.html">Other APIs</a>
+            <a class="nav-group-name-link" href="../Other%20APIs.html">Other APIs</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RbBreak.html">RbBreak</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RbProc.html">RbProc</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20APIs.html#/s:10RubyBridge14RbProcCallbacka">RbProcCallback</a>
+              </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/RbSymbol.html">RbSymbol</a>
               </li>
@@ -90,7 +99,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Error Handling.html">Error Handling</a>
+            <a class="nav-group-name-link" href="../Error%20Handling.html">Error Handling</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/RbError.html">RbError</a>
@@ -107,7 +116,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Swift Interop.html">Swift Interop</a>
+            <a class="nav-group-name-link" href="../Swift%20Interop.html">Swift Interop</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>
@@ -287,6 +296,196 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:10RubyBridge16RbFailableAccessV4callAA0C6ObjectCSgSS_SayAA0cG11Convertible_pG4argsSaySS_AaH_ptG6kwArgsAFSayAFGKc9blockCalltF"></a>
+                    <a name="//apple_ref/swift/Method/call(_:args:kwArgs:blockCall:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RubyBridge16RbFailableAccessV4callAA0C6ObjectCSgSS_SayAA0cG11Convertible_pG4argsSaySS_AaH_ptG6kwArgsAFSayAFGKc9blockCalltF">call(_:args:kwArgs:blockCall:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Call a method of a Ruby object passing Swift code as a block.</p>
+
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pG4argsSaySS_AaG_ptG6kwArgsAFSayAFGKc9blockCalltKF">RbObjectAccess.call(_:args:kwArgs:blockCall:)</a></code>.
+See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7HistoryVvZ">RbError.history</a></code> to retrieve error details.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">call</span><span class="p">(</span><span class="n">_</span> <span class="nv">method</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+                 <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>
+                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="p">[(</span><span class="kt">String</span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)]</span> <span class="o">=</span> <span class="p">[],</span>
+                 <span class="nv">blockCall</span><span class="p">:</span> <span class="kt"><a href="../Other%20APIs.html#/s:10RubyBridge14RbProcCallbacka">RbProcCallback</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>method</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the method to call.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>args</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The positional arguments to the method, none by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>kwArgs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The keyword arguments to the method, none by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>blockCall</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Swift code to pass as a block to the method.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the result of the method, or <code>nil</code> if an error occurred.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L74-L79">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10RubyBridge16RbFailableAccessV4callAA0C6ObjectCSgSS_SayAA0cG11Convertible_pG4argsSaySS_AaH_ptG6kwArgsAaH_p5blocktF"></a>
+                    <a name="//apple_ref/swift/Method/call(_:args:kwArgs:block:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RubyBridge16RbFailableAccessV4callAA0C6ObjectCSgSS_SayAA0cG11Convertible_pG4argsSaySS_AaH_ptG6kwArgsAaH_p5blocktF">call(_:args:kwArgs:block:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Call a method of a Ruby object passing a Ruby Proc as a block.</p>
+
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pG4argsSaySS_AaG_ptG6kwArgsAaG_p5blocktKF">RbObjectAccess.call(_:args:kwArgs:block:)</a></code>.
+See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7HistoryVvZ">RbError.history</a></code> to retrieve error details.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">call</span><span class="p">(</span><span class="n">_</span> <span class="nv">method</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+                 <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>
+                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="p">[(</span><span class="kt">String</span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)]</span> <span class="o">=</span> <span class="p">[],</span>
+                 <span class="nv">block</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>method</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the method to call.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>args</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The positional arguments to the method, none by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>kwArgs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The keyword arguments to the method, none by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>block</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Ruby proc to pass as a block to the method.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the result of the method, or <code>nil</code> if an error occurred.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L91-L96">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:10RubyBridge16RbFailableAccessV4callAA0C6ObjectCSgAA0cG11Convertible_p6symbol_SayAaH_pG4argsSaySS_AaH_ptG6kwArgstF"></a>
                     <a name="//apple_ref/swift/Method/call(symbol:args:kwArgs:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:10RubyBridge16RbFailableAccessV4callAA0C6ObjectCSgAA0cG11Convertible_p6symbol_SayAaH_pG4argsSaySS_AaH_ptG6kwArgstF">call(symbol:args:kwArgs:)</a>
@@ -361,11 +560,212 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the result of the method, or <code>nil</code> if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L74-L78">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L108-L112">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10RubyBridge16RbFailableAccessV4callAA0C6ObjectCSgAA0cG11Convertible_p6symbol_SayAaH_pG4argsSaySS_AaH_ptG6kwArgsAFSayAFGKc9blockCalltF"></a>
+                    <a name="//apple_ref/swift/Method/call(symbol:args:kwArgs:blockCall:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RubyBridge16RbFailableAccessV4callAA0C6ObjectCSgAA0cG11Convertible_p6symbol_SayAaH_pG4argsSaySS_AaH_ptG6kwArgsAFSayAFGKc9blockCalltF">call(symbol:args:kwArgs:blockCall:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Call a method of a Ruby object using a symbol passing Swift code as a block.</p>
+
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC4callAA0cD0CAA0cD11Convertible_p6symbol_SayAaG_pG4argsSaySS_AaG_ptG6kwArgsAFSayAFGKc9blockCalltKF">RbObjectAccess.call(symbol:args:kwArgs:blockCall:)</a></code>.
+See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7HistoryVvZ">RbError.history</a></code> to retrieve error details.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">call</span><span class="p">(</span><span class="nv">symbol</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">,</span>
+                 <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>
+                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="p">[(</span><span class="kt">String</span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)]</span> <span class="o">=</span> <span class="p">[],</span>
+                 <span class="nv">blockCall</span><span class="p">:</span> <span class="kt"><a href="../Other%20APIs.html#/s:10RubyBridge14RbProcCallbacka">RbProcCallback</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>symbol</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A symbol for the method to call.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>args</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The positional arguments to the method, none by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>kwArgs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The keyword arguments to the method, none by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>blockCall</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Swift code to pass as a block to the method.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the result of the method, or <code>nil</code> if an error occurred.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L125-L130">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10RubyBridge16RbFailableAccessV4callAA0C6ObjectCSgAA0cG11Convertible_p6symbol_SayAaH_pG4argsSaySS_AaH_ptG6kwArgsAaH_p5blocktF"></a>
+                    <a name="//apple_ref/swift/Method/call(symbol:args:kwArgs:block:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RubyBridge16RbFailableAccessV4callAA0C6ObjectCSgAA0cG11Convertible_p6symbol_SayAaH_pG4argsSaySS_AaH_ptG6kwArgsAaH_p5blocktF">call(symbol:args:kwArgs:block:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Call a method of a Ruby object using a symbol passing a Ruby Proc as a block.</p>
+
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC4callAA0cD0CAA0cD11Convertible_p6symbol_SayAaG_pG4argsSaySS_AaG_ptG6kwArgsAaG_p5blocktKF">RbObjectAccess.call(symbol:args:kwArgs:block:)</a></code>.
+See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7HistoryVvZ">RbError.history</a></code> to retrieve error details.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">call</span><span class="p">(</span><span class="nv">symbol</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">,</span>
+                 <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>
+                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="p">[(</span><span class="kt">String</span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)]</span> <span class="o">=</span> <span class="p">[],</span>
+                 <span class="nv">block</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>symbol</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A symbol for the method to call.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>args</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The positional arguments to the method, none by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>kwArgs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The keyword arguments to the method, none by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>block</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Ruby proc to pass as a block to the method.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the result of the method, or <code>nil</code> if an error occurred.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L143-L148">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Attributes"></a>
+                <a name="//apple_ref/swift/Section/Attributes" class="dashAnchor"></a>
+                <a href="#/Attributes">
+                  <h3 class="section-name">Attributes</h3>
+                </a>
+              </div>
+              <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
@@ -417,7 +817,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>The value of the attribute, or <code>nil</code> if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L87-L89">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L161-L163">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -485,7 +885,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>The value set to the attribute, or <code>nil</code> if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L99-L101">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L173-L175">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -552,7 +952,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the constant or <code>nil</code> if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L114-L116">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L188-L190">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -608,7 +1008,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the class or <code>nil</code> if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L125-L127">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L199-L201">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -675,7 +1075,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>Value of the IVar, or <code>nil</code> if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L140-L142">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L214-L216">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -744,7 +1144,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>The value that was set, or nil if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L153-L155">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L227-L229">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -813,7 +1213,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>Value of the CVar, or <code>nil</code> if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L170-L172">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L244-L246">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -884,7 +1284,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>The value that was set, or <code>nil</code> if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L185-L187">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L259-L261">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -951,7 +1351,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>Value of the variable, or <code>nil</code> if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L200-L202">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L274-L276">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1020,7 +1420,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>The value that was set, or <code>nil</code> if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L213-L215">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L287-L289">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1088,7 +1488,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>Retrieved object, or <code>nil</code> if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L229-L231">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L303-L305">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

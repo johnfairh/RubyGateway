@@ -146,7 +146,11 @@ extension RbFailableAccess {
                      block: RbObjectConvertible) -> RbObject? {
         return try? access.call(symbol: symbol, args: args, kwArgs: kwArgs, block: block)
     }
+}
 
+// MARK: - Attributes
+
+extension RbFailableAccess {
     /// Get an attribute of a Ruby object.
     ///
     /// This is a non-throwing version of `RbObjectAccess.getAttribute(_:)`.

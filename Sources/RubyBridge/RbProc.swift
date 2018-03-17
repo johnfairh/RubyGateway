@@ -37,6 +37,19 @@ import RubyBridgeHelpers
 
 /// The type of a Proc or block implemented in Swift.
 ///
+/// The parameter is an array of arguments passed to the proc.  If the
+/// proc has just one argument then this is still an array.
+///
+/// Procs always return a value.  You can use `RbObject.nilObject` if
+/// you have nothing useful to return.
+///
+/// Procs can throw errors:
+/// * Create and throw `RbBreak` instead of Ruby `break`;
+/// * Create and throw `RbException` instead of Ruby `raise`;
+/// * Throwing any other kind of error (including propagating `RbError`s)
+///   causes RubyBridge to convert the error into a Ruby RuntimeError
+///   exception and raise it.
+///
 /// See `RbProc` and `RbObjectAccess.call(_:args:kwArgs:blockCall:)`.
 public typealias RbProcCallback = ([RbObject]) throws -> RbObject
 
@@ -193,6 +206,15 @@ internal enum RbProcUtils {
 /// If you want to pass Swift code to a method as a block then just call
 /// `RbObjectAccess.call(_:args:kwArgs:blockCall:)` directly, no need for
 /// an `RbProc`.
+///
+/// - warning: When you create an `RbProc` from a Swift callback using
+///   `RbProc.init(callback:)` and pass this as a Proc to Ruby, you must be sure
+///   that Ruby code does not invoke the Proc after the `RbObject` has been
+///   deallocated.  This normally happens naturally, but if you are wrapping a
+///   Swift closure to pass to a Ruby service that retains the Proc for later
+///   use, then watch out.  Parts of the mechanics of invoking the Swift closure
+///   are tied to the `RbObject` and the program is likely to crash or worse if
+///   it has been deallocated when the Proc is called.
 public enum RbProc: RbObjectConvertible {
 
     /// A proc implemented via a Ruby value :nodoc:

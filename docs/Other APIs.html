@@ -61,7 +61,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Main APIs.html">Main APIs</a>
+            <a class="nav-group-name-link" href="Main%20APIs.html">Main APIs</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/RbBridge.html">RbBridge</a>
@@ -78,8 +78,17 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Other APIs.html">Other APIs</a>
+            <a class="nav-group-name-link" href="Other%20APIs.html">Other APIs</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/RbBreak.html">RbBreak</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/RbProc.html">RbProc</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Other%20APIs.html#/s:10RubyBridge14RbProcCallbacka">RbProcCallback</a>
+              </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/RbSymbol.html">RbSymbol</a>
               </li>
@@ -89,7 +98,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Error Handling.html">Error Handling</a>
+            <a class="nav-group-name-link" href="Error%20Handling.html">Error Handling</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums/RbError.html">RbError</a>
@@ -106,7 +115,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Swift Interop.html">Swift Interop</a>
+            <a class="nav-group-name-link" href="Swift%20Interop.html">Swift Interop</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a>
@@ -174,6 +183,158 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:10RubyBridge7RbBreakV"></a>
+                    <a name="//apple_ref/swift/Struct/RbBreak" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RubyBridge7RbBreakV">RbBreak</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Throwing an instance of this type terminates and gives an overall
+result to a Ruby block-based iteration like the Ruby <code>break</code> keyword.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="n">myobj</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"each"</span><span class="p">)</span> <span class="p">{</span> <span class="n">args</span> <span class="k">in</span>
+                 <span class="k">let</span> <span class="nv">derived</span> <span class="o">=</span> <span class="nf">f</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                 <span class="k">if</span> <span class="nf">g</span><span class="p">(</span><span class="n">derived</span><span class="p">)</span> <span class="p">{</span>
+                     <span class="k">throw</span> <span class="kt">RbBreak</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">derived</span><span class="p">)</span>
+                 <span class="p">}</span>
+             <span class="p">}</span>
+</code></pre>
+
+                        <a href="Structs/RbBreak.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RbBreak</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbError.swift#L129-L139">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10RubyBridge6RbProcO"></a>
+                    <a name="//apple_ref/swift/Enum/RbProc" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RubyBridge6RbProcO">RbProc</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A Ruby Proc.</p>
+
+<p>Use this to create a Ruby <code>Proc</code> object from either a symbol (or any
+Ruby object supporting <code>to_proc</code>) or a Swift closure.</p>
+
+<p>The first form is most useful when passing a block to a method:</p>
+<pre class="highlight swift"><code><span class="c1">// Ruby: mapped = names.map(&amp;:downcase)</span>
+<span class="k">let</span> <span class="nv">mapped</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"map"</span><span class="p">,</span> <span class="nv">block</span><span class="p">:</span> <span class="kt">RbProc</span><span class="p">(</span><span class="kt">RbSymbol</span><span class="p">(</span><span class="s">"downcase"</span><span class="p">)))</span>
+</code></pre>
+
+<p>The second form is for when you need to pass an explicit <code>Proc</code>
+implemented in Swift:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">myProc</span> <span class="o">=</span> <span class="kt">RbProc</span><span class="p">()</span> <span class="p">{</span> <span class="n">args</span> <span class="k">in</span>
+    <span class="n">args</span><span class="o">.</span><span class="n">forEach</span> <span class="p">{</span> <span class="nf">doSomething</span><span class="p">(</span><span class="kt">String</span><span class="p">(</span><span class="nv">$0</span><span class="p">))</span> <span class="p">}</span>
+    <span class="k">return</span> <span class="o">.</span><span class="n">nilObject</span>
+<span class="p">}</span>
+
+<span class="n">myRubyObj</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span><span class="s">"responseProc"</span><span class="p">,</span> <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="n">myProc</span><span class="p">])</span>
+</code></pre>
+
+<p>If you want to pass Swift code to a method as a block then just call
+<code><a href="Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pG4argsSaySS_AaG_ptG6kwArgsAFSayAFGKc9blockCalltKF">RbObjectAccess.call(_:args:kwArgs:blockCall:)</a></code> directly, no need for
+an <code>RbProc</code>.</p>
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    When you create an <code>RbProc</code> from a Swift callback using
+<code><a href="Enums/RbProc.html#/s:10RubyBridge6RbProcOAcA0C6ObjectCSayAEGKc8callback_tcfc">RbProc.init(callback:)</a></code> and pass this as a Proc to Ruby, you must be sure
+that Ruby code does not invoke the Proc after the <code><a href="Classes/RbObject.html">RbObject</a></code> has been
+deallocated.  This normally happens naturally, but if you are wrapping a
+Swift closure to pass to a Ruby service that retains the Proc for later
+use, then watch out.  Parts of the mechanics of invoking the Swift closure
+are tied to the <code><a href="Classes/RbObject.html">RbObject</a></code> and the program is likely to crash or worse if
+it has been deallocated when the Proc is called.
+
+</div>
+
+                        <a href="Enums/RbProc.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">RbProc</span> <span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbProc.swift#L218-L266">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10RubyBridge14RbProcCallbacka"></a>
+                    <a name="//apple_ref/swift/Alias/RbProcCallback" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RubyBridge14RbProcCallbacka">RbProcCallback</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The type of a Proc or block implemented in Swift.</p>
+
+<p>The parameter is an array of arguments passed to the proc.  If the
+proc has just one argument then this is still an array.</p>
+
+<p>Procs always return a value.  You can use <code><a href="Classes/RbObject.html#/s:10RubyBridge8RbObjectC03nilD0ACvZ">RbObject.nilObject</a></code> if
+you have nothing useful to return.</p>
+
+<p>Procs can throw errors:</p>
+
+<ul>
+<li>Create and throw <code><a href="Structs/RbBreak.html">RbBreak</a></code> instead of Ruby <code>break</code>;</li>
+<li>Create and throw <code><a href="Structs/RbException.html">RbException</a></code> instead of Ruby <code>raise</code>;</li>
+<li>Throwing any other kind of error (including propagating <code><a href="Enums/RbError.html">RbError</a></code>s)
+causes RubyBridge to convert the error into a Ruby RuntimeError
+exception and raise it.</li>
+</ul>
+
+<p>See <code><a href="Enums/RbProc.html">RbProc</a></code> and <code><a href="Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pG4argsSaySS_AaG_ptG6kwArgsAFSayAFGKc9blockCalltKF">RbObjectAccess.call(_:args:kwArgs:blockCall:)</a></code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">RbProcCallback</span> <span class="o">=</span> <span class="p">([</span><span class="kt"><a href="Classes/RbObject.html">RbObject</a></span><span class="p">])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="Classes/RbObject.html">RbObject</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbProc.swift#L54">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:10RubyBridge8RbSymbolV"></a>
                     <a name="//apple_ref/swift/Struct/RbSymbol" class="dashAnchor"></a>
                     <a class="token" href="#/s:10RubyBridge8RbSymbolV">RbSymbol</a>
@@ -238,7 +399,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/CRubyMacros.swift#L73-L129">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/CRubyMacros.swift#L74-L130">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

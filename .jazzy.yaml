@@ -29,6 +29,9 @@ custom_categories:
     - name: Other APIs
       abstract: These types are used less often than those in [`Main APIs`](Main%20APIs.html).
       children:
+          - RbBreak
+          - RbProc
+          - RbProcCallback
           - RbSymbol
           - RbType
 

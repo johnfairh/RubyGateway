@@ -61,7 +61,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Main APIs.html">Main APIs</a>
+            <a class="nav-group-name-link" href="Main%20APIs.html">Main APIs</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/RbBridge.html">RbBridge</a>
@@ -78,8 +78,17 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Other APIs.html">Other APIs</a>
+            <a class="nav-group-name-link" href="Other%20APIs.html">Other APIs</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/RbBreak.html">RbBreak</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/RbProc.html">RbProc</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Other%20APIs.html#/s:10RubyBridge14RbProcCallbacka">RbProcCallback</a>
+              </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/RbSymbol.html">RbSymbol</a>
               </li>
@@ -89,7 +98,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Error Handling.html">Error Handling</a>
+            <a class="nav-group-name-link" href="Error%20Handling.html">Error Handling</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums/RbError.html">RbError</a>
@@ -106,7 +115,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Swift Interop.html">Swift Interop</a>
+            <a class="nav-group-name-link" href="Swift%20Interop.html">Swift Interop</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a>
@@ -319,7 +328,7 @@ the program will crash.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbObject.swift#L71-L149">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbObject.swift#L71-L164">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -354,6 +363,39 @@ of <code><a href="Classes/RbBridge.html">RbBridge</a></code>.</p>
 when Ruby raises an exception.  Use the <code><a href="Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC8failableAA0c8FailableE0Vv">RbObjectAccess.failable</a></code> adapter to
 access an alternative API that returns <code>nil</code> on errors instead.  You can still
 see any Ruby exceptions via <code><a href="Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7HistoryVvZ">RbError.history</a></code>.</p>
+<h2 id='calling-methods' class='heading'>Calling methods</h2>
+
+<p>Ruby has a few different ways to call methods that are reflected in the
+various Swift methods here and their types.  The degrees of freedom are:</p>
+
+<ol>
+<li>Call method by name or by symbol;</li>
+<li>Pass positional and/or keyword arguments;</li>
+<li>Optionally pass a block, that can be expressed as a Swift function or
+a Ruby Proc.</li>
+<li>Method can raise an exception, or return a value that can be ignored.</li>
+</ol>
+
+<p>From the simple end:</p>
+<pre class="highlight swift"><code><span class="k">try!</span> <span class="n">obj</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"myMethod"</span><span class="p">)</span>
+</code></pre>
+
+<p>&hellip;to:</p>
+<pre class="highlight swift"><code><span class="k">do</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span>
+         <span class="k">try</span> <span class="n">obj</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="n">myMethodSymbol</span><span class="p">,</span>
+                      <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s">"3.5"</span><span class="p">,</span> <span class="n">myHash</span><span class="p">],</span>
+                      <span class="nv">kwArgs</span><span class="p">:</span> <span class="p">[(</span><span class="s">"mode"</span><span class="p">,</span> <span class="kt">RbSymbol</span><span class="p">(</span><span class="s">"debug"</span><span class="p">)])</span> <span class="p">{</span> <span class="n">blockArgs</span> <span class="k">in</span>
+                          <span class="n">blockArgs</span><span class="o">.</span><span class="n">forEach</span> <span class="p">{</span>
+                              <span class="nf">process</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span>
+                          <span class="p">}</span>
+                      <span class="p">}</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="kt">RbError</span><span class="o">.</span><span class="nf">rubyException</span><span class="p">(</span><span class="k">let</span> <span class="nv">exn</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">handleErrors</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</code></pre>
 
                         <a href="Classes/RbObjectAccess.html" class="slightly-smaller">See more</a>
                       </div>
@@ -366,7 +408,7 @@ see any Ruby exceptions via <code><a href="Enums/RbError.html#/s:10RubyBridge7Rb
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbObjectAccess.swift#L25-L75">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbObjectAccess.swift#L57-L107">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

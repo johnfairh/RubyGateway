@@ -215,6 +215,27 @@ class TestProcs: XCTestCase {
         }
     }
 
+    // Lambda experiments
+    func skip_testLambda() {
+        do {
+            let lambda = try Ruby.call("lambda") { args in
+                return args[0] + args[1]
+            }
+
+            let result = try lambda.call("call", args: [1,2])
+            XCTAssertEqual(3, Int(result))
+
+            do {
+                let result2 = try lambda.call("call", args: [1])
+                XCTFail("Managed to call lambda with insufficient args: \(result2)")
+            } catch {
+                print(error)
+            }
+        } catch {
+            XCTFail("Unexpected exception: \(error)")
+        }
+    }
+
     static var allTests = [
         ("testCall", testCall),
         ("testNotProc", testNotProc),

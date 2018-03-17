@@ -119,8 +119,8 @@ extension RbError: CustomStringConvertible {
 /// result to a Ruby block-based iteration like the Ruby `break` keyword.
 ///
 /// ```swift
-/// let result = myobj.call("each") { item in
-///                  let derived = f(item)
+/// let result = myobj.call("each") { args in
+///                  let derived = f(args[0])
 ///                  if g(derived) {
 ///                      throw RbBreak(with: derived)
 ///                  }
@@ -145,6 +145,9 @@ public struct RbBreak: Error {
 /// This provides some convenience methods on top of the underlying `Exception`
 /// object.  `RubyBridge` does not throw these directly, it always wraps them in
 /// an `RbError` instance.
+///
+/// Users should create one of these and throw it to raise a Ruby exception from
+/// a proc/block implemented in Swift by an `RbProcCallback`.
 public struct RbException: CustomStringConvertible, Error {
     /// The underlying Ruby exception object
     public let exception: RbObject
