@@ -222,7 +222,7 @@ extension RbObjectAccess {
                      kwArgs: [(String, RbObjectConvertible)] = []) throws -> RbObject {
         try Ruby.setup()
         let methodId = try Ruby.getID(for: methodName)
-        return try doCall(id: methodId, args: args, kwArgs: kwArgs, retainBlock: false, block: nil, blockCall: nil)
+        return try doCall(id: methodId, args: args, kwArgs: kwArgs)
     }
 
     /// Call a Ruby object method passing Swift code as a block.
@@ -230,9 +230,8 @@ extension RbObjectAccess {
     /// - parameter methodName: The name of the method to call.
     /// - parameter args: The positional arguments to the method.  None by default.
     /// - parameter kwArgs: The keyword arguments to the method.  None by default.
-    /// - parameter retainBlock: Should the object keep a reference to the `blockCall`
-    ///             closure.  Default `false`.  Set if the Ruby code will use the block
-    ///             outside the scope of the call.
+    /// - parameter blockRetention: Should the `blockCall` closure be retained for
+    ///             longer than this call?  See `RbBlockRetention`.
     /// - parameter blockCall: Swift code to pass as a block to the method.
     /// - returns: The result of calling the method.
     /// - throws: `RbError.rubyException` if there is a Ruby exception.
@@ -243,13 +242,13 @@ extension RbObjectAccess {
     public func call(_ methodName: String,
                      args: [RbObjectConvertible] = [],
                      kwArgs: [(String, RbObjectConvertible)] = [],
-                     retainBlock: Bool = false,
+                     blockRetention: RbBlockRetention = .none,
                      blockCall: @escaping RbProcCallback) throws -> RbObject {
         try Ruby.setup()
         let methodId = try Ruby.getID(for: methodName)
         return try doCall(id: methodId,
                           args: args, kwArgs: kwArgs,
-                          retainBlock: retainBlock,
+                          blockRetention: blockRetention,
                           blockCall: blockCall)
     }
 
@@ -301,9 +300,8 @@ extension RbObjectAccess {
     /// - parameter symbol: The symbol for the name of the method to call.
     /// - parameter args: The positional arguments to the method.  None by default.
     /// - parameter kwArgs: The keyword arguments to the method.  None by default.
-    /// - parameter retainBlock: Should the object keep a reference to the `blockCall`
-    ///             closure.  Default `false`.  Set if the Ruby code will use the block
-    ///             outside the scope of the call.
+    /// - parameter blockRetention: Should the `blockCall` closure be retained for
+    ///             longer than this call?  See `RbBlockRetention`.
     /// - parameter blockCall: Swift code to pass as a block to the method.
     /// - returns: The result of calling the method.
     /// - throws: `RbError.rubyException` if there is a Ruby exception.
@@ -315,11 +313,11 @@ extension RbObjectAccess {
     public func call(symbol: RbObjectConvertible,
                      args: [RbObjectConvertible] = [],
                      kwArgs: [(String, RbObjectConvertible)] = [],
-                     retainBlock: Bool = false,
+                     blockRetention: RbBlockRetention = .none,
                      blockCall: @escaping RbProcCallback) throws -> RbObject {
         try Ruby.setup()
         return try symbol.rubyObject.withSymbolId { methodId in
-            try doCall(id: methodId, args: args, kwArgs: kwArgs, retainBlock: retainBlock, blockCall: blockCall)
+            try doCall(id: methodId, args: args, kwArgs: kwArgs, blockRetention: blockRetention, blockCall: blockCall)
         }
     }
 
@@ -351,7 +349,7 @@ extension RbObjectAccess {
     private func doCall(id: ID,
                         args: [RbObjectConvertible],
                         kwArgs: [(String, RbObjectConvertible)],
-                        retainBlock: Bool = false,
+                        blockRetention: RbBlockRetention = .none,
                         block: RbObjectConvertible? = nil,
                         blockCall: RbProcCallback? = nil) throws -> RbObject {
         // Sort out unlikely block errors
@@ -371,31 +369,32 @@ extension RbObjectAccess {
         }
 
         // Do call - more complicated if block is involved
-        let resultVal = try argObjects.withRubyValues { argValues -> VALUE in
+        return try argObjects.withRubyValues { argValues -> RbObject in
             if let blockCall = blockCall {
                 let (context, value) =
                     try RbProcUtils.doBlockCall(value: getValue(), methodId: id,
                                                 argValues: argValues,
                                                 block: .callback(blockCall))
-                if retainBlock {
-                    associate(object: context)
+                let retObject = RbObject(rubyValue: value)
+                switch blockRetention {
+                case .none: break
+                case .self: associate(object: context)
+                case .returned: retObject.associate(object: context)
                 }
-                return value
+                return retObject
             } else if let blockObj = blockObj {
-                return try blockObj.withRubyValue { blockValue in
+                return RbObject(rubyValue: try blockObj.withRubyValue { blockValue in
                     let (_, value) =
                         try RbProcUtils.doBlockCall(value: getValue(), methodId: id,
                                                     argValues: argValues,
                                                     block: .value(blockValue))
                     return value
-                }
+                })
             }
-            return try RbVM.doProtect {
+            return RbObject(rubyValue: try RbVM.doProtect {
                 rbb_funcallv_protect(getValue(), id, Int32(argValues.count), argValues, nil)
-            }
+            })
         }
-
-        return RbObject(rubyValue: resultVal)
     }
 
     /// Build a keyword args hash.  The keys are Symbols of the keywords.

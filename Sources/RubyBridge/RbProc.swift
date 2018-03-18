@@ -50,8 +50,29 @@ import RubyBridgeHelpers
 ///   causes RubyBridge to convert the error into a Ruby RuntimeError
 ///   exception and raise it.
 ///
-/// See `RbProc` and `RbObjectAccess.call(_:args:kwArgs:blockCall:)`.
+/// See `RbProc` and `RbObjectAccess.call(_:args:kwArgs:blockRetention:blockCall:)`.
 public typealias RbProcCallback = ([RbObject]) throws -> RbObject
+
+/// Control over how Swift closures passed as blocks are retained.
+///
+/// When you pass a Swift closure as a block, for example using
+/// `RbObjectAccess.call(_:args:kwArgs:retainBlock:blockCall)`, RubyBridge
+/// needs some help to understand how Ruby will use the closure.
+public enum RbBlockRetention {
+    /// Do not retain the closure.  The default, appropriate when the block
+    /// is used only during execution of the method it is passed to.  For
+    /// example `#each`.
+    case none
+
+    /// Retain the closure for as long as the object that owns the method.
+    /// Use when a method stores a closure in an object property for later use.
+    case `self`
+
+    /// Retain the closure for as long as the object returned by the method.
+    /// Use when the method is a factory that produces some object and passes
+    /// that object the closure.  For example `Proc#new`.
+    case returned
+}
 
 // MARK: - Swift -> Ruby -> Swift call context
 

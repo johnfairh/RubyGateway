@@ -86,6 +86,10 @@ class TestRbObject: XCTestCase {
         if let obj = RbObject(ofClass: "DoesNotExist") {
             XCTFail("Managed to create object of odd class: \(obj)")
         }
+
+        if let obj = RbObject(ofClass: "DoesNotExist", retainBlock: false, blockCall: { args in .nilObject }) {
+            XCTFail("Managed to create object of odd class: \(obj)")
+        }
     }
 
     // symbol helper

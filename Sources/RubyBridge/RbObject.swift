@@ -192,6 +192,34 @@ extension RbObject {
         }
         self.init(obj)
     }
+
+    /// Create an instance of a given Ruby class passing a Swift closure as a block.
+    ///
+    /// Fails (returns `nil`) if anything goes wrong along the way - check `RbError.history` to
+    /// find out what failed.
+    ///
+    /// - parameter ofClass: Name of the class to instantiate.  Can contain `::` to drill
+    ///             down into module/etc. scope.
+    /// - parameter args: positional arguments to pass to `new` call for the object.  Default none.
+    /// - parameter kwArgs: keyword arguments to pass to the `new` call for the object.  Default none.
+    /// - parameter retainBlock: Should `blockCall` be retained by the object?  Default `false`.  Set
+    ///             `true` if Ruby uses the block after this call.  For example creating a Proc object
+    ///             using `Proc#new`.
+    /// - parameter blockCall: Swift code to pass as a block to the method.
+    public convenience init?(ofClass className: String,
+                             args: [RbObjectConvertible] = [],
+                             kwArgs: [(String, RbObjectConvertible)] = [],
+                             retainBlock: Bool = false,
+                             blockCall: @escaping RbProcCallback) {
+        let retention: RbBlockRetention = retainBlock ? .returned : .none
+        guard let obj = try? Ruby.get(className).call("new",
+                                                      args: args, kwArgs: kwArgs,
+                                                      blockRetention: retention,
+                                                      blockCall: blockCall) else {
+            return nil
+        }
+        self.init(obj)
+    }
 }
 
 // MARK: - String Convertible

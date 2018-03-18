@@ -38,6 +38,14 @@ class MethodsTest
         return x * 2
     end
 
+    def store_block(&block)
+        @stored_block = block
+    end
+
+    def call_block
+        @stored_block.call()
+    end
+
     def yielder
         raise "No block given" unless block_given?
         yield(22, "fish")

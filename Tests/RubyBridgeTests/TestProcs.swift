@@ -11,6 +11,26 @@ import XCTest
 /// Proc tests
 class TestProcs: XCTestCase {
 
+    /// Manual proc creation
+    func testManualProc() {
+        do {
+            var procHappened = false
+
+            guard let proc = (RbObject(ofClass: "Proc", retainBlock: true) { args in
+                procHappened = true
+                return .nilObject
+            }) else {
+                XCTFail("Couldn't create proc")
+                return
+            }
+
+            try proc.call("call")
+            XCTAssertTrue(procHappened)
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+    }
+
     /// Create and call simple swift proc
     func testCall() {
         do {
@@ -218,7 +238,7 @@ class TestProcs: XCTestCase {
     // Lambda experiments
     func testLambda() {
         do {
-            let lambda = try Ruby.call("lambda", retainBlock: true) { args in
+            let lambda = try Ruby.call("lambda", blockRetention: .returned) { args in
                 if args.count != 2 {
                     throw RbException(message: "Wrong number of args, expected 2 got \(args.count)")
                 }
@@ -240,6 +260,7 @@ class TestProcs: XCTestCase {
     }
 
     static var allTests = [
+        ("testManualProc", testManualProc),
         ("testCall", testCall),
         ("testNotProc", testNotProc),
         ("testProcConversion", testProcConversion),
@@ -248,6 +269,7 @@ class TestProcs: XCTestCase {
         ("testProcRubyException", testProcRubyException),
         ("testProcRubyException2", testProcRubyException2),
         ("testProcWeirdException", testProcWeirdException),
-        ("testProcBreak", testProcBreak)
+        ("testProcBreak", testProcBreak),
+        ("testLambda", testLambda)
     ]
 }

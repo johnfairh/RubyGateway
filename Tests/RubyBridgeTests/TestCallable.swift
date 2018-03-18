@@ -233,6 +233,27 @@ class TestCallable: XCTestCase {
         }
     }
 
+    // Store a Swift block and later call it
+    func testStoredSwiftBlock() {
+        do {
+            let obj = getNewMethodTest()
+
+            var counter = 0
+
+            try obj.call("store_block", blockRetention: .self) { args in
+                counter += 1
+                return .nilObject
+            }
+
+            XCTAssertEqual(0, counter)
+
+            try obj.call("call_block")
+            XCTAssertEqual(1, counter)
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+    }
+
     static var allTests = [
         ("testCallGlobal", testCallGlobal),
         ("testCallGlobalFailure", testCallGlobalFailure),
@@ -247,6 +268,7 @@ class TestCallable: XCTestCase {
         ("testCallViaSymbol", testCallViaSymbol),
         ("testCallViaSymbolNotSymbol", testCallViaSymbolNotSymbol),
         ("testCallWithBlock", testCallWithBlock),
-        ("testCallWithProcBlock", testCallWithProcBlock)
+        ("testCallWithProcBlock", testCallWithProcBlock),
+        ("testStoredSwiftBlock", testStoredSwiftBlock)
     ]
 }
