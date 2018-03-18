@@ -66,22 +66,41 @@ typedef struct {
     VALUE           value;
 } Rbb_return_value;
 
-/// Callback into Swift code for a block
-typedef void (*Rbb_swift_block_call)(void * _Nonnull context,
+/// Callback into Swift code for a block, using a void * context
+typedef void (*Rbb_pvoid_block_call)(void * _Nonnull context,
                                      int argc,
                                      const VALUE * _Nonnull argv,
                                      VALUE blockarg,
                                      Rbb_return_value * _Nonnull returnValue);
 
-/// Set the single function where all block/proc calls go
-void rbb_register_block_proc_callback(Rbb_swift_block_call _Nonnull);
+/// Callback into Swift code for a block, using a VALUE context
+typedef void (*Rbb_value_block_call)(VALUE context,
+                                     int argc,
+                                     const VALUE * _Nonnull argv,
+                                     VALUE blockarg,
+                                     Rbb_return_value * _Nonnull returnValue);
 
-/// Safely call `rb_block_call`, invoking the registered block handler
-/// with the given context as the block.  And report exception status.
-VALUE rbb_block_call_protect(VALUE value, ID id,
-                             int argc, const VALUE * _Nonnull argv,
-                             void * _Nonnull context,
-                             int * _Nullable status);
+/// Set the single function where all pvoid-context block/proc calls go
+void rbb_register_pvoid_block_proc_callback(Rbb_pvoid_block_call _Nonnull);
+
+/// Set the single function where all value-context block/proc calls go
+void rbb_register_value_block_proc_callback(Rbb_value_block_call _Nonnull);
+
+/// Safely call `rb_block_call`, invoking the registered pvoid-context
+/// block handler with the given context as the block.
+/// And report exception status.
+VALUE rbb_block_call_pvoid_protect(VALUE value, ID id,
+                                   int argc, const VALUE * _Nonnull argv,
+                                   void * _Nonnull context,
+                                   int * _Nullable status);
+
+/// Safely call `rb_block_call`, invoking the registered value-context
+/// block handler with the given context as the block.
+/// And report exception status.
+VALUE rbb_block_call_value_protect(VALUE value, ID id,
+                                   int argc, const VALUE * _Nonnull argv,
+                                   VALUE context,
+                                   int * _Nullable status);
 
 /// Safely call `rb_proc_call_with_block` and report exception status.
 VALUE rbb_proc_call_with_block_protect(VALUE value,

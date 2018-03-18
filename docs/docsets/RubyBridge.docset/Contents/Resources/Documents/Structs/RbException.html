@@ -82,6 +82,9 @@
             <a class="nav-group-name-link" href="../Other%20APIs.html">Other APIs</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20APIs.html#/s:10RubyBridge15RbBlockCallbacka">RbBlockCallback</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/RbBlockRetention.html">RbBlockRetention</a>
               </li>
               <li class="nav-group-task">
@@ -89,9 +92,6 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/RbProc.html">RbProc</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Other%20APIs.html#/s:10RubyBridge14RbProcCallbacka">RbProcCallback</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/RbSymbol.html">RbSymbol</a>
@@ -187,8 +187,8 @@
 object.  <code>RubyBridge</code> does not throw these directly, it always wraps them in
 an <code><a href="../Enums/RbError.html">RbError</a></code> instance.</p>
 
-<p>Users should create one of these and throw it to raise a Ruby exception from
-a proc/block implemented in Swift by an <code><a href="../Other%20APIs.html#/s:10RubyBridge14RbProcCallbacka">RbProcCallback</a></code>.</p>
+<p>Create and throw one of these to raise a Ruby exception from
+a block implemented in Swift by an <code><a href="../Other%20APIs.html#/s:10RubyBridge15RbBlockCallbacka">RbBlockCallback</a></code>.</p>
 
           </div>
         </section>

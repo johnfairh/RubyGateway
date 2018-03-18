@@ -81,6 +81,9 @@
             <a class="nav-group-name-link" href="Other%20APIs.html">Other APIs</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Other%20APIs.html#/s:10RubyBridge15RbBlockCallbacka">RbBlockCallback</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums/RbBlockRetention.html">RbBlockRetention</a>
               </li>
               <li class="nav-group-task">
@@ -88,9 +91,6 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/RbProc.html">RbProc</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Other%20APIs.html#/s:10RubyBridge14RbProcCallbacka">RbProcCallback</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/RbSymbol.html">RbSymbol</a>
@@ -287,7 +287,7 @@ have to tell RubyBridge:</p>
 </code></pre>
 <h3 id='create-a-proc-with-swift-code' class='heading'>Create a Proc with Swift code</h3>
 
-<p>Use <code><a href="Classes/RbObject.html#/s:10RubyBridge8RbObjectCA2CSayACGKc12procCallback_tcfc">RbObject.init(procCallback:)</a></code>.  Ruby:</p>
+<p>Use <code><a href="Classes/RbObject.html#/s:10RubyBridge8RbObjectCA2CSayACGKc9blockCall_tcfc">RbObject.init(blockCall:)</a></code>.  Ruby:</p>
 <pre class="highlight ruby"><code><span class="n">myProc</span> <span class="o">=</span> <span class="nb">proc</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="p">}</span>
 </code></pre>
 

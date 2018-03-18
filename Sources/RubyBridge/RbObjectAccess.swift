@@ -243,7 +243,7 @@ extension RbObjectAccess {
                      args: [RbObjectConvertible] = [],
                      kwArgs: [(String, RbObjectConvertible)] = [],
                      blockRetention: RbBlockRetention = .none,
-                     blockCall: @escaping RbProcCallback) throws -> RbObject {
+                     blockCall: @escaping RbBlockCallback) throws -> RbObject {
         try Ruby.setup()
         let methodId = try Ruby.getID(for: methodName)
         return try doCall(id: methodId,
@@ -314,7 +314,7 @@ extension RbObjectAccess {
                      args: [RbObjectConvertible] = [],
                      kwArgs: [(String, RbObjectConvertible)] = [],
                      blockRetention: RbBlockRetention = .none,
-                     blockCall: @escaping RbProcCallback) throws -> RbObject {
+                     blockCall: @escaping RbBlockCallback) throws -> RbObject {
         try Ruby.setup()
         return try symbol.rubyObject.withSymbolId { methodId in
             try doCall(id: methodId, args: args, kwArgs: kwArgs, blockRetention: blockRetention, blockCall: blockCall)
@@ -351,7 +351,7 @@ extension RbObjectAccess {
                         kwArgs: [(String, RbObjectConvertible)],
                         blockRetention: RbBlockRetention = .none,
                         block: RbObjectConvertible? = nil,
-                        blockCall: RbProcCallback? = nil) throws -> RbObject {
+                        blockCall: RbBlockCallback? = nil) throws -> RbObject {
         // Sort out unlikely block errors
         let blockObj: RbObject?
         if let block = block {
@@ -372,10 +372,12 @@ extension RbObjectAccess {
         return try argObjects.withRubyValues { argValues -> RbObject in
             if let blockCall = blockCall {
                 let (context, value) =
-                    try RbProcUtils.doBlockCall(value: getValue(), methodId: id,
-                                                argValues: argValues,
-                                                block: .callback(blockCall))
+                    try RbBlock.doBlockCall(value: getValue(), methodId: id,
+                                            argValues: argValues,
+                                            blockCall: blockCall)
+
                 let retObject = RbObject(rubyValue: value)
+
                 switch blockRetention {
                 case .none: break
                 case .self: associate(object: context)
@@ -384,11 +386,9 @@ extension RbObjectAccess {
                 return retObject
             } else if let blockObj = blockObj {
                 return RbObject(rubyValue: try blockObj.withRubyValue { blockValue in
-                    let (_, value) =
-                        try RbProcUtils.doBlockCall(value: getValue(), methodId: id,
-                                                    argValues: argValues,
-                                                    block: .value(blockValue))
-                    return value
+                    try RbBlock.doBlockCall(value: getValue(), methodId: id,
+                                            argValues: argValues,
+                                            block: blockValue)
                 })
             }
             return RbObject(rubyValue: try RbVM.doProtect {

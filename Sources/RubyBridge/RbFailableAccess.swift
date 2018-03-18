@@ -77,7 +77,7 @@ extension RbFailableAccess {
                      args: [RbObjectConvertible] = [],
                      kwArgs: [(String, RbObjectConvertible)] = [],
                      blockRetention: RbBlockRetention = .none,
-                     blockCall: @escaping RbProcCallback) -> RbObject? {
+                     blockCall: @escaping RbBlockCallback) -> RbObject? {
         return try? access.call(method, args: args, kwArgs: kwArgs, blockRetention: blockRetention, blockCall: blockCall)
     }
 
@@ -131,7 +131,7 @@ extension RbFailableAccess {
                      args: [RbObjectConvertible] = [],
                      kwArgs: [(String, RbObjectConvertible)] = [],
                      blockRetention: RbBlockRetention = .none,
-                     blockCall: @escaping RbProcCallback) -> RbObject? {
+                     blockCall: @escaping RbBlockCallback) -> RbObject? {
         return try? access.call(symbol: symbol, args: args, kwArgs: kwArgs, blockRetention: blockRetention, blockCall: blockCall)
     }
 

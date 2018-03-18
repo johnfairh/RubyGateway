@@ -146,8 +146,8 @@ public struct RbBreak: Error {
 /// object.  `RubyBridge` does not throw these directly, it always wraps them in
 /// an `RbError` instance.
 ///
-/// Users should create one of these and throw it to raise a Ruby exception from
-/// a proc/block implemented in Swift by an `RbProcCallback`.
+/// Create and throw one of these to raise a Ruby exception from
+/// a block implemented in Swift by an `RbBlockCallback`.
 public struct RbException: CustomStringConvertible, Error {
     /// The underlying Ruby exception object
     public let exception: RbObject

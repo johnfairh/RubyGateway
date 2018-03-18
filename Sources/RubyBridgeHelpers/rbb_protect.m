@@ -88,7 +88,8 @@ typedef enum {
     RBB_JOB_CONST_GET,
     RBB_JOB_CONST_GET_AT,
     RBB_JOB_FUNCALLV,
-    RBB_JOB_BLOCK_CALL,
+    RBB_JOB_BLOCK_CALL_PVOID,
+    RBB_JOB_BLOCK_CALL_VALUE,
     RBB_JOB_CVAR_GET,
     RBB_JOB_TO_ULONG,
     RBB_JOB_TO_LONG,
@@ -116,8 +117,10 @@ typedef struct {
 
 static VALUE rbb_obj2ulong(VALUE v);
 
-static VALUE rbb_block_callback(VALUE yieldedArg, VALUE callbackArg,
-                                int argc, VALUE *argv, VALUE blockArg);
+static VALUE rbb_block_pvoid_callback(VALUE yieldedArg, VALUE callbackArg,
+                                      int argc, VALUE *argv, VALUE blockArg);
+static VALUE rbb_block_value_callback(VALUE yieldedArg, VALUE callbackArg,
+                                      int argc, VALUE *argv, VALUE blockArg);
 
 /// Callback made by Ruby from `rb_protect` -- OK to raise exceptions from here.
 static VALUE rbb_protect_thunk(VALUE value)
@@ -142,8 +145,13 @@ static VALUE rbb_protect_thunk(VALUE value)
     case RBB_JOB_FUNCALLV:
         rc = rb_funcallv(d->value, d->id, d->argc, d->argv);
         break;
-    case RBB_JOB_BLOCK_CALL:
-        rc = rb_block_call(d->value, d->id, d->argc, d->argv, rbb_block_callback, (VALUE) d->blockContext);
+    case RBB_JOB_BLOCK_CALL_PVOID:
+        rc = rb_block_call(d->value, d->id, d->argc, d->argv,
+                           rbb_block_pvoid_callback, (VALUE) d->blockContext);
+        break;
+    case RBB_JOB_BLOCK_CALL_VALUE:
+        rc = rb_block_call(d->value, d->id, d->argc, d->argv,
+                           rbb_block_value_callback, (VALUE) d->blockContext);
         break;
     case RBB_JOB_CVAR_GET:
         rc = rb_cvar_get(d->value, d->id);
@@ -225,14 +233,26 @@ VALUE rbb_funcallv_protect(VALUE value, ID id,
 }
 
 // rb_block_call - run two lots of arbitrary code
-VALUE rbb_block_call_protect(VALUE value, ID id,
-                             int argc, const VALUE * _Nonnull argv,
-                             void * _Nonnull context,
-                             int * _Nullable status)
+VALUE rbb_block_call_pvoid_protect(VALUE value, ID id,
+                                   int argc, const VALUE * _Nonnull argv,
+                                   void * _Nonnull context,
+                                   int * _Nullable status)
 {
-    Rbb_protect_data data = { .job = RBB_JOB_BLOCK_CALL, .value = value, .id = id,
+    Rbb_protect_data data = { .job = RBB_JOB_BLOCK_CALL_PVOID, .value = value, .id = id,
                               .argc = argc, .argv = argv,
                               .blockContext = context };
+    return rbb_protect(&data, status);
+}
+
+// rb_block_call - run two lots of arbitrary code
+VALUE rbb_block_call_value_protect(VALUE value, ID id,
+                                   int argc, const VALUE * _Nonnull argv,
+                                   VALUE context,
+                                   int * _Nullable status)
+{
+    Rbb_protect_data data = { .job = RBB_JOB_BLOCK_CALL_VALUE, .value = value, .id = id,
+                              .argc = argc, .argv = argv,
+                              .blockContext = (void *) context };
     return rbb_protect(&data, status);
 }
 
@@ -339,45 +359,80 @@ VALUE rbb_proc_call_with_block_protect(VALUE value,
 // to actually do the raising.
 //
 
-/// Single staticly registered Swift callback.
-/// This is `rbproc_block_callback` in RbProc.swift.
+/// Registered Swift callbacks.
 ///
-/// We have this registered instead of passed per-call
-/// to avoid running out of context space.
-static Rbb_swift_block_call rbb_swift_block_call;
+/// These are registered instead of passed per-call to avoid running
+/// out of context space.
+///
+/// Two separate callbacks for the two cases where we want to call a
+/// Swift callback -- the pvoid-context case -- and where we want to
+/// call a Ruby VALUE block -- the value-context case.
 
-void rbb_register_block_proc_callback(Rbb_swift_block_call callback)
+/// This is `rbproc_pvoid_block_callback` in RbProc.swift.
+static Rbb_pvoid_block_call rbb_pvoid_block_call;
+
+/// This is `rbproc_value_block_callback` in RbProc.swift.
+static Rbb_value_block_call rbb_value_block_call;
+
+void rbb_register_pvoid_block_proc_callback(Rbb_pvoid_block_call callback)
 {
-    rbb_swift_block_call = callback;
+    rbb_pvoid_block_call = callback;
 }
 
-/// All block/proc callbacks come into here from Ruby core.
+void rbb_register_value_block_proc_callback(Rbb_value_block_call callback)
+{
+    rbb_value_block_call = callback;
+}
+
+/// All block/proc callbacks come into these functions from Ruby core.
+///
 /// We get in the way to let the Swift implementation do its thing and
 /// get safely off the callstack, passing back to us what it wants to
 /// do next.  Then we can either pass the result back to Ruby or
 /// invoke some API function to longjmp off somewhere else without
 /// skipping over any Swift frames.
-static VALUE rbb_block_callback(VALUE yieldedArg,
-                                VALUE callbackArg,
-                                int argc,
-                                VALUE *argv,
-                                VALUE blockArg)
+
+static VALUE rbb_block_callback_tail(Rbb_return_value * _Nonnull rv);
+
+static VALUE rbb_block_pvoid_callback(VALUE yieldedArg,
+                                      VALUE callbackArg,
+                                      int argc,
+                                      VALUE *argv,
+                                      VALUE blockArg)
 {
     Rbb_return_value return_value = { 0 };
 
-    rbb_swift_block_call((void *) callbackArg, argc, argv, blockArg, &return_value);
+    rbb_pvoid_block_call((void *) callbackArg, argc, argv, blockArg, &return_value);
 
-    switch (return_value.type)
+    return rbb_block_callback_tail(&return_value);
+}
+
+static VALUE rbb_block_value_callback(VALUE yieldedArg,
+                                      VALUE callbackArg,
+                                      int argc,
+                                      VALUE *argv,
+                                      VALUE blockArg)
+{
+    Rbb_return_value return_value = { 0 };
+
+    rbb_value_block_call(callbackArg, argc, argv, blockArg, &return_value);
+
+    return rbb_block_callback_tail(&return_value);
+}
+
+static VALUE rbb_block_callback_tail(Rbb_return_value * _Nonnull rv)
+{
+    switch (rv->type)
     {
         case RBB_RT_VALUE:
-            return return_value.value;
+            return rv->value;
         case RBB_RT_BREAK:
             rb_iter_break();    /* does not return */
         case RBB_RT_BREAK_VALUE:
-            rb_iter_break_value(return_value.value);   /* does not return */
+            rb_iter_break_value(rv->value);   /* does not return */
         case RBB_RT_RAISE:
-            rb_exc_raise(return_value.value);    /* does not return */
+            rb_exc_raise(rv->value);    /* does not return */
         default:
-            rb_raise(rb_eRuntimeError, "Mangled Swift retval from proc: %u", return_value.type);
+            rb_raise(rb_eRuntimeError, "Mangled Swift retval from proc: %u", rv->type);
     }
 }

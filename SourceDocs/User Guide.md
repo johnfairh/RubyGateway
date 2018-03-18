@@ -123,7 +123,7 @@ result = try array.call("each") { args in
 
 ### Create a Proc with Swift code
 
-Use `RbObject.init(procCallback:)`.  Ruby:
+Use `RbObject.init(blockCall:)`.  Ruby:
 ```ruby
 myProc = proc { |a, b| a + b }
 ```

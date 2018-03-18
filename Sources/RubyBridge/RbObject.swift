@@ -210,7 +210,7 @@ extension RbObject {
                              args: [RbObjectConvertible] = [],
                              kwArgs: [(String, RbObjectConvertible)] = [],
                              retainBlock: Bool = false,
-                             blockCall: @escaping RbProcCallback) {
+                             blockCall: @escaping RbBlockCallback) {
         let retention: RbBlockRetention = retainBlock ? .returned : .none
         guard let obj = try? Ruby.get(className).call("new",
                                                       args: args, kwArgs: kwArgs,
@@ -223,11 +223,11 @@ extension RbObject {
 
     /// Create a Ruby Proc object from a Swift closure.
     ///
-    /// - parameter procCallback: The callback for the proc.
+    /// - parameter blockCall: The callback for the proc.
     /// - warning: You must not allow this `RbObject` to be deallocated before Ruby has
-    ///            finished with the proc, or the process will crash when Ruby calls it.
-    public convenience init(procCallback: @escaping RbProcCallback) {
-        if let obj = try? Ruby.get("Proc").call("new", blockRetention: .returned, blockCall: procCallback) {
+    ///            finished with the block, or the process will crash when Ruby calls it.
+    public convenience init(blockCall: @escaping RbBlockCallback) {
+        if let obj = try? Ruby.get("Proc").call("new", blockRetention: .returned, blockCall: blockCall) {
             self.init(obj)
         } else {
             self.init(rubyValue: Qnil)
