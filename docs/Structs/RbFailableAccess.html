@@ -82,10 +82,13 @@
             <a class="nav-group-name-link" href="../Other%20APIs.html">Other APIs</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RbBlockRetention.html">RbBlockRetention</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/RbBreak.html">RbBreak</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Enums/RbProc.html">RbProc</a>
+                <a class="nav-group-task-link" href="../Structs/RbProc.html">RbProc</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Other%20APIs.html#/s:10RubyBridge14RbProcCallbacka">RbProcCallback</a>
@@ -296,9 +299,9 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10RubyBridge16RbFailableAccessV4callAA0C6ObjectCSgSS_SayAA0cG11Convertible_pG4argsSaySS_AaH_ptG6kwArgsAFSayAFGKc9blockCalltF"></a>
-                    <a name="//apple_ref/swift/Method/call(_:args:kwArgs:blockCall:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10RubyBridge16RbFailableAccessV4callAA0C6ObjectCSgSS_SayAA0cG11Convertible_pG4argsSaySS_AaH_ptG6kwArgsAFSayAFGKc9blockCalltF">call(_:args:kwArgs:blockCall:)</a>
+                    <a name="/s:10RubyBridge16RbFailableAccessV4callAA0C6ObjectCSgSS_SayAA0cG11Convertible_pG4argsSaySS_AaH_ptG6kwArgsAA0C14BlockRetentionO05blockM0AFSayAFGKc0N4CalltF"></a>
+                    <a name="//apple_ref/swift/Method/call(_:args:kwArgs:blockRetention:blockCall:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RubyBridge16RbFailableAccessV4callAA0C6ObjectCSgSS_SayAA0cG11Convertible_pG4argsSaySS_AaH_ptG6kwArgsAA0C14BlockRetentionO05blockM0AFSayAFGKc0N4CalltF">call(_:args:kwArgs:blockRetention:blockCall:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -308,7 +311,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                       <div class="abstract">
                         <p>Call a method of a Ruby object passing Swift code as a block.</p>
 
-<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pG4argsSaySS_AaG_ptG6kwArgsAFSayAFGKc9blockCalltKF">RbObjectAccess.call(_:args:kwArgs:blockCall:)</a></code>.
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pG4argsSaySS_AaG_ptG6kwArgsAA0C14BlockRetentionO05blockL0AFSayAFGKc0M4CalltKF">RbObjectAccess.call(_:args:kwArgs:blockRetention:blockCall:)</a></code>.
 See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7HistoryVvZ">RbError.history</a></code> to retrieve error details.</p>
 
                       </div>
@@ -319,7 +322,8 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">call</span><span class="p">(</span><span class="n">_</span> <span class="nv">method</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
                  <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>
                  <span class="nv">kwArgs</span><span class="p">:</span> <span class="p">[(</span><span class="kt">String</span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)]</span> <span class="o">=</span> <span class="p">[],</span>
-                 <span class="nv">blockCall</span><span class="p">:</span> <span class="kt"><a href="../Other%20APIs.html#/s:10RubyBridge14RbProcCallbacka">RbProcCallback</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
+                 <span class="nv">blockRetention</span><span class="p">:</span> <span class="kt"><a href="../Enums/RbBlockRetention.html">RbBlockRetention</a></span> <span class="o">=</span> <span class="o">.</span><span class="k">none</span><span class="p">,</span>
+                 <span class="nv">blockCall</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Other%20APIs.html#/s:10RubyBridge14RbProcCallbacka">RbProcCallback</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -366,6 +370,19 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                             <tr>
                               <td>
                                 <code>
+                                <em>blockRetention</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Should the <code>blockCall</code> closure be retained for
+        longer than this call?  Default <code>.none</code>.  See <code><a href="../Enums/RbBlockRetention.html">RbBlockRetention</a></code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>blockCall</em>
                                 </code>
                               </td>
@@ -383,7 +400,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the result of the method, or <code>nil</code> if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L74-L79">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L76-L82">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -478,7 +495,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the result of the method, or <code>nil</code> if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L91-L96">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L94-L99">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -560,7 +577,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the result of the method, or <code>nil</code> if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L108-L112">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L111-L115">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -568,9 +585,9 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10RubyBridge16RbFailableAccessV4callAA0C6ObjectCSgAA0cG11Convertible_p6symbol_SayAaH_pG4argsSaySS_AaH_ptG6kwArgsAFSayAFGKc9blockCalltF"></a>
-                    <a name="//apple_ref/swift/Method/call(symbol:args:kwArgs:blockCall:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10RubyBridge16RbFailableAccessV4callAA0C6ObjectCSgAA0cG11Convertible_p6symbol_SayAaH_pG4argsSaySS_AaH_ptG6kwArgsAFSayAFGKc9blockCalltF">call(symbol:args:kwArgs:blockCall:)</a>
+                    <a name="/s:10RubyBridge16RbFailableAccessV4callAA0C6ObjectCSgAA0cG11Convertible_p6symbol_SayAaH_pG4argsSaySS_AaH_ptG6kwArgsAA0C14BlockRetentionO05blockN0AFSayAFGKc0O4CalltF"></a>
+                    <a name="//apple_ref/swift/Method/call(symbol:args:kwArgs:blockRetention:blockCall:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RubyBridge16RbFailableAccessV4callAA0C6ObjectCSgAA0cG11Convertible_p6symbol_SayAaH_pG4argsSaySS_AaH_ptG6kwArgsAA0C14BlockRetentionO05blockN0AFSayAFGKc0O4CalltF">call(symbol:args:kwArgs:blockRetention:blockCall:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -580,7 +597,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                       <div class="abstract">
                         <p>Call a method of a Ruby object using a symbol passing Swift code as a block.</p>
 
-<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC4callAA0cD0CAA0cD11Convertible_p6symbol_SayAaG_pG4argsSaySS_AaG_ptG6kwArgsAFSayAFGKc9blockCalltKF">RbObjectAccess.call(symbol:args:kwArgs:blockCall:)</a></code>.
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC4callAA0cD0CAA0cD11Convertible_p6symbol_SayAaG_pG4argsSaySS_AaG_ptG6kwArgsAA0C14BlockRetentionO05blockM0AFSayAFGKc0N4CalltKF">RbObjectAccess.call(symbol:args:kwArgs:blockRetention:blockCall:)</a></code>.
 See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7HistoryVvZ">RbError.history</a></code> to retrieve error details.</p>
 
                       </div>
@@ -591,7 +608,8 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">call</span><span class="p">(</span><span class="nv">symbol</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">,</span>
                  <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>
                  <span class="nv">kwArgs</span><span class="p">:</span> <span class="p">[(</span><span class="kt">String</span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)]</span> <span class="o">=</span> <span class="p">[],</span>
-                 <span class="nv">blockCall</span><span class="p">:</span> <span class="kt"><a href="../Other%20APIs.html#/s:10RubyBridge14RbProcCallbacka">RbProcCallback</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
+                 <span class="nv">blockRetention</span><span class="p">:</span> <span class="kt"><a href="../Enums/RbBlockRetention.html">RbBlockRetention</a></span> <span class="o">=</span> <span class="o">.</span><span class="k">none</span><span class="p">,</span>
+                 <span class="nv">blockCall</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Other%20APIs.html#/s:10RubyBridge14RbProcCallbacka">RbProcCallback</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -638,6 +656,19 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                             <tr>
                               <td>
                                 <code>
+                                <em>blockRetention</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Should the <code>blockCall</code> closure be retained for
+        longer than this call?  Default <code>.none</code>.  See <code><a href="../Enums/RbBlockRetention.html">RbBlockRetention</a></code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>blockCall</em>
                                 </code>
                               </td>
@@ -655,7 +686,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the result of the method, or <code>nil</code> if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L125-L130">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L130-L136">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -750,7 +781,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the result of the method, or <code>nil</code> if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L143-L148">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L149-L154">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -817,7 +848,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>The value of the attribute, or <code>nil</code> if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L161-L163">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L167-L169">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -885,7 +916,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>The value set to the attribute, or <code>nil</code> if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L173-L175">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L179-L181">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -952,7 +983,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the constant or <code>nil</code> if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L188-L190">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L194-L196">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1008,7 +1039,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the class or <code>nil</code> if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L199-L201">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L205-L207">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1075,7 +1106,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>Value of the IVar, or <code>nil</code> if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L214-L216">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L220-L222">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1144,7 +1175,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>The value that was set, or nil if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L227-L229">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L233-L235">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1213,7 +1244,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>Value of the CVar, or <code>nil</code> if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L244-L246">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L250-L252">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1284,7 +1315,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>The value that was set, or <code>nil</code> if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L259-L261">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L265-L267">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1351,7 +1382,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>Value of the variable, or <code>nil</code> if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L274-L276">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L280-L282">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1420,7 +1451,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>The value that was set, or <code>nil</code> if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L287-L289">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L293-L295">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1488,7 +1519,7 @@ See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7Hist
                         <p>Retrieved object, or <code>nil</code> if an error occurred.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L303-L305">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbFailableAccess.swift#L309-L311">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

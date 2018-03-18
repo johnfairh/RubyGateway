@@ -63,14 +63,14 @@ extension RbFailableAccess {
 
     /// Call a method of a Ruby object passing Swift code as a block.
     ///
-    /// This is a non-throwing version of `RbObjectAccess.call(_:args:kwArgs:retainBlock:blockCall:)`.
+    /// This is a non-throwing version of `RbObjectAccess.call(_:args:kwArgs:blockRetention:blockCall:)`.
     /// See `RbError.history` to retrieve error details.
     ///
     /// - parameter method: The name of the method to call.
     /// - parameter args: The positional arguments to the method, none by default.
     /// - parameter kwArgs: The keyword arguments to the method, none by default.
     /// - parameter blockRetention: Should the `blockCall` closure be retained for
-    ///             longer than this call?  See `RbBlockRetention`.
+    ///             longer than this call?  Default `.none`.  See `RbBlockRetention`.
     /// - parameter blockCall: Swift code to pass as a block to the method.
     /// - returns: An `RbObject` for the result of the method, or `nil` if an error occurred.
     public func call(_ method: String,
@@ -116,14 +116,14 @@ extension RbFailableAccess {
 
     /// Call a method of a Ruby object using a symbol passing Swift code as a block.
     ///
-    /// This is a non-throwing version of `RbObjectAccess.call(symbol:args:kwArgs:retainBlock:blockCall:)`.
+    /// This is a non-throwing version of `RbObjectAccess.call(symbol:args:kwArgs:blockRetention:blockCall:)`.
     /// See `RbError.history` to retrieve error details.
     ///
     /// - parameter symbol: A symbol for the method to call.
     /// - parameter args: The positional arguments to the method, none by default.
     /// - parameter kwArgs: The keyword arguments to the method, none by default.
     /// - parameter blockRetention: Should the `blockCall` closure be retained for
-    ///             longer than this call?  See `RbBlockRetention`.
+    ///             longer than this call?  Default `.none`.  See `RbBlockRetention`.
     /// - parameter blockCall: Swift code to pass as a block to the method.
     /// - returns: An `RbObject` for the result of the method, or `nil` if an error occurred.
     @discardableResult

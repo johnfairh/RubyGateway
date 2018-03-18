@@ -56,8 +56,12 @@ public typealias RbProcCallback = ([RbObject]) throws -> RbObject
 /// Control over how Swift closures passed as blocks are retained.
 ///
 /// When you pass a Swift closure as a block, for example using
-/// `RbObjectAccess.call(_:args:kwArgs:retainBlock:blockCall)`, RubyBridge
+/// `RbObjectAccess.call(_:args:kwArgs:blockRetention:blockCall:)`, RubyBridge
 /// needs some help to understand how Ruby will use the closure.
+///
+/// The easiest thing to get wrong is using the default of `.none` when
+/// Ruby retains the block for use later.  This causes a hard crash in
+/// `RbProcContext.from(raw:)` when Ruby tries to call the block.
 public enum RbBlockRetention {
     /// Do not retain the closure.  The default, appropriate when the block
     /// is used only during execution of the method it is passed to.  For
@@ -100,6 +104,9 @@ private class RbProcContext {
 
     /// Retrieve an `RbProcContext` from its `void *` representation
     static func from(raw: UnsafeMutableRawPointer) -> RbProcContext {
+        // A EXC_BAD_ACCESS here usually means the blockRetention has been
+        // set wrongly - at any rate, the `RbProcContext` has been deallocated
+        // while Ruby was still using it.
         return Unmanaged<RbProcContext>.fromOpaque(raw).takeUnretainedValue()
     }
 
@@ -187,76 +194,37 @@ internal enum RbProcUtils {
             }
         })
     }
-
-    /// Create a Proc object from a Swift closure
-    fileprivate static func makeProc(procCallback: @escaping RbProcCallback) throws -> RbObject {
-        let _ = initOnce
-        let context = RbProcContext(.callback(procCallback))
-        let procValue = try context.withRaw { rawContext in
-            try RbVM.doProtect {
-                rbb_proc_new_protect(rawContext, nil)
-            }
-        }
-        let procObject = RbObject(rubyValue: procValue)
-        procObject.associate(object: context)
-        return procObject
-    }
 }
 
 // MARK: - RbProc
 
 /// A Ruby Proc.
 ///
-/// Use this to create a Ruby `Proc` object from either a symbol (or any
-/// Ruby object supporting `to_proc`) or a Swift closure.
+/// Use this to create a Ruby Proc from a symbol or any Ruby object
+/// supporting `to_proc`.
 ///
-/// The first form is most useful when passing a block to a method:
+/// This is most useful when passing a block to a method:
 /// ```swift
 /// // Ruby: mapped = names.map(&:downcase)
 /// let mapped = names.call("map", block: RbProc(RbSymbol("downcase")))
 /// ```
 ///
-/// The second form is for when you need to pass an explicit `Proc`
-/// implemented in Swift:
-/// ```swift
-/// let myProc = RbProc() { args in
-///     args.forEach { doSomething(String($0)) }
-///     return .nilObject
-/// }
-///
-/// myRubyObj.set("responseProc", args: [myProc])
-/// ```
+/// Use `RbObject.init(procCallback:)` to create a Ruby Proc from a
+/// Swift closure.
 ///
 /// If you want to pass Swift code to a method as a block then just call
-/// `RbObjectAccess.call(_:args:kwArgs:blockCall:)` directly, no need for
-/// an `RbProc`.
-///
-/// - warning: When you create an `RbProc` from a Swift callback using
-///   `RbProc.init(callback:)` and pass this as a Proc to Ruby, you must be sure
-///   that Ruby code does not invoke the Proc after the `RbObject` has been
-///   deallocated.  This normally happens naturally, but if you are wrapping a
-///   Swift closure to pass to a Ruby service that retains the Proc for later
-///   use, then watch out.  Parts of the mechanics of invoking the Swift closure
-///   are tied to the `RbObject` and the program is likely to crash or worse if
-///   it has been deallocated when the Proc is called.
-public enum RbProc: RbObjectConvertible {
+/// `RbObjectAccess.call(_:args:kwArgs:blockRetention:blockCall:)` directly,
+/// no need for either `RbProc` or `RbObject`.
+public struct RbProc: RbObjectConvertible {
+    private let sourceObject: RbObjectConvertible
 
-    /// A proc implemented via a Ruby value :nodoc:
-    case rubyObject(RbObjectConvertible)
-    /// A proc implemented by a Swift closure :nodoc:
-    case callback(RbProcCallback)
-
-    /// Create from a Ruby object.
+    /// Initialize from something that can be turned into a Ruby object.
     public init(object: RbObjectConvertible) {
-        self = .rubyObject(object)
+        sourceObject = object
     }
 
-    /// Create from a Swift closure.
-    public init(callback: @escaping RbProcCallback) {
-        self = .callback(callback)
-    }
-
-    /// Try to create an `RbProc` from an `RbObject`.
+    /// Try to initialize from a Ruby object.
+    ///
     /// Succeeds if the object can be used as a Proc (has `to_proc`).
     public init?(_ value: RbObject) {
         guard let obj = try? value.call("respond_to?", args: ["to_proc"]),
@@ -267,38 +235,12 @@ public enum RbProc: RbObjectConvertible {
     }
 
     /// A Ruby object for the Proc
-    ///
-    /// - warning: You must be sure that Ruby code does not use this Proc after
-    ///   the returned `RbObject` has been deallocated.  This normally happens naturally
-    ///   but if you are wrapping a Swift closure to pass to a Ruby service that retains
-    ///   the Proc for later use, then watch out.  Parts of the mechanics of invoking the
-    ///   Swift closure are tied to the `RbObject` and the program is likely to crash or
-    ///   worse if it has been deallocated when the Proc is called.
     public var rubyObject: RbObject {
-        guard Ruby.softSetup() else {
+        let srcObj = sourceObject.rubyObject
+        guard Ruby.softSetup(),
+            let procObj = try? srcObj.call("to_proc") else {
             return .nilObject
         }
-        switch self {
-        case let .callback(callback):
-            return (try? RbProcUtils.makeProc(procCallback: callback)) ?? .nilObject
-
-        case let .rubyObject(convertible):
-            let obj = convertible.rubyObject
-            return (try? obj.call("to_proc")) ?? .nilObject
-        }
-    }
-}
-
-// MARK: - CustomStringConvertible
-
-extension RbProc: CustomStringConvertible {
-    /// A textual representation of the `RbProc`
-    public var description: String {
-        switch self {
-        case .callback:
-            return "RbProc(swift closure)"
-        case .rubyObject:
-            return "RbProc(ruby object)"
-        }
+        return procObj
     }
 }

@@ -83,11 +83,6 @@ VALUE rbb_block_call_protect(VALUE value, ID id,
                              void * _Nonnull context,
                              int * _Nullable status);
 
-/// Safely call `rb_proc_new` using the registered block handler as the
-/// callback and the provided context.  And report exception status.
-VALUE rbb_proc_new_protect(void * _Nonnull context,
-                           int * _Nullable status);
-
 /// Safely call `rb_proc_call_with_block` and report exception status.
 VALUE rbb_proc_call_with_block_protect(VALUE value,
                                        int argc, const VALUE * _Nonnull argv,

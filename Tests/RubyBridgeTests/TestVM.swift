@@ -229,7 +229,7 @@ class TestVM: XCTestCase {
         let intObj: RbObject = -200
         let dblObj: RbObject = 100.2
         let symObj = RbObject(RbSymbol("test"))
-        let procObj = RbProc(callback: { args in .nilObject }).rubyObject
+        let procObj = RbObject() { args in .nilObject }
 
         [strObj, uintObj, intObj, dblObj, symObj, procObj].forEach { obj in
             XCTAssertTrue(obj.isNil)

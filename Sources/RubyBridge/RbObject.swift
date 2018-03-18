@@ -220,6 +220,19 @@ extension RbObject {
         }
         self.init(obj)
     }
+
+    /// Create a Ruby Proc object from a Swift closure.
+    ///
+    /// - parameter procCallback: The callback for the proc.
+    /// - warning: You must not allow this `RbObject` to be deallocated before Ruby has
+    ///            finished with the proc, or the process will crash when Ruby calls it.
+    public convenience init(procCallback: @escaping RbProcCallback) {
+        if let obj = try? Ruby.get("Proc").call("new", blockRetention: .returned, blockCall: procCallback) {
+            self.init(obj)
+        } else {
+            self.init(rubyValue: Qnil)
+        }
+    }
 }
 
 // MARK: - String Convertible

@@ -93,7 +93,6 @@ typedef enum {
     RBB_JOB_TO_ULONG,
     RBB_JOB_TO_LONG,
     RBB_JOB_TO_DOUBLE,
-    RBB_JOB_PROC_NEW,
     RBB_JOB_PROC_CALL,
 } Rbb_job;
 
@@ -157,9 +156,6 @@ static VALUE rbb_protect_thunk(VALUE value)
         break;
     case RBB_JOB_TO_DOUBLE:
         d->toDoubleResult = NUM2DBL(rb_Float(d->value));
-        break;
-    case RBB_JOB_PROC_NEW:
-        rc = rb_proc_new(rbb_block_callback, (VALUE) d->blockContext);
         break;
     case RBB_JOB_PROC_CALL:
         rc = rb_proc_call_with_block(d->value, d->argc, d->argv, d->blockArg);
@@ -322,14 +318,6 @@ double rbb_obj2double_protect(VALUE v, int * _Nullable status)
     Rbb_protect_data data = { .job = RBB_JOB_TO_DOUBLE, .value = v };
     rbb_protect(&data, status);
     return data.toDoubleResult;
-}
-
-// rb_proc_new - probably can't raise but complicated enough not to be sure...
-VALUE rbb_proc_new_protect(void * _Nonnull context,
-                           int * _Nullable status)
-{
-    Rbb_protect_data data = { .job = RBB_JOB_PROC_NEW, .blockContext = context };
-    return rbb_protect(&data, status);
 }
 
 // rb_proc_call - arbitrary code

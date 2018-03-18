@@ -39,7 +39,7 @@ class TestProcs: XCTestCase {
             let expectedArgCount = 2
             let expectedResult = -7002
 
-            let proc = RbProc() { args in
+            let proc = RbObject() { args in
                 XCTAssertEqual(expectedArgCount, args.count)
                 XCTAssertEqual(expectedArg0, String(args[0]))
                 XCTAssertEqual(expectedArg1, Double(args[1]))
@@ -56,7 +56,7 @@ class TestProcs: XCTestCase {
 
     /// Proc detection
     func testNotProc() {
-        let proc = RbProc() { args in .nilObject }
+        let proc = RbObject() { args in .nilObject }
         print(proc)
         let object = proc.rubyObject
         do {
@@ -139,7 +139,7 @@ class TestProcs: XCTestCase {
         do {
             let badString = "Nope"
 
-            let proc = RbProc() { args in
+            let proc = RbObject() { args in
                 // call nonexistant method -> NoMethodError mentioning `badString`
                 try args[0].call(badString)
             }
@@ -161,7 +161,7 @@ class TestProcs: XCTestCase {
         do {
             let msg = "Ruby Exception!"
 
-            let proc = RbProc() { args in
+            let proc = RbObject() { args in
                 throw RbException(message: msg)
             }
 
@@ -181,7 +181,7 @@ class TestProcs: XCTestCase {
     func testProcWeirdException() {
         struct S: Error {}
         do {
-            let proc = RbProc() { args in
+            let proc = RbObject() { args in
                 throw S()
             }
 

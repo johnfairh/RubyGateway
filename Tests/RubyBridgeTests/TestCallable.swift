@@ -216,7 +216,7 @@ class TestCallable: XCTestCase {
 
         do {
             let expectedRes = "answer"
-            let proc = RbProc() { args in
+            let proc = RbObject() { args in
                 XCTAssertEqual(2, args.count)
                 XCTAssertEqual(22, Int(args[0]))
                 XCTAssertEqual("fish", String(args[1]))

@@ -104,7 +104,7 @@ class TestFailable: XCTestCase {
 
         let inst = getInstance()
 
-        let proc = RbProc() { args in .nilObject }
+        let proc = RbObject() { args in .nilObject }
 
         guard let _ = inst.failable.call("give_name", block: proc) else {
             XCTFail("Couldn't pass proc")

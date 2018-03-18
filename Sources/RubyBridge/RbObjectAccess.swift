@@ -29,9 +29,9 @@ import RubyBridgeHelpers
 /// various Swift methods here and their types.  The degrees of freedom are:
 /// 1. Call method by name or by symbol;
 /// 2. Pass positional and/or keyword arguments;
-/// 3. Optionally pass a block, that can be expressed as a Swift function or
+/// 3. Optionally pass a block that can be expressed as a Swift function or
 ///    a Ruby Proc.
-/// 4. Method can raise an exception, or return a value that can be ignored.
+/// 4. Method can either raise an exception or return a value.
 ///
 /// From the simple end:
 /// ```swift
@@ -41,7 +41,7 @@ import RubyBridgeHelpers
 /// ```swift
 /// do {
 ///     let result =
-///          try obj.call(myMethodSymbol,
+///          try obj.call(symbol: myMethodSymbol,
 ///                       args: [1, "3.5", myHash],
 ///                       kwArgs: [("mode", RbSymbol("debug")]) { blockArgs in
 ///                           blockArgs.forEach {
@@ -59,7 +59,7 @@ public class RbObjectAccess {
     private let getValue: () -> VALUE
 
     /// Swift objects whose lifetimes need to be tied to this one.
-    public private(set) var associatedObjects: [AnyObject]?
+    internal private(set) var associatedObjects: [AnyObject]?
 
     /// Set up Swift access to a Ruby object.
     /// - parameter getValue: Getter for the `VALUE` to be accessed.
@@ -231,7 +231,7 @@ extension RbObjectAccess {
     /// - parameter args: The positional arguments to the method.  None by default.
     /// - parameter kwArgs: The keyword arguments to the method.  None by default.
     /// - parameter blockRetention: Should the `blockCall` closure be retained for
-    ///             longer than this call?  See `RbBlockRetention`.
+    ///             longer than this call?  Default `.none`.  See `RbBlockRetention`.
     /// - parameter blockCall: Swift code to pass as a block to the method.
     /// - returns: The result of calling the method.
     /// - throws: `RbError.rubyException` if there is a Ruby exception.
@@ -301,7 +301,7 @@ extension RbObjectAccess {
     /// - parameter args: The positional arguments to the method.  None by default.
     /// - parameter kwArgs: The keyword arguments to the method.  None by default.
     /// - parameter blockRetention: Should the `blockCall` closure be retained for
-    ///             longer than this call?  See `RbBlockRetention`.
+    ///             longer than this call?  Default `.none`.  See `RbBlockRetention`.
     /// - parameter blockCall: Swift code to pass as a block to the method.
     /// - returns: The result of calling the method.
     /// - throws: `RbError.rubyException` if there is a Ruby exception.

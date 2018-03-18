@@ -83,13 +83,21 @@ let res = try arr.call("each", block: RbProc(object: RbSymbol("downcase")))
 
 ### Pass Swift code as a block
 
-Use a `call` variant with a `blockCall` argument.  Ruby:
+Use an `RbObjectAccess.call(...)` variant with a `blockCall` argument.  Ruby:
 ```ruby
 obj.meth { |x| puts(x) }
 ```
 RubyBridge:
 ```swift
 try obj.call("meth") { args in
+    print(args[0])
+    return .nilObject
+}
+```
+If the method causes the Ruby object to capture the block as a proc then you
+have to tell RubyBridge:
+```swift
+try obj.call("meth", blockRetention: .self) { args in
     print(args[0])
     return .nilObject
 }
@@ -111,6 +119,36 @@ result = try array.call("each") { args in
     }
     return .nilObject
 }
+```
+
+### Create a Proc with Swift code
+
+Use `RbObject.init(procCallback:)`.  Ruby:
+```ruby
+myProc = proc { |a, b| a + b }
+```
+RubyBridge:
+```swift
+myProc = RbObject() { args in
+    return args[0] + args[1]
+}
+```
+You must not let the `RbObject` expire while Ruby is holding on to the proc
+object or the program will crash.  For example if you pass `myProc` to a
+method of a Ruby object that captures the proc for later use, then you must
+not let that Swift value go out of scope until the Ruby object has died or
+otherwise guarantees never to invoke the proc.
+
+### Create a lambda with Swift code
+
+You can't: there's not much value and the API doesn't provide the argument
+policing.  If you really need to then this kind of thing should get you
+started:
+```swift
+let myLambda = try Ruby.call("lambda", blockRetention: .returned) { args in
+                   print("I got \(args.count) args!")
+                   return .nilObject
+               }
 ```
 
 ### Access class variables
@@ -210,14 +248,15 @@ if Ruby fails / the object doesn't support the method.  It's up to you to be
 sure the Ruby objects you're dealing with are of the right type.  See
 `RbObject` for more information on which these methods are.
 
-### Swift Procs
+### Swift closure retention
 
-You can create a Ruby proc implemented in Swift using `RbProc.init(callback:)`
-and then using `RbProc.rubyObject` either directly or by passing it to one of
-the `call` methods.  It is possible to decouple that `RbObject` from the
-underlying Ruby object, but part of the proc callback implementation relies
-on the Swift `RbObject` being alive.  You must not let the `RbObject` be
-deallocated until Ruby has finished with the underlying proc object.
+If you pass a Swift closure to a method as a block/proc/lambda that is used
+by Ruby after that method finishes -- ie. *not* the normal `#each`-type use --
+then you need to understand `RbBlockRetention`.
+
+The reason for all this is that calling Swift code from Ruby requires an
+intermediate Swift object, and RubyBridge needs to tie the lifetime of that
+Swift object to something else in the Swift world.
 
 ### Ruby code safety
 
