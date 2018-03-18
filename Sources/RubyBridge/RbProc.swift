@@ -152,16 +152,19 @@ internal enum RbProcUtils {
     }()
 
     /// Call a method on an object passing something as its block
-    internal static func doBlockCall(value: VALUE, methodId: ID, argValues: [VALUE], block: RbProcCallType) throws -> VALUE {
+    internal static func doBlockCall(value: VALUE,
+                                     methodId: ID,
+                                     argValues: [VALUE],
+                                     block: RbProcCallType) throws -> (AnyObject, VALUE) {
         let _ = initOnce
         let context = RbProcContext(block)
-        return try context.withRaw { rawContext in
+        return (context, try context.withRaw { rawContext in
             try RbVM.doProtect {
                 rbb_block_call_protect(value, methodId,
                                        Int32(argValues.count), argValues,
                                        rawContext, nil)
             }
-        }
+        })
     }
 
     /// Create a Proc object from a Swift closure

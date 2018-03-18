@@ -216,9 +216,12 @@ class TestProcs: XCTestCase {
     }
 
     // Lambda experiments
-    func skip_testLambda() {
+    func testLambda() {
         do {
-            let lambda = try Ruby.call("lambda") { args in
+            let lambda = try Ruby.call("lambda", retainBlock: true) { args in
+                if args.count != 2 {
+                    throw RbException(message: "Wrong number of args, expected 2 got \(args.count)")
+                }
                 return args[0] + args[1]
             }
 

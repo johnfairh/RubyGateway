@@ -58,10 +58,24 @@ public class RbObjectAccess {
     /// Getter for the `VALUE` associated with this object
     private let getValue: () -> VALUE
 
+    /// Swift objects whose lifetimes need to be tied to this one.
+    public private(set) var associatedObjects: [AnyObject]?
+
     /// Set up Swift access to a Ruby object.
     /// - parameter getValue: Getter for the `VALUE` to be accessed.
-    init(getValue: @escaping () -> VALUE) {
+    /// - parameter associatedObjects: Set of objects to reference.
+    init(getValue: @escaping () -> VALUE, associatedObjects: [AnyObject]? = nil) {
         self.getValue = getValue
+        self.associatedObjects = associatedObjects
+    }
+
+    /// Add a Swift object to be forgotten about when this one is.
+    func associate(object: AnyObject) {
+        if associatedObjects != nil {
+            associatedObjects?.append(object)
+        } else {
+            associatedObjects = [object]
+        }
     }
 
     // MARK: - Instance Variables
@@ -208,7 +222,7 @@ extension RbObjectAccess {
                      kwArgs: [(String, RbObjectConvertible)] = []) throws -> RbObject {
         try Ruby.setup()
         let methodId = try Ruby.getID(for: methodName)
-        return try doCall(id: methodId, args: args, kwArgs: kwArgs, block: nil, blockCall: nil)
+        return try doCall(id: methodId, args: args, kwArgs: kwArgs, retainBlock: false, block: nil, blockCall: nil)
     }
 
     /// Call a Ruby object method passing Swift code as a block.
@@ -216,6 +230,9 @@ extension RbObjectAccess {
     /// - parameter methodName: The name of the method to call.
     /// - parameter args: The positional arguments to the method.  None by default.
     /// - parameter kwArgs: The keyword arguments to the method.  None by default.
+    /// - parameter retainBlock: Should the object keep a reference to the `blockCall`
+    ///             closure.  Default `false`.  Set if the Ruby code will use the block
+    ///             outside the scope of the call.
     /// - parameter blockCall: Swift code to pass as a block to the method.
     /// - returns: The result of calling the method.
     /// - throws: `RbError.rubyException` if there is a Ruby exception.
@@ -226,12 +243,14 @@ extension RbObjectAccess {
     public func call(_ methodName: String,
                      args: [RbObjectConvertible] = [],
                      kwArgs: [(String, RbObjectConvertible)] = [],
-                     blockCall: RbProcCallback) throws -> RbObject {
+                     retainBlock: Bool = false,
+                     blockCall: @escaping RbProcCallback) throws -> RbObject {
         try Ruby.setup()
         let methodId = try Ruby.getID(for: methodName)
-        return try withoutActuallyEscaping(blockCall) { escapingBlockCall in
-            try doCall(id: methodId, args: args, kwArgs: kwArgs, block: nil, blockCall: escapingBlockCall)
-        }
+        return try doCall(id: methodId,
+                          args: args, kwArgs: kwArgs,
+                          retainBlock: retainBlock,
+                          blockCall: blockCall)
     }
 
     /// Call a Ruby object method passing a Ruby Proc as a block.
@@ -253,7 +272,7 @@ extension RbObjectAccess {
                      block: RbObjectConvertible) throws -> RbObject {
         try Ruby.setup()
         let methodId = try Ruby.getID(for: methodName)
-        return try doCall(id: methodId, args: args, kwArgs: kwArgs, block: block, blockCall: nil)
+        return try doCall(id: methodId, args: args, kwArgs: kwArgs, block: block)
     }
 
     /// Call a Ruby object method using a symbol.
@@ -273,7 +292,7 @@ extension RbObjectAccess {
                      kwArgs: [(String, RbObjectConvertible)] = []) throws -> RbObject {
         try Ruby.setup()
         return try symbol.rubyObject.withSymbolId { methodId in
-            try doCall(id: methodId, args: args, kwArgs: kwArgs, block: nil, blockCall: nil)
+            try doCall(id: methodId, args: args, kwArgs: kwArgs)
         }
     }
 
@@ -282,6 +301,9 @@ extension RbObjectAccess {
     /// - parameter symbol: The symbol for the name of the method to call.
     /// - parameter args: The positional arguments to the method.  None by default.
     /// - parameter kwArgs: The keyword arguments to the method.  None by default.
+    /// - parameter retainBlock: Should the object keep a reference to the `blockCall`
+    ///             closure.  Default `false`.  Set if the Ruby code will use the block
+    ///             outside the scope of the call.
     /// - parameter blockCall: Swift code to pass as a block to the method.
     /// - returns: The result of calling the method.
     /// - throws: `RbError.rubyException` if there is a Ruby exception.
@@ -293,12 +315,11 @@ extension RbObjectAccess {
     public func call(symbol: RbObjectConvertible,
                      args: [RbObjectConvertible] = [],
                      kwArgs: [(String, RbObjectConvertible)] = [],
-                     blockCall: RbProcCallback) throws -> RbObject {
+                     retainBlock: Bool = false,
+                     blockCall: @escaping RbProcCallback) throws -> RbObject {
         try Ruby.setup()
         return try symbol.rubyObject.withSymbolId { methodId in
-            try withoutActuallyEscaping(blockCall) { escapingBlockCall in
-                try doCall(id: methodId, args: args, kwArgs: kwArgs, block: nil, blockCall: escapingBlockCall)
-            }
+            try doCall(id: methodId, args: args, kwArgs: kwArgs, retainBlock: retainBlock, blockCall: blockCall)
         }
     }
 
@@ -322,7 +343,7 @@ extension RbObjectAccess {
                      block: RbObjectConvertible) throws -> RbObject {
         try Ruby.setup()
         return try symbol.rubyObject.withSymbolId { methodId in
-            try doCall(id: methodId, args: args, kwArgs: kwArgs, block: block, blockCall: nil)
+            try doCall(id: methodId, args: args, kwArgs: kwArgs, block: block)
         }
     }
 
@@ -330,8 +351,9 @@ extension RbObjectAccess {
     private func doCall(id: ID,
                         args: [RbObjectConvertible],
                         kwArgs: [(String, RbObjectConvertible)],
-                        block: RbObjectConvertible?,
-                        blockCall: RbProcCallback?) throws -> RbObject {
+                        retainBlock: Bool = false,
+                        block: RbObjectConvertible? = nil,
+                        blockCall: RbProcCallback? = nil) throws -> RbObject {
         // Sort out unlikely block errors
         let blockObj: RbObject?
         if let block = block {
@@ -351,14 +373,21 @@ extension RbObjectAccess {
         // Do call - more complicated if block is involved
         let resultVal = try argObjects.withRubyValues { argValues -> VALUE in
             if let blockCall = blockCall {
-                return try RbProcUtils.doBlockCall(value: getValue(), methodId: id,
-                                                   argValues: argValues,
-                                                   block: .callback(blockCall))
-            } else if let blockObj = blockObj {
-                return try blockObj.withRubyValue { blockValue in
+                let (context, value) =
                     try RbProcUtils.doBlockCall(value: getValue(), methodId: id,
                                                 argValues: argValues,
-                                                block: .value(blockValue))
+                                                block: .callback(blockCall))
+                if retainBlock {
+                    associate(object: context)
+                }
+                return value
+            } else if let blockObj = blockObj {
+                return try blockObj.withRubyValue { blockValue in
+                    let (_, value) =
+                        try RbProcUtils.doBlockCall(value: getValue(), methodId: id,
+                                                    argValues: argValues,
+                                                    block: .value(blockValue))
+                    return value
                 }
             }
             return try RbVM.doProtect {

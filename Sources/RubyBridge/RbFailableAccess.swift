@@ -63,19 +63,23 @@ extension RbFailableAccess {
 
     /// Call a method of a Ruby object passing Swift code as a block.
     ///
-    /// This is a non-throwing version of `RbObjectAccess.call(_:args:kwArgs:blockCall:)`.
+    /// This is a non-throwing version of `RbObjectAccess.call(_:args:kwArgs:retainBlock:blockCall:)`.
     /// See `RbError.history` to retrieve error details.
     ///
     /// - parameter method: The name of the method to call.
     /// - parameter args: The positional arguments to the method, none by default.
     /// - parameter kwArgs: The keyword arguments to the method, none by default.
+    /// - parameter retainBlock: Should the object keep a reference to the `blockCall`
+    ///             closure.  Default `false`.  Set if the Ruby code will use the block
+    ///             outside the scope of the call.
     /// - parameter blockCall: Swift code to pass as a block to the method.
     /// - returns: An `RbObject` for the result of the method, or `nil` if an error occurred.
     public func call(_ method: String,
                      args: [RbObjectConvertible] = [],
                      kwArgs: [(String, RbObjectConvertible)] = [],
-                     blockCall: RbProcCallback) -> RbObject? {
-        return try? access.call(method, args: args, kwArgs: kwArgs, blockCall: blockCall)
+                     retainBlock: Bool = false,
+                     blockCall: @escaping RbProcCallback) -> RbObject? {
+        return try? access.call(method, args: args, kwArgs: kwArgs, retainBlock: retainBlock, blockCall: blockCall)
     }
 
     /// Call a method of a Ruby object passing a Ruby Proc as a block.
@@ -113,20 +117,24 @@ extension RbFailableAccess {
 
     /// Call a method of a Ruby object using a symbol passing Swift code as a block.
     ///
-    /// This is a non-throwing version of `RbObjectAccess.call(symbol:args:kwArgs:blockCall:)`.
+    /// This is a non-throwing version of `RbObjectAccess.call(symbol:args:kwArgs:retainBlock:blockCall:)`.
     /// See `RbError.history` to retrieve error details.
     ///
     /// - parameter symbol: A symbol for the method to call.
     /// - parameter args: The positional arguments to the method, none by default.
     /// - parameter kwArgs: The keyword arguments to the method, none by default.
+    /// - parameter retainBlock: Should the object keep a reference to the `blockCall`
+    ///             closure.  Default `false`.  Set if the Ruby code will use the block
+    ///             outside the scope of the call.
     /// - parameter blockCall: Swift code to pass as a block to the method.
     /// - returns: An `RbObject` for the result of the method, or `nil` if an error occurred.
     @discardableResult
     public func call(symbol: RbObjectConvertible,
                      args: [RbObjectConvertible] = [],
                      kwArgs: [(String, RbObjectConvertible)] = [],
-                     blockCall: RbProcCallback) -> RbObject? {
-        return try? access.call(symbol: symbol, args: args, kwArgs: kwArgs, blockCall: blockCall)
+                     retainBlock: Bool = false,
+                     blockCall: @escaping RbProcCallback) -> RbObject? {
+        return try? access.call(symbol: symbol, args: args, kwArgs: kwArgs, retainBlock: retainBlock, blockCall: blockCall)
     }
 
     /// Call a method of a Ruby object using a symbol passing a Ruby Proc as a block.
