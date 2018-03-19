@@ -19,6 +19,7 @@ XCTMain([
     testCase(TestConstants.allTests),
     testCase(TestVars.allTests),
     testCase(TestCallable.allTests),
+    testCase(TestProcs.allTests),
     testCase(TestErrors.allTests),
     testCase(TestFailable.allTests)
 ])

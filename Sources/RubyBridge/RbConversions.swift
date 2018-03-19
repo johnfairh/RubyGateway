@@ -33,7 +33,7 @@ public protocol RbObjectConvertible {
 extension RbObject {
     /// Create an `RbObject` from a Swift type.
     ///
-    /// `RubyBridge` conforms most of the Swift standard library types
+    /// RubyBridge conforms most of the Swift standard library types
     /// to `RbObjectConvertible`.
     public convenience init(_ value: RbObjectConvertible) {
         self.init(value.rubyObject)

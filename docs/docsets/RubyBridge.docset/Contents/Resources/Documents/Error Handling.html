@@ -61,7 +61,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Main APIs.html">Main APIs</a>
+            <a class="nav-group-name-link" href="Main%20APIs.html">Main APIs</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/RbBridge.html">RbBridge</a>
@@ -78,8 +78,20 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Other APIs.html">Other APIs</a>
+            <a class="nav-group-name-link" href="Other%20APIs.html">Other APIs</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Other%20APIs.html#/s:10RubyBridge15RbBlockCallbacka">RbBlockCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/RbBlockRetention.html">RbBlockRetention</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/RbBreak.html">RbBreak</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/RbProc.html">RbProc</a>
+              </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/RbSymbol.html">RbSymbol</a>
               </li>
@@ -89,7 +101,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Error Handling.html">Error Handling</a>
+            <a class="nav-group-name-link" href="Error%20Handling.html">Error Handling</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums/RbError.html">RbError</a>
@@ -106,7 +118,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Swift Interop.html">Swift Interop</a>
+            <a class="nav-group-name-link" href="Swift%20Interop.html">Swift Interop</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a>
@@ -184,7 +196,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An error raised by the <code>RubyBridge</code> module.  Ruby exceptions
+                        <p>An error raised by the RubyBridge module.  Ruby exceptions
 generate <code><a href="Enums/RbError.html#/s:10RubyBridge7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code>, the other cases correspond
 to error conditions encountered by the Swift software.</p>
 
@@ -220,8 +232,11 @@ to error conditions encountered by the Swift software.</p>
                         <p>A Ruby exception.</p>
 
 <p>This provides some convenience methods on top of the underlying <code>Exception</code>
-object.  <code>RubyBridge</code> does not throw these directly, it always wraps them in
+object.  RubyBridge does not throw these directly, it always wraps them in
 an <code><a href="Enums/RbError.html">RbError</a></code> instance.</p>
+
+<p>Create and throw one of these to raise a Ruby exception from
+a block implemented in Swift by an <code><a href="Other%20APIs.html#/s:10RubyBridge15RbBlockCallbacka">RbBlockCallback</a></code>.</p>
 
                         <a href="Structs/RbException.html" class="slightly-smaller">See more</a>
                       </div>
@@ -234,7 +249,7 @@ an <code><a href="Enums/RbError.html">RbError</a></code> instance.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbError.swift#L123-L165">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbError.swift#L152-L204">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

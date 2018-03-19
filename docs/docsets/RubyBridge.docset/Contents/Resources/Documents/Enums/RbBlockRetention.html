@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Float Extension Reference</title>
+    <title>RbBlockRetention Enumeration Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Extension/Float" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Enum/RbBlockRetention" class="dashAnchor"></a>
 
-    <a title="Float Extension Reference"></a>
+    <a title="RbBlockRetention Enumeration Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -44,7 +44,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">RubyBridge Reference</a>
       <img class="carat" src="../img/carat.png" />
-      Float Extension Reference
+      RbBlockRetention Enumeration Reference
     </p>
 
     <div class="content-wrapper">
@@ -174,14 +174,23 @@
 
         <section class="section">
           <div class="section-content">
-            <h1>Float</h1>
+            <h1>RbBlockRetention</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Float</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">RbBlockRetention</span></code></pre>
 
                 </div>
               </div>
-            
+            <p>Control over how Swift closures passed as blocks are retained.</p>
+
+<p>When you pass a Swift closure as a block, for example using
+<code><a href="../Classes/RbObjectAccess.html#/s:10RubyBridge14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pG4argsSaySS_AaG_ptG6kwArgsAA0C14BlockRetentionO05blockL0AFSayAFGKc0M4CalltKF">RbObjectAccess.call(_:args:kwArgs:blockRetention:blockCall:)</a></code>, RubyBridge
+needs some help to understand how Ruby will use the closure.</p>
+
+<p>The easiest thing to get wrong is using the default of <code>.none</code> when
+Ruby retains the block for use later.  This causes a hard crash in
+<code>RbBlockContext.from(raw:)</code> when Ruby tries to call the block.</p>
+
           </div>
         </section>
 
@@ -192,9 +201,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:Sf10RubyBridgeESfSgAA8RbObjectCcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Sf10RubyBridgeESfSgAA8RbObjectCcfc">init(_:)</a>
+                    <a name="/s:10RubyBridge16RbBlockRetentionO4noneA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/none" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RubyBridge16RbBlockRetentionO4noneA2CmF">none</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -202,30 +211,21 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Try to get a <code>Float</code> floating-point representation of an <code><a href="../Classes/RbObject.html">RbObject</a></code>.</p>
-
-<p>It fails if the Ruby value:</p>
-
-<ol>
-<li>Is numeric and does not fit into the Swift type; or</li>
-<li>Cannot be made into a suitable numeric via <code>to_f</code>.</li>
-</ol>
-
-<p>See <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO7historyAC7HistoryVvZ">RbError.history</a></code> to find out why a conversion failed.</p>
-
-<p>Flavors of NaN are not preserved across the Ruby&lt;-&gt;Swift interface.</p>
+                        <p>Do not retain the closure.  The default, appropriate when the block
+is used only during execution of the method it is passed to.  For
+example <code>#each</code>.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">?(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="k">none</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbNumericConversions.swift#L215-L225">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbBlockCall.swift#L73">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -233,9 +233,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:Sf10RubyBridgeE10rubyObjectAA02RbD0Cv"></a>
-                    <a name="//apple_ref/swift/Property/rubyObject" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Sf10RubyBridgeE10rubyObjectAA02RbD0Cv">rubyObject</a>
+                    <a name="/s:10RubyBridge16RbBlockRetentionO4selfA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/self" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RubyBridge16RbBlockRetentionO4selfA2CmF">self</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -243,19 +243,52 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A Ruby object for the number.</p>
+                        <p>Retain the closure for as long as the object that owns the method.
+Use when a method stores a closure in an object property for later use.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">rubyObject</span><span class="p">:</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="p">`</span><span class="nv">self</span><span class="p">`</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbNumericConversions.swift#L228-L230">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbBlockCall.swift#L77">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10RubyBridge16RbBlockRetentionO8returnedA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/returned" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RubyBridge16RbBlockRetentionO8returnedA2CmF">returned</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Retain the closure for as long as the object returned by the method.
+Use when the method is a factory that produces some object and passes
+that object the closure.  For example <code>Proc#new</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">returned</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbBlockCall.swift#L82">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

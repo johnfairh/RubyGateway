@@ -22,14 +22,60 @@ import RubyBridgeHelpers
 /// when Ruby raises an exception.  Use the `RbObjectAccess.failable` adapter to
 /// access an alternative API that returns `nil` on errors instead.  You can still
 /// see any Ruby exceptions via `RbError.history`.
+///
+/// ## Calling methods
+///
+/// Ruby has a few different ways to call methods that are reflected in the
+/// various Swift methods here and their types.  The degrees of freedom are:
+/// 1. Call method by name or by symbol;
+/// 2. Pass positional and/or keyword arguments;
+/// 3. Optionally pass a block that can be expressed as a Swift function or
+///    a Ruby Proc.
+/// 4. Method can either raise an exception or return a value.
+///
+/// From the simple end:
+/// ```swift
+/// try! obj.call("myMethod")
+/// ```
+/// ...to:
+/// ```swift
+/// do {
+///     let result =
+///          try obj.call(symbol: myMethodSymbol,
+///                       args: [1, "3.5", myHash],
+///                       kwArgs: [("mode", RbSymbol("debug")]) { blockArgs in
+///                           blockArgs.forEach {
+///                               process($0)
+///                           }
+///                       }
+/// } catch RbError.rubyException(let exn) {
+///     handleErrors(error)
+/// } catch {
+///     ...
+/// }
+/// ```
 public class RbObjectAccess {
     /// Getter for the `VALUE` associated with this object
     private let getValue: () -> VALUE
 
+    /// Swift objects whose lifetimes need to be tied to this one.
+    internal private(set) var associatedObjects: [AnyObject]?
+
     /// Set up Swift access to a Ruby object.
     /// - parameter getValue: Getter for the `VALUE` to be accessed.
-    init(getValue: @escaping () -> VALUE) {
+    /// - parameter associatedObjects: Set of objects to reference.
+    init(getValue: @escaping () -> VALUE, associatedObjects: [AnyObject]? = nil) {
         self.getValue = getValue
+        self.associatedObjects = associatedObjects
+    }
+
+    /// Add a Swift object to be forgotten about when this one is.
+    func associate(object: AnyObject) {
+        if associatedObjects != nil {
+            associatedObjects?.append(object)
+        } else {
+            associatedObjects = [object]
+        }
     }
 
     // MARK: - Instance Variables
@@ -170,8 +216,6 @@ extension RbObjectAccess {
     ///           `RbError.duplicateKwArg` if there are duplicate keywords in `kwArgs`.
     ///
     /// For a version that does not throw, see `failable`.
-    ///
-    /// TODO: blocks.
     @discardableResult
     public func call(_ methodName: String,
                      args: [RbObjectConvertible] = [],
@@ -179,6 +223,55 @@ extension RbObjectAccess {
         try Ruby.setup()
         let methodId = try Ruby.getID(for: methodName)
         return try doCall(id: methodId, args: args, kwArgs: kwArgs)
+    }
+
+    /// Call a Ruby object method passing Swift code as a block.
+    ///
+    /// - parameter methodName: The name of the method to call.
+    /// - parameter args: The positional arguments to the method.  None by default.
+    /// - parameter kwArgs: The keyword arguments to the method.  None by default.
+    /// - parameter blockRetention: Should the `blockCall` closure be retained for
+    ///             longer than this call?  Default `.none`.  See `RbBlockRetention`.
+    /// - parameter blockCall: Swift code to pass as a block to the method.
+    /// - returns: The result of calling the method.
+    /// - throws: `RbError.rubyException` if there is a Ruby exception.
+    ///           `RbError.duplicateKwArg` if there are duplicate keywords in `kwArgs`.
+    ///
+    /// For a version that does not throw, see `failable`.
+    @discardableResult
+    public func call(_ methodName: String,
+                     args: [RbObjectConvertible] = [],
+                     kwArgs: [(String, RbObjectConvertible)] = [],
+                     blockRetention: RbBlockRetention = .none,
+                     blockCall: @escaping RbBlockCallback) throws -> RbObject {
+        try Ruby.setup()
+        let methodId = try Ruby.getID(for: methodName)
+        return try doCall(id: methodId,
+                          args: args, kwArgs: kwArgs,
+                          blockRetention: blockRetention,
+                          blockCall: blockCall)
+    }
+
+    /// Call a Ruby object method passing a Ruby Proc as a block.
+    ///
+    /// - parameter methodName: The name of the method to call.
+    /// - parameter args: The positional arguments to the method.  None by default.
+    /// - parameter kwArgs: The keyword arguments to the method.  None by default.
+    /// - parameter block: A Ruby proc to pass as a block to the method.
+    /// - returns: The result of calling the method.
+    /// - throws: `RbError.rubyException` if there is a Ruby exception.
+    ///           `RbError.duplicateKwArg` if there are duplicate keywords in `kwArgs`.
+    ///           `RbError.badType` if `block` does not convert to a Proc.
+    ///
+    /// For a version that does not throw, see `failable`.
+    @discardableResult
+    public func call(_ methodName: String,
+                     args: [RbObjectConvertible] = [],
+                     kwArgs: [(String, RbObjectConvertible)] = [],
+                     block: RbObjectConvertible) throws -> RbObject {
+        try Ruby.setup()
+        let methodId = try Ruby.getID(for: methodName)
+        return try doCall(id: methodId, args: args, kwArgs: kwArgs, block: block)
     }
 
     /// Call a Ruby object method using a symbol.
@@ -192,39 +285,116 @@ extension RbObjectAccess {
     ///           `RbError.duplicateKwArg` if there are duplicate keywords in `kwArgs`.
     ///
     /// For a version that does not throw, see `failable`.
-    ///
-    /// TODO: blocks.
     @discardableResult
     public func call(symbol: RbObjectConvertible,
                      args: [RbObjectConvertible] = [],
                      kwArgs: [(String, RbObjectConvertible)] = []) throws -> RbObject {
         try Ruby.setup()
-        let symbolObj = symbol.rubyObject
-        guard symbolObj.rubyType == .T_SYMBOL else {
-            throw RbError.badType("Expected T_SYMBOL, got \(symbolObj.rubyType.rawValue) \(symbol)")
+        return try symbol.rubyObject.withSymbolId { methodId in
+            try doCall(id: methodId, args: args, kwArgs: kwArgs)
         }
-        return try symbolObj.withRubyValue { symValue in
-            try doCall(id: rb_sym2id(symValue), args: args, kwArgs: kwArgs)
+    }
+
+    /// Call a Ruby object method using a symbol passing Swift code as a block.
+    ///
+    /// - parameter symbol: The symbol for the name of the method to call.
+    /// - parameter args: The positional arguments to the method.  None by default.
+    /// - parameter kwArgs: The keyword arguments to the method.  None by default.
+    /// - parameter blockRetention: Should the `blockCall` closure be retained for
+    ///             longer than this call?  Default `.none`.  See `RbBlockRetention`.
+    /// - parameter blockCall: Swift code to pass as a block to the method.
+    /// - returns: The result of calling the method.
+    /// - throws: `RbError.rubyException` if there is a Ruby exception.
+    ///           `RbError.badType` if `symbol` is not a symbol.
+    ///           `RbError.duplicateKwArg` if there are duplicate keywords in `kwArgs`.
+    ///
+    /// For a version that does not throw, see `failable`.
+    @discardableResult
+    public func call(symbol: RbObjectConvertible,
+                     args: [RbObjectConvertible] = [],
+                     kwArgs: [(String, RbObjectConvertible)] = [],
+                     blockRetention: RbBlockRetention = .none,
+                     blockCall: @escaping RbBlockCallback) throws -> RbObject {
+        try Ruby.setup()
+        return try symbol.rubyObject.withSymbolId { methodId in
+            try doCall(id: methodId, args: args, kwArgs: kwArgs, blockRetention: blockRetention, blockCall: blockCall)
+        }
+    }
+
+    /// Call a Ruby object method using a symbol passing a Ruby Proc as a block.
+    ///
+    /// - parameter symbol: The symbol for the name of the method to call.
+    /// - parameter args: The positional arguments to the method.  None by default.
+    /// - parameter kwArgs: The keyword arguments to the method.  None by default.
+    /// - parameter block: A Ruby proc to pass as a block to the method.
+    /// - returns: The result of calling the method.
+    /// - throws: `RbError.rubyException` if there is a Ruby exception.
+    ///           `RbError.badType` if `symbol` is not a symbol.
+    ///           `RbError.duplicateKwArg` if there are duplicate keywords in `kwArgs`.
+    ///           `RbError.badType` if `block` does not convert to a Proc.
+    ///
+    /// For a version that does not throw, see `failable`.
+    @discardableResult
+    public func call(symbol: RbObjectConvertible,
+                     args: [RbObjectConvertible] = [],
+                     kwArgs: [(String, RbObjectConvertible)] = [],
+                     block: RbObjectConvertible) throws -> RbObject {
+        try Ruby.setup()
+        return try symbol.rubyObject.withSymbolId { methodId in
+            try doCall(id: methodId, args: args, kwArgs: kwArgs, block: block)
         }
     }
 
     /// Backend to method-call / message-send.
     private func doCall(id: ID,
                         args: [RbObjectConvertible],
-                        kwArgs: [(String, RbObjectConvertible)]) throws -> RbObject {
+                        kwArgs: [(String, RbObjectConvertible)],
+                        blockRetention: RbBlockRetention = .none,
+                        block: RbObjectConvertible? = nil,
+                        blockCall: RbBlockCallback? = nil) throws -> RbObject {
+        // Sort out unlikely block errors
+        let blockObj: RbObject?
+        if let block = block {
+            blockObj = block.rubyObject
+            try blockObj?.checkIsProc()
+        } else {
+            blockObj = nil
+        }
+
+        // Decode arguments
         var argObjects = args.map { $0.rubyObject }
 
         if kwArgs.count > 0 {
             try argObjects.append(buildKwArgsHash(from: kwArgs))
         }
 
-        let resultVal = try argObjects.withRubyValues { argValues in
-            try RbVM.doProtect {
-                rbb_funcallv_protect(getValue(), id, Int32(argValues.count), argValues, nil)
-            }
-        }
+        // Do call - more complicated if block is involved
+        return try argObjects.withRubyValues { argValues -> RbObject in
+            if let blockCall = blockCall {
+                let (context, value) =
+                    try RbBlock.doBlockCall(value: getValue(), methodId: id,
+                                            argValues: argValues,
+                                            blockCall: blockCall)
 
-        return RbObject(rubyValue: resultVal)
+                let retObject = RbObject(rubyValue: value)
+
+                switch blockRetention {
+                case .none: break
+                case .self: associate(object: context)
+                case .returned: retObject.associate(object: context)
+                }
+                return retObject
+            } else if let blockObj = blockObj {
+                return RbObject(rubyValue: try blockObj.withRubyValue { blockValue in
+                    try RbBlock.doBlockCall(value: getValue(), methodId: id,
+                                            argValues: argValues,
+                                            block: blockValue)
+                })
+            }
+            return RbObject(rubyValue: try RbVM.doProtect {
+                rbb_funcallv_protect(getValue(), id, Int32(argValues.count), argValues, nil)
+            })
+        }
     }
 
     /// Build a keyword args hash.  The keys are Symbols of the keywords.
@@ -242,11 +412,15 @@ extension RbObjectAccess {
         }
         return RbObject(rubyValue: hashValue)
     }
+}
 
+// MARK: - Attributes
+
+extension RbObjectAccess {
     /// Get an attribute of a Ruby object.
     ///
     /// Attributes are declared with `:attr_accessor` and so on -- this routine is a
-    /// simple wrapper around `call(...)` for symmetry with `set(...)`.
+    /// simple wrapper around `call(...)` for symmetry with `setAttribute(...)`.
     ///
     /// For a version that does not throw, see `failable`.
     ///

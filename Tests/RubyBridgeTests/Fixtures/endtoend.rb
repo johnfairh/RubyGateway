@@ -11,5 +11,13 @@ module RubyBridge
         def to_s
             "#{name} (version #{version})"
         end
+
+        def give_name
+            yield self.name
+        end
+
+        def always_raise
+            raise "Always raising"
+        end
     end
 end

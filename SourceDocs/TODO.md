@@ -4,11 +4,6 @@ Build
 * Cocoapods
 * Linux Travis
 
-Callbacks
-* Magic & operator
-* Swift as a proc/block to Ruby code
-* Ability for Swift to raise Ruby exceptions?
-
 ## "1.0" feeling 
 
 Collection translation, needs 4.1

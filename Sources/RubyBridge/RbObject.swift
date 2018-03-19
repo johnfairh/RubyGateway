@@ -51,7 +51,7 @@ import RubyBridgeHelpers
 ///
 /// `RbObject` conforms to `Hashable`, `Equatable`, and `Comparable` protocols by
 /// forwarding to the corresponding Ruby methods.  Beware though that it is easy
-/// to trigger Ruby errors here that currently cause `RubyBridge` to crash.  For
+/// to trigger Ruby errors here that currently cause RubyBridge to crash.  For
 /// example this is poison:
 /// ```swift
 /// RbObject(3) < RbObject("barney")
@@ -96,10 +96,10 @@ public final class RbObject: RbObjectAccess {
     public init(_ value: RbObject) {
         valueBox = rbb_value_dup(value.valueBox);
         let rubyValue = valueBox.pointee.value
-        super.init(getValue: { rubyValue })
+        super.init(getValue: { rubyValue }, associatedObjects: value.associatedObjects)
     }
 
-    /// Allow the tracked object to be GCed when we go out of scope.
+    /// Allow the tracked Ruby object to be GCed when we go out of scope.
     deinit {
         rbb_value_free(valueBox)
     }
@@ -148,6 +148,30 @@ public final class RbObject: RbObjectAccess {
     public static let nilObject = RbObject(rubyValue: Qnil)
 }
 
+// MARK: - In-module utility
+
+extension RbObject {
+    /// Check object is a symbol
+    func checkIsSymbol() throws {
+        guard rubyType == .T_SYMBOL else {
+            throw RbError.badType("Expected T_SYMBOL, got \(rubyType.rawValue) \(self)")
+        }
+    }
+
+    /// Get the 'id' associated with this symbol object
+    func withSymbolId<T>(call: (ID) throws -> T) throws -> T {
+        try checkIsSymbol()
+        return try call(rb_sym2id(rubyValue))
+    }
+
+    /// Check object is a proc
+    func checkIsProc() throws {
+        guard rb_obj_is_proc(rubyValue) == Qtrue else {
+            throw RbError.badType("Expected proc, actual type: \(rubyType)")
+        }
+    }
+}
+
 // MARK: - Useful Initializers
 
 extension RbObject {
@@ -167,6 +191,47 @@ extension RbObject {
             return nil
         }
         self.init(obj)
+    }
+
+    /// Create an instance of a given Ruby class passing a Swift closure as a block.
+    ///
+    /// Fails (returns `nil`) if anything goes wrong along the way - check `RbError.history` to
+    /// find out what failed.
+    ///
+    /// - parameter ofClass: Name of the class to instantiate.  Can contain `::` to drill
+    ///             down into module/etc. scope.
+    /// - parameter args: positional arguments to pass to `new` call for the object.  Default none.
+    /// - parameter kwArgs: keyword arguments to pass to the `new` call for the object.  Default none.
+    /// - parameter retainBlock: Should `blockCall` be retained by the object?  Default `false`.  Set
+    ///             `true` if Ruby uses the block after this call.  For example creating a Proc object
+    ///             using `Proc#new`.
+    /// - parameter blockCall: Swift code to pass as a block to the method.
+    public convenience init?(ofClass className: String,
+                             args: [RbObjectConvertible] = [],
+                             kwArgs: [(String, RbObjectConvertible)] = [],
+                             retainBlock: Bool = false,
+                             blockCall: @escaping RbBlockCallback) {
+        let retention: RbBlockRetention = retainBlock ? .returned : .none
+        guard let obj = try? Ruby.get(className).call("new",
+                                                      args: args, kwArgs: kwArgs,
+                                                      blockRetention: retention,
+                                                      blockCall: blockCall) else {
+            return nil
+        }
+        self.init(obj)
+    }
+
+    /// Create a Ruby Proc object from a Swift closure.
+    ///
+    /// - parameter blockCall: The callback for the proc.
+    /// - warning: You must not allow this `RbObject` to be deallocated before Ruby has
+    ///            finished with the block, or the process will crash when Ruby calls it.
+    public convenience init(blockCall: @escaping RbBlockCallback) {
+        if let obj = try? Ruby.get("Proc").call("new", blockRetention: .returned, blockCall: blockCall) {
+            self.init(obj)
+        } else {
+            self.init(rubyValue: Qnil)
+        }
     }
 }
 

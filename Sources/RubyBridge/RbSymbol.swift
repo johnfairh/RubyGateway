@@ -14,7 +14,7 @@ import CRuby
 /// obj.meth(:value)
 /// ```
 ///
-/// Then the `RubyBridge` version is:
+/// Then the RubyBridge version is:
 /// ```swift
 /// try obj.call("meth", args: [RbSymbol("value")])
 /// ```

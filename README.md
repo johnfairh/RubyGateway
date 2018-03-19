@@ -23,9 +23,9 @@ programs.  It's easy to pass Swift datatypes into Ruby and turn Ruby objects
 back into Swift types.
 
 This project is [young](https://johnfairh.github.io/RubyBridge/todo.html):
-biggest missing features right now are collection types and calling Swift code
-from Ruby.  The eventual goal is to allow implementation of Ruby classes in
-Swift to enable Ruby as a sandboxed DSL/scripting language for Swift applications.
+biggest missing features right now are collection types.  The eventual goal
+is to allow implementation of Ruby classes in Swift to enable Ruby as a
+sandboxed DSL/scripting language for Swift applications.
 
 See [CRuby](https://github.com/johnfairh/CRuby) if you are looking for a
 low-level Ruby C API wrapper.
@@ -91,6 +91,13 @@ try! student.call("add_score", args: [readingSubject, 35])
 let avgScoreObj = try! student.call("mean_score_for_subject", args: [readingSubject])
 let avgScore = Double(avgScoreObj)!
 print("Mean score is \(avgScore)")
+
+// Pass Swift code as a block
+let scores = try! student.get("all_scores")
+scores.call("each") { args in
+    print("Subject: \(args[0]) Score: \(args[1])")
+    return .nilObject
+}
 ```
 
 ## Documentation

@@ -1,6 +1,6 @@
 # Using RubyBridge
 
-This document contains notes on using `RubyBridge`.  For installation tips
+This document contains notes on using RubyBridge.  For installation tips
 see [the README](index.html).
 * [How to use the framework](#general-usage)
 * [How to do various Ruby tasks](#how-to)
@@ -30,9 +30,10 @@ do {
 Create objects using `RbObject.init(ofClass:args:kwArgs:)`.  Pass Swift types
 or `RbObject`s to the `args` parameter.
 
-Use `RbObject.call(_:args:kwArgs)` [link: `RbObjectAccess.call(_:args:kwArgs)`]
-to call methods on the object.  See `RbObjectAccess` for more object
-operations.  Again pass Swift types or `RbObject`s in the `args` parameter.
+Use `RbObjectAccess.call(_:args:kwArgs:)` to call methods on the object.  See
+`RbObjectAccess` for more object operations and variations on `call` including
+passing Swift code as a block.  Again pass Swift types or `RbObject`s in the
+`args` parameter.
 
 Use optional initializers to convert from `RbObject`s back to Swift types, or
 implicitly/explicitly access `RbObject.description` if you just want `String`.
@@ -53,6 +54,11 @@ do {
 
 ## How to ...
 
+A few Ruby-ish tasks.  These are more long-winded in Swift.  The idea here
+though is not to let you write Ruby using Swift: use Ruby to do that!  But
+rather to provide a layer that lets you bridge between Ruby and Swift code,
+which will sometimes require driving the Ruby code in these ways.
+
 ### Pass a symbol as an argument
 
 Use `RbSymbol`.  Ruby:
@@ -61,7 +67,88 @@ res = obj.meth(:value)
 ```
 RubyBridge:
 ```swift
-let res = obj.call("meth", args: [RbSymbol("value")])
+let res = try obj.call("meth", args: [RbSymbol("value")])
+```
+
+### Pass a method as a block
+
+Use `RbProc` and `RbSymbol`.  Ruby:
+```ruby
+res = arr.each(&:downcase)
+```
+RubyBridge:
+```swift
+let res = try arr.call("each", block: RbProc(object: RbSymbol("downcase")))
+```
+
+### Pass Swift code as a block
+
+Use an `RbObjectAccess.call(...)` variant with a `blockCall` argument.  Ruby:
+```ruby
+obj.meth { |x| puts(x) }
+```
+RubyBridge:
+```swift
+try obj.call("meth") { args in
+    print(args[0])
+    return .nilObject
+}
+```
+If the method causes the Ruby object to capture the block as a proc then you
+have to tell RubyBridge:
+```swift
+try obj.call("meth", blockRetention: .self) { args in
+    print(args[0])
+    return .nilObject
+}
+```
+
+### Use 'break' in a Swift block
+
+Throw an `RbBreak`.  Ruby:
+```ruby
+result = array.each do |item|
+   break item if f(item)
+end
+```
+RubyBridge:
+```swift
+result = try array.call("each") { args in
+    if f(args[0]) {
+        throw RbBreak(with: args[0])
+    }
+    return .nilObject
+}
+```
+
+### Create a Proc with Swift code
+
+Use `RbObject.init(blockCall:)`.  Ruby:
+```ruby
+myProc = proc { |a, b| a + b }
+```
+RubyBridge:
+```swift
+myProc = RbObject() { args in
+    return args[0] + args[1]
+}
+```
+You must not let the `RbObject` expire while Ruby is holding on to the proc
+object or the program will crash.  For example if you pass `myProc` to a
+method of a Ruby object that captures the proc for later use, then you must
+not let that Swift value go out of scope until the Ruby object has died or
+otherwise guarantees never to invoke the proc.
+
+### Create a lambda with Swift code
+
+You can't: there's not much value and the API doesn't provide the argument
+policing.  If you really need to then this kind of thing should get you
+started:
+```swift
+let myLambda = try Ruby.call("lambda", blockRetention: .returned) { args in
+                   print("I got \(args.count) args!")
+                   return .nilObject
+               }
 ```
 
 ### Access class variables
@@ -91,8 +178,6 @@ never come back to Ruby in the process, use `RbBridge.cleanup()`.
 * Arrays Hashes Sets
 * Ranges
 * Rational Complex
-* Symbol as blocks
-* Code as block
 
 ## Error Handling
 
@@ -156,13 +241,27 @@ Do not access RubyBridge APIs from more than one thread ever.
 
 ## Caveats and Gotchas
 
+### Crashiness
+
 Certain `RbObject` methods forward to Ruby calls and crash (`fatalError()`)
 if Ruby fails / the object doesn't support the method.  It's up to you to be
 sure the Ruby objects you're dealing with are of the right type.  See
 `RbObject` for more information on which these methods are.
 
+### Swift closure retention
+
+If you pass a Swift closure to a method as a block/proc/lambda that is used
+by Ruby after that method finishes -- ie. *not* the normal `#each`-type use --
+then you need to understand `RbBlockRetention`.
+
+The reason for all this is that calling Swift code from Ruby requires an
+intermediate Swift object, and RubyBridge needs to tie the lifetime of that
+Swift object to something else in the Swift world.
+
+### Ruby code safety
+
 Running arbitrary Ruby code is a bad idea unless the process itself is
-sandboxed - there are no restrictions on what the Ruby VM can do including
+sandboxed: there are no restrictions on what the Ruby VM can do including
 call `exit!`.
 
 ## Using the CRuby API

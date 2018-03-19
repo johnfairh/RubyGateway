@@ -6,7 +6,8 @@
 
 ##### Enhancements
 
-* None.
+Add `RbProc` `RbProcCallback` `RbBreak` and new `RbObjectAccess.call(...)`
+variants to let Swift code implement Ruby procs and blocks.
 
 ##### Bug Fixes
 

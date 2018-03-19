@@ -181,6 +181,79 @@ class TestCallable: XCTestCase {
         }
     }
 
+    // call with a Swift block
+    func testCallWithBlock() {
+        let obj = getNewMethodTest()
+
+        do {
+            let expectedRes = "answer"
+
+            let res = try obj.call("yielder") { args in
+                XCTAssertEqual(2, args.count)
+                XCTAssertEqual(22, Int(args[0]))
+                XCTAssertEqual("fish", String(args[1]))
+                return RbObject(expectedRes)
+            }
+            XCTAssertEqual(expectedRes, String(res))
+
+            // sym version
+            let res2 = try obj.call(symbol: RbSymbol("yielder")) { args in
+                XCTAssertEqual(2, args.count)
+                XCTAssertEqual(22, Int(args[0]))
+                XCTAssertEqual("fish", String(args[1]))
+                return RbObject(expectedRes)
+            }
+            XCTAssertEqual(expectedRes, String(res2))
+
+        } catch {
+            XCTFail("Unexpected exception: \(error)")
+        }
+    }
+
+    // call with a Proc'd Swift block
+    func testCallWithProcBlock() {
+        let obj = getNewMethodTest()
+
+        do {
+            let expectedRes = "answer"
+            let proc = RbObject() { args in
+                XCTAssertEqual(2, args.count)
+                XCTAssertEqual(22, Int(args[0]))
+                XCTAssertEqual("fish", String(args[1]))
+                return RbObject(expectedRes)
+            }
+            let res = try obj.call("yielder", block: proc)
+            XCTAssertEqual(expectedRes, String(res))
+
+            // sym version
+            let res2 = try obj.call(symbol: RbSymbol("yielder"), block: proc)
+            XCTAssertEqual(expectedRes, String(res2))
+        } catch {
+            XCTFail("Unexpected exception: \(error)")
+        }
+    }
+
+    // Store a Swift block and later call it
+    func testStoredSwiftBlock() {
+        do {
+            let obj = getNewMethodTest()
+
+            var counter = 0
+
+            try obj.call("store_block", blockRetention: .self) { args in
+                counter += 1
+                return .nilObject
+            }
+
+            XCTAssertEqual(0, counter)
+
+            try obj.call("call_block")
+            XCTAssertEqual(1, counter)
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+    }
+
     static var allTests = [
         ("testCallGlobal", testCallGlobal),
         ("testCallGlobalFailure", testCallGlobalFailure),
@@ -193,6 +266,9 @@ class TestCallable: XCTestCase {
         ("testKwArgs", testKwArgs),
         ("testDupKwArgs", testDupKwArgs),
         ("testCallViaSymbol", testCallViaSymbol),
-        ("testCallViaSymbolNotSymbol", testCallViaSymbolNotSymbol)
+        ("testCallViaSymbolNotSymbol", testCallViaSymbolNotSymbol),
+        ("testCallWithBlock", testCallWithBlock),
+        ("testCallWithProcBlock", testCallWithProcBlock),
+        ("testStoredSwiftBlock", testStoredSwiftBlock)
     ]
 }

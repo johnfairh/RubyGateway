@@ -5,6 +5,7 @@ copyright: Distributed under the MIT license.  Maintained by [John Fairhurst](ma
 readme: README.md
 github_url: https://github.com/johnfairh/RubyBridge
 github_file_prefix: https://github.com/johnfairh/RubyBridge/tree/master/
+clean: true
 xcodebuild_arguments:
     - "-target"
     - "RubyBridge"
@@ -29,6 +30,10 @@ custom_categories:
     - name: Other APIs
       abstract: These types are used less often than those in [`Main APIs`](Main%20APIs.html).
       children:
+          - RbBlockCallback
+          - RbBlockRetention
+          - RbBreak
+          - RbProc
           - RbSymbol
           - RbType
 
