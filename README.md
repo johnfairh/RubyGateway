@@ -96,6 +96,7 @@ print("Mean score is \(avgScore)")
 let scores = try! student.get("all_scores")
 scores.call("each") { args in
     print("Subject: \(args[0]) Score: \(args[1])")
+    return .nilObject
 }
 ```
 

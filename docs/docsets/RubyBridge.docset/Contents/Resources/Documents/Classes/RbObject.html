@@ -221,7 +221,7 @@ when passed as arguments via the <code><a href="../Protocols/RbObjectConvertible
 
 <p><code>RbObject</code> conforms to <code>Hashable</code>, <code>Equatable</code>, and <code>Comparable</code> protocols by
 forwarding to the corresponding Ruby methods.  Beware though that it is easy
-to trigger Ruby errors here that currently cause <code>RubyBridge</code> to crash.  For
+to trigger Ruby errors here that currently cause RubyBridge to crash.  For
 example this is poison:</p>
 <pre class="highlight swift"><code><span class="kt">RbObject</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">&lt;</span> <span class="kt">RbObject</span><span class="p">(</span><span class="s">"barney"</span><span class="p">)</span>
 </code></pre>
@@ -1490,7 +1490,7 @@ argument is less than that of the second argument.</p>
                       <div class="abstract">
                         <p>Create an <code>RbObject</code> from a Swift type.</p>
 
-<p><code>RubyBridge</code> conforms most of the Swift standard library types
+<p>RubyBridge conforms most of the Swift standard library types
 to <code><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code>.</p>
 
                       </div>

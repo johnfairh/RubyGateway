@@ -51,7 +51,7 @@ import RubyBridgeHelpers
 ///
 /// `RbObject` conforms to `Hashable`, `Equatable`, and `Comparable` protocols by
 /// forwarding to the corresponding Ruby methods.  Beware though that it is easy
-/// to trigger Ruby errors here that currently cause `RubyBridge` to crash.  For
+/// to trigger Ruby errors here that currently cause RubyBridge to crash.  For
 /// example this is poison:
 /// ```swift
 /// RbObject(3) < RbObject("barney")

@@ -253,7 +253,7 @@ needs some help to understand how Ruby will use the closure.</p>
 
 <p>The easiest thing to get wrong is using the default of <code>.none</code> when
 Ruby retains the block for use later.  This causes a hard crash in
-<code>RbProcContext.from(raw:)</code> when Ruby tries to call the block.</p>
+<code>RbBlockContext.from(raw:)</code> when Ruby tries to call the block.</p>
 
                         <a href="Enums/RbBlockRetention.html" class="slightly-smaller">See more</a>
                       </div>
@@ -291,6 +291,7 @@ result to a Ruby block-based iteration like the Ruby <code>break</code> keyword.
                  <span class="k">if</span> <span class="nf">g</span><span class="p">(</span><span class="n">derived</span><span class="p">)</span> <span class="p">{</span>
                      <span class="k">throw</span> <span class="kt">RbBreak</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">derived</span><span class="p">)</span>
                  <span class="p">}</span>
+                 <span class="k">return</span> <span class="o">.</span><span class="n">nilObject</span>
              <span class="p">}</span>
 </code></pre>
 
@@ -305,7 +306,7 @@ result to a Ruby block-based iteration like the Ruby <code>break</code> keyword.
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbError.swift#L129-L139">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyBridge/tree/master//Sources/RubyBridge/RbError.swift#L130-L140">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -333,7 +334,7 @@ supporting <code>to_proc</code>.</p>
 <span class="k">let</span> <span class="nv">mapped</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"map"</span><span class="p">,</span> <span class="nv">block</span><span class="p">:</span> <span class="kt">RbProc</span><span class="p">(</span><span class="kt">RbSymbol</span><span class="p">(</span><span class="s">"downcase"</span><span class="p">)))</span>
 </code></pre>
 
-<p>Use <code>RbObject.init(procCallback:)</code> to create a Ruby Proc from a
+<p>Use <code><a href="Classes/RbObject.html#/s:10RubyBridge8RbObjectCA2CSayACGKc9blockCall_tcfc">RbObject.init(blockCall:)</a></code> to create a Ruby Proc from a
 Swift closure.</p>
 
 <p>If you want to pass Swift code to a method as a block then just call
@@ -375,7 +376,7 @@ no need for either <code>RbProc</code> or <code><a href="Classes/RbObject.html">
 <pre class="highlight ruby"><code><span class="n">obj</span><span class="p">.</span><span class="nf">meth</span><span class="p">(</span><span class="ss">:value</span><span class="p">)</span>
 </code></pre>
 
-<p>Then the <code>RubyBridge</code> version is:</p>
+<p>Then the RubyBridge version is:</p>
 <pre class="highlight swift"><code><span class="k">try</span> <span class="n">obj</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"meth"</span><span class="p">,</span> <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt">RbSymbol</span><span class="p">(</span><span class="s">"value"</span><span class="p">)])</span>
 </code></pre>
 

@@ -1,6 +1,6 @@
 # Using RubyBridge
 
-This document contains notes on using `RubyBridge`.  For installation tips
+This document contains notes on using RubyBridge.  For installation tips
 see [the README](index.html).
 * [How to use the framework](#general-usage)
 * [How to do various Ruby tasks](#how-to)

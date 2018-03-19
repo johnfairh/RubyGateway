@@ -199,14 +199,14 @@
                         <p>Provides information about the Ruby VM, some control over how code is run,
 and services to access various kinds of Ruby objects from the top level.</p>
 
-<p>You cannot instantiate this type.  Instead <code>RubyBridge</code> exports a public
+<p>You cannot instantiate this type.  Instead RubyBridge exports a public
 instance <code>Ruby</code>.  Among other things this permits dynamic member lookup
 and callable-style programming in Swift 5.</p>
 
 <p>The Ruby VM is initialized when the object is first accessed and is
 automatically stopped when the process ends.  The VM can be manually shut
 down before process exit by calling <code><a href="Classes/RbBridge.html#/s:10RubyBridge02RbB0C7cleanups5Int32VyF">RbBridge.cleanup()</a></code> but once this has
-been done the VM cannot be restarted and subsequent calls to <code>RubyBridge</code>
+been done the VM cannot be restarted and subsequent calls to RubyBridge
 services will fail.</p>
 
 <p>The loadpath (where <code>require</code> looks) is set to the <code>lib/ruby</code> directories
@@ -303,7 +303,7 @@ when passed as arguments via the <code><a href="Protocols/RbObjectConvertible.ht
 
 <p><code>RbObject</code> conforms to <code>Hashable</code>, <code>Equatable</code>, and <code>Comparable</code> protocols by
 forwarding to the corresponding Ruby methods.  Beware though that it is easy
-to trigger Ruby errors here that currently cause <code>RubyBridge</code> to crash.  For
+to trigger Ruby errors here that currently cause RubyBridge to crash.  For
 example this is poison:</p>
 <pre class="highlight swift"><code><span class="kt">RbObject</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">&lt;</span> <span class="kt">RbObject</span><span class="p">(</span><span class="s">"barney"</span><span class="p">)</span>
 </code></pre>

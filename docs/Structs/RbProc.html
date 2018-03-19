@@ -191,7 +191,7 @@ supporting <code>to_proc</code>.</p>
 <span class="k">let</span> <span class="nv">mapped</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"map"</span><span class="p">,</span> <span class="nv">block</span><span class="p">:</span> <span class="kt">RbProc</span><span class="p">(</span><span class="kt">RbSymbol</span><span class="p">(</span><span class="s">"downcase"</span><span class="p">)))</span>
 </code></pre>
 
-<p>Use <code>RbObject.init(procCallback:)</code> to create a Ruby Proc from a
+<p>Use <code><a href="../Classes/RbObject.html#/s:10RubyBridge8RbObjectCA2CSayACGKc9blockCall_tcfc">RbObject.init(blockCall:)</a></code> to create a Ruby Proc from a
 Swift closure.</p>
 
 <p>If you want to pass Swift code to a method as a block then just call

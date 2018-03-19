@@ -184,14 +184,14 @@
             <p>Provides information about the Ruby VM, some control over how code is run,
 and services to access various kinds of Ruby objects from the top level.</p>
 
-<p>You cannot instantiate this type.  Instead <code>RubyBridge</code> exports a public
+<p>You cannot instantiate this type.  Instead RubyBridge exports a public
 instance <code>Ruby</code>.  Among other things this permits dynamic member lookup
 and callable-style programming in Swift 5.</p>
 
 <p>The Ruby VM is initialized when the object is first accessed and is
 automatically stopped when the process ends.  The VM can be manually shut
 down before process exit by calling <code><a href="../Classes/RbBridge.html#/s:10RubyBridge02RbB0C7cleanups5Int32VyF">RbBridge.cleanup()</a></code> but once this has
-been done the VM cannot be restarted and subsequent calls to <code>RubyBridge</code>
+been done the VM cannot be restarted and subsequent calls to RubyBridge
 services will fail.</p>
 
 <p>The loadpath (where <code>require</code> looks) is set to the <code>lib/ruby</code> directories
@@ -283,7 +283,7 @@ be re-setup.</p>
                         <p>Get an <code>ID</code> ready to call a method, for example.</p>
 
 <p>This is public to permit interop with <code>CRuby</code>.  It is not
-needed for regular <code>RubyBridge</code> use.</p>
+needed for regular RubyBridge use.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     <code><a href="../Enums/RbError.html#/s:10RubyBridge7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if Ruby raises an exception.  This

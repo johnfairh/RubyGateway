@@ -19,7 +19,7 @@ import RubyBridgeHelpers
 /// let mapped = names.call("map", block: RbProc(RbSymbol("downcase")))
 /// ```
 ///
-/// Use `RbObject.init(procCallback:)` to create a Ruby Proc from a
+/// Use `RbObject.init(blockCall:)` to create a Ruby Proc from a
 /// Swift closure.
 ///
 /// If you want to pass Swift code to a method as a block then just call
