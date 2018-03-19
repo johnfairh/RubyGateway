@@ -15,16 +15,8 @@
  * It would be part of the RubyBridge module directly but SPM does not approve.
  */
 
-/* Linux Clang 6 is unhappy with @import syntax when processing this
- * lib's module map as part of building the Swift module RubyBridge.
- * ???
- */
-#ifdef __linux__
 typedef unsigned long VALUE;
 typedef VALUE ID;
-#else
-@import CRuby;
-#endif
 
 /// Safely call `rb_load` and report exception status.
 void rbb_load_protect(VALUE fname, int wrap, int * _Nullable status);

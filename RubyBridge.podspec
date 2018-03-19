@@ -26,6 +26,6 @@ Pod::Spec.new do |s|
     ss.preserve_path = "CRuby/*"
     ss.source_files = 'Sources/RubyBridgeHelpers/*m', 'Sources/RubyBridgeHelpers/include/*h'
     ss.pod_target_xcconfig = { 'HEADER_SEARCH_PATHS' => '"${PODS_ROOT}/RubyBridge/CRuby"' }
-    ss.private_header_files = 'Sources/RubyBridgeHelpers/include/*h'
+#    ss.private_header_files = 'Sources/RubyBridgeHelpers/include/*h'
   end
 end
