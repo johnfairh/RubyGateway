@@ -1,4 +1,4 @@
-## 0.2 plan
+## 0.3 plan
 
 Build
 * Cocoapods
