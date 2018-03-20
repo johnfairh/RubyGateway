@@ -1,7 +1,7 @@
 // swift-tools-version:4.0
 
 //  Package.swift
-//  RubyBridge
+//  RubyGateway
 //
 //  Distributed under the MIT license, see LICENSE
 

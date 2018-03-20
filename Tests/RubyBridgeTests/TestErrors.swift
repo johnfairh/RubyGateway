@@ -1,6 +1,6 @@
 //
 //  TestErrors.swift
-//  RubyBridgeTests
+//  RubyGatewayTests
 //
 //  Distributed under the MIT license, see LICENSE
 //

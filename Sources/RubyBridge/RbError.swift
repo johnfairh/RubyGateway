@@ -1,12 +1,12 @@
 //
 //  RbError.swift
-//  RubyBridge
+//  RubyGateway
 //
 //  Distributed under the MIT license, see LICENSE
 //
 import CRuby
 
-/// An error raised by the RubyBridge module.  Ruby exceptions
+/// An error raised by the RubyGateway module.  Ruby exceptions
 /// generate `RbError.rubyException`, the other cases correspond
 /// to error conditions encountered by the Swift software.
 public enum RbError: Error {
@@ -36,7 +36,7 @@ public enum RbError: Error {
 
     // MARK: - Error History
 
-    /// Holds the most recent errors thrown by RubyBridge.
+    /// Holds the most recent errors thrown by RubyGateway.
     ///
     /// This can be useful when the module indicates an error has occurred
     /// through a `nil` result somewhere -- the error causing the `nil` has
@@ -55,7 +55,7 @@ public enum RbError: Error {
         /// this consuming all your memory.
         public private(set) var errors: [RbError] = []
 
-        /// The most recent error encountered by RubyBridge.
+        /// The most recent error encountered by RubyGateway.
         public var mostRecent: RbError? {
             return errors.last
         }
@@ -88,7 +88,7 @@ public enum RbError: Error {
         throw error
     }
 
-    /// A short history of errors thrown by RubyBridge
+    /// A short history of errors thrown by RubyGateway
     public static var history = History()
     // TODO: Fix locking....
 }
@@ -144,7 +144,7 @@ public struct RbBreak: Error {
 /// A Ruby exception.
 ///
 /// This provides some convenience methods on top of the underlying `Exception`
-/// object.  RubyBridge does not throw these directly, it always wraps them in
+/// object.  RubyGateway does not throw these directly, it always wraps them in
 /// an `RbError` instance.
 ///
 /// Create and throw one of these to raise a Ruby exception from

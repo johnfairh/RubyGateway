@@ -1,6 +1,6 @@
 //
 //  RbBridge.swift
-//  RubyBridge
+//  RubyGateway
 //
 //  Distributed under the MIT license, see LICENSE
 //
@@ -11,14 +11,14 @@ import RubyGatewayHelpers
 /// Provides information about the Ruby VM, some control over how code is run,
 /// and services to access various kinds of Ruby objects from the top level.
 ///
-/// You cannot instantiate this type.  Instead RubyBridge exports a public
+/// You cannot instantiate this type.  Instead RubyGateway exports a public
 /// instance `Ruby`.  Among other things this permits dynamic member lookup
 /// and callable-style programming in Swift 5.
 ///
 /// The Ruby VM is initialized when the object is first accessed and is
 /// automatically stopped when the process ends.  The VM can be manually shut
 /// down before process exit by calling `RbBridge.cleanup()` but once this has
-/// been done the VM cannot be restarted and subsequent calls to RubyBridge
+/// been done the VM cannot be restarted and subsequent calls to RubyGateway
 /// services will fail.
 ///
 /// The loadpath (where `require` looks) is set to the `lib/ruby` directories
@@ -30,7 +30,7 @@ import RubyGatewayHelpers
 /// The class inherits from `RbObjectAccess` which lets you look up constants
 /// or call functions as you would at the top level of a Ruby script, for example:
 /// ```swift
-/// import RubyBridge
+/// import RubyGateway
 ///
 /// print("Ruby version is \(Ruby.version)")
 ///
@@ -83,7 +83,7 @@ public final class RbBridge: RbObjectAccess {
     /// Get an `ID` ready to call a method, for example.
     ///
     /// This is public to permit interop with `CRuby`.  It is not
-    /// needed for regular RubyBridge use.
+    /// needed for regular RubyGateway use.
     ///
     /// - parameter name: Name to look up, typically constant or method name.
     /// - returns: The corresponding ID.

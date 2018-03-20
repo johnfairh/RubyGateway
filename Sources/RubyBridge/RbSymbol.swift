@@ -1,6 +1,6 @@
 //
 //  RbSymbol.swift
-//  RubyBridge
+//  RubyGateway
 //
 //  Distributed under the MIT license, see LICENSE
 //
@@ -14,7 +14,7 @@ import CRuby
 /// obj.meth(:value)
 /// ```
 ///
-/// Then the RubyBridge version is:
+/// Then the RubyGateway version is:
 /// ```swift
 /// try obj.call("meth", args: [RbSymbol("value")])
 /// ```

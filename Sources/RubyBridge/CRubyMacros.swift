@@ -1,6 +1,6 @@
 //
 //  CRubyMacros.swift
-//  RubyBridge
+//  RubyGateway
 //
 //  Distributed under the MIT license, see LICENSE
 //  Portions of this file derived from Ruby and distributed under terms of its license.
@@ -17,7 +17,7 @@ import RubyGatewayHelpers
 // Began keeping this in the same order as ruby.h but good grief the numeric functions
 // drove me crazy this way -- so reordered to group all like stuff together.
 //
-// RubyBridge uses the NUM abstraction layers exclusively so most stuff lower than that
+// RubyGateway uses the NUM abstraction layers exclusively so most stuff lower than that
 // is omitted.
 //
 

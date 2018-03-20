@@ -1,6 +1,6 @@
 //
 //  RbConversions.swift
-//  RubyBridge
+//  RubyGateway
 //
 //  Distributed under the MIT license, see LICENSE
 //
@@ -33,7 +33,7 @@ public protocol RbObjectConvertible {
 extension RbObject {
     /// Create an `RbObject` from a Swift type.
     ///
-    /// RubyBridge conforms most of the Swift standard library types
+    /// RubyGateway conforms most of the Swift standard library types
     /// to `RbObjectConvertible`.
     public convenience init(_ value: RbObjectConvertible) {
         self.init(value.rubyObject)

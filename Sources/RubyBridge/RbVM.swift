@@ -1,6 +1,6 @@
 //
 //  RbVM.swift
-//  RubyBridge
+//  RubyGateway
 //
 //  Distributed under the MIT license, see LICENSE
 
@@ -124,7 +124,7 @@ final class RbVM {
         // Calling ruby_options() sets up the loadpath nicely and does the bootstrapping of
         // rubygems so they can be required directly.
         // The -e part is to prevent it reading from stdin - empty script.
-        let arg1 = strdup("RubyBridge")
+        let arg1 = strdup("RubyGateway")
         let arg2 = strdup("-e ")
         defer {
             free(arg1)

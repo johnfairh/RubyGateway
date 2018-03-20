@@ -1,6 +1,6 @@
 //
 //  RbFailableAccess.swift
-//  RubyBridge
+//  RubyGateway
 //
 //  Distributed under the MIT license, see LICENSE
 //

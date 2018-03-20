@@ -1,6 +1,6 @@
 //
 //  RbBlockCall.swift
-//  RubyBridge
+//  RubyGateway
 //
 //  Distributed under the MIT license, see LICENSE
 //
@@ -50,7 +50,7 @@ import RubyGatewayHelpers
 /// * Create and throw `RbBreak` instead of Ruby `break`;
 /// * Create and throw `RbException` instead of Ruby `raise`;
 /// * Throwing any other kind of error (including propagating `RbError`s)
-///   causes RubyBridge to convert the error into a Ruby RuntimeError
+///   causes RubyGateway to convert the error into a Ruby RuntimeError
 ///   exception and raise it.
 ///
 /// See `RbObjectAccess.call(_:args:kwArgs:blockRetention:blockCall:)` and
@@ -60,7 +60,7 @@ public typealias RbBlockCallback = ([RbObject]) throws -> RbObject
 /// Control over how Swift closures passed as blocks are retained.
 ///
 /// When you pass a Swift closure as a block, for example using
-/// `RbObjectAccess.call(_:args:kwArgs:blockRetention:blockCall:)`, RubyBridge
+/// `RbObjectAccess.call(_:args:kwArgs:blockRetention:blockCall:)`, RubyGateway
 /// needs some help to understand how Ruby will use the closure.
 ///
 /// The easiest thing to get wrong is using the default of `.none` when
@@ -158,7 +158,7 @@ private func rbproc_block_callback(returnValue: UnsafeMutablePointer<Rbg_return_
         let retVal = try blockCall()
         returnValue.set(type: RBG_RT_VALUE, value: retVal)
     } catch RbError.rubyException(let exn) {
-        // RubyBridge/Ruby code threw exception
+        // RubyGateway/Ruby code threw exception
         returnValue.set(type: RBG_RT_RAISE, value: exn.exception.withRubyValue { $0 })
     } catch let exn as RbException {
         // User Swift code generated Ruby exception
@@ -171,7 +171,7 @@ private func rbproc_block_callback(returnValue: UnsafeMutablePointer<Rbg_return_
             returnValue.set(type: RBG_RT_BREAK, value: Qundef)
         }
     } catch {
-        // User Swift code or RubyBridge threw Swift error.  Oh for typed throws.
+        // User Swift code or RubyGateway threw Swift error.  Oh for typed throws.
         // Wrap it up in a Ruby exception and raise that instead!
         let rbExn = RbException(message: "Unexpected Swift error thrown: \(error)")
         returnValue.set(type: RBG_RT_RAISE, value: rbExn.exception.withRubyValue { $0 })
