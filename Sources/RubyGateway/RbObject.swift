@@ -33,7 +33,7 @@ import RubyGatewayHelpers
 /// let results = myObj.process(arg1, 100)
 /// ```
 ///
-/// See `RbBridge` and its global instance `Ruby` for access to the Ruby 'top self'
+/// See `RbGateway` and its global instance `Ruby` for access to the Ruby 'top self'
 /// object to get started finding constants or calling global functions.
 ///
 /// ## Converting to and from Swift types

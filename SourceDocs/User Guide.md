@@ -12,9 +12,9 @@ see [the README](index.html).
 ## General Usage
 
 The Ruby VM is initialized when you first try to use it and shut down when the
-process ends.  Load Ruby code using `RbBridge.load(filename:wrap:)` or
-`RbBridge.require(filename:)`.  Or just run some Ruby code and get the result
-using `RbBridge.eval(ruby:)`.  There already is a global instance of `RbBridge`
+process ends.  Load Ruby code using `RbGateway.load(filename:wrap:)` or
+`RbGateway.require(filename:)`.  Or just run some Ruby code and get the result
+using `RbGateway.eval(ruby:)`.  There already is a global instance of `RbGateway`
 called `Ruby` so the code looks like:
 
 ```swift
@@ -172,7 +172,7 @@ let count = try myClass.getClassVar("@@count")
 ### Run finalizers before process exit
 
 If you want to stop using Ruby and get on with something else, and
-never come back to Ruby in the process, use `RbBridge.cleanup()`.
+never come back to Ruby in the process, use `RbGateway.cleanup()`.
 
 ### Can't do yet
 * Arrays Hashes Sets
@@ -221,7 +221,7 @@ guard let score = Float(scoreObj) else {
 
 ### Failable Adapter
 
-`RbFailableAccess` is a non-throwing adapter for `RbObject` and `RbBridge` that
+`RbFailableAccess` is a non-throwing adapter for `RbObject` and `RbGateway` that
 returns `nil` when there is an error.  All it does is `try?` the
 corresponding throwing method, meaning that the details of the failure are
 available in `RbError.history`.
@@ -275,7 +275,7 @@ Each `RbObject` wraps one `VALUE` keeping it safe from garbage collection.  You
 can access that `VALUE` using `RbObject.withRubyValue(call:)`.
 
 RubyGateway caches intern'ed Ruby strings - you can access the cache using
-`RbBridge.getID(for:)`.
+`RbGateway.getID(for:)`.
 
 Note that when you call the Ruby API and Ruby raises an exception, the process
 immediately crashes unless you are running inside `rb_protect()` or equivalent.

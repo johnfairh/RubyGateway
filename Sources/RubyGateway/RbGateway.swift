@@ -1,5 +1,5 @@
 //
-//  RbBridge.swift
+//  RbGateway.swift
 //  RubyGateway
 //
 //  Distributed under the MIT license, see LICENSE
@@ -17,7 +17,7 @@ import RubyGatewayHelpers
 ///
 /// The Ruby VM is initialized when the object is first accessed and is
 /// automatically stopped when the process ends.  The VM can be manually shut
-/// down before process exit by calling `RbBridge.cleanup()` but once this has
+/// down before process exit by calling `RbGateway.cleanup()` but once this has
 /// been done the VM cannot be restarted and subsequent calls to RubyGateway
 /// services will fail.
 ///
@@ -48,7 +48,7 @@ import RubyGatewayHelpers
 ///
 /// If you just want to create a Ruby object of some class, see
 /// `RbObject.init(ofClass:args:kwArgs:)`.
-public final class RbBridge: RbObjectAccess {
+public final class RbGateway: RbObjectAccess {
 
     /// The VM - not intialized until `setup()` is called.
     static let vm = RbVM()
@@ -60,9 +60,9 @@ public final class RbBridge: RbObjectAccess {
     /// Initialize Ruby.  Throw an error if Ruby is not working.
     /// Called by anything that might by the first op.
     func setup() throws {
-        if try RbBridge.vm.setup() {
+        if try RbGateway.vm.setup() {
             // Work around Swift not calling static deinit...
-            atexit { RbBridge.vm.cleanup() }
+            atexit { RbGateway.vm.cleanup() }
         }
     }
 
@@ -77,7 +77,7 @@ public final class RbBridge: RbObjectAccess {
     ///
     /// - returns: 0 if the cleanup went fine, otherwise some error code from Ruby.
     public func cleanup() -> Int32 {
-        return RbBridge.vm.cleanup()
+        return RbGateway.vm.cleanup()
     }
 
     /// Get an `ID` ready to call a method, for example.
@@ -90,7 +90,7 @@ public final class RbBridge: RbObjectAccess {
     /// - throws: `RbError.rubyException` if Ruby raises an exception.  This
     ///   probably means the `ID` space is full, which is fairly unlikely.
     public func getID(for name: String) throws -> ID {
-        return try RbBridge.vm.getID(for: name)
+        return try RbGateway.vm.getID(for: name)
     }
 
     /// Attempt to initialize Ruby but swallow any error.
@@ -116,7 +116,7 @@ public final class RbBridge: RbObjectAccess {
     // we have to use `eval` these.  Reading is easy enough; writing an arbitrary
     // VALUE is impossible to do without shenanigans.
 
-    private static var ivarWorkaroundName = "$RbBridgeTopSelfIvarWorkaround"
+    private static var ivarWorkaroundName = "$RbGatewayTopSelfIvarWorkaround"
 
     /// Get the value of a top-level instance variable.  Creates a new one with a `nil`
     /// value if it doesn't exist yet.
@@ -150,17 +150,17 @@ public final class RbBridge: RbObjectAccess {
     public override func setInstanceVar(_ name: String, newValue: RbObjectConvertible) throws -> RbObject {
         try setup()
         try name.checkRubyInstanceVarName()
-        let oldValue = try getGlobalVar(RbBridge.ivarWorkaroundName)
-        try setGlobalVar(RbBridge.ivarWorkaroundName, newValue: newValue)
-        defer { let _ = try? setGlobalVar(RbBridge.ivarWorkaroundName, newValue: oldValue) }
-        return try eval(ruby: "\(name) = \(RbBridge.ivarWorkaroundName)")
+        let oldValue = try getGlobalVar(RbGateway.ivarWorkaroundName)
+        try setGlobalVar(RbGateway.ivarWorkaroundName, newValue: newValue)
+        defer { let _ = try? setGlobalVar(RbGateway.ivarWorkaroundName, newValue: oldValue) }
+        return try eval(ruby: "\(name) = \(RbGateway.ivarWorkaroundName)")
         // TODO: simplify when we have hooked global vars...
     }
 }
 
 // MARK: - VM Properties
 
-extension RbBridge {
+extension RbGateway {
     /// Debug mode for Ruby code, sets `$DEBUG` / `$-d`.
     public var debug: Bool {
         get {
@@ -254,7 +254,7 @@ extension RbBridge {
 
 // MARK: - Run Ruby Code
 
-extension RbBridge {
+extension RbGateway {
     /// Evaluate some Ruby and return the result.
     ///
     /// - parameter ruby: Ruby code to execute at the top level.
@@ -301,5 +301,5 @@ extension RbBridge {
 
 // MARK: - Global declaration
 
-/// The shared instance of `RbBridge`. :nodoc:
-public let Ruby = RbBridge()
+/// The shared instance of `RbGateway`. :nodoc:
+public let Ruby = RbGateway()

@@ -16,7 +16,7 @@ import RubyGatewayHelpers
 /// * Find constants, classes, and modules.
 ///
 /// The class is abstract.  You use it via `RbObject` and the global `Ruby` instance
-/// of `RbBridge`.
+/// of `RbGateway`.
 ///
 /// By default all methods throw `RbError`s if anything goes wrong including
 /// when Ruby raises an exception.  Use the `RbObjectAccess.failable` adapter to
@@ -466,7 +466,7 @@ extension RbObjectAccess {
 
     /// Get the value of a Ruby class variable that has already been written.
     ///
-    /// Must be called on an `RbObject` for a class, or `RbBridge`.  **Note** this
+    /// Must be called on an `RbObject` for a class, or `RbGateway`.  **Note** this
     /// is different from Ruby as-written where you write `@@fred` in an object
     /// context to get a CVar on the object's class.
     ///
@@ -495,7 +495,7 @@ extension RbObjectAccess {
 
     /// Set a Ruby class variable.  Creates a new one if it doesn't exist yet.
     ///
-    /// Must be called on an `RbObject` for a class, or `RbBridge`.  **Note** this
+    /// Must be called on an `RbObject` for a class, or `RbGateway`.  **Note** this
     /// is different from Ruby as-written where you write `@@fred = thing` in an
     /// object context to set a CVar on the object's class.
     ///
@@ -533,7 +533,7 @@ extension RbObjectAccess {
     /// - throws: `RbError` if `name` looks wrong.
     ///
     /// (This method is present in this class meaning you can call it on any
-    /// `RbObject` as well as `RbBridge` without any difference in effect.  This is
+    /// `RbObject` as well as `RbGateway` without any difference in effect.  This is
     /// purely convenience to put all these getter/setter pairs in the same place and
     /// make construction of `RbFailableAccess` a bit easier.  Best practice probably
     /// to avoid calling the `RbObject` version.)
@@ -554,7 +554,7 @@ extension RbObjectAccess {
     /// - throws: `RbError` if `name` looks wrong.
     ///
     /// (This method is present in this class meaning you can call it on any
-    /// `RbObject` as well as `RbBridge` without any difference in effect.  This is
+    /// `RbObject` as well as `RbGateway` without any difference in effect.  This is
     /// purely convenience to put all these getter/setter pairs in the same place and
     /// make construction of `RbFailableAccess` a bit easier.  Best practice probably
     /// to avoid calling the `RbObject` version.)

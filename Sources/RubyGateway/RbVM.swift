@@ -11,7 +11,7 @@ import RubyGatewayHelpers
 /// as storing data associated with the Ruby runtime.
 ///
 /// There can only be one of these for a process which is enforced by this class not
-/// being public + `RbBridge` holding the only instance.
+/// being public + `RbGateway` holding the only instance.
 final class RbVM {
 
     /// State of Ruby lifecycle
@@ -91,7 +91,7 @@ final class RbVM {
 
     /// Shut down Ruby at process exit if possible
     /// (Swift seems to not call this for static-scope objects so we don't get here
-    /// ... there's a compensating atexit() in `RbBridge.setup()`.)
+    /// ... there's a compensating atexit() in `RbGateway.setup()`.)
     deinit {
         cleanup()
     }

@@ -192,8 +192,8 @@ class TestVM: XCTestCase {
     func testSetupFailures() {
         try! Ruby.setup()
 
-        RbBridge.vm.utSetSetupError()
-        defer { RbBridge.vm.utSetSetup() }
+        RbGateway.vm.utSetSetupError()
+        defer { RbGateway.vm.utSetSetup() }
 
         // explicit setup() call fails
         do {
@@ -240,8 +240,8 @@ class TestVM: XCTestCase {
     func testCleanedUpFailure() {
         try! Ruby.setup()
 
-        RbBridge.vm.utSetCleanedUp()
-        defer { RbBridge.vm.utSetSetup() }
+        RbGateway.vm.utSetCleanedUp()
+        defer { RbGateway.vm.utSetSetup() }
 
         // explicit setup() call fails
         do {

@@ -23,7 +23,7 @@ custom_categories:
     - name: Main APIs
       abstract: These types form the main API to RubyGateway.
       children:
-          - RbBridge
+          - RbGateway
           - RbObject
           - RbObjectAccess
 

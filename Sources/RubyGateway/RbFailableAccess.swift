@@ -8,7 +8,7 @@
 /// A way to call Ruby methods and so on with a different error-handling style
 /// to the try/catch approach of `RbObjectAccess`: the methods return `nil` in failure
 /// cases instead of throwing errors.  Get hold of this *failable* interface using
-/// `RbObject.failable` or `RbBridge.failable`:
+/// `RbObject.failable` or `RbGateway.failable`:
 /// ```swift
 /// if let classObj = Ruby.failable.getClass("Mod::Service"),
 ///    let instance = classObj.failable.call("new"),
@@ -240,7 +240,7 @@ extension RbFailableAccess {
 extension RbFailableAccess {
     /// Get the value of a Ruby class variable.
     ///
-    /// Must be called on an `RbObject` for a class, or `RbBridge`.
+    /// Must be called on an `RbObject` for a class, or `RbGateway`.
     ///
     /// This is a non-throwing version of `RbObjectAccess.getClassVar(_:)`.
     /// See `RbError.history` to retrieve error details.
@@ -253,7 +253,7 @@ extension RbFailableAccess {
 
     /// Set or create a Ruby class variable.
     ///
-    /// Must be called on an `RbObject` for a class, or `RbBridge`.
+    /// Must be called on an `RbObject` for a class, or `RbGateway`.
     ///
     /// This is a non-throwing version of `RbObjectAccess.setClassVar(_:newValue:)`.
     /// See `RbError.history` to retrieve error details.
