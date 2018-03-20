@@ -5,15 +5,14 @@ Pod::Spec.new do |s|
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.homepage     = "https://github.com/johnfairh/RubyBridge"
   s.source       = { :git => "https://github.com/johnfairh/RubyBridge.git",
-#                     :tag => "v#{s.version.to_s}",
-                     :branch => "cpod",
+                     :tag => "v#{s.version.to_s}",
                      :submodules => true }
   s.summary      = "Embed Ruby in Swift: load Gems, run scripts, get results."
   s.description = <<-EDESC
                     A Swift framework built on the Ruby C API that lets Swift
                     programs painlessly and safely run and interact with Ruby
-                    programs.  It is easy to pass Swift datatypes into Ruby
-                    and turn Ruby objects back into Swift types.
+                    programs.  Easily pass Swift datatypes into Ruby and turn
+                    Ruby objects back into Swift types.
                   EDESC
   s.documentation_url = "https://johnfairh.github.io/RubyBridge/"
   s.source_files  = 'Sources/RubyBridge/*swift', 'Sources/RubyBridgeHelpers/*m', 'Sources/RubyBridgeHelpers/include/*h'
