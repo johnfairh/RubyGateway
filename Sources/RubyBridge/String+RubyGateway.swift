@@ -1,5 +1,5 @@
 //
-//  String+RubyBridge.swift
+//  String+RubyGateway.swift
 //  RubyGateway
 //
 //  Distributed under the MIT license, see LICENSE
