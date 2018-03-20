@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import RubyBridge
+import RubyGateway
 
 /// Ruby constant access
 class TestConstants: XCTestCase {

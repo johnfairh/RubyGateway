@@ -6,7 +6,7 @@
 //
 
 import CRuby
-@testable /* various macros */ import RubyBridge
+@testable /* various macros */ import RubyGateway
 import XCTest
 
 /// Misc data type tests

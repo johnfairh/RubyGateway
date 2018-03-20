@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import RubyBridge
+import RubyGateway
 
 class TestFailable: XCTestCase {
     /// get the ruby code

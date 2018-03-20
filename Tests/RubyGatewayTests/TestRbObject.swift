@@ -7,7 +7,7 @@
 
 import XCTest
 import CRuby
-@testable /* Qtrue */ import RubyBridge
+@testable /* Qtrue */ import RubyGateway
 
 /// Core object tests
 class TestRbObject: XCTestCase {

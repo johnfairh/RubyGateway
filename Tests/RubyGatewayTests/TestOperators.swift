@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import RubyBridge
+import RubyGateway
 
 /// Some not-very-comprehensive tests for numeric support - at least check the Swift
 /// operators are hooked up to the right Ruby ones.

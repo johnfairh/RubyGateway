@@ -30,7 +30,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "TMLRuby::TMLRuby"
                BuildableName = "RubyBridge.framework"
-               BlueprintName = "RubyBridge"
+               BlueprintName = "RubyGateway"
                ReferencedContainer = "container:RubyBridge.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

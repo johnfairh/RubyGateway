@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import RubyBridge
+import RubyGateway
 import Foundation
 
 /// Test global etc. vars work

@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import RubyBridge
+import RubyGateway
 
 /// Some higher-level demos - skipped if gems are missing
 class TestDemo: XCTestCase {

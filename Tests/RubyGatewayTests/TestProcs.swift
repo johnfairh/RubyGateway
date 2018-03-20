@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable /* checkIsProc */ import RubyBridge
+@testable /* checkIsProc */ import RubyGateway
 
 /// Proc tests
 class TestProcs: XCTestCase {

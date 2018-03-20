@@ -42,10 +42,17 @@
 		0290133A203ED8D60090C5C9 /* RbConversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02901339203ED8D60090C5C9 /* RbConversions.swift */; };
 		0290133D203F42820090C5C9 /* TestMiscObjTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0290133C203F42820090C5C9 /* TestMiscObjTypes.swift */; };
 		OBJ_26 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
-		OBJ_44 /* RubyBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "TMLRuby::TMLRuby::Product" /* RubyBridge.framework */; };
+		OBJ_44 /* RubyGateway.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "TMLRuby::TMLRuby::Product" /* RubyGateway.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		022BD89F20612B3500DA077F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 022F3AB62036D4DD009E69BE;
+			remoteInfo = RubyGatewayHelpers;
+		};
 		0234545420307CA000BE311B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
@@ -102,7 +109,7 @@
 		0290133B203EF0F60090C5C9 /* nonconvert.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = nonconvert.rb; sourceTree = "<group>"; };
 		0290133C203F42820090C5C9 /* TestMiscObjTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMiscObjTypes.swift; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		"TMLRuby::TMLRuby::Product" /* RubyBridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RubyBridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"TMLRuby::TMLRuby::Product" /* RubyGateway.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RubyGateway.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"TMLRuby::TMLRubyTests::Product" /* RubyGatewayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = RubyGatewayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -118,7 +125,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_44 /* RubyBridge.framework in Frameworks */,
+				OBJ_44 /* RubyGateway.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,7 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				"TMLRuby::TMLRubyTests::Product" /* RubyGatewayTests.xctest */,
-				"TMLRuby::TMLRuby::Product" /* RubyBridge.framework */,
+				"TMLRuby::TMLRuby::Product" /* RubyGateway.framework */,
 				022F3AB72036D4DD009E69BE /* libRubyGatewayHelpers.a */,
 			);
 			name = Products;
@@ -235,13 +242,13 @@
 		OBJ_7 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_8 /* RubyBridge */,
+				OBJ_8 /* RubyGateway */,
 				022F3ABC2036D58C009E69BE /* RubyGatewayHelpers */,
 			);
 			name = Sources;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_8 /* RubyBridge */ = {
+		OBJ_8 /* RubyGateway */ = {
 			isa = PBXGroup;
 			children = (
 				024923462031EDE000E3AAF4 /* RbVM.swift */,
@@ -259,8 +266,8 @@
 				022F3AB120360B9F009E69BE /* CRubyMacros.swift */,
 				0205A8A62043284C00076840 /* String+RubyGateway.swift */,
 			);
-			name = RubyBridge;
-			path = Sources/RubyBridge;
+			name = RubyGateway;
+			path = Sources/RubyGateway;
 			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
@@ -316,9 +323,9 @@
 			productName = TMLRubyPackageDescription;
 			productType = "com.apple.product-type.framework";
 		};
-		"TMLRuby::TMLRuby" /* RubyBridge */ = {
+		"TMLRuby::TMLRuby" /* RubyGateway */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_46 /* Build configuration list for PBXNativeTarget "RubyBridge" */;
+			buildConfigurationList = OBJ_46 /* Build configuration list for PBXNativeTarget "RubyGateway" */;
 			buildPhases = (
 				022F3AAE2035F82F009E69BE /* Headers */,
 				OBJ_49 /* Sources */,
@@ -327,10 +334,11 @@
 			buildRules = (
 			);
 			dependencies = (
+				022BD8A020612B3500DA077F /* PBXTargetDependency */,
 			);
-			name = RubyBridge;
+			name = RubyGateway;
 			productName = TMLRuby;
-			productReference = "TMLRuby::TMLRuby::Product" /* RubyBridge.framework */;
+			productReference = "TMLRuby::TMLRuby::Product" /* RubyGateway.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		"TMLRuby::TMLRubyTests" /* RubyGatewayTests */ = {
@@ -381,7 +389,7 @@
 			targets = (
 				"TMLRuby::SwiftPMPackageDescription" /* RubyBridgePackageDescription */,
 				"TMLRuby::TMLRubyTests" /* RubyGatewayTests */,
-				"TMLRuby::TMLRuby" /* RubyBridge */,
+				"TMLRuby::TMLRuby" /* RubyGateway */,
 				022F3AB62036D4DD009E69BE /* RubyGatewayHelpers */,
 			);
 		};
@@ -451,9 +459,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		022BD8A020612B3500DA077F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 022F3AB62036D4DD009E69BE /* RubyGatewayHelpers */;
+			targetProxy = 022BD89F20612B3500DA077F /* PBXContainerItemProxy */;
+		};
 		OBJ_45 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = "TMLRuby::TMLRuby" /* RubyBridge */;
+			target = "TMLRuby::TMLRuby" /* RubyGateway */;
 			targetProxy = 0234545420307CA000BE311B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -682,14 +695,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = RubyBridge;
+				PRODUCT_BUNDLE_IDENTIFIER = RubyGateway;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "${SRCROOT}/CRuby ${SRCROOT}/Sources/RubyGatewayHelpers";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
-				TARGET_NAME = RubyBridge;
+				TARGET_NAME = RubyGateway;
 			};
 			name = Debug;
 		};
@@ -708,13 +721,13 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = RubyBridge;
+				PRODUCT_BUNDLE_IDENTIFIER = RubyGateway;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "${SRCROOT}/CRuby ${SRCROOT}/Sources/RubyGatewayHelpers";
 				SWIFT_VERSION = 4.0;
-				TARGET_NAME = RubyBridge;
+				TARGET_NAME = RubyGateway;
 			};
 			name = Release;
 		};
@@ -757,7 +770,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_46 /* Build configuration list for PBXNativeTarget "RubyBridge" */ = {
+		OBJ_46 /* Build configuration list for PBXNativeTarget "RubyGateway" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				OBJ_47 /* Debug */,

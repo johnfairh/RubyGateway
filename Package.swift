@@ -8,24 +8,24 @@
 import PackageDescription
 
 let package = Package(
-    name: "RubyBridge",
+    name: "RubyGateway",
     products: [
         .library(
-            name: "RubyBridge",
-            targets: ["RubyBridge", "RubyGatewayHelpers"])
+            name: "RubyGateway",
+            targets: ["RubyGateway", "RubyGatewayHelpers"])
     ],
     dependencies: [
         .package(url: "https://github.com/johnfairh/CRuby", from: "1.0.0"),
     ],
     targets: [
         .target(
-            name: "RubyBridge",
+            name: "RubyGateway",
             dependencies: ["RubyGatewayHelpers"]),
         .target(
             name: "RubyGatewayHelpers",
             dependencies: []),
         .testTarget(
             name: "RubyGatewayTests",
-            dependencies: ["RubyBridge"]),
+            dependencies: ["RubyGateway"]),
     ]
 )
