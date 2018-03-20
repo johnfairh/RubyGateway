@@ -1,6 +1,6 @@
-# Using RubyBridge
+# Using RubyGateway
 
-This document contains notes on using RubyBridge.  For installation tips
+This document contains notes on using RubyGateway.  For installation tips
 see [the README](index.html).
 * [How to use the framework](#general-usage)
 * [How to do various Ruby tasks](#how-to)
@@ -18,7 +18,7 @@ using `RbBridge.eval(ruby:)`.  There already is a global instance of `RbBridge`
 called `Ruby` so the code looks like:
 
 ```swift
-import RubyBridge
+import RubyGateway
 
 do {
     let result = try Ruby.eval(ruby: "'a' * 4")
@@ -39,7 +39,7 @@ Use optional initializers to convert from `RbObject`s back to Swift types, or
 implicitly/explicitly access `RbObject.description` if you just want `String`.
 
 ```swift
-import RubyBridge
+import RubyGateway
 
 do {
     try Ruby.require(filename: "academy")
@@ -65,7 +65,7 @@ Use `RbSymbol`.  Ruby:
 ```ruby
 res = obj.meth(:value)
 ```
-RubyBridge:
+RubyGateway:
 ```swift
 let res = try obj.call("meth", args: [RbSymbol("value")])
 ```
@@ -76,7 +76,7 @@ Use `RbProc` and `RbSymbol`.  Ruby:
 ```ruby
 res = arr.each(&:downcase)
 ```
-RubyBridge:
+RubyGateway:
 ```swift
 let res = try arr.call("each", block: RbProc(object: RbSymbol("downcase")))
 ```
@@ -87,7 +87,7 @@ Use an `RbObjectAccess.call(...)` variant with a `blockCall` argument.  Ruby:
 ```ruby
 obj.meth { |x| puts(x) }
 ```
-RubyBridge:
+RubyGateway:
 ```swift
 try obj.call("meth") { args in
     print(args[0])
@@ -95,7 +95,7 @@ try obj.call("meth") { args in
 }
 ```
 If the method causes the Ruby object to capture the block as a proc then you
-have to tell RubyBridge:
+have to tell RubyGateway:
 ```swift
 try obj.call("meth", blockRetention: .self) { args in
     print(args[0])
@@ -111,7 +111,7 @@ result = array.each do |item|
    break item if f(item)
 end
 ```
-RubyBridge:
+RubyGateway:
 ```swift
 result = try array.call("each") { args in
     if f(args[0]) {
@@ -127,7 +127,7 @@ Use `RbObject.init(blockCall:)`.  Ruby:
 ```ruby
 myProc = proc { |a, b| a + b }
 ```
-RubyBridge:
+RubyGateway:
 ```swift
 myProc = RbObject() { args in
     return args[0] + args[1]
@@ -153,7 +153,7 @@ let myLambda = try Ruby.call("lambda", blockRetention: .returned) { args in
 
 ### Access class variables
 
-Use `RbObjectAccess.getClassVar(_:)` **on the class**: RubyBridge goes like the
+Use `RbObjectAccess.getClassVar(_:)` **on the class**: RubyGateway goes like the
 Ruby API not Ruby as written.  Ruby:
 ```ruby
 class MyClass
@@ -163,7 +163,7 @@ class MyClass
   end
 end
 ```
-RubyBridge:
+RubyGateway:
 ```swift
 let myClass = try Ruby.getClass("MyClass")
 let count = try myClass.getClassVar("@@count")
@@ -181,16 +181,16 @@ never come back to Ruby in the process, use `RbBridge.cleanup()`.
 
 ## Error Handling
 
-RubyBridge is very explicit about failure points.  Any Ruby method call can
+RubyGateway is very explicit about failure points.  Any Ruby method call can
 raise an exception instead of terminating normally and this is reflected in the
-throwable nature of most of the interesting RubyBridge methods.
+throwable nature of most of the interesting RubyGateway methods.
 
 Normally when writing Ruby scripts one doesn't care about this and just lets
 the program crash, which happens very rarely after the debugging phase.  If you
-are using RubyBridge though, there is presumably a lot more happening for you
+are using RubyGateway though, there is presumably a lot more happening for you
 and your users than the Ruby stuff -- otherwise you'd be writing Ruby, not
 Swift.  I feel it does not make sense for a subsystem like this to decide how to
-handle errors, so RubyBridge propagates all errors ([except when it doesn't]
+handle errors, so RubyGateway propagates all errors ([except when it doesn't]
 (#caveats-and-gotchas)).
 
 And `try!` is always available for quick don't-care-about-errors environments.
@@ -198,17 +198,17 @@ And `try!` is always available for quick don't-care-about-errors environments.
 ### Errors + Exceptions
 
 All errors thrown are `RbError` which is an enum of various interface errors
-detected by RubyBridge and one case `RbError.rubyException` that covers all
+detected by RubyGateway and one case `RbError.rubyException` that covers all
 Ruby exceptions.
 
-RubyBridge remembers the last few `RbError`s that were generated and stores
+RubyGateway remembers the last few `RbError`s that were generated and stores
 them in the publicly available `RbError.history`.
 
 ### `nil` failures
 
 Converting Ruby values to Swift types works differently: it happens using
 failable initializers such as `String.init(_:)`.  These can fail for a variety
-of reasons.  When they do, RubyBridge still internally generates an `RbError`
+of reasons.  When they do, RubyGateway still internally generates an `RbError`
 and stores a copy in `RbError.history` even though it is not thrown.  This
 means you can diagnose why a conversion failed:
 
@@ -227,7 +227,7 @@ corresponding throwing method, meaning that the details of the failure are
 available in `RbError.history`.
 
 This is a steal of rough approach (the name is my fault) from the Python DML
-sandbox with an eye to adding direct member lookup/callable to RubyBridge --
+sandbox with an eye to adding direct member lookup/callable to RubyGateway --
 Swift subscripts can't throw.
 
 I'm not sure this is better than just writing `try?` which at least makes it
@@ -237,7 +237,7 @@ very difficult for readers to ignore the possibility of errors.
 
 *more details to understand*
 
-Do not access RubyBridge APIs from more than one thread ever.
+Do not access RubyGateway APIs from more than one thread ever.
 
 ## Caveats and Gotchas
 
@@ -255,7 +255,7 @@ by Ruby after that method finishes -- ie. *not* the normal `#each`-type use --
 then you need to understand `RbBlockRetention`.
 
 The reason for all this is that calling Swift code from Ruby requires an
-intermediate Swift object, and RubyBridge needs to tie the lifetime of that
+intermediate Swift object, and RubyGateway needs to tie the lifetime of that
 Swift object to something else in the Swift world.
 
 ### Ruby code safety
@@ -268,13 +268,13 @@ call `exit!`.
 
 The [CRuby](https://github.com/johnfairh/CRuby) package provides access to as
 much of the `libruby` API as makes it through the importer.  You can use this
-in conjunction with RubyBridge to access more of the API than RubyBridge itself
+in conjunction with RubyGateway to access more of the API than RubyGateway itself
 provides.
 
 Each `RbObject` wraps one `VALUE` keeping it safe from garbage collection.  You
 can access that `VALUE` using `RbObject.withRubyValue(call:)`.
 
-RubyBridge caches intern'ed Ruby strings - you can access the cache using
+RubyGateway caches intern'ed Ruby strings - you can access the cache using
 `RbBridge.getID(for:)`.
 
 Note that when you call the Ruby API and Ruby raises an exception, the process
