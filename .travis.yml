@@ -14,4 +14,4 @@ script:
     - cp -f Packages/CRuby/* CRuby/
     - ./travis-xcodebuild
 after_success:
-    - bash <(curl -s https://codecov.io/bash) -J 'RubyBridge$' -X gcov -X coveragepy
+    - bash <(curl -s https://codecov.io/bash) -J 'RubyGateway$' -X gcov -X coveragepy

@@ -1,4 +1,0 @@
-module RubyBridgeHelpers {
-    header "rbb_helpers.h"
-    export *
-}

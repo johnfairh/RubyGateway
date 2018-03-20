@@ -1,31 +1,31 @@
 // swift-tools-version:4.0
 
 //  Package.swift
-//  RubyBridge
+//  RubyGateway
 //
 //  Distributed under the MIT license, see LICENSE
 
 import PackageDescription
 
 let package = Package(
-    name: "RubyBridge",
+    name: "RubyGateway",
     products: [
         .library(
-            name: "RubyBridge",
-            targets: ["RubyBridge", "RubyBridgeHelpers"])
+            name: "RubyGateway",
+            targets: ["RubyGateway", "RubyGatewayHelpers"])
     ],
     dependencies: [
         .package(url: "https://github.com/johnfairh/CRuby", from: "1.0.0"),
     ],
     targets: [
         .target(
-            name: "RubyBridge",
-            dependencies: ["RubyBridgeHelpers"]),
+            name: "RubyGateway",
+            dependencies: ["RubyGatewayHelpers"]),
         .target(
-            name: "RubyBridgeHelpers",
+            name: "RubyGatewayHelpers",
             dependencies: []),
         .testTarget(
-            name: "RubyBridgeTests",
-            dependencies: ["RubyBridge"]),
+            name: "RubyGatewayTests",
+            dependencies: ["RubyGateway"]),
     ]
 )

@@ -1,28 +1,28 @@
 <!--
-RubyBridge
+RubyGateway
 README.md
 Distributed under the MIT license, see LICENSE.
 -->
 
-# RubyBridge
+# RubyGateway
 
-[![CI](https://travis-ci.org/johnfairh/RubyBridge.svg?branch=master)](https://travis-ci.org/johnfairh/RubyBridge)
-[![codecov](https://codecov.io/gh/johnfairh/RubyBridge/branch/master/graph/badge.svg)](https://codecov.io/gh/johnfairh/RubyBridge)
+[![CI](https://travis-ci.org/johnfairh/RubyGateway.svg?branch=master)](https://travis-ci.org/johnfairh/RubyGateway)
+[![codecov](https://codecov.io/gh/johnfairh/RubyGateway/branch/master/graph/badge.svg)](https://codecov.io/gh/johnfairh/RubyGateway)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 <!--
-![Pod](https://cocoapod-badges.herokuapp.com/v/RubyBridge/badge.png)
-![Platforms](https://cocoapod-badges.herokuapp.com/p/RubyBridge/badge.png)
-![License](https://cocoapod-badges.herokuapp.com/l/RubyBridge/badge.png)
+![Pod](https://cocoapod-badges.herokuapp.com/v/RubyGateway/badge.png)
+![Platforms](https://cocoapod-badges.herokuapp.com/p/RubyGateway/badge.png)
+![License](https://cocoapod-badges.herokuapp.com/l/RubyGateway/badge.png)
 -->
 
 Embed Ruby in Swift: load Gems, run Ruby scripts, get results.
 
-RubyBridge is a framework built on the Ruby C API that lets Swift programs
+RubyGateway is a framework built on the Ruby C API that lets Swift programs
 running on macOS or Linux painlessly and safely run and interact with Ruby
 programs.  It's easy to pass Swift datatypes into Ruby and turn Ruby objects
 back into Swift types.
 
-This project is [young](https://johnfairh.github.io/RubyBridge/todo.html):
+This project is [young](https://johnfairh.github.io/RubyGateway/todo.html):
 biggest missing features right now are collection types.  The eventual goal
 is to allow implementation of Ruby classes in Swift to enable Ruby as a
 sandboxed DSL/scripting language for Swift applications.
@@ -52,7 +52,7 @@ puts(html)
 
 In Swift 4 with similar [lack of] error checking:
 ```swift
-import RubyBridge
+import RubyGateway
 
 try! Ruby.require("rouge")
 let html = try! Ruby.get("Rouge").call("highlight", args: ["let a = 3", "swift", "html"])
@@ -61,7 +61,7 @@ print(html)
 
 In future Swift:
 ```swift
-import RubyBridge
+import RubyGateway
 
 try! Ruby.require("rouge")
 let html = Ruby.Rouge!.highlight("let a = 3", "swift", "html")!
@@ -102,9 +102,9 @@ scores.call("each") { args in
 
 ## Documentation
 
-* [User guide](https://johnfairh.github.io/RubyBridge/user-guide.html).
-* [API documentation](https://johnfairh.github.io/RubyBridge).
-* [Docset for Dash](https://johnfairh.github.io/RubyBridge/docsets/RubyBridge.tgz).
+* [User guide](https://johnfairh.github.io/RubyGateway/user-guide.html).
+* [API documentation](https://johnfairh.github.io/RubyGateway).
+* [Docset for Dash](https://johnfairh.github.io/RubyGateway/docsets/RubyGateway.tgz).
 
 ## Requirements
 
@@ -114,32 +114,32 @@ scores.call("each") { args in
   * For macOS, this comes with Xcode.
   * For Linux you may need to install a -dev package depending on how your Ruby
     is installed.
-  * RubyBridge requires 'original' MRI/CRuby Ruby - no JRuby/Rubinius/etc.
+  * RubyGateway requires 'original' MRI/CRuby Ruby - no JRuby/Rubinius/etc.
 
 ## Installation
 
 For macOS, if you are happy to use the system Ruby then you just need to include
-the RubyBridge framework as a dependency.  If you are building on Linux or want
+the RubyGateway framework as a dependency.  If you are building on Linux or want
 to use a different Ruby then you also need to configure CRuby.
 
 ### Getting the framework
 
 Carthage for macOS:
 ```
-github "johnfairh/RubyBridge"
+github "johnfairh/RubyGateway"
 ```
 
 Swift package manager for macOS or Linux:
 ```
-.package(url: "https://github.com/johnfairh/RubyBridge", from: "0.1.0")
+.package(url: "https://github.com/johnfairh/RubyGateway", from: "0.1.0")
 ```
 
 CocoaPods soon&trade;.
 
 ### Configuring CRuby
 
-CRuby is the glue between RubyBridge and your Ruby installation.  It is a
-[separate github project](https://github.com/johnfairh/CRuby) but RubyBridge
+CRuby is the glue between RubyGateway and your Ruby installation.  It is a
+[separate github project](https://github.com/johnfairh/CRuby) but RubyGateway
 includes it as submodule so you do not install or require it separately.
 
 By default it points to the macOS system Ruby.  Follow the [CRuby usage
@@ -151,9 +151,9 @@ sudo apt-get install ruby2.5 ruby2.5-dev pkg-config
 mkdir MyProject
 swift package init --type executable
 vi Package.swift
-# add RubyBridge as a package dependency (NOT CRuby)
-# add RubyBridge as a target dependency
-echo "import RubyBridge; print(Ruby.versionDescription)" > Sources/MyProject/main.swift
+# add RubyGateway as a package dependency (NOT CRuby)
+# add RubyGateway as a target dependency
+echo "import RubyGateway; print(Ruby.versionDescription)" > Sources/MyProject/main.swift
 swift package update
 swift package edit CRuby
 Packages/CRuby/cfg-cruby --mode pkg-config --name ruby-2.5

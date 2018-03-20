@@ -1,0 +1,785 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0205A89E204088F900076840 /* RbNumericConversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205A89D204088F900076840 /* RbNumericConversions.swift */; };
+		0205A8A42042DA3600076840 /* TestCallable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205A8A32042DA3600076840 /* TestCallable.swift */; };
+		0205A8A72043284C00076840 /* String+RubyGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205A8A62043284C00076840 /* String+RubyGateway.swift */; };
+		0205A8A92043287B00076840 /* RbFailableAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205A8A82043287B00076840 /* RbFailableAccess.swift */; };
+		0205A8AB204423E400076840 /* TestVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205A8AA204423E400076840 /* TestVars.swift */; };
+		022BD882205EEA9B00DA077F /* RbBlockCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022BD881205EEA9B00DA077F /* RbBlockCall.swift */; };
+		022F3AB220360B9F009E69BE /* CRubyMacros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3AB120360B9F009E69BE /* CRubyMacros.swift */; };
+		022F3AC12036D72A009E69BE /* rbg_helpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 022F3ABE2036D721009E69BE /* rbg_helpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		022F3AC22036D731009E69BE /* rbg_protect.m in Sources */ = {isa = PBXBuildFile; fileRef = 022F3ABD2036D721009E69BE /* rbg_protect.m */; };
+		022F3AC42036D82F009E69BE /* module.modulemap in Headers */ = {isa = PBXBuildFile; fileRef = 022F3AC32036D816009E69BE /* module.modulemap */; settings = {ATTRIBUTES = (Public, ); }; };
+		022F3AC62036D85A009E69BE /* libRubyGatewayHelpers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 022F3AB72036D4DD009E69BE /* libRubyGatewayHelpers.a */; };
+		022F3AC92037153A009E69BE /* TestNumerics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3AC82037153A009E69BE /* TestNumerics.swift */; };
+		022F3ACB20375E01009E69BE /* TestStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3ACA20375E01009E69BE /* TestStrings.swift */; };
+		022F3ACD20385C3A009E69BE /* TestConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3ACC20385C3A009E69BE /* TestConstants.swift */; };
+		022F3ACF203AE707009E69BE /* RbObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3ACE203AE707009E69BE /* RbObject.swift */; };
+		022F3AD1203AF8BA009E69BE /* TestRbObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3AD0203AF8BA009E69BE /* TestRbObject.swift */; };
+		0230075C2045B27E00044B8E /* TestDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230075B2045B27E00044B8E /* TestDemo.swift */; };
+		0230075E2046ED9900044B8E /* TestErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230075D2046ED9900044B8E /* TestErrors.swift */; };
+		02300762204805B500044B8E /* rbg_value.m in Sources */ = {isa = PBXBuildFile; fileRef = 02300761204805B500044B8E /* rbg_value.m */; };
+		023007642048075500044B8E /* rbg_macros.m in Sources */ = {isa = PBXBuildFile; fileRef = 023007632048075500044B8E /* rbg_macros.m */; };
+		02300766204AFA3600044B8E /* RbObjectAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02300765204AFA3600044B8E /* RbObjectAccess.swift */; };
+		02300768204BF3E800044B8E /* TestFailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02300767204BF3E800044B8E /* TestFailable.swift */; };
+		024923482031EE0400E3AAF4 /* RbVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024923462031EDE000E3AAF4 /* RbVM.swift */; };
+		0249234B20334AE500E3AAF4 /* RbError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0249234920334ADE00E3AAF4 /* RbError.swift */; };
+		0249234D20335ADB00E3AAF4 /* TestVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0249234C20335ADB00E3AAF4 /* TestVM.swift */; };
+		0249235120335C0D00E3AAF4 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0249235020335C0D00E3AAF4 /* Helpers.swift */; };
+		02706177204EB47600C336B8 /* RbOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02706176204EB47600C336B8 /* RbOperators.swift */; };
+		02706179204EC36E00C336B8 /* TestOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02706178204EC36E00C336B8 /* TestOperators.swift */; };
+		0270617C2051918500C336B8 /* RbSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270617B2051918500C336B8 /* RbSymbol.swift */; };
+		027061BB2058117100C336B8 /* RbProc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027061BA2058117100C336B8 /* RbProc.swift */; };
+		027061BD2059483C00C336B8 /* TestProcs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027061BC2059483C00C336B8 /* TestProcs.swift */; };
+		02901338203E03530090C5C9 /* RbGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02901337203E03530090C5C9 /* RbGateway.swift */; };
+		0290133A203ED8D60090C5C9 /* RbConversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02901339203ED8D60090C5C9 /* RbConversions.swift */; };
+		0290133D203F42820090C5C9 /* TestMiscObjTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0290133C203F42820090C5C9 /* TestMiscObjTypes.swift */; };
+		OBJ_26 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
+		OBJ_44 /* RubyGateway.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "TMLRuby::TMLRuby::Product" /* RubyGateway.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		022BD89F20612B3500DA077F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 022F3AB62036D4DD009E69BE;
+			remoteInfo = RubyGatewayHelpers;
+		};
+		0234545420307CA000BE311B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "TMLRuby::TMLRuby";
+			remoteInfo = TMLRuby;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0205A89C2040522300076840 /* numbers.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = numbers.rb; sourceTree = "<group>"; };
+		0205A89D204088F900076840 /* RbNumericConversions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbNumericConversions.swift; sourceTree = "<group>"; };
+		0205A89F2041A7BD00076840 /* unloadable.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = unloadable.rb; sourceTree = "<group>"; };
+		0205A8A02041EE4A00076840 /* inspectables.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = inspectables.rb; sourceTree = "<group>"; };
+		0205A8A32042DA3600076840 /* TestCallable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCallable.swift; sourceTree = "<group>"; };
+		0205A8A52042DC3F00076840 /* methods.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = methods.rb; sourceTree = "<group>"; };
+		0205A8A62043284C00076840 /* String+RubyGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+RubyGateway.swift"; sourceTree = "<group>"; };
+		0205A8A82043287B00076840 /* RbFailableAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbFailableAccess.swift; sourceTree = "<group>"; };
+		0205A8AA204423E400076840 /* TestVars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVars.swift; sourceTree = "<group>"; };
+		022BD881205EEA9B00DA077F /* RbBlockCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbBlockCall.swift; sourceTree = "<group>"; };
+		022F3AB120360B9F009E69BE /* CRubyMacros.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRubyMacros.swift; sourceTree = "<group>"; };
+		022F3AB72036D4DD009E69BE /* libRubyGatewayHelpers.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRubyGatewayHelpers.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		022F3ABD2036D721009E69BE /* rbg_protect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rbg_protect.m; sourceTree = "<group>"; };
+		022F3ABE2036D721009E69BE /* rbg_helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = rbg_helpers.h; path = include/rbg_helpers.h; sourceTree = "<group>"; };
+		022F3AC32036D816009E69BE /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = include/module.modulemap; sourceTree = "<group>"; };
+		022F3AC82037153A009E69BE /* TestNumerics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestNumerics.swift; sourceTree = "<group>"; };
+		022F3ACA20375E01009E69BE /* TestStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestStrings.swift; sourceTree = "<group>"; };
+		022F3ACC20385C3A009E69BE /* TestConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConstants.swift; sourceTree = "<group>"; };
+		022F3ACE203AE707009E69BE /* RbObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbObject.swift; sourceTree = "<group>"; };
+		022F3AD0203AF8BA009E69BE /* TestRbObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRbObject.swift; sourceTree = "<group>"; };
+		0230075B2045B27E00044B8E /* TestDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDemo.swift; sourceTree = "<group>"; };
+		0230075D2046ED9900044B8E /* TestErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestErrors.swift; sourceTree = "<group>"; };
+		0230075F2046F8E700044B8E /* raising.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = raising.rb; sourceTree = "<group>"; };
+		023007602047F7DA00044B8E /* endtoend.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = endtoend.rb; sourceTree = "<group>"; };
+		02300761204805B500044B8E /* rbg_value.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rbg_value.m; sourceTree = "<group>"; };
+		023007632048075500044B8E /* rbg_macros.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rbg_macros.m; sourceTree = "<group>"; };
+		02300765204AFA3600044B8E /* RbObjectAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbObjectAccess.swift; sourceTree = "<group>"; };
+		02300767204BF3E800044B8E /* TestFailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFailable.swift; sourceTree = "<group>"; };
+		024923462031EDE000E3AAF4 /* RbVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbVM.swift; sourceTree = "<group>"; };
+		0249234920334ADE00E3AAF4 /* RbError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbError.swift; sourceTree = "<group>"; };
+		0249234C20335ADB00E3AAF4 /* TestVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVM.swift; sourceTree = "<group>"; };
+		0249234E20335B3D00E3AAF4 /* LinuxMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LinuxMain.swift; path = Tests/LinuxMain.swift; sourceTree = "<group>"; };
+		0249235020335C0D00E3AAF4 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		024923532034AA3E00E3AAF4 /* backwards.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = backwards.rb; sourceTree = "<group>"; };
+		02571723203C984C001E3C43 /* nesting.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = nesting.rb; sourceTree = "<group>"; };
+		02706176204EB47600C336B8 /* RbOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbOperators.swift; sourceTree = "<group>"; };
+		02706178204EC36E00C336B8 /* TestOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestOperators.swift; sourceTree = "<group>"; };
+		0270617A20514DF600C336B8 /* demo.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = demo.rb; sourceTree = "<group>"; };
+		0270617B2051918500C336B8 /* RbSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbSymbol.swift; sourceTree = "<group>"; };
+		027061BA2058117100C336B8 /* RbProc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbProc.swift; sourceTree = "<group>"; };
+		027061BC2059483C00C336B8 /* TestProcs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestProcs.swift; sourceTree = "<group>"; };
+		02901337203E03530090C5C9 /* RbGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbGateway.swift; sourceTree = "<group>"; };
+		02901339203ED8D60090C5C9 /* RbConversions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbConversions.swift; sourceTree = "<group>"; };
+		0290133B203EF0F60090C5C9 /* nonconvert.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = nonconvert.rb; sourceTree = "<group>"; };
+		0290133C203F42820090C5C9 /* TestMiscObjTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMiscObjTypes.swift; sourceTree = "<group>"; };
+		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		"TMLRuby::TMLRuby::Product" /* RubyGateway.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RubyGateway.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"TMLRuby::TMLRubyTests::Product" /* RubyGatewayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = RubyGatewayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		022F3AB42036D4DD009E69BE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_43 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_44 /* RubyGateway.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_51 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				022F3AC62036D85A009E69BE /* libRubyGatewayHelpers.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		022F3ABC2036D58C009E69BE /* RubyGatewayHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				022F3AC32036D816009E69BE /* module.modulemap */,
+				022F3ABE2036D721009E69BE /* rbg_helpers.h */,
+				022F3ABD2036D721009E69BE /* rbg_protect.m */,
+				02300761204805B500044B8E /* rbg_value.m */,
+				023007632048075500044B8E /* rbg_macros.m */,
+			);
+			name = RubyGatewayHelpers;
+			path = Sources/RubyGatewayHelpers;
+			sourceTree = SOURCE_ROOT;
+		};
+		022F3AC52036D85A009E69BE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		024923522034AA2B00E3AAF4 /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				0270617A20514DF600C336B8 /* demo.rb */,
+				024923532034AA3E00E3AAF4 /* backwards.rb */,
+				023007602047F7DA00044B8E /* endtoend.rb */,
+				02571723203C984C001E3C43 /* nesting.rb */,
+				0290133B203EF0F60090C5C9 /* nonconvert.rb */,
+				0230075F2046F8E700044B8E /* raising.rb */,
+				0205A89C2040522300076840 /* numbers.rb */,
+				0205A89F2041A7BD00076840 /* unloadable.rb */,
+				0205A8A02041EE4A00076840 /* inspectables.rb */,
+				0205A8A52042DC3F00076840 /* methods.rb */,
+			);
+			name = Fixtures;
+			path = Tests/RubyGatewayTests/Fixtures;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_12 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				0249234E20335B3D00E3AAF4 /* LinuxMain.swift */,
+				OBJ_13 /* RubyGatewayTests */,
+			);
+			name = Tests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_13 /* RubyGatewayTests */ = {
+			isa = PBXGroup;
+			children = (
+				0249234C20335ADB00E3AAF4 /* TestVM.swift */,
+				0230075B2045B27E00044B8E /* TestDemo.swift */,
+				022F3AD0203AF8BA009E69BE /* TestRbObject.swift */,
+				022F3AC82037153A009E69BE /* TestNumerics.swift */,
+				02706178204EC36E00C336B8 /* TestOperators.swift */,
+				0290133C203F42820090C5C9 /* TestMiscObjTypes.swift */,
+				022F3ACA20375E01009E69BE /* TestStrings.swift */,
+				022F3ACC20385C3A009E69BE /* TestConstants.swift */,
+				0205A8AA204423E400076840 /* TestVars.swift */,
+				0205A8A32042DA3600076840 /* TestCallable.swift */,
+				027061BC2059483C00C336B8 /* TestProcs.swift */,
+				0230075D2046ED9900044B8E /* TestErrors.swift */,
+				02300767204BF3E800044B8E /* TestFailable.swift */,
+				0249235020335C0D00E3AAF4 /* Helpers.swift */,
+				024923522034AA2B00E3AAF4 /* Fixtures */,
+			);
+			name = RubyGatewayTests;
+			path = Tests/RubyGatewayTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_16 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		OBJ_17 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				"TMLRuby::TMLRubyTests::Product" /* RubyGatewayTests.xctest */,
+				"TMLRuby::TMLRuby::Product" /* RubyGateway.framework */,
+				022F3AB72036D4DD009E69BE /* libRubyGatewayHelpers.a */,
+			);
+			name = Products;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		OBJ_5 = {
+			isa = PBXGroup;
+			children = (
+				OBJ_6 /* Package.swift */,
+				OBJ_7 /* Sources */,
+				OBJ_12 /* Tests */,
+				OBJ_16 /* Dependencies */,
+				OBJ_17 /* Products */,
+				022F3AC52036D85A009E69BE /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		OBJ_7 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_8 /* RubyGateway */,
+				022F3ABC2036D58C009E69BE /* RubyGatewayHelpers */,
+			);
+			name = Sources;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_8 /* RubyGateway */ = {
+			isa = PBXGroup;
+			children = (
+				024923462031EDE000E3AAF4 /* RbVM.swift */,
+				02901337203E03530090C5C9 /* RbGateway.swift */,
+				022F3ACE203AE707009E69BE /* RbObject.swift */,
+				0270617B2051918500C336B8 /* RbSymbol.swift */,
+				027061BA2058117100C336B8 /* RbProc.swift */,
+				02901339203ED8D60090C5C9 /* RbConversions.swift */,
+				0205A89D204088F900076840 /* RbNumericConversions.swift */,
+				02706176204EB47600C336B8 /* RbOperators.swift */,
+				022BD881205EEA9B00DA077F /* RbBlockCall.swift */,
+				02300765204AFA3600044B8E /* RbObjectAccess.swift */,
+				0205A8A82043287B00076840 /* RbFailableAccess.swift */,
+				0249234920334ADE00E3AAF4 /* RbError.swift */,
+				022F3AB120360B9F009E69BE /* CRubyMacros.swift */,
+				0205A8A62043284C00076840 /* String+RubyGateway.swift */,
+			);
+			name = RubyGateway;
+			path = Sources/RubyGateway;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		022F3AAE2035F82F009E69BE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		022F3AB52036D4DD009E69BE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				022F3AC12036D72A009E69BE /* rbg_helpers.h in Headers */,
+				022F3AC42036D82F009E69BE /* module.modulemap in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		022F3AB62036D4DD009E69BE /* RubyGatewayHelpers */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 022F3AB82036D4DD009E69BE /* Build configuration list for PBXNativeTarget "RubyGatewayHelpers" */;
+			buildPhases = (
+				022F3AB32036D4DD009E69BE /* Sources */,
+				022F3AB42036D4DD009E69BE /* Frameworks */,
+				022F3AB52036D4DD009E69BE /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RubyGatewayHelpers;
+			productName = TMLRubyHelpers;
+			productReference = 022F3AB72036D4DD009E69BE /* libRubyGatewayHelpers.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		"TMLRuby::SwiftPMPackageDescription" /* RubyGatewayPackageDescription */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_22 /* Build configuration list for PBXNativeTarget "RubyGatewayPackageDescription" */;
+			buildPhases = (
+				OBJ_25 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RubyGatewayPackageDescription;
+			productName = TMLRubyPackageDescription;
+			productType = "com.apple.product-type.framework";
+		};
+		"TMLRuby::TMLRuby" /* RubyGateway */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_46 /* Build configuration list for PBXNativeTarget "RubyGateway" */;
+			buildPhases = (
+				022F3AAE2035F82F009E69BE /* Headers */,
+				OBJ_49 /* Sources */,
+				OBJ_51 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				022BD8A020612B3500DA077F /* PBXTargetDependency */,
+			);
+			name = RubyGateway;
+			productName = TMLRuby;
+			productReference = "TMLRuby::TMLRuby::Product" /* RubyGateway.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"TMLRuby::TMLRubyTests" /* RubyGatewayTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_38 /* Build configuration list for PBXNativeTarget "RubyGatewayTests" */;
+			buildPhases = (
+				OBJ_41 /* Sources */,
+				OBJ_43 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_45 /* PBXTargetDependency */,
+			);
+			name = RubyGatewayTests;
+			productName = TMLRubyTests;
+			productReference = "TMLRuby::TMLRubyTests::Product" /* RubyGatewayTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		OBJ_1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 9999;
+				TargetAttributes = {
+					022F3AB62036D4DD009E69BE = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					"TMLRuby::TMLRuby" = {
+						LastSwiftMigration = 0920;
+					};
+				};
+			};
+			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "RubyGateway" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = OBJ_5;
+			productRefGroup = OBJ_17 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				"TMLRuby::SwiftPMPackageDescription" /* RubyGatewayPackageDescription */,
+				"TMLRuby::TMLRubyTests" /* RubyGatewayTests */,
+				"TMLRuby::TMLRuby" /* RubyGateway */,
+				022F3AB62036D4DD009E69BE /* RubyGatewayHelpers */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		022F3AB32036D4DD009E69BE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02300762204805B500044B8E /* rbg_value.m in Sources */,
+				022F3AC22036D731009E69BE /* rbg_protect.m in Sources */,
+				023007642048075500044B8E /* rbg_macros.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_25 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_26 /* Package.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_41 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				02706179204EC36E00C336B8 /* TestOperators.swift in Sources */,
+				0249235120335C0D00E3AAF4 /* Helpers.swift in Sources */,
+				0249234D20335ADB00E3AAF4 /* TestVM.swift in Sources */,
+				022F3ACD20385C3A009E69BE /* TestConstants.swift in Sources */,
+				022F3ACB20375E01009E69BE /* TestStrings.swift in Sources */,
+				0230075E2046ED9900044B8E /* TestErrors.swift in Sources */,
+				0230075C2045B27E00044B8E /* TestDemo.swift in Sources */,
+				0205A8AB204423E400076840 /* TestVars.swift in Sources */,
+				0290133D203F42820090C5C9 /* TestMiscObjTypes.swift in Sources */,
+				027061BD2059483C00C336B8 /* TestProcs.swift in Sources */,
+				0205A8A42042DA3600076840 /* TestCallable.swift in Sources */,
+				02300768204BF3E800044B8E /* TestFailable.swift in Sources */,
+				022F3AC92037153A009E69BE /* TestNumerics.swift in Sources */,
+				022F3AD1203AF8BA009E69BE /* TestRbObject.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_49 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				027061BB2058117100C336B8 /* RbProc.swift in Sources */,
+				02300766204AFA3600044B8E /* RbObjectAccess.swift in Sources */,
+				0249234B20334AE500E3AAF4 /* RbError.swift in Sources */,
+				022F3ACF203AE707009E69BE /* RbObject.swift in Sources */,
+				02706177204EB47600C336B8 /* RbOperators.swift in Sources */,
+				024923482031EE0400E3AAF4 /* RbVM.swift in Sources */,
+				0205A8A92043287B00076840 /* RbFailableAccess.swift in Sources */,
+				02901338203E03530090C5C9 /* RbGateway.swift in Sources */,
+				0270617C2051918500C336B8 /* RbSymbol.swift in Sources */,
+				022BD882205EEA9B00DA077F /* RbBlockCall.swift in Sources */,
+				0205A89E204088F900076840 /* RbNumericConversions.swift in Sources */,
+				022F3AB220360B9F009E69BE /* CRubyMacros.swift in Sources */,
+				0290133A203ED8D60090C5C9 /* RbConversions.swift in Sources */,
+				0205A8A72043284C00076840 /* String+RubyGateway.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		022BD8A020612B3500DA077F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 022F3AB62036D4DD009E69BE /* RubyGatewayHelpers */;
+			targetProxy = 022BD89F20612B3500DA077F /* PBXContainerItemProxy */;
+		};
+		OBJ_45 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "TMLRuby::TMLRuby" /* RubyGateway */;
+			targetProxy = 0234545420307CA000BE311B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		022F3AB92036D4DD009E69BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_LINK_OBJC_RUNTIME = NO;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"${SRCROOT}/CRuby",
+					"${SRCROOT}/Sources/RubyGatewayHelpers/include",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		022F3ABA2036D4DD009E69BE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_LINK_OBJC_RUNTIME = NO;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"${SRCROOT}/CRuby",
+					"${SRCROOT}/Sources/RubyGatewayHelpers/include",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		OBJ_23 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 4 -I /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/pm/4 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk";
+				PRODUCT_NAME = RubyGatewayPackageDescription;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		OBJ_24 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 4 -I /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/pm/4 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk";
+				PRODUCT_NAME = RubyGatewayPackageDescription;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		OBJ_3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				USE_HEADERMAP = NO;
+			};
+			name = Debug;
+		};
+		OBJ_39 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGatewayTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_NAME = RubyGatewayTests;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = RubyGatewayTests;
+			};
+			name = Debug;
+		};
+		OBJ_4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_OPTIMIZATION_LEVEL = s;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_SWIFT_FLAGS = "-DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				USE_HEADERMAP = NO;
+			};
+			name = Release;
+		};
+		OBJ_40 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGatewayTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_NAME = RubyGatewayTests;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = RubyGatewayTests;
+			};
+			name = Release;
+		};
+		OBJ_47 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "${SRCROOT}/CRuby";
+				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGateway_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = RubyGateway;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "${SRCROOT}/CRuby ${SRCROOT}/Sources/RubyGatewayHelpers";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = RubyGateway;
+			};
+			name = Debug;
+		};
+		OBJ_48 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "${SRCROOT}/CRuby";
+				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGateway_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = RubyGateway;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "${SRCROOT}/CRuby ${SRCROOT}/Sources/RubyGatewayHelpers";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = RubyGateway;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		022F3AB82036D4DD009E69BE /* Build configuration list for PBXNativeTarget "RubyGatewayHelpers" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				022F3AB92036D4DD009E69BE /* Debug */,
+				022F3ABA2036D4DD009E69BE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		OBJ_2 /* Build configuration list for PBXProject "RubyGateway" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_3 /* Debug */,
+				OBJ_4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		OBJ_22 /* Build configuration list for PBXNativeTarget "RubyGatewayPackageDescription" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_23 /* Debug */,
+				OBJ_24 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		OBJ_38 /* Build configuration list for PBXNativeTarget "RubyGatewayTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_39 /* Debug */,
+				OBJ_40 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		OBJ_46 /* Build configuration list for PBXNativeTarget "RubyGateway" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_47 /* Debug */,
+				OBJ_48 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = OBJ_1 /* Project object */;
+}
