@@ -103,7 +103,7 @@
 		0290133C203F42820090C5C9 /* TestMiscObjTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMiscObjTypes.swift; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		"TMLRuby::TMLRuby::Product" /* RubyBridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RubyBridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		"TMLRuby::TMLRubyTests::Product" /* RubyBridgeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = RubyBridgeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		"TMLRuby::TMLRubyTests::Product" /* RubyGatewayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = RubyGatewayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,7 +213,7 @@
 		OBJ_17 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				"TMLRuby::TMLRubyTests::Product" /* RubyBridgeTests.xctest */,
+				"TMLRuby::TMLRubyTests::Product" /* RubyGatewayTests.xctest */,
 				"TMLRuby::TMLRuby::Product" /* RubyBridge.framework */,
 				022F3AB72036D4DD009E69BE /* libRubyGatewayHelpers.a */,
 			);
@@ -347,7 +347,7 @@
 			);
 			name = RubyGatewayTests;
 			productName = TMLRubyTests;
-			productReference = "TMLRuby::TMLRubyTests::Product" /* RubyBridgeTests.xctest */;
+			productReference = "TMLRuby::TMLRubyTests::Product" /* RubyGatewayTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -623,9 +623,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_NAME = RubyBridgeTests;
+				PRODUCT_NAME = RubyGatewayTests;
 				SWIFT_VERSION = 4.0;
-				TARGET_NAME = RubyBridgeTests;
+				TARGET_NAME = RubyGatewayTests;
 			};
 			name = Debug;
 		};
@@ -661,9 +661,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_NAME = RubyBridgeTests;
+				PRODUCT_NAME = RubyGatewayTests;
 				SWIFT_VERSION = 4.0;
-				TARGET_NAME = RubyBridgeTests;
+				TARGET_NAME = RubyGatewayTests;
 			};
 			name = Release;
 		};

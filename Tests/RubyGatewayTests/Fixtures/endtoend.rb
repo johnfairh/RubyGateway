@@ -1,4 +1,4 @@
-module RubyBridge
+module RubyGateway
     class EndToEnd
         attr_accessor :name
         attr_reader :version

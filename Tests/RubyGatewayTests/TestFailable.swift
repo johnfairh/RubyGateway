@@ -15,7 +15,7 @@ class TestFailable: XCTestCase {
     }
 
     private func getInstance() -> RbObject {
-        return RbObject(ofClass: "RubyBridge::EndToEnd",
+        return RbObject(ofClass: "RubyGateway::EndToEnd",
                         args: [1.2],
                         kwArgs: [("name", "barney")])!
     }
@@ -24,7 +24,7 @@ class TestFailable: XCTestCase {
     func testConstants() {
         setup()
 
-        guard let mod = Ruby.failable.getConstant("RubyBridge"),
+        guard let mod = Ruby.failable.getConstant("RubyGateway"),
             let cls = mod.failable.getClass("EndToEnd") else {
                 XCTFail("Couldn't get mod + cls")
                 return
@@ -157,7 +157,7 @@ class TestFailable: XCTestCase {
     func testCvars() {
         setup()
 
-        guard let clazz = Ruby.failable.getClass("RubyBridge::EndToEnd") else {
+        guard let clazz = Ruby.failable.getClass("RubyGateway::EndToEnd") else {
             XCTFail("Couldn't get class")
             return
         }
