@@ -23,4 +23,8 @@ Pod::Spec.new do |s|
   s.preserve_path = 'CRuby/*', 'RubyBridgeHelpers/*'
   s.pod_target_xcconfig = { 'SWIFT_INCLUDE_PATHS' => '"${PODS_ROOT}/RubyBridge/CRuby" "${PODS_ROOT}/RubyBridge/RubyBridgeHelpers"',
                             'HEADER_SEARCH_PATHS' => '"${PODS_ROOT}/RubyBridge/CRuby"' }
+  s.prepare_command = <<-ECMD
+                        mkdir RubyBridgeHelpers
+                        echo 'module RubyBridgeHelpers [system] {}' > RubyBridgeHelpers/module.modulemap
+                      ECMD
 end
