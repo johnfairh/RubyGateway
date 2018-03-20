@@ -16,16 +16,11 @@ Pod::Spec.new do |s|
                     and turn Ruby objects back into Swift types.
                   EDESC
   s.documentation_url = "https://johnfairh.github.io/RubyBridge/"
-  s.source_files  = "Sources/RubyBridge/*swift"
+  s.source_files  = 'Sources/RubyBridge/*swift', 'Sources/RubyBridgeHelpers/*m', 'Sources/RubyBridgeHelpers/include/*h'
   s.platform = :osx, '10.13'
   s.swift_version = "4.0"
   s.frameworks  = "Foundation"
   s.preserve_path = 'CRuby/*', 'RubyBridgeHelpers/*'
-  s.pod_target_xcconfig = { 'SWIFT_INCLUDE_PATHS' => '"${PODS_ROOT}/RubyBridge/CRuby" "${PODS_ROOT}/RubyBridge/RubyBridgeHelpers"' }
-  s.subspec 'RubyBridgeHelpers' do |ss|
-    ss.preserve_path = "CRuby/*"
-    ss.source_files = 'Sources/RubyBridgeHelpers/*m', 'Sources/RubyBridgeHelpers/include/*h'
-    ss.pod_target_xcconfig = { 'HEADER_SEARCH_PATHS' => '"${PODS_ROOT}/RubyBridge/CRuby"' }
-#    ss.private_header_files = 'Sources/RubyBridgeHelpers/include/*h'
-  end
+  s.pod_target_xcconfig = { 'SWIFT_INCLUDE_PATHS' => '"${PODS_ROOT}/RubyBridge/CRuby" "${PODS_ROOT}/RubyBridge/RubyBridgeHelpers"',
+                            'HEADER_SEARCH_PATHS' => '"${PODS_ROOT}/RubyBridge/CRuby"' }
 end

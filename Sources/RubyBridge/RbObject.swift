@@ -4,6 +4,7 @@
 //
 //  Distributed under the MIT license, see LICENSE
 //
+import CRuby
 import RubyBridgeHelpers
 
 /// A Ruby object.
