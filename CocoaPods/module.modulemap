@@ -1,0 +1,4 @@
+framework module RubyBridge {
+  export *
+  module * { export * }
+}
