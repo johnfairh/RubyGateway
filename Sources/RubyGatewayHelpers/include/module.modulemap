@@ -1,4 +1,4 @@
-module RubyBridgeHelpers {
+module RubyGatewayHelpers {
     header "rbg_helpers.h"
     export *
 }

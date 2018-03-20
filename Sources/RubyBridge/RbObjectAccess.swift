@@ -6,7 +6,7 @@
 //
 
 import CRuby
-import RubyBridgeHelpers
+import RubyGatewayHelpers
 
 /// Provides services to manipulate a Ruby object:
 /// * Call methods;

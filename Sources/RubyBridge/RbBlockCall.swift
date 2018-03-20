@@ -6,7 +6,7 @@
 //
 
 import CRuby
-import RubyBridgeHelpers
+import RubyGatewayHelpers
 
 //
 // This file deals with Ruby blocks.  It gets a bit complicated.

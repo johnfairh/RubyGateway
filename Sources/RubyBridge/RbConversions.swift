@@ -10,7 +10,7 @@
 
 import CRuby
 import Foundation
-import RubyBridgeHelpers
+import RubyGatewayHelpers
 
 /// Protocol adopted by types that can be converted to and from `RbObject`s.
 public protocol RbObjectConvertible {

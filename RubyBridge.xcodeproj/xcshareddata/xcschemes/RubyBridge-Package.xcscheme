@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "022F3AB62036D4DD009E69BE"
-               BuildableName = "libRubyBridgeHelpers.a"
-               BlueprintName = "RubyBridgeHelpers"
+               BuildableName = "libRubyGatewayHelpers.a"
+               BlueprintName = "RubyGatewayHelpers"
                ReferencedContainer = "container:RubyBridge.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -78,6 +78,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "022F3AB62036D4DD009E69BE"
+            BuildableName = "libRubyGatewayHelpers.a"
+            BlueprintName = "RubyGatewayHelpers"
+            ReferencedContainer = "container:RubyBridge.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

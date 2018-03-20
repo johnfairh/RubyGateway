@@ -6,7 +6,7 @@
 //  Portions of this file derived from Ruby and distributed under terms of its license.
 
 import CRuby
-import RubyBridgeHelpers
+import RubyGatewayHelpers
 
 //
 // Various useful stuff from ruby.h that didn't make it through the Clang importer.

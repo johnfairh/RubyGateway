@@ -12,7 +12,7 @@ let package = Package(
     products: [
         .library(
             name: "RubyBridge",
-            targets: ["RubyBridge", "RubyBridgeHelpers"])
+            targets: ["RubyBridge", "RubyGatewayHelpers"])
     ],
     dependencies: [
         .package(url: "https://github.com/johnfairh/CRuby", from: "1.0.0"),
@@ -20,9 +20,9 @@ let package = Package(
     targets: [
         .target(
             name: "RubyBridge",
-            dependencies: ["RubyBridgeHelpers"]),
+            dependencies: ["RubyGatewayHelpers"]),
         .target(
-            name: "RubyBridgeHelpers",
+            name: "RubyGatewayHelpers",
             dependencies: []),
         .testTarget(
             name: "RubyBridgeTests",

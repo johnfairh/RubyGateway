@@ -15,15 +15,15 @@ Pod::Spec.new do |s|
                     Ruby objects back into Swift types.
                   EDESC
   s.documentation_url = "https://johnfairh.github.io/RubyBridge/"
-  s.source_files  = 'Sources/RubyBridge/*swift', 'Sources/RubyBridgeHelpers/*m', 'Sources/RubyBridgeHelpers/include/*h'
+  s.source_files  = 'Sources/RubyBridge/*swift', 'Sources/RubyGatewayHelpers/**/*.{h,m}'
   s.platform = :osx, '10.13'
   s.swift_version = "4.0"
   s.frameworks  = "Foundation"
-  s.preserve_path = 'CRuby/*', 'RubyBridgeHelpers/*'
-  s.pod_target_xcconfig = { 'SWIFT_INCLUDE_PATHS' => '"${PODS_ROOT}/RubyBridge/CRuby" "${PODS_ROOT}/RubyBridge/RubyBridgeHelpers"',
+  s.preserve_path = 'CRuby/*', 'RubyGatewayHelpers/*'
+  s.pod_target_xcconfig = { 'SWIFT_INCLUDE_PATHS' => '"${PODS_ROOT}/RubyBridge/CRuby" "${PODS_ROOT}/RubyBridge/RubyGatewayHelpers"',
                             'HEADER_SEARCH_PATHS' => '"${PODS_ROOT}/RubyBridge/CRuby"' }
   s.prepare_command = <<-ECMD
-                        mkdir RubyBridgeHelpers
-                        echo 'module RubyBridgeHelpers [system] {}' > RubyBridgeHelpers/module.modulemap
+                        mkdir RubyGatewayHelpers
+                        echo 'module RubyGatewayHelpers [system] {}' > RubyGatewayHelpers/module.modulemap
                       ECMD
 end

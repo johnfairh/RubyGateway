@@ -6,7 +6,7 @@
 //
 
 import CRuby
-import RubyBridgeHelpers
+import RubyGatewayHelpers
 
 /// Provides information about the Ruby VM, some control over how code is run,
 /// and services to access various kinds of Ruby objects from the top level.

@@ -6,7 +6,7 @@
 //
 
 import CRuby
-import RubyBridgeHelpers
+import RubyGatewayHelpers
 
 /// A Ruby Proc.
 ///
