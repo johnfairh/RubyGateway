@@ -11,10 +11,12 @@
 /* This small C module provides a speed-matching layer between Swift and the
  * Ruby API to hide some C-ish behaviour such as type-safety and longjmp()ing
  * from Swift.
- *
- * It would be part of the RubyBridge module directly but SPM does not approve.
  */
 
+/* Would ideally @import CRuby here, but causes weird problems building on
+ * Linux/Clang 6 and is impossible with the CocoaPods setup where this header
+ * file ends up in the RubyBridge module map.  This is a bit gross though.
+ */
 typedef unsigned long VALUE;
 typedef VALUE ID;
 
