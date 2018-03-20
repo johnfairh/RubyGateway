@@ -6,7 +6,7 @@
 //
 
 @import CRuby;
-#import "rbb_helpers.h"
+#import "rbg_helpers.h"
 
 // Fixups for Ruby < 2.3
 

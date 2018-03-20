@@ -6,7 +6,7 @@
 //
 
 @import CRuby;
-#import "rbb_helpers.h"
+#import "rbg_helpers.h"
 
 // The RSTRING routines accesss the underlying structures
 // that have too many unions for Swift to access safely.

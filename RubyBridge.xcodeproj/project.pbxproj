@@ -14,8 +14,8 @@
 		0205A8AB204423E400076840 /* TestVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205A8AA204423E400076840 /* TestVars.swift */; };
 		022BD882205EEA9B00DA077F /* RbBlockCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022BD881205EEA9B00DA077F /* RbBlockCall.swift */; };
 		022F3AB220360B9F009E69BE /* CRubyMacros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3AB120360B9F009E69BE /* CRubyMacros.swift */; };
-		022F3AC12036D72A009E69BE /* rbb_helpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 022F3ABE2036D721009E69BE /* rbb_helpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		022F3AC22036D731009E69BE /* rbb_protect.m in Sources */ = {isa = PBXBuildFile; fileRef = 022F3ABD2036D721009E69BE /* rbb_protect.m */; };
+		022F3AC12036D72A009E69BE /* rbg_helpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 022F3ABE2036D721009E69BE /* rbg_helpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		022F3AC22036D731009E69BE /* rbg_protect.m in Sources */ = {isa = PBXBuildFile; fileRef = 022F3ABD2036D721009E69BE /* rbg_protect.m */; };
 		022F3AC42036D82F009E69BE /* module.modulemap in Headers */ = {isa = PBXBuildFile; fileRef = 022F3AC32036D816009E69BE /* module.modulemap */; settings = {ATTRIBUTES = (Public, ); }; };
 		022F3AC62036D85A009E69BE /* libRubyBridgeHelpers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 022F3AB72036D4DD009E69BE /* libRubyBridgeHelpers.a */; };
 		022F3AC92037153A009E69BE /* TestNumerics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3AC82037153A009E69BE /* TestNumerics.swift */; };
@@ -25,8 +25,8 @@
 		022F3AD1203AF8BA009E69BE /* TestRbObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3AD0203AF8BA009E69BE /* TestRbObject.swift */; };
 		0230075C2045B27E00044B8E /* TestDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230075B2045B27E00044B8E /* TestDemo.swift */; };
 		0230075E2046ED9900044B8E /* TestErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230075D2046ED9900044B8E /* TestErrors.swift */; };
-		02300762204805B500044B8E /* rbb_value.m in Sources */ = {isa = PBXBuildFile; fileRef = 02300761204805B500044B8E /* rbb_value.m */; };
-		023007642048075500044B8E /* rbb_macros.m in Sources */ = {isa = PBXBuildFile; fileRef = 023007632048075500044B8E /* rbb_macros.m */; };
+		02300762204805B500044B8E /* rbg_value.m in Sources */ = {isa = PBXBuildFile; fileRef = 02300761204805B500044B8E /* rbg_value.m */; };
+		023007642048075500044B8E /* rbg_macros.m in Sources */ = {isa = PBXBuildFile; fileRef = 023007632048075500044B8E /* rbg_macros.m */; };
 		02300766204AFA3600044B8E /* RbObjectAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02300765204AFA3600044B8E /* RbObjectAccess.swift */; };
 		02300768204BF3E800044B8E /* TestFailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02300767204BF3E800044B8E /* TestFailable.swift */; };
 		024923482031EE0400E3AAF4 /* RbVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024923462031EDE000E3AAF4 /* RbVM.swift */; };
@@ -68,8 +68,8 @@
 		022BD881205EEA9B00DA077F /* RbBlockCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbBlockCall.swift; sourceTree = "<group>"; };
 		022F3AB120360B9F009E69BE /* CRubyMacros.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRubyMacros.swift; sourceTree = "<group>"; };
 		022F3AB72036D4DD009E69BE /* libRubyBridgeHelpers.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRubyBridgeHelpers.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		022F3ABD2036D721009E69BE /* rbb_protect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rbb_protect.m; sourceTree = "<group>"; };
-		022F3ABE2036D721009E69BE /* rbb_helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = rbb_helpers.h; path = include/rbb_helpers.h; sourceTree = "<group>"; };
+		022F3ABD2036D721009E69BE /* rbg_protect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rbg_protect.m; sourceTree = "<group>"; };
+		022F3ABE2036D721009E69BE /* rbg_helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = rbg_helpers.h; path = include/rbg_helpers.h; sourceTree = "<group>"; };
 		022F3AC32036D816009E69BE /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = include/module.modulemap; sourceTree = "<group>"; };
 		022F3AC82037153A009E69BE /* TestNumerics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestNumerics.swift; sourceTree = "<group>"; };
 		022F3ACA20375E01009E69BE /* TestStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestStrings.swift; sourceTree = "<group>"; };
@@ -80,8 +80,8 @@
 		0230075D2046ED9900044B8E /* TestErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestErrors.swift; sourceTree = "<group>"; };
 		0230075F2046F8E700044B8E /* raising.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = raising.rb; sourceTree = "<group>"; };
 		023007602047F7DA00044B8E /* endtoend.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = endtoend.rb; sourceTree = "<group>"; };
-		02300761204805B500044B8E /* rbb_value.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rbb_value.m; sourceTree = "<group>"; };
-		023007632048075500044B8E /* rbb_macros.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rbb_macros.m; sourceTree = "<group>"; };
+		02300761204805B500044B8E /* rbg_value.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rbg_value.m; sourceTree = "<group>"; };
+		023007632048075500044B8E /* rbg_macros.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rbg_macros.m; sourceTree = "<group>"; };
 		02300765204AFA3600044B8E /* RbObjectAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbObjectAccess.swift; sourceTree = "<group>"; };
 		02300767204BF3E800044B8E /* TestFailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFailable.swift; sourceTree = "<group>"; };
 		024923462031EDE000E3AAF4 /* RbVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbVM.swift; sourceTree = "<group>"; };
@@ -137,10 +137,10 @@
 			isa = PBXGroup;
 			children = (
 				022F3AC32036D816009E69BE /* module.modulemap */,
-				022F3ABE2036D721009E69BE /* rbb_helpers.h */,
-				022F3ABD2036D721009E69BE /* rbb_protect.m */,
-				02300761204805B500044B8E /* rbb_value.m */,
-				023007632048075500044B8E /* rbb_macros.m */,
+				022F3ABE2036D721009E69BE /* rbg_helpers.h */,
+				022F3ABD2036D721009E69BE /* rbg_protect.m */,
+				02300761204805B500044B8E /* rbg_value.m */,
+				023007632048075500044B8E /* rbg_macros.m */,
 			);
 			name = RubyBridgeHelpers;
 			path = Sources/RubyBridgeHelpers;
@@ -277,7 +277,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				022F3AC12036D72A009E69BE /* rbb_helpers.h in Headers */,
+				022F3AC12036D72A009E69BE /* rbg_helpers.h in Headers */,
 				022F3AC42036D82F009E69BE /* module.modulemap in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -392,9 +392,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02300762204805B500044B8E /* rbb_value.m in Sources */,
-				022F3AC22036D731009E69BE /* rbb_protect.m in Sources */,
-				023007642048075500044B8E /* rbb_macros.m in Sources */,
+				02300762204805B500044B8E /* rbg_value.m in Sources */,
+				022F3AC22036D731009E69BE /* rbg_protect.m in Sources */,
+				023007642048075500044B8E /* rbg_macros.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,7 +6,7 @@
 //
 
 @import CRuby;
-#import "rbb_helpers.h"
+#import "rbg_helpers.h"
 #import <stdbool.h>
 #import <stdint.h>
 
