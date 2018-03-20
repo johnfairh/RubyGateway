@@ -309,9 +309,9 @@
 			productReference = 022F3AB72036D4DD009E69BE /* libRubyGatewayHelpers.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		"TMLRuby::SwiftPMPackageDescription" /* RubyBridgePackageDescription */ = {
+		"TMLRuby::SwiftPMPackageDescription" /* RubyGatewayPackageDescription */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_22 /* Build configuration list for PBXNativeTarget "RubyBridgePackageDescription" */;
+			buildConfigurationList = OBJ_22 /* Build configuration list for PBXNativeTarget "RubyGatewayPackageDescription" */;
 			buildPhases = (
 				OBJ_25 /* Sources */,
 			);
@@ -319,7 +319,7 @@
 			);
 			dependencies = (
 			);
-			name = RubyBridgePackageDescription;
+			name = RubyGatewayPackageDescription;
 			productName = TMLRubyPackageDescription;
 			productType = "com.apple.product-type.framework";
 		};
@@ -375,7 +375,7 @@
 					};
 				};
 			};
-			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "RubyBridge" */;
+			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "RubyGateway" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -387,7 +387,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				"TMLRuby::SwiftPMPackageDescription" /* RubyBridgePackageDescription */,
+				"TMLRuby::SwiftPMPackageDescription" /* RubyGatewayPackageDescription */,
 				"TMLRuby::TMLRubyTests" /* RubyGatewayTests */,
 				"TMLRuby::TMLRuby" /* RubyGateway */,
 				022F3AB62036D4DD009E69BE /* RubyGatewayHelpers */,
@@ -632,7 +632,7 @@
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
-				INFOPLIST_FILE = RubyBridge.xcodeproj/RubyBridgeTests_Info.plist;
+				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyBridgeTests_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -670,7 +670,7 @@
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
-				INFOPLIST_FILE = RubyBridge.xcodeproj/RubyBridgeTests_Info.plist;
+				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyBridgeTests_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -691,7 +691,7 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = "${SRCROOT}/CRuby";
-				INFOPLIST_FILE = RubyBridge.xcodeproj/RubyBridge_Info.plist;
+				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyBridge_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -717,7 +717,7 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = "${SRCROOT}/CRuby";
-				INFOPLIST_FILE = RubyBridge.xcodeproj/RubyBridge_Info.plist;
+				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyBridge_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -743,7 +743,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_2 /* Build configuration list for PBXProject "RubyBridge" */ = {
+		OBJ_2 /* Build configuration list for PBXProject "RubyGateway" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				OBJ_3 /* Debug */,
@@ -752,7 +752,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_22 /* Build configuration list for PBXNativeTarget "RubyBridgePackageDescription" */ = {
+		OBJ_22 /* Build configuration list for PBXNativeTarget "RubyGatewayPackageDescription" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				OBJ_23 /* Debug */,

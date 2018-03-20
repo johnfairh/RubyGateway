@@ -17,7 +17,7 @@
                BlueprintIdentifier = "022F3AB62036D4DD009E69BE"
                BuildableName = "libRubyGatewayHelpers.a"
                BlueprintName = "RubyGatewayHelpers"
-               ReferencedContainer = "container:RubyBridge.xcodeproj">
+               ReferencedContainer = "container:RubyGateway.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "TMLRuby::TMLRuby"
-               BuildableName = "RubyBridge.framework"
+               BuildableName = "RubyGateway.framework"
                BlueprintName = "RubyGateway"
-               ReferencedContainer = "container:RubyBridge.xcodeproj">
+               ReferencedContainer = "container:RubyGateway.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -49,9 +49,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "TMLRuby::TMLRubyTests"
-               BuildableName = "RubyBridgeTests.xctest"
+               BuildableName = "RubyGatewayTests.xctest"
                BlueprintName = "RubyGatewayTests"
-               ReferencedContainer = "container:RubyBridge.xcodeproj">
+               ReferencedContainer = "container:RubyGateway.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -61,7 +61,7 @@
             BlueprintIdentifier = "TMLRuby::TMLRubyClient"
             BuildableName = "TMLRubyClient"
             BlueprintName = "TMLRubyClient"
-            ReferencedContainer = "container:RubyBridge.xcodeproj">
+            ReferencedContainer = "container:RubyGateway.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -84,7 +84,7 @@
             BlueprintIdentifier = "022F3AB62036D4DD009E69BE"
             BuildableName = "libRubyGatewayHelpers.a"
             BlueprintName = "RubyGatewayHelpers"
-            ReferencedContainer = "container:RubyBridge.xcodeproj">
+            ReferencedContainer = "container:RubyGateway.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>

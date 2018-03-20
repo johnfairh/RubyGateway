@@ -3,4 +3,4 @@ set -xev
 T_CFLAGS=`grep Cflags CRuby/CRuby.pc|sed -e 's/Cflags: //' -e 's/-I//g'`
 T_LDFLAGS=`grep Libs CRuby/CRuby.pc|sed -e 's/Libs: //'`
 ALL_SEARCHPATHS="${T_CFLAGS} ${PWD}/CRuby ${PWD}/Sources/RubyGatewayHelpers/include"
-xcodebuild clean build test -sdk macosx -project RubyBridge.xcodeproj -scheme RubyBridge-Package CODE_SIGNING_REQUIRED=NO -enableCodeCoverage YES VALID_ARCHS=x86_64 OTHER_LDFLAGS="${T_LDFLAGS}" HEADER_SEARCH_PATHS="${ALL_SEARCHPATHS}" -verbose
+xcodebuild clean build test -sdk macosx -project RubyGateway.xcodeproj -scheme RubyGateway-Package CODE_SIGNING_REQUIRED=NO -enableCodeCoverage YES VALID_ARCHS=x86_64 OTHER_LDFLAGS="${T_LDFLAGS}" HEADER_SEARCH_PATHS="${ALL_SEARCHPATHS}" -verbose
