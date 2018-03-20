@@ -55,4 +55,8 @@ it impossible to keep the RubyBridgeHelpers header file out of the RubyBridge
 module map, which means users importing RubyBridge also get the `rbb_` symbols
 polluting their autocomplete.
 
-Everything is sort of just about OK.
+Really want to edit the module map after the build is complete, could probably
+do via `script_phase` but not sure I want the warning on install / overhead of
+maintaining the files.
+
+Everything is just about OK.
