@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>History Structure Reference</title>
+    <title>Verbosity Enumeration Reference</title>
     <link rel="stylesheet" type="text/css" href="../../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Struct/History" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Enum/Verbosity" class="dashAnchor"></a>
 
-    <a title="History Structure Reference"></a>
+    <a title="Verbosity Enumeration Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -44,7 +44,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../../index.html">RubyGateway Reference</a>
       <img class="carat" src="../../img/carat.png" />
-      History Structure Reference
+      Verbosity Enumeration Reference
     </p>
 
     <div class="content-wrapper">
@@ -174,22 +174,14 @@
 
         <section class="section">
           <div class="section-content">
-            <h1>History</h1>
+            <h1>Verbosity</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">History</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Verbosity</span></code></pre>
 
                 </div>
               </div>
-            <p>Holds the most recent errors thrown by RubyGateway.</p>
-
-<p>This can be useful when the module indicates an error has occurred
-through a <code>nil</code> result somewhere &ndash; the error causing the <code>nil</code> has
-still been generated internally and is stashed here.</p>
-
-<p>These <code>nil</code> results happen during type conversion to Swift, for example
-<code><a href="../../Extensions/String.html#/s:SS11RubyGatewayESSSgAA8RbObjectCcfc">String.init(_:)</a></code>, and when using the <code><a href="../../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vv">RbObjectAccess.failable</a></code>
-adapter that suppresses throwing.</p>
+            <p>Verbosity setting for Ruby scripts - affects <code>Kernel#warn</code> etc.</p>
 
           </div>
         </section>
@@ -201,9 +193,9 @@ adapter that suppresses throwing.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway7RbErrorO7HistoryV6errorsSayACGv"></a>
-                    <a name="//apple_ref/swift/Property/errors" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway7RbErrorO7HistoryV6errorsSayACGv">errors</a>
+                    <a name="/s:11RubyGateway02RbB0C9VerbosityO4noneA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/none" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C9VerbosityO4noneA2EmF">none</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -211,25 +203,19 @@ adapter that suppresses throwing.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The error history.</p>
-
-<p>The oldest error recorded is at index 0; the most recent is at the
-end of the array.  See <code><a href="../../Enums/RbError/History.html#/s:11RubyGateway7RbErrorO7HistoryV10mostRecentACSgv">mostRecent</a></code>.</p>
-
-<p>The list is automatically pruned, there is no need to worry about
-this consuming all your memory.</p>
+                        <p>Silent verbosity mode.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">errors</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../../Enums/RbError.html">RbError</a></span><span class="p">]</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="k">none</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbError.swift#L56">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L185">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -237,9 +223,9 @@ this consuming all your memory.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway7RbErrorO7HistoryV10mostRecentACSgv"></a>
-                    <a name="//apple_ref/swift/Property/mostRecent" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway7RbErrorO7HistoryV10mostRecentACSgv">mostRecent</a>
+                    <a name="/s:11RubyGateway02RbB0C9VerbosityO6mediumA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/medium" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C9VerbosityO6mediumA2EmF">medium</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -247,19 +233,19 @@ this consuming all your memory.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The most recent error encountered by RubyGateway.</p>
+                        <p>Medium verbosity mode.  The Ruby default.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">mostRecent</span><span class="p">:</span> <span class="kt"><a href="../../Enums/RbError.html">RbError</a></span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">medium</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbError.swift#L59-L61">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L187">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -267,9 +253,9 @@ this consuming all your memory.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway7RbErrorO7HistoryV5clearyyF"></a>
-                    <a name="//apple_ref/swift/Method/clear()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway7RbErrorO7HistoryV5clearyyF">clear()</a>
+                    <a name="/s:11RubyGateway02RbB0C9VerbosityO4fullA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/full" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C9VerbosityO4fullA2EmF">full</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -277,19 +263,19 @@ this consuming all your memory.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Clear the error history.</p>
+                        <p>Full verbosity mode.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">clear</span><span class="p">()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">full</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbError.swift#L64-L66">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L189">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

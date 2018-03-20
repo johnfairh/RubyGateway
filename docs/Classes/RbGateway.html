@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>RbGateway Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Class/RbGateway" class="dashAnchor"></a>
+
+    <a title="RbGateway Class Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          RubyGateway Docs
+        </a>
+         (100% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/johnfairh/RubyGateway">
+            <img class="header-icon" src="../img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">RubyGateway Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      RbGateway Class Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../user-guide.html">User Guide</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../todo.html">TODO</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Main APIs.html">Main APIs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RbGateway.html">RbGateway</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RbGateway/Verbosity.html">– Verbosity</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RbObject.html">RbObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RbObjectAccess.html">RbObjectAccess</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Other APIs.html">Other APIs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other APIs.html#/s:11RubyGateway15RbBlockCallbacka">RbBlockCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RbBlockRetention.html">RbBlockRetention</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RbBreak.html">RbBreak</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RbProc.html">RbProc</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RbSymbol.html">RbSymbol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RbType.html">RbType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Error Handling.html">Error Handling</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RbError.html">RbError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RbError/History.html">– History</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RbException.html">RbException</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RbFailableAccess.html">RbFailableAccess</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Swift Interop.html">Swift Interop</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/String.html">String</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Bool.html">Bool</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UInt.html">UInt</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UInt64.html">UInt64</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UInt32.html">UInt32</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UInt16.html">UInt16</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UInt8.html">UInt8</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Int.html">Int</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Int64.html">Int64</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Int32.html">Int32</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Int16.html">Int16</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Int8.html">Int8</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Double.html">Double</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Float.html">Float</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content">
+            <h1>RbGateway</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">RbGateway</span> <span class="p">:</span> <span class="kt"><a href="../Classes/RbObjectAccess.html">RbObjectAccess</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>Provides information about the Ruby VM, some control over how code is run,
+and services to access various kinds of Ruby objects from the top level.</p>
+
+<p>You cannot instantiate this type.  Instead RubyGateway exports a public
+instance <code>Ruby</code>.  Among other things this permits dynamic member lookup
+and callable-style programming in Swift 5.</p>
+
+<p>The Ruby VM is initialized when the object is first accessed and is
+automatically stopped when the process ends.  The VM can be manually shut
+down before process exit by calling <code><a href="../Classes/RbGateway.html#/s:11RubyGateway02RbB0C7cleanups5Int32VyF">RbGateway.cleanup()</a></code> but once this has
+been done the VM cannot be restarted and subsequent calls to RubyGateway
+services will fail.</p>
+
+<p>The loadpath (where <code>require</code> looks) is set to the <code>lib/ruby</code> directories
+adjacent to the <code>libruby</code> the program is linked against and <code>$RUBYLIB</code>.
+RubyGems are enabled.</p>
+<h2 id='accessing-ruby-objects' class='heading'>Accessing Ruby objects</h2>
+
+<p>The class inherits from <code><a href="../Classes/RbObjectAccess.html">RbObjectAccess</a></code> which lets you look up constants
+or call functions as you would at the top level of a Ruby script, for example:</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">RubyGateway</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="s">"Ruby version is </span><span class="se">\(</span><span class="kt">Ruby</span><span class="o">.</span><span class="n">version</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+
+<span class="k">do</span> <span class="p">{</span>
+   <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">require</span><span class="p">(</span><span class="s">"rouge"</span><span class="p">)</span>
+   <span class="k">let</span> <span class="nv">html</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"Rouge"</span><span class="p">)</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"highlight"</span><span class="p">,</span> <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="s">"let a = 1"</span><span class="p">,</span> <span class="s">"swift"</span><span class="p">,</span> <span class="s">"html"</span><span class="p">])</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Or with Swift 5 dynamic member lookup &amp; callable:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">html</span> <span class="o">=</span> <span class="kt">Ruby</span><span class="o">.</span><span class="kt">Rouge</span><span class="o">!.</span><span class="nf">highlight</span><span class="p">(</span><span class="s">"let a = 1"</span><span class="p">,</span> <span class="s">"swift"</span><span class="p">,</span> <span class="s">"html"</span><span class="p">)</span><span class="o">!</span>
+</code></pre>
+
+<p>If you just want to create a Ruby object of some class, see
+<code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectCACSgSS7ofClass_SayAA0cD11Convertible_pG4argsSaySS_AaF_ptG6kwArgstcfc">RbObject.init(ofClass:args:kwArgs:)</a></code>.</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway02RbB0C7cleanups5Int32VyF"></a>
+                    <a name="//apple_ref/swift/Method/cleanup()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C7cleanups5Int32VyF">cleanup()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Explicitly shut down Ruby and release resources.
+This includes calling <code>END{}</code> code and procs registered by <code>Kernel.#at_exit</code>.</p>
+
+<p>You generally don&rsquo;t need to call this: it happens automatically as part of
+process exit.</p>
+
+<p>Once called you cannot continue to use Ruby in this process: the VM cannot
+be re-setup.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">cleanup</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int32</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>0 if the cleanup went fine, otherwise some error code from Ruby.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L79-L81">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway02RbB0C5getIDSuSS3for_tKF"></a>
+                    <a name="//apple_ref/swift/Method/getID(for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C5getIDSuSS3for_tKF">getID(for:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get an <code>ID</code> ready to call a method, for example.</p>
+
+<p>This is public to permit interop with <code>CRuby</code>.  It is not
+needed for regular RubyGateway use.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if Ruby raises an exception.  This
+probably means the <code>ID</code> space is full, which is fairly unlikely.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getID</span><span class="p">(</span><span class="k">for</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">ID</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Name to look up, typically constant or method name.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The corresponding ID.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L92-L94">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Top%20Self%20Instance%20Variables"></a>
+                <a name="//apple_ref/swift/Section/Top Self Instance Variables" class="dashAnchor"></a>
+                <a href="#/Top%20Self%20Instance%20Variables">
+                  <h3 class="section-name">Top Self Instance Variables</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway02RbB0C14getInstanceVarAA0C6ObjectCSSKF"></a>
+                    <a name="//apple_ref/swift/Method/getInstanceVar(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C14getInstanceVarAA0C6ObjectCSSKF">getInstanceVar(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get the value of a top-level instance variable.  Creates a new one with a <code>nil</code>
+value if it doesn&rsquo;t exist yet.</p>
+
+<p>This is like doing <code>@f</code> at the top level of a Ruby script.</p>
+
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vv">RbObjectAccess.failable</a></code>.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifierACSS4type_SS2idtcACmF">RbError.badIdentifier</a></code> if <code>name</code> looks wrong.
+      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if Ruby has a problem.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">getInstanceVar</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Name of IVar to get.  Must begin with a single &lsquo;@&rsquo;.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Value of the IVar or Ruby <code>nil</code> if it has not been assigned yet.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L132-L136">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway02RbB0C14setInstanceVarAA0C6ObjectCSS_AA0cG11Convertible_p8newValuetKF"></a>
+                    <a name="//apple_ref/swift/Method/setInstanceVar(_:newValue:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C14setInstanceVarAA0C6ObjectCSS_AA0cG11Convertible_p8newValuetKF">setInstanceVar(_:newValue:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set a top-level instance variable.  Creates a new one if it doesn&rsquo;t exist yet.</p>
+
+<p>This is like doing <code>@f = 3</code> at the top level of a Ruby script.</p>
+
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vv">RbObjectAccess.failable</a></code>.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifierACSS4type_SS2idtcACmF">RbError.badIdentifier</a></code> if <code>name</code> looks wrong.
+      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if Ruby has a problem.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">setInstanceVar</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">newValue</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Name of IVar to set.  Must begin with a single &lsquo;@&rsquo;.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>newValue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>New value to set.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The value that was set.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L150-L158">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/VM%20Properties"></a>
+                <a name="//apple_ref/swift/Section/VM Properties" class="dashAnchor"></a>
+                <a href="#/VM%20Properties">
+                  <h3 class="section-name">VM Properties</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway02RbB0C5debugSbv"></a>
+                    <a name="//apple_ref/swift/Property/debug" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C5debugSbv">debug</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Debug mode for Ruby code, sets <code>$DEBUG</code> / <code>$-d</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">debug</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L165-L180">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway02RbB0C9VerbosityO"></a>
+                    <a name="//apple_ref/swift/Enum/Verbosity" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C9VerbosityO">Verbosity</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Verbosity setting for Ruby scripts - affects <code>Kernel#warn</code> etc.</p>
+
+                        <a href="../Classes/RbGateway/Verbosity.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Verbosity</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L183-L190">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway02RbB0C7verboseAC9VerbosityOv"></a>
+                    <a name="//apple_ref/swift/Property/verbose" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C7verboseAC9VerbosityOv">verbose</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Verbose mode for Ruby code, sets <code>$VERBOSE</code> / <code>$-v</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">verbose</span><span class="p">:</span> <span class="kt"><a href="../Classes/RbGateway/Verbosity.html">Verbosity</a></span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L193-L217">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway02RbB0C10scriptNameSSv"></a>
+                    <a name="//apple_ref/swift/Property/scriptName" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C10scriptNameSSv">scriptName</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Value of Ruby <code>$PROGRAM_NAME</code> / <code>$0</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">scriptName</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L220-L235">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway02RbB0C10apiVersions5Int32V_A2Ftv"></a>
+                    <a name="//apple_ref/swift/Property/apiVersion" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C10apiVersions5Int32V_A2Ftv">apiVersion</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The component major/minor/teeny version numbers of Ruby being used.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">apiVersion</span><span class="p">:</span> <span class="p">(</span><span class="kt">Int32</span><span class="p">,</span> <span class="kt">Int32</span><span class="p">,</span> <span class="kt">Int32</span><span class="p">)</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L238-L240">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway02RbB0C7versionSSv"></a>
+                    <a name="//apple_ref/swift/Property/version" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C7versionSSv">version</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The version number triple of Ruby being used, for example <em>2.5.0</em>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">version</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L243-L245">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway02RbB0C18versionDescriptionSSv"></a>
+                    <a name="//apple_ref/swift/Property/versionDescription" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C18versionDescriptionSSv">versionDescription</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The full version string for the Ruby being used.</p>
+
+<p>For example <em>ruby 2.5.0p0 (2017-12-25 revision 61468) [x86_64-darwin17]</em>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">versionDescription</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L250-L252">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Run%20Ruby%20Code"></a>
+                <a name="//apple_ref/swift/Section/Run Ruby Code" class="dashAnchor"></a>
+                <a href="#/Run%20Ruby%20Code">
+                  <h3 class="section-name">Run Ruby Code</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway02RbB0C4evalAA0C6ObjectCSS4ruby_tKF"></a>
+                    <a name="//apple_ref/swift/Method/eval(ruby:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C4evalAA0C6ObjectCSS4ruby_tKF">eval(ruby:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Evaluate some Ruby and return the result.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code><a href="../Enums/RbError.html">RbError</a></code> if something goes wrong.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">eval</span><span class="p">(</span><span class="nv">ruby</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ruby</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Ruby code to execute at the top level.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The result of executing the code.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L263-L268">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway02RbB0C7requireSbSS8filename_tKF"></a>
+                    <a name="//apple_ref/swift/Method/require(filename:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C7requireSbSS8filename_tKF">require(filename:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Load a Ruby file once-only.  See <code>Kernel#require</code>, but note this
+method is dispatched dynamically so it will invoke any replacements of
+<code>require</code>.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code><a href="../Enums/RbError.html">RbError</a></code> if something goes wrong.  This usually means that Ruby
+      couldn&rsquo;t find the file.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">require</span><span class="p">(</span><span class="nv">filename</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>filename</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the file to load.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code>true</code> if the file was loaded OK, <code>false</code> if it is already loaded.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L279-L283">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway02RbB0C4loadySS8filename_Sb4wraptKF"></a>
+                    <a name="//apple_ref/swift/Method/load(filename:wrap:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C4loadySS8filename_Sb4wraptKF">load(filename:wrap:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>See Ruby <code>Kernel#load</code>. Load a file, reloads if already loaded.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code><a href="../Enums/RbError.html">RbError</a></code> if something goes wrong.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">load</span><span class="p">(</span><span class="nv">filename</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">wrap</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>filename</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the file to load</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>wrap</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If <code>true</code>, load the file into a fresh anonymous namespace
+instead of the current program.  See <code>Kernel#load</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L291-L298">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>Distributed under the MIT license.  Maintained by <a class="link" href="mailto:johnfairh@gmail.com" target="_blank" rel="external">John Fairhurst</a>.</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>-<a class="link" href="https://github.com/johnfairh/jazzy" target="_blank" rel="external">bebop</a>, originally a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>
