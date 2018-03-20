@@ -89,7 +89,7 @@
 		0249234C20335ADB00E3AAF4 /* TestVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVM.swift; sourceTree = "<group>"; };
 		0249234E20335B3D00E3AAF4 /* LinuxMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LinuxMain.swift; path = Tests/LinuxMain.swift; sourceTree = "<group>"; };
 		0249235020335C0D00E3AAF4 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
-		024923532034AA3E00E3AAF4 /* backwards.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = backwards.rb; path = Tests/RubyBridgeTests/Fixtures/backwards.rb; sourceTree = SOURCE_ROOT; };
+		024923532034AA3E00E3AAF4 /* backwards.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = backwards.rb; sourceTree = "<group>"; };
 		02571723203C984C001E3C43 /* nesting.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = nesting.rb; sourceTree = "<group>"; };
 		02706176204EB47600C336B8 /* RbOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbOperators.swift; sourceTree = "<group>"; };
 		02706178204EC36E00C336B8 /* TestOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestOperators.swift; sourceTree = "<group>"; };
@@ -168,19 +168,19 @@
 				0205A8A52042DC3F00076840 /* methods.rb */,
 			);
 			name = Fixtures;
-			path = Tests/RubyBridgeTests/Fixtures;
+			path = Tests/RubyGatewayTests/Fixtures;
 			sourceTree = SOURCE_ROOT;
 		};
 		OBJ_12 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				0249234E20335B3D00E3AAF4 /* LinuxMain.swift */,
-				OBJ_13 /* RubyBridgeTests */,
+				OBJ_13 /* RubyGatewayTests */,
 			);
 			name = Tests;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_13 /* RubyBridgeTests */ = {
+		OBJ_13 /* RubyGatewayTests */ = {
 			isa = PBXGroup;
 			children = (
 				0249234C20335ADB00E3AAF4 /* TestVM.swift */,
@@ -199,8 +199,8 @@
 				0249235020335C0D00E3AAF4 /* Helpers.swift */,
 				024923522034AA2B00E3AAF4 /* Fixtures */,
 			);
-			name = RubyBridgeTests;
-			path = Tests/RubyBridgeTests;
+			name = RubyGatewayTests;
+			path = Tests/RubyGatewayTests;
 			sourceTree = SOURCE_ROOT;
 		};
 		OBJ_16 /* Dependencies */ = {
@@ -333,9 +333,9 @@
 			productReference = "TMLRuby::TMLRuby::Product" /* RubyBridge.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		"TMLRuby::TMLRubyTests" /* RubyBridgeTests */ = {
+		"TMLRuby::TMLRubyTests" /* RubyGatewayTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_38 /* Build configuration list for PBXNativeTarget "RubyBridgeTests" */;
+			buildConfigurationList = OBJ_38 /* Build configuration list for PBXNativeTarget "RubyGatewayTests" */;
 			buildPhases = (
 				OBJ_41 /* Sources */,
 				OBJ_43 /* Frameworks */,
@@ -345,7 +345,7 @@
 			dependencies = (
 				OBJ_45 /* PBXTargetDependency */,
 			);
-			name = RubyBridgeTests;
+			name = RubyGatewayTests;
 			productName = TMLRubyTests;
 			productReference = "TMLRuby::TMLRubyTests::Product" /* RubyBridgeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -380,7 +380,7 @@
 			projectRoot = "";
 			targets = (
 				"TMLRuby::SwiftPMPackageDescription" /* RubyBridgePackageDescription */,
-				"TMLRuby::TMLRubyTests" /* RubyBridgeTests */,
+				"TMLRuby::TMLRubyTests" /* RubyGatewayTests */,
 				"TMLRuby::TMLRuby" /* RubyBridge */,
 				022F3AB62036D4DD009E69BE /* RubyGatewayHelpers */,
 			);
@@ -748,7 +748,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_38 /* Build configuration list for PBXNativeTarget "RubyBridgeTests" */ = {
+		OBJ_38 /* Build configuration list for PBXNativeTarget "RubyGatewayTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				OBJ_39 /* Debug */,

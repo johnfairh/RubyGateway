@@ -50,7 +50,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "TMLRuby::TMLRubyTests"
                BuildableName = "RubyBridgeTests.xctest"
-               BlueprintName = "RubyBridgeTests"
+               BlueprintName = "RubyGatewayTests"
                ReferencedContainer = "container:RubyBridge.xcodeproj">
             </BuildableReference>
          </TestableReference>

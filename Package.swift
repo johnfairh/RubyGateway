@@ -25,7 +25,7 @@ let package = Package(
             name: "RubyGatewayHelpers",
             dependencies: []),
         .testTarget(
-            name: "RubyBridgeTests",
+            name: "RubyGatewayTests",
             dependencies: ["RubyBridge"]),
     ]
 )

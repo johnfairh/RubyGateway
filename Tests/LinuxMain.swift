@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import RubyBridgeTests
+@testable import RubyGatewayTests
 
 XCTMain([
     testCase(TestVM.allTests),
