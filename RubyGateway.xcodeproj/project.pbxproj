@@ -632,7 +632,7 @@
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
-				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyBridgeTests_Info.plist;
+				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGatewayTests_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -670,7 +670,7 @@
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
-				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyBridgeTests_Info.plist;
+				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGatewayTests_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -691,7 +691,7 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = "${SRCROOT}/CRuby";
-				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyBridge_Info.plist;
+				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGateway_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -717,7 +717,7 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = "${SRCROOT}/CRuby";
-				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyBridge_Info.plist;
+				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGateway_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
