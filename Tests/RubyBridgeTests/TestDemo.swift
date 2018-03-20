@@ -6,7 +6,6 @@
 //
 
 import XCTest
-import CRuby
 import RubyBridge
 
 /// Some higher-level demos - skipped if gems are missing
