@@ -116,7 +116,7 @@ private class RbBlockContext {
 private func rbproc_pvoid_block_callback(rawContext: UnsafeMutableRawPointer,
                                          argc: Int32, argv: UnsafePointer<VALUE>,
                                          blockArg: VALUE,
-                                         returnValue: UnsafeMutablePointer<Rbb_return_value>) {
+                                         returnValue: UnsafeMutablePointer<Rbg_return_value>) {
     rbproc_block_callback(returnValue: returnValue) {
         let context = RbBlockContext.from(raw: rawContext)
         var args: [RbObject] = []
@@ -134,47 +134,47 @@ private func rbproc_pvoid_block_callback(rawContext: UnsafeMutableRawPointer,
 private func rbproc_value_block_callback(context: VALUE,
                                          argc: Int32, argv: UnsafePointer<VALUE>,
                                          blockArg: VALUE,
-                                         returnValue: UnsafeMutablePointer<Rbb_return_value>) {
+                                         returnValue: UnsafeMutablePointer<Rbg_return_value>) {
     rbproc_block_callback(returnValue: returnValue) {
         try RbVM.doProtect {
-            rbb_proc_call_with_block_protect(context, argc, argv, blockArg, nil)
+            rbg_proc_call_with_block_protect(context, argc, argv, blockArg, nil)
         }
     }
 }
 
 // MARK: - common callback handling
 
-private extension UnsafeMutablePointer where Pointee == Rbb_return_value {
-    func set(type: Rbb_return_type, value: VALUE) {
+private extension UnsafeMutablePointer where Pointee == Rbg_return_value {
+    func set(type: Rbg_return_type, value: VALUE) {
         pointee.type = type
         pointee.value = value
     }
 }
 
 /// Common (Swift closure/Ruby proc) result/error handling.
-private func rbproc_block_callback(returnValue: UnsafeMutablePointer<Rbb_return_value>,
+private func rbproc_block_callback(returnValue: UnsafeMutablePointer<Rbg_return_value>,
                                    blockCall: () throws -> VALUE) {
     do {
         let retVal = try blockCall()
-        returnValue.set(type: RBB_RT_VALUE, value: retVal)
+        returnValue.set(type: RBG_RT_VALUE, value: retVal)
     } catch RbError.rubyException(let exn) {
         // RubyBridge/Ruby code threw exception
-        returnValue.set(type: RBB_RT_RAISE, value: exn.exception.withRubyValue { $0 })
+        returnValue.set(type: RBG_RT_RAISE, value: exn.exception.withRubyValue { $0 })
     } catch let exn as RbException {
         // User Swift code generated Ruby exception
-        returnValue.set(type: RBB_RT_RAISE, value: exn.exception.withRubyValue { $0 })
+        returnValue.set(type: RBG_RT_RAISE, value: exn.exception.withRubyValue { $0 })
     } catch let brk as RbBreak {
         // 'break' from iterator
         if let brkObject = brk.object {
-            returnValue.set(type: RBB_RT_BREAK_VALUE, value: brkObject.withRubyValue { $0 })
+            returnValue.set(type: RBG_RT_BREAK_VALUE, value: brkObject.withRubyValue { $0 })
         } else {
-            returnValue.set(type: RBB_RT_BREAK, value: Qundef)
+            returnValue.set(type: RBG_RT_BREAK, value: Qundef)
         }
     } catch {
         // User Swift code or RubyBridge threw Swift error.  Oh for typed throws.
         // Wrap it up in a Ruby exception and raise that instead!
         let rbExn = RbException(message: "Unexpected Swift error thrown: \(error)")
-        returnValue.set(type: RBB_RT_RAISE, value: rbExn.exception.withRubyValue { $0 })
+        returnValue.set(type: RBG_RT_RAISE, value: rbExn.exception.withRubyValue { $0 })
     }
 }
 
@@ -184,8 +184,8 @@ private func rbproc_block_callback(returnValue: UnsafeMutablePointer<Rbb_return_
 internal enum RbBlock {
     /// One-time init to register the callbacks
     private static var initOnce: Void = {
-        rbb_register_pvoid_block_proc_callback(rbproc_pvoid_block_callback)
-        rbb_register_value_block_proc_callback(rbproc_value_block_callback)
+        rbg_register_pvoid_block_proc_callback(rbproc_pvoid_block_callback)
+        rbg_register_value_block_proc_callback(rbproc_value_block_callback)
     }()
 
     /// Call a method on an object passing a Swift closure as its block
@@ -197,7 +197,7 @@ internal enum RbBlock {
         let context = RbBlockContext(blockCall)
         return (context, try context.withRaw { rawContext in
             try RbVM.doProtect {
-                rbb_block_call_pvoid_protect(value, methodId,
+                rbg_block_call_pvoid_protect(value, methodId,
                                              Int32(argValues.count), argValues,
                                              rawContext, nil)
             }
@@ -211,7 +211,7 @@ internal enum RbBlock {
                                      block: VALUE) throws -> VALUE {
         let _ = initOnce
         return try RbVM.doProtect {
-            rbb_block_call_value_protect(value, methodId,
+            rbg_block_call_value_protect(value, methodId,
                                          Int32(argValues.count), argValues,
                                          block, nil)
         }

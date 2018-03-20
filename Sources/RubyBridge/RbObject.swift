@@ -70,7 +70,7 @@ import RubyBridgeHelpers
 /// Again you must take ensure that your Ruby objects support these operators or
 /// the program will crash.
 public final class RbObject: RbObjectAccess {
-    private let valueBox: UnsafeMutablePointer<Rbb_value>
+    private let valueBox: UnsafeMutablePointer<Rbg_value>
 
     /// Wrap up a Ruby object using the its `VALUE` API handle.
     ///
@@ -80,7 +80,7 @@ public final class RbObject: RbObjectAccess {
     /// This initializer is public to allow use with other parts
     /// of the Ruby API.  It is not normally needed.
     public init(rubyValue: VALUE) {
-        valueBox = rbb_value_alloc(rubyValue);
+        valueBox = rbg_value_alloc(rubyValue);
         super.init(getValue: { rubyValue })
     }
 
@@ -95,14 +95,14 @@ public final class RbObject: RbObjectAccess {
     /// let myClone = myObject.call("clone")
     /// ```
     public init(_ value: RbObject) {
-        valueBox = rbb_value_dup(value.valueBox);
+        valueBox = rbg_value_dup(value.valueBox);
         let rubyValue = valueBox.pointee.value
         super.init(getValue: { rubyValue }, associatedObjects: value.associatedObjects)
     }
 
     /// Allow the tracked Ruby object to be GCed when we go out of scope.
     deinit {
-        rbb_value_free(valueBox)
+        rbg_value_free(valueBox)
     }
 
     /// Access the raw `VALUE` object handle.  Very restricted use because
@@ -256,7 +256,7 @@ extension RbObject: CustomStringConvertible,
     /// This is the result of `inspect` with a fallback to `description`.
     public var debugDescription: String {
         if let value = try? RbVM.doProtect { () -> VALUE in
-               rbb_inspect_protect(rubyValue, nil)
+               rbg_inspect_protect(rubyValue, nil)
            },
            let str = String(RbObject(rubyValue: value)) {
             return str

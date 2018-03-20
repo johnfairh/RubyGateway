@@ -64,7 +64,7 @@ extension String: RbObjectConvertible {
     ///
     /// See `RbError.history` to find out why a conversion failed.
     public init?(_ value: RbObject) {
-        let stringVal = value.withRubyValue { rbb_String_protect($0, nil) }
+        let stringVal = value.withRubyValue { rbg_String_protect($0, nil) }
         if RbException.ignoreAnyPending() {
             return nil
         }
@@ -137,7 +137,7 @@ extension UInt: RbObjectConvertible {
     ///
     /// If the Ruby value is floating-point then the integer part is used.
     public init?(_ value: RbObject) {
-        self = value.withRubyValue { rbb_obj2ulong_protect($0, nil) }
+        self = value.withRubyValue { rbg_obj2ulong_protect($0, nil) }
         if RbException.ignoreAnyPending() {
             return nil
         }
@@ -165,7 +165,7 @@ extension Int: RbObjectConvertible {
     ///
     /// If the Ruby value is floating-point then the integer part is used.
     public init?(_ value: RbObject) {
-        self = value.withRubyValue { rbb_obj2long_protect($0, nil) }
+        self = value.withRubyValue { rbg_obj2long_protect($0, nil) }
         if RbException.ignoreAnyPending() {
             return nil
         }
@@ -202,7 +202,7 @@ extension Double: RbObjectConvertible {
     ///
     /// Flavors of NaN are not preserved across the Ruby<->Swift interface.
     public init?(_ value: RbObject) {
-        self = value.withRubyValue { rbb_obj2double_protect($0, nil) }
+        self = value.withRubyValue { rbg_obj2double_protect($0, nil) }
         if RbException.ignoreAnyPending() {
             return nil
         }

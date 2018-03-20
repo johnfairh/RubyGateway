@@ -1,6 +1,6 @@
 //
-//  rbb_value.m
-//  RubyBridgeHelpers
+//  rbg_value.m
+//  RubyGatewayHelpers
 //
 //  Distributed under the MIT license, see LICENSE
 //
@@ -30,9 +30,9 @@
 // protocols as required.  Sounds fun, might do that anyway!
 //
 
-Rbb_value * _Nonnull rbb_value_alloc(VALUE value)
+Rbg_value * _Nonnull rbg_value_alloc(VALUE value)
 {
-    Rbb_value *box = malloc(sizeof(*box));
+    Rbg_value *box = malloc(sizeof(*box));
     if (box == NULL)
     {
         // No good way out here, don't want to make the RbEnv
@@ -51,12 +51,12 @@ Rbb_value * _Nonnull rbb_value_alloc(VALUE value)
     return box;
 }
 
-Rbb_value *rbb_value_dup(const Rbb_value * _Nonnull box)
+Rbg_value *rbg_value_dup(const Rbg_value * _Nonnull box)
 {
-    return rbb_value_alloc(box->value);
+    return rbg_value_alloc(box->value);
 }
 
-void rbb_value_free(Rbb_value * _Nonnull box)
+void rbg_value_free(Rbg_value * _Nonnull box)
 {
     if (!RB_SPECIAL_CONST_P(box->value))
     {

@@ -176,7 +176,7 @@ final class RbVM {
             return rbId
         }
         let rbId = try RbVM.doProtect {
-            rbb_intern_protect(name, nil)
+            rbg_intern_protect(name, nil)
         }
         idCache[name] = rbId
         return rbId

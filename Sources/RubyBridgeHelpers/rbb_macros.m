@@ -1,6 +1,6 @@
 //
-//  rbb_macros.m
-//  RubyBridgeHelpers
+//  rbg_macros.m
+//  RubyGatewayHelpers
 //
 //  Distributed under the MIT license, see LICENSE
 //
@@ -10,24 +10,24 @@
 
 // The RSTRING routines accesss the underlying structures
 // that have too many unions for Swift to access safely.
-long rbb_RSTRING_LEN(VALUE v)
+long rbg_RSTRING_LEN(VALUE v)
 {
     return RSTRING_LEN(v);
 }
 
-const char *rbb_RSTRING_PTR(VALUE v)
+const char *rbg_RSTRING_PTR(VALUE v)
 {
     return RSTRING_PTR(v);
 }
 
 // # Version constants
 // These are exported as char [] which don't get imported
-const char *rbb_ruby_version(void)
+const char *rbg_ruby_version(void)
 {
     return ruby_version;
 }
 
-const char *rbb_ruby_description(void)
+const char *rbg_ruby_description(void)
 {
     return ruby_description;
 }
@@ -41,11 +41,11 @@ const char *rbb_ruby_description(void)
 #define RB_FIX2LONG FIX2LONG
 #endif
 
-unsigned long rbb_fix2ulong(VALUE v)
+unsigned long rbg_fix2ulong(VALUE v)
 {
     return RB_FIX2ULONG(v);
 }
-long rbb_fix2long(VALUE v)
+long rbg_fix2long(VALUE v)
 {
     return RB_FIX2LONG(v);
 }

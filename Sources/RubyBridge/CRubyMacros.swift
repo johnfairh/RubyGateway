@@ -54,12 +54,12 @@ func RB_NIL_P(_ v: VALUE) -> Bool {
 
 /// Number of bytes in the string.
 func RSTRING_LEN(_ str: VALUE) -> Int {
-    return rbb_RSTRING_LEN(str)
+    return rbg_RSTRING_LEN(str)
 }
 
 /// Address of the string byte buffer.
 func RSTRING_PTR(_ str: VALUE) -> UnsafePointer<Int8> {
-    return rbb_RSTRING_PTR(str)
+    return rbg_RSTRING_PTR(str)
 }
 
 // MARK: - More enum-y `VALUE` type enum
@@ -163,11 +163,11 @@ func RB_LONG2FIX(_ i: Int) -> VALUE {
 }
 
 func RB_FIX2LONG(_ v: VALUE) -> Int {
-    return rbb_fix2long(v)
+    return rbg_fix2long(v)
 }
 
 func RB_FIX2ULONG(_ v: VALUE) -> UInt {
-    return rbb_fix2ulong(v)
+    return rbg_fix2ulong(v)
 }
 
 func RB_POSFIXABLE(_ f: SIGNED_VALUE) -> Bool {

@@ -241,14 +241,14 @@ extension RbBridge {
 
     /// The version number triple of Ruby being used, for example *2.5.0*.
     public var version: String {
-        return String(cString: rbb_ruby_version())
+        return String(cString: rbg_ruby_version())
     }
 
     /// The full version string for the Ruby being used.
     ///
     /// For example *ruby 2.5.0p0 (2017-12-25 revision 61468) [x86_64-darwin17]*.
     public var versionDescription: String {
-        return String(cString: rbb_ruby_description())
+        return String(cString: rbg_ruby_description())
     }
 }
 
@@ -292,7 +292,7 @@ extension RbBridge {
         try setup()
         return try RbObject(filename).withRubyValue { rubyValue in
             try RbVM.doProtect {
-                rbb_load_protect(rubyValue, wrap ? 1 : 0, nil)
+                rbg_load_protect(rubyValue, wrap ? 1 : 0, nil)
             }
         }
     }
