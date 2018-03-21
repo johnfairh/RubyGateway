@@ -9,11 +9,9 @@ Distributed under the MIT license, see LICENSE.
 [![CI](https://travis-ci.org/johnfairh/RubyGateway.svg?branch=master)](https://travis-ci.org/johnfairh/RubyGateway)
 [![codecov](https://codecov.io/gh/johnfairh/RubyGateway/branch/master/graph/badge.svg)](https://codecov.io/gh/johnfairh/RubyGateway)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-<!--
 ![Pod](https://cocoapod-badges.herokuapp.com/v/RubyGateway/badge.png)
-![Platforms](https://cocoapod-badges.herokuapp.com/p/RubyGateway/badge.png)
+![Platforms](https://img.shields.io/badge/platform-macOS%20%7C%20linux-lightgrey.svg)
 ![License](https://cocoapod-badges.herokuapp.com/l/RubyGateway/badge.png)
--->
 
 Embed Ruby in Swift: load Gems, run Ruby scripts, get results.
 
@@ -134,7 +132,11 @@ Swift package manager for macOS or Linux:
 .package(url: "https://github.com/johnfairh/RubyGateway", from: "0.1.0")
 ```
 
-CocoaPods soon&trade;.
+CocoaPods for macOS:
+```
+use_frameworks!
+pod 'RubyGateway'
+```
 
 ### Configuring CRuby
 
