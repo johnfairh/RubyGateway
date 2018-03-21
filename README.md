@@ -23,9 +23,9 @@ programs.  It's easy to pass Swift datatypes into Ruby and turn Ruby objects
 back into Swift types.
 
 This project is [young](https://johnfairh.github.io/RubyGateway/todo.html):
-biggest missing features right now are collection types.  The eventual goal
-is to allow implementation of Ruby classes in Swift to enable Ruby as a
-sandboxed DSL/scripting language for Swift applications.
+various things missing including collection types which should come with
+Swift 4.1.  Eventually plan to allow implementation of Ruby classes in Swift
+enabling Ruby as a sandboxed DSL/scripting language for Swift applications.
 
 See [CRuby](https://github.com/johnfairh/CRuby) if you are looking for a
 low-level Ruby C API wrapper.

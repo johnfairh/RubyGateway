@@ -12,6 +12,10 @@
 
 * None.
 
+## 0.3.0 - 21st March 2018
+
+CocoaPods.
+
 ## 0.2.0 - 19th March 2018
 
 Add `RbProc` `RbBlockCallback` `RbBreak` and new `RbObjectAccess.call(...)`

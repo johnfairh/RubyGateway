@@ -1,8 +1,9 @@
-## 0.3 plan
+## 0.4 plan
 
 Build
-* Cocoapods
 * Linux Travis
+
+?
 
 ## "1.0" feeling 
 
