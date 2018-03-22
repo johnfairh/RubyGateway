@@ -45,6 +45,8 @@ public enum RbError: Error {
     /// These `nil` results happen during type conversion to Swift, for example
     /// `String.init(_:)`, and when using the `RbObjectAccess.failable`
     /// adapter that suppresses throwing.
+    ///
+    /// Methods are thread-safe.
     public struct History {
         /// The error history.
         ///
@@ -54,15 +56,18 @@ public enum RbError: Error {
         /// The list is automatically pruned, there is no need to worry about
         /// this consuming all your memory.
         public private(set) var errors: [RbError] = []
+        private var lock: Lock = Lock()
 
         /// The most recent error encountered by RubyGateway.
         public var mostRecent: RbError? {
-            return errors.last
+            return lock.locked { errors.last } // I guess...
         }
 
         /// Clear the error history.
         public mutating func clear() {
-            errors = []
+            lock.locked {
+                errors = []
+            }
         }
 
         /// Loads more than useful...
@@ -70,9 +75,11 @@ public enum RbError: Error {
 
         /// Record an `RbError`
         mutating func record(error: RbError) {
-            errors.append(error)
-            if errors.count > MAX_RECENT_ERRORS {
-                errors = Array(errors.dropFirst())
+            lock.locked {
+                errors.append(error)
+                if errors.count > MAX_RECENT_ERRORS {
+                    errors = Array(errors.dropFirst())
+                }
             }
         }
 
@@ -90,7 +97,6 @@ public enum RbError: Error {
 
     /// A short history of errors thrown by RubyGateway
     public static var history = History()
-    // TODO: Fix locking....
 }
 
 // MARK: - CustomStringConvertible

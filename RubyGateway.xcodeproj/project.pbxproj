@@ -13,6 +13,7 @@
 		0205A8A92043287B00076840 /* RbFailableAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205A8A82043287B00076840 /* RbFailableAccess.swift */; };
 		0205A8AB204423E400076840 /* TestVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205A8AA204423E400076840 /* TestVars.swift */; };
 		022BD882205EEA9B00DA077F /* RbBlockCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022BD881205EEA9B00DA077F /* RbBlockCall.swift */; };
+		022BD8A22063C40800DA077F /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022BD8A12063C40800DA077F /* Lock.swift */; };
 		022F3AB220360B9F009E69BE /* CRubyMacros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3AB120360B9F009E69BE /* CRubyMacros.swift */; };
 		022F3AC12036D72A009E69BE /* rbg_helpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 022F3ABE2036D721009E69BE /* rbg_helpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		022F3AC22036D731009E69BE /* rbg_protect.m in Sources */ = {isa = PBXBuildFile; fileRef = 022F3ABD2036D721009E69BE /* rbg_protect.m */; };
@@ -73,6 +74,7 @@
 		0205A8A82043287B00076840 /* RbFailableAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbFailableAccess.swift; sourceTree = "<group>"; };
 		0205A8AA204423E400076840 /* TestVars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVars.swift; sourceTree = "<group>"; };
 		022BD881205EEA9B00DA077F /* RbBlockCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbBlockCall.swift; sourceTree = "<group>"; };
+		022BD8A12063C40800DA077F /* Lock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
 		022F3AB120360B9F009E69BE /* CRubyMacros.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRubyMacros.swift; sourceTree = "<group>"; };
 		022F3AB72036D4DD009E69BE /* libRubyGatewayHelpers.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRubyGatewayHelpers.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		022F3ABD2036D721009E69BE /* rbg_protect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rbg_protect.m; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				0249234920334ADE00E3AAF4 /* RbError.swift */,
 				022F3AB120360B9F009E69BE /* CRubyMacros.swift */,
 				0205A8A62043284C00076840 /* String+RubyGateway.swift */,
+				022BD8A12063C40800DA077F /* Lock.swift */,
 			);
 			name = RubyGateway;
 			path = Sources/RubyGateway;
@@ -440,6 +443,7 @@
 			buildActionMask = 0;
 			files = (
 				027061BB2058117100C336B8 /* RbProc.swift in Sources */,
+				022BD8A22063C40800DA077F /* Lock.swift in Sources */,
 				02300766204AFA3600044B8E /* RbObjectAccess.swift in Sources */,
 				0249234B20334AE500E3AAF4 /* RbError.swift in Sources */,
 				022F3ACF203AE707009E69BE /* RbObject.swift in Sources */,

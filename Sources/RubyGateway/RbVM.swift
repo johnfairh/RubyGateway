@@ -32,47 +32,41 @@ final class RbVM {
     private var idCache: [String: ID] = [:]
 
     /// Protect state (bit pointless given Ruby's state but feels bad not to)
-    private var mutex = pthread_mutex_t()
+    private var lock = Lock(recursive: true)
 
     /// Set up data
     init() {
         state = .unknown
         idCache = [:]
-
         // Paranoid about reentrant symbol lookup during finalizers...
-        var attr = pthread_mutexattr_t()
-        pthread_mutexattr_settype(&attr, Int32(PTHREAD_MUTEX_RECURSIVE))
-        pthread_mutex_init(&mutex, &attr)
+        lock = Lock(recursive: true)
     }
-
-    private func lock()   { pthread_mutex_lock(&mutex) }
-    private func unlock() { pthread_mutex_unlock(&mutex) }
 
     /// Check the state of the VM, make it better if possible.
     /// Returning means Ruby is working; throwing something means it is not.
     /// - returns: `true` on the actual setup, `false` subsequently.
     func setup() throws -> Bool {
-        lock(); defer { unlock() }
+        return try lock.locked {
+            switch state {
+            case .setupError(let error):
+                throw error
+            case .setup:
+                return false
+            case .cleanedUp:
+                try RbError.raise(error: .setup("Ruby has already been cleaned up."))
+            case .unknown:
+                break
+            }
 
-        switch state {
-        case .setupError(let error):
-            throw error
-        case .setup:
-            return false
-        case .cleanedUp:
-            try RbError.raise(error: .setup("Ruby has already been cleaned up."))
-        case .unknown:
-            break
+            do {
+                try doSetup()
+                state = .setup
+            } catch {
+                state = .setupError(error)
+                throw error
+            }
+            return true
         }
-
-        do {
-            try doSetup()
-            state = .setup
-        } catch {
-            state = .setupError(error)
-            throw error
-        }
-        return true
     }
 
     /// Shut down the Ruby VM and release resources.
@@ -80,13 +74,13 @@ final class RbVM {
     /// - returns: 0 if all is well, otherwise some error code.
     @discardableResult
     func cleanup() -> Int32 {
-        lock(); defer { unlock() }
-
-        guard case .setup = state else {
-            return 0;
+        return lock.locked {
+            guard case .setup = state else {
+                return 0;
+            }
+            defer { state = .cleanedUp }
+            return ruby_cleanup(0)
         }
-        defer { state = .cleanedUp }
-        return ruby_cleanup(0)
     }
 
     /// Shut down Ruby at process exit if possible
@@ -170,16 +164,16 @@ final class RbVM {
     /// - throws: `RbException` if Ruby raises -- probably means the `ID` space
     ///   is full, which is fairly unlikely.
     func getID(for name: String) throws -> ID {
-        lock(); defer { unlock() }
-
-        if let rbId = idCache[name] {
+        return try lock.locked {
+            if let rbId = idCache[name] {
+                return rbId
+            }
+            let rbId = try RbVM.doProtect {
+                rbg_intern_protect(name, nil)
+            }
+            idCache[name] = rbId
             return rbId
         }
-        let rbId = try RbVM.doProtect {
-            rbg_intern_protect(name, nil)
-        }
-        idCache[name] = rbId
-        return rbId
     }
 
     /// Helper to call a protected Ruby API function and propagate any Ruby exception
