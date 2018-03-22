@@ -121,6 +121,11 @@ result = try array.call("each") { args in
 }
 ```
 
+### Use 'return' in a Swift block
+
+Can't do it - missing from the Ruby API.  Would probably have just been
+confusing anyway.
+
 ### Create a Proc with Swift code
 
 Use `RbObject.init(blockCall:)`.  Ruby:
