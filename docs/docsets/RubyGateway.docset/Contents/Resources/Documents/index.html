@@ -183,13 +183,10 @@ Distributed under the MIT license, see LICENSE.
 
 <p><a href="https://travis-ci.org/johnfairh/RubyGateway"><img src="https://travis-ci.org/johnfairh/RubyGateway.svg?branch=master" alt="CI"></a>
 <a href="https://codecov.io/gh/johnfairh/RubyGateway"><img src="https://codecov.io/gh/johnfairh/RubyGateway/branch/master/graph/badge.svg" alt="codecov"></a>
-<a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage compatible"></a></p>
-
-<!--
-![Pod](https://cocoapod-badges.herokuapp.com/v/RubyGateway/badge.png)
-![Platforms](https://cocoapod-badges.herokuapp.com/p/RubyGateway/badge.png)
-![License](https://cocoapod-badges.herokuapp.com/l/RubyGateway/badge.png)
--->
+<a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage compatible"></a>
+<img src="https://cocoapod-badges.herokuapp.com/v/RubyGateway/badge.png" alt="Pod">
+<img src="https://img.shields.io/badge/platform-macOS%20%7C%20linux-lightgrey.svg" alt="Platforms">
+<img src="https://cocoapod-badges.herokuapp.com/l/RubyGateway/badge.png" alt="License"></p>
 
 <p>Embed Ruby in Swift: load Gems, run Ruby scripts, get results.</p>
 
@@ -199,9 +196,9 @@ programs.  It&rsquo;s easy to pass Swift datatypes into Ruby and turn Ruby objec
 back into Swift types.</p>
 
 <p>This project is <a href="https://johnfairh.github.io/RubyGateway/todo.html">young</a>:
-biggest missing features right now are collection types.  The eventual goal
-is to allow implementation of Ruby classes in Swift to enable Ruby as a
-sandboxed DSL/scripting language for Swift applications.</p>
+various things missing including collection types which should come with
+Swift 4.1.  Eventually plan to allow implementation of Ruby classes in Swift
+enabling Ruby as a sandboxed DSL/scripting language for Swift applications.</p>
 
 <p>See <a href="https://github.com/johnfairh/CRuby">CRuby</a> if you are looking for a
 low-level Ruby C API wrapper.</p>
@@ -305,7 +302,10 @@ to use a different Ruby then you also need to configure CRuby.</p>
 <pre class="highlight plaintext"><code>.package(url: "https://github.com/johnfairh/RubyGateway", from: "0.1.0")
 </code></pre>
 
-<p>CocoaPods soon&trade;.</p>
+<p>CocoaPods for macOS:</p>
+<pre class="highlight plaintext"><code>use_frameworks!
+pod 'RubyGateway'
+</code></pre>
 <h3 id='configuring-cruby' class='heading'>Configuring CRuby</h3>
 
 <p>CRuby is the glue between RubyGateway and your Ruby installation.  It is a

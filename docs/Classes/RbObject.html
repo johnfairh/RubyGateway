@@ -1468,6 +1468,63 @@ argument is less than that of the second argument.</p>
             </div>
             <div class="task-group">
               <div class="task-name-container">
+                <a name="/Subscript"></a>
+                <a name="//apple_ref/swift/Section/Subscript" class="dashAnchor"></a>
+                <a href="#/Subscript">
+                  <h3 class="section-name">Subscript</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway8RbObjectC9subscriptACSayAA0cD11Convertible_pGd_tci"></a>
+                    <a name="//apple_ref/swift/Method/subscript(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway8RbObjectC9subscriptACSayAA0cD11Convertible_pGd_tci">subscript(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Subscript operator, supports both get + set.</p>
+
+<p>Although you can use <code><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code>s as the subscript arguments,
+the value assigned in the setter has to be an <code>RbObject</code>.  So this doesn&rsquo;t
+work:</p>
+<pre class="highlight swift"><code><span class="k">try</span> <span class="n">myObj</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s">"fish"</span><span class="p">,</span> <span class="n">myThirdParamObj</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+</code></pre>
+
+<p>&hellip;instead you have to do:</p>
+<pre class="highlight swift"><code><span class="k">try</span> <span class="n">myObj</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s">"fish"</span><span class="p">,</span> <span class="n">myThirdParamObj</span><span class="p">]</span> <span class="o">=</span> <span class="kt">RbObject</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</code></pre>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    Calls Ruby [] and []= methods.  Crashes the process (<code>fatalError</code>)
+    if anything goes wrong - Swift can&rsquo;t throw from subscripts yet.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">subscript</span><span class="p">(</span><span class="nv">args</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="o">...</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">RbObject</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbOperators.swift#L172">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
                 <a name="/RbObjectConvertible"></a>
                 <a name="//apple_ref/swift/Section/RbObjectConvertible" class="dashAnchor"></a>
                 <a href="#/RbObjectConvertible">

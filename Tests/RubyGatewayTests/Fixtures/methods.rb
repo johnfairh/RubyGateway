@@ -50,4 +50,12 @@ class MethodsTest
         raise "No block given" unless block_given?
         yield(22, "fish")
     end
+
+    def [](a, b)
+        "#{a} #{b}"
+    end
+
+    def []=(a, b, new)
+        @subscript_set = "#{a} #{b} = #{new}"
+    end
 end

@@ -150,3 +150,40 @@ extension RbObject: SignedNumeric {
         }
     }
 }
+
+// MARK: - Subscript
+
+extension RbObject {
+    /// Subscript operator, supports both get + set.
+    ///
+    /// Although you can use `RbObjectConvertible`s as the subscript arguments,
+    /// the value assigned in the setter has to be an `RbObject`.  So this doesn't
+    /// work:
+    /// ```swift
+    /// try myObj[1, "fish", myThirdParamObj] = 4
+    /// ```
+    /// ...instead you have to do:
+    /// ```swift
+    /// try myObj[1, "fish", myThirdParamObj] = RbObject(4)
+    /// ```
+    ///
+    /// - note: Calls Ruby [] and []= methods.  Crashes the process (`fatalError`)
+    ///         if anything goes wrong - Swift can't throw from subscripts yet.
+    public subscript(args: RbObjectConvertible...) -> RbObject {
+        get {
+            do {
+                return try call("[]", args: args)
+            } catch {
+                fatalError("RbObject[] failed: \(error)")
+            }
+        }
+        set {
+            let allArgs = args + [newValue.rubyObject]
+            do {
+                try call("[]=", args: allArgs)
+            } catch {
+                fatalError("RbObject.[]= failed: \(error)")
+            }
+        }
+    }
+}

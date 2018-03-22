@@ -70,8 +70,30 @@ class TestOperators: XCTestCase {
         XCTAssertEqual(aVal, Double(aValObj))
     }
 
+    func testSubscript() {
+        do {
+            try Ruby.require(filename: Helpers.fixturePath("methods.rb"))
+            guard let inst = RbObject(ofClass: "MethodsTest") else {
+                XCTFail("Couldn't create instance")
+                return
+            }
+
+            let val1 = 1
+            let val2 = 4.5
+            let str = inst[val1, val2]
+            XCTAssertEqual("\(val1) \(val2)", String(str))
+
+            let val3 = "fred"
+            inst[val1, val2] = RbObject(val3)
+            XCTAssertEqual("\(val1) \(val2) = \(val3)", String(try inst.getInstanceVar("@subscript_set")))
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+    }
+
     static var allTests = [
         ("testBasicIntegers", testBasicIntegers),
-        ("testMutating", testMutating)
+        ("testMutating", testMutating),
+        ("testSubscript", testSubscript)
     ]
 }
