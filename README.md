@@ -48,7 +48,7 @@ html = Rouge.highlight("let a = 3", "swift", "html")
 puts(html)
 ```
 
-In Swift 4 with similar [lack of] error checking:
+In Swift 4.1 with similar [lack of] error checking:
 ```swift
 import RubyGateway
 
@@ -106,7 +106,7 @@ scores.call("each") { args in
 
 ## Requirements
 
-* Swift 4 or later, from swift.org or Xcode 9.2+.
+* Swift 4.1 or later, from swift.org or Xcode 9.3+.
 * macOS (tested on 10.13.3) or Linux (tested on Ubuntu Xenial/16.04 on x86_64) with Clang 6+.
 * Ruby 2.2 or later including development files:
   * For macOS, this comes with Xcode.
