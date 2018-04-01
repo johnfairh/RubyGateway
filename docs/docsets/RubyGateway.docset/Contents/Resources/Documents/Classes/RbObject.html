@@ -213,7 +213,7 @@ object to get started finding constants or calling global functions.</p>
 <span class="k">let</span> <span class="nv">heightDb</span> <span class="o">=</span> <span class="kt">Dictionary</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">Double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">myObj</span><span class="p">)</span> <span class="c1">// one day!</span>
 </code></pre>
 
-<p>Check <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvZ">RbError.history</a></code> to see the cause of failed initializations.</p>
+<p>Check <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to see the cause of failed initializations.</p>
 
 <p>In the reverse direction, Swift types convert implicitly to <code>RbObject</code>
 when passed as arguments via the <code><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code> protocol.</p>
@@ -375,9 +375,9 @@ outside the corresponding <code>RbObject</code>&lsquo;s lifetime.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway8RbObjectC8rubyTypeAA0cF0Ov"></a>
+                    <a name="/s:11RubyGateway8RbObjectC8rubyTypeAA0cF0Ovp"></a>
                     <a name="//apple_ref/swift/Property/rubyType" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway8RbObjectC8rubyTypeAA0cF0Ov">rubyType</a>
+                    <a class="token" href="#/s:11RubyGateway8RbObjectC8rubyTypeAA0cF0Ovp">rubyType</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -406,9 +406,9 @@ might be useful for debugging.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway8RbObjectC8isTruthySbv"></a>
+                    <a name="/s:11RubyGateway8RbObjectC8isTruthySbvp"></a>
                     <a name="//apple_ref/swift/Property/isTruthy" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway8RbObjectC8isTruthySbv">isTruthy</a>
+                    <a class="token" href="#/s:11RubyGateway8RbObjectC8isTruthySbvp">isTruthy</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -436,9 +436,9 @@ might be useful for debugging.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway8RbObjectC5isNilSbv"></a>
+                    <a name="/s:11RubyGateway8RbObjectC5isNilSbvp"></a>
                     <a name="//apple_ref/swift/Property/isNil" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway8RbObjectC5isNilSbv">isNil</a>
+                    <a class="token" href="#/s:11RubyGateway8RbObjectC5isNilSbvp">isNil</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -449,7 +449,7 @@ might be useful for debugging.</p>
                         <p>Is the Ruby object <code>nil</code>?</p>
 
 <p>If you have Swift <code>nil</code> &ndash; that is, you don&rsquo;t have <code>.some(RbObject)</code> &ndash;
-then Ruby failed &ndash; there was probably an exception.  Check <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvZ">RbError.history</a></code>
+then Ruby failed &ndash; there was probably an exception.  Check <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code>
 for a list of recent exceptions.</p>
 
 <p>If you&rsquo;ve got Ruby <code>nil</code> &ndash; that is, you&rsquo;ve got <code>RbObject.isNil</code> &ndash; then
@@ -473,9 +473,9 @@ Ruby worked but the call evaluated to [Ruby] <code>nil</code>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway8RbObjectC03nilD0ACvZ"></a>
+                    <a name="/s:11RubyGateway8RbObjectC03nilD0ACvpZ"></a>
                     <a name="//apple_ref/swift/Variable/nilObject" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway8RbObjectC03nilD0ACvZ">nilObject</a>
+                    <a class="token" href="#/s:11RubyGateway8RbObjectC03nilD0ACvpZ">nilObject</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -526,7 +526,7 @@ Ruby worked but the call evaluated to [Ruby] <code>nil</code>.</p>
                       <div class="abstract">
                         <p>Create an instance of a given Ruby class.</p>
 
-<p>Fails (returns <code>nil</code>) if anything goes wrong along the way - check <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvZ">RbError.history</a></code> to
+<p>Fails (returns <code>nil</code>) if anything goes wrong along the way - check <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to
 find out what failed.</p>
 
                       </div>
@@ -605,7 +605,7 @@ find out what failed.</p>
                       <div class="abstract">
                         <p>Create an instance of a given Ruby class passing a Swift closure as a block.</p>
 
-<p>Fails (returns <code>nil</code>) if anything goes wrong along the way - check <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvZ">RbError.history</a></code> to
+<p>Fails (returns <code>nil</code>) if anything goes wrong along the way - check <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to
 find out what failed.</p>
 
                       </div>
@@ -766,9 +766,9 @@ find out what failed.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway8RbObjectC11descriptionSSv"></a>
+                    <a name="/s:11RubyGateway8RbObjectC11descriptionSSvp"></a>
                     <a name="//apple_ref/swift/Property/description" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway8RbObjectC11descriptionSSv">description</a>
+                    <a class="token" href="#/s:11RubyGateway8RbObjectC11descriptionSSvp">description</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -798,9 +798,9 @@ find out what failed.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway8RbObjectC16debugDescriptionSSv"></a>
+                    <a name="/s:11RubyGateway8RbObjectC16debugDescriptionSSvp"></a>
                     <a name="//apple_ref/swift/Property/debugDescription" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway8RbObjectC16debugDescriptionSSv">debugDescription</a>
+                    <a class="token" href="#/s:11RubyGateway8RbObjectC16debugDescriptionSSvp">debugDescription</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -810,7 +810,7 @@ find out what failed.</p>
                       <div class="abstract">
                         <p>A developer-appropriate string representation of the Ruby object.</p>
 
-<p>This is the result of <code>inspect</code> with a fallback to <code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectC11descriptionSSv">description</a></code>.</p>
+<p>This is the result of <code>inspect</code> with a fallback to <code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectC11descriptionSSvp">description</a></code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -830,9 +830,9 @@ find out what failed.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway8RbObjectC25customPlaygroundQuickLooks0fgH0Ov"></a>
+                    <a name="/s:11RubyGateway8RbObjectC25customPlaygroundQuickLooks0fgH0Ovp"></a>
                     <a name="//apple_ref/swift/Property/customPlaygroundQuickLook" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway8RbObjectC25customPlaygroundQuickLooks0fgH0Ov">customPlaygroundQuickLook</a>
+                    <a class="token" href="#/s:11RubyGateway8RbObjectC25customPlaygroundQuickLooks0fgH0Ovp">customPlaygroundQuickLook</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -840,7 +840,7 @@ find out what failed.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The text from <code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectC11descriptionSSv">description</a></code>.</p>
+                        <p>The text from <code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectC11descriptionSSvp">description</a></code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -871,9 +871,9 @@ find out what failed.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway8RbObjectC9hashValueSiv"></a>
+                    <a name="/s:11RubyGateway8RbObjectC9hashValueSivp"></a>
                     <a name="//apple_ref/swift/Property/hashValue" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway8RbObjectC9hashValueSiv">hashValue</a>
+                    <a class="token" href="#/s:11RubyGateway8RbObjectC9hashValueSivp">hashValue</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -933,7 +933,7 @@ or if the <code>hash</code> call returns something that can&rsquo;t be converted
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">==</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">==</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -975,7 +975,7 @@ argument is less than that of the second argument.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">&lt;</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">&lt;</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -1052,7 +1052,7 @@ argument is less than that of the second argument.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">-</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">RbObject</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">-</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">RbObject</span></code></pre>
 
                         </div>
                       </div>
@@ -1088,7 +1088,7 @@ argument is less than that of the second argument.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">+</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">RbObject</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">+</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">RbObject</span></code></pre>
 
                         </div>
                       </div>
@@ -1124,7 +1124,7 @@ argument is less than that of the second argument.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">*</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">RbObject</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">*</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">RbObject</span></code></pre>
 
                         </div>
                       </div>
@@ -1160,7 +1160,7 @@ argument is less than that of the second argument.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">/</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">RbObject</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">/</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">RbObject</span></code></pre>
 
                         </div>
                       </div>
@@ -1196,7 +1196,7 @@ argument is less than that of the second argument.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">%</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">RbObject</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">%</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">RbObject</span></code></pre>
 
                         </div>
                       </div>
@@ -1226,7 +1226,7 @@ argument is less than that of the second argument.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">+=</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">RbObject</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">+=</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">RbObject</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1256,7 +1256,7 @@ argument is less than that of the second argument.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">-=</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">RbObject</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">-=</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">RbObject</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1286,7 +1286,7 @@ argument is less than that of the second argument.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">*=</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">RbObject</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">*=</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">RbObject</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1316,7 +1316,7 @@ argument is less than that of the second argument.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">/=</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">RbObject</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">/=</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">RbObject</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1346,7 +1346,7 @@ argument is less than that of the second argument.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">%=</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">RbObject</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">%=</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">RbObject</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1359,9 +1359,9 @@ argument is less than that of the second argument.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway8RbObjectC9magnitudeACv"></a>
+                    <a name="/s:11RubyGateway8RbObjectC9magnitudeACvp"></a>
                     <a name="//apple_ref/swift/Property/magnitude" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway8RbObjectC9magnitudeACv">magnitude</a>
+                    <a class="token" href="#/s:11RubyGateway8RbObjectC9magnitudeACvp">magnitude</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1418,7 +1418,7 @@ argument is less than that of the second argument.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">prefix</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">-</span><span class="p">(</span><span class="nv">operand</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">RbObject</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">prefix</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">-</span> <span class="p">(</span><span class="nv">operand</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">RbObject</span></code></pre>
 
                         </div>
                       </div>
@@ -1454,7 +1454,7 @@ argument is less than that of the second argument.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">prefix</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">+</span><span class="p">(</span><span class="nv">operand</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">RbObject</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">prefix</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">+</span> <span class="p">(</span><span class="nv">operand</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">RbObject</span></code></pre>
 
                         </div>
                       </div>
@@ -1478,9 +1478,9 @@ argument is less than that of the second argument.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway8RbObjectC9subscriptACSayAA0cD11Convertible_pGd_tci"></a>
+                    <a name="/s:11RubyGateway8RbObjectCAcA0cD11Convertible_pd_tcip"></a>
                     <a name="//apple_ref/swift/Method/subscript(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway8RbObjectC9subscriptACSayAA0cD11Convertible_pGd_tci">subscript(_:)</a>
+                    <a class="token" href="#/s:11RubyGateway8RbObjectCAcA0cD11Convertible_pd_tcip">subscript(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1516,7 +1516,7 @@ work:</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbOperators.swift#L172">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbOperators.swift#L172-L188">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

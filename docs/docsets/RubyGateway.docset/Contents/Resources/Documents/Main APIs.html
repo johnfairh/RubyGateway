@@ -295,7 +295,7 @@ object to get started finding constants or calling global functions.</p>
 <span class="k">let</span> <span class="nv">heightDb</span> <span class="o">=</span> <span class="kt">Dictionary</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">Double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">myObj</span><span class="p">)</span> <span class="c1">// one day!</span>
 </code></pre>
 
-<p>Check <code><a href="Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvZ">RbError.history</a></code> to see the cause of failed initializations.</p>
+<p>Check <code><a href="Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to see the cause of failed initializations.</p>
 
 <p>In the reverse direction, Swift types convert implicitly to <code>RbObject</code>
 when passed as arguments via the <code><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code> protocol.</p>
@@ -363,9 +363,9 @@ the program will crash.</p>
 of <code><a href="Classes/RbGateway.html">RbGateway</a></code>.</p>
 
 <p>By default all methods throw <code><a href="Enums/RbError.html">RbError</a></code>s if anything goes wrong including
-when Ruby raises an exception.  Use the <code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vv">RbObjectAccess.failable</a></code> adapter to
+when Ruby raises an exception.  Use the <code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">RbObjectAccess.failable</a></code> adapter to
 access an alternative API that returns <code>nil</code> on errors instead.  You can still
-see any Ruby exceptions via <code><a href="Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvZ">RbError.history</a></code>.</p>
+see any Ruby exceptions via <code><a href="Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code>.</p>
 <h2 id='calling-methods' class='heading'>Calling methods</h2>
 
 <p>Ruby has a few different ways to call methods that are reflected in the

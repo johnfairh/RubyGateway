@@ -212,7 +212,7 @@ passing Swift code as a block.  Again pass Swift types or <code><a href="Classes
 <code>args</code> parameter.</p>
 
 <p>Use optional initializers to convert from <code><a href="Classes/RbObject.html">RbObject</a></code>s back to Swift types, or
-implicitly/explicitly access <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC11descriptionSSv">RbObject.description</a></code> if you just want <code>String</code>.</p>
+implicitly/explicitly access <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC11descriptionSSvp">RbObject.description</a></code> if you just want <code>String</code>.</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">RubyGateway</span>
 
 <span class="k">do</span> <span class="p">{</span>
@@ -285,6 +285,10 @@ have to tell RubyGateway:</p>
     <span class="k">return</span> <span class="o">.</span><span class="n">nilObject</span>
 <span class="p">}</span>
 </code></pre>
+<h3 id='use-39-return-39-in-a-swift-block' class='heading'>Use &lsquo;return&rsquo; in a Swift block</h3>
+
+<p>Can&rsquo;t do it - missing from the Ruby API.  Would probably have just been
+confusing anyway.</p>
 <h3 id='create-a-proc-with-swift-code' class='heading'>Create a Proc with Swift code</h3>
 
 <p>Use <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectCA2CSayACGKc9blockCall_tcfc">RbObject.init(blockCall:)</a></code>.  Ruby:</p>
@@ -360,13 +364,13 @@ detected by RubyGateway and one case <code><a href="Enums/RbError.html#/s:11Ruby
 Ruby exceptions.</p>
 
 <p>RubyGateway remembers the last few <code><a href="Enums/RbError.html">RbError</a></code>s that were generated and stores
-them in the publicly available <code><a href="Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvZ">RbError.history</a></code>.</p>
+them in the publicly available <code><a href="Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code>.</p>
 <h3 id='code-nil-code-failures' class='heading'><code>nil</code> failures</h3>
 
 <p>Converting Ruby values to Swift types works differently: it happens using
 failable initializers such as <code><a href="Extensions/String.html#/s:SS11RubyGatewayESSSgAA8RbObjectCcfc">String.init(_:)</a></code>.  These can fail for a variety
 of reasons.  When they do, RubyGateway still internally generates an <code><a href="Enums/RbError.html">RbError</a></code>
-and stores a copy in <code><a href="Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvZ">RbError.history</a></code> even though it is not thrown.  This
+and stores a copy in <code><a href="Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> even though it is not thrown.  This
 means you can diagnose why a conversion failed:</p>
 <pre class="highlight swift"><code><span class="k">guard</span> <span class="k">let</span> <span class="nv">score</span> <span class="o">=</span> <span class="kt">Float</span><span class="p">(</span><span class="n">scoreObj</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
     <span class="nf">print</span><span class="p">(</span><span class="s">"Failed to get score back from Ruby: </span><span class="se">\(</span><span class="kt">RbError</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">mostRecent</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
@@ -378,7 +382,7 @@ means you can diagnose why a conversion failed:</p>
 <p><code><a href="Structs/RbFailableAccess.html">RbFailableAccess</a></code> is a non-throwing adapter for <code><a href="Classes/RbObject.html">RbObject</a></code> and <code><a href="Classes/RbGateway.html">RbGateway</a></code> that
 returns <code>nil</code> when there is an error.  All it does is <code>try?</code> the
 corresponding throwing method, meaning that the details of the failure are
-available in <code><a href="Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvZ">RbError.history</a></code>.</p>
+available in <code><a href="Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code>.</p>
 
 <p>This is a steal of rough approach (the name is my fault) from the Python DML
 sandbox with an eye to adding direct member lookup/callable to RubyGateway &ndash;
