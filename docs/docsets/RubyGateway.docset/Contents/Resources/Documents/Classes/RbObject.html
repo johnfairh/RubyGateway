@@ -166,6 +166,9 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Extensions/Float.html">Float</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Array.html">Array</a>
+              </li>
             </ul>
           </li>
         </ul>
@@ -210,6 +213,7 @@ object to get started finding constants or calling global functions.</p>
 
 <p>Convert <code>RbObject</code>s to Swift types using failable initializers:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">height</span> <span class="o">=</span> <span class="kt">Double</span><span class="p">(</span><span class="n">myObj</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">allHeights</span> <span class="o">=</span> <span class="kt">Array</span><span class="o">&lt;</span><span class="kt">Double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">myObj</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">heightDb</span> <span class="o">=</span> <span class="kt">Dictionary</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">Double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">myObj</span><span class="p">)</span> <span class="c1">// one day!</span>
 </code></pre>
 
@@ -276,7 +280,7 @@ of the Ruby API.  It is not normally needed.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L82-L85">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L83-L86">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -314,7 +318,7 @@ a separate Ruby object do:</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L97-L101">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L98-L102">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -367,7 +371,7 @@ outside the corresponding <code>RbObject</code>&lsquo;s lifetime.</p>
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L121-L123">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L122-L124">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -398,7 +402,7 @@ might be useful for debugging.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L127-L129">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L128-L130">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -428,7 +432,7 @@ might be useful for debugging.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L132-L134">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L133-L135">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -465,7 +469,7 @@ Ruby worked but the call evaluated to [Ruby] <code>nil</code>.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L144-L146">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L145-L147">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -495,7 +499,7 @@ Ruby worked but the call evaluated to [Ruby] <code>nil</code>.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L149">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L150">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -585,7 +589,7 @@ find out what failed.</p>
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L188-L195">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L189-L196">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -692,7 +696,7 @@ find out what failed.</p>
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L210-L223">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L211-L224">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -747,7 +751,7 @@ find out what failed.</p>
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L230-L236">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L231-L237">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -790,7 +794,7 @@ find out what failed.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L247-L252">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L248-L253">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -822,7 +826,7 @@ find out what failed.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L257-L265">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L258-L266">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -852,7 +856,7 @@ find out what failed.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L268-L270">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L269-L271">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -901,7 +905,7 @@ or if the <code>hash</code> call returns something that can&rsquo;t be converted
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L281-L293">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L282-L294">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -942,7 +946,7 @@ or if the <code>hash</code> call returns something that can&rsquo;t be converted
                         <p>Whether the objects are the same under <code>==</code>.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L300-L310">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L301-L311">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -980,7 +984,7 @@ argument is less than that of the second argument.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L317-L325">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L318-L326">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1725,6 +1729,54 @@ to <code><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>
                       </div>
                       <div class="slightly-smaller">
                         <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbConversions.swift#L224-L226">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/ArrayLiteral"></a>
+                <a name="//apple_ref/swift/Section/ArrayLiteral" class="dashAnchor"></a>
+                <a href="#/ArrayLiteral">
+                  <h3 class="section-name">ArrayLiteral</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway8RbObjectCA2C12arrayLiterald_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(arrayLiteral:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway8RbObjectCA2C12arrayLiterald_tcfc">init(arrayLiteral:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates an <code>RbObject</code> from an array literal.</p>
+
+<p>Although the element type here is <code>RbObject</code> you can write things like:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">obj</span><span class="p">:</span> <span class="kt">RbObject</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</code></pre>
+
+<p>&hellip; because of <code>RbObject</code>&lsquo;s <code>ExpressibleByIntegerLiteral</code> conformance
+that gets applied recursively.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="n">arrayLiteral</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">RbObject</span><span class="o">...</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbConversions.swift#L280-L282">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
