@@ -195,9 +195,9 @@
 of <code><a href="../Classes/RbGateway.html">RbGateway</a></code>.</p>
 
 <p>By default all methods throw <code><a href="../Enums/RbError.html">RbError</a></code>s if anything goes wrong including
-when Ruby raises an exception.  Use the <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vv">RbObjectAccess.failable</a></code> adapter to
+when Ruby raises an exception.  Use the <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">RbObjectAccess.failable</a></code> adapter to
 access an alternative API that returns <code>nil</code> on errors instead.  You can still
-see any Ruby exceptions via <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvZ">RbError.history</a></code>.</p>
+see any Ruby exceptions via <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code>.</p>
 <h2 id='calling-methods' class='heading'>Calling methods</h2>
 
 <p>Ruby has a few different ways to call methods that are reflected in the
@@ -262,7 +262,7 @@ a Ruby Proc.</li>
                         <p>Get the value of a Ruby instance variable.  Creates a new one with a <code>nil</code> value
 if it doesn&rsquo;t exist yet.</p>
 
-<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifierACSS4type_SS2idtcACmF">RbError.badIdentifier</a></code> if <code>name</code> looks wrong.
@@ -323,7 +323,7 @@ if it doesn&rsquo;t exist yet.</p>
                       <div class="abstract">
                         <p>Set a Ruby instance variable.  Creates a new one if it doesn&rsquo;t exist yet.</p>
 
-<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifierACSS4type_SS2idtcACmF">RbError.badIdentifier</a></code> if <code>name</code> looks wrong.
@@ -418,7 +418,7 @@ any kind of constant, but see <code><a href="../Classes/RbObjectAccess.html#/s:1
 <p>This is a dynamic call into Ruby that can cause calls to <code>const_missing</code>
 and autoloading.</p>
 
-<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 
 <p>If you call this method on an <code><a href="../Classes/RbObject.html">RbObject</a></code> then <code>name</code> is resolved like Ruby does,
   looking up the inheritance chain if there is no local match.</p>
@@ -494,7 +494,7 @@ and autoloading.</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">myObj</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">RbObject</span><span class="p">(</span><span class="nv">ofClass</span><span class="p">:</span> <span class="s">"MyModule::MyClass"</span><span class="p">)</span>
 </code></pre>
 
-<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 
 <p>If you call this method on an <code><a href="../Classes/RbObject.html">RbObject</a></code> then <code>name</code> is resolved like Ruby does,
   looking up the inheritance chain if there is no match.</p>
@@ -576,7 +576,7 @@ to drill down through nested classes and modules.</p>
 
 </div>
 
-<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -664,7 +664,7 @@ to drill down through nested classes and modules.</p>
 
 </div>
 
-<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -780,7 +780,7 @@ to drill down through nested classes and modules.</p>
 
 </div>
 
-<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -882,7 +882,7 @@ to drill down through nested classes and modules.</p>
 
 </div>
 
-<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -971,7 +971,7 @@ to drill down through nested classes and modules.</p>
 
 </div>
 
-<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -1088,7 +1088,7 @@ to drill down through nested classes and modules.</p>
 
 </div>
 
-<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -1197,7 +1197,7 @@ to drill down through nested classes and modules.</p>
 <p>Attributes are declared with <code>:attr_accessor</code> and so on &ndash; this routine is a
 simple wrapper around <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pG4argsSaySS_AaG_ptG6kwArgstKF">call(...)</a></code> for symmetry with <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC12setAttributeAA0cD0CSS_AA0cD11Convertible_p8newValuetKF">setAttribute(...)</a></code>.</p>
 
-<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifierACSS4type_SS2idtcACmF">RbError.badIdentifier</a></code> if <code>name</code> looks wrong.
@@ -1262,7 +1262,7 @@ simple wrapper around <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGat
 <p>Attributes are declared with <code>:attr_accessor</code> and so on &ndash; this routine is a
 wrapper around a call to the <code>attrname=</code> method.</p>
 
-<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifierACSS4type_SS2idtcACmF">RbError.badIdentifier</a></code> if <code>name</code> looks wrong.
@@ -1355,7 +1355,7 @@ context to get a CVar on the object&rsquo;s class.</p>
 <p>The behavior of accessing a non-existent CVar is not consistent with IVars
 or GVars.  This is how Ruby works; one more reason to avoid CVars.</p>
 
-<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifierACSS4type_SS2idtcACmF">RbError.badIdentifier</a></code> if <code>name</code> looks wrong.
@@ -1422,7 +1422,7 @@ or GVars.  This is how Ruby works; one more reason to avoid CVars.</p>
 is different from Ruby as-written where you write <code>@@fred = thing</code> in an
 object context to set a CVar on the object&rsquo;s class.</p>
 
-<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifierACSS4type_SS2idtcACmF">RbError.badIdentifier</a></code> if <code>name</code> looks wrong.
@@ -1508,7 +1508,7 @@ object context to set a CVar on the object&rsquo;s class.</p>
                       <div class="abstract">
                         <p>Get the value of a Ruby global variable.</p>
 
-<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     <code><a href="../Enums/RbError.html">RbError</a></code> if <code>name</code> looks wrong.
@@ -1574,7 +1574,7 @@ to avoid calling the <code><a href="../Classes/RbObject.html">RbObject</a></code
                       <div class="abstract">
                         <p>Set a Ruby global variable.  Creates a new one if it doesn&rsquo;t exist yet.</p>
 
-<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     <code><a href="../Enums/RbError.html">RbError</a></code> if <code>name</code> looks wrong.
@@ -1674,7 +1674,7 @@ to avoid calling the <code><a href="../Classes/RbObject.html">RbObject</a></code
 <p>This is a convenience helper to let you access Ruby structures without
 worrying about precisely what they are.</p>
 
-<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a></code>.</p>
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if Ruby has a problem.
@@ -1735,9 +1735,9 @@ worrying about precisely what they are.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vv"></a>
+                    <a name="/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp"></a>
                     <a name="//apple_ref/swift/Property/failable" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vv">failable</a>
+                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a>
                     </code>
                   </div>
                   <div class="height-container">

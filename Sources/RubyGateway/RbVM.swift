@@ -26,13 +26,13 @@ final class RbVM {
         case cleanedUp
     }
     /// Current state of the VM
-    private var state = State.unknown
+    private var state: State
 
     /// Cache of rb_intern() calls.
-    private var idCache: [String: ID] = [:]
+    private var idCache: [String: ID]
 
     /// Protect state (bit pointless given Ruby's state but feels bad not to)
-    private var lock = Lock(recursive: true)
+    private var lock: Lock
 
     /// Set up data
     init() {
