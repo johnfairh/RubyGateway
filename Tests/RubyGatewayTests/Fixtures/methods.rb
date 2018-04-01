@@ -58,4 +58,18 @@ class MethodsTest
     def []=(a, b, new)
         @subscript_set = "#{a} #{b} = #{new}"
     end
+
+    def get_num_array
+        [1, 2, 3]
+    end
+
+    def sum_array(ary)
+        sum = 0
+        ary.each { |a| sum += a }
+        sum
+    end
+
+    def to_a
+        [1, "two", 3.0]
+    end
 end

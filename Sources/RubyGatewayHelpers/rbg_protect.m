@@ -351,6 +351,12 @@ VALUE rbg_proc_call_with_block_protect(VALUE value,
     return rbg_protect(&data, status);
 }
 
+/// rb_Array - raises if conversion goes wrong
+VALUE rbg_Array_protect(VALUE v, int * _Nullable status)
+{
+    return rb_protect(rb_Array, v, status);
+}
+
 //
 // Procs/blocks written in Swift
 //

@@ -1,9 +1,8 @@
 ## 0.4 plan
 
-Build
-* Linux Travis
+Swift 4.1.
 
-?
+Conditional conformances for array etc.
 
 ## "1.0" feeling 
 
@@ -23,6 +22,11 @@ Sandboxing
 * Research, worth doing anything?  Even about `exit!` ?
 
 Fix TODOs
+
+Build
+* Linux Travis
+
+Refactor testcases
 
 ## "Post 1.0" feeling
 

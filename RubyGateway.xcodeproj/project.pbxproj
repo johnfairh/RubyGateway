@@ -34,6 +34,7 @@
 		0249234B20334AE500E3AAF4 /* RbError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0249234920334ADE00E3AAF4 /* RbError.swift */; };
 		0249234D20335ADB00E3AAF4 /* TestVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0249234C20335ADB00E3AAF4 /* TestVM.swift */; };
 		0249235120335C0D00E3AAF4 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0249235020335C0D00E3AAF4 /* Helpers.swift */; };
+		026F1B042070CDB0002E8C45 /* TestArrays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026F1B032070CDB0002E8C45 /* TestArrays.swift */; };
 		02706177204EB47600C336B8 /* RbOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02706176204EB47600C336B8 /* RbOperators.swift */; };
 		02706179204EC36E00C336B8 /* TestOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02706178204EC36E00C336B8 /* TestOperators.swift */; };
 		0270617C2051918500C336B8 /* RbSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270617B2051918500C336B8 /* RbSymbol.swift */; };
@@ -100,6 +101,7 @@
 		0249235020335C0D00E3AAF4 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		024923532034AA3E00E3AAF4 /* backwards.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = backwards.rb; sourceTree = "<group>"; };
 		02571723203C984C001E3C43 /* nesting.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = nesting.rb; sourceTree = "<group>"; };
+		026F1B032070CDB0002E8C45 /* TestArrays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestArrays.swift; sourceTree = "<group>"; };
 		02706176204EB47600C336B8 /* RbOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbOperators.swift; sourceTree = "<group>"; };
 		02706178204EC36E00C336B8 /* TestOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestOperators.swift; sourceTree = "<group>"; };
 		0270617A20514DF600C336B8 /* demo.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = demo.rb; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				02706178204EC36E00C336B8 /* TestOperators.swift */,
 				0290133C203F42820090C5C9 /* TestMiscObjTypes.swift */,
 				022F3ACA20375E01009E69BE /* TestStrings.swift */,
+				026F1B032070CDB0002E8C45 /* TestArrays.swift */,
 				022F3ACC20385C3A009E69BE /* TestConstants.swift */,
 				0205A8AA204423E400076840 /* TestVars.swift */,
 				0205A8A32042DA3600076840 /* TestCallable.swift */,
@@ -435,6 +438,7 @@
 				02300768204BF3E800044B8E /* TestFailable.swift in Sources */,
 				022F3AC92037153A009E69BE /* TestNumerics.swift in Sources */,
 				022F3AD1203AF8BA009E69BE /* TestRbObject.swift in Sources */,
+				026F1B042070CDB0002E8C45 /* TestArrays.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

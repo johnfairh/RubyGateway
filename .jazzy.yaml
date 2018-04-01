@@ -62,3 +62,4 @@ custom_categories:
           - Int8
           - Double
           - Float
+          - Array
