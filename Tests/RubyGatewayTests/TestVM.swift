@@ -230,8 +230,9 @@ class TestVM: XCTestCase {
         let dblObj: RbObject = 100.2
         let symObj = RbObject(RbSymbol("test"))
         let procObj = RbObject() { args in .nilObject }
+        let arrObj: RbObject = [1,2,3]
 
-        [strObj, uintObj, intObj, dblObj, symObj, procObj].forEach { obj in
+        [strObj, uintObj, intObj, dblObj, symObj, procObj, arrObj].forEach { obj in
             XCTAssertTrue(obj.isNil)
         }
     }

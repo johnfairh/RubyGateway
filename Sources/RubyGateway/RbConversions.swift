@@ -226,6 +226,62 @@ extension RbObject: ExpressibleByFloatLiteral {
     }
 }
 
+// MARK: - Array
+
+/// These methods are available only when the array `Element` type conforms
+/// to `RbObjectConvertible`.
+extension Array: RbObjectConvertible where Element: RbObjectConvertible {
+    /// Try to get a `Array` representation of an `RbObject`.
+    ///
+    /// Equivalent to `Kernel#Array`: will attempt `to_a`, if unsupported then
+    /// creates a 1-element array.  Fails if *any* of the Ruby array elements do
+    /// not support conversion to the array `Element` type.
+    ///
+    /// See `RbError.history` to find out why a conversion failed.
+    public init?(_ value: RbObject) {
+        self.init()
+
+        let aryValue = value.withRubyValue { rbg_Array_protect($0, nil) }
+        if RbException.ignoreAnyPending() {
+            return nil
+        }
+
+        for i in 0..<rb_array_len(aryValue) {
+            let eleValue = rb_ary_entry(aryValue, i)
+            guard let element = Element(RbObject(rubyValue: eleValue)) else {
+                return nil
+            }
+            append(element)
+        }
+    }
+
+    /// Create a Ruby array object for this `Array`.
+    public var rubyObject: RbObject {
+        guard Ruby.softSetup() else {
+            return .nilObject
+        }
+        return RbObject(rubyValue: map { $0.rubyObject }.withRubyValues { elementValues in
+            rb_ary_new_from_values(count, elementValues)
+        })
+    }
+}
+
+// MARK: - ArrayLiteral
+
+extension RbObject: ExpressibleByArrayLiteral {
+    /// Creates an `RbObject` from an array literal.
+    ///
+    /// Although the element type here is `RbObject` you can write things like:
+    /// ```swift
+    /// let obj: RbObject = [1, 2, 3]
+    /// ```
+    /// ... because of `RbObject`'s `ExpressibleByIntegerLiteral` conformance
+    /// that gets applied recursively.
+    public convenience init(arrayLiteral value: RbObject...) {
+        self.init(value.rubyObject)
+    }
+}
+
 // MARK: - Dictionary
 //extension Dictionary: RbObjectConvertible where Key: RbObjectConvertible, Value: RbObjectConvertible {
 //    /// Try to get a `Dictionary` representation of an `RbObject` that is a Ruby hash.

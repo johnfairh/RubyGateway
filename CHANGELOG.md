@@ -2,11 +2,11 @@
 
 ##### Breaking
 
-* None.
+* Require Swift 4.1
 
 ##### Enhancements
 
-* None.
+* Add conditional Array `RbObjectConvertible` conformance.
 
 ##### Bug Fixes
 

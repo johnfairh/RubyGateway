@@ -41,6 +41,7 @@ import RubyGatewayHelpers
 /// Convert `RbObject`s to Swift types using failable initializers:
 /// ```swift
 /// let height = Double(myObj)
+/// let allHeights = Array<Double>(myObj)
 /// let heightDb = Dictionary<String, Double>(myObj) // one day!
 /// ```
 /// Check `RbError.history` to see the cause of failed initializations.

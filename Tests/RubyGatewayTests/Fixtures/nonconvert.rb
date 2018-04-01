@@ -19,3 +19,10 @@ class BothToSAndToStr
         "to_str"
     end
 end
+
+# class with trap to_a
+class NotArrayable
+    def to_a
+        1
+    end
+end

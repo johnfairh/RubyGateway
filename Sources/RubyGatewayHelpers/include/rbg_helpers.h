@@ -123,6 +123,9 @@ long rbg_obj2long_protect(VALUE v, int * _Nullable status);
 /// Safely call `rb_num2dbl(rb_Float)` and report exception status.
 double rbg_obj2double_protect(VALUE v, int * _Nullable status);
 
+/// Safely call `rb_Array` and report exception status
+VALUE rbg_Array_protect(VALUE v, int * _Nullable status);
+
 /// Strings hidden from importer
 const char * _Nonnull rbg_ruby_version(void);
 const char * _Nonnull rbg_ruby_description(void);
