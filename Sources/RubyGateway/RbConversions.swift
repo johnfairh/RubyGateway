@@ -233,9 +233,10 @@ extension RbObject: ExpressibleByFloatLiteral {
 extension Array: RbObjectConvertible where Element: RbObjectConvertible {
     /// Try to get a `Array` representation of an `RbObject`.
     ///
-    /// Equivalent to `Kernel#Array`: will attempt `to_a`, if unsupported then
-    /// creates a 1-element array.  Fails if *any* of the Ruby array elements do
-    /// not support conversion to the array `Element` type.
+    /// Equivalent to `Kernel#Array`: attempts `to_ary` then `to_a`,
+    /// if unsupported then creates a one-element array.  Fails if *any* of
+    /// the Ruby array elements do not support conversion to the array `Element`
+    /// type.
     ///
     /// See `RbError.history` to find out why a conversion failed.
     public init?(_ value: RbObject) {
@@ -283,34 +284,88 @@ extension RbObject: ExpressibleByArrayLiteral {
 }
 
 // MARK: - Dictionary
-//extension Dictionary: RbObjectConvertible where Key: RbObjectConvertible, Value: RbObjectConvertible {
-//    /// Try to get a `Dictionary` representation of an `RbObject` that is a Ruby hash.
-//    ///
-//    /// It fails if the Ruby value is not a hash.
-//    ///
-//    /// See `RbError.history` to find out why a conversion failed.
-//    public init?(_ value: RbObject) {
-//        return nil
-//    }
-//
-//    /// Create a Ruby hash object for the dictionary.
-//    public var rubyObject: RbObject {
-//        guard Ruby.softSetup() else {
-//            return RbObject(rubyValue: Qnil)
-//        }
-//        return dictToRubyObj(self)
-//    }
-//}
 
-//
-//func dictToRubyObj<K>(dict: [K: RbObjectConvertible]) -> RbObject where K: RbObjectConvertible {
-//    let hashObj = RbObject(rubyValue: rb_hash_new())
-//    dict.forEach { key, value in
-//        key.rubyObject.withRubyValue { keyRubyValue in
-//            value.rubyObject.withRubyValue { valueRubyValue in
-//                rb_hash_aset(hashObj.rubyValue, keyRubyValue, valueRubyValue)
-//            }
-//        }
-//    }
-//    return hashObj
-//}
+/// These methods are available only when both the dictionary `Key` *and* `Value`
+/// types conform to `RbObjectConvertible`.
+extension Dictionary: RbObjectConvertible where Key: RbObjectConvertible, Value: RbObjectConvertible {
+    /// Try to get a `Dictionary` representation of an `RbObject` that is a Ruby hash.
+    ///
+    /// Based on `Kernel#Hash`: will attempt `to_hash` then `to_h`, has a weird
+    /// special case for an empty array, otherwise fails.
+    ///
+    /// Fails if *any* of the Ruby hash keys or values do do not support conversion
+    /// to the corresponding Swift types.
+    ///
+    /// Fails if more than one of the Ruby hash keys convert to the same Swift value.
+    ///
+    /// See `RbError.history` to find out why a conversion failed.
+    public init?(_ value: RbObject) {
+        let hashObj = RbObject(rubyValue: value.withRubyValue { $0 /*rbg_Hash_protect($0, nil)*/ })
+        if RbException.ignoreAnyPending() {
+            return nil
+        }
+        // oh boy
+        do {
+            var dict: [Key: Value] = [:] // closure cannot capture mutable self
+            try hashObj.call("each") { args in
+                // Hash#each has way too much magic: undocumentedly it tries to peek at the block
+                // arity in the block_given case.  Can't make this work in C so it gets '1'.
+                // Then, undocumentedly it parcels K + V up into an array and passes that to us.
+                guard args.count == 1 else {
+                    throw RbException(message: "Cannot convert Ruby hash: \(args.count) args to each")
+                }
+                let kvArrayObj = args[0]
+                guard let key = Key(kvArrayObj[0]) else {
+                    throw RbException(message: "Cannot convert Ruby hash: unconvertible key \(args[0])")
+                }
+                guard dict[key] == nil else {
+                    throw RbException(message: "Cannot convert Ruby hash: duplicate key \(key)")
+                }
+                guard let value = Value(kvArrayObj[1]) else {
+                    throw RbException(message: "Cannot convert Ruby hash: unconvertible value \(args[1])")
+                }
+                dict[key] = value
+                return .nilObject
+            }
+            self = dict
+        } catch {
+            return nil
+        }
+    }
+
+    /// Create a Ruby hash object for this `Dictionary`.
+    public var rubyObject: RbObject {
+        guard Ruby.softSetup() else {
+            return .nilObject
+        }
+        let hashObj = RbObject(rubyValue: rb_hash_new())
+        hashObj.withRubyValue { hashValue in
+            forEach { arg in
+                arg.key.rubyObject.withRubyValue { keyRubyValue in
+                    arg.value.rubyObject.withRubyValue { valueRubyValue in
+                        rb_hash_aset(hashValue, keyRubyValue, valueRubyValue)
+                    }
+                }
+            }
+        }
+        return hashObj
+    }
+}
+
+// MARK: - DictionaryLiteral
+
+extension RbObject: ExpressibleByDictionaryLiteral {
+    /// Creates an `RbObject` from a dictionary literal.
+    ///
+    /// Although the key and value types here are `RbObject` you can write things like:
+    /// ```swift
+    /// let obj: RbObject = [1: "fish", 2: "bucket", 3: "wife", 4: "goat"]
+    /// ```
+    /// ... because of `RbObject`'s `ExpressibleByXxxLiteral` conformance
+    /// that gets applied recursively.
+    ///
+    /// Like a regular `Dictionary` there must be no duplicate keys in the `elements`.
+    public convenience init(dictionaryLiteral elements: (RbObject, RbObject)...) {
+        self.init(Dictionary(uniqueKeysWithValues: elements))
+    }
+}
