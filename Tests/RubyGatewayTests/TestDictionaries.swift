@@ -90,12 +90,17 @@ class TestDictionaries: XCTestCase {
                 return
             }
 
-//            XCTAssertEqual([1: 2], Dictionary<Int, Int>(justToH))
-//
-//            XCTAssertEqual([1: 2], Dictionary<Int, Int>(bothToHAndToHash))
+            XCTAssertEqual([1: 2], Dictionary<Int, Int>(justToH))
+
+            XCTAssertEqual([1: 2], Dictionary<Int, Int>(bothToHAndToHash))
 
             if let unexpected = Dictionary<Int, Int>(trapToHash) {
                 XCTFail("Unexpected conversion: \(unexpected)")
+                return
+            }
+
+            if let unexpected = Dictionary<Int, Int>(RbObject.nilObject) {
+                XCTFail("Unexpected conversion of nil to dict: \(unexpected)")
                 return
             }
         } catch {

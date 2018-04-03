@@ -358,6 +358,53 @@ VALUE rbg_Array_protect(VALUE v, int * _Nullable status)
 }
 
 //
+// Hash conversion.
+//
+// Hashes are historically under-represented, in particular the Ruby
+// runtime doesn't believe in `to_h`.  This implements an approximation
+// of rb_Array behavior for hashes:
+//
+// * if nil, return empty hash
+// * if supports to_hash, call it
+//   * if gives non-nil hash, return it
+//   * if gives non-nil non-hash, raise
+// * if supports to_h, call it
+//   * if gives non-nil hash, return it
+//   * if gives non-nil non-hash, raise
+// * raise
+static VALUE rbg_Hash(VALUE value)
+{
+    ID toHashId = rb_intern("to_hash");
+    ID toHId = rb_intern("to_h");
+
+    if (NIL_P(value)) {
+        return Qnil;
+    }
+
+    VALUE result;
+
+    result = rb_check_funcall(value, toHashId, 0, NULL);
+    if (result == Qundef || result == Qnil) {
+        result = rb_check_funcall(value, toHId, 0, NULL);
+    }
+
+    if (result != Qundef && result != Qnil) {
+        if (!RB_TYPE_P(result, RUBY_T_HASH)) {
+            rb_raise(rb_eTypeError, "Could not produce hash from to_hash.");
+        }
+        return result;
+    }
+
+    rb_raise(rb_eTypeError, "Could not convert object to hash.");
+}
+
+/// rb_Hash (sort of) - raises if conversion goes wrong
+VALUE rbg_Hash_protect(VALUE v, int * _Nullable status)
+{
+    return rb_protect(rbg_Hash, v, status);
+}
+
+//
 // Procs/blocks written in Swift
 //
 // Indirection here to allow Swift code to raise Ruby exceptions by

@@ -300,7 +300,7 @@ extension Dictionary: RbObjectConvertible where Key: RbObjectConvertible, Value:
     ///
     /// See `RbError.history` to find out why a conversion failed.
     public init?(_ value: RbObject) {
-        let hashObj = RbObject(rubyValue: value.withRubyValue { $0 /*rbg_Hash_protect($0, nil)*/ })
+        let hashObj = RbObject(rubyValue: value.withRubyValue { rbg_Hash_protect($0, nil) })
         if RbException.ignoreAnyPending() {
             return nil
         }
@@ -311,9 +311,6 @@ extension Dictionary: RbObjectConvertible where Key: RbObjectConvertible, Value:
                 // Hash#each has way too much magic: undocumentedly it tries to peek at the block
                 // arity in the block_given case.  Can't make this work in C so it gets '1'.
                 // Then, undocumentedly it parcels K + V up into an array and passes that to us.
-                guard args.count == 1 else {
-                    throw RbException(message: "Cannot convert Ruby hash: \(args.count) args to each")
-                }
                 let kvArrayObj = args[0]
                 guard let key = Key(kvArrayObj[0]) else {
                     throw RbException(message: "Cannot convert Ruby hash: unconvertible key \(kvArrayObj[0])")
