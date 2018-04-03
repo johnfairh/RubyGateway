@@ -280,6 +280,10 @@ extension RbObject: Hashable, Equatable, Comparable {
     /// - note: Crashes the process (`fatalError`) if the object does not support `hash`
     ///   or if the `hash` call returns something that can't be converted to `Int`.
     public var hashValue: Int {
+        // Have to do this to avoid dictionary literal type stuff causing crashes when setup has failed.
+        guard Ruby.softSetup() else {
+            return 0
+        }
         // not super happy about this - could we instead call hash just once, cache
         // result + use some arbitrary value on failure?
         do {

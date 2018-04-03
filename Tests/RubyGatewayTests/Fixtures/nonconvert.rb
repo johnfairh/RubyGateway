@@ -26,3 +26,32 @@ class NotArrayable
         1
     end
 end
+
+# class without to_h + to_hash
+class NotHashable
+end
+
+# class without to_hash
+class JustToH
+    def to_h
+        { 1 => 2}
+    end
+end
+
+# class with both
+class BothToHAndToHash
+    def to_hash
+        { 1 => 2 }
+    end
+
+    def to_h
+        { :bad => "news" }
+    end
+end
+
+# class with trap to_hash
+class TrapToHash
+    def to_hash
+        "Not remotely a hash"
+    end
+end

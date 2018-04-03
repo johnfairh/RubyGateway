@@ -69,6 +69,14 @@ class MethodsTest
         sum
     end
 
+    def get_sym_num_hash
+        { a: 1, b: 2, c: 3}
+    end
+
+    def get_ambiguous_hash
+        { 1 => "a", 1.0 => "b" }
+    end
+
     def to_a
         [1, "two", 3.0]
     end

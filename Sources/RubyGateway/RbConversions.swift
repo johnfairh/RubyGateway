@@ -316,13 +316,13 @@ extension Dictionary: RbObjectConvertible where Key: RbObjectConvertible, Value:
                 }
                 let kvArrayObj = args[0]
                 guard let key = Key(kvArrayObj[0]) else {
-                    throw RbException(message: "Cannot convert Ruby hash: unconvertible key \(args[0])")
+                    throw RbException(message: "Cannot convert Ruby hash: unconvertible key \(kvArrayObj[0])")
                 }
                 guard dict[key] == nil else {
                     throw RbException(message: "Cannot convert Ruby hash: duplicate key \(key)")
                 }
                 guard let value = Value(kvArrayObj[1]) else {
-                    throw RbException(message: "Cannot convert Ruby hash: unconvertible value \(args[1])")
+                    throw RbException(message: "Cannot convert Ruby hash: unconvertible value \(kvArrayObj[1])")
                 }
                 dict[key] = value
                 return .nilObject

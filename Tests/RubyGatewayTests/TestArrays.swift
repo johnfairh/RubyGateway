@@ -123,6 +123,8 @@ class TestArrays: XCTestCase {
         ("testRoundTripString", testRoundTripString),
         ("testRoundTripNested", testRoundTripNested),
         ("testRubyInterop", testRubyInterop),
-        ("testMixedArrays", testMixedArrays)
+        ("testMixedArrays", testMixedArrays),
+        ("testArrayLiteral", testArrayLiteral),
+        ("testNoArrayConversion", testNoArrayConversion)
     ]
 }
