@@ -126,6 +126,9 @@ double rbg_obj2double_protect(VALUE v, int * _Nullable status);
 /// Safely call `rb_Array` and report exception status
 VALUE rbg_Array_protect(VALUE v, int * _Nullable status);
 
+/// Safely call `rb_Hash` (sort of) and report exception status
+VALUE rbg_Hash_protect(VALUE v, int * _Nullable status);
+
 /// Strings hidden from importer
 const char * _Nonnull rbg_ruby_version(void);
 const char * _Nonnull rbg_ruby_description(void);

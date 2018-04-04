@@ -12,6 +12,7 @@
 		0205A8A72043284C00076840 /* String+RubyGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205A8A62043284C00076840 /* String+RubyGateway.swift */; };
 		0205A8A92043287B00076840 /* RbFailableAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205A8A82043287B00076840 /* RbFailableAccess.swift */; };
 		0205A8AB204423E400076840 /* TestVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205A8AA204423E400076840 /* TestVars.swift */; };
+		020B4C192072379D0073276B /* TestDictionaries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020B4C182072379D0073276B /* TestDictionaries.swift */; };
 		022BD882205EEA9B00DA077F /* RbBlockCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022BD881205EEA9B00DA077F /* RbBlockCall.swift */; };
 		022BD8A22063C40800DA077F /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022BD8A12063C40800DA077F /* Lock.swift */; };
 		022F3AB220360B9F009E69BE /* CRubyMacros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3AB120360B9F009E69BE /* CRubyMacros.swift */; };
@@ -74,6 +75,7 @@
 		0205A8A62043284C00076840 /* String+RubyGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+RubyGateway.swift"; sourceTree = "<group>"; };
 		0205A8A82043287B00076840 /* RbFailableAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbFailableAccess.swift; sourceTree = "<group>"; };
 		0205A8AA204423E400076840 /* TestVars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVars.swift; sourceTree = "<group>"; };
+		020B4C182072379D0073276B /* TestDictionaries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDictionaries.swift; sourceTree = "<group>"; };
 		022BD881205EEA9B00DA077F /* RbBlockCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbBlockCall.swift; sourceTree = "<group>"; };
 		022BD8A12063C40800DA077F /* Lock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
 		022F3AB120360B9F009E69BE /* CRubyMacros.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRubyMacros.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				0290133C203F42820090C5C9 /* TestMiscObjTypes.swift */,
 				022F3ACA20375E01009E69BE /* TestStrings.swift */,
 				026F1B032070CDB0002E8C45 /* TestArrays.swift */,
+				020B4C182072379D0073276B /* TestDictionaries.swift */,
 				022F3ACC20385C3A009E69BE /* TestConstants.swift */,
 				0205A8AA204423E400076840 /* TestVars.swift */,
 				0205A8A32042DA3600076840 /* TestCallable.swift */,
@@ -439,6 +442,7 @@
 				022F3AC92037153A009E69BE /* TestNumerics.swift in Sources */,
 				022F3AD1203AF8BA009E69BE /* TestRbObject.swift in Sources */,
 				026F1B042070CDB0002E8C45 /* TestArrays.swift in Sources */,
+				020B4C192072379D0073276B /* TestDictionaries.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

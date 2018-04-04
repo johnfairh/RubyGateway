@@ -20,10 +20,9 @@ running on macOS or Linux painlessly and safely run and interact with Ruby
 programs.  It's easy to pass Swift datatypes into Ruby and turn Ruby objects
 back into Swift types.
 
-This project is [young](https://johnfairh.github.io/RubyGateway/todo.html):
-various things missing including collection types which should come with
-Swift 4.1.  Eventually plan to allow implementation of Ruby classes in Swift
-enabling Ruby as a sandboxed DSL/scripting language for Swift applications.
+This project is [young](https://johnfairh.github.io/RubyGateway/todo.html).
+Eventually plan to allow implementation of Ruby classes in Swift, enabling Ruby as
+a DSL/scripting language for Swift applications.
 
 See [CRuby](https://github.com/johnfairh/CRuby) if you are looking for a
 low-level Ruby C API wrapper.
@@ -96,6 +95,10 @@ scores.call("each") { args in
     print("Subject: \(args[0]) Score: \(args[1])")
     return .nilObject
 }
+
+// Convert to a Swift array
+let subjects = Array<String>(try! student.get("all_subjects"))
+subjectsPopularityDb.submit(subjects: subjects)
 ```
 
 ## Documentation

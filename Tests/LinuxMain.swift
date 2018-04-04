@@ -16,6 +16,8 @@ XCTMain([
     testCase(TestMiscObjTypes.allTests),
     testCase(TestOperators.allTests),
     testCase(TestStrings.allTests),
+    testCase(TestArrays.allTests),
+    testCase(TestDictionaries.allTests),
     testCase(TestConstants.allTests),
     testCase(TestVars.allTests),
     testCase(TestCallable.allTests),

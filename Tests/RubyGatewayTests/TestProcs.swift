@@ -26,6 +26,9 @@ class TestProcs: XCTestCase {
 
             try proc.call("call")
             XCTAssertTrue(procHappened)
+
+            let arity = try proc.getAttribute("arity")
+            XCTAssertEqual(-1, arity)
         } catch {
             XCTFail("Unexpected error: \(error)")
         }

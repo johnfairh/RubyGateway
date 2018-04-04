@@ -1,18 +1,19 @@
 ## 0.4 plan
 
-Swift 4.1.
+✅ Swift 4.1.
 
-Conditional conformances for array etc.
+✅ Conditional conformances for array + dictionary.
+
+Updates to make use of Arrays
+
+Nil literal translation in StoR direction
 
 ## "1.0" feeling 
 
 Collection translation, needs 4.1
-* Array, Dictionary
 * Set?
 * Range, Slice ?
 * Helpers for efficient Ruby array/hash (set?) access
-
-Nil literal translation in StoR direction
 
 Concurrency
 * Fix races
