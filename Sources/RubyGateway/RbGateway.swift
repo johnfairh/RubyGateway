@@ -154,7 +154,7 @@ public final class RbGateway: RbObjectAccess {
         try setGlobalVar(RbGateway.ivarWorkaroundName, newValue: newValue)
         defer { let _ = try? setGlobalVar(RbGateway.ivarWorkaroundName, newValue: oldValue) }
         return try eval(ruby: "\(name) = \(RbGateway.ivarWorkaroundName)")
-        // TODO: simplify when we have hooked global vars...
+        // simplify this when we have hooked global vars...
     }
 }
 

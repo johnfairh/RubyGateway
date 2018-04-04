@@ -146,7 +146,6 @@ func TYPE(_ x: VALUE) -> RbType {
 
 // MARK: - Garbage collection helpers
 
-// TODO: figure out
 //#define RB_OBJ_WB_UNPROTECT(x)      rb_obj_wb_unprotect(x, __FILE__, __LINE__)
 //#define RB_OBJ_WRITE(a, slot, b)       rb_obj_write((VALUE)(a), (VALUE *)(slot),(VALUE)(b), __FILE__, __LINE__)
 

@@ -4,7 +4,7 @@
 
 ✅ Conditional conformances for array + dictionary.
 
-Updates to make use of Arrays
+✅ Updates to make use of Arrays
 
 Nil literal translation in StoR direction
 
@@ -21,8 +21,6 @@ Concurrency
 
 Sandboxing
 * Research, worth doing anything?  Even about `exit!` ?
-
-Fix TODOs
 
 Build
 * Linux Travis
