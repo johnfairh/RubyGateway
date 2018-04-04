@@ -180,7 +180,7 @@ If you want to stop using Ruby and get on with something else, and
 never come back to Ruby in the process, use `RbGateway.cleanup()`.
 
 ### Can't do yet
-* Arrays Hashes Sets
+* Sets
 * Ranges
 * Rational Complex
 
@@ -268,6 +268,16 @@ Swift object to something else in the Swift world.
 Running arbitrary Ruby code is a bad idea unless the process itself is
 sandboxed: there are no restrictions on what the Ruby VM can do including
 call `exit!`.
+
+### Block arity
+
+The Ruby runtime cannot tell the arity (number of expected arguments) of
+blocks created by the Ruby C API / RubyGateway -- `Proc#arity` always comes
+out as -1.  This means that any Ruby code that tries to be clever by inspecting
+the arity of its block will not work as expected.
+
+Ruby's `Hash#each` suffers from this: instead of getting the key and value
+passed separately you get one parameter, a two-element array of key and value.
 
 ## Using the CRuby API
 

@@ -42,7 +42,7 @@ import RubyGatewayHelpers
 /// ```swift
 /// let height = Double(myObj)
 /// let allHeights = Array<Double>(myObj)
-/// let heightDb = Dictionary<String, Double>(myObj) // one day!
+/// let heightDb = Dictionary<String, Double>(myObj)
 /// ```
 /// Check `RbError.history` to see the cause of failed initializations.
 ///
