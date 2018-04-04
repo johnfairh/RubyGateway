@@ -168,6 +168,9 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Extensions/Array.html">Array</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Dictionary.html">Dictionary</a>
+              </li>
             </ul>
           </li>
         </ul>
@@ -342,7 +345,7 @@ never come back to Ruby in the process, use <code><a href="Classes/RbGateway.htm
 <h3 id='can-39-t-do-yet' class='heading'>Can&rsquo;t do yet</h3>
 
 <ul>
-<li>Arrays Hashes Sets</li>
+<li>Sets</li>
 <li>Ranges</li>
 <li>Rational Complex</li>
 </ul>
@@ -419,6 +422,15 @@ Swift object to something else in the Swift world.</p>
 <p>Running arbitrary Ruby code is a bad idea unless the process itself is
 sandboxed: there are no restrictions on what the Ruby VM can do including
 call <code>exit!</code>.</p>
+<h3 id='block-arity' class='heading'>Block arity</h3>
+
+<p>The Ruby runtime cannot tell the arity (number of expected arguments) of
+blocks created by the Ruby C API / RubyGateway &ndash; <code>Proc#arity</code> always comes
+out as -1.  This means that any Ruby code that tries to be clever by inspecting
+the arity of its block will not work as expected.</p>
+
+<p>Ruby&rsquo;s <code>Hash#each</code> suffers from this: instead of getting the key and value
+passed separately you get one parameter, a two-element array of key and value.</p>
 <h2 id='using-the-cruby-api' class='heading'>Using the CRuby API</h2>
 
 <p>The <a href="https://github.com/johnfairh/CRuby">CRuby</a> package provides access to as

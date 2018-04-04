@@ -45,7 +45,7 @@ custom_categories:
           - RbFailableAccess
 
     - name: Swift Interop
-      abstract: These types are used to convert Swift datatypes to Ruby and vice versa.
+      abstract: These types and extensions are used to convert Swift datatypes to Ruby and vice versa.
       children:
           - RbObjectConvertible
           - String
@@ -63,3 +63,4 @@ custom_categories:
           - Double
           - Float
           - Array
+          - Dictionary

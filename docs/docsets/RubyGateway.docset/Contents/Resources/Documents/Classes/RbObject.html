@@ -169,6 +169,9 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Extensions/Array.html">Array</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Dictionary.html">Dictionary</a>
+              </li>
             </ul>
           </li>
         </ul>
@@ -214,7 +217,7 @@ object to get started finding constants or calling global functions.</p>
 <p>Convert <code>RbObject</code>s to Swift types using failable initializers:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">height</span> <span class="o">=</span> <span class="kt">Double</span><span class="p">(</span><span class="n">myObj</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">allHeights</span> <span class="o">=</span> <span class="kt">Array</span><span class="o">&lt;</span><span class="kt">Double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">myObj</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">heightDb</span> <span class="o">=</span> <span class="kt">Dictionary</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">Double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">myObj</span><span class="p">)</span> <span class="c1">// one day!</span>
+<span class="k">let</span> <span class="nv">heightDb</span> <span class="o">=</span> <span class="kt">Dictionary</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">Double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">myObj</span><span class="p">)</span>
 </code></pre>
 
 <p>Check <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to see the cause of failed initializations.</p>
@@ -905,7 +908,7 @@ or if the <code>hash</code> call returns something that can&rsquo;t be converted
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L282-L294">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L282-L298">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -946,7 +949,7 @@ or if the <code>hash</code> call returns something that can&rsquo;t be converted
                         <p>Whether the objects are the same under <code>==</code>.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L301-L311">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L305-L315">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -984,7 +987,7 @@ argument is less than that of the second argument.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L318-L326">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L322-L330">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1776,7 +1779,57 @@ that gets applied recursively.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbConversions.swift#L280-L282">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbConversions.swift#L281-L283">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/DictionaryLiteral"></a>
+                <a name="//apple_ref/swift/Section/DictionaryLiteral" class="dashAnchor"></a>
+                <a href="#/DictionaryLiteral">
+                  <h3 class="section-name">DictionaryLiteral</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway8RbObjectCA2C_ACt17dictionaryLiterald_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(dictionaryLiteral:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway8RbObjectCA2C_ACt17dictionaryLiterald_tcfc">init(dictionaryLiteral:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates an <code>RbObject</code> from a dictionary literal.</p>
+
+<p>Although the key and value types here are <code>RbObject</code> you can write things like:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">obj</span><span class="p">:</span> <span class="kt">RbObject</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span> <span class="s">"fish"</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s">"bucket"</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s">"wife"</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s">"goat"</span><span class="p">]</span>
+</code></pre>
+
+<p>&hellip; because of <code>RbObject</code>&lsquo;s <code>ExpressibleByXxxLiteral</code> conformance
+that gets applied recursively.</p>
+
+<p>Like a regular <code>Dictionary</code> there must be no duplicate keys in the <code>elements</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="n">dictionaryLiteral</span> <span class="nv">elements</span><span class="p">:</span> <span class="p">(</span><span class="kt">RbObject</span><span class="p">,</span> <span class="kt">RbObject</span><span class="p">)</span><span class="o">...</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbConversions.swift#L365-L367">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

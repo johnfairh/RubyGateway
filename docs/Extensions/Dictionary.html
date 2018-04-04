@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>UInt16 Extension Reference</title>
+    <title>Dictionary Extension Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Extension/UInt16" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Extension/Dictionary" class="dashAnchor"></a>
 
-    <a title="UInt16 Extension Reference"></a>
+    <a title="Dictionary Extension Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -44,7 +44,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">RubyGateway Reference</a>
       <img class="carat" src="../img/carat.png" />
-      UInt16 Extension Reference
+      Dictionary Extension Reference
     </p>
 
     <div class="content-wrapper">
@@ -180,14 +180,16 @@
 
         <section class="section">
           <div class="section-content">
-            <h1>UInt16</h1>
+            <h1>Dictionary</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">UInt16</span> <span class="p">:</span> <span class="kt">FixedWidthInteger</span><span class="p">,</span> <span class="kt">UnsignedInteger</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Dictionary</span><span class="o">&lt;</span><span class="kt">Key</span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">Key</span> <span class="p">:</span> <span class="kt">Hashable</span></code></pre>
 
                 </div>
               </div>
-            
+            <p>These methods are available only when both the dictionary <code>Key</code> <em>and</em> <code>Value</code>
+types conform to <code><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code>.</p>
+
           </div>
         </section>
 
@@ -198,9 +200,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:s6UInt16V11RubyGatewayEABSgAC8RbObjectCcfc"></a>
+                    <a name="/s:s10DictionaryV11RubyGatewayAC19RbObjectConvertibleRzAcDR_rlEAByxq_GSgAC0dE0Ccfc"></a>
                     <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s6UInt16V11RubyGatewayEABSgAC8RbObjectCcfc">init(_:)</a>
+                    <a class="token" href="#/s:s10DictionaryV11RubyGatewayAC19RbObjectConvertibleRzAcDR_rlEAByxq_GSgAC0dE0Ccfc">init(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -208,19 +210,17 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Try to get a 16-bit unsigned integer representation of an <code><a href="../Classes/RbObject.html">RbObject</a></code>.</p>
+                        <p>Try to get a <code>Dictionary</code> representation of an <code><a href="../Classes/RbObject.html">RbObject</a></code> that is a Ruby hash.</p>
 
-<p>It fails if the Ruby value:</p>
+<p>Based on <code>Kernel#Hash</code>: will attempt <code>to_hash</code> then <code>to_h</code>, has a weird
+special case for an empty array, otherwise fails.</p>
 
-<ol>
-<li>Is numeric and negative; or</li>
-<li>Is numeric, positive, and does not fit into the Swift type; or</li>
-<li>Cannot be made into a suitable numeric via <code>to_int</code> or <code>to_i</code>.</li>
-</ol>
+<p>Fails if <em>any</em> of the Ruby hash keys or values do do not support conversion
+to the corresponding Swift types.</p>
+
+<p>Fails if more than one of the Ruby hash keys convert to the same Swift value.</p>
 
 <p>See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to find out why a conversion failed.</p>
-
-<p>If the Ruby value is floating-point then the integer part is used.</p>
 
                       </div>
                       <div class="declaration">
@@ -232,7 +232,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbNumericConversions.swift#L72-L77">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbConversions.swift#L302-L331">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -240,9 +240,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:s6UInt16V11RubyGatewayE10rubyObjectAC02RbE0Cvp"></a>
+                    <a name="/s:s10DictionaryV11RubyGatewayAC19RbObjectConvertibleRzAcDR_rlE04rubyE0AC0dE0Cvp"></a>
                     <a name="//apple_ref/swift/Property/rubyObject" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s6UInt16V11RubyGatewayE10rubyObjectAC02RbE0Cvp">rubyObject</a>
+                    <a class="token" href="#/s:s10DictionaryV11RubyGatewayAC19RbObjectConvertibleRzAcDR_rlE04rubyE0AC0dE0Cvp">rubyObject</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -250,7 +250,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A Ruby object for the number.</p>
+                        <p>Create a Ruby hash object for this <code>Dictionary</code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -262,7 +262,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbNumericConversions.swift#L80-L82">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbConversions.swift#L334-L349">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

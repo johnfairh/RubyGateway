@@ -169,6 +169,9 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Extensions/Array.html">Array</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Dictionary.html">Dictionary</a>
+              </li>
             </ul>
           </li>
         </ul>
@@ -209,9 +212,10 @@ to <code><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>
                       <div class="abstract">
                         <p>Try to get a <code>Array</code> representation of an <code><a href="../Classes/RbObject.html">RbObject</a></code>.</p>
 
-<p>Equivalent to <code>Kernel#Array</code>: will attempt <code>to_a</code>, if unsupported then
-creates a 1-element array.  Fails if <em>any</em> of the Ruby array elements do
-not support conversion to the array <code>Element</code> type.</p>
+<p>Equivalent to <code>Kernel#Array</code>: attempts <code>to_ary</code> then <code>to_a</code>,
+if unsupported then creates a one-element array.  Fails if <em>any</em> of
+the Ruby array elements do not support conversion to the array <code>Element</code>
+type.</p>
 
 <p>See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to find out why a conversion failed.</p>
 
@@ -225,7 +229,7 @@ not support conversion to the array <code>Element</code> type.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbConversions.swift#L241-L256">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbConversions.swift#L242-L257">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -255,7 +259,7 @@ not support conversion to the array <code>Element</code> type.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbConversions.swift#L259-L266">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbConversions.swift#L260-L267">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

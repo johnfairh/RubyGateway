@@ -7,6 +7,7 @@
 ##### Enhancements
 
 * Add conditional Array `RbObjectConvertible` conformance.
+* Add conditional Dictionary `RbObjectConvertible` conformance.
 
 ##### Bug Fixes
 
