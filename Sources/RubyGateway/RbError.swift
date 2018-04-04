@@ -192,14 +192,14 @@ public struct RbException: CustomStringConvertible, Error {
         return true
     }
 
-    // TODO: Sort out arrays and make this better
     /// The backtrace from the Ruby exception
-    public var backtrace: String {
-        guard let btObj = try? exception.get("backtrace"),
-              let btStr = String(btObj) else {
-            return "[unbacktraceable]"
+    public var backtrace: [String] {
+        var bt = ["[unbacktraceable]"]
+        if let btObj = try? exception.get("backtrace"),
+            let btStr = Array<String>(btObj) {
+            bt = btStr
         }
-        return btStr
+        return bt
     }
 
     /// The exception's message

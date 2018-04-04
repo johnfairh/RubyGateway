@@ -97,8 +97,8 @@ class TestErrors: XCTestCase {
                 return
             } catch RbError.rubyException(let exn) {
                 let btstr = exn.backtrace
-                XCTAssertTrue(btstr.contains("raiseString"))
-                XCTAssertTrue(btstr.contains("raising.rb:2"))
+                XCTAssertTrue(btstr[0].contains("raiseString"))
+                XCTAssertTrue(btstr[0].contains("raising.rb:2"))
                 XCTAssertEqual("RuntimeError: string", exn.description)
             } catch {
                 XCTFail("Unexpected exception: \(error)")
