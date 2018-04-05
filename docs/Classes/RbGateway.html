@@ -223,7 +223,7 @@ or call functions as you would at the top level of a Ruby script, for example:</
 </code></pre>
 
 <p>If you just want to create a Ruby object of some class, see
-<code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectCACSgSS7ofClass_SayAA0cD11Convertible_pG4argsSaySS_AaF_ptG6kwArgstcfc">RbObject.init(ofClass:args:kwArgs:)</a></code>.</p>
+<code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectCACSgSS7ofClass_SayAA0cD11Convertible_pSgG4argsSaySS_AGtG6kwArgstcfc">RbObject.init(ofClass:args:kwArgs:)</a></code>.</p>
 
           </div>
         </section>
@@ -413,9 +413,9 @@ value if it doesn&rsquo;t exist yet.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway02RbB0C14setInstanceVarAA0C6ObjectCSS_AA0cG11Convertible_p8newValuetKF"></a>
+                    <a name="/s:11RubyGateway02RbB0C14setInstanceVarAA0C6ObjectCSS_AA0cG11Convertible_pSg8newValuetKF"></a>
                     <a name="//apple_ref/swift/Method/setInstanceVar(_:newValue:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway02RbB0C14setInstanceVarAA0C6ObjectCSS_AA0cG11Convertible_p8newValuetKF">setInstanceVar(_:newValue:)</a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C14setInstanceVarAA0C6ObjectCSS_AA0cG11Convertible_pSg8newValuetKF">setInstanceVar(_:newValue:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -441,7 +441,7 @@ value if it doesn&rsquo;t exist yet.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">setInstanceVar</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">newValue</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
+<span class="kd">public</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">setInstanceVar</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">newValue</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
 
                         </div>
                       </div>

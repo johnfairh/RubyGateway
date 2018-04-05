@@ -254,6 +254,17 @@ class TestCallable: XCTestCase {
         }
     }
 
+    // Nil magic
+    func testNilValue() {
+        let obj = getNewMethodTest()
+
+        do {
+            try obj.call("expectsNil", args: [nil])
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+    }
+
     static var allTests = [
         ("testCallGlobal", testCallGlobal),
         ("testCallGlobalFailure", testCallGlobalFailure),

@@ -147,7 +147,7 @@ public final class RbGateway: RbObjectAccess {
     /// - throws: `RbError.badIdentifier` if `name` looks wrong.
     ///           `RbError.rubyException` if Ruby has a problem.
     @discardableResult
-    public override func setInstanceVar(_ name: String, newValue: RbObjectConvertible) throws -> RbObject {
+    public override func setInstanceVar(_ name: String, newValue: RbObjectConvertible?) throws -> RbObject {
         try setup()
         try name.checkRubyInstanceVarName()
         let oldValue = try getGlobalVar(RbGateway.ivarWorkaroundName)

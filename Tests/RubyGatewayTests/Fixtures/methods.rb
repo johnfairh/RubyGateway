@@ -38,6 +38,10 @@ class MethodsTest
         return x * 2
     end
 
+    def expectsNil(arg)
+        raise "It's not nil: #{arg}" unless arg.nil?
+    end
+
     def store_block(&block)
         @stored_block = block
     end

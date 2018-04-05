@@ -192,7 +192,7 @@
 <p>All Ruby objects whatever their type or class are represented using this
 Swift type.</p>
 
-<p>Use <code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectCACSgSS7ofClass_SayAA0cD11Convertible_pG4argsSaySS_AaF_ptG6kwArgstcfc">RbObject.init(ofClass:args:kwArgs:)</a></code> to create a new Ruby object of
+<p>Use <code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectCACSgSS7ofClass_SayAA0cD11Convertible_pSgG4argsSaySS_AGtG6kwArgstcfc">RbObject.init(ofClass:args:kwArgs:)</a></code> to create a new Ruby object of
 some class:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">myObj</span> <span class="o">=</span> <span class="kt">RbObject</span><span class="p">(</span><span class="nv">ofClass</span><span class="p">:</span> <span class="s">"MyModule::MyClass"</span><span class="p">,</span> <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="s">"arg1"</span><span class="p">,</span> <span class="mf">25.3</span><span class="p">])</span>
 </code></pre>
@@ -521,9 +521,9 @@ Ruby worked but the call evaluated to [Ruby] <code>nil</code>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway8RbObjectCACSgSS7ofClass_SayAA0cD11Convertible_pG4argsSaySS_AaF_ptG6kwArgstcfc"></a>
+                    <a name="/s:11RubyGateway8RbObjectCACSgSS7ofClass_SayAA0cD11Convertible_pSgG4argsSaySS_AGtG6kwArgstcfc"></a>
                     <a name="//apple_ref/swift/Method/init(ofClass:args:kwArgs:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway8RbObjectCACSgSS7ofClass_SayAA0cD11Convertible_pG4argsSaySS_AaF_ptG6kwArgstcfc">init(ofClass:args:kwArgs:)</a>
+                    <a class="token" href="#/s:11RubyGateway8RbObjectCACSgSS7ofClass_SayAA0cD11Convertible_pSgG4argsSaySS_AGtG6kwArgstcfc">init(ofClass:args:kwArgs:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -542,8 +542,8 @@ find out what failed.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">?(</span><span class="n">ofClass</span> <span class="nv">className</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-                         <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>
-                         <span class="nv">kwArgs</span><span class="p">:</span> <span class="p">[(</span><span class="kt">String</span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)]</span> <span class="o">=</span> <span class="p">[])</span></code></pre>
+                         <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?]</span> <span class="o">=</span> <span class="p">[],</span>
+                         <span class="nv">kwArgs</span><span class="p">:</span> <span class="p">[(</span><span class="kt">String</span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?)]</span> <span class="o">=</span> <span class="p">[])</span></code></pre>
 
                         </div>
                       </div>
@@ -600,9 +600,9 @@ find out what failed.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway8RbObjectCACSgSS7ofClass_SayAA0cD11Convertible_pG4argsSaySS_AaF_ptG6kwArgsSb11retainBlockACSayACGKc9blockCalltcfc"></a>
+                    <a name="/s:11RubyGateway8RbObjectCACSgSS7ofClass_SayAA0cD11Convertible_pSgG4argsSaySS_AGtG6kwArgsSb11retainBlockACSayACGKc9blockCalltcfc"></a>
                     <a name="//apple_ref/swift/Method/init(ofClass:args:kwArgs:retainBlock:blockCall:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway8RbObjectCACSgSS7ofClass_SayAA0cD11Convertible_pG4argsSaySS_AaF_ptG6kwArgsSb11retainBlockACSayACGKc9blockCalltcfc">init(ofClass:args:kwArgs:retainBlock:blockCall:)</a>
+                    <a class="token" href="#/s:11RubyGateway8RbObjectCACSgSS7ofClass_SayAA0cD11Convertible_pSgG4argsSaySS_AGtG6kwArgsSb11retainBlockACSayACGKc9blockCalltcfc">init(ofClass:args:kwArgs:retainBlock:blockCall:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -621,8 +621,8 @@ find out what failed.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">?(</span><span class="n">ofClass</span> <span class="nv">className</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-                         <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>
-                         <span class="nv">kwArgs</span><span class="p">:</span> <span class="p">[(</span><span class="kt">String</span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)]</span> <span class="o">=</span> <span class="p">[],</span>
+                         <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?]</span> <span class="o">=</span> <span class="p">[],</span>
+                         <span class="nv">kwArgs</span><span class="p">:</span> <span class="p">[(</span><span class="kt">String</span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?)]</span> <span class="o">=</span> <span class="p">[],</span>
                          <span class="nv">retainBlock</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
                          <span class="nv">blockCall</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Other APIs.html#/s:11RubyGateway15RbBlockCallbacka">RbBlockCallback</a></span><span class="p">)</span></code></pre>
 

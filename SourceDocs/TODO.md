@@ -6,7 +6,7 @@
 
 ✅ Updates to make use of Arrays
 
-Nil literal translation in StoR direction
+✅ Nil literal translation in StoR direction
 
 ## "1.0" feeling 
 

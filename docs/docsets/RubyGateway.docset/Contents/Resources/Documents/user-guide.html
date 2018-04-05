@@ -209,10 +209,10 @@ called <code>Ruby</code> so the code looks like:</p>
 <span class="p">}</span>
 </code></pre>
 
-<p>Create objects using <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectCACSgSS7ofClass_SayAA0cD11Convertible_pG4argsSaySS_AaF_ptG6kwArgstcfc">RbObject.init(ofClass:args:kwArgs:)</a></code>.  Pass Swift types
+<p>Create objects using <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectCACSgSS7ofClass_SayAA0cD11Convertible_pSgG4argsSaySS_AGtG6kwArgstcfc">RbObject.init(ofClass:args:kwArgs:)</a></code>.  Pass Swift types
 or <code><a href="Classes/RbObject.html">RbObject</a></code>s to the <code>args</code> parameter.</p>
 
-<p>Use <code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pG4argsSaySS_AaG_ptG6kwArgstKF">RbObjectAccess.call(_:args:kwArgs:)</a></code> to call methods on the object.  See
+<p>Use <code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pSgG4argsSaySS_AHtG6kwArgstKF">RbObjectAccess.call(_:args:kwArgs:)</a></code> to call methods on the object.  See
 <code><a href="Classes/RbObjectAccess.html">RbObjectAccess</a></code> for more object operations and variations on <code>call</code> including
 passing Swift code as a block.  Again pass Swift types or <code><a href="Classes/RbObject.html">RbObject</a></code>s in the
 <code>args</code> parameter.</p>
@@ -233,10 +233,19 @@ implicitly/explicitly access <code><a href="Classes/RbObject.html#/s:11RubyGatew
 </code></pre>
 <h2 id='how-to' class='heading'>How to &hellip;</h2>
 
-<p>A few Ruby-ish tasks.  These are more long-winded in Swift.  The idea here
-though is not to let you write Ruby using Swift: use Ruby to do that!  But
+<p>A few Ruby-ish tasks.  Lots of these are more long-winded in Swift.  The idea
+here though is not to let you write Ruby using Swift: use Ruby to do that!  But
 rather to provide a layer that lets you bridge between Ruby and Swift code,
 which will sometimes require driving the Ruby code in these ways.</p>
+<h3 id='exchange-code-nil-code-with-ruby' class='heading'>Exchange <code>nil</code> with Ruby</h3>
+
+<p>The static <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC03nilD0ACvpZ">RbObject.nilObject</a></code> represents Ruby nil and can be passed to Ruby
+methods as a parameter or used in data structures.  As a short-hand you can use
+literal Swift <code>nil</code> with APIs like <code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pSgG4argsSaySS_AHtG6kwArgstKF">RbObjectAccess.call(_:args:kwArgs:)</a></code>.</p>
+
+<p>When Ruby returns <code>nil</code> to Swift it always comes through as an <code><a href="Classes/RbObject.html">RbObject</a></code>.  You
+can compare this directly to <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC03nilD0ACvpZ">RbObject.nilObject</a></code> or use <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC5isNilSbvp">RbObject.isNil</a></code> to
+test it.</p>
 <h3 id='pass-a-symbol-as-an-argument' class='heading'>Pass a symbol as an argument</h3>
 
 <p>Use <code><a href="Structs/RbSymbol.html">RbSymbol</a></code>.  Ruby:</p>
@@ -257,7 +266,7 @@ which will sometimes require driving the Ruby code in these ways.</p>
 </code></pre>
 <h3 id='pass-swift-code-as-a-block' class='heading'>Pass Swift code as a block</h3>
 
-<p>Use an <code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pG4argsSaySS_AaG_ptG6kwArgstKF">RbObjectAccess.call(...)</a></code> variant with a <code>blockCall</code> argument.  Ruby:</p>
+<p>Use an <code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pSgG4argsSaySS_AHtG6kwArgstKF">RbObjectAccess.call(...)</a></code> variant with a <code>blockCall</code> argument.  Ruby:</p>
 <pre class="highlight ruby"><code><span class="n">obj</span><span class="p">.</span><span class="nf">meth</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="nb">puts</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">}</span>
 </code></pre>
 

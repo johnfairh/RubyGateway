@@ -54,10 +54,20 @@ do {
 
 ## How to ...
 
-A few Ruby-ish tasks.  These are more long-winded in Swift.  The idea here
-though is not to let you write Ruby using Swift: use Ruby to do that!  But
+A few Ruby-ish tasks.  Lots of these are more long-winded in Swift.  The idea
+here though is not to let you write Ruby using Swift: use Ruby to do that!  But
 rather to provide a layer that lets you bridge between Ruby and Swift code,
 which will sometimes require driving the Ruby code in these ways.
+
+### Exchange `nil` with Ruby
+
+The static `RbObject.nilObject` represents Ruby nil and can be passed to Ruby
+methods as a parameter or used in data structures.  As a short-hand you can use
+literal Swift `nil` with APIs like `RbObjectAccess.call(_:args:kwArgs:)`.
+
+When Ruby returns `nil` to Swift it always comes through as an `RbObject`.  You
+can compare this directly to `RbObject.nilObject` or use `RbObject.isNil` to
+test it.
 
 ### Pass a symbol as an argument
 

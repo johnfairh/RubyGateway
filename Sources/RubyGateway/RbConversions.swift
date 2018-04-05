@@ -366,3 +366,21 @@ extension RbObject: ExpressibleByDictionaryLiteral {
         self.init(Dictionary(uniqueKeysWithValues: elements))
     }
 }
+
+// MARK: - Optional<RbObjectConvertible>
+
+/// This lets you pass literal `nil` in an argument position to a Ruby method
+/// and have it transparently turn into Ruby nil.
+/// :nodoc:
+extension Optional: RbObjectConvertible where Wrapped == RbObjectConvertible {
+    public init?(_ value: RbObject) {
+        return nil
+    }
+
+    public var rubyObject: RbObject {
+        switch self {
+        case .some(let w): return w.rubyObject
+        case .none: return .nilObject
+        }
+    }
+}
