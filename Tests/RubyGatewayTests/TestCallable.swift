@@ -280,6 +280,7 @@ class TestCallable: XCTestCase {
         ("testCallViaSymbolNotSymbol", testCallViaSymbolNotSymbol),
         ("testCallWithBlock", testCallWithBlock),
         ("testCallWithProcBlock", testCallWithProcBlock),
-        ("testStoredSwiftBlock", testStoredSwiftBlock)
+        ("testStoredSwiftBlock", testStoredSwiftBlock),
+        ("testNilValue", testNilValue)
     ]
 }

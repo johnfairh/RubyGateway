@@ -163,6 +163,14 @@ class TestRbObject: XCTestCase {
         XCTAssertEqual(2, TestRbObject.testObjDeinitCount)
     }
 
+    // optional helper
+    func testOptionalConformance() {
+        let obj1 = Optional<RbObjectConvertible>(RbObject.nilObject)
+        let obj2: Optional<RbObjectConvertible> = nil
+
+        XCTAssertEqual(obj1?.rubyObject, obj2.rubyObject)
+    }
+
     static var allTests = [
         ("testSimple", testSimple),
         ("testObject", testObject),
@@ -173,6 +181,7 @@ class TestRbObject: XCTestCase {
         ("testSymbols", testSymbols),
         ("testHashing", testHashing),
         ("testComparable", testComparable),
-        ("testAssociatedObjects", testAssociatedObjects)
+        ("testAssociatedObjects", testAssociatedObjects),
+        ("testOptionalConformance", testOptionalConformance)
     ]
 }

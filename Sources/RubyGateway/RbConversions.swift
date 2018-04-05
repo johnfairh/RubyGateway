@@ -374,7 +374,7 @@ extension RbObject: ExpressibleByDictionaryLiteral {
 /// :nodoc:
 extension Optional: RbObjectConvertible where Wrapped == RbObjectConvertible {
     public init?(_ value: RbObject) {
-        return nil
+        self = .some(value)
     }
 
     public var rubyObject: RbObject {
