@@ -8,16 +8,14 @@
 
 ✅ Nil literal translation in StoR direction
 
+✅ Threading
+
 ## "1.0" feeling 
 
 Collection translation, needs 4.1
 * Set?
 * Range, Slice ?
 * Helpers for efficient Ruby array/hash (set?) access
-
-Concurrency
-* Fix races
-* Understand what the Ruby story actually is and document it
 
 Sandboxing
 * Research, worth doing anything?  Even about `exit!` ?
