@@ -137,6 +137,10 @@ const char * _Nonnull rbg_ruby_description(void);
 unsigned long rbg_fix2ulong(VALUE v);
 long          rbg_fix2long(VALUE v);
 
+/// Horrible casts rejected by importer
+typedef void rbg_unblock_function_t(void * _Nullable);
+rbg_unblock_function_t * _Nonnull rbg_RUBY_UBF_IO(void);
+
 /// Rbg_value - keep a VALUE safe so it does not get GC'ed
 typedef struct  {
     VALUE value;

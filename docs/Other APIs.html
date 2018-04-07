@@ -96,6 +96,12 @@
                 <a class="nav-group-task-link" href="Structs/RbSymbol.html">RbSymbol</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/RbThread.html">RbThread</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/RbThread/UnblockingFunc.html">– UnblockingFunc</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums/RbType.html">RbType</a>
               </li>
             </ul>
@@ -398,6 +404,52 @@ no need for either <code>RbProc</code> or <code><a href="Classes/RbObject.html">
                       </div>
                       <div class="slightly-smaller">
                         <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbSymbol.swift#L21-L45">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway8RbThreadO"></a>
+                    <a name="//apple_ref/swift/Enum/RbThread" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway8RbThreadO">RbThread</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This type provides a namespace for working with Ruby threads.</p>
+
+<p>You cannot call Ruby on arbitrary threads: only the very first thread
+where RubyGateway gets used or threads created by Ruby&rsquo;s <code>Thread</code> class.</p>
+
+<p>There is no way to &lsquo;attach&rsquo; the Ruby runtime to a thread created by client
+code (eg. one accessed via libdispatch).</p>
+
+<p>Even when multiple Ruby threads are active, the VM executes just one at a
+time under control of a single lock known as the GVL.  The GVL is given up
+over Ruby blocking operations and can be manually relinquished using
+<code><a href="Enums/RbThread.html#/s:11RubyGateway8RbThreadO14callWithoutGvlyyyc8callback_tFZ">RbThread.callWithoutGvl(callback:)</a></code>.</p>
+
+<p>Inside a block that has given up the GVL, you must not call any Ruby code or
+it will at best crash.  You can execute some code inside your GVL-free scope
+that is allowed to call Ruby using <code><a href="Enums/RbThread.html#/s:11RubyGateway8RbThreadO11callWithGvlyyyc8callback_tFZ">RbThread.callWithGvl(callback:)</a></code>.</p>
+
+                        <a href="Enums/RbThread.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">RbThread</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbThread.swift#L64-L159">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

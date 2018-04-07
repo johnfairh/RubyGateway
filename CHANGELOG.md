@@ -8,6 +8,7 @@
 
 * Add conditional Array `RbObjectConvertible` conformance.
 * Add conditional Dictionary `RbObjectConvertible` conformance.
+* Add `RbThread` utilities.
 
 ##### Bug Fixes
 

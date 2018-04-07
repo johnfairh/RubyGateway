@@ -49,3 +49,9 @@ long rbg_fix2long(VALUE v)
 {
     return RB_FIX2LONG(v);
 }
+
+/// This is '-1' cast to pfn...
+rb_unblock_function_t * _Nonnull rbg_RUBY_UBF_IO(void)
+{
+    return RUBY_UBF_IO;
+}

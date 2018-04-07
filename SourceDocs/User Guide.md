@@ -59,6 +59,19 @@ here though is not to let you write Ruby using Swift: use Ruby to do that!  But
 rather to provide a layer that lets you bridge between Ruby and Swift code,
 which will sometimes require driving the Ruby code in these ways.
 
+### Exchange Swift types
+
+RubyBridge provides extensions to most Swift types so you can initialize
+`RbObject`s with them and vice versa, or use them directly as arguments to
+`RbObjectAccess.call(...)` and friends.  Supported types are:
+* `Bool`
+* `String`
+* Floating point - `Float` and `Double`
+* Unsigned integer - `UInt`, `UInt64`, `UInt32`, `UInt16`, `UInt8`
+* Signed integer - `Int`, `Int64`, `Int32`, `Int16`, `Int8`
+* `Array`
+* `Dictionary`
+
 ### Exchange `nil` with Ruby
 
 The static `RbObject.nilObject` represents Ruby nil and can be passed to Ruby
@@ -250,9 +263,11 @@ very difficult for readers to ignore the possibility of errors.
 
 ## Concurrency
 
-*more details to understand*
+RubyBridge inherits Ruby's threading model.  This means you can only use
+RubyBridge APIs on the first/main thread and any other threads created by Ruby.
 
-Do not access RubyGateway APIs from more than one thread ever.
+`RbThread` provides some static helpers for creating Ruby threads and
+relinquishing the GVL: consult the internet for further guidance.
 
 ## Caveats and Gotchas
 

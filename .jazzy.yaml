@@ -35,6 +35,7 @@ custom_categories:
           - RbBreak
           - RbProc
           - RbSymbol
+          - RbThread
           - RbType
 
     - name: Error Handling
