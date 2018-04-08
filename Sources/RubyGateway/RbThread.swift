@@ -8,41 +8,36 @@
 import RubyGatewayHelpers
 import CRuby
 
-/// Context passed to callbacks wrapping up a Swift closure.
-internal final class RbCallbackContext<A, B> {
-    let callback: (A) -> B
+/// Context passed to thread callbacks wrapping up a Swift closure.
+internal final class RbThreadContext {
+    let callback: () -> Void
 
-    init(_ callback: @escaping (A) -> B) {
+    init(_ callback: @escaping () -> Void) {
         self.callback = callback
     }
 
-    /// Call a function passing it a `void *` representation of the `RbProcContext`
+    /// Call a function passing it a `void *` representation of the `RbThreadContext`
     func withRaw(rawCallback: (UnsafeMutableRawPointer) -> Void) {
         let unmanaged = Unmanaged.passRetained(self)
         defer { unmanaged.release() }
         rawCallback(unmanaged.toOpaque())
     }
 
-    /// Retrieve an `RbBlockContext` from its `void *` representation
-    static func from(raw: UnsafeMutableRawPointer) -> RbCallbackContext<A, B> {
-        // A EXC_BAD_ACCESS here usually means the blockRetention has been
-        // set wrongly - at any rate, the `RbProcContext` has been deallocated
-        // while Ruby was still using it.
-        return Unmanaged<RbCallbackContext<A, B>>.fromOpaque(raw).takeUnretainedValue()
+    /// Retrieve an `RbThreadContext` from its `void *` representation
+    static func from(raw: UnsafeMutableRawPointer) -> RbThreadContext {
+        return Unmanaged<RbThreadContext>.fromOpaque(raw).takeUnretainedValue()
     }
 }
 
-private typealias RbThreadContext = RbCallbackContext<(), Void>
-
 private func rbthread_callback(rawContext: UnsafeMutableRawPointer?) -> UnsafeMutableRawPointer? {
     let context = RbThreadContext.from(raw: rawContext!)
-    context.callback(())
+    context.callback()
     return nil
 }
 
 private func rbthread_ubf_callback(rawContext: UnsafeMutableRawPointer?) -> Void {
     let context = RbThreadContext.from(raw: rawContext!)
-    context.callback(())
+    context.callback()
 }
 
 /// This type provides a namespace for working with Ruby threads.
@@ -105,9 +100,9 @@ public enum RbThread {
 
     /// A way to unblock a thread executing inside a `callWithoutGvl` section.
     public enum UnblockingFunc {
-        /// RUBY_UBF_IO
+        /// Same as `RUBY_UBF_IO`
         ///
-        /// For pthread platforms, sends SIGVTALRM to the thread until it wakes up.
+        /// For pthread platforms, sends `SIGVTALRM` to the thread until it wakes up.
         case io
 
         /// A custom unblocking function.
