@@ -15,6 +15,7 @@
 		020B4C192072379D0073276B /* TestDictionaries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020B4C182072379D0073276B /* TestDictionaries.swift */; };
 		020B4C1B2078CADA0073276B /* RbThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020B4C1A2078CADA0073276B /* RbThread.swift */; };
 		020B4C1D2078D54F0073276B /* TestThreads.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020B4C1C2078D54F0073276B /* TestThreads.swift */; };
+		020B4C1F207B62390073276B /* RbObjectCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020B4C1E207B62390073276B /* RbObjectCollection.swift */; };
 		022BD882205EEA9B00DA077F /* RbBlockCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022BD881205EEA9B00DA077F /* RbBlockCall.swift */; };
 		022BD8A22063C40800DA077F /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022BD8A12063C40800DA077F /* Lock.swift */; };
 		022F3AB220360B9F009E69BE /* CRubyMacros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F3AB120360B9F009E69BE /* CRubyMacros.swift */; };
@@ -80,6 +81,7 @@
 		020B4C182072379D0073276B /* TestDictionaries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDictionaries.swift; sourceTree = "<group>"; };
 		020B4C1A2078CADA0073276B /* RbThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbThread.swift; sourceTree = "<group>"; };
 		020B4C1C2078D54F0073276B /* TestThreads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestThreads.swift; sourceTree = "<group>"; };
+		020B4C1E207B62390073276B /* RbObjectCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbObjectCollection.swift; sourceTree = "<group>"; };
 		022BD881205EEA9B00DA077F /* RbBlockCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbBlockCall.swift; sourceTree = "<group>"; };
 		022BD8A12063C40800DA077F /* Lock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
 		022F3AB120360B9F009E69BE /* CRubyMacros.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRubyMacros.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				024923462031EDE000E3AAF4 /* RbVM.swift */,
 				02901337203E03530090C5C9 /* RbGateway.swift */,
 				022F3ACE203AE707009E69BE /* RbObject.swift */,
+				020B4C1E207B62390073276B /* RbObjectCollection.swift */,
 				0270617B2051918500C336B8 /* RbSymbol.swift */,
 				027061BA2058117100C336B8 /* RbProc.swift */,
 				02901339203ED8D60090C5C9 /* RbConversions.swift */,
@@ -465,6 +468,7 @@
 				020B4C1B2078CADA0073276B /* RbThread.swift in Sources */,
 				02706177204EB47600C336B8 /* RbOperators.swift in Sources */,
 				024923482031EE0400E3AAF4 /* RbVM.swift in Sources */,
+				020B4C1F207B62390073276B /* RbObjectCollection.swift in Sources */,
 				0205A8A92043287B00076840 /* RbFailableAccess.swift in Sources */,
 				02901338203E03530090C5C9 /* RbGateway.swift in Sources */,
 				0270617C2051918500C336B8 /* RbSymbol.swift in Sources */,

@@ -148,6 +148,13 @@ public final class RbObject: RbObjectAccess {
 
     /// An `RbObject` that means `nil` to Ruby.
     public static let nilObject = RbObject(rubyValue: Qnil)
+
+    /// A view of a Ruby object using Swift collection APIs.
+    ///
+    /// Works best with Ruby objects that are arrays
+    public var collection: RbObjectCollection {
+        return RbObjectCollection(object: self)
+    }
 }
 
 // MARK: - In-module utility

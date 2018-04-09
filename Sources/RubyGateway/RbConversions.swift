@@ -384,3 +384,57 @@ extension Optional: RbObjectConvertible where Wrapped == RbObjectConvertible {
         }
     }
 }
+
+// MARK: - Range<RbObjectConvertible>
+
+extension Range: RbObjectConvertible where Bound: RbObjectConvertible {
+    public init?(_ value: RbObject) {
+        // Pull values out of Ruby (probably a Range but duck-type it...)
+        guard let lowerObj = try? value.get("begin"),
+              let upperObj = try? value.get("end"),
+              let halfOpenObj = try? value.get("exclude_end?"),
+              halfOpenObj.isTruthy else {
+                  return nil
+        }
+        // Check Swift conversion
+        guard let lower = Bound(lowerObj),
+              let upper = Bound(upperObj) else {
+                return nil
+        }
+        guard lower < upper else {
+            return nil
+        }
+        self.init(uncheckedBounds: (lower: lower, upper: upper))
+    }
+
+    public var rubyObject: RbObject {
+        return RbObject(ofClass: "Range", args: [lowerBound, upperBound, true]) ?? .nilObject
+    }
+}
+
+// MARK: - ClosedRange<RbObjectConvertible>
+
+extension ClosedRange: RbObjectConvertible where Bound: RbObjectConvertible {
+    public init?(_ value: RbObject) {
+        // Pull values out of Ruby (probably a Range but duck-type it...)
+        guard let lowerObj = try? value.get("begin"),
+            let upperObj = try? value.get("end"),
+            let halfOpenObj = try? value.get("exclude_end?"),
+            !halfOpenObj.isTruthy else {
+                return nil
+        }
+        // Check Swift conversion
+        guard let lower = Bound(lowerObj),
+            let upper = Bound(upperObj) else {
+                return nil
+        }
+        guard lower < upper else {
+            return nil
+        }
+        self.init(uncheckedBounds: (lower: lower, upper: upper))
+    }
+
+    public var rubyObject: RbObject {
+        return RbObject(ofClass: "Range", args: [lowerBound, upperBound, false]) ?? .nilObject
+    }
+}
