@@ -309,7 +309,7 @@ extension Dictionary: RbObjectConvertible where Key: RbObjectConvertible, Value:
             var dict: [Key: Value] = [:] // closure cannot capture mutable self
             try hashObj.call("each") { args in
                 // Hash#each has way too much magic: undocumentedly it tries to peek at the block
-                // arity in the block_given case.  Can't make this work in C so it gets '1'.
+                // arity in the block_given case.  Can't make this work in C so it gets '-1'.
                 // Then, undocumentedly it parcels K + V up into an array and passes that to us.
                 let kvArrayObj = args[0]
                 guard let key = Key(kvArrayObj[0]) else {
@@ -414,7 +414,13 @@ private func makeRange<T>(lower: T, upper: T, halfOpen: Bool) -> RbObject where 
 
 // One day Swift will catch up with C++ and let me write this as a single generic...
 
+/// These methods are available only when the range `Bound` type conforms to
+/// `RbObjectConvertible`.
 extension Range: RbObjectConvertible where Bound: RbObjectConvertible {
+    /// Try to get a `Range` from a Ruby range object.
+    ///
+    /// Fails if the Ruby object isn't a half-open range.  Fails if the Ruby range
+    /// endpoints cannot be converted to the `Bound` type.
     public init?(_ value: RbObject) {
         guard let bounds: (Bound, Bound) = decodeRange(value, halfOpen: true) else {
             return nil
@@ -422,6 +428,7 @@ extension Range: RbObjectConvertible where Bound: RbObjectConvertible {
         self.init(uncheckedBounds: bounds)
     }
 
+    /// A Ruby object for the range.
     public var rubyObject: RbObject {
         return makeRange(lower: lowerBound, upper: upperBound, halfOpen: true)
     }
@@ -429,7 +436,13 @@ extension Range: RbObjectConvertible where Bound: RbObjectConvertible {
 
 // MARK: - CountableRange<RbObjectConvertible>
 
+/// These methods are available only when the range `Bound` type conforms to
+/// `RbObjectConvertible`.
 extension CountableRange: RbObjectConvertible where Bound: RbObjectConvertible {
+    /// Try to get a `CountableRange` from a Ruby range object.
+    ///
+    /// Fails if the Ruby object isn't a half-open range.  Fails if the Ruby range
+    /// endpoints cannot be converted to the `Bound` type.
     public init?(_ value: RbObject) {
         guard let bounds: (Bound, Bound) = decodeRange(value, halfOpen: true) else {
             return nil
@@ -437,6 +450,7 @@ extension CountableRange: RbObjectConvertible where Bound: RbObjectConvertible {
         self.init(uncheckedBounds: bounds)
     }
 
+    /// A Ruby object for the range.
     public var rubyObject: RbObject {
         return makeRange(lower: lowerBound, upper: upperBound, halfOpen: true)
     }
@@ -444,7 +458,13 @@ extension CountableRange: RbObjectConvertible where Bound: RbObjectConvertible {
 
 // MARK: - CountableClosedRange<RbObjectConvertible>
 
+/// These methods are available only when the range `Bound` type conforms to
+/// `RbObjectConvertible`.
 extension CountableClosedRange: RbObjectConvertible where Bound: RbObjectConvertible {
+    /// Try to get a `CountableClosedRange` from a Ruby range object.
+    ///
+    /// Fails if the Ruby object isn't a closed range.  Fails if the Ruby range
+    /// endpoints cannot be converted to the `Bound` type.
     public init?(_ value: RbObject) {
         guard let bounds: (Bound, Bound) = decodeRange(value, halfOpen: false) else {
             return nil
@@ -452,6 +472,7 @@ extension CountableClosedRange: RbObjectConvertible where Bound: RbObjectConvert
         self.init(uncheckedBounds: bounds)
     }
 
+    /// A Ruby object for the range.
     public var rubyObject: RbObject {
         return makeRange(lower: lowerBound, upper: upperBound, halfOpen: false)
     }
@@ -459,7 +480,13 @@ extension CountableClosedRange: RbObjectConvertible where Bound: RbObjectConvert
 
 // MARK: - ClosedRange<RbObjectConvertible>
 
+/// These methods are available only when the range `Bound` type conforms to
+/// `RbObjectConvertible`.
 extension ClosedRange: RbObjectConvertible where Bound: RbObjectConvertible {
+    /// Try to get a `ClosedRange` from a Ruby range object.
+    ///
+    /// Fails if the Ruby object isn't a closed range.  Fails if the Ruby range
+    /// endpoints cannot be converted to the `Bound` type.
     public init?(_ value: RbObject) {
         guard let bounds: (Bound, Bound) = decodeRange(value, halfOpen: false) else {
             return nil
@@ -467,6 +494,7 @@ extension ClosedRange: RbObjectConvertible where Bound: RbObjectConvertible {
         self.init(uncheckedBounds: bounds)
     }
 
+    /// A Ruby object for the range.
     public var rubyObject: RbObject {
         return makeRange(lower: lowerBound, upper: upperBound, halfOpen: false)
     }

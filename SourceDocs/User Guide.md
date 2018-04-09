@@ -69,8 +69,10 @@ RubyBridge provides extensions to most Swift types so you can initialize
 * Floating point - `Float` and `Double`
 * Unsigned integer - `UInt`, `UInt64`, `UInt32`, `UInt16`, `UInt8`
 * Signed integer - `Int`, `Int64`, `Int32`, `Int16`, `Int8`
-* `Array`
-* `Dictionary`
+* `Array` with supported element type
+* `Dictionary` with supported key and value types
+* Range types with supported bound types - `Range`, `CountableRange`,
+  `ClosedRange`, `ClosedCountableRange`
 
 ### Exchange `nil` with Ruby
 
@@ -204,7 +206,6 @@ never come back to Ruby in the process, use `RbGateway.cleanup()`.
 
 ### Can't do yet
 * Sets
-* Ranges
 * Rational Complex
 
 ## Error Handling

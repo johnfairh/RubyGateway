@@ -1,6 +1,19 @@
 {
   "warnings": [
-
+    {
+      "file": "/Users/johnf/project/RubyGateway/Sources/RubyGateway/RbObjectCollection.swift",
+      "line": 8,
+      "symbol": "RbObjectCollection",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/johnf/project/RubyGateway/Sources/RubyGateway/RbObjectCollection.swift",
+      "line": 11,
+      "symbol": "RbObjectCollection.init(object:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
   ],
   "source_directory": "/Users/johnf/project/RubyGateway"
 }

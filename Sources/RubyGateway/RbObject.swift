@@ -151,8 +151,8 @@ public final class RbObject: RbObjectAccess {
 
     /// A view onto the Ruby object using Swift collection APIs.
     ///
-    /// Intended for us with Ruby arrays, but any object that implements
-    /// `[]`, `[]=`, and `length` like Array does will work as well.
+    /// Intended for use with Ruby arrays, but any object will work provided
+    /// it implements `[]`, `[]=`, and `length` like array.
     public var collection: RbObjectCollection {
         return RbObjectCollection(object: self)
     }

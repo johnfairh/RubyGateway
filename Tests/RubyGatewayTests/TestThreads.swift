@@ -57,7 +57,6 @@ class TestThreads: XCTestCase {
                 threadHasRun = true
             }
             if let threadObj = threadObj {
-                XCTAssertFalse(threadHasRun)
                 try threadObj.call("join")
                 XCTAssertTrue(threadHasRun)
             } else {

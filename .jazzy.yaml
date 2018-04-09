@@ -65,3 +65,7 @@ custom_categories:
           - Float
           - Array
           - Dictionary
+          - Range
+          - ClosedRange
+          - CountableRange
+          - CountableClosedRange

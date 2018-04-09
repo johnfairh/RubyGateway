@@ -10,11 +10,13 @@
 
 ✅ Threading
 
+✅ Conditional conformances for ranges.
+
 ## "1.0" feeling 
 
 Collection translation, needs 4.1
 * Set?
-* Range, Slice ?
+* Slice ?
 * Helpers for efficient Ruby array/hash (set?) access
 
 Sandboxing

@@ -22,7 +22,7 @@
         <a class="header-link" href="index.html">
           RubyGateway Docs
         </a>
-         (100% documented)
+         (99% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -177,6 +177,26 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Extensions/Dictionary.html">Dictionary</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Range.html">Range</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/ClosedRange.html">ClosedRange</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/CountableRange.html">CountableRange</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/CountableClosedRange.html">CountableClosedRange</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Other Structs.html">Other Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/RbObjectCollection.html">RbObjectCollection</a>
+              </li>
             </ul>
           </li>
         </ul>
@@ -243,6 +263,23 @@ implicitly/explicitly access <code><a href="Classes/RbObject.html#/s:11RubyGatew
 here though is not to let you write Ruby using Swift: use Ruby to do that!  But
 rather to provide a layer that lets you bridge between Ruby and Swift code,
 which will sometimes require driving the Ruby code in these ways.</p>
+<h3 id='exchange-swift-types' class='heading'>Exchange Swift types</h3>
+
+<p>RubyBridge provides extensions to most Swift types so you can initialize
+<code><a href="Classes/RbObject.html">RbObject</a></code>s with them and vice versa, or use them directly as arguments to
+<code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pSgG4argsSaySS_AHtG6kwArgstKF">RbObjectAccess.call(...)</a></code> and friends.  Supported types are:</p>
+
+<ul>
+<li><code>Bool</code></li>
+<li><code>String</code></li>
+<li>Floating point - <code>Float</code> and <code>Double</code></li>
+<li>Unsigned integer - <code>UInt</code>, <code>UInt64</code>, <code>UInt32</code>, <code>UInt16</code>, <code>UInt8</code></li>
+<li>Signed integer - <code>Int</code>, <code>Int64</code>, <code>Int32</code>, <code>Int16</code>, <code>Int8</code></li>
+<li><code>Array</code> with element types from this list</li>
+<li><code>Dictionary</code> with key and value types from this list</li>
+<li>Range types with bound types from this list - <code>Range</code>, <code>CountableRange</code>,
+<code>ClosedRange</code>, <code>ClosedCountableRange</code>.</li>
+</ul>
 <h3 id='exchange-code-nil-code-with-ruby' class='heading'>Exchange <code>nil</code> with Ruby</h3>
 
 <p>The static <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC03nilD0ACvpZ">RbObject.nilObject</a></code> represents Ruby nil and can be passed to Ruby
@@ -361,7 +398,6 @@ never come back to Ruby in the process, use <code><a href="Classes/RbGateway.htm
 
 <ul>
 <li>Sets</li>
-<li>Ranges</li>
 <li>Rational Complex</li>
 </ul>
 <h2 id='error-handling' class='heading'>Error Handling</h2>
@@ -413,9 +449,11 @@ Swift subscripts can&rsquo;t throw.</p>
 very difficult for readers to ignore the possibility of errors.</p>
 <h2 id='concurrency' class='heading'>Concurrency</h2>
 
-<p><em>more details to understand</em></p>
+<p>RubyBridge inherits Ruby&rsquo;s threading model.  This means you can only use
+RubyBridge APIs on the first/main thread and any other threads created by Ruby.</p>
 
-<p>Do not access RubyGateway APIs from more than one thread ever.</p>
+<p><code><a href="Enums/RbThread.html">RbThread</a></code> provides some static helpers for creating Ruby threads and
+relinquishing the GVL: consult the internet for further guidance.</p>
 <h2 id='caveats-and-gotchas' class='heading'>Caveats and Gotchas</h2>
 <h3 id='crashiness' class='heading'>Crashiness</h3>
 
