@@ -5,19 +5,23 @@
 //  Distributed under the MIT license, see LICENSE
 //
 
-public struct RbObjectCollection: RandomAccessCollection, MutableCollection {
+public struct RbObjectCollection: RandomAccessCollection, MutableCollection, RangeReplaceableCollection {
     private let object: RbObject
 
     public init(object: RbObject) {
         self.object = object
     }
 
-    public var startIndex: RbObject { return 0 }
-    public var endIndex: RbObject {
-        return try! object.call("length")
+    public init() {
+        self.object = []
     }
 
-    public subscript(index: RbObject) -> RbObject {
+    public var startIndex: Int { return 0 }
+    public var endIndex: Int {
+        return Int(try! object.call("length"))!
+    }
+
+    public subscript(index: Int) -> RbObject {
         get {
             return object[index]
         }
@@ -26,34 +30,15 @@ public struct RbObjectCollection: RandomAccessCollection, MutableCollection {
         }
     }
 
-    public func index(after i: RbObject) -> RbObject {
+    public func index(after i: Int) -> Int {
         return i + 1
     }
 
-    public func index(before i: RbObject) -> RbObject {
+    public func index(before i: Int) -> Int {
         return i - 1
     }
 
-    // MARK: - RandomAccessCollection
-
-    public func index(_ i: RbObject, offsetBy n: RbObject) -> RbObject {
-        return i + n
-    }
-
-    public func distance(from start: RbObject, to end: RbObject) -> RbObject {
-        return end - start
-    }
-}
-
-// MARK: - RangeReplaceableCollection
-
-extension RbObjectCollection: RangeReplaceableCollection {
-
-    public init() {
-        self.object = []
-    }
-
-    public mutating func replaceSubrange<C>(_ subrange: Range<RbObject>, with newElements: C) where C : Collection, C.Element: RbObjectConvertible {
+    public mutating func replaceSubrange<C>(_ subrange: Range<Int>, with newElements: C) where C: Collection, C.Element: RbObjectConvertible {
         let newArray = Array(newElements)
         object[subrange] = RbObject(newArray)
     }

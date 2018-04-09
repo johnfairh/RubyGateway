@@ -387,28 +387,73 @@ extension Optional: RbObjectConvertible where Wrapped == RbObjectConvertible {
 
 // MARK: - Range<RbObjectConvertible>
 
+// Bit of a mess of types here.  Half of them will go away in 4.2.
+
+/// Helper to extract range parameters from something that quacks
+/// like a Ruby Range.
+private func decodeRange<T>(_ object: RbObject, halfOpen: Bool) -> (T, T)? where T: RbObjectConvertible & Comparable {
+    guard let lowerObj = try? object.get("begin"),
+          let upperObj = try? object.get("end"),
+          let halfOpenObj = try? object.get("exclude_end?"),
+          halfOpenObj.isTruthy == halfOpen else {
+              return nil
+    }
+    // Check Swift conversion
+    guard let lower = T(lowerObj),
+          let upper = T(upperObj),
+          lower < upper else {
+              return nil
+    }
+    return (lower, upper)
+}
+
+/// Helper to create a Ruby Range from Swift types.
+private func makeRange<T>(lower: T, upper: T, halfOpen: Bool) -> RbObject where T: RbObjectConvertible {
+    return RbObject(ofClass: "Range", args: [lower, upper, halfOpen]) ?? .nilObject
+}
+
+// One day Swift will catch up with C++ and let me write this as a single generic...
+
 extension Range: RbObjectConvertible where Bound: RbObjectConvertible {
     public init?(_ value: RbObject) {
-        // Pull values out of Ruby (probably a Range but duck-type it...)
-        guard let lowerObj = try? value.get("begin"),
-              let upperObj = try? value.get("end"),
-              let halfOpenObj = try? value.get("exclude_end?"),
-              halfOpenObj.isTruthy else {
-                  return nil
-        }
-        // Check Swift conversion
-        guard let lower = Bound(lowerObj),
-              let upper = Bound(upperObj) else {
-                return nil
-        }
-        guard lower < upper else {
+        guard let bounds: (Bound, Bound) = decodeRange(value, halfOpen: true) else {
             return nil
         }
-        self.init(uncheckedBounds: (lower: lower, upper: upper))
+        self.init(uncheckedBounds: bounds)
     }
 
     public var rubyObject: RbObject {
-        return RbObject(ofClass: "Range", args: [lowerBound, upperBound, true]) ?? .nilObject
+        return makeRange(lower: lowerBound, upper: upperBound, halfOpen: true)
+    }
+}
+
+// MARK: - CountableRange<RbObjectConvertible>
+
+extension CountableRange: RbObjectConvertible where Bound: RbObjectConvertible {
+    public init?(_ value: RbObject) {
+        guard let bounds: (Bound, Bound) = decodeRange(value, halfOpen: true) else {
+            return nil
+        }
+        self.init(uncheckedBounds: bounds)
+    }
+
+    public var rubyObject: RbObject {
+        return makeRange(lower: lowerBound, upper: upperBound, halfOpen: true)
+    }
+}
+
+// MARK: - CountableClosedRange<RbObjectConvertible>
+
+extension CountableClosedRange: RbObjectConvertible where Bound: RbObjectConvertible {
+    public init?(_ value: RbObject) {
+        guard let bounds: (Bound, Bound) = decodeRange(value, halfOpen: false) else {
+            return nil
+        }
+        self.init(uncheckedBounds: bounds)
+    }
+
+    public var rubyObject: RbObject {
+        return makeRange(lower: lowerBound, upper: upperBound, halfOpen: false)
     }
 }
 
@@ -416,25 +461,13 @@ extension Range: RbObjectConvertible where Bound: RbObjectConvertible {
 
 extension ClosedRange: RbObjectConvertible where Bound: RbObjectConvertible {
     public init?(_ value: RbObject) {
-        // Pull values out of Ruby (probably a Range but duck-type it...)
-        guard let lowerObj = try? value.get("begin"),
-            let upperObj = try? value.get("end"),
-            let halfOpenObj = try? value.get("exclude_end?"),
-            !halfOpenObj.isTruthy else {
-                return nil
-        }
-        // Check Swift conversion
-        guard let lower = Bound(lowerObj),
-            let upper = Bound(upperObj) else {
-                return nil
-        }
-        guard lower < upper else {
+        guard let bounds: (Bound, Bound) = decodeRange(value, halfOpen: false) else {
             return nil
         }
-        self.init(uncheckedBounds: (lower: lower, upper: upper))
+        self.init(uncheckedBounds: bounds)
     }
 
     public var rubyObject: RbObject {
-        return RbObject(ofClass: "Range", args: [lowerBound, upperBound, false]) ?? .nilObject
+        return makeRange(lower: lowerBound, upper: upperBound, halfOpen: false)
     }
 }
