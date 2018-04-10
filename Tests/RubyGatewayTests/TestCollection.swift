@@ -21,40 +21,34 @@ class TestCollection: XCTestCase {
     // check mutable stuff works OK
     func testMutable() {
         let arr: RbObject = [4, 3, 2, 1]
-        var coll = arr.collection
-        coll[2] = 8
+        arr.collection[2] = 8
         XCTAssertEqual([4, 3, 8, 1], Array<Int>(arr))
-        coll[0..<2].sort()
+        arr.collection[0..<2].sort()
         XCTAssertEqual([3, 4, 8, 1], Array<Int>(arr))
     }
 
     // check range setter passed thru OK, same cardinality
     func testRangeReplace() {
         let arr: RbObject = [1, 2, 3, 4]
-        var coll = arr.collection
-
-        coll.replaceSubrange(0..<2, with: [8, 9])
+        arr.collection.replaceSubrange(0..<2, with: [8, 9])
         XCTAssertEqual([8, 9, 3, 4], Array<Int>(arr))
     }
 
     // check range setter passed thru OK, > cardinality
     func testRangeReplaceMore() {
         let arr: RbObject = [1, 2, 3, 4]
-        var coll = arr.collection
-
-        coll.replaceSubrange(0...1, with: [8, 9, 10, 11])
+        arr.collection.replaceSubrange(0...1, with: [8, 9, 10, 11])
         XCTAssertEqual([8, 9, 10, 11, 3, 4], Array<Int>(arr))
     }
 
     // check range setter passed thru OK, < cardinality
     func testRangeReplaceLess() {
         let arr: RbObject = [1, 2, 3, 4]
-        var coll = arr.collection
 
-        coll.replaceSubrange(0...1, with: [5])
+        arr.collection.replaceSubrange(0...1, with: [5])
         XCTAssertEqual([5, 3, 4], Array<Int>(arr))
 
-        coll.removeSubrange(1...2)
+        arr.collection.removeSubrange(1...2)
         XCTAssertEqual([5], Array<Int>(arr))
     }
 

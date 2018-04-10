@@ -153,8 +153,21 @@ public final class RbObject: RbObjectAccess {
     ///
     /// Intended for use with Ruby arrays, but any object will work provided
     /// it implements `[]`, `[]=`, and `length` like array.
+    ///
+    /// This property has a setter to permit syntax like:
+    /// ```swift
+    /// myObj.collection[3..<12].sort()
+    /// ```
+    /// The only thing that can be assigned is the object's corresponding
+    /// `RbObjectCollection` -- assigning anything else will trap.  Use
+    /// `RbObjectCollection.rubyObject` to obtain a collection's underlying Ruby array.
     public var collection: RbObjectCollection {
-        return RbObjectCollection(self)
+        get {
+            return RbObjectCollection(self)
+        }
+        set {
+            precondition(rubyValue == newValue.rubyObject.rubyValue)
+        }
     }
 }
 
