@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable /* Lock */ import RubyGateway
+import RubyGateway
 import Foundation
 
 class TestThreads: XCTestCase {

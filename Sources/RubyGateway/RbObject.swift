@@ -154,7 +154,7 @@ public final class RbObject: RbObjectAccess {
     /// Intended for use with Ruby arrays, but any object will work provided
     /// it implements `[]`, `[]=`, and `length` like array.
     public var collection: RbObjectCollection {
-        return RbObjectCollection(object: self)
+        return RbObjectCollection(self)
     }
 }
 

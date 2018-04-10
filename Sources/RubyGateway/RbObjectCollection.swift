@@ -5,28 +5,31 @@
 //  Distributed under the MIT license, see LICENSE
 //
 
-public struct RbObjectCollection: RandomAccessCollection, MutableCollection, RangeReplaceableCollection {
-    private let object: RbObject
-
-    public init(object: RbObject) {
-        self.object = object
+public struct RbObjectCollection: RandomAccessCollection,
+                                  MutableCollection,
+                                  RangeReplaceableCollection,
+                                  RbObjectConvertible {
+    public init(_ value: RbObject) {
+        self.rubyObject = value
     }
 
+    public private(set) var rubyObject: RbObject
+
     public init() {
-        self.object = []
+        self.rubyObject = []
     }
 
     public var startIndex: Int { return 0 }
     public var endIndex: Int {
-        return Int(try! object.call("length"))!
+        return Int(try! rubyObject.call("length"))! /* XXX */
     }
 
     public subscript(index: Int) -> RbObject {
         get {
-            return object[index]
+            return rubyObject[index]
         }
         set {
-            self[index] = newValue
+            rubyObject[index] = newValue
         }
     }
 
@@ -40,6 +43,11 @@ public struct RbObjectCollection: RandomAccessCollection, MutableCollection, Ran
 
     public mutating func replaceSubrange<C>(_ subrange: Range<Int>, with newElements: C) where C: Collection, C.Element: RbObjectConvertible {
         let newArray = Array(newElements)
-        object[subrange] = RbObject(newArray)
+
+        // need this next explicitly to avoid an apologetic fatalError() from Swift.
+        // "Swift runtime does not yet support dynamically querying conditional conformance"
+        let rangeObj = subrange.rubyObject
+
+        rubyObject[rangeObj] = RbObject(newArray)
     }
 }
