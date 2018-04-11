@@ -10,12 +10,15 @@
 
 ✅ Threading
 
+✅ Conditional conformances for ranges.
+
+✅ Collection protocol adapter
+
 ## "1.0" feeling 
 
 Collection translation, needs 4.1
 * Set?
-* Range, Slice ?
-* Helpers for efficient Ruby array/hash (set?) access
+* Slice ?
 
 Sandboxing
 * Research, worth doing anything?  Even about `exit!` ?

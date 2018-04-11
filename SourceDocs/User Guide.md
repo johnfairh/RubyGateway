@@ -69,8 +69,10 @@ RubyBridge provides extensions to most Swift types so you can initialize
 * Floating point - `Float` and `Double`
 * Unsigned integer - `UInt`, `UInt64`, `UInt32`, `UInt16`, `UInt8`
 * Signed integer - `Int`, `Int64`, `Int32`, `Int16`, `Int8`
-* `Array`
-* `Dictionary`
+* `Array` with supported element type
+* `Dictionary` with supported key and value types
+* Range types with supported bound types - `Range`, `CountableRange`,
+  `ClosedRange`, `ClosedCountableRange`
 
 ### Exchange `nil` with Ruby
 
@@ -81,6 +83,19 @@ literal Swift `nil` with APIs like `RbObjectAccess.call(_:args:kwArgs:)`.
 When Ruby returns `nil` to Swift it always comes through as an `RbObject`.  You
 can compare this directly to `RbObject.nilObject` or use `RbObject.isNil` to
 test it.
+
+### Deal with Ruby arrays
+
+There are a few approaches to make use of Ruby arrays depending on your goal.
+1. Convert the whole array to Swift using an initializer.  This eagerly converts
+   all the elements to Swift too and gives you an independent Swift array.
+2. Use Ruby Array methods via `RbObjectAccess.call(...)`.  Doing more work in
+   the Ruby domain can reduce the number of elements that need to be converted
+   to Swift types.
+3. Use Swift collection methods using `RbObject.collection`.  This gives access
+   to the Swift collection APIs.  It's more efficient that approach #1 if you
+   can avoid converting all the array elements and looks prettier if you are
+   aiming to mutate the array because the mutations happen in-place.
 
 ### Pass a symbol as an argument
 
@@ -204,7 +219,6 @@ never come back to Ruby in the process, use `RbGateway.cleanup()`.
 
 ### Can't do yet
 * Sets
-* Ranges
 * Rational Complex
 
 ## Error Handling

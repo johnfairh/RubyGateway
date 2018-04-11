@@ -49,6 +49,16 @@ import RubyGatewayHelpers
 /// In the reverse direction, Swift types convert implicitly to `RbObject`
 /// when passed as arguments via the `RbObjectConvertible` protocol.
 ///
+/// ## Collection protocols
+///
+/// The conversion example above converts the entire Ruby array to an independent
+/// Swift array.  An alternative is to use `RbObject.collection` which provides
+/// a dynamic view onto the Ruby array that supports many Swift collection protocols
+/// so you can update a Ruby array like:
+/// ```swift
+/// myArrayObj.collection.sort(4..<8)
+/// ```
+///
 /// ## Standard library conformances
 ///
 /// `RbObject` conforms to `Hashable`, `Equatable`, and `Comparable` protocols by
@@ -148,6 +158,27 @@ public final class RbObject: RbObjectAccess {
 
     /// An `RbObject` that means `nil` to Ruby.
     public static let nilObject = RbObject(rubyValue: Qnil)
+
+    /// A view onto the Ruby object using Swift collection APIs.
+    ///
+    /// Intended for use with Ruby arrays, but any object will work provided
+    /// it implements `[]`, `[]=`, and `length` like Array does
+    ///
+    /// This property has a setter to permit syntax like:
+    /// ```swift
+    /// myObj.collection[3..<12].sort()
+    /// ```
+    /// The only thing that can be assigned is the object's corresponding
+    /// `RbObjectCollection` -- assigning anything else will trap.  Use
+    /// `RbObjectCollection.rubyObject` to obtain a collection's underlying Ruby array.
+    public var collection: RbObjectCollection {
+        get {
+            return RbObjectCollection(self)
+        }
+        set {
+            precondition(rubyValue == newValue.rubyObject.rubyValue)
+        }
+    }
 }
 
 // MARK: - In-module utility

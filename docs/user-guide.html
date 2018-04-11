@@ -75,6 +75,9 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/RbObjectAccess.html">RbObjectAccess</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/RbObjectCollection.html">RbObjectCollection</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -177,6 +180,18 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Extensions/Dictionary.html">Dictionary</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Range.html">Range</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/ClosedRange.html">ClosedRange</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/CountableRange.html">CountableRange</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/CountableClosedRange.html">CountableClosedRange</a>
+              </li>
             </ul>
           </li>
         </ul>
@@ -243,6 +258,23 @@ implicitly/explicitly access <code><a href="Classes/RbObject.html#/s:11RubyGatew
 here though is not to let you write Ruby using Swift: use Ruby to do that!  But
 rather to provide a layer that lets you bridge between Ruby and Swift code,
 which will sometimes require driving the Ruby code in these ways.</p>
+<h3 id='exchange-swift-types' class='heading'>Exchange Swift types</h3>
+
+<p>RubyBridge provides extensions to most Swift types so you can initialize
+<code><a href="Classes/RbObject.html">RbObject</a></code>s with them and vice versa, or use them directly as arguments to
+<code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pSgG4argsSaySS_AHtG6kwArgstKF">RbObjectAccess.call(...)</a></code> and friends.  Supported types are:</p>
+
+<ul>
+<li><code>Bool</code></li>
+<li><code>String</code></li>
+<li>Floating point - <code>Float</code> and <code>Double</code></li>
+<li>Unsigned integer - <code>UInt</code>, <code>UInt64</code>, <code>UInt32</code>, <code>UInt16</code>, <code>UInt8</code></li>
+<li>Signed integer - <code>Int</code>, <code>Int64</code>, <code>Int32</code>, <code>Int16</code>, <code>Int8</code></li>
+<li><code>Array</code> with supported element type</li>
+<li><code>Dictionary</code> with supported key and value types</li>
+<li>Range types with supported bound types - <code>Range</code>, <code>CountableRange</code>,
+<code>ClosedRange</code>, <code>ClosedCountableRange</code></li>
+</ul>
 <h3 id='exchange-code-nil-code-with-ruby' class='heading'>Exchange <code>nil</code> with Ruby</h3>
 
 <p>The static <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC03nilD0ACvpZ">RbObject.nilObject</a></code> represents Ruby nil and can be passed to Ruby
@@ -252,6 +284,21 @@ literal Swift <code>nil</code> with APIs like <code><a href="Classes/RbObjectAcc
 <p>When Ruby returns <code>nil</code> to Swift it always comes through as an <code><a href="Classes/RbObject.html">RbObject</a></code>.  You
 can compare this directly to <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC03nilD0ACvpZ">RbObject.nilObject</a></code> or use <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC5isNilSbvp">RbObject.isNil</a></code> to
 test it.</p>
+<h3 id='deal-with-ruby-arrays' class='heading'>Deal with Ruby arrays</h3>
+
+<p>There are a few approaches to make use of Ruby arrays depending on your goal.</p>
+
+<ol>
+<li>Convert the whole array to Swift using an initializer.  This eagerly converts
+all the elements to Swift too and gives you an independent Swift array.</li>
+<li>Use Ruby Array methods via <code>RbObjectAccess.call</code>.  Doing more work in the
+Ruby domain can reduce the number of elements that need to be converted to
+Swift.</li>
+<li>Use Swift collection methods using <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC10collectionAA0cD10CollectionVvp">RbObject.collection</a></code>.  This gives access
+to the Swift APIs.  It&rsquo;s more efficient that approach #1 if you can avoid
+converting all the array elements and looks prettier if you are aiming to
+mutate the array.</li>
+</ol>
 <h3 id='pass-a-symbol-as-an-argument' class='heading'>Pass a symbol as an argument</h3>
 
 <p>Use <code><a href="Structs/RbSymbol.html">RbSymbol</a></code>.  Ruby:</p>
@@ -361,7 +408,6 @@ never come back to Ruby in the process, use <code><a href="Classes/RbGateway.htm
 
 <ul>
 <li>Sets</li>
-<li>Ranges</li>
 <li>Rational Complex</li>
 </ul>
 <h2 id='error-handling' class='heading'>Error Handling</h2>
@@ -413,9 +459,11 @@ Swift subscripts can&rsquo;t throw.</p>
 very difficult for readers to ignore the possibility of errors.</p>
 <h2 id='concurrency' class='heading'>Concurrency</h2>
 
-<p><em>more details to understand</em></p>
+<p>RubyBridge inherits Ruby&rsquo;s threading model.  This means you can only use
+RubyBridge APIs on the first/main thread and any other threads created by Ruby.</p>
 
-<p>Do not access RubyGateway APIs from more than one thread ever.</p>
+<p><code><a href="Enums/RbThread.html">RbThread</a></code> provides some static helpers for creating Ruby threads and
+relinquishing the GVL: consult the internet for further guidance.</p>
 <h2 id='caveats-and-gotchas' class='heading'>Caveats and Gotchas</h2>
 <h3 id='crashiness' class='heading'>Crashiness</h3>
 

@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable /* Lock */ import RubyGateway
+import RubyGateway
 import Foundation
 
 class TestThreads: XCTestCase {
@@ -57,7 +57,6 @@ class TestThreads: XCTestCase {
                 threadHasRun = true
             }
             if let threadObj = threadObj {
-                XCTAssertFalse(threadHasRun)
                 try threadObj.call("join")
                 XCTAssertTrue(threadHasRun)
             } else {

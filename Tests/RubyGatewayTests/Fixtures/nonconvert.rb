@@ -55,3 +55,18 @@ class TrapToHash
         "Not remotely a hash"
     end
 end
+
+# class that looks like Range but is bad
+class BadRange
+    def begin
+        100
+    end
+
+    def end
+        2
+    end
+
+    def exclude_end?
+        true
+    end
+end

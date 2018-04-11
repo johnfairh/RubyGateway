@@ -18,11 +18,13 @@ XCTMain([
     testCase(TestStrings.allTests),
     testCase(TestArrays.allTests),
     testCase(TestDictionaries.allTests),
+    testCase(TestRanges.allTests),
     testCase(TestConstants.allTests),
     testCase(TestVars.allTests),
     testCase(TestCallable.allTests),
     testCase(TestProcs.allTests),
     testCase(TestErrors.allTests),
     testCase(TestFailable.allTests),
-    testCase(TestThreads.allTests)
+    testCase(TestThreads.allTests),
+    testCase(TestCollection.allTests)
 ])
