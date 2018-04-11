@@ -26,6 +26,7 @@ custom_categories:
           - RbGateway
           - RbObject
           - RbObjectAccess
+          - RbObjectCollection
 
     - name: Other APIs
       abstract: These types are used less often than those in [`Main APIs`](Main%20APIs.html).

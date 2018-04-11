@@ -22,7 +22,7 @@
         <a class="header-link" href="index.html">
           RubyGateway Docs
         </a>
-         (99% documented)
+         (100% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -74,6 +74,9 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/RbObjectAccess.html">RbObjectAccess</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/RbObjectCollection.html">RbObjectCollection</a>
               </li>
             </ul>
           </li>
@@ -191,14 +194,6 @@
               </li>
             </ul>
           </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Other Structs.html">Other Structures</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/RbObjectCollection.html">RbObjectCollection</a>
-              </li>
-            </ul>
-          </li>
         </ul>
       </nav>
       <article class="main-content">
@@ -275,10 +270,10 @@ which will sometimes require driving the Ruby code in these ways.</p>
 <li>Floating point - <code>Float</code> and <code>Double</code></li>
 <li>Unsigned integer - <code>UInt</code>, <code>UInt64</code>, <code>UInt32</code>, <code>UInt16</code>, <code>UInt8</code></li>
 <li>Signed integer - <code>Int</code>, <code>Int64</code>, <code>Int32</code>, <code>Int16</code>, <code>Int8</code></li>
-<li><code>Array</code> with element types from this list</li>
-<li><code>Dictionary</code> with key and value types from this list</li>
-<li>Range types with bound types from this list - <code>Range</code>, <code>CountableRange</code>,
-<code>ClosedRange</code>, <code>ClosedCountableRange</code>.</li>
+<li><code>Array</code> with supported element type</li>
+<li><code>Dictionary</code> with supported key and value types</li>
+<li>Range types with supported bound types - <code>Range</code>, <code>CountableRange</code>,
+<code>ClosedRange</code>, <code>ClosedCountableRange</code></li>
 </ul>
 <h3 id='exchange-code-nil-code-with-ruby' class='heading'>Exchange <code>nil</code> with Ruby</h3>
 
@@ -289,6 +284,21 @@ literal Swift <code>nil</code> with APIs like <code><a href="Classes/RbObjectAcc
 <p>When Ruby returns <code>nil</code> to Swift it always comes through as an <code><a href="Classes/RbObject.html">RbObject</a></code>.  You
 can compare this directly to <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC03nilD0ACvpZ">RbObject.nilObject</a></code> or use <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC5isNilSbvp">RbObject.isNil</a></code> to
 test it.</p>
+<h3 id='deal-with-ruby-arrays' class='heading'>Deal with Ruby arrays</h3>
+
+<p>There are a few approaches to make use of Ruby arrays depending on your goal.</p>
+
+<ol>
+<li>Convert the whole array to Swift using an initializer.  This eagerly converts
+all the elements to Swift too and gives you an independent Swift array.</li>
+<li>Use Ruby Array methods via <code>RbObjectAccess.call</code>.  Doing more work in the
+Ruby domain can reduce the number of elements that need to be converted to
+Swift.</li>
+<li>Use Swift collection methods using <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC10collectionAA0cD10CollectionVvp">RbObject.collection</a></code>.  This gives access
+to the Swift APIs.  It&rsquo;s more efficient that approach #1 if you can avoid
+converting all the array elements and looks prettier if you are aiming to
+mutate the array.</li>
+</ol>
 <h3 id='pass-a-symbol-as-an-argument' class='heading'>Pass a symbol as an argument</h3>
 
 <p>Use <code><a href="Structs/RbSymbol.html">RbSymbol</a></code>.  Ruby:</p>

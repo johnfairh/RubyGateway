@@ -34,6 +34,8 @@ public struct RbObjectCollection: RandomAccessCollection,
     /// The Ruby object for the underlying array.
     public private(set) var rubyObject: RbObject
 
+    // MARK: - Collection protocol conformance
+
     /// Create an empty collection - an empty Ruby array.
     public init() {
         self.rubyObject = []

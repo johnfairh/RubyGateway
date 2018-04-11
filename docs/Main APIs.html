@@ -22,7 +22,7 @@
         <a class="header-link" href="index.html">
           RubyGateway Docs
         </a>
-         (99% documented)
+         (100% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -74,6 +74,9 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/RbObjectAccess.html">RbObjectAccess</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/RbObjectCollection.html">RbObjectCollection</a>
               </li>
             </ul>
           </li>
@@ -188,14 +191,6 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Extensions/CountableClosedRange.html">CountableClosedRange</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Other Structs.html">Other Structures</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/RbObjectCollection.html">RbObjectCollection</a>
               </li>
             </ul>
           </li>
@@ -332,6 +327,14 @@ object to get started finding constants or calling global functions.</p>
 
 <p>In the reverse direction, Swift types convert implicitly to <code>RbObject</code>
 when passed as arguments via the <code><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code> protocol.</p>
+<h2 id='collection-protocols' class='heading'>Collection protocols</h2>
+
+<p>The conversion example above converts the entire Ruby array to an independent
+Swift array.  An alternative is to use <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC10collectionAA0cD10CollectionVvp">RbObject.collection</a></code> which provides
+a dynamic view onto the Ruby array that supports many Swift collection protocols
+so you can update a Ruby array like:</p>
+<pre class="highlight swift"><code><span class="n">myArrayObj</span><span class="o">.</span><span class="n">collection</span><span class="o">.</span><span class="nf">sort</span><span class="p">(</span><span class="mi">4</span><span class="o">..&lt;</span><span class="mi">8</span><span class="p">)</span>
+</code></pre>
 <h2 id='standard-library-conformances' class='heading'>Standard library conformances</h2>
 
 <p><code>RbObject</code> conforms to <code>Hashable</code>, <code>Equatable</code>, and <code>Comparable</code> protocols by
@@ -364,7 +367,7 @@ the program will crash.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L73-L159">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObject.swift#L83-L182">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -445,6 +448,53 @@ a Ruby Proc.</li>
                       </div>
                       <div class="slightly-smaller">
                         <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObjectAccess.swift#L57-L121">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway18RbObjectCollectionV"></a>
+                    <a name="//apple_ref/swift/Struct/RbObjectCollection" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway18RbObjectCollectionV">RbObjectCollection</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A view onto a Ruby array using Swift collection protocols.</p>
+
+<p>This is an adapter type that wraps an <code><a href="Classes/RbObject.html">RbObject</a></code> and adopts
+Swift collection protocols for use with an underlying Ruby
+array (or any Ruby object that supports <code>length</code>, <code>[]</code>, and
+<code>[]=</code>.)</p>
+
+<p>For example:</p>
+<pre class="highlight swift"><code><span class="n">myObj</span><span class="o">.</span><span class="n">collection</span><span class="o">.</span><span class="nf">replaceSubrange</span><span class="p">(</span><span class="n">lower</span><span class="o">..&lt;</span><span class="n">upper</span><span class="p">,</span> <span class="nv">with</span><span class="p">:</span> <span class="n">otherArray</span><span class="p">)</span>
+</code></pre>
+
+<p>This is separate to <code><a href="Classes/RbObject.html">RbObject</a></code> to avoid dumping all the
+collection protocol members into its dynamic member lookup
+namespace.</p>
+
+                        <a href="Structs/RbObjectCollection.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RbObjectCollection</span><span class="p">:</span> <span class="kt">RandomAccessCollection</span><span class="p">,</span>
+                                  <span class="kt">MutableCollection</span><span class="p">,</span>
+                                  <span class="kt">RangeReplaceableCollection</span><span class="p">,</span>
+                                  <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbObjectCollection.swift#L23-L82">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

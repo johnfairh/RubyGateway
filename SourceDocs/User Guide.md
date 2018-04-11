@@ -84,6 +84,19 @@ When Ruby returns `nil` to Swift it always comes through as an `RbObject`.  You
 can compare this directly to `RbObject.nilObject` or use `RbObject.isNil` to
 test it.
 
+### Deal with Ruby arrays
+
+There are a few approaches to make use of Ruby arrays depending on your goal.
+1. Convert the whole array to Swift using an initializer.  This eagerly converts
+   all the elements to Swift too and gives you an independent Swift array.
+2. Use Ruby Array methods via `RbObjectAccess.call(...)`.  Doing more work in
+   the Ruby domain can reduce the number of elements that need to be converted
+   to Swift types.
+3. Use Swift collection methods using `RbObject.collection`.  This gives access
+   to the Swift collection APIs.  It's more efficient that approach #1 if you
+   can avoid converting all the array elements and looks prettier if you are
+   aiming to mutate the array because the mutations happen in-place.
+
 ### Pass a symbol as an argument
 
 Use `RbSymbol`.  Ruby:
