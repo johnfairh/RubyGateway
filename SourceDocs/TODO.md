@@ -1,24 +1,10 @@
-## 0.4 plan
-
-✅ Swift 4.1.
-
-✅ Conditional conformances for array + dictionary.
-
-✅ Updates to make use of Arrays
-
-✅ Nil literal translation in StoR direction
-
-✅ Threading
-
-✅ Conditional conformances for ranges.
-
-✅ Collection protocol adapter
-
-## "1.0" feeling 
+## 0.5 plan
 
 Collection translation, needs 4.1
 * Set?
 * Slice ?
+
+## "1.0" feeling 
 
 Sandboxing
 * Research, worth doing anything?  Even about `exit!` ?

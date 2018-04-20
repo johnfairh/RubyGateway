@@ -2,19 +2,32 @@
 
 ##### Breaking
 
-* Require Swift 4.1
+* None
+
+##### Enhancements
+
+* None
+
+##### Bug Fixes
+
+* None.
+
+## 0.4.0 - 20th April 2018
+
+##### Breaking
+
+* Require Swift 4.1 (conditional conformances).
+* Replace `RbObject`'s `CustomPlaygroundQuickLookable` conformance with
+  `CustomPlaygroundDisplayConvertible`.
 
 ##### Enhancements
 
 * Add conditional Array `RbObjectConvertible` conformance.
 * Add conditional Dictionary `RbObjectConvertible` conformance.
-* Add `RbThread` utilities.
+* Add `RbThread` utilities and rules for multithreading.
 * Add conditional Range family `RbObjectConvertible` conformance.
-* Add `RbObjectCollection` to use collection protocols with Ruby.
-
-##### Bug Fixes
-
-* None.
+* Add `RbObjectCollection` to use Swift collection protocols with Ruby.
+* Allow Swift `nil` literal in argument positions to mean Ruby `nil`.
 
 ## 0.3.0 - 21st March 2018
 

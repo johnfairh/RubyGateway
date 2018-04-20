@@ -72,7 +72,7 @@ print(html)
 let student = RbObject(ofClass: "Academy::Student", kwArgs: [("name", "barney")])!
 
 // Acess an attribute
-print("Name is \(student.get("name"))"
+print("Name is \(student.get("name"))")
 
 // Fix their name by poking an ivar
 try! student.setInstanceVar("@name", newValue: "Barney")

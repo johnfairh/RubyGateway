@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "RubyGateway"
-  s.version      = "0.3.0"
+  s.version      = "0.4.0"
   s.authors      = { "John Fairhurst" => "johnfairh@gmail.com" }
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.homepage     = "https://github.com/johnfairh/RubyGateway"
