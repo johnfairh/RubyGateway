@@ -112,7 +112,7 @@ subjectsPopularityDb.submit(subjects: subjects)
 * Swift 4.1 or later, from swift.org or Xcode 9.3+.
 * macOS (tested on 10.13.3) or Linux (tested on Ubuntu Xenial/16.04 on x86_64) with Clang 6+.
 * Ruby 2.2 or later including development files:
-  * For macOS, this comes with Xcode.
+  * For macOS, these come with Xcode.
   * For Linux you may need to install a -dev package depending on how your Ruby
     is installed.
   * RubyGateway requires 'original' MRI/CRuby Ruby - no JRuby/Rubinius/etc.
