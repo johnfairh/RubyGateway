@@ -356,6 +356,45 @@ probably means the <code>ID</code> space is full, which is fairly unlikely.
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway02RbB0C9softSetupSbyF"></a>
+                    <a name="//apple_ref/swift/Method/softSetup()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C9softSetupSbyF">softSetup()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Attempt to initialize Ruby but swallow any error.</p>
+
+<p>This is for use from places that could be the first use of Ruby but it
+is not practical to throw an exception for API or aesthetic reasons.</p>
+
+<p>The idea is that callers can get by long enough for the user to call
+<code>require()</code> or <code>send()</code> which will properly report the VM setup error.</p>
+
+<p>This is public to let you implement <code><a href="../Protocols/RbObjectConvertible.html#/s:11RubyGateway19RbObjectConvertibleP04rubyD0AA0cD0Cvp">RbObjectConvertible.rubyObject</a></code> for
+custom types.  It is not required for regular RubyGateway use.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">softSetup</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L106-L111">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
             <div class="task-group">
@@ -426,7 +465,7 @@ value if it doesn&rsquo;t exist yet.</p>
                         <p>Value of the IVar or Ruby <code>nil</code> if it has not been assigned yet.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L132-L136">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L135-L139">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -502,7 +541,7 @@ value if it doesn&rsquo;t exist yet.</p>
                         <p>The value that was set.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L150-L158">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L153-L161">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -543,7 +582,7 @@ value if it doesn&rsquo;t exist yet.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L165-L180">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L168-L183">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -574,7 +613,7 @@ value if it doesn&rsquo;t exist yet.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L183-L190">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L186-L193">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -604,7 +643,7 @@ value if it doesn&rsquo;t exist yet.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L193-L217">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L196-L220">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -634,7 +673,7 @@ value if it doesn&rsquo;t exist yet.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L220-L235">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L223-L238">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -664,7 +703,7 @@ value if it doesn&rsquo;t exist yet.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L238-L240">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L241-L243">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -694,7 +733,7 @@ value if it doesn&rsquo;t exist yet.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L243-L245">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L246-L248">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -726,7 +765,7 @@ value if it doesn&rsquo;t exist yet.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L250-L252">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L253-L255">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -795,7 +834,7 @@ value if it doesn&rsquo;t exist yet.</p>
                         <p>The result of executing the code.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L263-L268">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L266-L271">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -857,7 +896,7 @@ method is dispatched dynamically so it will invoke any replacements of
                         <p><code>true</code> if the file was loaded OK, <code>false</code> if it is already loaded.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L279-L283">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L282-L286">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -924,7 +963,7 @@ instead of the current program.  See <code>Kernel#load</code>.</p>
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L291-L298">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbGateway.swift#L294-L301">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

@@ -100,7 +100,10 @@ public final class RbGateway: RbObjectAccess {
     ///
     /// The idea is that callers can get by long enough for the user to call
     /// `require()` or `send()` which will properly report the VM setup error.
-    func softSetup() -> Bool {
+    ///
+    /// This is public to let you implement `RbObjectConvertible.rubyObject` for
+    /// custom types.  It is not required for regular RubyGateway use.
+    public func softSetup() -> Bool {
         if let _ = try? setup() {
             return true
         }

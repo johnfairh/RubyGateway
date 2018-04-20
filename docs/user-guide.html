@@ -291,13 +291,13 @@ test it.</p>
 <ol>
 <li>Convert the whole array to Swift using an initializer.  This eagerly converts
 all the elements to Swift too and gives you an independent Swift array.</li>
-<li>Use Ruby Array methods via <code>RbObjectAccess.call</code>.  Doing more work in the
-Ruby domain can reduce the number of elements that need to be converted to
-Swift.</li>
+<li>Use Ruby Array methods via <code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pSgG4argsSaySS_AHtG6kwArgstKF">RbObjectAccess.call(...)</a></code>.  Doing more work in
+the Ruby domain can reduce the number of elements that need to be converted
+to Swift types.</li>
 <li>Use Swift collection methods using <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC10collectionAA0cD10CollectionVvp">RbObject.collection</a></code>.  This gives access
-to the Swift APIs.  It&rsquo;s more efficient that approach #1 if you can avoid
-converting all the array elements and looks prettier if you are aiming to
-mutate the array.</li>
+to the Swift collection APIs.  It&rsquo;s more efficient that approach #1 if you
+can avoid converting all the array elements and looks prettier if you are
+aiming to mutate the array because the mutations happen in-place.</li>
 </ol>
 <h3 id='pass-a-symbol-as-an-argument' class='heading'>Pass a symbol as an argument</h3>
 
