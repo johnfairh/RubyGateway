@@ -272,7 +272,7 @@ extension RbObject {
 
 extension RbObject: CustomStringConvertible,
                     CustomDebugStringConvertible,
-                    CustomPlaygroundQuickLookable {
+                    CustomPlaygroundDisplayConvertible {
     /// A string representation of the Ruby object.
     ///
     /// This is the same as `String(rbObject)` which is approximately `Kernel#String`.
@@ -297,8 +297,8 @@ extension RbObject: CustomStringConvertible,
     }
 
     /// The text from `description`.
-    public var customPlaygroundQuickLook: PlaygroundQuickLook {
-        return .text(description)
+    public var playgroundDescription: Any {
+        return description
     }
 }
 

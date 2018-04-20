@@ -58,11 +58,12 @@ class TestRbObject: XCTestCase {
         let rubyObj = RbObject(string)
         XCTAssertEqual(string, rubyObj.description)
 
-        let playgroundQL = rubyObj.customPlaygroundQuickLook
-        switch playgroundQL {
-        case let .text(str): XCTAssertEqual(string, str)
-        default: XCTFail("Unexpected playgroundquicklookable: \(playgroundQL)")
+        let playgroundDesc = rubyObj.playgroundDescription
+        guard let playgroundDescStr = playgroundDesc as? String else {
+            XCTFail("Not a string?")
+            return
         }
+        XCTAssertEqual(string, playgroundDescStr)
     }
 
     // inspect
