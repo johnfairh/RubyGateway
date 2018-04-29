@@ -19,8 +19,8 @@ import RubyGatewayHelpers
 //      rbproc_pvoid_block_callback() whenever Ruby deigns to invoke
 //      the block.
 //    * Retrieve context, run Swift closure, handle exceptions etc.
-//    * Pass control back to C code rbb_block_pvoid_callback() /
-//      rbb_block_callback_tail().
+//    * Pass control back to C code rbg_block_pvoid_callback() /
+//      rbg_block_callback_tail().
 //
 // 2) Call Ruby method passing a Ruby Proc object as a block.
 //    * RbBlock.doBlockCall(...block:) uses Proc object as the
@@ -29,8 +29,8 @@ import RubyGatewayHelpers
 //      rbproc_value_block_callback() whenever Ruby deigns to invoke
 //      the block.
 //    * Retrieve context, invoke Proc, handle exceptions etc.
-//    * Pass control back to C code rbb_block_value_callback() /
-//      rbb_block_callback_tail().
+//    * Pass control back to C code rbg_block_value_callback() /
+//      rbg_block_callback_tail().
 //    * This is messy because the API function that looks like it
 //      should be used instead of this forwarding business,
 //      `rb_funcall_with_block`, is `CALL_PUBLIC` instead of
@@ -201,7 +201,7 @@ internal enum RbBlock {
                                              Int32(argValues.count), argValues,
                                              rawContext, nil)
             }
-            })
+        })
     }
 
     /// Call a method on an object passing a Ruby object as its block
