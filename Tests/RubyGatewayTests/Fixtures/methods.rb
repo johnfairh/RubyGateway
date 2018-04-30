@@ -81,6 +81,14 @@ class MethodsTest
         { 1 => "a", 1.0 => "b" }
     end
 
+    def self.get_str_set
+        Set.new(["one", "two", "three"])
+    end
+
+    def self.get_ambiguous_num_set
+        Set.new([1, 1.0])
+    end
+
     def to_a
         [1, "two", 3.0]
     end

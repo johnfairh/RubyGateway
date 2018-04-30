@@ -331,20 +331,28 @@ extension Dictionary: RbObjectConvertible where Key: RbObjectConvertible, Value:
     }
 
     /// Create a Ruby hash object for this `Dictionary`.
+    ///
+    /// If multiple Swift `Key`s convert to the same Ruby Key objects
+    /// then the conversion fails and the routine returns `RbObject.nilObject`.
+    /// This is quite a tough condition to hit without adding additional
+    /// `RbObjectConvertible` conformances.
     public var rubyObject: RbObject {
         guard Ruby.softSetup() else {
             return .nilObject
         }
         let hashObj = RbObject(rubyValue: rb_hash_new())
-        hashObj.withRubyValue { hashValue in
-            forEach { arg in
-                arg.key.rubyObject.withRubyValue { keyRubyValue in
-                    arg.value.rubyObject.withRubyValue { valueRubyValue in
-                        rb_hash_aset(hashValue, keyRubyValue, valueRubyValue)
-                    }
+        do {
+            try forEach { arg in
+                let newRbKey = arg.key.rubyObject
+                guard !(try hashObj.call("key?", args: [newRbKey]).isTruthy) else {
+                    throw RbException(message: "Cannot convert Swift dictionary, duplicate key \(newRbKey)")
                 }
+                try hashObj.call("store", args: [newRbKey, arg.value])
             }
+        } catch {
+            return .nilObject
         }
+
         return hashObj
     }
 }
@@ -497,5 +505,68 @@ extension ClosedRange: RbObjectConvertible where Bound: RbObjectConvertible {
     /// A Ruby object for the range.
     public var rubyObject: RbObject {
         return makeRange(lower: lowerBound, upper: upperBound, halfOpen: false)
+    }
+}
+
+// MARK: - Set
+
+/// These methods are available only when the set `Element` type conforms
+/// to `RbObjectConvertible`.
+extension Set: RbObjectConvertible where Element: RbObjectConvertible {
+    /// Try to get a `Set` representation of an `RbObject`.
+    ///
+    /// Calls `to_set` on the object and then converts each element.
+    ///
+    /// Fails if *any* of the elements do not support conversion to the set
+    /// `Element` type.
+    ///
+    /// Fails if any of the Ruby set elements convert to the same Swift
+    /// element, ie. if the Swift set would have a smaller cardinality
+    /// than the Ruby set.
+    ///
+    /// See `RbError.history` to find out why a conversion failed.
+    public init?(_ value: RbObject) {
+        self.init()
+        do {
+            let setObj = try value.call("to_set")
+            var newSet = Set<Element>() // closure cannot capture mutable self
+            try setObj.call("each") { args in
+                guard let ele = Element(args[0]) else {
+                    throw RbException(message: "Cannot convert Ruby set: unconvertible ele \(args[0])")
+                }
+                guard !newSet.contains(ele) else {
+                    throw RbException(message: "Cannot convert Ruby set: duplicate ele \(ele)")
+                }
+                newSet.insert(ele)
+                return .nilObject
+            }
+            self = newSet
+        } catch {
+            return nil
+        }
+    }
+
+    /// Create a Ruby set object for this `Set`.
+    ///
+    /// If multiple Swift `Element`s convert to the same Ruby Key objects
+    /// then the conversion fails and the routine returns `RbObject.nilObject`.
+    /// This is quite a tough condition to hit without adding additional
+    /// `RbObjectConvertible` conformances.
+    public var rubyObject: RbObject {
+        guard Ruby.softSetup(),
+            let set = RbObject(ofClass: "Set") else {
+            return .nilObject
+        }
+        do {
+            try forEach { ele in
+                let dupTest = try set.call("add?", args: [ele.rubyObject])
+                if dupTest == .nilObject {
+                    throw RbException(message: "Cannot convert Swift set: duplicate ele \(ele)")
+                }
+            }
+        } catch {
+            return .nilObject
+        }
+        return set
     }
 }

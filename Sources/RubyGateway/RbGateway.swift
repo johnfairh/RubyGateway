@@ -61,6 +61,7 @@ public final class RbGateway: RbObjectAccess {
     /// Called by anything that might by the first op.
     func setup() throws {
         if try RbGateway.vm.setup() {
+            try! require(filename: "set")
             // Work around Swift not calling static deinit...
             atexit { RbGateway.vm.cleanup() }
         }

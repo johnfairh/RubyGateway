@@ -71,6 +71,7 @@ RubyBridge provides extensions to most Swift types so you can initialize
 * Signed integer - `Int`, `Int64`, `Int32`, `Int16`, `Int8`
 * `Array` with supported element type
 * `Dictionary` with supported key and value types
+* `Set` with supported element type
 * Range types with supported bound types - `Range`, `CountableRange`,
   `ClosedRange`, `ClosedCountableRange`
 
@@ -218,7 +219,6 @@ If you want to stop using Ruby and get on with something else, and
 never come back to Ruby in the process, use `RbGateway.cleanup()`.
 
 ### Can't do yet
-* Sets
 * Rational Complex
 
 ## Error Handling

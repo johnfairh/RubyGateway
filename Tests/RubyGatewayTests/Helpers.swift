@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RubyGateway
 
 /// Misc test helpers
 struct Helpers {
@@ -21,5 +22,23 @@ struct Helpers {
     /// Get full path to fixture with name
     static func fixturePath(_ name: String) -> String {
         return "\(fixturesDir)/\(name)"
+    }
+
+    /// A weird Swift type that has distinct Swift instances
+    /// but identical Ruby instances.  Simulate some kind of client bug...
+    struct ImpreciseRuby: RbObjectConvertible, Hashable {
+        let val: Int
+
+        init(_ val: Int) {
+            self.val = val
+        }
+
+        init?(_ value: RbObject) {
+            return nil
+        }
+
+        var rubyObject: RbObject {
+            return RbObject(42)
+        }
     }
 }
