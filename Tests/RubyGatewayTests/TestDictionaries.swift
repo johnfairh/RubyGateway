@@ -108,11 +108,20 @@ class TestDictionaries: XCTestCase {
         }
     }
 
+    func testDupRubyConversion() {
+        let dict = [Helpers.ImpreciseRuby(1) : "One",
+                    Helpers.ImpreciseRuby(2) : "Two"];
+
+        let rbDict = RbObject(dict)
+        XCTAssertTrue(rbDict.isNil)
+    }
+
     static var allTests = [
         ("testRoundTrip", testRoundTrip),
         ("testSwiftTypeConversion", testSwiftTypeConversion),
         ("testDuplicateKey", testDuplicateKey),
         ("testLiteral", testLiteral),
-        ("testNoConversion", testNoConversion)
+        ("testNoConversion", testNoConversion),
+        ("testDupRubyConversion", testDupRubyConversion)
     ]
 }

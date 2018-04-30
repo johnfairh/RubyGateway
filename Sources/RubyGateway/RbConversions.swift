@@ -332,23 +332,27 @@ extension Dictionary: RbObjectConvertible where Key: RbObjectConvertible, Value:
 
     /// Create a Ruby hash object for this `Dictionary`.
     ///
-    /// If multiple Swift Key objects convert to the same Ruby Key objects
-    /// then this is silently ignored.  Not totally happy with this but not
-    /// sure what to do: return `.nilObject` for any collisions?
+    /// If multiple Swift `Key`s convert to the same Ruby Key objects
+    /// then the conversion fails and the routine returns `RbObject.nilObject`.
+    /// This is quite a tough condition to hit without adding additional
+    /// `RbObjectConvertible` conformances.
     public var rubyObject: RbObject {
         guard Ruby.softSetup() else {
             return .nilObject
         }
         let hashObj = RbObject(rubyValue: rb_hash_new())
-        hashObj.withRubyValue { hashValue in
-            forEach { arg in
-                arg.key.rubyObject.withRubyValue { keyRubyValue in
-                    arg.value.rubyObject.withRubyValue { valueRubyValue in
-                        rb_hash_aset(hashValue, keyRubyValue, valueRubyValue)
-                    }
+        do {
+            try forEach { arg in
+                let newRbKey = arg.key.rubyObject
+                guard !(try hashObj.call("key?", args: [newRbKey]).isTruthy) else {
+                    throw RbException(message: "Cannot convert Swift dictionary, duplicate key \(newRbKey)")
                 }
+                try hashObj.call("store", args: [newRbKey, arg.value])
             }
+        } catch {
+            return .nilObject
         }
+
         return hashObj
     }
 }
@@ -560,9 +564,9 @@ extension Set: RbObjectConvertible where Element: RbObjectConvertible {
                     throw RbException(message: "Cannot convert Swift set: duplicate ele \(ele)")
                 }
             }
-            return set
         } catch {
             return .nilObject
         }
+        return set
     }
 }
