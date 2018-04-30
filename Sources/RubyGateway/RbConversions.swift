@@ -544,8 +544,10 @@ extension Set: RbObjectConvertible where Element: RbObjectConvertible {
 
     /// Create a Ruby set object for this `Set`.
     ///
-    /// If multiple Swift Element objects convert to the same Ruby Key objects
+    /// If multiple Swift `Element`s convert to the same Ruby Key objects
     /// then the conversion fails and the routine returns `RbObject.nilObject`.
+    /// This is quite a tough condition to hit without adding additional
+    /// `RbObjectConvertible` conformances.
     public var rubyObject: RbObject {
         guard Ruby.softSetup(),
             let set = RbObject(ofClass: "Set") else {
