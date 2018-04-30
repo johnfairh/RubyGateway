@@ -6,7 +6,7 @@
 
 ##### Enhancements
 
-* None
+* Add conditional Set `RbObjectConvertible` conformance.
 
 ##### Bug Fixes
 

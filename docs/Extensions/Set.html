@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Int Extension Reference</title>
+    <title>Set Extension Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Extension/Int" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Extension/Set" class="dashAnchor"></a>
 
-    <a title="Int Extension Reference"></a>
+    <a title="Set Extension Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -44,7 +44,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">RubyGateway Reference</a>
       <img class="carat" src="../img/carat.png" />
-      Int Extension Reference
+      Set Extension Reference
     </p>
 
     <div class="content-wrapper">
@@ -204,14 +204,16 @@
 
         <section class="section">
           <div class="section-content">
-            <h1>Int</h1>
+            <h1>Set</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Int</span> <span class="p">:</span> <span class="kt">FixedWidthInteger</span><span class="p">,</span> <span class="kt">SignedInteger</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Set</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">Element</span> <span class="p">:</span> <span class="kt">Hashable</span></code></pre>
 
                 </div>
               </div>
-            
+            <p>These methods are available only when the set <code>Element</code> type conforms
+to <code><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code>.</p>
+
           </div>
         </section>
 
@@ -222,9 +224,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:Si11RubyGatewayESiSgAA8RbObjectCcfc"></a>
+                    <a name="/s:s3SetV11RubyGatewayAC19RbObjectConvertibleRzrlEAByxGSgAC0dE0Ccfc"></a>
                     <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Si11RubyGatewayESiSgAA8RbObjectCcfc">init(_:)</a>
+                    <a class="token" href="#/s:s3SetV11RubyGatewayAC19RbObjectConvertibleRzrlEAByxGSgAC0dE0Ccfc">init(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -232,18 +234,18 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Try to get an signed integer representation of an <code><a href="../Classes/RbObject.html">RbObject</a></code>.</p>
+                        <p>Try to get a <code>Set</code> representation of an <code><a href="../Classes/RbObject.html">RbObject</a></code>.</p>
 
-<p>It fails if the Ruby value:</p>
+<p>Calls <code>to_set</code> on the object and then converts each element.</p>
 
-<ol>
-<li>Is numeric and does not fit into the Swift type; or</li>
-<li>Cannot be made into a suitable numeric via <code>to_int</code> or <code>to_i</code>.</li>
-</ol>
+<p>Fails if <em>any</em> of the elements do not support conversion to the set
+<code>Element</code> type.</p>
+
+<p>Fails if any of the Ruby set elements convert to the same Swift
+element, ie. if the Swift set would have a smaller cardinality
+than the Ruby set.</p>
 
 <p>See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to find out why a conversion failed.</p>
-
-<p>If the Ruby value is floating-point then the integer part is used.</p>
 
                       </div>
                       <div class="declaration">
@@ -255,7 +257,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbConversions.swift#L167-L172">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbConversions.swift#L528-L547">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -263,9 +265,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:Si11RubyGatewayE10rubyObjectAA02RbD0Cvp"></a>
+                    <a name="/s:s3SetV11RubyGatewayAC19RbObjectConvertibleRzrlE04rubyE0AC0dE0Cvp"></a>
                     <a name="//apple_ref/swift/Property/rubyObject" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Si11RubyGatewayE10rubyObjectAA02RbD0Cvp">rubyObject</a>
+                    <a class="token" href="#/s:s3SetV11RubyGatewayAC19RbObjectConvertibleRzrlE04rubyE0AC0dE0Cvp">rubyObject</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -273,7 +275,12 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A Ruby object for the number.</p>
+                        <p>Create a Ruby set object for this <code>Set</code>.</p>
+
+<p>If multiple Swift <code>Element</code>s convert to the same Ruby Key objects
+then the conversion fails and the routine returns <code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectC03nilD0ACvpZ">RbObject.nilObject</a></code>.
+This is quite a tough condition to hit without adding additional
+<code><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code> conformances.</p>
 
                       </div>
                       <div class="declaration">
@@ -285,7 +292,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbConversions.swift#L175-L180">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master//Sources/RubyGateway/RbConversions.swift#L555-L571">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
