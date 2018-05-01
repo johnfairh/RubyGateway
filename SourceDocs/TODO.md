@@ -11,6 +11,8 @@ Sandboxing
 Build
 * Linux Travis
 
+Stern GC review, especially non-Darwin
+
 Refactor testcases
 
 ## "Post 1.0" feeling
