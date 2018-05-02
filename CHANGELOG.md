@@ -2,7 +2,7 @@
 
 ##### Breaking
 
-* None
+* Change `kwArgs` to use `DictionaryLiteral`.
 
 ##### Enhancements
 

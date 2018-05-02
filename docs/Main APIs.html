@@ -252,18 +252,18 @@ or call functions as you would at the top level of a Ruby script, for example:</
 <span class="nf">print</span><span class="p">(</span><span class="s">"Ruby version is </span><span class="se">\(</span><span class="kt">Ruby</span><span class="o">.</span><span class="n">version</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
 
 <span class="k">do</span> <span class="p">{</span>
-   <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">require</span><span class="p">(</span><span class="s">"rouge"</span><span class="p">)</span>
+   <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">require</span><span class="p">(</span><span class="nv">filename</span><span class="p">:</span> <span class="s">"rouge"</span><span class="p">)</span>
    <span class="k">let</span> <span class="nv">html</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"Rouge"</span><span class="p">)</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"highlight"</span><span class="p">,</span> <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="s">"let a = 1"</span><span class="p">,</span> <span class="s">"swift"</span><span class="p">,</span> <span class="s">"html"</span><span class="p">])</span>
 <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
 <span class="p">}</span>
 </code></pre>
 
 <p>Or with Swift 5 dynamic member lookup &amp; callable:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">html</span> <span class="o">=</span> <span class="kt">Ruby</span><span class="o">.</span><span class="kt">Rouge</span><span class="o">!.</span><span class="nf">highlight</span><span class="p">(</span><span class="s">"let a = 1"</span><span class="p">,</span> <span class="s">"swift"</span><span class="p">,</span> <span class="s">"html"</span><span class="p">)</span><span class="o">!</span>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">html</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="kt">Rouge</span><span class="o">!.</span><span class="nf">highlight</span><span class="p">(</span><span class="s">"let a = 1"</span><span class="p">,</span> <span class="s">"swift"</span><span class="p">,</span> <span class="s">"html"</span><span class="p">)</span>
 </code></pre>
 
 <p>If you just want to create a Ruby object of some class, see
-<code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectCACSgSS7ofClass_SayAA0cD11Convertible_pSgG4argsSaySS_AGtG6kwArgstcfc">RbObject.init(ofClass:args:kwArgs:)</a></code>.</p>
+<code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectCACSgSS7ofClass_SayAA0cD11Convertible_pSgG4argss17DictionaryLiteralVySSAGG6kwArgstcfc">RbObject.init(ofClass:args:kwArgs:)</a></code>.</p>
 
                         <a href="Classes/RbGateway.html" class="slightly-smaller">See more</a>
                       </div>
@@ -299,7 +299,7 @@ or call functions as you would at the top level of a Ruby script, for example:</
 <p>All Ruby objects whatever their type or class are represented using this
 Swift type.</p>
 
-<p>Use <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectCACSgSS7ofClass_SayAA0cD11Convertible_pSgG4argsSaySS_AGtG6kwArgstcfc">RbObject.init(ofClass:args:kwArgs:)</a></code> to create a new Ruby object of
+<p>Use <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectCACSgSS7ofClass_SayAA0cD11Convertible_pSgG4argss17DictionaryLiteralVySSAGG6kwArgstcfc">RbObject.init(ofClass:args:kwArgs:)</a></code> to create a new Ruby object of
 some class:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">myObj</span> <span class="o">=</span> <span class="kt">RbObject</span><span class="p">(</span><span class="nv">ofClass</span><span class="p">:</span> <span class="s">"MyModule::MyClass"</span><span class="p">,</span> <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="s">"arg1"</span><span class="p">,</span> <span class="mf">25.3</span><span class="p">])</span>
 </code></pre>
@@ -309,12 +309,8 @@ constants from an <code>RbObject</code>:</p>
 <pre class="highlight swift"><code><span class="k">try</span> <span class="n">myObj</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span><span class="s">"name"</span><span class="p">,</span> <span class="s">"fred"</span><span class="p">)</span>
 
 <span class="k">let</span> <span class="nv">results</span> <span class="o">=</span> <span class="k">try</span> <span class="n">myObj</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"process"</span><span class="p">,</span> <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="s">"arg1"</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
-</code></pre>
 
-<p>Or in Swift 5 dynamic-member style:</p>
-<pre class="highlight swift"><code><span class="n">myObj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">"fred"</span>
-
-<span class="k">let</span> <span class="nv">results</span> <span class="o">=</span> <span class="n">myObj</span><span class="o">.</span><span class="nf">process</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">answer</span> <span class="o">=</span> <span class="k">try</span> <span class="n">myObj</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"pose"</span><span class="p">,</span> <span class="nv">kwArgs</span><span class="p">:</span> <span class="p">[</span><span class="s">"questionNumber"</span><span class="p">:</span> <span class="mi">40</span><span class="p">])</span>
 </code></pre>
 
 <p>See <code><a href="Classes/RbGateway.html">RbGateway</a></code> and its global instance <code>Ruby</code> for access to the Ruby &lsquo;top self&rsquo;
@@ -371,7 +367,7 @@ the program will crash.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L83-L182">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L78-L177">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

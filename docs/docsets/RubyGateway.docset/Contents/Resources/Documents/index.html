@@ -254,21 +254,21 @@ low-level Ruby C API wrapper.</p>
 <p>In Swift 4.1 with similar [lack of] error checking:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">RubyGateway</span>
 
-<span class="k">try!</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">require</span><span class="p">(</span><span class="s">"rouge"</span><span class="p">)</span>
+<span class="k">try!</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">require</span><span class="p">(</span><span class="nv">filename</span><span class="p">:</span> <span class="s">"rouge"</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">html</span> <span class="o">=</span> <span class="k">try!</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"Rouge"</span><span class="p">)</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"highlight"</span><span class="p">,</span> <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="s">"let a = 3"</span><span class="p">,</span> <span class="s">"swift"</span><span class="p">,</span> <span class="s">"html"</span><span class="p">])</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
 </code></pre>
 
-<p>In future Swift:</p>
+<p>In future Swift, maybe:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">RubyGateway</span>
 
-<span class="k">try!</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">require</span><span class="p">(</span><span class="s">"rouge"</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">html</span> <span class="o">=</span> <span class="kt">Ruby</span><span class="o">.</span><span class="kt">Rouge</span><span class="o">!.</span><span class="nf">highlight</span><span class="p">(</span><span class="s">"let a = 3"</span><span class="p">,</span> <span class="s">"swift"</span><span class="p">,</span> <span class="s">"html"</span><span class="p">)</span><span class="o">!</span>
+<span class="k">try!</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">require</span><span class="p">(</span><span class="nv">filename</span><span class="p">:</span> <span class="s">"rouge"</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">html</span> <span class="o">=</span> <span class="k">try!</span> <span class="kt">Ruby</span><span class="o">.</span><span class="kt">Rouge</span><span class="o">!.</span><span class="nf">highlight</span><span class="p">(</span><span class="s">"let a = 3"</span><span class="p">,</span> <span class="s">"swift"</span><span class="p">,</span> <span class="s">"html"</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
 </code></pre>
 <h3 id='objects' class='heading'>Objects</h3>
 <pre class="highlight swift"><code><span class="c1">// Create an object.  Use keyword arguments with initializer</span>
-<span class="k">let</span> <span class="nv">student</span> <span class="o">=</span> <span class="kt">RbObject</span><span class="p">(</span><span class="nv">ofClass</span><span class="p">:</span> <span class="s">"Academy::Student"</span><span class="p">,</span> <span class="nv">kwArgs</span><span class="p">:</span> <span class="p">[(</span><span class="s">"name"</span><span class="p">,</span> <span class="s">"barney"</span><span class="p">)])</span><span class="o">!</span>
+<span class="k">let</span> <span class="nv">student</span> <span class="o">=</span> <span class="kt">RbObject</span><span class="p">(</span><span class="nv">ofClass</span><span class="p">:</span> <span class="s">"Academy::Student"</span><span class="p">,</span> <span class="nv">kwArgs</span><span class="p">:</span> <span class="p">[</span><span class="s">"name"</span><span class="p">:</span> <span class="s">"barney"</span><span class="p">])</span><span class="o">!</span>
 
 <span class="c1">// Acess an attribute</span>
 <span class="nf">print</span><span class="p">(</span><span class="s">"Name is </span><span class="se">\(</span><span class="n">student</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"name"</span><span class="p">)</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
@@ -332,12 +332,11 @@ to use a different Ruby then you also need to configure CRuby.</p>
 </code></pre>
 
 <p>Swift package manager for macOS or Linux:</p>
-<pre class="highlight plaintext"><code>.package(url: "https://github.com/johnfairh/RubyGateway", from: "0.1.0")
+<pre class="highlight plaintext"><code>.package(url: "https://github.com/johnfairh/RubyGateway", from: "0.4.0")
 </code></pre>
 
 <p>CocoaPods for macOS:</p>
-<pre class="highlight plaintext"><code>use_frameworks!
-pod 'RubyGateway'
+<pre class="highlight plaintext"><code>pod 'RubyGateway'
 </code></pre>
 <h3 id='configuring-cruby' class='heading'>Configuring CRuby</h3>
 

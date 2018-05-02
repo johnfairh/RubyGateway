@@ -24,13 +24,8 @@ import RubyGatewayHelpers
 /// try myObj.set("name", "fred")
 ///
 /// let results = try myObj.call("process", args: ["arg1", 100])
-/// ```
 ///
-/// Or in Swift 5 dynamic-member style:
-/// ```swift
-/// myObj.name = "fred"
-///
-/// let results = myObj.process(arg1, 100)
+/// let answer = try myObj.call("pose", kwArgs: ["questionNumber": 40])
 /// ```
 ///
 /// See `RbGateway` and its global instance `Ruby` for access to the Ruby 'top self'
