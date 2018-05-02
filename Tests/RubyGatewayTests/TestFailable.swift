@@ -17,7 +17,7 @@ class TestFailable: XCTestCase {
     private func getInstance() -> RbObject {
         return RbObject(ofClass: "RubyGateway::EndToEnd",
                         args: [1.2],
-                        kwArgs: [("name", "barney")])!
+                        kwArgs: ["name": "barney"])!
     }
 
     // Constants

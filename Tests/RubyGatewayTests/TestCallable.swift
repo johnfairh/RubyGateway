@@ -131,7 +131,7 @@ class TestCallable: XCTestCase {
         let obj = getNewMethodTest()
 
         do {
-            let v = try obj.call("kwArgsMethod", args: [214], kwArgs: [("aSecond", 32)])
+            let v = try obj.call("kwArgsMethod", args: [214], kwArgs: ["aSecond": 32])
             XCTAssertEqual(214 + 32 * 1, Int(v))
         } catch {
             XCTFail("Unexpected exception \(error)")
@@ -143,7 +143,7 @@ class TestCallable: XCTestCase {
         let obj = getNewMethodTest()
 
         do {
-            let v = try obj.call("kwArgsMethod", args: [214], kwArgs: [("aSecond", 32), ("aSecond", 38)])
+            let v = try obj.call("kwArgsMethod", args: [214], kwArgs: ["aSecond": 32, "aSecond": 38])
             XCTFail("Managed to pass duplicate keyword args to Ruby, got \(v)")
         } catch RbError.duplicateKwArg(let key) {
             XCTAssertEqual("aSecond", key)

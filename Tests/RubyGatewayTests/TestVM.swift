@@ -26,7 +26,7 @@ class TestVM: XCTestCase {
             let ver = 1.2
             let name = "fred"
 
-            guard let obj = RbObject(ofClass: "RubyGateway::EndToEnd", args: [ver], kwArgs: [("name", name)]) else {
+            guard let obj = RbObject(ofClass: "RubyGateway::EndToEnd", args: [ver], kwArgs: ["name": name]) else {
                 XCTFail("Couldn't create object")
                 return
             }

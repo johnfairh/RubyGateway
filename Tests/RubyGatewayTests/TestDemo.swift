@@ -49,7 +49,7 @@ class TestDemo: XCTestCase {
             try Ruby.require(filename: Helpers.fixturePath("demo.rb"))
 
             // Create a named student
-            let student = RbObject(ofClass: "Academy::Student", kwArgs: [("name", "barney")])!
+            let student = RbObject(ofClass: "Academy::Student", kwArgs: ["name": "barney"])!
             try XCTAssertEqual("barney", String(student.get("name")))
 
             // Fix their name!

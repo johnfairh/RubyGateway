@@ -219,7 +219,7 @@ extension RbObjectAccess {
     @discardableResult
     public func call(_ methodName: String,
                      args: [RbObjectConvertible?] = [],
-                     kwArgs: [(String, RbObjectConvertible?)] = []) throws -> RbObject {
+                     kwArgs: DictionaryLiteral<String, RbObjectConvertible?> = [:]) throws -> RbObject {
         try Ruby.setup()
         let methodId = try Ruby.getID(for: methodName)
         return try doCall(id: methodId, args: args, kwArgs: kwArgs)
@@ -241,7 +241,7 @@ extension RbObjectAccess {
     @discardableResult
     public func call(_ methodName: String,
                      args: [RbObjectConvertible?] = [],
-                     kwArgs: [(String, RbObjectConvertible?)] = [],
+                     kwArgs: DictionaryLiteral<String, RbObjectConvertible?> = [:],
                      blockRetention: RbBlockRetention = .none,
                      blockCall: @escaping RbBlockCallback) throws -> RbObject {
         try Ruby.setup()
@@ -267,7 +267,7 @@ extension RbObjectAccess {
     @discardableResult
     public func call(_ methodName: String,
                      args: [RbObjectConvertible?] = [],
-                     kwArgs: [(String, RbObjectConvertible?)] = [],
+                     kwArgs: DictionaryLiteral<String, RbObjectConvertible?> = [:],
                      block: RbObjectConvertible) throws -> RbObject {
         try Ruby.setup()
         let methodId = try Ruby.getID(for: methodName)
@@ -288,7 +288,7 @@ extension RbObjectAccess {
     @discardableResult
     public func call(symbol: RbObjectConvertible,
                      args: [RbObjectConvertible?] = [],
-                     kwArgs: [(String, RbObjectConvertible?)] = []) throws -> RbObject {
+                     kwArgs: DictionaryLiteral<String, RbObjectConvertible?> = [:]) throws -> RbObject {
         try Ruby.setup()
         return try symbol.rubyObject.withSymbolId { methodId in
             try doCall(id: methodId, args: args, kwArgs: kwArgs)
@@ -312,7 +312,7 @@ extension RbObjectAccess {
     @discardableResult
     public func call(symbol: RbObjectConvertible,
                      args: [RbObjectConvertible?] = [],
-                     kwArgs: [(String, RbObjectConvertible?)] = [],
+                     kwArgs: DictionaryLiteral<String, RbObjectConvertible?> = [:],
                      blockRetention: RbBlockRetention = .none,
                      blockCall: @escaping RbBlockCallback) throws -> RbObject {
         try Ruby.setup()
@@ -337,7 +337,7 @@ extension RbObjectAccess {
     @discardableResult
     public func call(symbol: RbObjectConvertible,
                      args: [RbObjectConvertible?] = [],
-                     kwArgs: [(String, RbObjectConvertible?)] = [],
+                     kwArgs: DictionaryLiteral<String, RbObjectConvertible?> = [:],
                      block: RbObjectConvertible) throws -> RbObject {
         try Ruby.setup()
         return try symbol.rubyObject.withSymbolId { methodId in
@@ -348,7 +348,7 @@ extension RbObjectAccess {
     /// Backend to method-call / message-send.
     private func doCall(id: ID,
                         args: [RbObjectConvertible?],
-                        kwArgs: [(String, RbObjectConvertible?)],
+                        kwArgs: DictionaryLiteral<String, RbObjectConvertible?>,
                         blockRetention: RbBlockRetention = .none,
                         block: RbObjectConvertible? = nil,
                         blockCall: RbBlockCallback? = nil) throws -> RbObject {
@@ -398,7 +398,7 @@ extension RbObjectAccess {
     }
 
     /// Build a keyword args hash.  The keys are Symbols of the keywords.
-    private func buildKwArgsHash(from kwArgs: [(String, RbObjectConvertible?)]) throws -> RbObject {
+    private func buildKwArgsHash(from kwArgs: DictionaryLiteral<String, RbObjectConvertible?>) throws -> RbObject {
         let hashValue = rb_hash_new()
         try kwArgs.forEach { (key, value) in
             try RbSymbol(key).rubyObject.withRubyValue { symValue in
