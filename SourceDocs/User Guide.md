@@ -44,7 +44,7 @@ import RubyGateway
 do {
     try Ruby.require(filename: "academy")
     let student = try RbObject(ofClass: "Academy::Student",
-                               kwArgs: [("name", "Betty")])
+                               kwArgs: ["name": "Betty"])
     if let bettyGpa = try Double(student.get("gpa")) {
         processScore(gpa: bettyGpa)
     }

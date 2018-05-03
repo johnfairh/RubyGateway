@@ -24,13 +24,8 @@ import RubyGatewayHelpers
 /// try myObj.set("name", "fred")
 ///
 /// let results = try myObj.call("process", args: ["arg1", 100])
-/// ```
 ///
-/// Or in Swift 5 dynamic-member style:
-/// ```swift
-/// myObj.name = "fred"
-///
-/// let results = myObj.process(arg1, 100)
+/// let answer = try myObj.call("pose", kwArgs: ["questionNumber": 40])
 /// ```
 ///
 /// See `RbGateway` and its global instance `Ruby` for access to the Ruby 'top self'
@@ -219,7 +214,7 @@ extension RbObject {
     /// - parameter kwArgs: keyword arguments to pass to the `new` call for the object.  Default none.
     public convenience init?(ofClass className: String,
                              args: [RbObjectConvertible?] = [],
-                             kwArgs: [(String, RbObjectConvertible?)] = []) {
+                             kwArgs: DictionaryLiteral<String, RbObjectConvertible?> = [:]) {
         guard let obj = try? Ruby.get(className).call("new", args: args, kwArgs: kwArgs) else {
             return nil
         }
@@ -241,7 +236,7 @@ extension RbObject {
     /// - parameter blockCall: Swift code to pass as a block to the method.
     public convenience init?(ofClass className: String,
                              args: [RbObjectConvertible?] = [],
-                             kwArgs: [(String, RbObjectConvertible?)] = [],
+                             kwArgs: DictionaryLiteral<String, RbObjectConvertible?> = [:],
                              retainBlock: Bool = false,
                              blockCall: @escaping RbBlockCallback) {
         let retention: RbBlockRetention = retainBlock ? .returned : .none

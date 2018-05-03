@@ -35,7 +35,7 @@ import RubyGatewayHelpers
 /// print("Ruby version is \(Ruby.version)")
 ///
 /// do {
-///    try Ruby.require("rouge")
+///    try Ruby.require(filename: "rouge")
 ///    let html = try Ruby.get("Rouge").call("highlight", args: ["let a = 1", "swift", "html"])
 /// } catch {
 /// }
@@ -43,14 +43,14 @@ import RubyGatewayHelpers
 ///
 /// Or with Swift 5 dynamic member lookup & callable:
 /// ```swift
-/// let html = Ruby.Rouge!.highlight("let a = 1", "swift", "html")!
+/// let html = try Ruby.Rouge!.highlight("let a = 1", "swift", "html")
 /// ```
 ///
 /// If you just want to create a Ruby object of some class, see
 /// `RbObject.init(ofClass:args:kwArgs:)`.
 public final class RbGateway: RbObjectAccess {
 
-    /// The VM - not intialized until `setup()` is called.
+    /// The VM - not initialized until `setup()` is called.
     static let vm = RbVM()
 
     init() {

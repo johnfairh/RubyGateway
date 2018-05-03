@@ -51,17 +51,17 @@ In Swift 4.1 with similar [lack of] error checking:
 ```swift
 import RubyGateway
 
-try! Ruby.require("rouge")
+try! Ruby.require(filename: "rouge")
 let html = try! Ruby.get("Rouge").call("highlight", args: ["let a = 3", "swift", "html"])
 print(html)
 ```
 
-In future Swift:
+In future Swift, maybe:
 ```swift
 import RubyGateway
 
-try! Ruby.require("rouge")
-let html = Ruby.Rouge!.highlight("let a = 3", "swift", "html")!
+try! Ruby.require(filename: "rouge")
+let html = try! Ruby.Rouge!.highlight("let a = 3", "swift", "html")
 print(html)
 ```
 
@@ -69,7 +69,7 @@ print(html)
 
 ```swift
 // Create an object.  Use keyword arguments with initializer
-let student = RbObject(ofClass: "Academy::Student", kwArgs: [("name", "barney")])!
+let student = RbObject(ofClass: "Academy::Student", kwArgs: ["name": "barney"])!
 
 // Acess an attribute
 print("Name is \(student.get("name"))")
@@ -132,12 +132,11 @@ github "johnfairh/RubyGateway"
 
 Swift package manager for macOS or Linux:
 ```
-.package(url: "https://github.com/johnfairh/RubyGateway", from: "0.1.0")
+.package(url: "https://github.com/johnfairh/RubyGateway", from: "0.4.0")
 ```
 
 CocoaPods for macOS:
 ```
-use_frameworks!
 pod 'RubyGateway'
 ```
 
