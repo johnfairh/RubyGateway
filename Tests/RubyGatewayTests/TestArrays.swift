@@ -118,6 +118,23 @@ class TestArrays: XCTestCase {
         }
     }
 
+    /// Quick ArraySlice check
+    func testSlice() {
+        let array = [1, 2, 3]
+        let slice = array[1...2]
+        let rbArray = RbObject(slice)
+        guard let backArray = Array<Int>(rbArray) else {
+            XCTFail("Couldn't get the array back")
+            return
+        }
+        XCTAssertEqual(slice, ArraySlice(backArray))
+
+        if let swSlice = ArraySlice<Int>(rbArray) {
+            XCTFail("Managed to convert to Swift slice: \(swSlice)")
+            return
+        }
+    }
+
     static var allTests = [
         ("testRoundTripInt", testRoundTripInt),
         ("testRoundTripString", testRoundTripString),
@@ -125,6 +142,7 @@ class TestArrays: XCTestCase {
         ("testRubyInterop", testRubyInterop),
         ("testMixedArrays", testMixedArrays),
         ("testArrayLiteral", testArrayLiteral),
-        ("testNoArrayConversion", testNoArrayConversion)
+        ("testNoArrayConversion", testNoArrayConversion),
+        ("testSlice", testSlice)
     ]
 }

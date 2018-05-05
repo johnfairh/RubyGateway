@@ -65,6 +65,7 @@ custom_categories:
           - Double
           - Float
           - Array
+          - ArraySlice
           - Dictionary
           - Set
           - Range

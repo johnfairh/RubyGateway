@@ -7,6 +7,7 @@
 ##### Enhancements
 
 * Add conditional Set `RbObjectConvertible` conformance.
+* Add conditional ArraySlice `RbObjectConvertible` conformance.
 
 ##### Bug Fixes
 

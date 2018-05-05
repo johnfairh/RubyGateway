@@ -267,6 +267,29 @@ extension Array: RbObjectConvertible where Element: RbObjectConvertible {
     }
 }
 
+// MARK: - ArraySlice
+
+/// These methods are available only when the array slice `Element` type
+/// conforms to `RbObjectConvertible`.
+extension ArraySlice: RbObjectConvertible where Element: RbObjectConvertible {
+    /// No sense in converting :nodoc:
+    public init?(_ value: RbObject) {
+        return nil
+    }
+
+    /// Create a Ruby array object for this `ArraySlice`.  All the sliceness
+    /// is lost by this conversion, there's no ongoing relation between the Swift
+    /// and Ruby types.
+    public var rubyObject: RbObject {
+        guard Ruby.softSetup() else {
+            return .nilObject
+        }
+        return RbObject(rubyValue: map { $0.rubyObject }.withRubyValues { elementValues in
+            rb_ary_new_from_values(count, elementValues)
+        })
+    }
+}
+
 // MARK: - ArrayLiteral
 
 extension RbObject: ExpressibleByArrayLiteral {

@@ -1,7 +1,6 @@
 ## 0.5 plan
 
-Collection translation, needs 4.1
-* Slice ?
+done?
 
 ## "1.0" feeling 
 
