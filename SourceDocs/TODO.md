@@ -1,18 +1,14 @@
-## 0.5 plan
+## 0.6 plan
 
-done?
+* Figure out SAFE / whatever architecture.
+* Refactor testcases
 
 ## "1.0" feeling 
-
-Sandboxing
-* Research, worth doing anything?  Even about `exit!` ?
 
 Build
 * Linux Travis
 
 Stern GC review, especially non-Darwin
-
-Refactor testcases
 
 ## "Post 1.0" feeling
 

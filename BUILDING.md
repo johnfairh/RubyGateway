@@ -64,7 +64,7 @@ Everything is just about OK.
 ## Releasing
 
 * Update docs if needed, separate commit.
-* Update podspec, changelog, TODO.
+* Update podspec, changelog, TODO, README.
 * Commit + tag + push with `--tags`.  Check CI.
 * `pod spec lint` -- *not* `pod lib lint`
   * `pod cache clean 'RubyGateway' --all` if you mess up the tag + have to repush it

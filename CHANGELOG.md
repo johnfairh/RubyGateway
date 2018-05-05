@@ -2,16 +2,26 @@
 
 ##### Breaking
 
-* Change `kwArgs` to use `DictionaryLiteral`.
+* None.
+
+##### Enhancements
+
+* None.
+
+##### Bug Fixes
+
+* None.
+
+## 0.5.0 - 5th May 2018
+
+##### Breaking
+
+* Change `kwArgs` to use `DictionaryLiteral` per dynamic callable.
 
 ##### Enhancements
 
 * Add conditional Set `RbObjectConvertible` conformance.
 * Add conditional ArraySlice `RbObjectConvertible` conformance.
-
-##### Bug Fixes
-
-* None.
 
 ## 0.4.0 - 20th April 2018
 
