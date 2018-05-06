@@ -302,12 +302,6 @@ The reason for all this is that calling Swift code from Ruby requires an
 intermediate Swift object, and RubyGateway needs to tie the lifetime of that
 Swift object to something else in the Swift world.
 
-### Ruby code safety
-
-Running arbitrary Ruby code is a bad idea unless the process itself is
-sandboxed: there are no restrictions on what the Ruby VM can do including
-call `exit!`.
-
 ### Block arity
 
 The Ruby runtime cannot tell the arity (number of expected arguments) of
@@ -333,6 +327,18 @@ RubyGateway caches intern'ed Ruby strings - you can access the cache using
 
 Note that when you call the Ruby API and Ruby raises an exception, the process
 immediately crashes unless you are running inside `rb_protect()` or equivalent.
+
+### Ruby code safety
+
+RubyGateway puts no restriction on what Ruby code can do: it can access the
+filesystem, exit the process, and has complete access to the process's memory.
+
+Ruby has historically had a `$SAFE` feature that did some amount of sandboxing.
+This has been slowly removed over the years and what remains is a debugging
+feature that can be enabled via `RbGateway.taintChecks`.
+
+Dealing with actively hostile Ruby code is best done with a separate process
+or container; several examples on github.
 
 ### References
 

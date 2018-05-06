@@ -6,7 +6,7 @@
 
 ##### Enhancements
 
-* None.
+* Add `RbGateway.taintChecks`
 
 ##### Bug Fixes
 
