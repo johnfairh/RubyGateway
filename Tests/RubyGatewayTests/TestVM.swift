@@ -291,6 +291,7 @@ class TestVM: XCTestCase {
         ("testDebug", testDebug),
         ("testVerbose", testVerbose),
         ("testScriptName", testScriptName),
+        ("testSafeMode", testSafeMode),
         ("testVersion", testVersion),
         ("testSetupFailures", testSetupFailures),
         ("testCleanedUpFailure", testCleanedUpFailure)

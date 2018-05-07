@@ -1,12 +1,8 @@
 ## 0.6 plan
 
-* eval_wrap
 * Refactor testcases
 
 ## "1.0" feeling 
-
-Build
-* Linux Travis
 
 Stern GC review, especially non-Darwin
 
