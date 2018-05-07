@@ -8,7 +8,7 @@
 import XCTest
 import RubyGateway
 
-class TestRange: XCTestCase {
+class TestRanges: XCTestCase {
 
     // basic round-tripping
 
@@ -94,6 +94,7 @@ class TestRange: XCTestCase {
         ("testRoundTripClosed", testRoundTripClosed),
         ("testRoundTripCountable", testRoundTripCountable),
         ("testRoundTripCountableClosed", testRoundTripCountableClosed),
-        ("testRangeTypes", testRangeTypes)
+        ("testRangeTypes", testRangeTypes),
+        ("testBadRange", testBadRange)
     ]
 }
