@@ -855,6 +855,13 @@ feature.  See Ruby#14250.</li>
     <code><a href="../Enums/RbError.html">RbError</a></code> if something goes wrong.
 
 </div>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    This is a lower level than <code>Kernel#eval</code> and less flexible - if you
+need that function then access it via <code>RbGateway.call(&quot;eval&quot;)</code>.
+Don&rsquo;t be tempted by <code>rb_eval_string_wrap()</code>, it is broken. #10466.
+
+</div>
 
                       </div>
                       <div class="declaration">
@@ -889,7 +896,7 @@ feature.  See Ruby#14250.</li>
                         <p>The result of executing the code.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L296-L301">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L299-L304">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -951,7 +958,7 @@ method is dispatched dynamically so it will invoke any replacements of
                         <p><code>true</code> if the file was loaded OK, <code>false</code> if it is already loaded.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L312-L316">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L315-L319">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1018,7 +1025,7 @@ instead of the current program.  See <code>Kernel#load</code>.</p>
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L324-L331">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L327-L334">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

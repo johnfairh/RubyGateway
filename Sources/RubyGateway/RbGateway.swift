@@ -293,6 +293,9 @@ extension RbGateway {
     /// - parameter ruby: Ruby code to execute at the top level.
     /// - returns: The result of executing the code.
     /// - throws: `RbError` if something goes wrong.
+    /// - note: This is a lower level than `Kernel#eval` and less flexible - if you
+    ///   need that function then access it via `RbGateway.call("eval")`.
+    ///   Don't be tempted by `rb_eval_string_wrap()`, it is broken. #10466.
     public func eval(ruby: String) throws -> RbObject {
         try setup()
         return RbObject(rubyValue: try RbVM.doProtect {
