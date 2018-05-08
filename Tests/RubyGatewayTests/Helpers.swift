@@ -7,6 +7,39 @@
 
 import Foundation
 import RubyGateway
+import XCTest
+
+extension XCTestCase {
+    /// Standard wrapper for error checking
+    func doErrorFree(call: () throws -> ())  {
+        do {
+            try call()
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+    }
+
+    /// Standard wrapper for error checking
+    func doErrorFree<T>(fallback: T, call: () throws -> T) -> T {
+        do {
+            return try call()
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+            return fallback
+        }
+    }
+
+    /// Standard wrapper for expected errors
+    func doError(call: () throws -> ()) {
+        do {
+            try call()
+            // Shouldn't really get here, want more explicit fail in client
+            XCTFail("No error thrown")
+        } catch {
+            print("Caught and swallowed \(error)")
+        }
+    }
+}
 
 /// Misc test helpers
 struct Helpers {

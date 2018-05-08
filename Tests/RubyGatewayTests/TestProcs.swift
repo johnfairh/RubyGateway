@@ -13,7 +13,7 @@ class TestProcs: XCTestCase {
 
     /// Manual proc creation
     func testManualProc() {
-        do {
+        doErrorFree {
             var procHappened = false
 
             guard let proc = (RbObject(ofClass: "Proc", retainBlock: true) { args in
@@ -29,14 +29,12 @@ class TestProcs: XCTestCase {
 
             let arity = try proc.getAttribute("arity")
             XCTAssertEqual(-1, arity)
-        } catch {
-            XCTFail("Unexpected error: \(error)")
         }
     }
 
     /// Create and call simple swift proc
     func testCall() {
-        do {
+        doErrorFree {
             let expectedArg0 = "argString"
             let expectedArg1 = 102.8
             let expectedArgCount = 2
@@ -52,8 +50,6 @@ class TestProcs: XCTestCase {
             let result = try proc.rubyObject.call("call", args: [expectedArg0, expectedArg1])
 
             XCTAssertEqual(expectedResult, Int(result))
-        } catch {
-            XCTFail("Unexpected error: \(error)")
         }
     }
 
@@ -62,17 +58,14 @@ class TestProcs: XCTestCase {
         let proc = RbObject() { args in .nilObject }
         print(proc)
         let object = proc.rubyObject
-        do {
+        doErrorFree {
             try object.checkIsProc()
-        } catch {
-            XCTFail("Unexpected error: \(error)")
-        }
-        do {
-            try RbObject.nilObject.checkIsProc()
-            XCTFail("Believe nil is proc")
-        } catch RbError.badType(_) {
-        } catch {
-            XCTFail("Unexpected error: \(error)")
+            
+            do {
+                try RbObject.nilObject.checkIsProc()
+                XCTFail("Believe nil is proc")
+            } catch RbError.badType(_) {
+            }
         }
     }
 
@@ -92,7 +85,7 @@ class TestProcs: XCTestCase {
 
     /// Procs from Ruby objects - success
     func testRubyObjectProc() {
-        do {
+        doErrorFree {
             /// assertSame( "AAA", Array("aaa").map(&:upcase).pop )
             let testStr = "aaa"
 
@@ -105,25 +98,20 @@ class TestProcs: XCTestCase {
             let mappedVal = try mappedArr.call("pop")
 
             XCTAssertEqual(testStr.uppercased(), String(mappedVal))
-        } catch {
-            XCTFail("Unexpected error: \(error)")
         }
     }
 
     /// Procs from Ruby objects - fail
     func testRubyObjectProcFail() {
-        do {
+        doErrorFree {
             let notAProc = RbProc(object: "upcase")
 
             let array = try Ruby.call("Array", args: [1])
 
-            do {
+            doError {
                 let mappedArr = try array.call("map", block: notAProc)
                 XCTFail("Managed to procify a string: \(mappedArr)")
-            } catch {
             }
-        } catch {
-            XCTFail("Unexpected error: \(error)")
         }
     }
 
@@ -139,7 +127,7 @@ class TestProcs: XCTestCase {
     ///      -> Detect that and convert to Swift RbError again,
     ///         wrapping original Ruby exception.
     func testProcRubyException() {
-        do {
+        doErrorFree {
             let badString = "Nope"
 
             let proc = RbObject() { args in
@@ -151,17 +139,15 @@ class TestProcs: XCTestCase {
                 try proc.rubyObject.call("call", args: [120])
                 XCTFail("Managed to survive call to throwing proc")
             } catch RbError.rubyException(let exn) {
-                // catch the NoMethodError, hopefully
+                // catch the NoMethodError
                 XCTAssertTrue(exn.description.contains(badString))
             }
-        } catch {
-            XCTFail("Unexpected error: \(error)")
         }
     }
 
     /// 1b - throw 'ruby' exception from Swift
     func testProcRubyException2() {
-        do {
+        doErrorFree {
             let msg = "Ruby Exception!"
 
             let proc = RbObject() { args in
@@ -172,18 +158,16 @@ class TestProcs: XCTestCase {
                 try proc.rubyObject.call("call")
                 XCTFail("Managed to survive call to throwing proc")
             } catch RbError.rubyException(let exn) {
-                // catch the RbException, hopefully
+                // catch the RbException
                 XCTAssertTrue(exn.description.contains(msg))
             }
-        } catch {
-            XCTFail("Unexpected error: \(error)")
         }
     }
 
     /// 2) Some other Error thrown.
     func testProcWeirdException() {
         struct S: Error {}
-        do {
+        doErrorFree {
             let proc = RbObject() { args in
                 throw S()
             }
@@ -194,14 +178,12 @@ class TestProcs: XCTestCase {
             } catch RbError.rubyException(let exn) {
                 print("Got Ruby exception \(exn)")
             }
-        } catch {
-            XCTFail("Unexpected error: \(error)")
         }
     }
 
     /// 3) Break.
     func testProcBreak() {
-        do {
+        doErrorFree {
             let array = try Ruby.call("Array", args: [1])
             try array.call("push", args: [2, 3])
 
@@ -233,14 +215,12 @@ class TestProcs: XCTestCase {
 
             XCTAssertEqual(2, counter)
             XCTAssertEqual(breakVal, String(retVal2))
-        } catch {
-            XCTFail("Unexpected error: \(error)")
         }
     }
 
     // Lambda experiments
     func testLambda() {
-        do {
+        doErrorFree {
             let lambda = try Ruby.call("lambda", blockRetention: .returned) { args in
                 if args.count != 2 {
                     throw RbException(message: "Wrong number of args, expected 2 got \(args.count)")
@@ -251,14 +231,10 @@ class TestProcs: XCTestCase {
             let result = try lambda.call("call", args: [1,2])
             XCTAssertEqual(3, Int(result))
 
-            do {
+            doError {
                 let result2 = try lambda.call("call", args: [1])
                 XCTFail("Managed to call lambda with insufficient args: \(result2)")
-            } catch {
-                print(error)
             }
-        } catch {
-            XCTFail("Unexpected exception: \(error)")
         }
     }
 

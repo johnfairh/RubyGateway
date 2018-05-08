@@ -40,7 +40,7 @@ class TestArrays: XCTestCase {
 
     /// Ruby understands our arrays + vice versa
     func testRubyInterop() {
-        do {
+        doErrorFree {
             try Ruby.require(filename: Helpers.fixturePath("methods.rb"))
 
             guard let instance = RbObject(ofClass: "MethodsTest") else {
@@ -60,14 +60,12 @@ class TestArrays: XCTestCase {
             // Pass Swift array to Ruby
             let sumObj = try instance.call("sum_array", args: [[1, 2, 3]])
             XCTAssertEqual(1 + 2 + 3, Int(sumObj))
-        } catch {
-            XCTFail("Unexpected error: \(error)")
         }
     }
 
     /// Heterogeneous arrays (+ to_a behavior of Array)
     func testMixedArrays() {
-        do {
+        doErrorFree {
             try Ruby.require(filename: Helpers.fixturePath("methods.rb"))
 
             guard let instance = RbObject(ofClass: "MethodsTest") else {
@@ -88,8 +86,6 @@ class TestArrays: XCTestCase {
             XCTAssertEqual(1, Int(objArray[0]))
             XCTAssertEqual("two", String(objArray[1]))
             XCTAssertEqual(3.0, Double(objArray[2]))
-        } catch {
-            XCTFail("Unexpected error: \(error)")
         }
     }
 
@@ -101,7 +97,7 @@ class TestArrays: XCTestCase {
 
     /// Nonconvertible (tricky!)
     func testNoArrayConversion() {
-        do {
+        doErrorFree {
             try Ruby.require(filename: Helpers.fixturePath("nonconvert.rb"))
 
             guard let instance = RbObject(ofClass: "NotArrayable") else {
@@ -113,8 +109,6 @@ class TestArrays: XCTestCase {
                 XCTFail("Managed to arrayify unarrayifyable: \(arr)")
                 return
             }
-        } catch {
-            XCTFail("Unexpected error: \(error)")
         }
     }
 

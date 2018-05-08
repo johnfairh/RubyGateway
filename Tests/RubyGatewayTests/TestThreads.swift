@@ -13,7 +13,7 @@ class TestThreads: XCTestCase {
 
     // Check Ruby threads + GVL works as expected
     func testCreateThread() {
-        do {
+        doErrorFree {
             var threadHasRun = false // optimistic concurrency control....
             let threadObj = RbThread.create {
                 XCTAssertTrue(RbThread.isRubyThread())
@@ -29,14 +29,12 @@ class TestThreads: XCTestCase {
             } else {
                 XCTFail("Couldn't create thread object")
             }
-        } catch {
-            XCTFail("Unexpected error: \(error)")
         }
     }
 
     // Check Ruby-created thread can drop GVL
     func testThreadCanDropGvl() {
-        do {
+        doErrorFree {
             var threadHasRun = false // optimistic concurrency control....
             let threadObj = RbThread.create {
                 XCTAssertFalse(threadHasRun)
@@ -62,14 +60,12 @@ class TestThreads: XCTestCase {
             } else {
                 XCTFail("Couldn't create thread object")
             }
-        } catch {
-            XCTFail("Unexpected error: \(error)")
         }
     }
 
     // Check interrupt works outwith GVL using UBF_IO
     func testThreadCanBeInterruptedWithoutGvl() {
-        do {
+        doErrorFree {
             var sleeping = false
             var slept = false
 
@@ -92,14 +88,12 @@ class TestThreads: XCTestCase {
             try threadObj.call("join")
 
             XCTAssertTrue(slept)
-        } catch {
-            XCTFail("Unexpected error: \(error)")
         }
     }
 
     // Check interrupt works outwith GVL doing it manually
     func testThreadCanBeInterruptedWithoutGvlManually() {
-        do {
+        doErrorFree {
             var slept = false
             var sleeping = false
             var pid: pthread_t? = nil
@@ -125,8 +119,6 @@ class TestThreads: XCTestCase {
             try threadObj.call("join")
 
             XCTAssertTrue(slept)
-        } catch {
-            XCTFail("Unexpected error: \(error)")
         }
     }
 

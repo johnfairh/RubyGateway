@@ -16,7 +16,6 @@ class TestRanges: XCTestCase {
         let range = Range(13..<29)
         let rbRange = range.rubyObject
         XCTAssertEqual(range, Range<Int>(rbRange))
-
     }
 
     func testRoundTripClosed() {
@@ -72,7 +71,7 @@ class TestRanges: XCTestCase {
     // unconvertable Range
 
     func testBadRange() {
-        do {
+        doErrorFree {
             try Ruby.require(filename: Helpers.fixturePath("nonconvert.rb"))
 
             guard let rangeObj = RbObject(ofClass: "BadRange") else {
@@ -84,8 +83,6 @@ class TestRanges: XCTestCase {
                 XCTFail("Managed to create backwards range: \(r)")
                 return
             }
-        } catch {
-            XCTFail("Unexpected error: \(error)")
         }
     }
 

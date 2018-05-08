@@ -26,7 +26,7 @@ class TestDictionaries: XCTestCase {
     }
 
     private func getSymNumHash(method: String = "get_sym_num_hash") -> RbObject {
-        do {
+        return doErrorFree(fallback: .nilObject) {
             try Ruby.require(filename: Helpers.fixturePath("methods.rb"))
 
             guard let instance = RbObject(ofClass: "MethodsTest") else {
@@ -35,9 +35,6 @@ class TestDictionaries: XCTestCase {
             }
 
             return try instance.call(method)
-        } catch {
-            XCTFail("Unexpected error: \(error)")
-            return .nilObject
         }
     }
 
@@ -74,7 +71,7 @@ class TestDictionaries: XCTestCase {
     }
 
     func testNoConversion() {
-        do {
+        doErrorFree {
             try Ruby.require(filename: Helpers.fixturePath("nonconvert.rb"))
 
             guard let notHashable = RbObject(ofClass: "NotHashable"),
@@ -103,8 +100,6 @@ class TestDictionaries: XCTestCase {
                 XCTFail("Unexpected conversion of nil to dict: \(unexpected)")
                 return
             }
-        } catch {
-            XCTFail("Unexpected error: \(error)")
         }
     }
 

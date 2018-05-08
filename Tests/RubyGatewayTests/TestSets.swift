@@ -20,13 +20,10 @@ class TestSets: XCTestCase {
     }
 
     private func getSet(method: String) -> RbObject {
-        do {
+        return doErrorFree(fallback: .nilObject) {
             try Ruby.require(filename: Helpers.fixturePath("methods.rb"))
 
             return try Ruby.get("MethodsTest").get(method)
-        } catch {
-            XCTFail("Unexpected error: \(error)")
-            return .nilObject
         }
     }
 

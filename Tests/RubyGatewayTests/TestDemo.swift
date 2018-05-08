@@ -16,15 +16,13 @@ class TestDemo: XCTestCase {
             return
         }
 
-        do {
+        doErrorFree {
             // Careful to avoid String methods that are unimplemented on Linux....
             let swiftText = try String(contentsOfFile: URL(fileURLWithPath: #file).path, encoding: .utf8)
 
             let html = try Ruby.get("Rouge").call("highlight", args: [swiftText, "swift", "html"])
 
             XCTAssertTrue(String(html)!.contains("<span class=\"p\">}</span>"))
-        } catch {
-            XCTFail("Unexpected error: \(error)")
         }
     }
 
@@ -33,19 +31,17 @@ class TestDemo: XCTestCase {
             return
         }
 
-        do {
+        doErrorFree {
             let page = try Ruby.get("Wikipedia").call("find", args: ["Swift"])
 
             try XCTAssertEqual("Swift", String(page.get("title")))
 
             try XCTAssertTrue(String(page.get("summary"))!.contains("Apodidae"))
-        } catch {
-            XCTFail("Unexpected error: \(error)")
         }
     }
 
     func testDemo() {
-        do {
+        doErrorFree {
             try Ruby.require(filename: Helpers.fixturePath("demo.rb"))
 
             // Create a named student
@@ -75,9 +71,6 @@ class TestDemo: XCTestCase {
             // do test - needs block
 
             try yearGroup.call("report")
-
-        } catch {
-            XCTFail("Unexpected error: \(error)")
         }
     }
 

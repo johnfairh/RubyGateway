@@ -71,7 +71,7 @@ class TestOperators: XCTestCase {
     }
 
     func testSubscript() {
-        do {
+        doErrorFree {
             try Ruby.require(filename: Helpers.fixturePath("methods.rb"))
             guard let inst = RbObject(ofClass: "MethodsTest") else {
                 XCTFail("Couldn't create instance")
@@ -86,8 +86,6 @@ class TestOperators: XCTestCase {
             let val3 = "fred"
             inst[val1, val2] = RbObject(val3)
             XCTAssertEqual("\(val1) \(val2) = \(val3)", String(try inst.getInstanceVar("@subscript_set")))
-        } catch {
-            XCTFail("Unexpected error: \(error)")
         }
     }
 

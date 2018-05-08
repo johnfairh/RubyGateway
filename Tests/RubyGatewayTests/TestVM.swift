@@ -11,16 +11,14 @@ import XCTest
 class TestVM: XCTestCase {
     /// Check we can bring up Ruby.
     func testInit() {
-        do {
+        doErrorFree {
             try Ruby.setup()
-        } catch {
-            XCTFail("Ruby init failed, \(error)")
         }
     }
 
     /// Check whole thing is broadly functional
     func testEndToEnd() {
-        do {
+        doErrorFree {
             let _ = try Ruby.require(filename: Helpers.fixturePath("endtoend.rb"))
 
             let ver = 1.2
@@ -34,8 +32,6 @@ class TestVM: XCTestCase {
             try XCTAssertEqual(ver, Double(obj.get("version")))
             try XCTAssertEqual(name, String(obj.get("name")))
             XCTAssertEqual("\(name) (version \(ver))", obj.description)
-        } catch {
-            XCTFail("Unexpected exception, \(error)")
         }
     }
 
@@ -44,19 +40,19 @@ class TestVM: XCTestCase {
         testInit()
 
         let vm2 = RbVM()
-        do {
-            let _ = try vm2.setup()
-            XCTFail("Unexpected pass of second init")
-        } catch RbError.setup(_) {
-            // OK
-        } catch {
-            XCTFail("Unexpected error type")
+        doErrorFree {
+            do {
+                let _ = try vm2.setup()
+                XCTFail("Unexpected pass of second init")
+            } catch RbError.setup(_) {
+                // OK
+            }
         }
     }
 
     /// 'require' works, path set up OK
     func testRequire() {
-        do {
+        doErrorFree {
             let rc1 = try Ruby.require(filename: "pp") // Internal
             XCTAssertTrue(rc1)
 
@@ -65,32 +61,29 @@ class TestVM: XCTestCase {
 
             let rc3 = try Ruby.require(filename: "rdoc") // Gem shipped apparently everywhere??
             XCTAssertTrue(rc3)
-        } catch {
-            XCTFail("Unexpected exception: \(error)")
         }
 
-        do {
-            let rc = try Ruby.require(filename: "not-ruby") // fail
-            XCTFail("vm.require unexpectedly passed, rc=\(rc)")
-        } catch RbError.rubyException(let exn) {
-            XCTAssertTrue(exn.description.contains("LoadError: cannot load such file"))
-        } catch {
-            XCTFail("Unexpected exception: \(error)")
+        doErrorFree {
+            do {
+                let rc = try Ruby.require(filename: "not-ruby") // fail
+                XCTFail("vm.require unexpectedly passed, rc=\(rc)")
+            } catch RbError.rubyException(let exn) {
+                XCTAssertTrue(exn.description.contains("LoadError: cannot load such file"))
+            }
         }
     }
 
     /// 'load' works
     func testLoad() {
-        do {
+        doErrorFree {
             // load wrapped version - no access
             try Ruby.load(filename: Helpers.fixturePath("backwards.rb"), wrap: true)
 
             let str = "forwards"
 
-            do {
+            doError {
                 let rc = try Ruby.call("backwards", args: [str])
                 XCTFail("Managed to resolve backwards global: \(rc)")
-            } catch {
             }
 
             // now load unwrapped
@@ -98,37 +91,34 @@ class TestVM: XCTestCase {
 
             let rc = try Ruby.call("backwards", args: [str])
             XCTAssertEqual(String(str.reversed()), String(rc))
-
-        } catch {
-            XCTFail("Unexpected exception: \(error)")
         }
     }
 
     func testLoadFailBadPath() {
-        do {
-            try Ruby.load(filename: "Should fail")
-            XCTFail("Managed to load nonexistent file")
-        } catch RbError.rubyException(let exn) {
-            XCTAssertTrue(exn.description.contains("LoadError: cannot load such file"))
-        } catch {
-            XCTFail("Unexpected error: \(error)")
+        doErrorFree {
+            do {
+                try Ruby.load(filename: "Should fail")
+                XCTFail("Managed to load nonexistent file")
+            } catch RbError.rubyException(let exn) {
+                XCTAssertTrue(exn.description.contains("LoadError: cannot load such file"))
+            }
         }
     }
 
     func testLoadFailException() {
-        do {
-            try Ruby.load(filename: Helpers.fixturePath("unloadable.rb"))
-            XCTFail("Managed to load unloadable file")
-        } catch RbError.rubyException(let exn) {
-            XCTAssertTrue(exn.description.contains("SyntaxError:"))
-        } catch {
-            XCTFail("Unexpected error: \(error)")
+        doErrorFree {
+            do {
+                try Ruby.load(filename: Helpers.fixturePath("unloadable.rb"))
+                XCTFail("Managed to load unloadable file")
+            } catch RbError.rubyException(let exn) {
+                XCTAssertTrue(exn.description.contains("SyntaxError:"))
+            }
         }
     }
 
     /// debug flag
     func testDebug() {
-        do {
+        doErrorFree {
             XCTAssertFalse(Ruby.debug)
             let debugVal1 = try Ruby.getGlobalVar("$DEBUG")
             XCTAssertFalse(debugVal1.isTruthy)
@@ -140,14 +130,12 @@ class TestVM: XCTestCase {
 
             Ruby.debug = false
             XCTAssertFalse(Ruby.debug)
-        } catch {
-            XCTFail("Unexpected exception: \(error)")
         }
     }
 
     /// verbose flag
     func testVerbose() {
-        do {
+        doErrorFree {
             XCTAssertEqual(.medium, Ruby.verbose)
             let verboseVal1 = try Ruby.getGlobalVar("$VERBOSE")
             XCTAssertFalse(Bool(verboseVal1)!)
@@ -164,8 +152,6 @@ class TestVM: XCTestCase {
 
             Ruby.verbose = .medium
             XCTAssertEqual(.medium, Ruby.verbose)
-        } catch {
-            XCTFail("Unexpected exception: \(error)")
         }
     }
 
@@ -213,18 +199,16 @@ class TestVM: XCTestCase {
         defer { RbGateway.vm.utSetSetup() }
 
         // explicit setup() call fails
-        do {
+        doError {
             try Ruby.setup()
             XCTFail("Unexpected setup OK in setupError")
-        } catch {
         }
 
         // API call doesn't make it to Ruby
         // (could be a lot more exhaustive...)
-        do {
+        doError {
             let ret = try Ruby.eval(ruby: "exit!")
             XCTFail("Unexpected exit pass in setupError - \(ret)")
-        } catch {
         }
 
         // scriptname fail-safe
@@ -273,10 +257,9 @@ class TestVM: XCTestCase {
         defer { RbGateway.vm.utSetSetup() }
 
         // explicit setup() call fails
-        do {
+        doError {
             try Ruby.setup()
             XCTFail("Unexpected setup OK in setupError")
-        } catch {
         }
     }
 

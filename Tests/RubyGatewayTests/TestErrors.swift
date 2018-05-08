@@ -88,7 +88,7 @@ class TestErrors: XCTestCase {
     func testRubyException() {
         RbError.history.clear()
 
-        do {
+        doErrorFree {
             try Ruby.require(filename: Helpers.fixturePath("raising.rb"))
 
             do {
@@ -100,45 +100,34 @@ class TestErrors: XCTestCase {
                 XCTAssertTrue(btstr[0].contains("raiseString"))
                 XCTAssertTrue(btstr[0].contains("raising.rb:2"))
                 XCTAssertEqual("RuntimeError: string", exn.description)
-            } catch {
-                XCTFail("Unexpected exception: \(error)")
             }
-        } catch {
-            XCTFail("Unexpected exception: \(error)")
         }
     }
 
     /// Ruby stack overflow
     func testRubyStackOverflow() {
-        do {
+        doErrorFree {
             try Ruby.require(filename: Helpers.fixturePath("raising.rb"))
 
-            do {
+            doError {
                 let v = try Ruby.call("stackSmash")
                 XCTFail("Got past stack overflow: \(v)")
-            } catch {
             }
-        } catch {
-            XCTFail("Unexpected exception: \(error)")
         }
     }
 
     /// Ruby exit call
     func testRubyExit() {
-        do {
+        doErrorFree {
             try Ruby.require(filename: Helpers.fixturePath("raising.rb"))
 
-            do {
+            doError {
                 let v = try Ruby.call("doExit")
                 XCTFail("Got past exit call : \(v)")
-            } catch {
-                print(error)
             }
 
             // Just check we haven't exitted Ruby...
             testRubyStackOverflow()
-        } catch {
-            XCTFail("Unexpected exception: \(error)")
         }
     }
 
