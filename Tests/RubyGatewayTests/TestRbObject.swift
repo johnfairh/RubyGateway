@@ -27,20 +27,6 @@ class TestRbObject: XCTestCase {
         XCTAssertTrue(called)
     }
 
-    // Try and test the GC-safe thing works.
-    // Probably a bit pointless, the value is probably on the stack,
-    // but at least tests that the gc registration doesn't hurt.
-
-    func testObject() {
-        let obj = RbObject(UInt.max)
-        rb_gc()
-        rb_gc()
-        rb_gc()
-        rb_gc()
-        let backVal = UInt(obj)
-        XCTAssertEqual(UInt.max, backVal)
-    }
-
     func testCopy() {
         let testNum = UInt.max
         let rbObj2: RbObject
@@ -172,9 +158,67 @@ class TestRbObject: XCTestCase {
         XCTAssertEqual(obj1?.rubyObject, obj2.rubyObject)
     }
 
+    private func getMethodsTestHeapCount() throws -> Int {
+        var count = 0
+        try Ruby.get("ObjectSpace").call("each_object", args: [Ruby.getClass("MethodsTest")]) { args in
+            count += 1
+            return .nilObject
+        }
+        return count
+    }
+
+    private func runGC() throws {
+        try Ruby.get("GC").call("start")
+    }
+
+    // Test RbObject alive prevents GC AND RbObject dead allows GC
+    func testObjectGc() {
+        doErrorFree {
+            try Ruby.require(filename: Helpers.fixturePath("methods.rb"))
+
+            try runGC()
+
+            let initialMTCount = try getMethodsTestHeapCount()
+
+            do {
+                let o = RbObject(ofClass: "MethodsTest")!
+
+                XCTAssertEqual(initialMTCount + 1, try getMethodsTestHeapCount())
+                print("Hey Swift, please don't optimize away \(o)")
+            }
+
+            try runGC()
+
+            XCTAssertEqual(initialMTCount, try getMethodsTestHeapCount())
+        }
+    }
+
+    // Test Ruby stack snooping GC works
+    func testStackGc() {
+        doErrorFree {
+            try Ruby.require(filename: Helpers.fixturePath("methods.rb"))
+
+            try runGC()
+
+            let initialMTCount = try getMethodsTestHeapCount()
+
+            func innerFunction() throws {
+                let value = RbObject(ofClass: "MethodsTest")!.withRubyValue { $0 }
+                XCTAssertEqual(initialMTCount + 1, try getMethodsTestHeapCount())
+                try runGC()
+                XCTAssertEqual(initialMTCount + 1, try getMethodsTestHeapCount())
+                print("Hey Swift, please don't optimize away \(value)")
+            }
+
+            try innerFunction()
+
+            try runGC()
+            XCTAssertEqual(initialMTCount, try getMethodsTestHeapCount())
+        }
+    }
+
     static var allTests = [
         ("testSimple", testSimple),
-        ("testObject", testObject),
         ("testCopy", testCopy),
         ("testConversions", testConversions),
         ("testInspect", testInspect),
@@ -183,6 +227,8 @@ class TestRbObject: XCTestCase {
         ("testHashing", testHashing),
         ("testComparable", testComparable),
         ("testAssociatedObjects", testAssociatedObjects),
-        ("testOptionalConformance", testOptionalConformance)
+        ("testOptionalConformance", testOptionalConformance),
+        ("testObjectGc", testObjectGc),
+        ("testStackGc", testStackGc)
     ]
 }
