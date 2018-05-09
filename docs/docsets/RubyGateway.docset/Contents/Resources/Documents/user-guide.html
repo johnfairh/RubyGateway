@@ -219,6 +219,7 @@ see <a href="index.html">the README</a>.</p>
 <li><a href="#concurrency">Concurrency and multi-threading</a></li>
 <li><a href="#caveats-and-gotchas">Health warning</a></li>
 <li><a href="#using-the-cruby-api">Using the libruby API</a></li>
+<li><a href="#garbage-collection">Garbage collection notes</a></li>
 </ul>
 <h2 id='general-usage' class='heading'>General Usage</h2>
 
@@ -495,6 +496,17 @@ the arity of its block will not work as expected.</p>
 
 <p>Ruby&rsquo;s <code>Hash#each</code> suffers from this: instead of getting the key and value
 passed separately you get one parameter, a two-element array of key and value.</p>
+<h3 id='ruby-code-safety' class='heading'>Ruby code safety</h3>
+
+<p>RubyGateway puts no restriction on what Ruby code can do: it can access the
+filesystem, exit the process, and has complete access to the process&rsquo;s memory.</p>
+
+<p>Ruby has historically had a <code>$SAFE</code> feature that did some amount of sandboxing.
+This has been slowly removed over the years and what remains is a debugging
+feature that can be enabled via <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C11taintChecksSbvp">RbGateway.taintChecks</a></code>.</p>
+
+<p>Dealing with actively hostile Ruby code is best done with a separate process
+or container; several examples on github.</p>
 <h2 id='using-the-cruby-api' class='heading'>Using the CRuby API</h2>
 
 <p>The <a href="https://github.com/johnfairh/CRuby">CRuby</a> package provides access to as
@@ -510,17 +522,37 @@ can access that <code>VALUE</code> using <code><a href="Classes/RbObject.html#/s
 
 <p>Note that when you call the Ruby API and Ruby raises an exception, the process
 immediately crashes unless you are running inside <code>rb_protect()</code> or equivalent.</p>
-<h3 id='ruby-code-safety' class='heading'>Ruby code safety</h3>
+<h3 id='garbage-collection' class='heading'>Garbage collection</h3>
 
-<p>RubyGateway puts no restriction on what Ruby code can do: it can access the
-filesystem, exit the process, and has complete access to the process&rsquo;s memory.</p>
+<p>The main risk using the <code>libruby</code> API is that GC happens too early on objects
+you are trying to work with.</p>
 
-<p>Ruby has historically had a <code>$SAFE</code> feature that did some amount of sandboxing.
-This has been slowly removed over the years and what remains is a debugging
-feature that can be enabled via <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C11taintChecksSbvp">RbGateway.taintChecks</a></code>.</p>
+<p>Ruby uses a mark and sweep GC.  This means the GC must be able to find the root
+objects while they are live.  Two relevant techniques for this are:</p>
 
-<p>Dealing with actively hostile Ruby code is best done with a separate process
-or container; several examples on github.</p>
+<ol>
+<li>A list of known root objects;</li>
+<li>Stack snooping.</li>
+</ol>
+
+<p><code><a href="Classes/RbObject.html">RbObject</a></code> holds one <code>VALUE</code> and stores it on the known list while the Swift
+object is alive.  So if you solely use <code><a href="Classes/RbObject.html">RbObject</a></code>s then everything should be
+fine. The only risk is that the Swift object dies before you expect it to;
+the standard library includes <code>withExtendedLifetime(_:_:)</code> to help reason about
+this.</p>
+
+<p>Ruby GC scans the stack of each Ruby thread searching for <code>VALUE</code>s.  In very
+old Ruby, the position of the stack was found from the address of a local
+variable in an init function.  In modern Ruby, at least on Darwin &amp; Linux,
+various pthread APIs are used instead which means there are no unwritten
+rules about where the init function is called.</p>
+
+<p>See <code>TestRbObject.testStackGc()</code> for a demo of this working in Swift.</p>
+
+<p>This relies on the compiler actually placing <code>VALUE</code>s on the stack, which it is
+not obliged to do.  In C the <code>RB_GC_GUARD()</code> macro forces its hand &ndash; a similar
+thing should work in Swift but I haven&rsquo;t managed to find a situation where the
+Swift compiler does <em>not</em> put it on the stack so can&rsquo;t test it.</p>
 <h3 id='references' class='heading'>References</h3>
 
 <ul>

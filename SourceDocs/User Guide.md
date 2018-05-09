@@ -8,6 +8,7 @@ see [the README](index.html).
 * [Concurrency and multi-threading](#concurrency)
 * [Health warning](#caveats-and-gotchas)
 * [Using the libruby API](#using-the-cruby-api)
+* [Garbage collection notes](#garbage-collection)
 
 ## General Usage
 
@@ -312,6 +313,18 @@ the arity of its block will not work as expected.
 Ruby's `Hash#each` suffers from this: instead of getting the key and value
 passed separately you get one parameter, a two-element array of key and value.
 
+### Ruby code safety
+
+RubyGateway puts no restriction on what Ruby code can do: it can access the
+filesystem, exit the process, and has complete access to the process's memory.
+
+Ruby has historically had a `$SAFE` feature that did some amount of sandboxing.
+This has been slowly removed over the years and what remains is a debugging
+feature that can be enabled via `RbGateway.taintChecks`.
+
+Dealing with actively hostile Ruby code is best done with a separate process
+or container; several examples on github.
+
 ## Using the CRuby API
 
 The [CRuby](https://github.com/johnfairh/CRuby) package provides access to as
@@ -328,17 +341,34 @@ RubyGateway caches intern'ed Ruby strings - you can access the cache using
 Note that when you call the Ruby API and Ruby raises an exception, the process
 immediately crashes unless you are running inside `rb_protect()` or equivalent.
 
-### Ruby code safety
+### Garbage collection
 
-RubyGateway puts no restriction on what Ruby code can do: it can access the
-filesystem, exit the process, and has complete access to the process's memory.
+The main risk using the `libruby` API is that GC happens too early on objects
+you are trying to work with.
 
-Ruby has historically had a `$SAFE` feature that did some amount of sandboxing.
-This has been slowly removed over the years and what remains is a debugging
-feature that can be enabled via `RbGateway.taintChecks`.
+Ruby uses a mark and sweep GC.  This means the GC must be able to find the root
+objects while they are live.  Two relevant techniques for this are:
+1. A list of known root objects;
+2. Stack snooping.
 
-Dealing with actively hostile Ruby code is best done with a separate process
-or container; several examples on github.
+`RbObject` holds one `VALUE` and stores it on the known list while the Swift
+object is alive.  So if you solely use `RbObject`s then everything should be
+fine. The only risk is that the Swift object dies before you expect it to;
+the standard library includes `withExtendedLifetime(_:_:)` to help reason about
+this.
+
+Ruby GC scans the stack of each Ruby thread searching for `VALUE`s.  In very
+old Ruby, the position of the stack was found from the address of a local
+variable in an init function.  In modern Ruby, at least on Darwin & Linux,
+various pthread APIs are used instead which means there are no unwritten
+rules about where the init function is called.
+
+See `TestRbObject.testStackGc()` for a demo of this working in Swift.
+
+This relies on the compiler actually placing `VALUE`s on the stack, which it is
+not obliged to do.  In C the `RB_GC_GUARD()` macro forces its hand -- a similar
+thing should work in Swift but I haven't managed to find a situation where the
+Swift compiler does *not* put it on the stack so can't test it.
 
 ### References
 

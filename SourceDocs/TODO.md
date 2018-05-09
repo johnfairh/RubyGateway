@@ -1,10 +1,6 @@
-## 0.6 plan
-
-* Refactor testcases
-
 ## "1.0" feeling 
 
-Stern GC review, especially non-Darwin
+? nothing left ?
 
 ## "Post 1.0" feeling
 
