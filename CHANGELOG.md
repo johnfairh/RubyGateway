@@ -6,11 +6,16 @@
 
 ##### Enhancements
 
-* Add `RbGateway.taintChecks`
+* None.
 
 ##### Bug Fixes
 
 * None.
+
+## 1.0.0 - 11th May 2018
+
+* Add `RbGateway.taintChecks`.
+* Full SemVer rules from now on.
 
 ## 0.5.0 - 5th May 2018
 
