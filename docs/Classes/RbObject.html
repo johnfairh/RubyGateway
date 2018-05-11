@@ -583,6 +583,312 @@ it implements <code>[]</code>, <code>[]=</code>, and <code>length</code> like Ar
             </div>
             <div class="task-group">
               <div class="task-name-container">
+                <a name="/RbObjectConvertible"></a>
+                <a name="//apple_ref/swift/Section/RbObjectConvertible" class="dashAnchor"></a>
+                <a href="#/RbObjectConvertible">
+                  <h3 class="section-name">RbObjectConvertible</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway8RbObjectCAcA0cD11Convertible_pcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway8RbObjectCAcA0cD11Convertible_pcfc">init(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create an <code>RbObject</code> from a Swift type.</p>
+
+<p>RubyGateway conforms most of the Swift standard library types
+to <code><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L38-L40">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/StringLiteral"></a>
+                <a name="//apple_ref/swift/Section/StringLiteral" class="dashAnchor"></a>
+                <a href="#/StringLiteral">
+                  <h3 class="section-name">StringLiteral</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway8RbObjectCACSS13stringLiteral_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(stringLiteral:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway8RbObjectCACSS13stringLiteral_tcfc">init(stringLiteral:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates an <code>RbObject</code> from a string literal.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="n">stringLiteral</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L92-L94">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/BooleanLiteral"></a>
+                <a name="//apple_ref/swift/Section/BooleanLiteral" class="dashAnchor"></a>
+                <a href="#/BooleanLiteral">
+                  <h3 class="section-name">BooleanLiteral</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway8RbObjectCACSb14booleanLiteral_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(booleanLiteral:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway8RbObjectCACSb14booleanLiteral_tcfc">init(booleanLiteral:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates an <code>RbObject</code> from a boolean literal.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="n">booleanLiteral</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L121-L123">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/IntegerLiteral"></a>
+                <a name="//apple_ref/swift/Section/IntegerLiteral" class="dashAnchor"></a>
+                <a href="#/IntegerLiteral">
+                  <h3 class="section-name">IntegerLiteral</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway8RbObjectCACSi14integerLiteral_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(integerLiteral:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway8RbObjectCACSi14integerLiteral_tcfc">init(integerLiteral:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates an <code>RbObject</code> from an integer literal.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="n">integerLiteral</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L187-L189">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/FloatLiteral"></a>
+                <a name="//apple_ref/swift/Section/FloatLiteral" class="dashAnchor"></a>
+                <a href="#/FloatLiteral">
+                  <h3 class="section-name">FloatLiteral</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway8RbObjectCACSd12floatLiteral_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(floatLiteral:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway8RbObjectCACSd12floatLiteral_tcfc">init(floatLiteral:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates an <code>RbObject</code> from a floating-point literal.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="n">floatLiteral</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Double</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L224-L226">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/ArrayLiteral"></a>
+                <a name="//apple_ref/swift/Section/ArrayLiteral" class="dashAnchor"></a>
+                <a href="#/ArrayLiteral">
+                  <h3 class="section-name">ArrayLiteral</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway8RbObjectCA2C12arrayLiterald_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(arrayLiteral:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway8RbObjectCA2C12arrayLiterald_tcfc">init(arrayLiteral:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates an <code>RbObject</code> from an array literal.</p>
+
+<p>Although the element type here is <code>RbObject</code> you can write things like:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">obj</span><span class="p">:</span> <span class="kt">RbObject</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</code></pre>
+
+<p>&hellip; because of <code>RbObject</code>&lsquo;s <code>ExpressibleByIntegerLiteral</code> conformance
+that gets applied recursively.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="n">arrayLiteral</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">RbObject</span><span class="o">...</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L304-L306">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/DictionaryLiteral"></a>
+                <a name="//apple_ref/swift/Section/DictionaryLiteral" class="dashAnchor"></a>
+                <a href="#/DictionaryLiteral">
+                  <h3 class="section-name">DictionaryLiteral</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway8RbObjectCA2C_ACt17dictionaryLiterald_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(dictionaryLiteral:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway8RbObjectCA2C_ACt17dictionaryLiterald_tcfc">init(dictionaryLiteral:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates an <code>RbObject</code> from a dictionary literal.</p>
+
+<p>Although the key and value types here are <code>RbObject</code> you can write things like:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">obj</span><span class="p">:</span> <span class="kt">RbObject</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span> <span class="s">"fish"</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s">"bucket"</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s">"wife"</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s">"goat"</span><span class="p">]</span>
+</code></pre>
+
+<p>&hellip; because of <code>RbObject</code>&lsquo;s <code>ExpressibleByXxxLiteral</code> conformance
+that gets applied recursively.</p>
+
+<p>Like a regular <code>Dictionary</code> there must be no duplicate keys in the <code>elements</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="n">dictionaryLiteral</span> <span class="nv">elements</span><span class="p">:</span> <span class="p">(</span><span class="kt">RbObject</span><span class="p">,</span> <span class="kt">RbObject</span><span class="p">)</span><span class="o">...</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L396-L398">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
                 <a name="/Useful%20Initializers"></a>
                 <a name="//apple_ref/swift/Section/Useful Initializers" class="dashAnchor"></a>
                 <a href="#/Useful%20Initializers">
@@ -1602,312 +1908,6 @@ work:</p>
                 </li>
               </ul>
             </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/RbObjectConvertible"></a>
-                <a name="//apple_ref/swift/Section/RbObjectConvertible" class="dashAnchor"></a>
-                <a href="#/RbObjectConvertible">
-                  <h3 class="section-name">RbObjectConvertible</h3>
-                </a>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway8RbObjectCAcA0cD11Convertible_pcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway8RbObjectCAcA0cD11Convertible_pcfc">init(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Create an <code>RbObject</code> from a Swift type.</p>
-
-<p>RubyGateway conforms most of the Swift standard library types
-to <code><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code>.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L38-L40">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/StringLiteral"></a>
-                <a name="//apple_ref/swift/Section/StringLiteral" class="dashAnchor"></a>
-                <a href="#/StringLiteral">
-                  <h3 class="section-name">StringLiteral</h3>
-                </a>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway8RbObjectCACSS13stringLiteral_tcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(stringLiteral:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway8RbObjectCACSS13stringLiteral_tcfc">init(stringLiteral:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Creates an <code>RbObject</code> from a string literal.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="n">stringLiteral</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L92-L94">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/BooleanLiteral"></a>
-                <a name="//apple_ref/swift/Section/BooleanLiteral" class="dashAnchor"></a>
-                <a href="#/BooleanLiteral">
-                  <h3 class="section-name">BooleanLiteral</h3>
-                </a>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway8RbObjectCACSb14booleanLiteral_tcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(booleanLiteral:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway8RbObjectCACSb14booleanLiteral_tcfc">init(booleanLiteral:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Creates an <code>RbObject</code> from a boolean literal.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="n">booleanLiteral</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L121-L123">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/IntegerLiteral"></a>
-                <a name="//apple_ref/swift/Section/IntegerLiteral" class="dashAnchor"></a>
-                <a href="#/IntegerLiteral">
-                  <h3 class="section-name">IntegerLiteral</h3>
-                </a>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway8RbObjectCACSi14integerLiteral_tcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(integerLiteral:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway8RbObjectCACSi14integerLiteral_tcfc">init(integerLiteral:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Creates an <code>RbObject</code> from an integer literal.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="n">integerLiteral</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L187-L189">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/FloatLiteral"></a>
-                <a name="//apple_ref/swift/Section/FloatLiteral" class="dashAnchor"></a>
-                <a href="#/FloatLiteral">
-                  <h3 class="section-name">FloatLiteral</h3>
-                </a>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway8RbObjectCACSd12floatLiteral_tcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(floatLiteral:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway8RbObjectCACSd12floatLiteral_tcfc">init(floatLiteral:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Creates an <code>RbObject</code> from a floating-point literal.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="n">floatLiteral</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Double</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L224-L226">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/ArrayLiteral"></a>
-                <a name="//apple_ref/swift/Section/ArrayLiteral" class="dashAnchor"></a>
-                <a href="#/ArrayLiteral">
-                  <h3 class="section-name">ArrayLiteral</h3>
-                </a>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway8RbObjectCA2C12arrayLiterald_tcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(arrayLiteral:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway8RbObjectCA2C12arrayLiterald_tcfc">init(arrayLiteral:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Creates an <code>RbObject</code> from an array literal.</p>
-
-<p>Although the element type here is <code>RbObject</code> you can write things like:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">obj</span><span class="p">:</span> <span class="kt">RbObject</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-</code></pre>
-
-<p>&hellip; because of <code>RbObject</code>&lsquo;s <code>ExpressibleByIntegerLiteral</code> conformance
-that gets applied recursively.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="n">arrayLiteral</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">RbObject</span><span class="o">...</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L304-L306">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/DictionaryLiteral"></a>
-                <a name="//apple_ref/swift/Section/DictionaryLiteral" class="dashAnchor"></a>
-                <a href="#/DictionaryLiteral">
-                  <h3 class="section-name">DictionaryLiteral</h3>
-                </a>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway8RbObjectCA2C_ACt17dictionaryLiterald_tcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(dictionaryLiteral:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway8RbObjectCA2C_ACt17dictionaryLiterald_tcfc">init(dictionaryLiteral:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Creates an <code>RbObject</code> from a dictionary literal.</p>
-
-<p>Although the key and value types here are <code>RbObject</code> you can write things like:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">obj</span><span class="p">:</span> <span class="kt">RbObject</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span> <span class="s">"fish"</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s">"bucket"</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s">"wife"</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s">"goat"</span><span class="p">]</span>
-</code></pre>
-
-<p>&hellip; because of <code>RbObject</code>&lsquo;s <code>ExpressibleByXxxLiteral</code> conformance
-that gets applied recursively.</p>
-
-<p>Like a regular <code>Dictionary</code> there must be no duplicate keys in the <code>elements</code>.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="n">dictionaryLiteral</span> <span class="nv">elements</span><span class="p">:</span> <span class="p">(</span><span class="kt">RbObject</span><span class="p">,</span> <span class="kt">RbObject</span><span class="p">)</span><span class="o">...</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L396-L398">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
           </div>
         </section>
 
@@ -1915,7 +1915,7 @@ that gets applied recursively.</p>
     </div>
     <section class="footer">
       <p>Distributed under the MIT license.  Maintained by <a class="link" href="mailto:johnfairh@gmail.com" target="_blank" rel="external">John Fairhurst</a>.</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>-<a class="link" href="https://github.com/johnfairh/jazzy" target="_blank" rel="external">bebop</a>, originally a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>-<a class="link" href="https://github.com/johnfairh/jazzy" target="_blank" rel="external">bebop</a>, originally a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

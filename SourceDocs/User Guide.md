@@ -78,13 +78,19 @@ RubyBridge provides extensions to most Swift types so you can initialize
 
 ### Exchange `nil` with Ruby
 
-The static `RbObject.nilObject` represents Ruby nil and can be passed to Ruby
+The static `RbObject.nilObject` represents Ruby `nil` and can be passed to Ruby
 methods as a parameter or used in data structures.  As a short-hand you can use
 literal Swift `nil` with APIs like `RbObjectAccess.call(_:args:kwArgs:)`.
 
 When Ruby returns `nil` to Swift it always comes through as an `RbObject`.  You
 can compare this directly to `RbObject.nilObject` or use `RbObject.isNil` to
 test it.
+
+If you want to include Ruby `nil` in a heterogenous array use this kind of
+syntax:
+```swift
+let arr: RbObject = [1, 2.0, "three", .nilObject]
+```
 
 ### Deal with Ruby arrays
 

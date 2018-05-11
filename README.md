@@ -20,9 +20,10 @@ running on macOS or Linux painlessly and safely run and interact with Ruby
 programs.  It's easy to pass Swift datatypes into Ruby and turn Ruby objects
 back into Swift types.
 
-This project is [young](https://johnfairh.github.io/RubyGateway/todo.html).
-Eventually plan to allow implementation of Ruby classes in Swift, enabling Ruby as
-a DSL/scripting language for Swift applications.
+The current version of the framework entirely covers calling Ruby from Swift,
+including passing Swift closures as blocks.  The main
+[features to add](https://johnfairh.github.io/RubyGateway/todo.html) cover
+implementing Ruby classes and methods in Swift.
 
 See [CRuby](https://github.com/johnfairh/CRuby) if you are looking for a
 low-level Ruby C API wrapper.
@@ -35,8 +36,6 @@ low-level Ruby C API wrapper.
 * [License](#license)
 
 ## Examples
-
-A couple of examples:
 
 ### Services
 
