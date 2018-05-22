@@ -73,8 +73,7 @@ RubyBridge provides extensions to most Swift types so you can initialize
 * `Array` or `ArraySlice` with supported element type
 * `Dictionary` with supported key and value types
 * `Set` with supported element type
-* Range types with supported bound types - `Range`, `CountableRange`,
-  `ClosedRange`, `ClosedCountableRange`
+* Range types with supported bound types - `Range`, `ClosedRange`
 
 ### Exchange `nil` with Ruby
 

@@ -70,7 +70,5 @@ custom_categories:
           - Set
           - Range
           - ClosedRange
-          - CountableRange
-          - CountableClosedRange
           - RbComplex
           - RbRational
