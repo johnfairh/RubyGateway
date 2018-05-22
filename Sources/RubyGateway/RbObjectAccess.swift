@@ -54,6 +54,7 @@ import RubyGatewayHelpers
 ///     ...
 /// }
 /// ```
+@dynamicMemberLookup
 public class RbObjectAccess {
     /// Getter for the `VALUE` associated with this object
     private let getValue: () -> VALUE
@@ -601,5 +602,20 @@ extension RbObjectAccess {
             return try getClassVar(name)
         }
         return try call(name)
+    }
+
+    /// Enable dynamic member lookup.
+    ///
+    /// This forwards unknown member access to `get(_:)`.  It returns
+    /// `nil` when there has been a Ruby exception.  The Swift error
+    /// describing the Ruby exception can be retrieved from `RbError.history`.
+    public subscript(dynamicMember name: String) -> RbObject? {
+        do {
+            let ret = try get(name)
+            return ret
+        } catch {
+            print(error)
+            return nil
+        }
     }
 }
