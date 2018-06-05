@@ -210,7 +210,13 @@ class TestRbObject: XCTestCase {
                 print("Hey Swift, please don't optimize away \(value)")
             }
 
+            func innerFunction2() {
+                let value = RbObject(ofClass: "Array")!.withRubyValue { $0 }
+                print("Let's try to wipe out that stack value.... \(value)")
+            }
+
             try innerFunction()
+            innerFunction2()
 
             try runGC()
             XCTAssertEqual(initialMTCount, try getMethodsTestHeapCount())
