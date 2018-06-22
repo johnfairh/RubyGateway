@@ -419,7 +419,10 @@
 						ProvisioningStyle = Automatic;
 					};
 					"TMLRuby::TMLRuby" = {
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 1000;
+					};
+					"TMLRuby::TMLRubyTests" = {
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -727,7 +730,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_NAME = RubyGatewayTests;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGET_NAME = RubyGatewayTests;
 			};
 			name = Debug;
@@ -790,7 +793,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_NAME = RubyGatewayTests;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGET_NAME = RubyGatewayTests;
 			};
 			name = Release;
@@ -816,7 +819,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "${SRCROOT}/CRuby ${SRCROOT}/Sources/RubyGatewayHelpers";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGET_NAME = RubyGateway;
 			};
 			name = Debug;
@@ -841,7 +844,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "${SRCROOT}/CRuby ${SRCROOT}/Sources/RubyGatewayHelpers";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGET_NAME = RubyGateway;
 			};
 			name = Release;
