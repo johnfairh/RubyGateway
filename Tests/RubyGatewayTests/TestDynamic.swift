@@ -2,33 +2,71 @@
 //  TestDynamic.swift
 //  RubyGatewayTests
 //
-//  Created by John Fairhurst on 22/05/2018.
+//  Distributed under the MIT license, see LICENSE
 //
 
 import XCTest
+import RubyGateway
 
+// Tests for dynamic member function
 class TestDynamic: XCTestCase {
 
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
+    /// Getter
+    func testDynamicMemberLookupRead() {
+        doErrorFree {
+            try Ruby.require(filename: Helpers.fixturePath("methods.rb"))
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+            guard let obj = RbObject(ofClass: "MethodsTest") else {
+                XCTFail("Couldn't create object")
+                return
+            }
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+            guard let strObj = obj.property else {
+                XCTFail("Couldn't access member 'property'")
+                return
+            }
+
+            XCTAssertEqual("Default", String(strObj))
+
+            if let mysterious = obj.not_a_member {
+                XCTFail("Accessed not_a_member: \(mysterious)")
+                return
+            }
         }
     }
 
+    /// Write
+    func testDynamicMemberLookupWrite() {
+        doErrorFree {
+            try Ruby.require(filename: Helpers.fixturePath("methods.rb"))
+
+            guard let obj = RbObject(ofClass: "MethodsTest") else {
+                XCTFail("Couldn't create object")
+                return
+            }
+
+            let newValue = "Changed it!"
+            obj.property = RbObject(newValue)
+
+            guard let strObj = obj.property else {
+                XCTFail("Couldn't access member 'property'")
+                return
+            }
+
+            XCTAssertEqual(newValue, String(strObj))
+
+            RbError.history.clear()
+            obj.bad_property = RbObject(23)
+            XCTAssertNotNil(RbError.history.mostRecent)
+
+            RbError.history.clear()
+            obj.property = nil
+            XCTAssertEqual(.nilObject, obj.property)
+        }
+    }
+
+    static var allTests = [
+        ("testDynamicMemberLookupRead", testDynamicMemberLookupRead),
+        ("testDynamicMemberLookupWrite", testDynamicMemberLookupWrite),
+    ]
 }

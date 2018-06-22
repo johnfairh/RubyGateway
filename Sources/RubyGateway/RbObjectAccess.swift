@@ -33,11 +33,11 @@ import RubyGatewayHelpers
 ///    a Ruby Proc.
 /// 4. Method can either raise an exception or return a value.
 ///
-/// From the simple end:
+/// From the simple:
 /// ```swift
 /// try! obj.call("myMethod")
 /// ```
-/// ...to:
+/// ...to more baroque:
 /// ```swift
 /// do {
 ///     let result =
@@ -54,6 +54,17 @@ import RubyGatewayHelpers
 ///     ...
 /// }
 /// ```
+///
+/// ## Dynamic Member Lookup
+///
+/// This feature lets you access Ruby properties or 0-argument methods directly,
+/// for example:
+/// ```swift
+/// let currentName = myRbObject.real_name
+/// myObject.real_name = RbObject("Anonymous")
+/// ```
+/// ...where `real_name` is not defined in Swift at all but is the underlying Ruby
+/// property.  See `RbObject.subscript(dynamicMember:)`.
 @dynamicMemberLookup
 public class RbObjectAccess {
     /// Getter for the `VALUE` associated with this object
@@ -604,18 +615,31 @@ extension RbObjectAccess {
         return try call(name)
     }
 
-    /// Enable dynamic member lookup.
+    /// Dynamic member lookup.
     ///
-    /// This forwards unknown member access to `get(_:)`.  It returns
-    /// `nil` when there has been a Ruby exception.  The Swift error
+    /// Reads from unknown members are forwared to `get(_:)`.  The method
+    /// returns `nil` when there has been a Ruby exception.  The Swift error
     /// describing the Ruby exception can be retrieved from `RbError.history`.
+    ///
+    /// Writes to unknown members are converted to property setters.  Any
+    /// errors cannot be detected at the call site and must be checked via
+    /// `RbError.history`.  For example:
+    /// ```swift
+    /// // Using dynamic member lookup:
+    /// obj.property = RbObject(5)
+    ///
+    /// // Same as:
+    /// obj.call("property=", args: [5])
+    /// ```
+    /// On the write direction the assigned type must be `RbObject`, no
+    /// implicit conversion via `RbObjectConvertible` here.
+    /// These are all current Swift limitations.
     public subscript(dynamicMember name: String) -> RbObject? {
-        do {
-            let ret = try get(name)
-            return ret
-        } catch {
-            print(error)
-            return nil
+        get {
+            return try? get(name)
+        }
+        set {
+            _ = try? call("\(name)=", args: [newValue ?? .nilObject])
         }
     }
 }
