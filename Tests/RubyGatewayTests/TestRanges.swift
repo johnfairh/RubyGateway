@@ -13,13 +13,13 @@ class TestRanges: XCTestCase {
     // basic round-tripping
 
     func testRoundTrip() {
-        let range = Range(13..<29)
+        let range = 13..<29
         let rbRange = range.rubyObject
         XCTAssertEqual(range, Range<Int>(rbRange))
     }
 
     func testRoundTripClosed() {
-        let range = ClosedRange(13...29)
+        let range = 13...29
         let rbRange = range.rubyObject
         XCTAssertEqual(range, ClosedRange<Int>(rbRange))
     }

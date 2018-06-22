@@ -418,8 +418,6 @@ extension Optional: RbObjectConvertible where Wrapped == RbObjectConvertible {
 
 // MARK: - Range<RbObjectConvertible>
 
-// Bit of a mess of types here.  Half of them will go away in 4.2.
-
 /// Helper to extract range parameters from something that quacks
 /// like a Ruby Range.
 private func decodeRange<T>(_ object: RbObject, halfOpen: Bool) -> (T, T)? where T: RbObjectConvertible & Comparable {
