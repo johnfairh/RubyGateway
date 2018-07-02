@@ -225,7 +225,7 @@ pre code {
   .item a[name]:before {
     content: "";
     display: block; }
-  .item .token {
+  .item .token, .item .direct-link {
     padding-left: 3px;
     margin-left: 0px;
     font-size: 1rem; }

@@ -210,7 +210,7 @@
             <h1>Dictionary</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Dictionary</span><span class="o">&lt;</span><span class="kt">Key</span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">Key</span> <span class="p">:</span> <span class="kt">Hashable</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/dictionary/">Dictionary</a></span><span class="o">&lt;</span><span class="kt">Key</span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">Key</span> <span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/hashable/">Hashable</a></span></code></pre>
 
                 </div>
               </div>
@@ -237,7 +237,7 @@ types conform to <code><a href="../Protocols/RbObjectConvertible.html">RbObjectC
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Try to get a <code>Dictionary</code> representation of an <code><a href="../Classes/RbObject.html">RbObject</a></code> that is a Ruby hash.</p>
+                        <p>Try to get a <code><a href="https://developer.apple.com/documentation/swift/dictionary/">Dictionary</a></code> representation of an <code><a href="../Classes/RbObject.html">RbObject</a></code> that is a Ruby hash.</p>
 
 <p>Based on <code>Kernel#Hash</code>: will attempt <code>to_hash</code> then <code>to_h</code>, has a weird
 special case for an empty array, otherwise fails.</p>
@@ -277,7 +277,7 @@ to the corresponding Swift types.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Create a Ruby hash object for this <code>Dictionary</code>.</p>
+                        <p>Create a Ruby hash object for this <code><a href="https://developer.apple.com/documentation/swift/dictionary/">Dictionary</a></code>.</p>
 
 <p>If multiple Swift <code>Key</code>s convert to the same Ruby Key objects
 then the conversion fails and the routine returns <code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectC03nilD0ACvpZ">RbObject.nilObject</a></code>.

@@ -340,7 +340,7 @@ so you can update a Ruby array like:</p>
 </code></pre>
 <h2 id='standard-library-conformances' class='heading'>Standard library conformances</h2>
 
-<p><code>RbObject</code> conforms to <code>Hashable</code>, <code>Equatable</code>, and <code>Comparable</code> protocols by
+<p><code>RbObject</code> conforms to <code><a href="https://developer.apple.com/documentation/swift/hashable/">Hashable</a></code>, <code><a href="https://developer.apple.com/documentation/swift/equatable/">Equatable</a></code>, and <code><a href="https://developer.apple.com/documentation/swift/comparable/">Comparable</a></code> protocols by
 forwarding to the corresponding Ruby methods.  Beware though that it is easy
 to trigger Ruby errors here that currently cause RubyGateway to crash.  For
 example this is poison:</p>
@@ -350,7 +350,7 @@ example this is poison:</p>
 <p>I plan to add more control over what happens here.</p>
 <h2 id='arithmetic-operators' class='heading'>Arithmetic operators</h2>
 
-<p><code>RbObject</code> conforms to the <code>SignedNumeric</code> protocol by forwarding the regular
+<p><code>RbObject</code> conforms to the <code><a href="https://developer.apple.com/documentation/swift/signednumeric/">SignedNumeric</a></code> protocol by forwarding the regular
 arithmetic operators to the corresponding Ruby methods.  This means you can
 write <code>let a = b + c</code> where all are <code>RbObject</code>s and get a valid value for <code>a</code>
 provided <code>b</code> and <code>c</code> are any of the Ruby numeric values or any Ruby class that
@@ -489,9 +489,9 @@ namespace.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RbObjectCollection</span><span class="p">:</span> <span class="kt">RandomAccessCollection</span><span class="p">,</span>
-                                  <span class="kt">MutableCollection</span><span class="p">,</span>
-                                  <span class="kt">RangeReplaceableCollection</span><span class="p">,</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RbObjectCollection</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/randomaccesscollection/">RandomAccessCollection</a></span><span class="p">,</span>
+                                  <span class="kt"><a href="https://developer.apple.com/documentation/swift/mutablecollection/">MutableCollection</a></span><span class="p">,</span>
+                                  <span class="kt"><a href="https://developer.apple.com/documentation/swift/rangereplaceablecollection/">RangeReplaceableCollection</a></span><span class="p">,</span>
                                   <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
 
                         </div>

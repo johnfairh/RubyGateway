@@ -217,7 +217,7 @@
             <p>This type provides a namespace for working with Ruby threads.</p>
 
 <p>You cannot call Ruby on arbitrary threads: only the very first thread
-where RubyGateway gets used or threads created by Ruby&rsquo;s <code>Thread</code> class.</p>
+where RubyGateway gets used or threads created by Ruby&rsquo;s <code><a href="https://developer.apple.com/documentation/foundation/thread/">Thread</a></code> class.</p>
 
 <p>There is no way to &lsquo;attach&rsquo; the Ruby runtime to a thread created by client
 code (eg. one accessed via libdispatch).</p>
@@ -253,7 +253,7 @@ that is allowed to call Ruby using <code><a href="../Enums/RbThread.html#/s:11Ru
                       <div class="abstract">
                         <p>Create a Ruby thread.</p>
 
-<p>This is a simple wrapper around creating a Ruby <code>Thread</code> object.</p>
+<p>This is a simple wrapper around creating a Ruby <code><a href="https://developer.apple.com/documentation/foundation/thread/">Thread</a></code> object.</p>
 <div class="aside aside-note">
     <p class="aside-title">Note</p>
     You must retain the returned <code><a href="../Classes/RbObject.html">RbObject</a></code> until the Ruby thread
@@ -292,7 +292,7 @@ that is allowed to call Ruby using <code><a href="../Enums/RbThread.html#/s:11Ru
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>The Ruby <code>Thread</code> object, or <code>nil</code> if there was a problem.
+                        <p>The Ruby <code><a href="https://developer.apple.com/documentation/foundation/thread/">Thread</a></code> object, or <code>nil</code> if there was a problem.
        See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> for details of any error.</p>
                       </div>
                       <div class="slightly-smaller">
@@ -321,7 +321,7 @@ that is allowed to call Ruby using <code><a href="../Enums/RbThread.html#/s:11Ru
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">isRubyThread</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">isRubyThread</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/bool/">Bool</a></span></code></pre>
 
                         </div>
                       </div>

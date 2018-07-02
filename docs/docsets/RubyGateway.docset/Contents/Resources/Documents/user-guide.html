@@ -246,7 +246,7 @@ passing Swift code as a block.  Again pass Swift types or <code><a href="Classes
 <code>args</code> parameter.</p>
 
 <p>Use optional initializers to convert from <code><a href="Classes/RbObject.html">RbObject</a></code>s back to Swift types, or
-implicitly/explicitly access <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC11descriptionSSvp">RbObject.description</a></code> if you just want <code>String</code>.</p>
+implicitly/explicitly access <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC11descriptionSSvp">RbObject.description</a></code> if you just want <code><a href="https://developer.apple.com/documentation/swift/string/">String</a></code>.</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">RubyGateway</span>
 
 <span class="k">do</span> <span class="p">{</span>
@@ -272,16 +272,16 @@ which will sometimes require driving the Ruby code in these ways.</p>
 <code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pSgG4argss17DictionaryLiteralVySSAHG6kwArgstKF">RbObjectAccess.call(...)</a></code> and friends.  Supported types are:</p>
 
 <ul>
-<li><code>Bool</code></li>
-<li><code>String</code></li>
-<li>Floating point - <code>Float</code> and <code>Double</code></li>
-<li>Unsigned integer - <code>UInt</code>, <code>UInt64</code>, <code>UInt32</code>, <code>UInt16</code>, <code>UInt8</code></li>
-<li>Signed integer - <code>Int</code>, <code>Int64</code>, <code>Int32</code>, <code>Int16</code>, <code>Int8</code></li>
-<li><code>Array</code> or <code>ArraySlice</code> with supported element type</li>
-<li><code>Dictionary</code> with supported key and value types</li>
-<li><code>Set</code> with supported element type</li>
-<li>Range types with supported bound types - <code>Range</code>, <code>CountableRange</code>,
-<code>ClosedRange</code>, <code>ClosedCountableRange</code></li>
+<li><code><a href="https://developer.apple.com/documentation/swift/bool/">Bool</a></code></li>
+<li><code><a href="https://developer.apple.com/documentation/swift/string/">String</a></code></li>
+<li>Floating point - <code><a href="https://developer.apple.com/documentation/swift/float/">Float</a></code> and <code><a href="https://developer.apple.com/documentation/swift/double/">Double</a></code></li>
+<li>Unsigned integer - <code><a href="https://developer.apple.com/documentation/swift/uint/">UInt</a></code>, <code><a href="https://developer.apple.com/documentation/swift/uint64/">UInt64</a></code>, <code><a href="https://developer.apple.com/documentation/swift/uint32/">UInt32</a></code>, <code><a href="https://developer.apple.com/documentation/swift/uint16/">UInt16</a></code>, <code><a href="https://developer.apple.com/documentation/swift/uint8/">UInt8</a></code></li>
+<li>Signed integer - <code><a href="https://developer.apple.com/documentation/swift/int/">Int</a></code>, <code><a href="https://developer.apple.com/documentation/swift/int64/">Int64</a></code>, <code><a href="https://developer.apple.com/documentation/swift/int32/">Int32</a></code>, <code><a href="https://developer.apple.com/documentation/swift/int16/">Int16</a></code>, <code><a href="https://developer.apple.com/documentation/swift/int8/">Int8</a></code></li>
+<li><code><a href="https://developer.apple.com/documentation/swift/array/">Array</a></code> or <code><a href="https://developer.apple.com/documentation/swift/arrayslice/">ArraySlice</a></code> with supported element type</li>
+<li><code><a href="https://developer.apple.com/documentation/swift/dictionary/">Dictionary</a></code> with supported key and value types</li>
+<li><code><a href="https://developer.apple.com/documentation/swift/set/">Set</a></code> with supported element type</li>
+<li>Range types with supported bound types - <code><a href="https://developer.apple.com/documentation/swift/range/">Range</a></code>, <code><a href="https://developer.apple.com/documentation/swift/countablerange/">CountableRange</a></code>,
+<code><a href="https://developer.apple.com/documentation/swift/closedrange/">ClosedRange</a></code>, <code>ClosedCountableRange</code></li>
 </ul>
 <h3 id='exchange-code-nil-code-with-ruby' class='heading'>Exchange <code>nil</code> with Ruby</h3>
 

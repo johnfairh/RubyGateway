@@ -23,7 +23,7 @@ function openCurrentItemIfClosed() {
   if (jazzy.docset) {
     return
   }
-  var $link = $(`.token[href="${location.hash}"]`);
+  var $link = $(`.token[href="${location.hash}"]`)
   $content = itemLinkToContent($link)
   if ($content.is(":hidden")) {
     toggleItem($link, $content)
@@ -38,11 +38,11 @@ $(".token").on("click", function(event) {
   if (jazzy.docset) {
     return
   }
-  var $link = $(this);
+  var $link = $(this)
   toggleItem($link, itemLinkToContent($link))
 
   // Keeps the document from jumping to the hash.
-  var href = $link.attr("href");
+  var href = $link.attr("href")
   if (history.pushState) {
     history.pushState({}, "", href)
   } else {
