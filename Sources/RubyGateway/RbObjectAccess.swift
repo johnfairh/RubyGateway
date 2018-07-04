@@ -64,7 +64,7 @@ import RubyGatewayHelpers
 /// myObject.real_name = RbObject("Anonymous")
 /// ```
 /// ...where `real_name` is not defined in Swift at all but is the underlying Ruby
-/// property.  See `RbObject.subscript(dynamicMember:)`.
+/// property.  See `RbObjectAccess.subscript(dynamicMember:)`.
 @dynamicMemberLookup
 public class RbObjectAccess {
     /// Getter for the `VALUE` associated with this object
@@ -617,13 +617,12 @@ extension RbObjectAccess {
 
     /// Dynamic member lookup.
     ///
-    /// Reads from unknown members are forwared to `get(_:)`.  The method
+    /// Reads from unknown members are forwared to `get(_:)`.  The subscript
     /// returns `nil` when there has been a Ruby exception.  The Swift error
     /// describing the Ruby exception can be retrieved from `RbError.history`.
     ///
-    /// Writes to unknown members are converted to property setters.  Any
-    /// errors cannot be detected at the call site and must be checked via
-    /// `RbError.history`.  For example:
+    /// Writes to unknown members are converted to calls to Ruby property
+    /// setters. For example:
     /// ```swift
     /// // Using dynamic member lookup:
     /// obj.property = RbObject(5)
@@ -631,9 +630,13 @@ extension RbObjectAccess {
     /// // Same as:
     /// obj.call("property=", args: [5])
     /// ```
-    /// On the write direction the assigned type must be `RbObject`, no
-    /// implicit conversion via `RbObjectConvertible` here.
-    /// These are all current Swift limitations.
+    /// - note: Any error in the write direction cannot be detected at the
+    ///   call site and must be checked via `RbError.history`.
+    ///
+    /// - note: In the write direction the assigned type must be `RbObject`, no
+    ///   implicit conversion via `RbObjectConvertible` here.
+    ///
+    /// These are both current Swift limitations.
     public subscript(dynamicMember name: String) -> RbObject? {
         get {
             return try? get(name)
