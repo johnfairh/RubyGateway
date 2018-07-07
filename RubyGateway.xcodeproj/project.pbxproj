@@ -50,6 +50,8 @@
 		02901338203E03530090C5C9 /* RbGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02901337203E03530090C5C9 /* RbGateway.swift */; };
 		0290133A203ED8D60090C5C9 /* RbConversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02901339203ED8D60090C5C9 /* RbConversions.swift */; };
 		0290133D203F42820090C5C9 /* TestMiscObjTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0290133C203F42820090C5C9 /* TestMiscObjTypes.swift */; };
+		02C5C85120ECD87E007138A2 /* RbComplex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5C85020ECD87E007138A2 /* RbComplex.swift */; };
+		02C5C85320ECE51A007138A2 /* TestComplex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5C85220ECE51A007138A2 /* TestComplex.swift */; };
 		OBJ_26 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_44 /* RubyGateway.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "TMLRuby::TMLRuby::Product" /* RubyGateway.framework */; };
 /* End PBXBuildFile section */
@@ -126,6 +128,8 @@
 		02901339203ED8D60090C5C9 /* RbConversions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbConversions.swift; sourceTree = "<group>"; };
 		0290133B203EF0F60090C5C9 /* nonconvert.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = nonconvert.rb; sourceTree = "<group>"; };
 		0290133C203F42820090C5C9 /* TestMiscObjTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMiscObjTypes.swift; sourceTree = "<group>"; };
+		02C5C85020ECD87E007138A2 /* RbComplex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbComplex.swift; sourceTree = "<group>"; };
+		02C5C85220ECE51A007138A2 /* TestComplex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestComplex.swift; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		"TMLRuby::TMLRuby::Product" /* RubyGateway.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RubyGateway.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"TMLRuby::TMLRubyTests::Product" /* RubyGatewayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = RubyGatewayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -227,6 +231,7 @@
 				02300767204BF3E800044B8E /* TestFailable.swift */,
 				020B4C1C2078D54F0073276B /* TestThreads.swift */,
 				020B4C22207CB7820073276B /* TestCollection.swift */,
+				02C5C85220ECE51A007138A2 /* TestComplex.swift */,
 				0249235020335C0D00E3AAF4 /* Helpers.swift */,
 				024923522034AA2B00E3AAF4 /* Fixtures */,
 			);
@@ -289,6 +294,7 @@
 				0205A8A82043287B00076840 /* RbFailableAccess.swift */,
 				0249234920334ADE00E3AAF4 /* RbError.swift */,
 				020B4C1A2078CADA0073276B /* RbThread.swift */,
+				02C5C85020ECD87E007138A2 /* RbComplex.swift */,
 				022F3AB120360B9F009E69BE /* CRubyMacros.swift */,
 				0205A8A62043284C00076840 /* String+RubyGateway.swift */,
 				022BD8A12063C40800DA077F /* Lock.swift */,
@@ -462,6 +468,7 @@
 				022F3AC92037153A009E69BE /* TestNumerics.swift in Sources */,
 				022F3AD1203AF8BA009E69BE /* TestRbObject.swift in Sources */,
 				027C98A52090F83C00D179B1 /* TestSets.swift in Sources */,
+				02C5C85320ECE51A007138A2 /* TestComplex.swift in Sources */,
 				026F1B042070CDB0002E8C45 /* TestArrays.swift in Sources */,
 				020B4C192072379D0073276B /* TestDictionaries.swift in Sources */,
 				020B4C23207CB7820073276B /* TestCollection.swift in Sources */,
@@ -480,6 +487,7 @@
 				020B4C1B2078CADA0073276B /* RbThread.swift in Sources */,
 				02706177204EB47600C336B8 /* RbOperators.swift in Sources */,
 				024923482031EE0400E3AAF4 /* RbVM.swift in Sources */,
+				02C5C85120ECD87E007138A2 /* RbComplex.swift in Sources */,
 				020B4C1F207B62390073276B /* RbObjectCollection.swift in Sources */,
 				0205A8A92043287B00076840 /* RbFailableAccess.swift in Sources */,
 				02901338203E03530090C5C9 /* RbGateway.swift in Sources */,

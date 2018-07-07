@@ -6,7 +6,7 @@
 
 ##### Enhancements
 
-* None.
+* Add `RbComplex`.
 
 ##### Bug Fixes
 
