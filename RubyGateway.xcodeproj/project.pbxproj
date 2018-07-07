@@ -294,10 +294,10 @@
 				0205A8A82043287B00076840 /* RbFailableAccess.swift */,
 				0249234920334ADE00E3AAF4 /* RbError.swift */,
 				020B4C1A2078CADA0073276B /* RbThread.swift */,
+				02C5C85020ECD87E007138A2 /* RbComplex.swift */,
 				022F3AB120360B9F009E69BE /* CRubyMacros.swift */,
 				0205A8A62043284C00076840 /* String+RubyGateway.swift */,
 				022BD8A12063C40800DA077F /* Lock.swift */,
-				02C5C85020ECD87E007138A2 /* RbComplex.swift */,
 			);
 			name = RubyGateway;
 			path = Sources/RubyGateway;

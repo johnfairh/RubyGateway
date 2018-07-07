@@ -225,8 +225,12 @@ let count = try myClass.getClassVar("@@count")
 If you want to stop using Ruby and get on with something else, and
 never come back to Ruby in the process, use `RbGateway.cleanup()`.
 
+## Work with Ruby complex numbers
+
+See `RbComplex` for a thin wrapper to Ruby's `Complex` type.
+
 ### Can't do yet
-* Rational Complex
+* Rational
 
 ## Error Handling
 

@@ -13,7 +13,6 @@
 /// Ruby always represents complex numbers internally using rectangular coordinates
 /// so this type does not offer any direct support for polar coordinates.
 ///
-/// [example]
 public struct RbComplex {
     /// The real part of the complex number
     public let real: Double
@@ -53,14 +52,11 @@ extension RbComplex: RbObjectConvertible {
     /// This can theoretically produce `RbObject.nilObject` if the `Complex`
     /// class has been nobbled in some way.
     public var rubyObject: RbObject {
-        guard Ruby.softSetup() else {
-            return .nilObject
+        guard Ruby.softSetup(),
+            let complexClass = try? Ruby.get("Complex"),
+            let complexObject = try? complexClass.call("rectangular", args: [real, imaginary]) else {
+                return .nilObject
         }
-        do {
-            let complexClass = try Ruby.get("Complex")
-            return try complexClass.call("rectangular", args: [real, imaginary])
-        } catch {
-            return .nilObject
-        }
+        return complexObject
     }
 }
