@@ -7,7 +7,7 @@
 
 /// A simple interface to Ruby's rational number support.
 ///
-/// This is not supposed to be a Swift rational number library.  It could be used
+/// This is not a Swift rational number library.  It could be used
 /// as an interface between one such and Ruby.
 ///
 /// Ruby represents rational numbers internally as a positive or negative
@@ -23,10 +23,10 @@
 ///
 /// let myRatResult = RbRational(resultObj)
 /// ```
-public struct RbRational {
-    /// The rational number's numerator
+public struct RbRational: RbObjectConvertible {
+    /// The rational number's numerator.
     public let numerator: Double
-    /// The rational number's denominator
+    /// The rational number's denominator.
     public let denominator: Double
 
     /// Create a new rational number.  The parameters are normalized to give
@@ -40,12 +40,10 @@ public struct RbRational {
             self.denominator = denominator
         }
     }
-}
-
-extension RbRational: RbObjectConvertible {
-    /// Extract rational parts from a Ruby object.
+    
+    /// Create a rational number from a Ruby object.
     ///
-    /// This calls `to_r` before extracting the parts so can
+    /// This calls `#to_r` before extracting the parts so can
     /// be passed various types of Ruby object.
     ///
     /// Returns `nil` if the object cannot be converted or if its fractional
@@ -74,7 +72,7 @@ extension RbRational: RbObjectConvertible {
         self.init(value.rubyObject)
     }
 
-    /// Get a Ruby version of a rational number.
+    /// Get a Ruby version of an `RbRational`.
     ///
     /// This can theoretically produce `RbObject.nilObject` if the environment
     /// has been nobbled in some way.

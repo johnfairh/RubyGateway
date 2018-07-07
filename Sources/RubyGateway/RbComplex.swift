@@ -7,16 +7,16 @@
 
 /// A simple interface to Ruby's complex number support.
 ///
-/// This is not supposed to be a Swift complex number library.  It could be used
+/// This is not a Swift complex number library.  It could be used
 /// as an interface between one such and Ruby.
 ///
 /// Ruby always represents complex numbers internally using rectangular coordinates
 /// so this type does not offer any direct support for polar coordinates.
 ///
-public struct RbComplex {
-    /// The real part of the complex number
+public struct RbComplex: RbObjectConvertible {
+    /// The real part of the complex number.
     public let real: Double
-    /// The imaginary part of the complex number
+    /// The imaginary part of the complex number.
     public let imaginary: Double
 
     /// Create a new complex number from real and imaginary parts.
@@ -24,12 +24,10 @@ public struct RbComplex {
         self.real = real
         self.imaginary = imaginary
     }
-}
 
-extension RbComplex: RbObjectConvertible {
     /// Create a complex number from a Ruby object.
     ///
-    /// This calls `to_c` before extracting real and imaginary parts so can
+    /// This calls `#to_c` before extracting real and imaginary parts so can
     /// be passed various types of Ruby object.
     ///
     /// Returns `nil` if the object cannot be converted or if its real and
@@ -58,7 +56,7 @@ extension RbComplex: RbObjectConvertible {
         self.init(value.rubyObject)
     }
 
-    /// Get a Ruby version of a complex number.
+    /// Get a Ruby version of an `RbComplex`.
     ///
     /// This can theoretically produce `RbObject.nilObject` if the `Complex`
     /// class has been nobbled in some way.

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Int32 Extension Reference</title>
+    <title>RbRational Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Extension/Int32" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Struct/RbRational" class="dashAnchor"></a>
 
-    <a title="Int32 Extension Reference"></a>
+    <a title="RbRational Structure Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -44,7 +44,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">RubyGateway Reference</a>
       <img class="carat" src="../img/carat.png" />
-      Int32 Extension Reference
+      RbRational Structure Reference
     </p>
 
     <div class="content-wrapper">
@@ -213,14 +213,30 @@
 
         <section class="section">
           <div class="section-content">
-            <h1>Int32</h1>
+            <h1>RbRational</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/int32/">Int32</a></span> <span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/fixedwidthinteger/">FixedWidthInteger</a></span><span class="p">,</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/signedinteger/">SignedInteger</a></span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RbRational</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
 
                 </div>
               </div>
-            
+            <p>A simple interface to Ruby&rsquo;s rational number support.</p>
+
+<p>This is not a Swift rational number library.  It could be used
+as an interface between one such and Ruby.</p>
+
+<p>Ruby represents rational numbers internally as a positive or negative
+integer numerator and a positive integer denominator.  Instances of this
+<code>RbRational</code> type converted from Ruby objects follow these rules; instances
+produced by Swift code using the <code><a href="../Structs/RbRational.html#/s:11RubyGateway10RbRationalVACSd9numerator_Sd11denominatortcfc">RbRational.init(numerator:denominator:)</a></code>
+method may not.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">myRat</span> <span class="o">=</span> <span class="kt">RbRational</span><span class="p">(</span><span class="nv">numerator</span><span class="p">:</span> <span class="n">myFractionTop</span><span class="p">,</span> <span class="nv">denominator</span><span class="p">:</span> <span class="n">myFractionBot</span><span class="p">)</span>
+
+<span class="k">let</span> <span class="nv">resultObj</span> <span class="o">=</span> <span class="n">myRubyService</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"addFinalSample"</span><span class="p">,</span> <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="n">myRat</span><span class="p">])</span>
+
+<span class="k">let</span> <span class="nv">myRatResult</span> <span class="o">=</span> <span class="kt">RbRational</span><span class="p">(</span><span class="n">resultObj</span><span class="p">)</span>
+</code></pre>
+
           </div>
         </section>
 
@@ -231,9 +247,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:s5Int32V11RubyGatewayEABSgAC8RbObjectCcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s5Int32V11RubyGatewayEABSgAC8RbObjectCcfc">init(_:)</a>
+                    <a name="/s:11RubyGateway10RbRationalV9numeratorSdvp"></a>
+                    <a name="//apple_ref/swift/Property/numerator" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway10RbRationalV9numeratorSdvp">numerator</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -241,18 +257,105 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Try to get a 32-bit signed integer representation of an <code><a href="../Classes/RbObject.html">RbObject</a></code>.</p>
+                        <p>The rational number&rsquo;s numerator.</p>
 
-<p>It fails if the Ruby value:</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">numerator</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/double/">Double</a></span></code></pre>
 
-<ol>
-<li>Is numeric and does not fit into the Swift type; or</li>
-<li>Cannot be made into a suitable numeric via <code>to_int</code> or <code>to_i</code>.</li>
-</ol>
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbRational.swift#L28">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway10RbRationalV11denominatorSdvp"></a>
+                    <a name="//apple_ref/swift/Property/denominator" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway10RbRationalV11denominatorSdvp">denominator</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The rational number&rsquo;s denominator.</p>
 
-<p>See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to find out why a conversion failed.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">denominator</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/double/">Double</a></span></code></pre>
 
-<p>If the Ruby value is floating-point then the integer part is used.</p>
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbRational.swift#L30">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway10RbRationalVACSd9numerator_Sd11denominatortcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(numerator:denominator:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway10RbRationalVACSd9numerator_Sd11denominatortcfc">init(numerator:denominator:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a new rational number.  The parameters are normalized to give
+a positive denominator.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">numerator</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/double/">Double</a></span><span class="p">,</span> <span class="nv">denominator</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/double/">Double</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbRational.swift#L34-L42">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway10RbRationalVACSgAA0C6ObjectCcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway10RbRationalVACSgAA0C6ObjectCcfc">init(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a rational number from a Ruby object.</p>
+
+<p>This calls <code>#to_r</code> before extracting the parts so can
+be passed various types of Ruby object.</p>
+
+<p>Returns <code>nil</code> if the object cannot be converted or if its fractional
+parts parts cannot be converted to Swift <code><a href="https://developer.apple.com/documentation/swift/double/">Double</a></code>s.
+See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to see why a conversion failed.</p>
 
                       </div>
                       <div class="declaration">
@@ -264,7 +367,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbNumericConversions.swift#L144-L149">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbRational.swift#L52-L62">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -272,9 +375,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:s5Int32V11RubyGatewayE10rubyObjectAC02RbE0Cvp"></a>
-                    <a name="//apple_ref/swift/Property/rubyObject" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s5Int32V11RubyGatewayE10rubyObjectAC02RbE0Cvp">rubyObject</a>
+                    <a name="/s:11RubyGateway10RbRationalVACSgAA0C17ObjectConvertible_pcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway10RbRationalVACSgAA0C17ObjectConvertible_pcfc">init(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -282,7 +385,45 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A Ruby object for the number.</p>
+                        <p>Convert some Swift data type to a rational.</p>
+
+<p>This is a convenience wrapper that lets you access Ruby&rsquo;s
+rational library directly from Swift types, for example:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">rat</span> <span class="o">=</span> <span class="kt">RbRational</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">?(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbRational.swift#L71-L73">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway10RbRationalV10rubyObjectAA0cF0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/rubyObject" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway10RbRationalV10rubyObjectAA0cF0Cvp">rubyObject</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get a Ruby version of an <code>RbRational</code>.</p>
+
+<p>This can theoretically produce <code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectC03nilD0ACvpZ">RbObject.nilObject</a></code> if the environment
+has been nobbled in some way.</p>
 
                       </div>
                       <div class="declaration">
@@ -294,7 +435,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbNumericConversions.swift#L152-L154">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbRational.swift#L79-L85">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

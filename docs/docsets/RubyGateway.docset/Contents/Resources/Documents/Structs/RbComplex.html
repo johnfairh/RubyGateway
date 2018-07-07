@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Int32 Extension Reference</title>
+    <title>RbComplex Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Extension/Int32" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Struct/RbComplex" class="dashAnchor"></a>
 
-    <a title="Int32 Extension Reference"></a>
+    <a title="RbComplex Structure Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -44,7 +44,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">RubyGateway Reference</a>
       <img class="carat" src="../img/carat.png" />
-      Int32 Extension Reference
+      RbComplex Structure Reference
     </p>
 
     <div class="content-wrapper">
@@ -213,14 +213,21 @@
 
         <section class="section">
           <div class="section-content">
-            <h1>Int32</h1>
+            <h1>RbComplex</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/int32/">Int32</a></span> <span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/fixedwidthinteger/">FixedWidthInteger</a></span><span class="p">,</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/signedinteger/">SignedInteger</a></span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RbComplex</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
 
                 </div>
               </div>
-            
+            <p>A simple interface to Ruby&rsquo;s complex number support.</p>
+
+<p>This is not a Swift complex number library.  It could be used
+as an interface between one such and Ruby.</p>
+
+<p>Ruby always represents complex numbers internally using rectangular coordinates
+so this type does not offer any direct support for polar coordinates.</p>
+
           </div>
         </section>
 
@@ -231,9 +238,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:s5Int32V11RubyGatewayEABSgAC8RbObjectCcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s5Int32V11RubyGatewayEABSgAC8RbObjectCcfc">init(_:)</a>
+                    <a name="/s:11RubyGateway9RbComplexV4realSdvp"></a>
+                    <a name="//apple_ref/swift/Property/real" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway9RbComplexV4realSdvp">real</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -241,18 +248,104 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Try to get a 32-bit signed integer representation of an <code><a href="../Classes/RbObject.html">RbObject</a></code>.</p>
+                        <p>The real part of the complex number.</p>
 
-<p>It fails if the Ruby value:</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">real</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/double/">Double</a></span></code></pre>
 
-<ol>
-<li>Is numeric and does not fit into the Swift type; or</li>
-<li>Cannot be made into a suitable numeric via <code>to_int</code> or <code>to_i</code>.</li>
-</ol>
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbComplex.swift#L18">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway9RbComplexV9imaginarySdvp"></a>
+                    <a name="//apple_ref/swift/Property/imaginary" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway9RbComplexV9imaginarySdvp">imaginary</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The imaginary part of the complex number.</p>
 
-<p>See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to find out why a conversion failed.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">imaginary</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/double/">Double</a></span></code></pre>
 
-<p>If the Ruby value is floating-point then the integer part is used.</p>
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbComplex.swift#L20">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway9RbComplexVACSd4real_Sd9imaginarytcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(real:imaginary:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway9RbComplexVACSd4real_Sd9imaginarytcfc">init(real:imaginary:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a new complex number from real and imaginary parts.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">real</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/double/">Double</a></span><span class="p">,</span> <span class="nv">imaginary</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/double/">Double</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbComplex.swift#L23-L26">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway9RbComplexVACSgAA0C6ObjectCcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway9RbComplexVACSgAA0C6ObjectCcfc">init(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a complex number from a Ruby object.</p>
+
+<p>This calls <code>to_c</code> before extracting real and imaginary parts so can
+be passed various types of Ruby object.</p>
+
+<p>Returns <code>nil</code> if the object cannot be converted or if its real and
+imaginary parts cannot be converted to Swift <code><a href="https://developer.apple.com/documentation/swift/double/">Double</a></code>s.
+See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to see why a conversion failed.</p>
 
                       </div>
                       <div class="declaration">
@@ -264,7 +357,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbNumericConversions.swift#L144-L149">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbComplex.swift#L36-L46">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -272,9 +365,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:s5Int32V11RubyGatewayE10rubyObjectAC02RbE0Cvp"></a>
-                    <a name="//apple_ref/swift/Property/rubyObject" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s5Int32V11RubyGatewayE10rubyObjectAC02RbE0Cvp">rubyObject</a>
+                    <a name="/s:11RubyGateway9RbComplexVACSgAA0C17ObjectConvertible_pcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway9RbComplexVACSgAA0C17ObjectConvertible_pcfc">init(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -282,7 +375,45 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A Ruby object for the number.</p>
+                        <p>Convert some Swift data type to a complex number.</p>
+
+<p>This is a convenience wrapper that lets you access Ruby&rsquo;s
+library directly from Swift types, for example:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">compl</span> <span class="o">=</span> <span class="kt">RbComplex</span><span class="p">(</span><span class="s">"1+2.3i"</span><span class="p">)</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">?(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbComplex.swift#L55-L57">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway9RbComplexV10rubyObjectAA0cF0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/rubyObject" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway9RbComplexV10rubyObjectAA0cF0Cvp">rubyObject</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get a Ruby version of an <code>RbComplex</code>.</p>
+
+<p>This can theoretically produce <code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectC03nilD0ACvpZ">RbObject.nilObject</a></code> if the <code>Complex</code>
+class has been nobbled in some way.</p>
 
                       </div>
                       <div class="declaration">
@@ -294,7 +425,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbNumericConversions.swift#L152-L154">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbComplex.swift#L63-L70">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

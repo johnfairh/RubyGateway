@@ -199,6 +199,12 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Extensions/CountableClosedRange.html">CountableClosedRange</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/RbComplex.html">RbComplex</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/RbRational.html">RbRational</a>
+              </li>
             </ul>
           </li>
         </ul>
@@ -854,6 +860,89 @@ to <code><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></c
                           <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/countableclosedrange/">CountableClosedRange</a></span><span class="o">&lt;</span><span class="kt">Bound</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">Bound</span> <span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/strideable/">Strideable</a></span><span class="p">,</span> <span class="kt">Bound</span><span class="o">.</span><span class="kt">Stride</span> <span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/signedinteger/">SignedInteger</a></span></code></pre>
 
                         </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway9RbComplexV"></a>
+                    <a name="//apple_ref/swift/Struct/RbComplex" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway9RbComplexV">RbComplex</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A simple interface to Ruby&rsquo;s complex number support.</p>
+
+<p>This is not a Swift complex number library.  It could be used
+as an interface between one such and Ruby.</p>
+
+<p>Ruby always represents complex numbers internally using rectangular coordinates
+so this type does not offer any direct support for polar coordinates.</p>
+
+                        <a href="Structs/RbComplex.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RbComplex</span> <span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbComplex.swift#L16-L71">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway10RbRationalV"></a>
+                    <a name="//apple_ref/swift/Struct/RbRational" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway10RbRationalV">RbRational</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A simple interface to Ruby&rsquo;s rational number support.</p>
+
+<p>This is not a Swift rational number library.  It could be used
+as an interface between one such and Ruby.</p>
+
+<p>Ruby represents rational numbers internally as a positive or negative
+integer numerator and a positive integer denominator.  Instances of this
+<code>RbRational</code> type converted from Ruby objects follow these rules; instances
+produced by Swift code using the <code><a href="Structs/RbRational.html#/s:11RubyGateway10RbRationalVACSd9numerator_Sd11denominatortcfc">RbRational.init(numerator:denominator:)</a></code>
+method may not.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">myRat</span> <span class="o">=</span> <span class="kt">RbRational</span><span class="p">(</span><span class="nv">numerator</span><span class="p">:</span> <span class="n">myFractionTop</span><span class="p">,</span> <span class="nv">denominator</span><span class="p">:</span> <span class="n">myFractionBot</span><span class="p">)</span>
+
+<span class="k">let</span> <span class="nv">resultObj</span> <span class="o">=</span> <span class="n">myRubyService</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"addFinalSample"</span><span class="p">,</span> <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="n">myRat</span><span class="p">])</span>
+
+<span class="k">let</span> <span class="nv">myRatResult</span> <span class="o">=</span> <span class="kt">RbRational</span><span class="p">(</span><span class="n">resultObj</span><span class="p">)</span>
+</code></pre>
+
+                        <a href="Structs/RbRational.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RbRational</span> <span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbRational.swift#L26-L86">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
