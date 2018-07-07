@@ -52,6 +52,8 @@
 		0290133D203F42820090C5C9 /* TestMiscObjTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0290133C203F42820090C5C9 /* TestMiscObjTypes.swift */; };
 		02C5C85120ECD87E007138A2 /* RbComplex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5C85020ECD87E007138A2 /* RbComplex.swift */; };
 		02C5C85320ECE51A007138A2 /* TestComplex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5C85220ECE51A007138A2 /* TestComplex.swift */; };
+		02C5C85520F0CD24007138A2 /* RbRational.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5C85420F0CD24007138A2 /* RbRational.swift */; };
+		02C5C85720F0D5E5007138A2 /* TestRational.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5C85620F0D5E5007138A2 /* TestRational.swift */; };
 		OBJ_26 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_44 /* RubyGateway.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "TMLRuby::TMLRuby::Product" /* RubyGateway.framework */; };
 /* End PBXBuildFile section */
@@ -130,6 +132,8 @@
 		0290133C203F42820090C5C9 /* TestMiscObjTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMiscObjTypes.swift; sourceTree = "<group>"; };
 		02C5C85020ECD87E007138A2 /* RbComplex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbComplex.swift; sourceTree = "<group>"; };
 		02C5C85220ECE51A007138A2 /* TestComplex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestComplex.swift; sourceTree = "<group>"; };
+		02C5C85420F0CD24007138A2 /* RbRational.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbRational.swift; sourceTree = "<group>"; };
+		02C5C85620F0D5E5007138A2 /* TestRational.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRational.swift; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		"TMLRuby::TMLRuby::Product" /* RubyGateway.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RubyGateway.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"TMLRuby::TMLRubyTests::Product" /* RubyGatewayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = RubyGatewayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -232,6 +236,7 @@
 				020B4C1C2078D54F0073276B /* TestThreads.swift */,
 				020B4C22207CB7820073276B /* TestCollection.swift */,
 				02C5C85220ECE51A007138A2 /* TestComplex.swift */,
+				02C5C85620F0D5E5007138A2 /* TestRational.swift */,
 				0249235020335C0D00E3AAF4 /* Helpers.swift */,
 				024923522034AA2B00E3AAF4 /* Fixtures */,
 			);
@@ -295,6 +300,7 @@
 				0249234920334ADE00E3AAF4 /* RbError.swift */,
 				020B4C1A2078CADA0073276B /* RbThread.swift */,
 				02C5C85020ECD87E007138A2 /* RbComplex.swift */,
+				02C5C85420F0CD24007138A2 /* RbRational.swift */,
 				022F3AB120360B9F009E69BE /* CRubyMacros.swift */,
 				0205A8A62043284C00076840 /* String+RubyGateway.swift */,
 				022BD8A12063C40800DA077F /* Lock.swift */,
@@ -456,6 +462,7 @@
 				0249235120335C0D00E3AAF4 /* Helpers.swift in Sources */,
 				0249234D20335ADB00E3AAF4 /* TestVM.swift in Sources */,
 				022F3ACD20385C3A009E69BE /* TestConstants.swift in Sources */,
+				02C5C85720F0D5E5007138A2 /* TestRational.swift in Sources */,
 				020B4C21207B7FEF0073276B /* TestRanges.swift in Sources */,
 				022F3ACB20375E01009E69BE /* TestStrings.swift in Sources */,
 				0230075E2046ED9900044B8E /* TestErrors.swift in Sources */,
@@ -496,6 +503,7 @@
 				0205A89E204088F900076840 /* RbNumericConversions.swift in Sources */,
 				022F3AB220360B9F009E69BE /* CRubyMacros.swift in Sources */,
 				0290133A203ED8D60090C5C9 /* RbConversions.swift in Sources */,
+				02C5C85520F0CD24007138A2 /* RbRational.swift in Sources */,
 				0205A8A72043284C00076840 /* String+RubyGateway.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -229,8 +229,9 @@ never come back to Ruby in the process, use `RbGateway.cleanup()`.
 
 See `RbComplex` for a thin wrapper to Ruby's `Complex` type.
 
-### Can't do yet
-* Rational
+## Work with Ruby rational numbers
+
+See `RbRational` for a thin wrapper to Ruby's `Rational` type.
 
 ## Error Handling
 

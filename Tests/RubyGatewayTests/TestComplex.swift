@@ -31,7 +31,7 @@ class TestComplex: XCTestCase {
         let imaginary = 4
         let complexStr = "\(real)+\(imaginary)i"
 
-        guard let num = RbComplex(complexStr.rubyObject) else {
+        guard let num = RbComplex(complexStr) else {
             XCTFail("Couldn't create complex number")
             return
         }

@@ -47,6 +47,17 @@ extension RbComplex: RbObjectConvertible {
         self.imaginary = imaginary
     }
 
+    /// Convert some Swift data type to a complex number.
+    ///
+    /// This is a convenience wrapper that lets you access Ruby's
+    /// library directly from Swift types, for example:
+    /// ```swift
+    /// let compl = RbComplex("1+2.3i")
+    /// ```
+    public init?(_ value: RbObjectConvertible) {
+        self.init(value.rubyObject)
+    }
+
     /// Get a Ruby version of a complex number.
     ///
     /// This can theoretically produce `RbObject.nilObject` if the `Complex`

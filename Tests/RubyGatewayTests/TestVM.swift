@@ -242,10 +242,11 @@ class TestVM: XCTestCase {
         let setObj = RbObject(Set<Int>())
         let sliceObj = RbObject([1,2,3][1..<2])
         let complexObj = RbObject(RbComplex(real: 1, imaginary: 1))
+        let rationalObj = RbObject(RbRational(numerator: 1, denominator: 1))
 
         [strObj, uintObj, intObj, dblObj, symObj,
          procObj, arrObj, hashObj, rangeObj, setObj,
-         sliceObj, complexObj].forEach { obj in
+         sliceObj, complexObj, rationalObj].forEach { obj in
             XCTAssertTrue(obj.isNil)
         }
     }
