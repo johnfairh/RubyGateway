@@ -7,6 +7,7 @@
 ##### Enhancements
 
 * Add `RbComplex`.
+* Add `RbRational`.
 
 ##### Bug Fixes
 

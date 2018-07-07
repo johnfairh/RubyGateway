@@ -29,4 +29,5 @@ XCTMain([
     testCase(TestThreads.allTests),
     testCase(TestCollection.allTests),
     testCase(TestComplex.allTests),
+    testCase(TestRational.allTests),
 ])
