@@ -5,6 +5,7 @@
 //  Distributed under the MIT license, see LICENSE
 //
 import CRuby
+import RubyGatewayHelpers
 
 /// An error raised by the RubyGateway module.  Ruby exceptions
 /// generate `RbError.rubyException`, the other cases correspond
@@ -206,5 +207,39 @@ public struct RbException: CustomStringConvertible, Error {
     public var description: String {
         let exceptionClass = try! exception.get("class")
         return "\(exceptionClass): \(exception)"
+    }
+}
+
+// MARK: - Common handling for the Swift->C error path
+
+extension UnsafeMutablePointer where Pointee == Rbg_return_value {
+    func set(type: Rbg_return_type, value: VALUE) {
+        pointee.type = type
+        pointee.value = value
+    }
+
+    func setFrom(call: () throws -> VALUE) {
+        do {
+            let retVal = try call()
+            set(type: RBG_RT_VALUE, value: retVal)
+        } catch RbError.rubyException(let exn) {
+            // RubyGateway/Ruby code threw exception
+            set(type: RBG_RT_RAISE, value: exn.exception.withRubyValue { $0 })
+        } catch let exn as RbException {
+            // User Swift code generated Ruby exception
+            set(type: RBG_RT_RAISE, value: exn.exception.withRubyValue { $0 })
+        } catch let brk as RbBreak {
+            // 'break' from iterator
+            if let brkObject = brk.object {
+                set(type: RBG_RT_BREAK_VALUE, value: brkObject.withRubyValue { $0 })
+            } else {
+                set(type: RBG_RT_BREAK, value: Qundef)
+            }
+        } catch {
+            // User Swift code or RubyGateway threw Swift error.  Oh for typed throws.
+            // Wrap it up in a Ruby exception and raise that instead!
+            let rbExn = RbException(message: "Unexpected Swift error thrown: \(error)")
+            set(type: RBG_RT_RAISE, value: rbExn.exception.withRubyValue { $0 })
+        }
     }
 }

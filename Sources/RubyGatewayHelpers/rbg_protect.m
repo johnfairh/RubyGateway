@@ -421,10 +421,10 @@ VALUE rbg_Hash_protect(VALUE v, int * _Nullable status)
 /// Swift callback -- the pvoid-context case -- and where we want to
 /// call a Ruby VALUE block -- the value-context case.
 
-/// This is `rbproc_pvoid_block_callback` in RbProc.swift.
+/// This is `rbproc_pvoid_block_callback` in RbBlockCall.swift.
 static Rbg_pvoid_block_call rbg_pvoid_block_call;
 
-/// This is `rbproc_value_block_callback` in RbProc.swift.
+/// This is `rbproc_value_block_callback` in RbBlockCall.swift.
 static Rbg_value_block_call rbg_value_block_call;
 
 void rbg_register_pvoid_block_proc_callback(Rbg_pvoid_block_call callback)
@@ -445,7 +445,7 @@ void rbg_register_value_block_proc_callback(Rbg_value_block_call callback)
 /// invoke some API function to longjmp off somewhere else without
 /// skipping over any Swift frames.
 
-static VALUE rbg_block_callback_tail(Rbg_return_value * _Nonnull rv);
+static VALUE rbg_handle_return_value(Rbg_return_value * _Nonnull rv);
 
 static VALUE rbg_block_pvoid_callback(VALUE yieldedArg,
                                       VALUE callbackArg,
@@ -457,7 +457,7 @@ static VALUE rbg_block_pvoid_callback(VALUE yieldedArg,
 
     rbg_pvoid_block_call((void *) callbackArg, argc, argv, blockArg, &return_value);
 
-    return rbg_block_callback_tail(&return_value);
+    return rbg_handle_return_value(&return_value);
 }
 
 static VALUE rbg_block_value_callback(VALUE yieldedArg,
@@ -470,10 +470,10 @@ static VALUE rbg_block_value_callback(VALUE yieldedArg,
 
     rbg_value_block_call(callbackArg, argc, argv, blockArg, &return_value);
 
-    return rbg_block_callback_tail(&return_value);
+    return rbg_handle_return_value(&return_value);
 }
 
-static VALUE rbg_block_callback_tail(Rbg_return_value * _Nonnull rv)
+static VALUE rbg_handle_return_value(Rbg_return_value * _Nonnull rv)
 {
     switch (rv->type)
     {
@@ -488,4 +488,54 @@ static VALUE rbg_block_callback_tail(Rbg_return_value * _Nonnull rv)
     default:
         rb_raise(rb_eRuntimeError, "Mangled Swift retval from proc: %u", rv->type);
     }
+}
+
+//
+// Global variables implemented in Swift
+//
+
+//
+// We support only the 'virtual' kind which are the most generic.
+// Callback thunking means we funnel all calls through a single
+// Swift entrypoint, using the variable name to distinguish them.
+//
+
+///  This is `rbobject_gvar_get_callback` in RbObject.swift.
+static Rbg_gvar_get_call rbg_gvar_get_call;
+
+///  This is `rbobject_gvar_set_callback` in RbObject.swift.
+static Rbg_gvar_set_call rbg_gvar_set_call;
+
+void rbg_register_gvar_callbacks(Rbg_gvar_get_call get,
+                                 Rbg_gvar_set_call set)
+{
+    rbg_gvar_get_call = get;
+    rbg_gvar_set_call = set;
+}
+
+// Callback from Ruby to implement getter for virtual RbObjects
+static VALUE rbg_gvar_virtual_getter(ID id, void *data, struct rb_global_variable *g)
+{
+    Rbg_return_value rv = { 0 };
+    rbg_gvar_get_call(id, &rv);
+    return rbg_handle_return_value(&rv);
+}
+
+// Callback from Ruby to implement setter for virtual RbObjects
+static void rbg_gvar_virtual_setter(VALUE newValue,
+                                    ID id,
+                                    void *data,
+                                    struct rb_global_variable *g)
+{
+    Rbg_return_value rv = { 0 };
+    rbg_gvar_set_call(id, newValue, &rv);
+    (void) rbg_handle_return_value(&rv);
+}
+
+ID rbg_create_virtual_gvar(const char * _Nonnull name, int readonly)
+{
+    rb_define_virtual_variable(name,
+                               rbg_gvar_virtual_getter,
+                               readonly ? NULL : rbg_gvar_virtual_setter);
+    return rb_intern(name);
 }
