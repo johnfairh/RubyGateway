@@ -69,7 +69,7 @@ private enum RbGlobalVar {
     }
 }
 
-// MARK: Implement global variables in Swift
+// MARK: Swift Global Variables
 
 extension RbGateway {
     /// Create a Ruby global variable implemented by Swift code.
@@ -82,7 +82,7 @@ extension RbGateway {
     ///   - get: Function called whenever Ruby code reads the global variable.
     ///   - set: Function called whenever Ruby code writes the global variable.  This can be `nil`,
     ///          in which case Ruby treats the variable as readonly and raises a suitable
-    ///          exception should code read it.
+    ///          exception should code attempt to read it.
     /// - throws: `RbError.badIdentifier` if `name` is bad; some other kind of error if Ruby is
     ///           not working.
     public func defineGlobalVar(name: String,

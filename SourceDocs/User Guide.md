@@ -233,6 +233,20 @@ See `RbComplex` for a thin wrapper to Ruby's `Complex` type.
 
 See `RbRational` for a thin wrapper to Ruby's `Rational` type.
 
+## Implement Ruby Global Variables in Swift
+
+See `RbGateway.defineGlobalVar(name:get:set:)`.  For example:
+```swift
+Ruby.defineGlobalVar(name: "$epoch",
+                     get: { RbObject(currentEpoch) },
+                     set: { newObj in
+                            guard let newEpoch = Int(newObj) else {
+                                throw RbException(message: "Bad Epoch")
+                            }
+                            notifyNewEpoch(newEpoch)
+                          })
+```
+
 ## Error Handling
 
 RubyGateway is very explicit about failure points.  Any Ruby method call can
