@@ -130,8 +130,7 @@ VALUE rbg_Array_protect(VALUE v, int * _Nullable status);
 VALUE rbg_Hash_protect(VALUE v, int * _Nullable status);
 
 /// Callback into Swift code for gvar access
-typedef void (*Rbg_gvar_get_call)(ID id,
-                                  Rbg_return_value * _Nonnull returnValue);
+typedef VALUE (*Rbg_gvar_get_call)(ID id);
 typedef void (*Rbg_gvar_set_call)(ID id,
                                   VALUE newValue,
                                   Rbg_return_value * _Nonnull returnValue);

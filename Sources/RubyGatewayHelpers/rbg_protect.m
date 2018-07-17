@@ -516,9 +516,7 @@ void rbg_register_gvar_callbacks(Rbg_gvar_get_call get,
 // Callback from Ruby to implement getter for virtual RbObjects
 static VALUE rbg_gvar_virtual_getter(ID id, void *data, struct rb_global_variable *g)
 {
-    Rbg_return_value rv = { 0 };
-    rbg_gvar_get_call(id, &rv);
-    return rbg_handle_return_value(&rv);
+    return rbg_gvar_get_call(id);
 }
 
 // Callback from Ruby to implement setter for virtual RbObjects

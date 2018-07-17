@@ -15,8 +15,8 @@ import RubyGatewayHelpers
 
 // MARK: Callbacks from C code (rbg_value.m)
 
-private func rbobject_gvar_get_callback(id: ID, returnValue: UnsafeMutablePointer<Rbg_return_value>) {
-    return RbGlobalVar.get(id: id, returnValue: returnValue)
+private func rbobject_gvar_get_callback(id: ID) -> VALUE {
+    return RbGlobalVar.get(id: id)
 }
 
 private func rbobject_gvar_set_callback(id: ID,
@@ -35,27 +35,26 @@ private enum RbGlobalVar {
 
     /// Callbacks + store
     private struct Context {
-        let get: () throws -> RbObject
+        let get: () -> RbObject
         let set: ((RbObject) throws -> Void)?
     }
 
     private static var contexts: [ID: Context] = [:]
 
     static func create(name: String,
-                       get: @escaping () throws -> RbObject,
+                       get: @escaping () -> RbObject,
                        set: ((RbObject) throws -> Void)?) {
         let _ = initOnce
         let id = rbg_create_virtual_gvar(name, set == nil ? 1 : 0)
         contexts[id] = Context(get: get, set: set)
     }
 
-    fileprivate static func get(id: ID, returnValue: UnsafeMutablePointer<Rbg_return_value>) {
+    fileprivate static func get(id: ID) -> VALUE {
         if let context = contexts[id] {
-            returnValue.setFrom {
-                let object = try context.get()
-                return object.withRubyValue { $0 }
-            }
+            let object = context.get()
+            return object.withRubyValue { $0 }
         }
+        return Qnil // practically unreachable
     }
 
     fileprivate static func set(id: ID, newValue: VALUE, returnValue: UnsafeMutablePointer<Rbg_return_value>) {
@@ -74,7 +73,8 @@ private enum RbGlobalVar {
 extension RbGateway {
     /// Create a Ruby global variable implemented by Swift code.
     ///
-    /// Errors thrown from the getter/setter closures propagate into Ruby as exceptions.
+    /// Errors thrown from the setter closure propagate into Ruby as exceptions.  Ruby does
+    /// not permit getters to raise exceptions.
     ///
     /// - parameters:
     ///   - name: The name of the global variable.  Must begin with `$`.  Any existing global
@@ -86,7 +86,7 @@ extension RbGateway {
     /// - throws: `RbError.badIdentifier` if `name` is bad; some other kind of error if Ruby is
     ///           not working.
     public func defineGlobalVar(name: String,
-                                get: @escaping () throws -> RbObject,
+                                get: @escaping () -> RbObject,
                                 set: ((RbObject) throws -> Void)? = nil) throws {
         try setup()
         try name.checkRubyGlobalVarName()

@@ -51,7 +51,24 @@ class TestGlobalVars: XCTestCase {
         }
     }
 
+    func testSwiftException() {
+        doErrorFree {
+            let gvarName = "$myVirtualGlobal"
+
+            try Ruby.defineGlobalVar(name: gvarName,
+                                     get: { RbObject(22) },
+                                     set: { _ in throw RbException(message: "Bad new value!") })
+
+            doError {
+                let answer = try Ruby.eval(ruby: "\(gvarName) = 44")
+                XCTFail("Managed to set unsettable: \(answer)")
+            }
+        }
+    }
+
     static var allTests = [
-        ("testVirtual", testVirtual)
+        ("testVirtual", testVirtual),
+        ("testReadonly", testReadonly),
+        ("testSwiftException", testSwiftException)
     ]
 }
