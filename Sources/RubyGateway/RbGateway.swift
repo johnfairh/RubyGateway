@@ -120,8 +120,6 @@ public final class RbGateway: RbObjectAccess {
     // we have to use `eval` these.  Reading is easy enough; writing an arbitrary
     // VALUE is impossible to do without shenanigans.
 
-    private static var ivarWorkaroundName = "$RbGatewayTopSelfIvarWorkaround"
-
     /// Get the value of a top-level instance variable.  Creates a new one with a `nil`
     /// value if it doesn't exist yet.
     ///
@@ -154,11 +152,10 @@ public final class RbGateway: RbObjectAccess {
     public override func setInstanceVar(_ name: String, newValue: RbObjectConvertible?) throws -> RbObject {
         try setup()
         try name.checkRubyInstanceVarName()
-        let oldValue = try getGlobalVar(RbGateway.ivarWorkaroundName)
-        try setGlobalVar(RbGateway.ivarWorkaroundName, newValue: newValue)
-        defer { let _ = try? setGlobalVar(RbGateway.ivarWorkaroundName, newValue: oldValue) }
-        return try eval(ruby: "\(name) = \(RbGateway.ivarWorkaroundName)")
-        // simplify this when we have hooked global vars...
+
+        let ivarWorkaroundName = "$RbGatewayTopSelfIvarWorkaround"
+        try defineGlobalVar(name: ivarWorkaroundName, get: { newValue.rubyObject })
+        return try eval(ruby: "\(name) = \(ivarWorkaroundName)")
     }
 }
 
