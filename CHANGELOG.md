@@ -6,14 +6,14 @@
 
 ##### Enhancements
 
-* Add `RbComplex`.
-* Add `RbRational`.
+* None
+
+## 1.1.0 - 18th July 2018
+
+* Add `RbComplex` wrapper for Ruby Complex.
+* Add `RbRational` wrapper for Ruby Rational.
 * Add `RbGateway.defineGlobalVar` - dynamically implement Ruby global
   variables in Swift.
-
-##### Bug Fixes
-
-* None.
 
 ## 1.0.0 - 11th May 2018
 
