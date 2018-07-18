@@ -100,6 +100,21 @@ let subjects = Array<String>(try! student.get("all_subjects"))
 subjectsPopularityDb.submit(subjects: subjects)
 ```
 
+## Dynamic data exchange
+
+Global variables:
+```swift
+Ruby.defineGlobalVariable(
+        name: "$epoch",
+        get: { RbObject(epochStore.current) },
+        set: { newValueObj in
+                  guard let newEpoch = UInt(newValueObj) else {
+                      throw RbException(message: "Bad epoch type \(newValueObj)")
+                  }
+                  epochStore.current = newEpoch
+             })
+```
+
 ## Documentation
 
 * [User guide](https://johnfairh.github.io/RubyGateway/user-guide.html).

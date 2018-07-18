@@ -1,18 +1,9 @@
-## 1.1 ?
-
-Datatypes
-* Ruby Rational + Complex wrappers
-
 ## 1.2 ?
-
-Tied global vars
-
-## 1.3 ?
 
 Global functions?
 * 'next' thrown from Ruby proc called from Swift
 
-## 1.4 ?
+## 1.3 ?
 
 * Swift implementations of classes
 

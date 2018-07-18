@@ -71,7 +71,22 @@ private enum RbGlobalVar {
 // MARK: Swift Global Variables
 
 extension RbGateway {
-    /// Create a Ruby global variable implemented by Swift code.
+    /// Create a readonly Ruby global variable implemented by Swift code.
+    ///
+    /// - parameters:
+    ///   - name: The name of the global variable.  Must begin with `$`.  Any existing global
+    ///           variable with this name is overwritten.
+    ///   - get: Function called whenever Ruby code reads the global variable.
+    /// - throws: `RbError.badIdentifier` if `name` is bad; some other kind of error if Ruby is
+    ///           not working.
+    public func defineGlobalVar(name: String,
+                                get: @escaping () -> RbObject) throws {
+        try setup()
+        try name.checkRubyGlobalVarName()
+        RbGlobalVar.create(name: name, get: get, set: nil)
+    }
+
+    /// Create a read-write Ruby global variable implemented by Swift code.
     ///
     /// Errors thrown from the setter closure propagate into Ruby as exceptions.  Ruby does
     /// not permit getters to raise exceptions.
@@ -87,7 +102,7 @@ extension RbGateway {
     ///           not working.
     public func defineGlobalVar(name: String,
                                 get: @escaping () -> RbObject,
-                                set: ((RbObject) throws -> Void)? = nil) throws {
+                                set: @escaping (RbObject) throws -> Void) throws {
         try setup()
         try name.checkRubyGlobalVarName()
         RbGlobalVar.create(name: name, get: get, set: set)

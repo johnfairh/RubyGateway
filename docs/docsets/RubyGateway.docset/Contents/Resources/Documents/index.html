@@ -307,6 +307,19 @@ low-level Ruby C API wrapper.</p>
 <span class="k">let</span> <span class="nv">subjects</span> <span class="o">=</span> <span class="kt">Array</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">(</span><span class="k">try!</span> <span class="n">student</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"all_subjects"</span><span class="p">))</span>
 <span class="n">subjectsPopularityDb</span><span class="o">.</span><span class="nf">submit</span><span class="p">(</span><span class="nv">subjects</span><span class="p">:</span> <span class="n">subjects</span><span class="p">)</span>
 </code></pre>
+<h2 id='dynamic-data-exchange' class='heading'>Dynamic data exchange</h2>
+
+<p>Global variables:</p>
+<pre class="highlight swift"><code><span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineGlobalVariable</span><span class="p">(</span>
+        <span class="nv">name</span><span class="p">:</span> <span class="s">"$epoch"</span><span class="p">,</span>
+        <span class="nv">get</span><span class="p">:</span> <span class="p">{</span> <span class="kt">RbObject</span><span class="p">(</span><span class="n">epochStore</span><span class="o">.</span><span class="n">current</span><span class="p">)</span> <span class="p">},</span>
+        <span class="nv">set</span><span class="p">:</span> <span class="p">{</span> <span class="n">newValueObj</span> <span class="k">in</span>
+                  <span class="k">guard</span> <span class="k">let</span> <span class="nv">newEpoch</span> <span class="o">=</span> <span class="kt">UInt</span><span class="p">(</span><span class="n">newValueObj</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
+                      <span class="k">throw</span> <span class="kt">RbException</span><span class="p">(</span><span class="nv">message</span><span class="p">:</span> <span class="s">"Bad epoch type </span><span class="se">\(</span><span class="n">newValueObj</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+                  <span class="p">}</span>
+                  <span class="n">epochStore</span><span class="o">.</span><span class="n">current</span> <span class="o">=</span> <span class="n">newEpoch</span>
+             <span class="p">})</span>
+</code></pre>
 <h2 id='documentation' class='heading'>Documentation</h2>
 
 <ul>

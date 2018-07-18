@@ -8,6 +8,8 @@
 
 * Add `RbComplex`.
 * Add `RbRational`.
+* Add `RbGateway.defineGlobalVar` - dynamically implement Ruby global
+  variables in Swift.
 
 ##### Bug Fixes
 

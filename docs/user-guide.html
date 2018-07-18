@@ -431,7 +431,7 @@ never come back to Ruby in the process, use <code><a href="Classes/RbGateway.htm
 <p>See <code><a href="Structs/RbRational.html">RbRational</a></code> for a thin wrapper to Ruby&rsquo;s <code>Rational</code> type.</p>
 <h2 id='implement-ruby-global-variables-in-swift' class='heading'>Implement Ruby Global Variables in Swift</h2>
 
-<p>See <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C15defineGlobalVarySS4name_AA0C6ObjectCyKc3getyAGKcSg3settKF">RbGateway.defineGlobalVar(name:get:set:)</a></code>.  For example:</p>
+<p>See <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C15defineGlobalVarySS4name_AA0C6ObjectCyc3getyAGKc3settKF">RbGateway.defineGlobalVar(name:get:set:)</a></code>.  For example:</p>
 <pre class="highlight swift"><code><span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineGlobalVar</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"$epoch"</span><span class="p">,</span>
                      <span class="nv">get</span><span class="p">:</span> <span class="p">{</span> <span class="kt">RbObject</span><span class="p">(</span><span class="n">currentEpoch</span><span class="p">)</span> <span class="p">},</span>
                      <span class="nv">set</span><span class="p">:</span> <span class="p">{</span> <span class="n">newObj</span> <span class="k">in</span>

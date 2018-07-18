@@ -38,8 +38,7 @@ class TestGlobalVars: XCTestCase {
             let gvarName = "$myVirtualGlobal"
             let modelValue = "Fish"
 
-            try Ruby.defineGlobalVar(name: gvarName,
-                                     get: { RbObject(modelValue) })
+            try Ruby.defineGlobalVar(name: gvarName) { RbObject(modelValue) }
 
             let rbCurrent = try Ruby.eval(ruby: gvarName)
             XCTAssertEqual(modelValue, String(rbCurrent))
