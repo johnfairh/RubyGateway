@@ -117,7 +117,7 @@ private func rbproc_pvoid_block_callback(rawContext: UnsafeMutableRawPointer,
                                          argc: Int32, argv: UnsafePointer<VALUE>,
                                          blockArg: VALUE,
                                          returnValue: UnsafeMutablePointer<Rbg_return_value>) {
-    rbproc_block_callback(returnValue: returnValue) {
+    returnValue.setFrom {
         let context = RbBlockContext.from(raw: rawContext)
         var args: [RbObject] = []
         for i in 0..<Int(argc) {
@@ -135,46 +135,10 @@ private func rbproc_value_block_callback(context: VALUE,
                                          argc: Int32, argv: UnsafePointer<VALUE>,
                                          blockArg: VALUE,
                                          returnValue: UnsafeMutablePointer<Rbg_return_value>) {
-    rbproc_block_callback(returnValue: returnValue) {
+    returnValue.setFrom {
         try RbVM.doProtect {
             rbg_proc_call_with_block_protect(context, argc, argv, blockArg, nil)
         }
-    }
-}
-
-// MARK: - common callback handling
-
-private extension UnsafeMutablePointer where Pointee == Rbg_return_value {
-    func set(type: Rbg_return_type, value: VALUE) {
-        pointee.type = type
-        pointee.value = value
-    }
-}
-
-/// Common (Swift closure/Ruby proc) result/error handling.
-private func rbproc_block_callback(returnValue: UnsafeMutablePointer<Rbg_return_value>,
-                                   blockCall: () throws -> VALUE) {
-    do {
-        let retVal = try blockCall()
-        returnValue.set(type: RBG_RT_VALUE, value: retVal)
-    } catch RbError.rubyException(let exn) {
-        // RubyGateway/Ruby code threw exception
-        returnValue.set(type: RBG_RT_RAISE, value: exn.exception.withRubyValue { $0 })
-    } catch let exn as RbException {
-        // User Swift code generated Ruby exception
-        returnValue.set(type: RBG_RT_RAISE, value: exn.exception.withRubyValue { $0 })
-    } catch let brk as RbBreak {
-        // 'break' from iterator
-        if let brkObject = brk.object {
-            returnValue.set(type: RBG_RT_BREAK_VALUE, value: brkObject.withRubyValue { $0 })
-        } else {
-            returnValue.set(type: RBG_RT_BREAK, value: Qundef)
-        }
-    } catch {
-        // User Swift code or RubyGateway threw Swift error.  Oh for typed throws.
-        // Wrap it up in a Ruby exception and raise that instead!
-        let rbExn = RbException(message: "Unexpected Swift error thrown: \(error)")
-        returnValue.set(type: RBG_RT_RAISE, value: rbExn.exception.withRubyValue { $0 })
     }
 }
 

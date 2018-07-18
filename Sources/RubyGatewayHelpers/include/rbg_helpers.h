@@ -129,6 +129,19 @@ VALUE rbg_Array_protect(VALUE v, int * _Nullable status);
 /// Safely call `rb_Hash` (sort of) and report exception status
 VALUE rbg_Hash_protect(VALUE v, int * _Nullable status);
 
+/// Callback into Swift code for gvar access
+typedef VALUE (*Rbg_gvar_get_call)(ID id);
+typedef void (*Rbg_gvar_set_call)(ID id,
+                                  VALUE newValue,
+                                  Rbg_return_value * _Nonnull returnValue);
+
+/// Set the single functions where all gvar calls go
+void rbg_register_gvar_callbacks(Rbg_gvar_get_call _Nonnull get,
+                                 Rbg_gvar_set_call _Nonnull set);
+
+/// Bind a global variable name to Swift code
+ID rbg_create_virtual_gvar(const char * _Nonnull name, int readonly);
+
 /// Strings hidden from importer
 const char * _Nonnull rbg_ruby_version(void);
 const char * _Nonnull rbg_ruby_description(void);

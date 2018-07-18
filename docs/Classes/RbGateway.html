@@ -1038,6 +1038,103 @@ instead of the current program.  See <code>Kernel#load</code>.</p>
                 </li>
               </ul>
             </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Swift%20Global%20Variables"></a>
+                <a name="//apple_ref/swift/Section/Swift Global Variables" class="dashAnchor"></a>
+                <a href="#/Swift%20Global%20Variables">
+                  <h3 class="section-name">Swift Global Variables</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway02RbB0C15defineGlobalVarySS4name_AA0C6ObjectCyKc3getyAGKcSg3settKF"></a>
+                    <a name="//apple_ref/swift/Method/defineGlobalVar(name:get:set:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C15defineGlobalVarySS4name_AA0C6ObjectCyKc3getyAGKcSg3settKF">defineGlobalVar(name:get:set:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a Ruby global variable implemented by Swift code.</p>
+
+<p>Errors thrown from the getter/setter closures propagate into Ruby as exceptions.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifierACSS4type_SS2idtcACmF">RbError.badIdentifier</a></code> if <code>name</code> is bad; some other kind of error if Ruby is
+      not working.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">defineGlobalVar</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span>
+                            <span class="nv">get</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">,</span>
+                            <span class="nv">set</span><span class="p">:</span> <span class="p">((</span><span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the global variable.  Must begin with <code>$</code>.  Any existing global
+  variable with this name is overwritten.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>get</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Function called whenever Ruby code reads the global variable.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>set</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Function called whenever Ruby code writes the global variable.  This can be <code>nil</code>,
+ in which case Ruby treats the variable as readonly and raises a suitable
+ exception should code attempt to read it.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGlobalVar.swift#L88-L94">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </section>
 

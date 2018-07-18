@@ -76,7 +76,7 @@ import RubyGatewayHelpers
 /// Again you must take ensure that your Ruby objects support these operators or
 /// the program will crash.
 public final class RbObject: RbObjectAccess {
-    private let valueBox: UnsafeMutablePointer<Rbg_value>
+    internal let valueBox: UnsafeMutablePointer<Rbg_value>
 
     /// Wrap up a Ruby object using the its `VALUE` API handle.
     ///
@@ -366,3 +366,4 @@ extension Array where Element == RbObject {
         return try call(map { $0.rubyValue })
     }
 }
+
