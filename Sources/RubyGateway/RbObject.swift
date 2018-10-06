@@ -21,7 +21,9 @@ import RubyGatewayHelpers
 /// See `RbObjectAccess` for ways to call methods, access properties, and find
 /// constants from an `RbObject`:
 /// ```swift
-/// try myObj.set("name", "fred")
+/// try myObj.set("name", "fred")  // explicit property set
+///
+/// myObj.name = RbObject("fred")  // dynamic member lookup
 ///
 /// let results = try myObj.call("process", args: ["arg1", 100])
 ///

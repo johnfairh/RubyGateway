@@ -46,7 +46,7 @@ html = Rouge.highlight("let a = 3", "swift", "html")
 puts(html)
 ```
 
-In Swift 4.1 with similar [lack of] error checking:
+In Swift 4.2 with similar [lack of] error checking:
 ```swift
 import RubyGateway
 
@@ -55,12 +55,12 @@ let html = try! Ruby.get("Rouge").call("highlight", args: ["let a = 3", "swift",
 print(html)
 ```
 
-In future Swift, maybe:
+Or using dynamic member lookup:
 ```swift
 import RubyGateway
 
 try! Ruby.require(filename: "rouge")
-let html = try! Ruby.Rouge!.highlight("let a = 3", "swift", "html")
+let html = try! Ruby.Rouge!.call("highlight", args: ["let a = 3", "swift", "html"])
 print(html)
 ```
 
@@ -89,14 +89,14 @@ let avgScore = Double(avgScoreObj)!
 print("Mean score is \(avgScore)")
 
 // Pass Swift code as a block
-let scores = try! student.get("all_scores")
+let scores = student.all_scores!
 scores.call("each") { args in
     print("Subject: \(args[0]) Score: \(args[1])")
     return .nilObject
 }
 
 // Convert to a Swift array
-let subjects = Array<String>(try! student.get("all_subjects"))
+let subjects = Array<String>(student.all_subjects!)
 subjectsPopularityDb.submit(subjects: subjects)
 ```
 
@@ -123,7 +123,7 @@ Ruby.defineGlobalVariable(
 
 ## Requirements
 
-* Swift 4.1 or later, from swift.org or Xcode 9.3+.
+* Swift 4.2 or later, from swift.org or Xcode 10.0+
 * macOS (tested on 10.13.3) or Linux (tested on Ubuntu Xenial/16.04 on x86_64) with Clang 6+.
 * Ruby 2.2 or later including development files:
   * For macOS, these come with Xcode.
@@ -180,7 +180,7 @@ PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH swift run
 
 ## Contributions
 
-Welcome: open an issue / johnfairh@gmail.com 
+Welcome: open an issue / johnfairh@gmail.com / @johnfairh
 
 ## License
 

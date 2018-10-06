@@ -629,6 +629,9 @@ extension RbObjectAccess {
     ///
     /// // Same as:
     /// obj.call("property=", args: [5])
+    ///
+    /// // Same as:
+    /// obj.setAttribute("property", newValue: 5)
     /// ```
     /// - note: Any error in the write direction cannot be detected at the
     ///   call site and must be checked via `RbError.history`.

@@ -73,10 +73,6 @@ public struct RbObjectCollection: RandomAccessCollection,
     public mutating func replaceSubrange<C>(_ subrange: Range<Int>, with newElements: C) where C: Collection, C.Element: RbObjectConvertible {
         let newArray = Array(newElements)
 
-        // need this next explicitly to avoid an apologetic fatalError() from Swift.
-        // "Swift runtime does not yet support dynamically querying conditional conformance"
-        let rangeObj = subrange.rubyObject
-
-        rubyObject[rangeObj] = RbObject(newArray)
+        rubyObject[subrange.rubyObject] = RbObject(newArray)
     }
 }

@@ -12,8 +12,8 @@ import RubyGatewayHelpers
 /// and services to access various kinds of Ruby objects from the top level.
 ///
 /// You cannot instantiate this type.  Instead RubyGateway exports a public
-/// instance `Ruby`.  Among other things this permits dynamic member lookup
-/// and callable-style programming in Swift 5.
+/// instance `Ruby`.  Among other things this permits a dynamic member lookup
+/// programming style.
 ///
 /// The Ruby VM is initialized when the object is first accessed and is
 /// automatically stopped when the process ends.  The VM can be manually shut
@@ -41,9 +41,9 @@ import RubyGatewayHelpers
 /// }
 /// ```
 ///
-/// Or with Swift 5 dynamic member lookup & callable:
+/// Or using dynamic member lookup:
 /// ```swift
-/// let html = try Ruby.Rouge!.highlight("let a = 1", "swift", "html")
+/// let html = try Ruby.Rouge!.call("highlight", args: ["let a = 1", "swift", "html"])
 /// ```
 ///
 /// If you just want to create a Ruby object of some class, see
