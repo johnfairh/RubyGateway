@@ -166,7 +166,7 @@ this.  For example on Linux using [Brightbox Ruby](https://www.brightbox.com/doc
 2.5:
 ```shell
 sudo apt-get install ruby2.5 ruby2.5-dev pkg-config
-mkdir MyProject
+mkdir MyProject && cd MyProject
 swift package init --type executable
 vi Package.swift
 # add RubyGateway as a package dependency (NOT CRuby)

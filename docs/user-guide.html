@@ -193,12 +193,6 @@
                 <a class="nav-group-task-link" href="Extensions/ClosedRange.html">ClosedRange</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/CountableRange.html">CountableRange</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/CountableClosedRange.html">CountableClosedRange</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/RbComplex.html">RbComplex</a>
               </li>
               <li class="nav-group-task">
@@ -230,9 +224,9 @@ see <a href="index.html">the README</a>.</p>
 <h2 id='general-usage' class='heading'>General Usage</h2>
 
 <p>The Ruby VM is initialized when you first try to use it and shut down when the
-process ends.  Load Ruby code using <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C4loadySS8filename_Sb4wraptKF">RbGateway.load(filename:wrap:)</a></code> or
-<code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C7requireSbSS8filename_tKF">RbGateway.require(filename:)</a></code>.  Or just run some Ruby code and get the result
-using <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C4evalAA0C6ObjectCSS4ruby_tKF">RbGateway.eval(ruby:)</a></code>.  There already is a global instance of <code><a href="Classes/RbGateway.html">RbGateway</a></code>
+process ends.  Load Ruby code using <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C4load8filename4wrapySS_SbtKF">RbGateway.load(filename:wrap:)</a></code> or
+<code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C7require8filenameSbSS_tKF">RbGateway.require(filename:)</a></code>.  Or just run some Ruby code and get the result
+using <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C4eval4rubyAA0C6ObjectCSS_tKF">RbGateway.eval(ruby:)</a></code>.  There already is a global instance of <code><a href="Classes/RbGateway.html">RbGateway</a></code>
 called <code>Ruby</code> so the code looks like:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">RubyGateway</span>
 
@@ -243,10 +237,10 @@ called <code>Ruby</code> so the code looks like:</p>
 <span class="p">}</span>
 </code></pre>
 
-<p>Create objects using <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectCACSgSS7ofClass_SayAA0cD11Convertible_pSgG4argss17DictionaryLiteralVySSAGG6kwArgstcfc">RbObject.init(ofClass:args:kwArgs:)</a></code>.  Pass Swift types
+<p>Create objects using <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC7ofClass4args6kwArgsACSgSS_SayAA0cD11Convertible_pSgGs17DictionaryLiteralVySSAIGtcfc">RbObject.init(ofClass:args:kwArgs:)</a></code>.  Pass Swift types
 or <code><a href="Classes/RbObject.html">RbObject</a></code>s to the <code>args</code> parameter.</p>
 
-<p>Use <code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pSgG4argss17DictionaryLiteralVySSAHG6kwArgstKF">RbObjectAccess.call(_:args:kwArgs:)</a></code> to call methods on the object.  See
+<p>Use <code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs17DictionaryLiteralVySSAJGtKF">RbObjectAccess.call(_:args:kwArgs:)</a></code> to call methods on the object.  See
 <code><a href="Classes/RbObjectAccess.html">RbObjectAccess</a></code> for more object operations and variations on <code>call</code> including
 passing Swift code as a block.  Again pass Swift types or <code><a href="Classes/RbObject.html">RbObject</a></code>s in the
 <code>args</code> parameter.</p>
@@ -275,7 +269,7 @@ which will sometimes require driving the Ruby code in these ways.</p>
 
 <p>RubyBridge provides extensions to most Swift types so you can initialize
 <code><a href="Classes/RbObject.html">RbObject</a></code>s with them and vice versa, or use them directly as arguments to
-<code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pSgG4argss17DictionaryLiteralVySSAHG6kwArgstKF">RbObjectAccess.call(...)</a></code> and friends.  Supported types are:</p>
+<code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs17DictionaryLiteralVySSAJGtKF">RbObjectAccess.call(...)</a></code> and friends.  Supported types are:</p>
 
 <ul>
 <li><code><a href="https://developer.apple.com/documentation/swift/bool/">Bool</a></code></li>
@@ -286,14 +280,13 @@ which will sometimes require driving the Ruby code in these ways.</p>
 <li><code><a href="https://developer.apple.com/documentation/swift/array/">Array</a></code> or <code><a href="https://developer.apple.com/documentation/swift/arrayslice/">ArraySlice</a></code> with supported element type</li>
 <li><code><a href="https://developer.apple.com/documentation/swift/dictionary/">Dictionary</a></code> with supported key and value types</li>
 <li><code><a href="https://developer.apple.com/documentation/swift/set/">Set</a></code> with supported element type</li>
-<li>Range types with supported bound types - <code><a href="https://developer.apple.com/documentation/swift/range/">Range</a></code>, <code><a href="https://developer.apple.com/documentation/swift/countablerange/">CountableRange</a></code>,
-<code><a href="https://developer.apple.com/documentation/swift/closedrange/">ClosedRange</a></code>, <code>ClosedCountableRange</code></li>
+<li>Range types with supported bound types - <code><a href="https://developer.apple.com/documentation/swift/range/">Range</a></code>, <code><a href="https://developer.apple.com/documentation/swift/closedrange/">ClosedRange</a></code></li>
 </ul>
 <h3 id='exchange-code-nil-code-with-ruby' class='heading'>Exchange <code>nil</code> with Ruby</h3>
 
 <p>The static <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC03nilD0ACvpZ">RbObject.nilObject</a></code> represents Ruby <code>nil</code> and can be passed to Ruby
 methods as a parameter or used in data structures.  As a short-hand you can use
-literal Swift <code>nil</code> with APIs like <code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pSgG4argss17DictionaryLiteralVySSAHG6kwArgstKF">RbObjectAccess.call(_:args:kwArgs:)</a></code>.</p>
+literal Swift <code>nil</code> with APIs like <code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs17DictionaryLiteralVySSAJGtKF">RbObjectAccess.call(_:args:kwArgs:)</a></code>.</p>
 
 <p>When Ruby returns <code>nil</code> to Swift it always comes through as an <code><a href="Classes/RbObject.html">RbObject</a></code>.  You
 can compare this directly to <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC03nilD0ACvpZ">RbObject.nilObject</a></code> or use <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC5isNilSbvp">RbObject.isNil</a></code> to
@@ -310,7 +303,7 @@ syntax:</p>
 <ol>
 <li>Convert the whole array to Swift using an initializer.  This eagerly converts
 all the elements to Swift too and gives you an independent Swift array.</li>
-<li>Use Ruby Array methods via <code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pSgG4argss17DictionaryLiteralVySSAHG6kwArgstKF">RbObjectAccess.call(...)</a></code>.  Doing more work in
+<li>Use Ruby Array methods via <code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs17DictionaryLiteralVySSAJGtKF">RbObjectAccess.call(...)</a></code>.  Doing more work in
 the Ruby domain can reduce the number of elements that need to be converted
 to Swift types.</li>
 <li>Use Swift collection methods using <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC10collectionAA0cD10CollectionVvp">RbObject.collection</a></code>.  This gives access
@@ -338,7 +331,7 @@ aiming to mutate the array because the mutations happen in-place.</li>
 </code></pre>
 <h3 id='pass-swift-code-as-a-block' class='heading'>Pass Swift code as a block</h3>
 
-<p>Use an <code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pSgG4argss17DictionaryLiteralVySSAHG6kwArgstKF">RbObjectAccess.call(...)</a></code> variant with a <code>blockCall</code> argument.  Ruby:</p>
+<p>Use an <code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs17DictionaryLiteralVySSAJGtKF">RbObjectAccess.call(...)</a></code> variant with a <code>blockCall</code> argument.  Ruby:</p>
 <pre class="highlight ruby"><code><span class="n">obj</span><span class="p">.</span><span class="nf">meth</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="nb">puts</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">}</span>
 </code></pre>
 
@@ -378,7 +371,7 @@ have to tell RubyGateway:</p>
 confusing anyway.</p>
 <h3 id='create-a-proc-with-swift-code' class='heading'>Create a Proc with Swift code</h3>
 
-<p>Use <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectCA2CSayACGKc9blockCall_tcfc">RbObject.init(blockCall:)</a></code>.  Ruby:</p>
+<p>Use <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC9blockCallA2CSayACGKc_tcfc">RbObject.init(blockCall:)</a></code>.  Ruby:</p>
 <pre class="highlight ruby"><code><span class="n">myProc</span> <span class="o">=</span> <span class="nb">proc</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="p">}</span>
 </code></pre>
 
@@ -405,7 +398,7 @@ started:</p>
 </code></pre>
 <h3 id='access-class-variables' class='heading'>Access class variables</h3>
 
-<p>Use <code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC11getClassVarAA0cD0CSSKF">RbObjectAccess.getClassVar(_:)</a></code> <strong>on the class</strong>: RubyGateway goes like the
+<p>Use <code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC11getClassVaryAA0cD0CSSKF">RbObjectAccess.getClassVar(_:)</a></code> <strong>on the class</strong>: RubyGateway goes like the
 Ruby API not Ruby as written.  Ruby:</p>
 <pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">MyClass</span>
   <span class="vc">@@count</span> <span class="o">=</span> <span class="mi">0</span>
@@ -431,7 +424,7 @@ never come back to Ruby in the process, use <code><a href="Classes/RbGateway.htm
 <p>See <code><a href="Structs/RbRational.html">RbRational</a></code> for a thin wrapper to Ruby&rsquo;s <code>Rational</code> type.</p>
 <h2 id='implement-ruby-global-variables-in-swift' class='heading'>Implement Ruby Global Variables in Swift</h2>
 
-<p>See <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C15defineGlobalVarySS4name_AA0C6ObjectCyc3getyAGKc3settKF">RbGateway.defineGlobalVar(name:get:set:)</a></code>.  For example:</p>
+<p>See <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C15defineGlobalVar4name3get3setySS_AA0C6ObjectCycyAIKctKF">RbGateway.defineGlobalVar(name:get:set:)</a></code>.  For example:</p>
 <pre class="highlight swift"><code><span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineGlobalVar</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"$epoch"</span><span class="p">,</span>
                      <span class="nv">get</span><span class="p">:</span> <span class="p">{</span> <span class="kt">RbObject</span><span class="p">(</span><span class="n">currentEpoch</span><span class="p">)</span> <span class="p">},</span>
                      <span class="nv">set</span><span class="p">:</span> <span class="p">{</span> <span class="n">newObj</span> <span class="k">in</span>
@@ -458,7 +451,7 @@ handle errors, so RubyGateway propagates all errors (<a href="#caveats-and-gotch
 <h3 id='errors-exceptions' class='heading'>Errors + Exceptions</h3>
 
 <p>All errors thrown are <code><a href="Enums/RbError.html">RbError</a></code> which is an enum of various interface errors
-detected by RubyGateway and one case <code><a href="Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> that covers all
+detected by RubyGateway and one case <code>RbError.rubyException</code> that covers all
 Ruby exceptions.</p>
 
 <p>RubyGateway remembers the last few <code><a href="Enums/RbError.html">RbError</a></code>s that were generated and stores
@@ -466,7 +459,7 @@ them in the publicly available <code><a href="Enums/RbError.html#/s:11RubyGatewa
 <h3 id='code-nil-code-failures' class='heading'><code>nil</code> failures</h3>
 
 <p>Converting Ruby values to Swift types works differently: it happens using
-failable initializers such as <code><a href="Extensions/String.html#/s:SS11RubyGatewayESSSgAA8RbObjectCcfc">String.init(_:)</a></code>.  These can fail for a variety
+failable initializers such as <code><a href="Extensions/String.html#/s:SS11RubyGatewayEySSSgAA8RbObjectCcfc">String.init(_:)</a></code>.  These can fail for a variety
 of reasons.  When they do, RubyGateway still internally generates an <code><a href="Enums/RbError.html">RbError</a></code>
 and stores a copy in <code><a href="Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> even though it is not thrown.  This
 means you can diagnose why a conversion failed:</p>
@@ -539,10 +532,10 @@ in conjunction with RubyGateway to access more of the API than RubyGateway itsel
 provides.</p>
 
 <p>Each <code><a href="Classes/RbObject.html">RbObject</a></code> wraps one <code>VALUE</code> keeping it safe from garbage collection.  You
-can access that <code>VALUE</code> using <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC04withA5ValuexxSuKc4call_tKlF">RbObject.withRubyValue(call:)</a></code>.</p>
+can access that <code>VALUE</code> using <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC04withA5Value4callxxSuKXE_tKlF">RbObject.withRubyValue(call:)</a></code>.</p>
 
 <p>RubyGateway caches intern&#39;ed Ruby strings - you can access the cache using
-<code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C5getIDSuSS3for_tKF">RbGateway.getID(for:)</a></code>.</p>
+<code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C5getID3forSuSS_tKF">RbGateway.getID(for:)</a></code>.</p>
 
 <p>Note that when you call the Ruby API and Ruby raises an exception, the process
 immediately crashes unless you are running inside <code>rb_protect()</code> or equivalent.</p>

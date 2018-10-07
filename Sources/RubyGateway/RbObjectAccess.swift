@@ -47,6 +47,7 @@ import RubyGatewayHelpers
 ///                           blockArgs.forEach {
 ///                               process($0)
 ///                           }
+///                           return .nilObject
 ///                       }
 /// } catch RbError.rubyException(let exn) {
 ///     handleErrors(error)
@@ -101,8 +102,8 @@ public class RbObjectAccess {
     ///
     /// - parameter name: Name of IVar to get.  Must begin with a single '@'.
     /// - returns: Value of the IVar or Ruby `nil` if it has not been assigned yet.
-    /// - throws: `RbError.badIdentifier` if `name` looks wrong.
-    ///           `RbError.rubyException` if Ruby has a problem.
+    /// - throws: `RbError.badIdentifier(type:id:)` if `name` looks wrong.
+    ///           `RbError.rubyException(_:)` if Ruby has a problem.
     public func getInstanceVar(_ name: String) throws -> RbObject {
         try Ruby.setup()
         try name.checkRubyInstanceVarName()
@@ -118,8 +119,8 @@ public class RbObjectAccess {
     /// - parameter name: Name of Ivar to set.  Must begin with a single '@'.
     /// - parameter newValue: New value to set.
     /// - returns: The value that was set.
-    /// - throws: `RbError.badIdentifier` if `name` looks wrong.
-    ///           `RbError.rubyException` if Ruby has a problem.
+    /// - throws: `RbError.badIdentifier(type:id:)` if `name` looks wrong.
+    ///           `RbError.rubyException(_:)` if Ruby has a problem.
     @discardableResult
     public func setInstanceVar(_ name: String, newValue: RbObjectConvertible?) throws -> RbObject {
         try Ruby.setup()
@@ -156,7 +157,7 @@ extension RbObjectAccess {
     ///   If you call this method on an `RbObject` then `name` is resolved like Ruby does,
     ///   looking up the inheritance chain if there is no local match.
     /// - returns: An `RbObject` for the constant.
-    /// - throws: `RbError.rubyException` if the constant cannot be found.
+    /// - throws: `RbError.rubyException(_:)` if the constant cannot be found.
     public func getConstant(_ name: String) throws -> RbObject {
         try Ruby.setup()
         try name.checkRubyConstantName()
@@ -204,8 +205,8 @@ extension RbObjectAccess {
     ///   If you call this method on an `RbObject` then `name` is resolved like Ruby does,
     ///   looking up the inheritance chain if there is no match.
     /// - returns: An `RbObject` for the class.
-    /// - throws: `RbError.rubyException` if the constant cannot be found.
-    ///           `RbError.badType` if the constant is found but is not a class.
+    /// - throws: `RbError.rubyException(_:)` if the constant cannot be found.
+    ///           `RbError.badType(_:)` if the constant is found but is not a class.
     public func getClass(_ name: String) throws -> RbObject {
         let obj = try getConstant(name)
         guard obj.rubyType == .T_CLASS else {
@@ -224,8 +225,8 @@ extension RbObjectAccess {
     /// - parameter args: The positional arguments to the method.  None by default.
     /// - parameter kwArgs: The keyword arguments to the method.  None by default.
     /// - returns: The result of calling the method.
-    /// - throws: `RbError.rubyException` if there is a Ruby exception.
-    ///           `RbError.duplicateKwArg` if there are duplicate keywords in `kwArgs`.
+    /// - throws: `RbError.rubyException(_:)` if there is a Ruby exception.
+    ///           `RbError.duplicateKwArg(_:)` if there are duplicate keywords in `kwArgs`.
     ///
     /// For a version that does not throw, see `failable`.
     @discardableResult
@@ -246,8 +247,8 @@ extension RbObjectAccess {
     ///             longer than this call?  Default `.none`.  See `RbBlockRetention`.
     /// - parameter blockCall: Swift code to pass as a block to the method.
     /// - returns: The result of calling the method.
-    /// - throws: `RbError.rubyException` if there is a Ruby exception.
-    ///           `RbError.duplicateKwArg` if there are duplicate keywords in `kwArgs`.
+    /// - throws: `RbError.rubyException(_:)` if there is a Ruby exception.
+    ///           `RbError.duplicateKwArg(_:)` if there are duplicate keywords in `kwArgs`.
     ///
     /// For a version that does not throw, see `failable`.
     @discardableResult
@@ -271,9 +272,9 @@ extension RbObjectAccess {
     /// - parameter kwArgs: The keyword arguments to the method.  None by default.
     /// - parameter block: A Ruby proc to pass as a block to the method.
     /// - returns: The result of calling the method.
-    /// - throws: `RbError.rubyException` if there is a Ruby exception.
-    ///           `RbError.duplicateKwArg` if there are duplicate keywords in `kwArgs`.
-    ///           `RbError.badType` if `block` does not convert to a Proc.
+    /// - throws: `RbError.rubyException(_:)` if there is a Ruby exception.
+    ///           `RbError.duplicateKwArg(_:)` if there are duplicate keywords in `kwArgs`.
+    ///           `RbError.badType(_:)` if `block` does not convert to a Proc.
     ///
     /// For a version that does not throw, see `failable`.
     @discardableResult
@@ -292,9 +293,9 @@ extension RbObjectAccess {
     /// - parameter args: The positional arguments to the method.  None by default.
     /// - parameter kwArgs: The keyword arguments to the method.  None by default.
     /// - returns: The result of calling the method.
-    /// - throws: `RbError.rubyException` if there is a Ruby exception.
-    ///           `RbError.badType` if `symbol` is not a symbol.
-    ///           `RbError.duplicateKwArg` if there are duplicate keywords in `kwArgs`.
+    /// - throws: `RbError.rubyException(_:)` if there is a Ruby exception.
+    ///           `RbError.badType(_:)` if `symbol` is not a symbol.
+    ///           `RbError.duplicateKwArg(_:)` if there are duplicate keywords in `kwArgs`.
     ///
     /// For a version that does not throw, see `failable`.
     @discardableResult
@@ -316,9 +317,9 @@ extension RbObjectAccess {
     ///             longer than this call?  Default `.none`.  See `RbBlockRetention`.
     /// - parameter blockCall: Swift code to pass as a block to the method.
     /// - returns: The result of calling the method.
-    /// - throws: `RbError.rubyException` if there is a Ruby exception.
-    ///           `RbError.badType` if `symbol` is not a symbol.
-    ///           `RbError.duplicateKwArg` if there are duplicate keywords in `kwArgs`.
+    /// - throws: `RbError.rubyException(_:)` if there is a Ruby exception.
+    ///           `RbError.badType(_:)` if `symbol` is not a symbol.
+    ///           `RbError.duplicateKwArg(_:)` if there are duplicate keywords in `kwArgs`.
     ///
     /// For a version that does not throw, see `failable`.
     @discardableResult
@@ -340,10 +341,10 @@ extension RbObjectAccess {
     /// - parameter kwArgs: The keyword arguments to the method.  None by default.
     /// - parameter block: A Ruby proc to pass as a block to the method.
     /// - returns: The result of calling the method.
-    /// - throws: `RbError.rubyException` if there is a Ruby exception.
-    ///           `RbError.badType` if `symbol` is not a symbol.
-    ///           `RbError.duplicateKwArg` if there are duplicate keywords in `kwArgs`.
-    ///           `RbError.badType` if `block` does not convert to a Proc.
+    /// - throws: `RbError.rubyException(_:)` if there is a Ruby exception.
+    ///           `RbError.badType(_:)` if `symbol` is not a symbol.
+    ///           `RbError.duplicateKwArg(_:)` if there are duplicate keywords in `kwArgs`.
+    ///           `RbError.badType(_:)` if `block` does not convert to a Proc.
     ///
     /// For a version that does not throw, see `failable`.
     @discardableResult
@@ -438,8 +439,8 @@ extension RbObjectAccess {
     ///
     /// - parameter name: The name of the attribute to get.
     /// - returns: The value of the attribute.
-    /// - throws: `RbError.badIdentifier` if `name` looks wrong.
-    ///           `RbError.rubyException` if Ruby has a problem, probably means
+    /// - throws: `RbError.badIdentifier(type:id:)` if `name` looks wrong.
+    ///           `RbError.rubyException(_:)` if Ruby has a problem, probably means
     ///           `attribute` doesn't exist.
     public func getAttribute(_ name: String) throws -> RbObject {
         try name.checkRubyMethodName()
@@ -456,8 +457,8 @@ extension RbObjectAccess {
     /// - parameter name: The name of the attribute to set.
     /// - parameter value: The new value of the attribute.
     /// - returns: Whatever the attribute setter returns, typically the new value.
-    /// - throws: `RbError.badIdentifier` if `name` looks wrong.
-    ///           `RbError.rubyException` if Ruby has a problem, probably means
+    /// - throws: `RbError.badIdentifier(type:id:)` if `name` looks wrong.
+    ///           `RbError.rubyException(_:)` if Ruby has a problem, probably means
     ///           `attribute` doesn't exist.
     @discardableResult
     public func setAttribute(_ name: String, newValue: RbObjectConvertible?) throws -> RbObject {
@@ -489,9 +490,9 @@ extension RbObjectAccess {
     ///
     /// - parameter name: Name of CVar to get.  Must begin with '@@'.
     /// - returns: The value of the CVar.
-    /// - throws: `RbError.badIdentifier` if `name` looks wrong.
-    ///           `RbError.badType` if the object is not a class.
-    ///           `RbError.rubyException` if Ruby has a problem -- in particular,
+    /// - throws: `RbError.badIdentifier(type:id:)` if `name` looks wrong.
+    ///           `RbError.badType(_:)` if the object is not a class.
+    ///           `RbError.rubyException(_:)` if Ruby has a problem -- in particular,
     ///           if the CVar does not exist.
     public func getClassVar(_ name: String) throws -> RbObject {
         try Ruby.setup()
@@ -516,9 +517,9 @@ extension RbObjectAccess {
     /// - parameter name: Name of the CVar to set.  Must begin with '@@'.
     /// - parameter newValue: The new value to set.
     /// - returns: The value that was set.
-    /// - throws: `RbError.badIdentifier` if `name` looks wrong.
-    ///           `RbError.badType` if the object is not a class.
-    ///           `RbError.rubyException` if Ruby has a problem.
+    /// - throws: `RbError.badIdentifier(type:id:)` if `name` looks wrong.
+    ///           `RbError.badType(_:)` if the object is not a class.
+    ///           `RbError.rubyException(_:)` if Ruby has a problem.
     @discardableResult
     public func setClassVar(_ name: String, newValue: RbObjectConvertible?) throws -> RbObject {
         try Ruby.setup()
@@ -599,7 +600,7 @@ extension RbObjectAccess {
     ///
     /// - parameter name: Name of thing to access.
     /// - returns: The accessed thing .
-    /// - throws: `RbError.rubyException` if Ruby has a problem.
+    /// - throws: `RbError.rubyException(_:)` if Ruby has a problem.
     ///           `RbError` of some other kind if `name` looks wrong in some way.
     @discardableResult
     public func get(_ name: String) throws -> RbObject {

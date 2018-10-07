@@ -88,7 +88,7 @@ public final class RbGateway: RbObjectAccess {
     ///
     /// - parameter name: Name to look up, typically constant or method name.
     /// - returns: The corresponding ID.
-    /// - throws: `RbError.rubyException` if Ruby raises an exception.  This
+    /// - throws: `RbError.rubyException(_:)` if Ruby raises an exception.  This
     ///   probably means the `ID` space is full, which is fairly unlikely.
     public func getID(for name: String) throws -> ID {
         return try RbGateway.vm.getID(for: name)
@@ -129,8 +129,8 @@ public final class RbGateway: RbObjectAccess {
     ///
     /// - parameter name: Name of IVar to get.  Must begin with a single '@'.
     /// - returns: Value of the IVar or Ruby `nil` if it has not been assigned yet.
-    /// - throws: `RbError.badIdentifier` if `name` looks wrong.
-    ///           `RbError.rubyException` if Ruby has a problem.
+    /// - throws: `RbError.badIdentifier(type:id:)` if `name` looks wrong.
+    ///           `RbError.rubyException(_:)` if Ruby has a problem.
     public override func getInstanceVar(_ name: String) throws -> RbObject {
         try setup()
         try name.checkRubyInstanceVarName()
@@ -146,8 +146,8 @@ public final class RbGateway: RbObjectAccess {
     /// - parameter name: Name of IVar to set.  Must begin with a single '@'.
     /// - parameter newValue: New value to set.
     /// - returns: The value that was set.
-    /// - throws: `RbError.badIdentifier` if `name` looks wrong.
-    ///           `RbError.rubyException` if Ruby has a problem.
+    /// - throws: `RbError.badIdentifier(type:id:)` if `name` looks wrong.
+    ///           `RbError.rubyException(_:)` if Ruby has a problem.
     @discardableResult
     public override func setInstanceVar(_ name: String, newValue: RbObjectConvertible?) throws -> RbObject {
         try setup()

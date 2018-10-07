@@ -194,12 +194,6 @@
                 <a class="nav-group-task-link" href="../Extensions/ClosedRange.html">ClosedRange</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/CountableRange.html">CountableRange</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/CountableClosedRange.html">CountableClosedRange</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/RbComplex.html">RbComplex</a>
               </li>
               <li class="nav-group-task">
@@ -230,11 +224,11 @@ supporting <code>to_proc</code>.</p>
 <span class="k">let</span> <span class="nv">mapped</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"map"</span><span class="p">,</span> <span class="nv">block</span><span class="p">:</span> <span class="kt">RbProc</span><span class="p">(</span><span class="kt">RbSymbol</span><span class="p">(</span><span class="s">"downcase"</span><span class="p">)))</span>
 </code></pre>
 
-<p>Use <code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectCA2CSayACGKc9blockCall_tcfc">RbObject.init(blockCall:)</a></code> to create a Ruby Proc from a
+<p>Use <code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectC9blockCallA2CSayACGKc_tcfc">RbObject.init(blockCall:)</a></code> to create a Ruby Proc from a
 Swift closure.</p>
 
 <p>If you want to pass Swift code to a method as a block then just call
-<code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pSgG4argss17DictionaryLiteralVySSAHG6kwArgsAA0C14BlockRetentionO05blockN0AFSayAFGKc0O4CalltKF">RbObjectAccess.call(_:args:kwArgs:blockRetention:blockCall:)</a></code> directly,
+<code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgs14blockRetention0J4CallAA0cD0CSS_SayAA0cD11Convertible_pSgGs17DictionaryLiteralVySSALGAA0c5BlockK0OAJSayAJGKctKF">RbObjectAccess.call(_:args:kwArgs:blockRetention:blockCall:)</a></code> directly,
 no need for either <code>RbProc</code> or <code><a href="../Classes/RbObject.html">RbObject</a></code>.</p>
 
           </div>
@@ -247,9 +241,9 @@ no need for either <code>RbProc</code> or <code><a href="../Classes/RbObject.htm
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway6RbProcVAcA0C17ObjectConvertible_p6object_tcfc"></a>
+                    <a name="/s:11RubyGateway6RbProcV6objectAcA0C17ObjectConvertible_p_tcfc"></a>
                     <a name="//apple_ref/swift/Method/init(object:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway6RbProcVAcA0C17ObjectConvertible_p6object_tcfc">init(object:)</a>
+                    <a class="token" href="#/s:11RubyGateway6RbProcV6objectAcA0C17ObjectConvertible_p_tcfc">init(object:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -277,9 +271,9 @@ no need for either <code>RbProc</code> or <code><a href="../Classes/RbObject.htm
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway6RbProcVACSgAA0C6ObjectCcfc"></a>
+                    <a name="/s:11RubyGateway6RbProcVyACSgAA0C6ObjectCcfc"></a>
                     <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway6RbProcVACSgAA0C6ObjectCcfc">init(_:)</a>
+                    <a class="token" href="#/s:11RubyGateway6RbProcVyACSgAA0C6ObjectCcfc">init(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">

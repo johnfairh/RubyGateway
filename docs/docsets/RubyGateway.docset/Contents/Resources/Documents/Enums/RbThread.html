@@ -194,12 +194,6 @@
                 <a class="nav-group-task-link" href="../Extensions/ClosedRange.html">ClosedRange</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/CountableRange.html">CountableRange</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/CountableClosedRange.html">CountableClosedRange</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/RbComplex.html">RbComplex</a>
               </li>
               <li class="nav-group-task">
@@ -231,11 +225,11 @@ code (eg. one accessed via libdispatch).</p>
 <p>Even when multiple Ruby threads are active, the VM executes just one at a
 time under control of a single lock known as the GVL.  The GVL is given up
 over Ruby blocking operations and can be manually relinquished using
-<code><a href="../Enums/RbThread.html#/s:11RubyGateway8RbThreadO14callWithoutGvlyyyc8callback_tFZ">RbThread.callWithoutGvl(callback:)</a></code>.</p>
+<code><a href="../Enums/RbThread.html#/s:11RubyGateway8RbThreadO14callWithoutGvl8callbackyyyXE_tFZ">RbThread.callWithoutGvl(callback:)</a></code>.</p>
 
 <p>Inside a block that has given up the GVL, you must not call any Ruby code or
 it will at best crash.  You can execute some code inside your GVL-free scope
-that is allowed to call Ruby using <code><a href="../Enums/RbThread.html#/s:11RubyGateway8RbThreadO11callWithGvlyyyc8callback_tFZ">RbThread.callWithGvl(callback:)</a></code>.</p>
+that is allowed to call Ruby using <code><a href="../Enums/RbThread.html#/s:11RubyGateway8RbThreadO11callWithGvl8callbackyyyXE_tFZ">RbThread.callWithGvl(callback:)</a></code>.</p>
 
           </div>
         </section>
@@ -247,9 +241,9 @@ that is allowed to call Ruby using <code><a href="../Enums/RbThread.html#/s:11Ru
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway8RbThreadO6createAA0C6ObjectCSgyyc8callback_tFZ"></a>
+                    <a name="/s:11RubyGateway8RbThreadO6create8callbackAA0C6ObjectCSgyyc_tFZ"></a>
                     <a name="//apple_ref/swift/Method/create(callback:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway8RbThreadO6createAA0C6ObjectCSgyyc8callback_tFZ">create(callback:)</a>
+                    <a class="token" href="#/s:11RubyGateway8RbThreadO6create8callbackAA0C6ObjectCSgyyc_tFZ">create(callback:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -345,9 +339,9 @@ that is allowed to call Ruby using <code><a href="../Enums/RbThread.html#/s:11Ru
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway8RbThreadO14callWithoutGvlyyyc8callback_tFZ"></a>
+                    <a name="/s:11RubyGateway8RbThreadO14callWithoutGvl8callbackyyyXE_tFZ"></a>
                     <a name="//apple_ref/swift/Method/callWithoutGvl(callback:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway8RbThreadO14callWithoutGvlyyyc8callback_tFZ">callWithoutGvl(callback:)</a>
+                    <a class="token" href="#/s:11RubyGateway8RbThreadO14callWithoutGvl8callbackyyyXE_tFZ">callWithoutGvl(callback:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -361,7 +355,7 @@ that is allowed to call Ruby using <code><a href="../Enums/RbThread.html#/s:11Ru
 for lengthy comments about how to do this safely.</p>
 
 <p>Using this API ends up with no unblocking function for the section.
-See <code><a href="../Enums/RbThread.html#/s:11RubyGateway8RbThreadO14callWithoutGvlyAC14UnblockingFuncO10unblocking_yyc8callbacktFZ">callWithoutGvl(unblocking:callback:)</a></code> to configure that.</p>
+See <code><a href="../Enums/RbThread.html#/s:11RubyGateway8RbThreadO14callWithoutGvl10unblocking8callbackyAC14UnblockingFuncO_yyXEtFZ">callWithoutGvl(unblocking:callback:)</a></code> to configure that.</p>
 
                       </div>
                       <div class="declaration">
@@ -412,9 +406,9 @@ See <code><a href="../Enums/RbThread.html#/s:11RubyGateway8RbThreadO14callWithou
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway8RbThreadO14callWithoutGvlyAC14UnblockingFuncO10unblocking_yyc8callbacktFZ"></a>
+                    <a name="/s:11RubyGateway8RbThreadO14callWithoutGvl10unblocking8callbackyAC14UnblockingFuncO_yyXEtFZ"></a>
                     <a name="//apple_ref/swift/Method/callWithoutGvl(unblocking:callback:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway8RbThreadO14callWithoutGvlyAC14UnblockingFuncO10unblocking_yyc8callbacktFZ">callWithoutGvl(unblocking:callback:)</a>
+                    <a class="token" href="#/s:11RubyGateway8RbThreadO14callWithoutGvl10unblocking8callbackyAC14UnblockingFuncO_yyXEtFZ">callWithoutGvl(unblocking:callback:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -448,9 +442,9 @@ Ruby wants to interrupt the thread and get it back under GVL control.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway8RbThreadO11callWithGvlyyyc8callback_tFZ"></a>
+                    <a name="/s:11RubyGateway8RbThreadO11callWithGvl8callbackyyyXE_tFZ"></a>
                     <a name="//apple_ref/swift/Method/callWithGvl(callback:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway8RbThreadO11callWithGvlyyyc8callback_tFZ">callWithGvl(callback:)</a>
+                    <a class="token" href="#/s:11RubyGateway8RbThreadO11callWithGvl8callbackyyyXE_tFZ">callWithGvl(callback:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -461,7 +455,7 @@ Ruby wants to interrupt the thread and get it back under GVL control.</p>
                         <p>From a GVL-free section of code on a Ruby thread, reacquire the GVL and run some code.</p>
 
 <p>This cannot be used to attach a native thread to Ruby.  It should only be used
-from within the <code>callback</code> passed to <code><a href="../Enums/RbThread.html#/s:11RubyGateway8RbThreadO14callWithoutGvlyyyc8callback_tFZ">callWithoutGvl(callback:)</a></code>.  See the Ruby
+from within the <code>callback</code> passed to <code><a href="../Enums/RbThread.html#/s:11RubyGateway8RbThreadO14callWithoutGvl8callbackyyyXE_tFZ">callWithoutGvl(callback:)</a></code>.  See the Ruby
 source code for more commentary.</p>
 
                       </div>

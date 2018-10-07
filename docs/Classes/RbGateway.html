@@ -194,12 +194,6 @@
                 <a class="nav-group-task-link" href="../Extensions/ClosedRange.html">ClosedRange</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/CountableRange.html">CountableRange</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/CountableClosedRange.html">CountableClosedRange</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/RbComplex.html">RbComplex</a>
               </li>
               <li class="nav-group-task">
@@ -224,8 +218,8 @@
 and services to access various kinds of Ruby objects from the top level.</p>
 
 <p>You cannot instantiate this type.  Instead RubyGateway exports a public
-instance <code>Ruby</code>.  Among other things this permits dynamic member lookup
-and callable-style programming in Swift 5.</p>
+instance <code>Ruby</code>.  Among other things this permits a dynamic member lookup
+programming style.</p>
 
 <p>The Ruby VM is initialized when the object is first accessed and is
 automatically stopped when the process ends.  The VM can be manually shut
@@ -251,12 +245,12 @@ or call functions as you would at the top level of a Ruby script, for example:</
 <span class="p">}</span>
 </code></pre>
 
-<p>Or with Swift 5 dynamic member lookup &amp; callable:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">html</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="kt">Rouge</span><span class="o">!.</span><span class="nf">highlight</span><span class="p">(</span><span class="s">"let a = 1"</span><span class="p">,</span> <span class="s">"swift"</span><span class="p">,</span> <span class="s">"html"</span><span class="p">)</span>
+<p>Or using dynamic member lookup:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">html</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="kt">Rouge</span><span class="o">!.</span><span class="nf">call</span><span class="p">(</span><span class="s">"highlight"</span><span class="p">,</span> <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="s">"let a = 1"</span><span class="p">,</span> <span class="s">"swift"</span><span class="p">,</span> <span class="s">"html"</span><span class="p">])</span>
 </code></pre>
 
 <p>If you just want to create a Ruby object of some class, see
-<code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectCACSgSS7ofClass_SayAA0cD11Convertible_pSgG4argss17DictionaryLiteralVySSAGG6kwArgstcfc">RbObject.init(ofClass:args:kwArgs:)</a></code>.</p>
+<code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectC7ofClass4args6kwArgsACSgSS_SayAA0cD11Convertible_pSgGs17DictionaryLiteralVySSAIGtcfc">RbObject.init(ofClass:args:kwArgs:)</a></code>.</p>
 
           </div>
         </section>
@@ -309,9 +303,9 @@ be re-setup.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway02RbB0C5getIDSuSS3for_tKF"></a>
+                    <a name="/s:11RubyGateway02RbB0C5getID3forSuSS_tKF"></a>
                     <a name="//apple_ref/swift/Method/getID(for:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway02RbB0C5getIDSuSS3for_tKF">getID(for:)</a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C5getID3forSuSS_tKF">getID(for:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -319,14 +313,14 @@ be re-setup.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Get an <code><a href="https://developer.apple.com/documentation/objectivec/id/">ID</a></code> ready to call a method, for example.</p>
+                        <p>Get an <code><a href="https://developer.apple.com/documentation/cloudkit/ckrecord/id/">ID</a></code> ready to call a method, for example.</p>
 
 <p>This is public to permit interop with <code>CRuby</code>.  It is not
 needed for regular RubyGateway use.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if Ruby raises an exception.  This
-probably means the <code><a href="https://developer.apple.com/documentation/objectivec/id/">ID</a></code> space is full, which is fairly unlikely.
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(_:)</a></code> if Ruby raises an exception.  This
+probably means the <code><a href="https://developer.apple.com/documentation/cloudkit/ckrecord/id/">ID</a></code> space is full, which is fairly unlikely.
 
 </div>
 
@@ -335,7 +329,7 @@ probably means the <code><a href="https://developer.apple.com/documentation/obje
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getID</span><span class="p">(</span><span class="k">for</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="https://developer.apple.com/documentation/objectivec/id/">ID</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getID</span><span class="p">(</span><span class="k">for</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="https://developer.apple.com/documentation/cloudkit/ckrecord/id/">ID</a></span></code></pre>
 
                         </div>
                       </div>
@@ -421,9 +415,9 @@ custom types.  It is not required for regular RubyGateway use.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway02RbB0C14getInstanceVarAA0C6ObjectCSSKF"></a>
+                    <a name="/s:11RubyGateway02RbB0C14getInstanceVaryAA0C6ObjectCSSKF"></a>
                     <a name="//apple_ref/swift/Method/getInstanceVar(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway02RbB0C14getInstanceVarAA0C6ObjectCSSKF">getInstanceVar(_:)</a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C14getInstanceVaryAA0C6ObjectCSSKF">getInstanceVar(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -439,8 +433,8 @@ value if it doesn&rsquo;t exist yet.</p>
 <p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">RbObjectAccess.failable</a></code>.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifierACSS4type_SS2idtcACmF">RbError.badIdentifier</a></code> if <code>name</code> looks wrong.
-      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if Ruby has a problem.
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifieryACSS_SStcACmF">RbError.badIdentifier(type:id:)</a></code> if <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> looks wrong.
+      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(_:)</a></code> if Ruby has a problem.
 
 </div>
 
@@ -485,9 +479,9 @@ value if it doesn&rsquo;t exist yet.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway02RbB0C14setInstanceVarAA0C6ObjectCSS_AA0cG11Convertible_pSg8newValuetKF"></a>
+                    <a name="/s:11RubyGateway02RbB0C14setInstanceVar_8newValueAA0C6ObjectCSS_AA0cI11Convertible_pSgtKF"></a>
                     <a name="//apple_ref/swift/Method/setInstanceVar(_:newValue:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway02RbB0C14setInstanceVarAA0C6ObjectCSS_AA0cG11Convertible_pSg8newValuetKF">setInstanceVar(_:newValue:)</a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C14setInstanceVar_8newValueAA0C6ObjectCSS_AA0cI11Convertible_pSgtKF">setInstanceVar(_:newValue:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -502,8 +496,8 @@ value if it doesn&rsquo;t exist yet.</p>
 <p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">RbObjectAccess.failable</a></code>.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifierACSS4type_SS2idtcACmF">RbError.badIdentifier</a></code> if <code>name</code> looks wrong.
-      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if Ruby has a problem.
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifieryACSS_SStcACmF">RbError.badIdentifier(type:id:)</a></code> if <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> looks wrong.
+      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(_:)</a></code> if Ruby has a problem.
 
 </div>
 
@@ -845,9 +839,9 @@ feature.  See Ruby#14250.</li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway02RbB0C4evalAA0C6ObjectCSS4ruby_tKF"></a>
+                    <a name="/s:11RubyGateway02RbB0C4eval4rubyAA0C6ObjectCSS_tKF"></a>
                     <a name="//apple_ref/swift/Method/eval(ruby:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway02RbB0C4evalAA0C6ObjectCSS4ruby_tKF">eval(ruby:)</a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C4eval4rubyAA0C6ObjectCSS_tKF">eval(ruby:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -910,9 +904,9 @@ Don&rsquo;t be tempted by <code>rb_eval_string_wrap()</code>, it is broken. #104
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway02RbB0C7requireSbSS8filename_tKF"></a>
+                    <a name="/s:11RubyGateway02RbB0C7require8filenameSbSS_tKF"></a>
                     <a name="//apple_ref/swift/Method/require(filename:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway02RbB0C7requireSbSS8filename_tKF">require(filename:)</a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C7require8filenameSbSS_tKF">require(filename:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -972,9 +966,9 @@ method is dispatched dynamically so it will invoke any replacements of
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway02RbB0C4loadySS8filename_Sb4wraptKF"></a>
+                    <a name="/s:11RubyGateway02RbB0C4load8filename4wrapySS_SbtKF"></a>
                     <a name="//apple_ref/swift/Method/load(filename:wrap:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway02RbB0C4loadySS8filename_Sb4wraptKF">load(filename:wrap:)</a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C4load8filename4wrapySS_SbtKF">load(filename:wrap:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1050,9 +1044,9 @@ instead of the current program.  See <code>Kernel#load</code>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway02RbB0C15defineGlobalVarySS4name_AA0C6ObjectCyc3gettKF"></a>
+                    <a name="/s:11RubyGateway02RbB0C15defineGlobalVar4name3getySS_AA0C6ObjectCyctKF"></a>
                     <a name="//apple_ref/swift/Method/defineGlobalVar(name:get:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway02RbB0C15defineGlobalVarySS4name_AA0C6ObjectCyc3gettKF">defineGlobalVar(name:get:)</a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C15defineGlobalVar4name3getySS_AA0C6ObjectCyctKF">defineGlobalVar(name:get:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1063,7 +1057,7 @@ instead of the current program.  See <code>Kernel#load</code>.</p>
                         <p>Create a readonly Ruby global variable implemented by Swift code.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifierACSS4type_SS2idtcACmF">RbError.badIdentifier</a></code> if <code>name</code> is bad; some other kind of error if Ruby is
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifieryACSS_SStcACmF">RbError.badIdentifier(type:id:)</a></code> if <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> is bad; some other kind of error if Ruby is
       not working.
 
 </div>
@@ -1119,9 +1113,9 @@ instead of the current program.  See <code>Kernel#load</code>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway02RbB0C15defineGlobalVarySS4name_AA0C6ObjectCyc3getyAGKc3settKF"></a>
+                    <a name="/s:11RubyGateway02RbB0C15defineGlobalVar4name3get3setySS_AA0C6ObjectCycyAIKctKF"></a>
                     <a name="//apple_ref/swift/Method/defineGlobalVar(name:get:set:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway02RbB0C15defineGlobalVarySS4name_AA0C6ObjectCyc3getyAGKc3settKF">defineGlobalVar(name:get:set:)</a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C15defineGlobalVar4name3get3setySS_AA0C6ObjectCycyAIKctKF">defineGlobalVar(name:get:set:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1135,7 +1129,7 @@ instead of the current program.  See <code>Kernel#load</code>.</p>
 not permit getters to raise exceptions.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifierACSS4type_SS2idtcACmF">RbError.badIdentifier</a></code> if <code>name</code> is bad; some other kind of error if Ruby is
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifieryACSS_SStcACmF">RbError.badIdentifier(type:id:)</a></code> if <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> is bad; some other kind of error if Ruby is
       not working.
 
 </div>

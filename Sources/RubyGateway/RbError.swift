@@ -8,7 +8,7 @@ import CRuby
 import RubyGatewayHelpers
 
 /// An error raised by the RubyGateway module.  Ruby exceptions
-/// generate `RbError.rubyException`, the other cases correspond
+/// generate `RbError.rubyException(_:)`, the other cases correspond
 /// to error conditions encountered by the Swift software.
 public enum RbError: Error {
 

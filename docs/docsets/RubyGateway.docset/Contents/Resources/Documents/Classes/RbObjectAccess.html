@@ -194,12 +194,6 @@
                 <a class="nav-group-task-link" href="../Extensions/ClosedRange.html">ClosedRange</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/CountableRange.html">CountableRange</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/CountableClosedRange.html">CountableClosedRange</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/RbComplex.html">RbComplex</a>
               </li>
               <li class="nav-group-task">
@@ -216,7 +210,8 @@
             <h1>RbObjectAccess</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">RbObjectAccess</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">@dynamicMemberLookup</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="kt">RbObjectAccess</span></code></pre>
 
                 </div>
               </div>
@@ -250,11 +245,11 @@ a Ruby Proc.</li>
 <li>Method can either raise an exception or return a value.</li>
 </ol>
 
-<p>From the simple end:</p>
+<p>From the simple:</p>
 <pre class="highlight swift"><code><span class="k">try!</span> <span class="n">obj</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"myMethod"</span><span class="p">)</span>
 </code></pre>
 
-<p>&hellip;to:</p>
+<p>&hellip;to more baroque:</p>
 <pre class="highlight swift"><code><span class="k">do</span> <span class="p">{</span>
     <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span>
          <span class="k">try</span> <span class="n">obj</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="nv">symbol</span><span class="p">:</span> <span class="n">myMethodSymbol</span><span class="p">,</span>
@@ -263,6 +258,7 @@ a Ruby Proc.</li>
                           <span class="n">blockArgs</span><span class="o">.</span><span class="n">forEach</span> <span class="p">{</span>
                               <span class="nf">process</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span>
                           <span class="p">}</span>
+                          <span class="k">return</span> <span class="o">.</span><span class="n">nilObject</span>
                       <span class="p">}</span>
 <span class="p">}</span> <span class="k">catch</span> <span class="kt">RbError</span><span class="o">.</span><span class="nf">rubyException</span><span class="p">(</span><span class="k">let</span> <span class="nv">exn</span><span class="p">)</span> <span class="p">{</span>
     <span class="nf">handleErrors</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
@@ -270,6 +266,16 @@ a Ruby Proc.</li>
     <span class="o">...</span>
 <span class="p">}</span>
 </code></pre>
+<h2 id='dynamic-member-lookup' class='heading'>Dynamic Member Lookup</h2>
+
+<p>This feature lets you access Ruby properties or 0-argument methods directly,
+for example:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">currentName</span> <span class="o">=</span> <span class="n">myRbObject</span><span class="o">.</span><span class="n">real_name</span>
+<span class="n">myObject</span><span class="o">.</span><span class="n">real_name</span> <span class="o">=</span> <span class="kt">RbObject</span><span class="p">(</span><span class="s">"Anonymous"</span><span class="p">)</span>
+</code></pre>
+
+<p>&hellip;where <code>real_name</code> is not defined in Swift at all but is the underlying Ruby
+property.  See <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC13dynamicMemberAA0cD0CSgSS_tcip">RbObjectAccess.subscript(dynamicMember:)</a></code>.</p>
 
           </div>
         </section>
@@ -288,9 +294,9 @@ a Ruby Proc.</li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway14RbObjectAccessC14getInstanceVarAA0cD0CSSKF"></a>
+                    <a name="/s:11RubyGateway14RbObjectAccessC14getInstanceVaryAA0cD0CSSKF"></a>
                     <a name="//apple_ref/swift/Method/getInstanceVar(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC14getInstanceVarAA0cD0CSSKF">getInstanceVar(_:)</a>
+                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC14getInstanceVaryAA0cD0CSSKF">getInstanceVar(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -304,8 +310,8 @@ if it doesn&rsquo;t exist yet.</p>
 <p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifierACSS4type_SS2idtcACmF">RbError.badIdentifier</a></code> if <code>name</code> looks wrong.
-      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if Ruby has a problem.
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifieryACSS_SStcACmF">RbError.badIdentifier(type:id:)</a></code> if <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> looks wrong.
+      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(_:)</a></code> if Ruby has a problem.
 
 </div>
 
@@ -342,7 +348,7 @@ if it doesn&rsquo;t exist yet.</p>
                         <p>Value of the IVar or Ruby <code>nil</code> if it has not been assigned yet.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L94-L100">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L107-L113">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -350,9 +356,9 @@ if it doesn&rsquo;t exist yet.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway14RbObjectAccessC14setInstanceVarAA0cD0CSS_AA0cD11Convertible_pSg8newValuetKF"></a>
+                    <a name="/s:11RubyGateway14RbObjectAccessC14setInstanceVar_8newValueAA0cD0CSS_AA0cD11Convertible_pSgtKF"></a>
                     <a name="//apple_ref/swift/Method/setInstanceVar(_:newValue:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC14setInstanceVarAA0cD0CSS_AA0cD11Convertible_pSg8newValuetKF">setInstanceVar(_:newValue:)</a>
+                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC14setInstanceVar_8newValueAA0cD0CSS_AA0cD11Convertible_pSgtKF">setInstanceVar(_:newValue:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -365,8 +371,8 @@ if it doesn&rsquo;t exist yet.</p>
 <p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifierACSS4type_SS2idtcACmF">RbError.badIdentifier</a></code> if <code>name</code> looks wrong.
-      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if Ruby has a problem.
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifieryACSS_SStcACmF">RbError.badIdentifier(type:id:)</a></code> if <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> looks wrong.
+      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(_:)</a></code> if Ruby has a problem.
 
 </div>
 
@@ -416,7 +422,7 @@ if it doesn&rsquo;t exist yet.</p>
                         <p>The value that was set.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L112-L120">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L125-L133">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -477,9 +483,9 @@ See <code><a href="../Structs/RbFailableAccess.html">RbFailableAccess</a></code>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway14RbObjectAccessC11getConstantAA0cD0CSSKF"></a>
+                    <a name="/s:11RubyGateway14RbObjectAccessC11getConstantyAA0cD0CSSKF"></a>
                     <a name="//apple_ref/swift/Method/getConstant(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC11getConstantAA0cD0CSSKF">getConstant(_:)</a>
+                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC11getConstantyAA0cD0CSSKF">getConstant(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -491,7 +497,7 @@ See <code><a href="../Structs/RbFailableAccess.html">RbFailableAccess</a></code>
 
 <p>In Ruby constants include things that users think of as constants like
 <code>Math::PI</code>, classes, and modules.  You can use this routine with
-any kind of constant, but see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8getClassAA0cD0CSSKF">getClass(...)</a></code> for a little more sugar.</p>
+any kind of constant, but see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8getClassyAA0cD0CSSKF">getClass(...)</a></code> for a little more sugar.</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">rubyPi</span> <span class="o">=</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">getConstant</span><span class="p">(</span><span class="s">"Math::PI"</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">crumbs</span> <span class="o">=</span> <span class="n">rubyPi</span> <span class="o">-</span> <span class="kt">Double</span><span class="o">.</span><span class="n">pi</span>
 </code></pre>
@@ -501,11 +507,11 @@ and autoloading.</p>
 
 <p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 
-<p>If you call this method on an <code><a href="../Classes/RbObject.html">RbObject</a></code> then <code>name</code> is resolved like Ruby does,
+<p>If you call this method on an <code><a href="../Classes/RbObject.html">RbObject</a></code> then <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> is resolved like Ruby does,
   looking up the inheritance chain if there is no local match.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if the constant cannot be found.
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(_:)</a></code> if the constant cannot be found.
 
 </div>
 
@@ -543,7 +549,7 @@ to drill down through nested classes and modules.</p>
                         <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the constant.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L148-L169">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L161-L182">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -551,9 +557,9 @@ to drill down through nested classes and modules.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway14RbObjectAccessC8getClassAA0cD0CSSKF"></a>
+                    <a name="/s:11RubyGateway14RbObjectAccessC8getClassyAA0cD0CSSKF"></a>
                     <a name="//apple_ref/swift/Method/getClass(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC8getClassAA0cD0CSSKF">getClass(_:)</a>
+                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC8getClassyAA0cD0CSSKF">getClass(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -577,12 +583,12 @@ and autoloading.</p>
 
 <p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 
-<p>If you call this method on an <code><a href="../Classes/RbObject.html">RbObject</a></code> then <code>name</code> is resolved like Ruby does,
+<p>If you call this method on an <code><a href="../Classes/RbObject.html">RbObject</a></code> then <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> is resolved like Ruby does,
   looking up the inheritance chain if there is no match.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if the constant cannot be found.
-      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeACSScACmF">RbError.badType</a></code> if the constant is found but is not a class.
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(_:)</a></code> if the constant cannot be found.
+      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeyACSScACmF">RbError.badType(_:)</a></code> if the constant is found but is not a class.
 
 </div>
 
@@ -620,7 +626,7 @@ to drill down through nested classes and modules.</p>
                         <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the class.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L197-L203">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L210-L216">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -639,9 +645,9 @@ to drill down through nested classes and modules.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pSgG4argss17DictionaryLiteralVySSAHG6kwArgstKF"></a>
+                    <a name="/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs17DictionaryLiteralVySSAJGtKF"></a>
                     <a name="//apple_ref/swift/Method/call(_:args:kwArgs:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pSgG4argss17DictionaryLiteralVySSAHG6kwArgstKF">call(_:args:kwArgs:)</a>
+                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs17DictionaryLiteralVySSAJGtKF">call(_:args:kwArgs:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -652,8 +658,8 @@ to drill down through nested classes and modules.</p>
                         <p>Call a Ruby object method.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if there is a Ruby exception.
-      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO14duplicateKwArgACSScACmF">RbError.duplicateKwArg</a></code> if there are duplicate keywords in <code>kwArgs</code>.
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(_:)</a></code> if there is a Ruby exception.
+      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO14duplicateKwArgyACSScACmF">RbError.duplicateKwArg(_:)</a></code> if there are duplicate keywords in <code>kwArgs</code>.
 
 </div>
 
@@ -719,7 +725,7 @@ to drill down through nested classes and modules.</p>
                         <p>The result of calling the method.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L220-L226">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L233-L239">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -727,9 +733,9 @@ to drill down through nested classes and modules.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pSgG4argss17DictionaryLiteralVySSAHG6kwArgsAA0C14BlockRetentionO05blockN0AFSayAFGKc0O4CalltKF"></a>
+                    <a name="/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgs14blockRetention0J4CallAA0cD0CSS_SayAA0cD11Convertible_pSgGs17DictionaryLiteralVySSALGAA0c5BlockK0OAJSayAJGKctKF"></a>
                     <a name="//apple_ref/swift/Method/call(_:args:kwArgs:blockRetention:blockCall:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pSgG4argss17DictionaryLiteralVySSAHG6kwArgsAA0C14BlockRetentionO05blockN0AFSayAFGKc0O4CalltKF">call(_:args:kwArgs:blockRetention:blockCall:)</a>
+                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgs14blockRetention0J4CallAA0cD0CSS_SayAA0cD11Convertible_pSgGs17DictionaryLiteralVySSALGAA0c5BlockK0OAJSayAJGKctKF">call(_:args:kwArgs:blockRetention:blockCall:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -740,8 +746,8 @@ to drill down through nested classes and modules.</p>
                         <p>Call a Ruby object method passing Swift code as a block.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if there is a Ruby exception.
-      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO14duplicateKwArgACSScACmF">RbError.duplicateKwArg</a></code> if there are duplicate keywords in <code>kwArgs</code>.
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(_:)</a></code> if there is a Ruby exception.
+      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO14duplicateKwArgyACSScACmF">RbError.duplicateKwArg(_:)</a></code> if there are duplicate keywords in <code>kwArgs</code>.
 
 </div>
 
@@ -834,7 +840,7 @@ to drill down through nested classes and modules.</p>
                         <p>The result of calling the method.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L242-L253">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L255-L266">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -842,9 +848,9 @@ to drill down through nested classes and modules.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pSgG4argss17DictionaryLiteralVySSAHG6kwArgsAaG_p5blocktKF"></a>
+                    <a name="/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgs5blockAA0cD0CSS_SayAA0cD11Convertible_pSgGs17DictionaryLiteralVySSAKGAaJ_ptKF"></a>
                     <a name="//apple_ref/swift/Method/call(_:args:kwArgs:block:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pSgG4argss17DictionaryLiteralVySSAHG6kwArgsAaG_p5blocktKF">call(_:args:kwArgs:block:)</a>
+                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgs5blockAA0cD0CSS_SayAA0cD11Convertible_pSgGs17DictionaryLiteralVySSAKGAaJ_ptKF">call(_:args:kwArgs:block:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -855,9 +861,9 @@ to drill down through nested classes and modules.</p>
                         <p>Call a Ruby object method passing a Ruby Proc as a block.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if there is a Ruby exception.
-      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO14duplicateKwArgACSScACmF">RbError.duplicateKwArg</a></code> if there are duplicate keywords in <code>kwArgs</code>.
-      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeACSScACmF">RbError.badType</a></code> if <code>block</code> does not convert to a Proc.
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(_:)</a></code> if there is a Ruby exception.
+      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO14duplicateKwArgyACSScACmF">RbError.duplicateKwArg(_:)</a></code> if there are duplicate keywords in <code>kwArgs</code>.
+      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeyACSScACmF">RbError.badType(_:)</a></code> if <code>block</code> does not convert to a Proc.
 
 </div>
 
@@ -936,7 +942,7 @@ to drill down through nested classes and modules.</p>
                         <p>The result of calling the method.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L268-L275">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L281-L288">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -944,9 +950,9 @@ to drill down through nested classes and modules.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway14RbObjectAccessC4callAA0cD0CAA0cD11Convertible_p6symbol_SayAaG_pSgG4argss17DictionaryLiteralVySSAIG6kwArgstKF"></a>
+                    <a name="/s:11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgsAA0cD0CAA0cD11Convertible_p_SayAaJ_pSgGs17DictionaryLiteralVySSAKGtKF"></a>
                     <a name="//apple_ref/swift/Method/call(symbol:args:kwArgs:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC4callAA0cD0CAA0cD11Convertible_p6symbol_SayAaG_pSgG4argss17DictionaryLiteralVySSAIG6kwArgstKF">call(symbol:args:kwArgs:)</a>
+                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgsAA0cD0CAA0cD11Convertible_p_SayAaJ_pSgGs17DictionaryLiteralVySSAKGtKF">call(symbol:args:kwArgs:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -957,9 +963,9 @@ to drill down through nested classes and modules.</p>
                         <p>Call a Ruby object method using a symbol.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if there is a Ruby exception.
-      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeACSScACmF">RbError.badType</a></code> if <code>symbol</code> is not a symbol.
-      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO14duplicateKwArgACSScACmF">RbError.duplicateKwArg</a></code> if there are duplicate keywords in <code>kwArgs</code>.
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(_:)</a></code> if there is a Ruby exception.
+      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeyACSScACmF">RbError.badType(_:)</a></code> if <code>symbol</code> is not a symbol.
+      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO14duplicateKwArgyACSScACmF">RbError.duplicateKwArg(_:)</a></code> if there are duplicate keywords in <code>kwArgs</code>.
 
 </div>
 
@@ -1025,7 +1031,7 @@ to drill down through nested classes and modules.</p>
                         <p>The result of calling the method.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L289-L296">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L302-L309">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1033,9 +1039,9 @@ to drill down through nested classes and modules.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway14RbObjectAccessC4callAA0cD0CAA0cD11Convertible_p6symbol_SayAaG_pSgG4argss17DictionaryLiteralVySSAIG6kwArgsAA0C14BlockRetentionO05blockO0AFSayAFGKc0P4CalltKF"></a>
+                    <a name="/s:11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgs14blockRetention0K4CallAA0cD0CAA0cD11Convertible_p_SayAaL_pSgGs17DictionaryLiteralVySSAMGAA0c5BlockL0OAKSayAKGKctKF"></a>
                     <a name="//apple_ref/swift/Method/call(symbol:args:kwArgs:blockRetention:blockCall:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC4callAA0cD0CAA0cD11Convertible_p6symbol_SayAaG_pSgG4argss17DictionaryLiteralVySSAIG6kwArgsAA0C14BlockRetentionO05blockO0AFSayAFGKc0P4CalltKF">call(symbol:args:kwArgs:blockRetention:blockCall:)</a>
+                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgs14blockRetention0K4CallAA0cD0CAA0cD11Convertible_p_SayAaL_pSgGs17DictionaryLiteralVySSAMGAA0c5BlockL0OAKSayAKGKctKF">call(symbol:args:kwArgs:blockRetention:blockCall:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1046,9 +1052,9 @@ to drill down through nested classes and modules.</p>
                         <p>Call a Ruby object method using a symbol passing Swift code as a block.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if there is a Ruby exception.
-      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeACSScACmF">RbError.badType</a></code> if <code>symbol</code> is not a symbol.
-      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO14duplicateKwArgACSScACmF">RbError.duplicateKwArg</a></code> if there are duplicate keywords in <code>kwArgs</code>.
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(_:)</a></code> if there is a Ruby exception.
+      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeyACSScACmF">RbError.badType(_:)</a></code> if <code>symbol</code> is not a symbol.
+      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO14duplicateKwArgyACSScACmF">RbError.duplicateKwArg(_:)</a></code> if there are duplicate keywords in <code>kwArgs</code>.
 
 </div>
 
@@ -1141,7 +1147,7 @@ to drill down through nested classes and modules.</p>
                         <p>The result of calling the method.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L313-L322">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L326-L335">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1149,9 +1155,9 @@ to drill down through nested classes and modules.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway14RbObjectAccessC4callAA0cD0CAA0cD11Convertible_p6symbol_SayAaG_pSgG4argss17DictionaryLiteralVySSAIG6kwArgsAaG_p5blocktKF"></a>
+                    <a name="/s:11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgs5blockAA0cD0CAA0cD11Convertible_p_SayAaK_pSgGs17DictionaryLiteralVySSALGAaK_ptKF"></a>
                     <a name="//apple_ref/swift/Method/call(symbol:args:kwArgs:block:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC4callAA0cD0CAA0cD11Convertible_p6symbol_SayAaG_pSgG4argss17DictionaryLiteralVySSAIG6kwArgsAaG_p5blocktKF">call(symbol:args:kwArgs:block:)</a>
+                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgs5blockAA0cD0CAA0cD11Convertible_p_SayAaK_pSgGs17DictionaryLiteralVySSALGAaK_ptKF">call(symbol:args:kwArgs:block:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1162,10 +1168,10 @@ to drill down through nested classes and modules.</p>
                         <p>Call a Ruby object method using a symbol passing a Ruby Proc as a block.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if there is a Ruby exception.
-      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeACSScACmF">RbError.badType</a></code> if <code>symbol</code> is not a symbol.
-      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO14duplicateKwArgACSScACmF">RbError.duplicateKwArg</a></code> if there are duplicate keywords in <code>kwArgs</code>.
-      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeACSScACmF">RbError.badType</a></code> if <code>block</code> does not convert to a Proc.
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(_:)</a></code> if there is a Ruby exception.
+      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeyACSScACmF">RbError.badType(_:)</a></code> if <code>symbol</code> is not a symbol.
+      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO14duplicateKwArgyACSScACmF">RbError.duplicateKwArg(_:)</a></code> if there are duplicate keywords in <code>kwArgs</code>.
+      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeyACSScACmF">RbError.badType(_:)</a></code> if <code>block</code> does not convert to a Proc.
 
 </div>
 
@@ -1244,7 +1250,7 @@ to drill down through nested classes and modules.</p>
                         <p>The result of calling the method.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L338-L346">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L351-L359">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1263,9 +1269,9 @@ to drill down through nested classes and modules.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway14RbObjectAccessC12getAttributeAA0cD0CSSKF"></a>
+                    <a name="/s:11RubyGateway14RbObjectAccessC12getAttributeyAA0cD0CSSKF"></a>
                     <a name="//apple_ref/swift/Method/getAttribute(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC12getAttributeAA0cD0CSSKF">getAttribute(_:)</a>
+                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC12getAttributeyAA0cD0CSSKF">getAttribute(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1276,14 +1282,14 @@ to drill down through nested classes and modules.</p>
                         <p>Get an attribute of a Ruby object.</p>
 
 <p>Attributes are declared with <code>:attr_accessor</code> and so on &ndash; this routine is a
-simple wrapper around <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4callAA0cD0CSS_SayAA0cD11Convertible_pSgG4argss17DictionaryLiteralVySSAHG6kwArgstKF">call(...)</a></code> for symmetry with <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC12setAttributeAA0cD0CSS_AA0cD11Convertible_pSg8newValuetKF">setAttribute(...)</a></code>.</p>
+simple wrapper around <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs17DictionaryLiteralVySSAJGtKF">call(...)</a></code> for symmetry with <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC12setAttribute_8newValueAA0cD0CSS_AA0cD11Convertible_pSgtKF">setAttribute(...)</a></code>.</p>
 
 <p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifierACSS4type_SS2idtcACmF">RbError.badIdentifier</a></code> if <code>name</code> looks wrong.
-      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if Ruby has a problem, probably means
-      <code>attribute</code> doesn&rsquo;t exist.
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifieryACSS_SStcACmF">RbError.badIdentifier(type:id:)</a></code> if <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> looks wrong.
+      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(_:)</a></code> if Ruby has a problem, probably means
+      <code><a href="https://developer.apple.com/documentation/appkit/nsaccessibility/attribute/">attribute</a></code> doesn&rsquo;t exist.
 
 </div>
 
@@ -1320,7 +1326,7 @@ simple wrapper around <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGat
                         <p>The value of the attribute.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L432-L435">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L445-L448">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1328,9 +1334,9 @@ simple wrapper around <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGat
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway14RbObjectAccessC12setAttributeAA0cD0CSS_AA0cD11Convertible_pSg8newValuetKF"></a>
+                    <a name="/s:11RubyGateway14RbObjectAccessC12setAttribute_8newValueAA0cD0CSS_AA0cD11Convertible_pSgtKF"></a>
                     <a name="//apple_ref/swift/Method/setAttribute(_:newValue:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC12setAttributeAA0cD0CSS_AA0cD11Convertible_pSg8newValuetKF">setAttribute(_:newValue:)</a>
+                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC12setAttribute_8newValueAA0cD0CSS_AA0cD11Convertible_pSgtKF">setAttribute(_:newValue:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1346,9 +1352,9 @@ wrapper around a call to the <code>attrname=</code> method.</p>
 <p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifierACSS4type_SS2idtcACmF">RbError.badIdentifier</a></code> if <code>name</code> looks wrong.
-      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if Ruby has a problem, probably means
-      <code>attribute</code> doesn&rsquo;t exist.
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifieryACSS_SStcACmF">RbError.badIdentifier(type:id:)</a></code> if <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> looks wrong.
+      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(_:)</a></code> if Ruby has a problem, probably means
+      <code><a href="https://developer.apple.com/documentation/appkit/nsaccessibility/attribute/">attribute</a></code> doesn&rsquo;t exist.
 
 </div>
 
@@ -1398,7 +1404,7 @@ wrapper around a call to the <code>attrname=</code> method.</p>
                         <p>Whatever the attribute setter returns, typically the new value.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L451-L454">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L464-L467">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1417,9 +1423,9 @@ wrapper around a call to the <code>attrname=</code> method.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway14RbObjectAccessC11getClassVarAA0cD0CSSKF"></a>
+                    <a name="/s:11RubyGateway14RbObjectAccessC11getClassVaryAA0cD0CSSKF"></a>
                     <a name="//apple_ref/swift/Method/getClassVar(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC11getClassVarAA0cD0CSSKF">getClassVar(_:)</a>
+                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC11getClassVaryAA0cD0CSSKF">getClassVar(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1439,9 +1445,9 @@ or GVars.  This is how Ruby works; one more reason to avoid CVars.</p>
 <p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifierACSS4type_SS2idtcACmF">RbError.badIdentifier</a></code> if <code>name</code> looks wrong.
-      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeACSScACmF">RbError.badType</a></code> if the object is not a class.
-      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if Ruby has a problem &ndash; in particular,
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifieryACSS_SStcACmF">RbError.badIdentifier(type:id:)</a></code> if <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> looks wrong.
+      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeyACSScACmF">RbError.badType(_:)</a></code> if the object is not a class.
+      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(_:)</a></code> if Ruby has a problem &ndash; in particular,
       if the CVar does not exist.
 
 </div>
@@ -1479,7 +1485,7 @@ or GVars.  This is how Ruby works; one more reason to avoid CVars.</p>
                         <p>The value of the CVar.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L484-L494">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L497-L507">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1487,9 +1493,9 @@ or GVars.  This is how Ruby works; one more reason to avoid CVars.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway14RbObjectAccessC11setClassVarAA0cD0CSS_AA0cD11Convertible_pSg8newValuetKF"></a>
+                    <a name="/s:11RubyGateway14RbObjectAccessC11setClassVar_8newValueAA0cD0CSS_AA0cD11Convertible_pSgtKF"></a>
                     <a name="//apple_ref/swift/Method/setClassVar(_:newValue:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC11setClassVarAA0cD0CSS_AA0cD11Convertible_pSg8newValuetKF">setClassVar(_:newValue:)</a>
+                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC11setClassVar_8newValueAA0cD0CSS_AA0cD11Convertible_pSgtKF">setClassVar(_:newValue:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1506,9 +1512,9 @@ object context to set a CVar on the object&rsquo;s class.</p>
 <p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifierACSS4type_SS2idtcACmF">RbError.badIdentifier</a></code> if <code>name</code> looks wrong.
-      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeACSScACmF">RbError.badType</a></code> if the object is not a class.
-      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if Ruby has a problem.
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifieryACSS_SStcACmF">RbError.badIdentifier(type:id:)</a></code> if <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> looks wrong.
+      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeyACSScACmF">RbError.badType(_:)</a></code> if the object is not a class.
+      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(_:)</a></code> if Ruby has a problem.
 
 </div>
 
@@ -1558,7 +1564,7 @@ object context to set a CVar on the object&rsquo;s class.</p>
                         <p>The value that was set.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L511-L521">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L524-L534">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1577,9 +1583,9 @@ object context to set a CVar on the object&rsquo;s class.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway14RbObjectAccessC12getGlobalVarAA0cD0CSSKF"></a>
+                    <a name="/s:11RubyGateway14RbObjectAccessC12getGlobalVaryAA0cD0CSSKF"></a>
                     <a name="//apple_ref/swift/Method/getGlobalVar(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC12getGlobalVarAA0cD0CSSKF">getGlobalVar(_:)</a>
+                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC12getGlobalVaryAA0cD0CSSKF">getGlobalVar(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1592,7 +1598,7 @@ object context to set a CVar on the object&rsquo;s class.</p>
 <p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html">RbError</a></code> if <code>name</code> looks wrong.
+    <code><a href="../Enums/RbError.html">RbError</a></code> if <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> looks wrong.
 
 </div>
 
@@ -1635,7 +1641,7 @@ to avoid calling the <code><a href="../Classes/RbObject.html">RbObject</a></code
                         <p>Value of the variable, or Ruby nil if not set before.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L540-L545">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L553-L558">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1643,9 +1649,9 @@ to avoid calling the <code><a href="../Classes/RbObject.html">RbObject</a></code
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway14RbObjectAccessC12setGlobalVarAA0cD0CSS_AA0cD11Convertible_pSg8newValuetKF"></a>
+                    <a name="/s:11RubyGateway14RbObjectAccessC12setGlobalVar_8newValueAA0cD0CSS_AA0cD11Convertible_pSgtKF"></a>
                     <a name="//apple_ref/swift/Method/setGlobalVar(_:newValue:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC12setGlobalVarAA0cD0CSS_AA0cD11Convertible_pSg8newValuetKF">setGlobalVar(_:newValue:)</a>
+                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC12setGlobalVar_8newValueAA0cD0CSS_AA0cD11Convertible_pSgtKF">setGlobalVar(_:newValue:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1658,7 +1664,7 @@ to avoid calling the <code><a href="../Classes/RbObject.html">RbObject</a></code
 <p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html">RbError</a></code> if <code>name</code> looks wrong.
+    <code><a href="../Enums/RbError.html">RbError</a></code> if <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> looks wrong.
 
 </div>
 
@@ -1714,7 +1720,7 @@ to avoid calling the <code><a href="../Classes/RbObject.html">RbObject</a></code
                         <p>The value that was set.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L562-L571">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L575-L584">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1733,9 +1739,9 @@ to avoid calling the <code><a href="../Classes/RbObject.html">RbObject</a></code
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway14RbObjectAccessC3getAA0cD0CSSKF"></a>
+                    <a name="/s:11RubyGateway14RbObjectAccessC3getyAA0cD0CSSKF"></a>
                     <a name="//apple_ref/swift/Method/get(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC3getAA0cD0CSSKF">get(_:)</a>
+                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC3getyAA0cD0CSSKF">get(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1743,12 +1749,12 @@ to avoid calling the <code><a href="../Classes/RbObject.html">RbObject</a></code
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Get some kind of Ruby object based on the <code>name</code> parameter:</p>
+                        <p>Get some kind of Ruby object based on the <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> parameter:</p>
 
 <ul>
-<li>If <code>name</code> starts with a capital letter then access a constant under this object;</li>
-<li>If <code>name</code> starts with &lsquo;@&rsquo; or &lsquo;@@&rsquo; then access an IVar/CVar for a class object;</li>
-<li>If <code>name</code> starts with &lsquo;$&rsquo; then access a global variable;</li>
+<li>If <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> starts with a capital letter then access a constant under this object;</li>
+<li>If <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> starts with &lsquo;@&rsquo; or &lsquo;@@&rsquo; then access an IVar/CVar for a class object;</li>
+<li>If <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> starts with &lsquo;$&rsquo; then access a global variable;</li>
 <li>Otherwise call a zero-args method.</li>
 </ul>
 
@@ -1758,8 +1764,8 @@ worrying about precisely what they are.</p>
 <p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionAcA0cF0VcACmF">RbError.rubyException</a></code> if Ruby has a problem.
-      <code><a href="../Enums/RbError.html">RbError</a></code> of some other kind if <code>name</code> looks wrong in some way.
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(_:)</a></code> if Ruby has a problem.
+      <code><a href="../Enums/RbError.html">RbError</a></code> of some other kind if <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> looks wrong in some way.
 
 </div>
 
@@ -1797,7 +1803,67 @@ worrying about precisely what they are.</p>
                         <p>The accessed thing .</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L593-L604">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L606-L617">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway14RbObjectAccessC13dynamicMemberAA0cD0CSgSS_tcip"></a>
+                    <a name="//apple_ref/swift/Method/subscript(dynamicMember:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC13dynamicMemberAA0cD0CSgSS_tcip">subscript(dynamicMember:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Dynamic member lookup.</p>
+
+<p>Reads from unknown members are forwared to <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC3getyAA0cD0CSSKF">get(_:)</a></code>.  The subscript
+returns <code>nil</code> when there has been a Ruby exception.  The Swift error
+describing the Ruby exception can be retrieved from <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code>.</p>
+
+<p>Writes to unknown members are converted to calls to Ruby property
+setters. For example:</p>
+<pre class="highlight swift"><code><span class="c1">// Using dynamic member lookup:</span>
+<span class="n">obj</span><span class="o">.</span><span class="n">property</span> <span class="o">=</span> <span class="kt">RbObject</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1">// Same as:</span>
+<span class="n">obj</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"property="</span><span class="p">,</span> <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+
+<span class="c1">// Same as:</span>
+<span class="n">obj</span><span class="o">.</span><span class="nf">setAttribute</span><span class="p">(</span><span class="s">"property"</span><span class="p">,</span> <span class="nv">newValue</span><span class="p">:</span> <span class="mi">5</span><span class="p">)</span>
+</code></pre>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>Any error in the write direction cannot be detected at the
+call site and must be checked via <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code>.</p>
+
+</div>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>In the write direction the assigned type must be <code><a href="../Classes/RbObject.html">RbObject</a></code>, no
+implicit conversion via <code><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code> here.</p>
+
+</div>
+
+<p>These are both current Swift limitations.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">subscript</span><span class="p">(</span><span class="n">dynamicMember</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L644-L651">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

@@ -167,7 +167,7 @@ extension RbObject {
     /// try myObj[1, "fish", myThirdParamObj] = RbObject(4)
     /// ```
     ///
-    /// - note: Calls Ruby [] and []= methods.  Crashes the process (`fatalError`)
+    /// - note: Calls Ruby `[]` and `[]=` methods.  Crashes the process (`fatalError`)
     ///         if anything goes wrong - Swift can't throw from subscripts yet.
     public subscript(args: RbObjectConvertible...) -> RbObject {
         get {

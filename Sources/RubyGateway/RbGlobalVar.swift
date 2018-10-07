@@ -77,7 +77,7 @@ extension RbGateway {
     ///   - name: The name of the global variable.  Must begin with `$`.  Any existing global
     ///           variable with this name is overwritten.
     ///   - get: Function called whenever Ruby code reads the global variable.
-    /// - throws: `RbError.badIdentifier` if `name` is bad; some other kind of error if Ruby is
+    /// - throws: `RbError.badIdentifier(type:id:)` if `name` is bad; some other kind of error if Ruby is
     ///           not working.
     public func defineGlobalVar(name: String,
                                 get: @escaping () -> RbObject) throws {
@@ -98,7 +98,7 @@ extension RbGateway {
     ///   - set: Function called whenever Ruby code writes the global variable.  This can be `nil`,
     ///          in which case Ruby treats the variable as readonly and raises a suitable
     ///          exception should code attempt to read it.
-    /// - throws: `RbError.badIdentifier` if `name` is bad; some other kind of error if Ruby is
+    /// - throws: `RbError.badIdentifier(type:id:)` if `name` is bad; some other kind of error if Ruby is
     ///           not working.
     public func defineGlobalVar(name: String,
                                 get: @escaping () -> RbObject,
