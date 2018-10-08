@@ -1044,9 +1044,9 @@ instead of the current program.  See <code>Kernel#load</code>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway02RbB0C15defineGlobalVar4name3getySS_AA0C6ObjectCyctKF"></a>
+                    <a name="/s:11RubyGateway02RbB0C15defineGlobalVar4name3getySS_xyctKAA0C17ObjectConvertibleRzlF"></a>
                     <a name="//apple_ref/swift/Method/defineGlobalVar(name:get:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway02RbB0C15defineGlobalVar4name3getySS_AA0C6ObjectCyctKF">defineGlobalVar(name:get:)</a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C15defineGlobalVar4name3getySS_xyctKAA0C17ObjectConvertibleRzlF">defineGlobalVar(name:get:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1055,6 +1055,9 @@ instead of the current program.  See <code>Kernel#load</code>.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Create a readonly Ruby global variable implemented by Swift code.</p>
+
+<p>If your global variable is not a simple Swift value type then use <code><a href="../Classes/RbObject.html">RbObject</a></code>
+as the closure return type.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifieryACSS_SStcACmF">RbError.badIdentifier(type:id:)</a></code> if <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> is bad; some other kind of error if Ruby is
@@ -1067,8 +1070,8 @@ instead of the current program.  See <code>Kernel#load</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">defineGlobalVar</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span>
-                            <span class="nv">get</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">defineGlobalVar</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="o">&gt;</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span>
+                                                    <span class="nv">get</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">T</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -1105,7 +1108,7 @@ instead of the current program.  See <code>Kernel#load</code>.</p>
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGlobalVar.swift#L82-L87">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGlobalVar.swift#L99-L104">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1113,9 +1116,9 @@ instead of the current program.  See <code>Kernel#load</code>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway02RbB0C15defineGlobalVar4name3get3setySS_AA0C6ObjectCycyAIKctKF"></a>
+                    <a name="/s:11RubyGateway02RbB0C15defineGlobalVar4name3get3setySS_xycyxKctKAA0C17ObjectConvertibleRzlF"></a>
                     <a name="//apple_ref/swift/Method/defineGlobalVar(name:get:set:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway02RbB0C15defineGlobalVar4name3get3setySS_AA0C6ObjectCycyAIKctKF">defineGlobalVar(name:get:set:)</a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C15defineGlobalVar4name3get3setySS_xycyxKctKAA0C17ObjectConvertibleRzlF">defineGlobalVar(name:get:set:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1127,6 +1130,10 @@ instead of the current program.  See <code>Kernel#load</code>.</p>
 
 <p>Errors thrown from the setter closure propagate into Ruby as exceptions.  Ruby does
 not permit getters to raise exceptions.</p>
+
+<p>If your global variable is not a simple Swift value type then use <code><a href="../Classes/RbObject.html">RbObject</a></code> as the
+closure return/argument type; you can manually throw an <code><a href="../Structs/RbException.html">RbException</a></code> from the setter
+if the provided Ruby value is the wrong shape.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifieryACSS_SStcACmF">RbError.badIdentifier(type:id:)</a></code> if <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> is bad; some other kind of error if Ruby is
@@ -1139,9 +1146,9 @@ not permit getters to raise exceptions.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">defineGlobalVar</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span>
-                            <span class="nv">get</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">,</span>
-                            <span class="nv">set</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">defineGlobalVar</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="o">&gt;</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span>
+                                                    <span class="nv">get</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">T</span><span class="p">,</span>
+                                                    <span class="nv">set</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">T</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -1182,9 +1189,7 @@ not permit getters to raise exceptions.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Function called whenever Ruby code writes the global variable.  This can be <code>nil</code>,
- in which case Ruby treats the variable as readonly and raises a suitable
- exception should code attempt to read it.</p>
+                                  <p>Function called whenever Ruby code writes the global variable.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1192,7 +1197,7 @@ not permit getters to raise exceptions.</p>
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGlobalVar.swift#L103-L109">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGlobalVar.swift#L122-L128">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

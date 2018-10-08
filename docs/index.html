@@ -304,22 +304,19 @@ low-level Ruby C API wrapper.</p>
 <h2 id='dynamic-data-exchange' class='heading'>Dynamic data exchange</h2>
 
 <p>Global variables:</p>
-<pre class="highlight swift"><code><span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineGlobalVariable</span><span class="p">(</span>
+<pre class="highlight swift"><code><span class="c1">// epochStore.current: Int</span>
+
+<span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineGlobalVariable</span><span class="p">(</span>
         <span class="nv">name</span><span class="p">:</span> <span class="s">"$epoch"</span><span class="p">,</span>
-        <span class="nv">get</span><span class="p">:</span> <span class="p">{</span> <span class="kt">RbObject</span><span class="p">(</span><span class="n">epochStore</span><span class="o">.</span><span class="n">current</span><span class="p">)</span> <span class="p">},</span>
-        <span class="nv">set</span><span class="p">:</span> <span class="p">{</span> <span class="n">newValueObj</span> <span class="k">in</span>
-                  <span class="k">guard</span> <span class="k">let</span> <span class="nv">newEpoch</span> <span class="o">=</span> <span class="kt">UInt</span><span class="p">(</span><span class="n">newValueObj</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
-                      <span class="k">throw</span> <span class="kt">RbException</span><span class="p">(</span><span class="nv">message</span><span class="p">:</span> <span class="s">"Bad epoch type </span><span class="se">\(</span><span class="n">newValueObj</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
-                  <span class="p">}</span>
-                  <span class="n">epochStore</span><span class="o">.</span><span class="n">current</span> <span class="o">=</span> <span class="n">newEpoch</span>
-             <span class="p">})</span>
+        <span class="nv">get</span><span class="p">:</span> <span class="p">{</span> <span class="n">epochStore</span><span class="o">.</span><span class="n">current</span> <span class="p">},</span>
+        <span class="nv">set</span><span class="p">:</span> <span class="p">{</span> <span class="n">epochStore</span><span class="o">.</span><span class="n">current</span> <span class="o">=</span> <span class="n">newEpoch</span> <span class="p">})</span>
 </code></pre>
 <h2 id='documentation' class='heading'>Documentation</h2>
 
 <ul>
-<li><a href="https://johnfairh.github.io/RubyGateway/user-guide.html">User guide</a>.</li>
-<li><a href="https://johnfairh.github.io/RubyGateway">API documentation</a>.</li>
-<li><a href="https://johnfairh.github.io/RubyGateway/docsets/RubyGateway.tgz">Docset for Dash</a>.</li>
+<li><a href="https://johnfairh.github.io/RubyGateway/user-guide.html">User guide</a></li>
+<li><a href="https://johnfairh.github.io/RubyGateway">API documentation</a></li>
+<li><a href="https://johnfairh.github.io/RubyGateway/docsets/RubyGateway.tgz">Docset for Dash</a></li>
 </ul>
 <h2 id='requirements' class='heading'>Requirements</h2>
 

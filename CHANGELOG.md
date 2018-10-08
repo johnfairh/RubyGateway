@@ -2,11 +2,11 @@
 
 ##### Breaking
 
-* None.
+* Require Swift 4.2.
 
 ##### Enhancements
 
-* None
+* Global variables can use native Swift types.
 
 ## 1.1.0 - 18th July 2018
 

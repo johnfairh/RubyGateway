@@ -236,14 +236,11 @@ See `RbRational` for a thin wrapper to Ruby's `Rational` type.
 
 See `RbGateway.defineGlobalVar(name:get:set:)`.  For example:
 ```swift
+var currentEpoch: Int
+
 Ruby.defineGlobalVar(name: "$epoch",
-                     get: { RbObject(currentEpoch) },
-                     set: { newObj in
-                            guard let newEpoch = Int(newObj) else {
-                                throw RbException(message: "Bad Epoch")
-                            }
-                            notifyNewEpoch(newEpoch)
-                          })
+                     get: { currentEpoch },
+                     set: { notifyNewEpoch($0)})
 ```
 
 ## Error Handling

@@ -104,22 +104,19 @@ subjectsPopularityDb.submit(subjects: subjects)
 
 Global variables:
 ```swift
+// epochStore.current: Int
+
 Ruby.defineGlobalVariable(
         name: "$epoch",
-        get: { RbObject(epochStore.current) },
-        set: { newValueObj in
-                  guard let newEpoch = UInt(newValueObj) else {
-                      throw RbException(message: "Bad epoch type \(newValueObj)")
-                  }
-                  epochStore.current = newEpoch
-             })
+        get: { epochStore.current },
+        set: { epochStore.current = newEpoch })
 ```
 
 ## Documentation
 
-* [User guide](https://johnfairh.github.io/RubyGateway/user-guide.html).
-* [API documentation](https://johnfairh.github.io/RubyGateway).
-* [Docset for Dash](https://johnfairh.github.io/RubyGateway/docsets/RubyGateway.tgz).
+* [User guide](https://johnfairh.github.io/RubyGateway/user-guide.html)
+* [API documentation](https://johnfairh.github.io/RubyGateway)
+* [Docset for Dash](https://johnfairh.github.io/RubyGateway/docsets/RubyGateway.tgz)
 
 ## Requirements
 

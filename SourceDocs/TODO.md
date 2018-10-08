@@ -1,15 +1,11 @@
-## 1.2 ?
+## 2.1 ?
 
 Global functions?
 * 'next' thrown from Ruby proc called from Swift
 
-## 1.3 ?
+## 2.2 ?
 
 * Swift implementations of classes
-
-## 2.0
-
-Dynamic member lookup, Swift 4.2 stuff
 
 ## Other
 

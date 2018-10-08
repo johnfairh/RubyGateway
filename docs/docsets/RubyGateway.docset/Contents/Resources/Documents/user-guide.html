@@ -424,15 +424,12 @@ never come back to Ruby in the process, use <code><a href="Classes/RbGateway.htm
 <p>See <code><a href="Structs/RbRational.html">RbRational</a></code> for a thin wrapper to Ruby&rsquo;s <code>Rational</code> type.</p>
 <h2 id='implement-ruby-global-variables-in-swift' class='heading'>Implement Ruby Global Variables in Swift</h2>
 
-<p>See <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C15defineGlobalVar4name3get3setySS_AA0C6ObjectCycyAIKctKF">RbGateway.defineGlobalVar(name:get:set:)</a></code>.  For example:</p>
-<pre class="highlight swift"><code><span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineGlobalVar</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"$epoch"</span><span class="p">,</span>
-                     <span class="nv">get</span><span class="p">:</span> <span class="p">{</span> <span class="kt">RbObject</span><span class="p">(</span><span class="n">currentEpoch</span><span class="p">)</span> <span class="p">},</span>
-                     <span class="nv">set</span><span class="p">:</span> <span class="p">{</span> <span class="n">newObj</span> <span class="k">in</span>
-                            <span class="k">guard</span> <span class="k">let</span> <span class="nv">newEpoch</span> <span class="o">=</span> <span class="kt">Int</span><span class="p">(</span><span class="n">newObj</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
-                                <span class="k">throw</span> <span class="kt">RbException</span><span class="p">(</span><span class="nv">message</span><span class="p">:</span> <span class="s">"Bad Epoch"</span><span class="p">)</span>
-                            <span class="p">}</span>
-                            <span class="nf">notifyNewEpoch</span><span class="p">(</span><span class="n">newEpoch</span><span class="p">)</span>
-                          <span class="p">})</span>
+<p>See <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C15defineGlobalVar4name3get3setySS_xycyxKctKAA0C17ObjectConvertibleRzlF">RbGateway.defineGlobalVar(name:get:set:)</a></code>.  For example:</p>
+<pre class="highlight swift"><code><span class="k">var</span> <span class="nv">currentEpoch</span><span class="p">:</span> <span class="kt">Int</span>
+
+<span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineGlobalVar</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"$epoch"</span><span class="p">,</span>
+                     <span class="nv">get</span><span class="p">:</span> <span class="p">{</span> <span class="n">currentEpoch</span> <span class="p">},</span>
+                     <span class="nv">set</span><span class="p">:</span> <span class="p">{</span> <span class="nf">notifyNewEpoch</span><span class="p">(</span><span class="nv">$0</span><span class="p">)})</span>
 </code></pre>
 <h2 id='error-handling' class='heading'>Error Handling</h2>
 
