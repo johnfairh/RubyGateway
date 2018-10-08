@@ -11,7 +11,8 @@ import RubyGateway
 /// Virtual GVars.
 class TestGlobalVars: XCTestCase {
 
-    func testVirtual() {
+    // read/write, native Swift type
+    func testVirtualNative() {
         doErrorFree {
             let initialValue = 22
             let newValue = 108
@@ -21,8 +22,8 @@ class TestGlobalVars: XCTestCase {
             let gvarName = "$myVirtualGlobal"
 
             try Ruby.defineGlobalVar(name: gvarName,
-                                     get: { RbObject(modelValue) },
-                                     set: { modelValue = Int($0)! })
+                                     get: { modelValue },
+                                     set: { modelValue = $0 })
 
             let rbCurrent = try Ruby.eval(ruby: gvarName)
             XCTAssertEqual(initialValue, modelValue)
@@ -30,6 +31,33 @@ class TestGlobalVars: XCTestCase {
 
             let _ = try Ruby.eval(ruby: "\(gvarName) = \(newValue)")
             XCTAssertEqual(newValue, modelValue)
+
+            // Assign a nonconvertible type, system picks it up
+            doError {
+                let _ = try Ruby.eval(ruby: "\(gvarName) = 'fishcakes'")
+            }
+            XCTAssertEqual(newValue, modelValue)
+        }
+    }
+
+    // read/write, RbObject
+    func testVirtualObj() {
+        doErrorFree {
+            let initialIntValue = 100
+            let targetStringValue = "Berry"
+
+            var wrappedObj = RbObject(initialIntValue)
+            let gvarName = "$myGlobal"
+
+            try Ruby.defineGlobalVar(name: gvarName,
+                                     get: { wrappedObj },
+                                     set: { wrappedObj = $0 })
+
+            let rbCurrent = try Ruby.eval(ruby: gvarName)
+            XCTAssertEqual(initialIntValue, Int(rbCurrent))
+
+            let _ = try Ruby.eval(ruby: "\(gvarName) = '\(targetStringValue)'")
+            XCTAssertEqual(targetStringValue, String(wrappedObj))
         }
     }
 
@@ -38,7 +66,7 @@ class TestGlobalVars: XCTestCase {
             let gvarName = "$myVirtualGlobal"
             let modelValue = "Fish"
 
-            try Ruby.defineGlobalVar(name: gvarName) { RbObject(modelValue) }
+            try Ruby.defineGlobalVar(name: gvarName) { modelValue }
 
             let rbCurrent = try Ruby.eval(ruby: gvarName)
             XCTAssertEqual(modelValue, String(rbCurrent))
@@ -55,7 +83,7 @@ class TestGlobalVars: XCTestCase {
             let gvarName = "$myVirtualGlobal"
 
             try Ruby.defineGlobalVar(name: gvarName,
-                                     get: { RbObject(22) },
+                                     get: { 22 },
                                      set: { _ in throw RbException(message: "Bad new value!") })
 
             doError {
@@ -66,7 +94,8 @@ class TestGlobalVars: XCTestCase {
     }
 
     static var allTests = [
-        ("testVirtual", testVirtual),
+        ("testVirtualNative", testVirtualNative),
+        ("testVirtualObj", testVirtualObj),
         ("testReadonly", testReadonly),
         ("testSwiftException", testSwiftException)
     ]
