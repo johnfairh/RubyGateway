@@ -121,7 +121,7 @@ Ruby.defineGlobalVariable(
 ## Requirements
 
 * Swift 4.2 or later, from swift.org or Xcode 10.0+
-* macOS (tested on 10.13.3) or Linux (tested on Ubuntu Xenial/16.04 on x86_64) with Clang 6+.
+* macOS (tested on 10.13.6) or Linux (tested on Ubuntu Bionic/18.04 on x86_64) with Clang 6.
 * Ruby 2.2 or later including development files:
   * For macOS, these come with Xcode.
   * For Linux you may need to install a -dev package depending on how your Ruby
@@ -143,7 +143,7 @@ github "johnfairh/RubyGateway"
 
 Swift package manager for macOS or Linux:
 ```
-.package(url: "https://github.com/johnfairh/RubyGateway", from: "1.0.0")
+.package(url: "https://github.com/johnfairh/RubyGateway", from: "2.0.0")
 ```
 
 CocoaPods for macOS:

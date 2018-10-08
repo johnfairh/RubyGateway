@@ -2,10 +2,17 @@
 
 ##### Breaking
 
+##### Enhancements
+
+# 2.0.0 - 8th October 2018
+
+##### Breaking
+
 * Require Swift 4.2.
 
 ##### Enhancements
 
+* Dynamic member lookup for property access or 0-arg methods.
 * Global variables can use native Swift types.
 
 ## 1.1.0 - 18th July 2018
