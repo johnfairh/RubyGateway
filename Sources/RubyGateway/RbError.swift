@@ -22,6 +22,11 @@ public enum RbError: Error {
     /// Raised for example when setting a CVar on a non-class object.
     case badType(String)
 
+    /// A value passed to the library is out of range for some reason.
+    ///
+    /// Raised for example when declaring a method with fixed arity > 15.
+    case badParameter(String)
+
     /// An identifier looks to be spelt wrong.
     ///
     /// Raised for example when an IVar name does not begin with '@'.
@@ -110,6 +115,8 @@ extension RbError: CustomStringConvertible {
             return "Can't set up Ruby: \(msg)"
         case let .badType(msg):
             return "Object has bad type: \(msg)"
+        case let .badParameter(msg):
+            return "Parameter has bad value: \(msg)"
         case let .badIdentifier(type, id):
             return "Bad Ruby identifier: '\(id)' does not look like \(type) name."
         case let .duplicateKwArg(key):

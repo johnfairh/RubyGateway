@@ -26,6 +26,7 @@ XCTMain([
     testCase(TestGlobalVars.allTests),
     testCase(TestCallable.allTests),
     testCase(TestProcs.allTests),
+    testCase(TestMethods.allTests),
     testCase(TestErrors.allTests),
     testCase(TestFailable.allTests),
     testCase(TestThreads.allTests),
