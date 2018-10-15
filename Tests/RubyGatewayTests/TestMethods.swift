@@ -17,15 +17,23 @@ class TestMethods: XCTestCase {
         doErrorFree {
 
             let funcName = "myGlobal"
+            let argCount = 1
+            let argValue = "Fish"
+            let retValue = 8.9
             var visited = false
 
-            try Ruby.defineGlobalFunction(name: funcName, args: 0) { obj, method in
+            try Ruby.defineGlobalFunction(name: funcName, args: argCount) { obj, method in
                 XCTAssertFalse(visited)
                 visited = true
-                return .nilObject
+                XCTAssertEqual(argCount, method.args.count)
+                XCTAssertEqual(argValue, String(method.args[0]))
+                return RbObject(retValue)
             }
 
+            let actualRetValue = try Ruby.eval(ruby: "\(funcName)(\"\(argValue)\")")
+
             XCTAssertTrue(visited)
+            XCTAssertEqual(retValue, Double(actualRetValue))
         }
     }
 

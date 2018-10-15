@@ -36,22 +36,22 @@ import RubyGatewayHelpers
 // think we're going to have use the method name (symbol/whatevs) as a key and query
 // it at invocation time from the C shim to figure out where to go.
 //
-// For actual class defns will need to `rb_class_of` the self param as well.
-// So I guess the Q is whether I can merge that with the globals or have to have
-// parallal infra.
+// We need two separate callbacks, one for normal methods (keyed by class-of-object)
+// and one for static methods / singleton object methods (keyed by object).
 //
-// Gonna have to revise singleton methods and ruby classes and shit.
-
-public struct RbMethod {
-
-    public var isBlockGiven: Bool {
-        return rb_block_given_p() != 0
-    }
-
-    public var args: [RbObject] {
-        return []
-    }
-}
+// Ok.  Flaw: I forgot about dynamic dispatch.
+// So, if we define a method m in class A, and class B: A, and object b: B then
+// calling b.m causes self.class == B and m will not resolve.
+//
+// Could insist on unique method names but, well.
+//
+// Ruby does make `ancestors` available to give class and hierarchy, importantly in
+// dispatch order.  So we can search ancestors looking for a match.  Will normally
+// hit in first position; if later up then can cache that for subsequent calls.
+// OK - not THAT bad!
+//
+// For regular methods need to do self.class.ancestors; for metatypes self.ancestors
+// for class methods - for metatype object methods not sure yet.
 
 /// The function signature for a Ruby method implemented in Swift.
 ///
@@ -62,6 +62,102 @@ public struct RbMethod {
 /// anything else gets wrapped up in an `RbException` and sent back
 /// to Ruby.
 public typealias RbMethodCallback = (RbObject, RbMethod) throws -> RbObject
+
+// MARK: - Dispatch gorpy implementation
+
+/// Callback from the C layer eg `rbg_method_varargs_callback` in `rbg_protect.m`.
+/// Swiften the arrays and wrap up the Ruby exception layer.
+private func rbmethod_callback(symbol: VALUE,
+                               targetCount: Int,
+                               rawTargets: UnsafePointer<VALUE>,
+                               rubySelf: VALUE,
+                               argc: Int32,
+                               argv: UnsafePointer<VALUE>,
+                               returnValue: UnsafeMutablePointer<Rbg_return_value>) {
+
+    let targets = Array(UnsafeBufferPointer(start: rawTargets, count: targetCount))
+    let args    = Array(UnsafeBufferPointer(start: argv, count: Int(argc)))
+    return returnValue.setFrom {
+        try RbMethodDispatch.exec(symbol: symbol, targets: targets,
+                                  rbSelf: RbObject(rubyValue: rubySelf),
+                                  args: args.map(RbObject.init(rubyValue:)))
+    }
+}
+
+/// `Rbg_method_id` is a C struct used to unique method callbacks.
+/// We can't have one callback per method because longjmp, so have to
+/// decode what is meant by reverse engineering the method dispatch.
+extension Rbg_method_id: Hashable {
+    public static func == (lhs: Rbg_method_id, rhs: Rbg_method_id) -> Bool {
+        return (lhs.method == rhs.method) &&
+               (lhs.target == rhs.target)
+    }
+
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(method)
+        hasher.combine(target)
+    }
+}
+
+private struct RbMethodDispatch {
+    /// One-time init to register the callbacks
+    private static var initOnce: Void = {
+        rbg_register_method_callback(rbmethod_callback)
+    }()
+
+    /// List of all method callbacks
+    private static var callbacks: [Rbg_method_id : RbMethodCallback] = [:]
+
+    /// Try to find a callback matching the class/method-name pair.
+    static func findCallback(symbol: VALUE, target: VALUE, firstTarget: VALUE) -> RbMethodCallback? {
+        let mid = Rbg_method_id(method: symbol, target: target)
+        guard let callback = callbacks[mid] else {
+            return nil
+        }
+        // Spot case where we define a method and get called from a subclass instance.
+        // Remember what happened so we don't have to walk the hierarchy next time.
+        if target != firstTarget {
+            let firstMid = Rbg_method_id(method: symbol, target: firstTarget)
+            callbacks[firstMid] = callback
+        }
+        return callback
+    }
+
+    static func exec(symbol: VALUE, targets: [VALUE], rbSelf: RbObject, args: [RbObject]) throws -> VALUE {
+        let firstTarget = targets.first!
+        for target in targets {
+            guard let callback = findCallback(symbol: symbol, target: target, firstTarget: firstTarget) else {
+                continue
+            }
+            return try callback(rbSelf, RbMethod(args: args)).withRubyValue { $0 }
+        }
+        throw RbException(message: "Can't match method ID to Swift callback")
+    }
+
+    // APIs
+
+    static func defineGlobalFunction(name: String, args: Int, body: @escaping RbMethodCallback) {
+        let _ = initOnce
+        let mid = rbg_define_global_function(name, Int32(args))
+        callbacks[mid] = body
+    }
+}
+
+// MARK: - RbMethod
+
+/// Structure passed in to Swift callbacks offering useful services.
+public struct RbMethod {
+
+    public let args: [RbObject]
+
+    public init(args: [RbObject]) {
+        self.args = args
+    }
+
+    public var isBlockGiven: Bool {
+        return rb_block_given_p() != 0
+    }
+}
 
 // MARK: - Global functions
 
@@ -82,5 +178,6 @@ extension RbGateway {
         guard args >= 0 && args <= 15 else {
             try RbError.raise(error: RbError.badParameter("args value out of range, \(args)"))
         }
+        RbMethodDispatch.defineGlobalFunction(name: name, args: args, body: body)
     }
 }
