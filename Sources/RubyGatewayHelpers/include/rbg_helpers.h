@@ -188,10 +188,10 @@ void rbg_register_method_callback(Rbg_method_call _Nonnull);
 #define RBG_METHOD_ARGC_DYNAMIC ((int)-1)
 
 /// Define a global function
-Rbg_method_id rbg_define_global_function(const char * _Nonnull name, int argc);
+Rbg_method_id rbg_define_global_function(const char * _Nonnull name);
 /// Define a regular method on some class
-Rbg_method_id rbg_define_method(VALUE clazz, const char * _Nonnull name, int argc);
+Rbg_method_id rbg_define_method(VALUE clazz, const char * _Nonnull name);
 /// Define a method for just this object - use for eg. class methods.
-Rbg_method_id rbg_define_singleton_method(VALUE object, const char * _Nonnull name, int argc);
+Rbg_method_id rbg_define_singleton_method(VALUE object, const char * _Nonnull name);
 
 #endif /* rbg_helpers_h */

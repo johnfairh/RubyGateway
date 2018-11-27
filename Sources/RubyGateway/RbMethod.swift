@@ -80,7 +80,7 @@ private func rbmethod_callback(symbol: VALUE,
     return returnValue.setFrom {
         try RbMethodDispatch.exec(symbol: symbol, targets: targets,
                                   rbSelf: RbObject(rubyValue: rubySelf),
-                                  args: args.map(RbObject.init(rubyValue:)))
+                                  argv: args.map(RbObject.init(rubyValue:)))
     }
 }
 
@@ -99,6 +99,26 @@ extension Rbg_method_id: Hashable {
     }
 }
 
+/// The context required to issue a callback.
+private struct RbMethodExec {
+    /// Number of arguments required for the method, or `nil` if variable/complicated.
+    /// Like Ruby, does not refer to the block in any way.  Don't count the block here.
+    var argc: Int?
+
+    /// The Swift implementation of the method.
+    var callback: RbMethodCallback
+
+    func exec(rbSelf: RbObject, argv: [RbObject]) throws -> RbObject {
+        // Police argc if appropriate
+        if let argc = argc {
+            if argv.count != argc {
+                throw RbException(message: "Wrong number of arguments, given \(argv.count) expected \(argc)")
+            }
+        }
+        return try callback(rbSelf, RbMethod(argv: argv))
+    }
+}
+
 private struct RbMethodDispatch {
     /// One-time init to register the callbacks
     private static var initOnce: Void = {
@@ -106,10 +126,10 @@ private struct RbMethodDispatch {
     }()
 
     /// List of all method callbacks
-    private static var callbacks: [Rbg_method_id : RbMethodCallback] = [:]
+    private static var callbacks: [Rbg_method_id : RbMethodExec] = [:]
 
     /// Try to find a callback matching the class/method-name pair.
-    static func findCallback(symbol: VALUE, target: VALUE, firstTarget: VALUE) -> RbMethodCallback? {
+    static func findCallback(symbol: VALUE, target: VALUE, firstTarget: VALUE) -> RbMethodExec? {
         let mid = Rbg_method_id(method: symbol, target: target)
         guard let callback = callbacks[mid] else {
             return nil
@@ -123,23 +143,23 @@ private struct RbMethodDispatch {
         return callback
     }
 
-    static func exec(symbol: VALUE, targets: [VALUE], rbSelf: RbObject, args: [RbObject]) throws -> VALUE {
+    static func exec(symbol: VALUE, targets: [VALUE], rbSelf: RbObject, argv: [RbObject]) throws -> VALUE {
         let firstTarget = targets.first!
         for target in targets {
             guard let callback = findCallback(symbol: symbol, target: target, firstTarget: firstTarget) else {
                 continue
             }
-            return try callback(rbSelf, RbMethod(args: args)).withRubyValue { $0 }
+            return try callback.exec(rbSelf: rbSelf, argv: argv).withRubyValue { $0 }
         }
         throw RbException(message: "Can't match method ID to Swift callback")
     }
 
     // APIs
 
-    static func defineGlobalFunction(name: String, args: Int, body: @escaping RbMethodCallback) {
+    static func defineGlobalFunction(name: String, argc: Int?, body: @escaping RbMethodCallback) {
         let _ = initOnce
-        let mid = rbg_define_global_function(name, Int32(args))
-        callbacks[mid] = body
+        let mid = rbg_define_global_function(name)
+        callbacks[mid] = RbMethodExec(argc: argc, callback: body)
     }
 }
 
@@ -148,10 +168,10 @@ private struct RbMethodDispatch {
 /// Structure passed in to Swift callbacks offering useful services.
 public struct RbMethod {
 
-    public let args: [RbObject]
+    public let argv: [RbObject]
 
-    public init(args: [RbObject]) {
-        self.args = args
+    public init(argv: [RbObject]) {
+        self.argv = argv
     }
 
     public var isBlockGiven: Bool {
@@ -166,18 +186,18 @@ extension RbGateway {
     /// The function can also be passed a block.
     ///
     /// - parameter name: The function name.
-    /// - parameter args: The number of arguments the function requires, not
+    /// - parameter argc: The number of arguments the function requires, not
     ///                   including any block.
     /// - parameter body: The Swift code to run when the function is called.
     /// - throws: `RbError.badIdentifier(type:id:)` if `name` is bad.
     ///           `RbError.badParameter(_:)` if `args` is silly.
     ///           Some other kind of error if Ruby is not working.
-    public func defineGlobalFunction(name: String, args: Int, body: @escaping RbMethodCallback) throws {
+    public func defineGlobalFunction(name: String, argc: Int, body: @escaping RbMethodCallback) throws {
         try setup()
         try name.checkRubyMethodName()
-        guard args >= 0 && args <= 15 else {
-            try RbError.raise(error: RbError.badParameter("args value out of range, \(args)"))
+        guard argc >= 0 && argc <= 9 else {
+            try RbError.raise(error: RbError.badParameter("argc value out of range, \(argc)"))
         }
-        RbMethodDispatch.defineGlobalFunction(name: name, args: args, body: body)
+        RbMethodDispatch.defineGlobalFunction(name: name, argc: argc, body: body)
     }
 }

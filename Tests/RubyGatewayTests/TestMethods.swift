@@ -16,17 +16,17 @@ class TestMethods: XCTestCase {
     func testFixedArgsRoundTrip() {
         doErrorFree {
 
-            let funcName = "myGlobal"
+            let funcName = "myGlobal1"
             let argCount = 1
             let argValue = "Fish"
             let retValue = 8.9
             var visited = false
 
-            try Ruby.defineGlobalFunction(name: funcName, args: argCount) { _, method in
+            try Ruby.defineGlobalFunction(name: funcName, argc: argCount) { _, method in
                 XCTAssertFalse(visited)
                 visited = true
-                XCTAssertEqual(argCount, method.args.count)
-                XCTAssertEqual(argValue, String(method.args[0]))
+                XCTAssertEqual(argCount, method.argv.count)
+                XCTAssertEqual(argValue, String(method.argv[0]))
                 return RbObject(retValue)
             }
 
@@ -37,14 +37,32 @@ class TestMethods: XCTestCase {
         }
     }
 
-    // invalid num-args request
+    // Argc runtime mismatch
+    func testArgcMismatch() {
+        doErrorFree {
+            let funcName = "myGlobal2"
+            let expectedArgCount = 1
+
+            try Ruby.defineGlobalFunction(name: funcName, argc: expectedArgCount) { _, _ in
+                XCTFail("Accidentally called function requiring an arg without any")
+                return .nilObject
+            }
+
+            doError {
+                let _ = try Ruby.eval(ruby: "\(funcName)()")
+            }
+        }
+    }
+
+    // invalid argc request
     func testInvalidArgsCount() {
         doError {
-            try Ruby.defineGlobalFunction(name: "bad_boy", args: 103) { _, _ in return .nilObject }
+            try Ruby.defineGlobalFunction(name: "bad_boy", argc: 103) { _, _ in return .nilObject }
         }
     }
 
     static var allTests = [
-        ("testFixedArgsRoundTrip", testFixedArgsRoundTrip)
+        ("testFixedArgsRoundTrip", testFixedArgsRoundTrip),
+        ("testInvalidArgsCount", testInvalidArgsCount)
     ]
 }

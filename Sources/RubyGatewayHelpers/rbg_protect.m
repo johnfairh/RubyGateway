@@ -574,10 +574,11 @@ static VALUE rbg_method_varargs_callback(int argc, VALUE *argv, VALUE self)
     return rbg_handle_return_value(&rv);
 }
 
-Rbg_method_id rbg_define_global_function(const char * _Nonnull name, int argc)
+Rbg_method_id rbg_define_global_function(const char * _Nonnull name)
 {
     Rbg_method_id mid = { 0 };
 
+    // Always say varargs here - have to do policing in Swift.
     rb_define_global_function(name, rbg_method_varargs_callback, -1);
 
     mid.method = rb_id2sym(rb_intern(name));
