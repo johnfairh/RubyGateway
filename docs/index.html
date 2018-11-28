@@ -93,6 +93,12 @@
                 <a class="nav-group-task-link" href="Structs/RbBreak.html">RbBreak</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/RbMethod.html">RbMethod</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Other APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/RbProc.html">RbProc</a>
               </li>
               <li class="nav-group-task">
@@ -306,7 +312,7 @@ low-level Ruby C API wrapper.</p>
 <p>Global variables:</p>
 <pre class="highlight swift"><code><span class="c1">// epochStore.current: Int</span>
 
-<span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineGlobalVariable</span><span class="p">(</span>
+<span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineGlobalVar</span><span class="p">(</span>
         <span class="nv">name</span><span class="p">:</span> <span class="s">"$epoch"</span><span class="p">,</span>
         <span class="nv">get</span><span class="p">:</span> <span class="p">{</span> <span class="n">epochStore</span><span class="o">.</span><span class="n">current</span> <span class="p">},</span>
         <span class="nv">set</span><span class="p">:</span> <span class="p">{</span> <span class="n">epochStore</span><span class="o">.</span><span class="n">current</span> <span class="o">=</span> <span class="n">newEpoch</span> <span class="p">})</span>
@@ -322,7 +328,7 @@ low-level Ruby C API wrapper.</p>
 
 <ul>
 <li>Swift 4.2 or later, from swift.org or Xcode 10.0+</li>
-<li>macOS (tested on 10.13.3) or Linux (tested on Ubuntu Xenial/16.04 on x86_64) with Clang 6+.</li>
+<li>macOS (tested on 10.13.6) or Linux (tested on Ubuntu Bionic/18.04 on x86_64) with Clang 6.</li>
 <li>Ruby 2.2 or later including development files:
 
 <ul>
@@ -344,7 +350,7 @@ to use a different Ruby then you also need to configure CRuby.</p>
 </code></pre>
 
 <p>Swift package manager for macOS or Linux:</p>
-<pre class="highlight plaintext"><code>.package(url: "https://github.com/johnfairh/RubyGateway", from: "1.0.0")
+<pre class="highlight plaintext"><code>.package(url: "https://github.com/johnfairh/RubyGateway", from: "2.0.0")
 </code></pre>
 
 <p>CocoaPods for macOS:</p>

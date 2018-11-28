@@ -34,6 +34,8 @@ custom_categories:
           - RbBlockCallback
           - RbBlockRetention
           - RbBreak
+          - RbMethod
+          - RbMethodCallback
           - RbProc
           - RbSymbol
           - RbThread

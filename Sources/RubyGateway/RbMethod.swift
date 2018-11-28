@@ -87,6 +87,7 @@ private func rbmethod_callback(symbol: VALUE,
 /// `Rbg_method_id` is a C struct used to unique method callbacks.
 /// We can't have one callback per method because longjmp, so have to
 /// decode what is meant by reverse engineering the method dispatch.
+/// :nodoc:
 extension Rbg_method_id: Hashable {
     public static func == (lhs: Rbg_method_id, rhs: Rbg_method_id) -> Bool {
         return (lhs.method == rhs.method) &&
@@ -183,8 +184,26 @@ public struct RbMethod {
 // MARK: - Global functions
 
 extension RbGateway {
+    /// Define a global function that can use positional, keyword, and optional
+    /// arguments as well as splatting.  The function can also be passed a block.
+    ///
+    /// Use the `RbMethod` passed into `body` to access the function arguments.
+    /// You have to implement all argument checking rules yourself.
+    ///
+    /// - parameter name: The function name.
+    /// - parameter body: The Swift code to run when the function is called.
+    /// - throws: `RbError.badIdentifier(type:id:)` if `name` is bad.
+    ///           `RbError.badParameter(_:)` if `args` is silly.
+    ///           Some other kind of error if Ruby is not working.
+    public func defineGlobalFunction(name: String, body: @escaping RbMethodCallback) throws {
+        try doDefineGlobalFunction(name: name, argc: nil, body: body)
+    }
+
     /// Define a global function with a fixed number of positional arguments.
     /// The function can also be passed a block.
+    ///
+    /// RubyGateway guarantees that the `body` callback is invoked with the
+    /// required number of parameters.
     ///
     /// To use other argument styles, use `defineGlobalFunction(name:body:)`.
     ///
@@ -197,18 +216,6 @@ extension RbGateway {
     ///           Some other kind of error if Ruby is not working.
     public func defineGlobalFunction(name: String, argc: Int, body: @escaping RbMethodCallback) throws {
         try doDefineGlobalFunction(name: name, argc: argc, body: body)
-    }
-
-    /// Define a global function that can use positional, keyword, and optional
-    /// arguments as well as splatting.  The function can also be passed a block.
-    ///
-    /// - parameter name: The function name.
-    /// - parameter body: The Swift code to run when the function is called.
-    /// - throws: `RbError.badIdentifier(type:id:)` if `name` is bad.
-    ///           `RbError.badParameter(_:)` if `args` is silly.
-    ///           Some other kind of error if Ruby is not working.
-    public func defineGlobalFunction(name: String, body: @escaping RbMethodCallback) throws {
-        try doDefineGlobalFunction(name: name, argc: nil, body: body)
     }
 
     private func doDefineGlobalFunction(name: String, argc: Int?, body: @escaping RbMethodCallback) throws {

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>ArraySlice Extension Reference</title>
+    <title>RbMethod Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Extension/ArraySlice" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Struct/RbMethod" class="dashAnchor"></a>
 
-    <a title="ArraySlice Extension Reference"></a>
+    <a title="RbMethod Structure Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -44,7 +44,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">RubyGateway Reference</a>
       <img class="carat" src="../img/carat.png" />
-      ArraySlice Extension Reference
+      RbMethod Structure Reference
     </p>
 
     <div class="content-wrapper">
@@ -213,15 +213,14 @@
 
         <section class="section">
           <div class="section-content">
-            <h1>ArraySlice</h1>
+            <h1>RbMethod</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/arrayslice/">ArraySlice</a></span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="p">:</span> <span class="n">_DestructorSafeContainer</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RbMethod</span></code></pre>
 
                 </div>
               </div>
-            <p>These methods are available only when the array slice <code>Element</code> type
-conforms to <code><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code>.</p>
+            <p>Structure passed in to Swift implementations of Ruby functions offering useful services.</p>
 
           </div>
         </section>
@@ -233,9 +232,9 @@ conforms to <code><a href="../Protocols/RbObjectConvertible.html">RbObjectConver
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:s10ArraySliceV11RubyGatewayAC19RbObjectConvertibleRzlE04rubyF0AC0eF0Cvp"></a>
-                    <a name="//apple_ref/swift/Property/rubyObject" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s10ArraySliceV11RubyGatewayAC19RbObjectConvertibleRzlE04rubyF0AC0eF0Cvp">rubyObject</a>
+                    <a name="/s:11RubyGateway8RbMethodV4argvSayAA0C6ObjectCGvp"></a>
+                    <a name="//apple_ref/swift/Property/argv" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway8RbMethodV4argvSayAA0C6ObjectCGvp">argv</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -243,21 +242,19 @@ conforms to <code><a href="../Protocols/RbObjectConvertible.html">RbObjectConver
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Create a Ruby array object for this <code><a href="https://developer.apple.com/documentation/swift/arrayslice/">ArraySlice</a></code>.  All the sliceness
-is lost by this conversion, there&rsquo;s no ongoing relation between the Swift
-and Ruby types.</p>
+                        <p>The raw Ruby objects passed as args to the function.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">rubyObject</span><span class="p">:</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">argv</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L283-L290">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L173">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
