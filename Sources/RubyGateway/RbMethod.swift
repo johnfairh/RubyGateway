@@ -165,18 +165,19 @@ private struct RbMethodDispatch {
 
 // MARK: - RbMethod
 
-/// Structure passed in to Swift callbacks offering useful services.
+/// Structure passed in to Swift implementations of Ruby functions offering useful services.
 public struct RbMethod {
 
+    /// The raw Ruby objects passed as args to the function.
     public let argv: [RbObject]
 
-    public init(argv: [RbObject]) {
+    init(argv: [RbObject]) {
         self.argv = argv
     }
 
-    public var isBlockGiven: Bool {
-        return rb_block_given_p() != 0
-    }
+//    public var isBlockGiven: Bool {
+//        return rb_block_given_p() != 0
+//    }
 }
 
 // MARK: - Global functions
@@ -184,6 +185,8 @@ public struct RbMethod {
 extension RbGateway {
     /// Define a global function with a fixed number of positional arguments.
     /// The function can also be passed a block.
+    ///
+    /// To use other argument styles, use `defineGlobalFunction(name:body:)`.
     ///
     /// - parameter name: The function name.
     /// - parameter argc: The number of arguments the function requires, not
@@ -193,10 +196,28 @@ extension RbGateway {
     ///           `RbError.badParameter(_:)` if `args` is silly.
     ///           Some other kind of error if Ruby is not working.
     public func defineGlobalFunction(name: String, argc: Int, body: @escaping RbMethodCallback) throws {
+        try doDefineGlobalFunction(name: name, argc: argc, body: body)
+    }
+
+    /// Define a global function that can use positional, keyword, and optional
+    /// arguments as well as splatting.  The function can also be passed a block.
+    ///
+    /// - parameter name: The function name.
+    /// - parameter body: The Swift code to run when the function is called.
+    /// - throws: `RbError.badIdentifier(type:id:)` if `name` is bad.
+    ///           `RbError.badParameter(_:)` if `args` is silly.
+    ///           Some other kind of error if Ruby is not working.
+    public func defineGlobalFunction(name: String, body: @escaping RbMethodCallback) throws {
+        try doDefineGlobalFunction(name: name, argc: nil, body: body)
+    }
+
+    private func doDefineGlobalFunction(name: String, argc: Int?, body: @escaping RbMethodCallback) throws {
         try setup()
         try name.checkRubyMethodName()
-        guard argc >= 0 && argc <= 9 else {
-            try RbError.raise(error: RbError.badParameter("argc value out of range, \(argc)"))
+        if let argc = argc {
+            guard argc >= 0 && argc <= 9 else {
+                try RbError.raise(error: RbError.badParameter("argc value out of range, \(argc)"))
+            }
         }
         RbMethodDispatch.defineGlobalFunction(name: name, argc: argc, body: body)
     }

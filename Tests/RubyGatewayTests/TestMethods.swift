@@ -15,7 +15,6 @@ class TestMethods: XCTestCase {
     // basic data round-trip
     func testFixedArgsRoundTrip() {
         doErrorFree {
-
             let funcName = "myGlobal1"
             let argCount = 1
             let argValue = "Fish"
@@ -37,10 +36,30 @@ class TestMethods: XCTestCase {
         }
     }
 
+    func testVarArgsRoundTrip() {
+        doErrorFree {
+            let funcName = "myGlobal2"
+            let retValue = 8.9
+            var visited = false
+
+            try Ruby.defineGlobalFunction(name: funcName) { _, method in
+                XCTAssertFalse(visited)
+                visited = true
+                XCTAssertEqual(method.argv.count, 0)
+                return RbObject(retValue)
+            }
+
+            let actualRetValue = try Ruby.eval(ruby: "\(funcName)()")
+
+            XCTAssertTrue(visited)
+            XCTAssertEqual(retValue, Double(actualRetValue))
+        }
+    }
+
     // Argc runtime mismatch
     func testArgcMismatch() {
         doErrorFree {
-            let funcName = "myGlobal2"
+            let funcName = "myGlobal3"
             let expectedArgCount = 1
 
             try Ruby.defineGlobalFunction(name: funcName, argc: expectedArgCount) { _, _ in
@@ -63,6 +82,8 @@ class TestMethods: XCTestCase {
 
     static var allTests = [
         ("testFixedArgsRoundTrip", testFixedArgsRoundTrip),
+        ("testVarArgsRoundTrip", testVarArgsRoundTrip),
+        ("testArgcMismatch", testArgcMismatch),
         ("testInvalidArgsCount", testInvalidArgsCount)
     ]
 }
