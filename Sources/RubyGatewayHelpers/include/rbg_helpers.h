@@ -163,4 +163,35 @@ Rbg_value * _Nonnull rbg_value_alloc(VALUE value);
 Rbg_value * _Nonnull rbg_value_dup(const Rbg_value * _Nonnull box);
 void                 rbg_value_free(Rbg_value * _Nonnull box);
 
+/// Method calling
+
+/// Value used to identify a particular callback.  Ruby does not allow us
+/// context here so we improvise like this instead.
+typedef struct {
+    /// symbol for the method name.
+    VALUE method;
+    /// class for a regular method, attached object for a singleton.
+    VALUE target;
+} Rbg_method_id;
+
+/// Swift callback that all methods go through
+typedef void (*Rbg_method_call)(VALUE,                  // symbol
+                                long,                   // targetCount
+                                const VALUE * _Nonnull, // targets
+                                VALUE,                  // self
+                                int,                    // argc
+                                const VALUE * _Nonnull, // argv
+                                Rbg_return_value * _Nonnull);
+void rbg_register_method_callback(Rbg_method_call _Nonnull);
+
+/// Specify to allow any number of args and handle at runtime
+#define RBG_METHOD_ARGC_DYNAMIC ((int)-1)
+
+/// Define a global function
+Rbg_method_id rbg_define_global_function(const char * _Nonnull name);
+/// Define a regular method on some class
+Rbg_method_id rbg_define_method(VALUE clazz, const char * _Nonnull name);
+/// Define a method for just this object - use for eg. class methods.
+Rbg_method_id rbg_define_singleton_method(VALUE object, const char * _Nonnull name);
+
 #endif /* rbg_helpers_h */

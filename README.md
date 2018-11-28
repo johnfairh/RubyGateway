@@ -106,7 +106,7 @@ Global variables:
 ```swift
 // epochStore.current: Int
 
-Ruby.defineGlobalVariable(
+Ruby.defineGlobalVar(
         name: "$epoch",
         get: { epochStore.current },
         set: { epochStore.current = newEpoch })

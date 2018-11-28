@@ -52,6 +52,8 @@
 		02901338203E03530090C5C9 /* RbGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02901337203E03530090C5C9 /* RbGateway.swift */; };
 		0290133A203ED8D60090C5C9 /* RbConversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02901339203ED8D60090C5C9 /* RbConversions.swift */; };
 		0290133D203F42820090C5C9 /* TestMiscObjTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0290133C203F42820090C5C9 /* TestMiscObjTypes.swift */; };
+		02ABDBA4216CF7BF00AFDB64 /* RbMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ABDBA3216CF7BF00AFDB64 /* RbMethod.swift */; };
+		02ABDBA6216D060300AFDB64 /* TestMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ABDBA5216D060300AFDB64 /* TestMethods.swift */; };
 		02C5C85120ECD87E007138A2 /* RbComplex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5C85020ECD87E007138A2 /* RbComplex.swift */; };
 		02C5C85320ECE51A007138A2 /* TestComplex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5C85220ECE51A007138A2 /* TestComplex.swift */; };
 		02C5C85520F0CD24007138A2 /* RbRational.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5C85420F0CD24007138A2 /* RbRational.swift */; };
@@ -135,6 +137,8 @@
 		02901339203ED8D60090C5C9 /* RbConversions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbConversions.swift; sourceTree = "<group>"; };
 		0290133B203EF0F60090C5C9 /* nonconvert.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = nonconvert.rb; sourceTree = "<group>"; };
 		0290133C203F42820090C5C9 /* TestMiscObjTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMiscObjTypes.swift; sourceTree = "<group>"; };
+		02ABDBA3216CF7BF00AFDB64 /* RbMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbMethod.swift; sourceTree = "<group>"; };
+		02ABDBA5216D060300AFDB64 /* TestMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMethods.swift; sourceTree = "<group>"; };
 		02C5C85020ECD87E007138A2 /* RbComplex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbComplex.swift; sourceTree = "<group>"; };
 		02C5C85220ECE51A007138A2 /* TestComplex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestComplex.swift; sourceTree = "<group>"; };
 		02C5C85420F0CD24007138A2 /* RbRational.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbRational.swift; sourceTree = "<group>"; };
@@ -239,6 +243,7 @@
 				02D9DA4820F61682006D1524 /* TestGlobalVars.swift */,
 				0205A8A32042DA3600076840 /* TestCallable.swift */,
 				027061BC2059483C00C336B8 /* TestProcs.swift */,
+				02ABDBA5216D060300AFDB64 /* TestMethods.swift */,
 				0230075D2046ED9900044B8E /* TestErrors.swift */,
 				02300767204BF3E800044B8E /* TestFailable.swift */,
 				020B4C1C2078D54F0073276B /* TestThreads.swift */,
@@ -304,6 +309,7 @@
 				02706176204EB47600C336B8 /* RbOperators.swift */,
 				022BD881205EEA9B00DA077F /* RbBlockCall.swift */,
 				02460F1D20FDF6BB006DB2D4 /* RbGlobalVar.swift */,
+				02ABDBA3216CF7BF00AFDB64 /* RbMethod.swift */,
 				02300765204AFA3600044B8E /* RbObjectAccess.swift */,
 				0205A8A82043287B00076840 /* RbFailableAccess.swift */,
 				0249234920334ADE00E3AAF4 /* RbError.swift */,
@@ -492,6 +498,7 @@
 				02C5C85320ECE51A007138A2 /* TestComplex.swift in Sources */,
 				026F1B042070CDB0002E8C45 /* TestArrays.swift in Sources */,
 				020B4C192072379D0073276B /* TestDictionaries.swift in Sources */,
+				02ABDBA6216D060300AFDB64 /* TestMethods.swift in Sources */,
 				020B4C23207CB7820073276B /* TestCollection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -504,6 +511,7 @@
 				022BD8A22063C40800DA077F /* Lock.swift in Sources */,
 				02300766204AFA3600044B8E /* RbObjectAccess.swift in Sources */,
 				0249234B20334AE500E3AAF4 /* RbError.swift in Sources */,
+				02ABDBA4216CF7BF00AFDB64 /* RbMethod.swift in Sources */,
 				02460F1E20FDF6BB006DB2D4 /* RbGlobalVar.swift in Sources */,
 				022F3ACF203AE707009E69BE /* RbObject.swift in Sources */,
 				020B4C1B2078CADA0073276B /* RbThread.swift in Sources */,

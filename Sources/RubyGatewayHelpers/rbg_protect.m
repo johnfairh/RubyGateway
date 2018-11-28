@@ -500,10 +500,10 @@ static VALUE rbg_handle_return_value(Rbg_return_value * _Nonnull rv)
 // Swift entrypoint, using the variable name to distinguish them.
 //
 
-///  This is `rbobject_gvar_get_callback` in RbObject.swift.
+///  This is `rbobject_gvar_get_callback` in RbGlobalVar.swift.
 static Rbg_gvar_get_call rbg_gvar_get_call;
 
-///  This is `rbobject_gvar_set_callback` in RbObject.swift.
+///  This is `rbobject_gvar_set_callback` in RbGlobalVar.swift.
 static Rbg_gvar_set_call rbg_gvar_set_call;
 
 void rbg_register_gvar_callbacks(Rbg_gvar_get_call get,
@@ -536,4 +536,53 @@ ID rbg_create_virtual_gvar(const char * _Nonnull name, int readonly)
                                rbg_gvar_virtual_getter,
                                readonly ? NULL : rbg_gvar_virtual_setter);
     return rb_intern(name);
+}
+
+//
+// Object methods in Swift
+//
+
+/// This is `rbmethod_callback` in RbMethod.swift.
+static Rbg_method_call rbg_method_call;
+
+static ID rbg_method_callee_id;
+static ID rbg_method_ancestors_id;
+
+void rbg_register_method_callback(Rbg_method_call call)
+{
+    rbg_method_call = call;
+    rbg_method_callee_id = rb_intern("__callee__");
+    rbg_method_ancestors_id = rb_intern("ancestors");
+}
+
+/// Callback to implement regular methods
+static VALUE rbg_method_varargs_callback(int argc, VALUE *argv, VALUE self)
+{
+    VALUE methodSym = rb_funcall(rb_mKernel, rbg_method_callee_id, 0);
+    VALUE clazz     = rb_class_of(self);
+    VALUE ancestors = rb_funcall(clazz, rbg_method_ancestors_id, 0);
+
+    Rbg_return_value rv = { 0 };
+    rbg_method_call(methodSym,
+                    RARRAY_LEN(ancestors),
+                    RARRAY_CONST_PTR(ancestors),
+                    self,
+                    argc,
+                    argv,
+                    &rv);
+
+    return rbg_handle_return_value(&rv);
+}
+
+Rbg_method_id rbg_define_global_function(const char * _Nonnull name)
+{
+    Rbg_method_id mid = { 0 };
+
+    // Always say varargs here - have to do policing in Swift.
+    rb_define_global_function(name, rbg_method_varargs_callback, -1);
+
+    mid.method = rb_id2sym(rb_intern(name));
+    mid.target = rb_mKernel;
+
+    return mid;
 }
