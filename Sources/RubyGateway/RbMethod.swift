@@ -137,10 +137,14 @@ private struct RbMethodDispatch {
         }
         // Spot case where we define a method and get called from a subclass instance.
         // Remember what happened so we don't have to walk the hierarchy next time.
-        if target != firstTarget {
-            let firstMid = Rbg_method_id(method: symbol, target: firstTarget)
-            callbacks[firstMid] = callback
-        }
+        //
+        // XXX this needs interlock with 'define new value for existing method'
+        // XXX to entirely purge DB of original values....
+        //
+//        if target != firstTarget {
+//            let firstMid = Rbg_method_id(method: symbol, target: firstTarget)
+//            callbacks[firstMid] = callback
+//        }
         return callback
     }
 
@@ -176,9 +180,33 @@ public struct RbMethod {
         self.argv = argv
     }
 
-//    public var isBlockGiven: Bool {
-//        return rb_block_given_p() != 0
-//    }
+    /// Has the function been passed a block?
+    public var isBlockGiven: Bool {
+        return rb_block_given_p() != 0
+    }
+
+    /// Raise an exception if the function has not been passed a block.
+    public func needsBlock() throws {
+        if !isBlockGiven {
+            throw RbException(message: "No block given")
+        }
+    }
+
+    /// Invoke the function's block and get the result.
+    ///
+    /// If the function was not passed a block then a Ruby exception
+    /// is raised.
+    /// - parameter args: The arguments to pass to the block, none by default.
+    /// - returns: The value returned by the block.
+    /// - throws: `RbError.rubyException(_:)` if the block raises an exception.
+    public func yieldBlock(args: [RbObjectConvertible?] = []) throws -> RbObject {
+        let argObjects = args.map { $0.rubyObject }
+        return try argObjects.withRubyValues { argValues in
+            try RbVM.doProtect {
+                RbObject(rubyValue: rbg_yield_values(Int32(argValues.count), argValues, nil))
+            }
+        }
+    }
 }
 
 // MARK: - Global functions

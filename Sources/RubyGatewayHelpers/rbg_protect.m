@@ -95,6 +95,7 @@ typedef enum {
     RBG_JOB_TO_LONG,
     RBG_JOB_TO_DOUBLE,
     RBG_JOB_PROC_CALL,
+    RBG_JOB_YIELD,
 } Rbg_job;
 
 typedef struct {
@@ -168,6 +169,9 @@ static VALUE rbg_protect_thunk(VALUE value)
     case RBG_JOB_PROC_CALL:
         rc = rb_proc_call_with_block(d->value, d->argc, d->argv, d->blockArg);
         break;
+    case RBG_JOB_YIELD:
+        rc = rb_yield_values2(d->argc, d->argv);
+        break;
     }
     return rc;
 }
@@ -229,6 +233,15 @@ VALUE rbg_funcallv_protect(VALUE value, ID id,
 {
     Rbg_protect_data data = { .job = RBG_JOB_FUNCALLV, .value = value, .id = id,
                               .argc = argc, .argv = argv };
+    return rbg_protect(&data, status);
+}
+
+// rb_yield - run arbitrary code
+VALUE rbg_yield_values(int argc,
+                       const VALUE * _Nonnull argv,
+                       int * _Nullable status)
+{
+    Rbg_protect_data data = { .job = RBG_JOB_YIELD, .argc = argc, .argv = argv };
     return rbg_protect(&data, status);
 }
 

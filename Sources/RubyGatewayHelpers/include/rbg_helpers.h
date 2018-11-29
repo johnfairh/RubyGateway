@@ -41,6 +41,11 @@ VALUE rbg_funcallv_protect(VALUE value, ID id,
                            int argc, const VALUE * _Nonnull argv,
                            int * _Nullable status);
 
+/// Safely call `rb_yield_values2` and report exception status.
+VALUE rbg_yield_values(int argc,
+                       const VALUE * _Nonnull argv,
+                       int * _Nullable status);
+
 /// Things a Swift callback can ask Ruby to do
 typedef enum {
     /// Return a VALUE - normal case

@@ -15,7 +15,7 @@ class TestMethods: XCTestCase {
     // basic data round-trip
     func testFixedArgsRoundTrip() {
         doErrorFree {
-            let funcName = "myGlobal1"
+            let funcName = "myGlobal"
             let argCount = 1
             let argValue = "Fish"
             let retValue = 8.9
@@ -38,7 +38,7 @@ class TestMethods: XCTestCase {
 
     func testVarArgsRoundTrip() {
         doErrorFree {
-            let funcName = "myGlobal2"
+            let funcName = "myGlobal"
             let retValue = 8.9
             var visited = false
 
@@ -59,7 +59,7 @@ class TestMethods: XCTestCase {
     // Argc runtime mismatch
     func testArgcMismatch() {
         doErrorFree {
-            let funcName = "myGlobal3"
+            let funcName = "myGlobal"
             let expectedArgCount = 1
 
             try Ruby.defineGlobalFunction(name: funcName, argc: expectedArgCount) { _, _ in
@@ -80,10 +80,98 @@ class TestMethods: XCTestCase {
         }
     }
 
+    // Goodpath calling Swift + Ruby block from a function
+    func testGoodBlock() {
+        doErrorFree {
+            let funcName = "myGlobal"
+            var funcCalled = false
+            var blockCalled = false
+            let expectedBlockResult = 4.0
+            let expectedFuncResult = "alldone"
+
+            try Ruby.defineGlobalFunction(name: funcName) { _, method in
+                XCTAssertTrue(method.isBlockGiven)
+                XCTAssertFalse(funcCalled)
+                let blockResult = try method.yieldBlock()
+                XCTAssertEqual(expectedBlockResult, Double(blockResult))
+                funcCalled = true
+                return RbObject(expectedFuncResult)
+            }
+
+            let funcResult = try Ruby.call(funcName) { blockArgs in
+                XCTAssertFalse(blockCalled)
+                blockCalled = true
+                XCTAssertEqual(0, blockArgs.count)
+                return RbObject(expectedBlockResult)
+            }
+
+            XCTAssertTrue(funcCalled)
+            XCTAssertTrue(blockCalled)
+            XCTAssertEqual(expectedFuncResult, String(funcResult))
+
+            // Do the ruby version too!
+            funcCalled = false
+            let _ = try Ruby.eval(ruby: "\(funcName) { next 4.0 }")
+            XCTAssertTrue(funcCalled)
+        }
+    }
+
+    // Missing block
+    func testErrorNoBlock() {
+        doErrorFree {
+            let funcName = "myGlobal"
+            var funcCalled = false
+
+            try Ruby.defineGlobalFunction(name: funcName) { _, method in
+                funcCalled = true
+                try method.needsBlock()
+                return .nilObject
+            }
+
+            doError {
+                let _ = try Ruby.call(funcName)
+            }
+            XCTAssertTrue(funcCalled)
+        }
+    }
+
+    // Block with args
+    func testBlockArgs() {
+        doErrorFree {
+            let funcName = "myGlobal"
+            var funcCalled = false
+            var blockCalled = false
+            let expectedBlockArg = 4.0
+
+            try Ruby.defineGlobalFunction(name: funcName) { _, method in
+                XCTAssertTrue(method.isBlockGiven)
+                try method.needsBlock()
+                XCTAssertFalse(funcCalled)
+                let _ = try method.yieldBlock(args: [expectedBlockArg])
+                funcCalled = true
+                return .nilObject
+            }
+
+            let _ = try Ruby.call(funcName) { blockArgs in
+                XCTAssertFalse(blockCalled)
+                blockCalled = true
+                XCTAssertEqual(1, blockArgs.count)
+                XCTAssertEqual(expectedBlockArg, Double(blockArgs[0]))
+                return .nilObject
+            }
+
+            XCTAssertTrue(funcCalled)
+            XCTAssertTrue(blockCalled)
+        }
+    }
+
     static var allTests = [
         ("testFixedArgsRoundTrip", testFixedArgsRoundTrip),
         ("testVarArgsRoundTrip", testVarArgsRoundTrip),
         ("testArgcMismatch", testArgcMismatch),
-        ("testInvalidArgsCount", testInvalidArgsCount)
+        ("testInvalidArgsCount", testInvalidArgsCount),
+        ("testGoodBlock", testGoodBlock),
+        ("testErrorNoBlock", testErrorNoBlock),
+        ("testBlockArgs", testBlockArgs)
     ]
 }
