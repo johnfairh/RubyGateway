@@ -42,3 +42,12 @@ def ruby_should_return_24
         22
     end
 end
+
+def ruby_should_return_4
+   rv = 0
+   swift_calls_block {
+       rv += 1
+       redo if rv < 4
+   }
+   rv
+end

@@ -181,7 +181,7 @@ class TestMethods: XCTestCase {
                 return try method.yieldBlock()
             }
 
-            let testSuffixes = [100, 42, 200, 44, 22, 24]
+            let testSuffixes = [100, 42, 200, 44, 22, 24, 4]
             try testSuffixes.forEach { val in
                 let funcName = "ruby_should_return_\(val)"
                 let result = try Ruby.call(funcName)
