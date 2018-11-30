@@ -177,51 +177,42 @@ static VALUE rbg_protect_thunk(VALUE value)
 }
 
 /// Run the job described by `data` and report exception status in `status`.
-static VALUE rbg_protect(Rbg_protect_data * _Nonnull data, int * _Nullable status)
+static VALUE rbg_protect(Rbg_protect_data * _Nonnull data, int * _Nonnull status)
 {
     return rb_protect(rbg_protect_thunk, RBG_PDATA_TO_VALUE(data), status);
 }
 
 // rb_load -- rb_load_protect exists but doesn't protect against exceptions
 // raised by the file being loaded, just the filename lookup part.
-void rbg_load_protect(VALUE fname, int wrap, int * _Nullable status)
+void rbg_load_protect(VALUE fname, int wrap, int * _Nonnull status)
 {
     Rbg_protect_data data = { .job = RBG_JOB_LOAD, .value = fname, .loadWrap = wrap };
-
-    // rb_load_protect has another bug, if you send it null status
-    // then it accesses the pointer anyway.  Recent regression, will try to fix...
-    int tmpStatus = 0;
-    if (status == NULL)
-    {
-        status = &tmpStatus;
-    }
-
     (void) rbg_protect(&data, status);
 }
 
 // rb_intern - can technically run out of IDs....
-ID rbg_intern_protect(const char * _Nonnull name, int * _Nullable status)
+ID rbg_intern_protect(const char * _Nonnull name, int * _Nonnull status)
 {
     Rbg_protect_data data = { .job = RBG_JOB_INTERN, .internName = name };
     return (ID) rbg_protect(&data, status);
 }
 
 // rb_const_get - raises if not found
-VALUE rbg_const_get_protect(VALUE value, ID id, int * _Nullable status)
+VALUE rbg_const_get_protect(VALUE value, ID id, int * _Nonnull status)
 {
     Rbg_protect_data data = { .job = RBG_JOB_CONST_GET, .value = value, .id = id };
     return rbg_protect(&data, status);
 }
 
 // rb_const_get_at - raises if not found
-VALUE rbg_const_get_at_protect(VALUE value, ID id, int * _Nullable status)
+VALUE rbg_const_get_at_protect(VALUE value, ID id, int * _Nonnull status)
 {
     Rbg_protect_data data = { .job = RBG_JOB_CONST_GET_AT, .value = value, .id = id };
     return rbg_protect(&data, status);
 }
 
 // rb_inspect - raises if can't get a string out
-VALUE rbg_inspect_protect(VALUE value, int * _Nullable status)
+VALUE rbg_inspect_protect(VALUE value, int * _Nonnull status)
 {
     return rb_protect(rb_inspect, value, status);
 }
@@ -229,7 +220,7 @@ VALUE rbg_inspect_protect(VALUE value, int * _Nullable status)
 // rb_funcallv - run arbitrary code
 VALUE rbg_funcallv_protect(VALUE value, ID id,
                            int argc, const VALUE * _Nonnull argv,
-                           int * _Nullable status)
+                           int * _Nonnull status)
 {
     Rbg_protect_data data = { .job = RBG_JOB_FUNCALLV, .value = value, .id = id,
                               .argc = argc, .argv = argv };
@@ -239,7 +230,7 @@ VALUE rbg_funcallv_protect(VALUE value, ID id,
 // rb_yield - run arbitrary code
 VALUE rbg_yield_values(int argc,
                        const VALUE * _Nonnull argv,
-                       int * _Nullable status)
+                       int * _Nonnull status)
 {
     Rbg_protect_data data = { .job = RBG_JOB_YIELD, .argc = argc, .argv = argv };
     return rbg_protect(&data, status);
@@ -249,7 +240,7 @@ VALUE rbg_yield_values(int argc,
 VALUE rbg_block_call_pvoid_protect(VALUE value, ID id,
                                    int argc, const VALUE * _Nonnull argv,
                                    void * _Nonnull context,
-                                   int * _Nullable status)
+                                   int * _Nonnull status)
 {
     Rbg_protect_data data = { .job = RBG_JOB_BLOCK_CALL_PVOID, .value = value, .id = id,
                               .argc = argc, .argv = argv,
@@ -261,7 +252,7 @@ VALUE rbg_block_call_pvoid_protect(VALUE value, ID id,
 VALUE rbg_block_call_value_protect(VALUE value, ID id,
                                    int argc, const VALUE * _Nonnull argv,
                                    VALUE context,
-                                   int * _Nullable status)
+                                   int * _Nonnull status)
 {
     Rbg_protect_data data = { .job = RBG_JOB_BLOCK_CALL_VALUE, .value = value, .id = id,
                               .argc = argc, .argv = argv,
@@ -270,14 +261,14 @@ VALUE rbg_block_call_value_protect(VALUE value, ID id,
 }
 
 // rb_cvar_get - raises if you look at it funny
-VALUE rbg_cvar_get_protect(VALUE clazz, ID id, int * _Nullable status)
+VALUE rbg_cvar_get_protect(VALUE clazz, ID id, int * _Nonnull status)
 {
     Rbg_protect_data data = { .job = RBG_JOB_CVAR_GET, .value = clazz, .id = id };
     return rbg_protect(&data, status);
 }
 
 // rb_String - raises if it can't get a string out.
-VALUE rbg_String_protect(VALUE v, int * _Nullable status)
+VALUE rbg_String_protect(VALUE v, int * _Nonnull status)
 {
     return rb_protect(rb_String, v, status);
 }
@@ -332,21 +323,21 @@ static VALUE rbg_obj2ulong(VALUE v)
 }
 
 // rb_obj2ulong - raises if can't do conversion
-unsigned long rbg_obj2ulong_protect(VALUE v, int * _Nullable status)
+unsigned long rbg_obj2ulong_protect(VALUE v, int * _Nonnull status)
 {
     Rbg_protect_data data = { .job = RBG_JOB_TO_ULONG, .value = v };
     return rbg_protect(&data, status);
 }
 
 // rb_num2long etc. - raises if can't do conversion
-long rbg_obj2long_protect(VALUE v, int * _Nullable status)
+long rbg_obj2long_protect(VALUE v, int * _Nonnull status)
 {
     Rbg_protect_data data = { .job = RBG_JOB_TO_LONG, .value = v };
     return rbg_protect(&data, status);
 }
 
 // rb_Float - raises if can't do conversion.
-double rbg_obj2double_protect(VALUE v, int * _Nullable status)
+double rbg_obj2double_protect(VALUE v, int * _Nonnull status)
 {
     Rbg_protect_data data = { .job = RBG_JOB_TO_DOUBLE, .value = v };
     rbg_protect(&data, status);
@@ -357,7 +348,7 @@ double rbg_obj2double_protect(VALUE v, int * _Nullable status)
 VALUE rbg_proc_call_with_block_protect(VALUE value,
                                        int argc, const VALUE * _Nonnull argv,
                                        VALUE blockArg,
-                                       int * _Nullable status)
+                                       int * _Nonnull status)
 {
     Rbg_protect_data data = { .job = RBG_JOB_PROC_CALL, .value = value,
         .argc = argc, .argv = argv, .blockArg = blockArg };
@@ -365,7 +356,7 @@ VALUE rbg_proc_call_with_block_protect(VALUE value,
 }
 
 /// rb_Array - raises if conversion goes wrong
-VALUE rbg_Array_protect(VALUE v, int * _Nullable status)
+VALUE rbg_Array_protect(VALUE v, int * _Nonnull status)
 {
     return rb_protect(rb_Array, v, status);
 }
@@ -412,7 +403,7 @@ static VALUE rbg_Hash(VALUE value)
 }
 
 /// rb_Hash (sort of) - raises if conversion goes wrong
-VALUE rbg_Hash_protect(VALUE v, int * _Nullable status)
+VALUE rbg_Hash_protect(VALUE v, int * _Nonnull status)
 {
     return rb_protect(rbg_Hash, v, status);
 }
@@ -498,8 +489,10 @@ static VALUE rbg_handle_return_value(Rbg_return_value * _Nonnull rv)
         rb_iter_break_value(rv->value);   /* does not return */
     case RBG_RT_RAISE:
         rb_exc_raise(rv->value);    /* does not return */
+    case RBG_RT_JUMP:
+        rb_jump_tag((int)rv->value);    /* does not return */
     default:
-        rb_raise(rb_eRuntimeError, "Mangled Swift retval from proc: %u", rv->type);
+        rb_raise(rb_eRuntimeError, "Mangled Swift retval: %u", rv->type);
     }
 }
 

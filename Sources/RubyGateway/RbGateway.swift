@@ -295,8 +295,8 @@ extension RbGateway {
     ///   Don't be tempted by `rb_eval_string_wrap()`, it is broken. #10466.
     public func eval(ruby: String) throws -> RbObject {
         try setup()
-        return RbObject(rubyValue: try RbVM.doProtect {
-            rb_eval_string_protect(ruby, nil)
+        return RbObject(rubyValue: try RbVM.doProtect { tag in
+            rb_eval_string_protect(ruby, &tag)
         })
     }
 
@@ -324,8 +324,8 @@ extension RbGateway {
     public func load(filename: String, wrap: Bool = false) throws {
         try setup()
         return try RbObject(filename).withRubyValue { rubyValue in
-            try RbVM.doProtect {
-                rbg_load_protect(rubyValue, wrap ? 1 : 0, nil)
+            try RbVM.doProtect { tag in
+                rbg_load_protect(rubyValue, wrap ? 1 : 0, &tag)
             }
         }
     }

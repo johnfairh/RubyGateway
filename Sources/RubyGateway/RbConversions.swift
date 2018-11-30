@@ -63,17 +63,22 @@ extension String: RbObjectConvertible {
     /// `to_str` followed by `to_s`.
     ///
     /// See `RbError.history` to find out why a conversion failed.
-    public init?(_ value: RbObject) {
-        let stringVal = value.withRubyValue { rbg_String_protect($0, nil) }
-        if RbException.ignoreAnyPending() {
+    public init?(_ object: RbObject) {
+        do {
+            let stringVal = try object.withRubyValue { objValue in
+                try RbVM.doProtect { tag in
+                    rbg_String_protect(objValue, &tag)
+                }
+            }
+
+            let rubyLength = RSTRING_LEN(stringVal)
+            let rubyPtr = RSTRING_PTR(stringVal)
+            let rubyData = Data(bytes: rubyPtr, count: rubyLength)
+
+            self.init(data: rubyData, encoding: .utf8)
+        } catch {
             return nil
         }
-
-        let rubyLength = RSTRING_LEN(stringVal)
-        let rubyPtr = RSTRING_PTR(stringVal)
-        let rubyData = Data(bytes: rubyPtr, count: rubyLength)
-
-        self.init(data: rubyData, encoding: .utf8)
     }
 
     /// A Ruby object for the string.
@@ -136,9 +141,14 @@ extension UInt: RbObjectConvertible {
     /// See `RbError.history` to find out why a conversion failed.
     ///
     /// If the Ruby value is floating-point then the integer part is used.
-    public init?(_ value: RbObject) {
-        self = value.withRubyValue { rbg_obj2ulong_protect($0, nil) }
-        if RbException.ignoreAnyPending() {
+    public init?(_ object: RbObject) {
+        do {
+            self = try object.withRubyValue { objValue in
+                try RbVM.doProtect { tag in
+                    rbg_obj2ulong_protect(objValue, &tag)
+                }
+            }
+        } catch {
             return nil
         }
     }
@@ -164,9 +174,14 @@ extension Int: RbObjectConvertible {
     /// See `RbError.history` to find out why a conversion failed.
     ///
     /// If the Ruby value is floating-point then the integer part is used.
-    public init?(_ value: RbObject) {
-        self = value.withRubyValue { rbg_obj2long_protect($0, nil) }
-        if RbException.ignoreAnyPending() {
+    public init?(_ object: RbObject) {
+        do {
+            self = try object.withRubyValue { objValue in
+                try RbVM.doProtect { tag in
+                    rbg_obj2long_protect(objValue, &tag)
+                }
+            }
+        } catch {
             return nil
         }
     }
@@ -201,9 +216,14 @@ extension Double: RbObjectConvertible {
     /// See `RbError.history` to find out why a conversion failed.
     ///
     /// Flavors of NaN are not preserved across the Ruby<->Swift interface.
-    public init?(_ value: RbObject) {
-        self = value.withRubyValue { rbg_obj2double_protect($0, nil) }
-        if RbException.ignoreAnyPending() {
+    public init?(_ object: RbObject) {
+        do {
+            self = try object.withRubyValue { objValue in
+                try RbVM.doProtect { tag in
+                    rbg_obj2double_protect(objValue, &tag)
+                }
+            }
+        } catch {
             return nil
         }
     }
@@ -239,20 +259,24 @@ extension Array: RbObjectConvertible where Element: RbObjectConvertible {
     /// type.
     ///
     /// See `RbError.history` to find out why a conversion failed.
-    public init?(_ value: RbObject) {
+    public init?(_ object: RbObject) {
         self.init()
 
-        let aryValue = value.withRubyValue { rbg_Array_protect($0, nil) }
-        if RbException.ignoreAnyPending() {
-            return nil
-        }
-
-        for i in 0..<rb_array_len(aryValue) {
-            let eleValue = rb_ary_entry(aryValue, i)
-            guard let element = Element(RbObject(rubyValue: eleValue)) else {
-                return nil
+        do {
+            let aryValue = try object.withRubyValue { objValue in
+                try RbVM.doProtect { tag in
+                    rbg_Array_protect(objValue, &tag)
+                }
             }
-            append(element)
+            for i in 0..<rb_array_len(aryValue) {
+                let eleValue = rb_ary_entry(aryValue, i)
+                guard let element = Element(RbObject(rubyValue: eleValue)) else {
+                    return nil
+                }
+                append(element)
+            }
+        } catch {
+            return nil
         }
     }
 
@@ -322,13 +346,14 @@ extension Dictionary: RbObjectConvertible where Key: RbObjectConvertible, Value:
     /// Fails if more than one of the Ruby hash keys convert to the same Swift value.
     ///
     /// See `RbError.history` to find out why a conversion failed.
-    public init?(_ value: RbObject) {
-        let hashObj = RbObject(rubyValue: value.withRubyValue { rbg_Hash_protect($0, nil) })
-        if RbException.ignoreAnyPending() {
-            return nil
-        }
-        // oh boy
+    public init?(_ object: RbObject) {
         do {
+            let hashObj = RbObject(rubyValue: try object.withRubyValue { objValue in
+                try RbVM.doProtect { tag in
+                    rbg_Hash_protect(objValue, &tag)
+                }
+            })
+            // oh boy
             var dict: [Key: Value] = [:] // closure cannot capture mutable self
             try hashObj.call("each") { args in
                 // Hash#each has way too much magic: undocumentedly it tries to peek at the block

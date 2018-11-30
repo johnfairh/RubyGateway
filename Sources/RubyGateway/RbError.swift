@@ -38,7 +38,18 @@ public enum RbError: Error {
     case duplicateKwArg(String)
 
     /// A Ruby exception occurred.
+    ///
+    /// You are free to ignore or handle this error.  If your code has been
+    /// invoked from Ruby then you can also re-throw the error to pass it back
+    /// down the stack.
     case rubyException(RbException)
+
+    /// Some Ruby flow control has happened.
+    ///
+    /// Raised when you invoke a block from Swift and the block does `return` or `break`.
+    /// You must do any Swift-side cleanup and re-throw the error, otherwise the Ruby
+    /// runtime will become confused at best.
+    case rubyJump(Int32)
 
     // MARK: - Error History
 
@@ -123,6 +134,8 @@ extension RbError: CustomStringConvertible {
             return "Duplicate keyword arg \(key) on call()."
         case let .rubyException(exn):
             return "Ruby exception: \(exn)"
+        case let .rubyJump(tag):
+            return "Ruby jump flow control: \(tag)"
         }
     }
 }
@@ -167,17 +180,8 @@ public struct RbException: CustomStringConvertible, Error {
     /// The underlying Ruby exception object
     public let exception: RbObject
 
-    /// Initialize a new `RbException` if Ruby has a pending exception.
-    /// Clears any such pending Ruby exception, transferring responsibility
-    /// to the Swift domain.
-    init?() {
-        let exceptionObj = RbObject(rubyValue: rb_errinfo())
-        guard !exceptionObj.isNil else {
-            return nil
-        }
-        rb_set_errinfo(Qnil)
-
-        self.exception = exceptionObj
+    init(exception: RbObject) {
+        self.exception = exception
     }
 
     /// Construct a new Ruby `RuntimeError` exception with the given message.
@@ -188,16 +192,6 @@ public struct RbException: CustomStringConvertible, Error {
             RbObject(rubyValue: rb_exc_new(rb_eRuntimeError, cstr, message.utf8.count))
         }
         RbError.history.record(exception: self)
-    }
-
-    /// Check + clear exception status.  Record any exception so it can
-    /// be inspected later on.  Return whether an exception was swallowed.
-    static func ignoreAnyPending() -> Bool {
-        guard let exception = RbException() else {
-            return false
-        }
-        RbError.history.record(exception: exception)
-        return true
     }
 
     /// The backtrace from the Ruby exception
@@ -232,6 +226,8 @@ extension UnsafeMutablePointer where Pointee == Rbg_return_value {
         } catch RbError.rubyException(let exn) {
             // RubyGateway/Ruby code threw exception
             set(type: RBG_RT_RAISE, value: exn.exception.withRubyValue { $0 })
+        } catch RbError.rubyJump(let tag) {
+            set(type: RBG_RT_JUMP, value: VALUE(tag))
         } catch let exn as RbException {
             // User Swift code generated Ruby exception
             set(type: RBG_RT_RAISE, value: exn.exception.withRubyValue { $0 })

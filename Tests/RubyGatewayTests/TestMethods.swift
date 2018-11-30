@@ -165,6 +165,26 @@ class TestMethods: XCTestCase {
         }
     }
 
+    // Break from block
+    func testBlockBreakReturn() {
+        doErrorFree {
+            try Ruby.require(filename: Helpers.fixturePath("swift_methods.rb"))
+
+            try Ruby.defineGlobalFunction(name: "swift_calls_block") { _, method in
+                try method.needsBlock()
+                let _ = try method.yieldBlock()
+                return RbObject(100)
+            }
+
+            let testSuffixes = [100, 42, 200, 44]
+            try testSuffixes.forEach { val in
+                let funcName = "ruby_should_return_\(val)"
+                let result = try Ruby.call(funcName)
+                XCTAssertEqual(val, Int(result))
+            }
+        }
+    }
+
     static var allTests = [
         ("testFixedArgsRoundTrip", testFixedArgsRoundTrip),
         ("testVarArgsRoundTrip", testVarArgsRoundTrip),
@@ -172,6 +192,7 @@ class TestMethods: XCTestCase {
         ("testInvalidArgsCount", testInvalidArgsCount),
         ("testGoodBlock", testGoodBlock),
         ("testErrorNoBlock", testErrorNoBlock),
-        ("testBlockArgs", testBlockArgs)
+        ("testBlockArgs", testBlockArgs),
+        ("testBlockBreakReturn", testBlockBreakReturn)
     ]
 }

@@ -168,8 +168,8 @@ final class RbVM {
             if let rbId = idCache[name] {
                 return rbId
             }
-            let rbId = try RbVM.doProtect {
-                rbg_intern_protect(name, nil)
+            let rbId = try RbVM.doProtect { tag in
+                rbg_intern_protect(name, &tag)
             }
             idCache[name] = rbId
             return rbId
@@ -177,24 +177,24 @@ final class RbVM {
     }
 
     /// Helper to call a protected Ruby API function and propagate any Ruby exception
-    /// as a Swift `RbException`.
-    static func doProtect<T>(call: () -> T) throws -> T {
-        // Caught between two stools right now about exception detection etc.
-        // All the _protect() APIs have the 'status' out-param which is set to
-        // the Ruby TAG value.  This appears to be redundant in that we can just
-        // check `rb_errinfo`.
-        //
-        // BUT when we start calling Ruby proc's from Swift, I have a feeling that
-        // we will get TAG_RETURN etc. with Qnil errinfo and have to figure out how
-        // to propagate that nonsense back to Ruby or wherever.
-        //
-        // So, all TBD until we have proc's working - for now we don't pass an Int32*
-        // through here and the C layer just gets NULL for the param.
-        let result = call()
+    /// or unusual flow control as a Swift `RbException`.
+    static func doProtect<T>(call: (inout Int32) -> T) throws -> T {
+        var tag = Int32(0)
+        let result = call(&tag)
 
-        if let exception = RbException() {
-            try RbError.raise(error: .rubyException(exception))
+        let errorObj = RbObject(rubyValue: rb_errinfo())
+        guard !errorObj.isNil else {
+            return result
         }
-        return result
+
+        switch errorObj.rubyType {
+        case .T_OBJECT:
+            // Normal case, a Ruby exception
+            rb_set_errinfo(Qnil)
+            try RbError.raise(error: .rubyException(RbException(exception: errorObj)))
+        default:
+            // Probably T_IMEMO for throw/break/return/etc.
+            try RbError.raise(error: .rubyJump(tag))
+        }
     }
 }

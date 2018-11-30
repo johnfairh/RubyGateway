@@ -168,13 +168,13 @@ extension RbObjectAccess {
             let rbId = try Ruby.getID(for: name)
             if nextValue == getValue() {
                 // For the first item in the path, allow a hit here or above in the hierarchy
-                nextValue = try RbVM.doProtect {
-                    rbg_const_get_protect(nextValue, rbId, nil)
+                nextValue = try RbVM.doProtect { tag in
+                    rbg_const_get_protect(nextValue, rbId, &tag)
                 }
             } else {
                 // Once found a place to start, insist on stepping down from there.
-                nextValue = try RbVM.doProtect {
-                    rbg_const_get_at_protect(nextValue, rbId, nil)
+                nextValue = try RbVM.doProtect { tag in
+                    rbg_const_get_at_protect(nextValue, rbId, &tag)
                 }
             }
         }
@@ -404,8 +404,8 @@ extension RbObjectAccess {
                                             block: blockValue)
                 })
             }
-            return RbObject(rubyValue: try RbVM.doProtect {
-                rbg_funcallv_protect(getValue(), id, Int32(argValues.count), argValues, nil)
+            return RbObject(rubyValue: try RbVM.doProtect { tag in
+                rbg_funcallv_protect(getValue(), id, Int32(argValues.count), argValues, &tag)
             })
         }
     }
@@ -501,8 +501,8 @@ extension RbObjectAccess {
 
         let id = try Ruby.getID(for: name)
 
-        return try RbObject(rubyValue: RbVM.doProtect {
-            rbg_cvar_get_protect(getValue(), id, nil)
+        return try RbObject(rubyValue: RbVM.doProtect { tag in
+            rbg_cvar_get_protect(getValue(), id, &tag)
         })
     }
 

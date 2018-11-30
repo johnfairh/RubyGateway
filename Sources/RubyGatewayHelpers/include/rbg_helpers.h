@@ -22,29 +22,29 @@ typedef unsigned long VALUE;
 typedef VALUE ID;
 
 /// Safely call `rb_load` and report exception status.
-void rbg_load_protect(VALUE fname, int wrap, int * _Nullable status);
+void rbg_load_protect(VALUE fname, int wrap, int * _Nonnull status);
 
 /// Safely call `rb_intern` and report exception status.
-ID rbg_intern_protect(const char * _Nonnull name, int * _Nullable status);
+ID rbg_intern_protect(const char * _Nonnull name, int * _Nonnull status);
 
 /// Safely call `rb_const_get_at` and report exception status.
-VALUE rbg_const_get_protect(VALUE value, ID id, int * _Nullable status);
+VALUE rbg_const_get_protect(VALUE value, ID id, int * _Nonnull status);
 
 /// Safely call `rb_const_get_at` and report exception status.
-VALUE rbg_const_get_at_protect(VALUE value, ID id, int * _Nullable status);
+VALUE rbg_const_get_at_protect(VALUE value, ID id, int * _Nonnull status);
 
 /// Safely call `rb_inspect` and report exception status.
-VALUE rbg_inspect_protect(VALUE value, int * _Nullable status);
+VALUE rbg_inspect_protect(VALUE value, int * _Nonnull status);
 
 /// Safely call `rb_funcallv` and report exception status.
 VALUE rbg_funcallv_protect(VALUE value, ID id,
                            int argc, const VALUE * _Nonnull argv,
-                           int * _Nullable status);
+                           int * _Nonnull status);
 
 /// Safely call `rb_yield_values2` and report exception status.
 VALUE rbg_yield_values(int argc,
                        const VALUE * _Nonnull argv,
-                       int * _Nullable status);
+                       int * _Nonnull status);
 
 /// Things a Swift callback can ask Ruby to do
 typedef enum {
@@ -55,7 +55,9 @@ typedef enum {
     /// Do 'break' - rare use in iterator blocks
     RBG_RT_BREAK,
     /// Do 'break' with a value - rare use in iterator blocks
-    RBG_RT_BREAK_VALUE
+    RBG_RT_BREAK_VALUE,
+    /// Continue non-local flow control (throw, return, break)
+    RBG_RT_JUMP,
 } Rbg_return_type;
 
 /// Express what a Swift callback wants Ruby to do
@@ -92,7 +94,7 @@ void rbg_register_value_block_proc_callback(Rbg_value_block_call _Nonnull);
 VALUE rbg_block_call_pvoid_protect(VALUE value, ID id,
                                    int argc, const VALUE * _Nonnull argv,
                                    void * _Nonnull context,
-                                   int * _Nullable status);
+                                   int * _Nonnull status);
 
 /// Safely call `rb_block_call`, invoking the registered value-context
 /// block handler with the given context as the block.
@@ -100,19 +102,19 @@ VALUE rbg_block_call_pvoid_protect(VALUE value, ID id,
 VALUE rbg_block_call_value_protect(VALUE value, ID id,
                                    int argc, const VALUE * _Nonnull argv,
                                    VALUE context,
-                                   int * _Nullable status);
+                                   int * _Nonnull status);
 
 /// Safely call `rb_proc_call_with_block` and report exception status.
 VALUE rbg_proc_call_with_block_protect(VALUE value,
                                        int argc, const VALUE * _Nonnull argv,
                                        VALUE blockArg,
-                                       int * _Nullable status);
+                                       int * _Nonnull status);
 
 /// Safely call `rb_cvar_get` and report exception status.
-VALUE rbg_cvar_get_protect(VALUE clazz, ID id, int * _Nullable status);
+VALUE rbg_cvar_get_protect(VALUE clazz, ID id, int * _Nonnull status);
 
 /// Safely call `rb_String` and report exception status.
-VALUE rbg_String_protect(VALUE v, int * _Nullable status);
+VALUE rbg_String_protect(VALUE v, int * _Nonnull status);
 
 /// String APIs with un-Swift requirements
 long                  rbg_RSTRING_LEN(VALUE v);
@@ -120,19 +122,19 @@ const char * _Nonnull rbg_RSTRING_PTR(VALUE v);
 
 /// Safely call `rb_num2ulong(rb_Integer)` and report exception status.
 /// Additionally, raise an exception if the number is negative.
-unsigned long rbg_obj2ulong_protect(VALUE v, int * _Nullable status);
+unsigned long rbg_obj2ulong_protect(VALUE v, int * _Nonnull status);
 
 /// Safely call `rb_num2long(rb_Integer)` and report exception status.
-long rbg_obj2long_protect(VALUE v, int * _Nullable status);
+long rbg_obj2long_protect(VALUE v, int * _Nonnull status);
 
 /// Safely call `rb_num2dbl(rb_Float)` and report exception status.
-double rbg_obj2double_protect(VALUE v, int * _Nullable status);
+double rbg_obj2double_protect(VALUE v, int * _Nonnull status);
 
 /// Safely call `rb_Array` and report exception status
-VALUE rbg_Array_protect(VALUE v, int * _Nullable status);
+VALUE rbg_Array_protect(VALUE v, int * _Nonnull status);
 
 /// Safely call `rb_Hash` (sort of) and report exception status
-VALUE rbg_Hash_protect(VALUE v, int * _Nullable status);
+VALUE rbg_Hash_protect(VALUE v, int * _Nonnull status);
 
 /// Callback into Swift code for gvar access
 typedef VALUE (*Rbg_gvar_get_call)(ID id);
@@ -188,9 +190,6 @@ typedef void (*Rbg_method_call)(VALUE,                  // symbol
                                 const VALUE * _Nonnull, // argv
                                 Rbg_return_value * _Nonnull);
 void rbg_register_method_callback(Rbg_method_call _Nonnull);
-
-/// Specify to allow any number of args and handle at runtime
-#define RBG_METHOD_ARGC_DYNAMIC ((int)-1)
 
 /// Define a global function
 Rbg_method_id rbg_define_global_function(const char * _Nonnull name);

@@ -284,8 +284,8 @@ extension RbObject: CustomStringConvertible,
     ///
     /// This is the result of `inspect` with a fallback to `description`.
     public var debugDescription: String {
-        if let value = try? RbVM.doProtect { () -> VALUE in
-               rbg_inspect_protect(rubyValue, nil)
+        if let value = try? RbVM.doProtect { tag in
+               rbg_inspect_protect(rubyValue, &tag)
            },
            let str = String(RbObject(rubyValue: value)) {
             return str

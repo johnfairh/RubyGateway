@@ -202,8 +202,8 @@ public struct RbMethod {
     public func yieldBlock(args: [RbObjectConvertible?] = []) throws -> RbObject {
         let argObjects = args.map { $0.rubyObject }
         return try argObjects.withRubyValues { argValues in
-            try RbVM.doProtect {
-                RbObject(rubyValue: rbg_yield_values(Int32(argValues.count), argValues, nil))
+            try RbVM.doProtect { tag in
+                RbObject(rubyValue: rbg_yield_values(Int32(argValues.count), argValues, &tag))
             }
         }
     }

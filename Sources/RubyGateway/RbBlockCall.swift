@@ -136,8 +136,8 @@ private func rbproc_value_block_callback(context: VALUE,
                                          blockArg: VALUE,
                                          returnValue: UnsafeMutablePointer<Rbg_return_value>) {
     returnValue.setFrom {
-        try RbVM.doProtect {
-            rbg_proc_call_with_block_protect(context, argc, argv, blockArg, nil)
+        try RbVM.doProtect { tag in
+            rbg_proc_call_with_block_protect(context, argc, argv, blockArg, &tag)
         }
     }
 }
@@ -160,10 +160,10 @@ internal enum RbBlock {
         let _ = initOnce
         let context = RbBlockContext(blockCall)
         return (context, try context.withRaw { rawContext in
-            try RbVM.doProtect {
+            try RbVM.doProtect { tag in
                 rbg_block_call_pvoid_protect(value, methodId,
                                              Int32(argValues.count), argValues,
-                                             rawContext, nil)
+                                             rawContext, &tag)
             }
         })
     }
@@ -174,10 +174,10 @@ internal enum RbBlock {
                                      argValues: [VALUE],
                                      block: VALUE) throws -> VALUE {
         let _ = initOnce
-        return try RbVM.doProtect {
+        return try RbVM.doProtect { tag in
             rbg_block_call_value_protect(value, methodId,
                                          Int32(argValues.count), argValues,
-                                         block, nil)
+                                         block, &tag)
         }
     }
 }
