@@ -165,7 +165,7 @@ class TestMethods: XCTestCase {
         }
     }
 
-    // Break from block
+    // break / return / next from block
     func testBlockBreakReturn() {
         doErrorFree {
             try Ruby.require(filename: Helpers.fixturePath("swift_methods.rb"))
@@ -176,7 +176,12 @@ class TestMethods: XCTestCase {
                 return RbObject(100)
             }
 
-            let testSuffixes = [100, 42, 200, 44]
+            try Ruby.defineGlobalFunction(name: "swift_returns_block") { _, method in
+                try method.needsBlock()
+                return try method.yieldBlock()
+            }
+
+            let testSuffixes = [100, 42, 200, 44, 22, 24]
             try testSuffixes.forEach { val in
                 let funcName = "ruby_should_return_\(val)"
                 let result = try Ruby.call(funcName)
