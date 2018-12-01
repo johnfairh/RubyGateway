@@ -56,7 +56,6 @@ class TestProcs: XCTestCase {
     /// Proc detection
     func testNotProc() {
         let proc = RbObject() { args in .nilObject }
-        print(proc)
         let object = proc.rubyObject
         doErrorFree {
             try object.checkIsProc()
@@ -76,11 +75,10 @@ class TestProcs: XCTestCase {
             return
         }
 
-        guard let symproc = RbProc(RbSymbol("something").rubyObject) else {
+        guard let _ = RbProc(RbSymbol("something").rubyObject) else {
             XCTFail("Couldn't recognize symbol as to_proc supporting")
             return
         }
-        print(symproc)
     }
 
     /// Procs from Ruby objects - success
