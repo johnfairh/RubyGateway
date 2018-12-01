@@ -29,7 +29,7 @@ class TestMethods: XCTestCase {
                 return RbObject(retValue)
             }
 
-            let actualRetValue = try Ruby.eval(ruby: "\(funcName)(\"\(argValue)\")")
+            let actualRetValue = try Ruby.call(funcName, args: [argValue])
 
             XCTAssertTrue(visited)
             XCTAssertEqual(retValue, Double(actualRetValue))
@@ -49,7 +49,7 @@ class TestMethods: XCTestCase {
                 return RbObject(retValue)
             }
 
-            let actualRetValue = try Ruby.eval(ruby: "\(funcName)()")
+            let actualRetValue = try Ruby.call(funcName)
 
             XCTAssertTrue(visited)
             XCTAssertEqual(retValue, Double(actualRetValue))
@@ -68,7 +68,7 @@ class TestMethods: XCTestCase {
             }
 
             doError {
-                let _ = try Ruby.eval(ruby: "\(funcName)()")
+                let _ = try Ruby.call(funcName)
             }
         }
     }
@@ -135,6 +135,31 @@ class TestMethods: XCTestCase {
         }
     }
 
+    // Manual block invocation
+    func testManualBlock() {
+        doErrorFree {
+            let funcName = "myGlobal"
+            var funcCalled = false
+            var blockCalled = false
+
+            try Ruby.defineGlobalFunction(name: funcName) { _, method in
+                let block = try method.captureBlock()
+                try block.call("call")
+                funcCalled = true
+                return .nilObject
+            }
+
+            try Ruby.call(funcName) { blockArgs in
+                blockCalled = true
+                XCTAssertEqual(0, blockArgs.count)
+                return .nilObject
+            }
+
+            XCTAssertTrue(funcCalled)
+            XCTAssertTrue(blockCalled)
+        }
+    }
+
     // Block with args
     func testBlockArgs() {
         doErrorFree {
@@ -197,6 +222,7 @@ class TestMethods: XCTestCase {
         ("testInvalidArgsCount", testInvalidArgsCount),
         ("testGoodBlock", testGoodBlock),
         ("testErrorNoBlock", testErrorNoBlock),
+        ("testManualBlock", testManualBlock),
         ("testBlockArgs", testBlockArgs),
         ("testBlockBreakReturn", testBlockBreakReturn)
     ]

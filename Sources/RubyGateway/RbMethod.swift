@@ -199,6 +199,9 @@ public struct RbMethod {
     /// - parameter args: The arguments to pass to the block, none by default.
     /// - returns: The value returned by the block.
     /// - throws: `RbError.rubyException(_:)` if the block raises an exception.
+    ///           `RbError.rubyJump(_:)` if the block does `return` or `break`.
+    ///           You should not attempt to handle `rubyJump` errors: rethrow them
+    ///           back to Ruby as soon as possible.
     public func yieldBlock(args: [RbObjectConvertible?] = []) throws -> RbObject {
         let argObjects = args.map { $0.rubyObject }
         return try argObjects.withRubyValues { argValues in
@@ -206,6 +209,18 @@ public struct RbMethod {
                 RbObject(rubyValue: rbg_yield_values(Int32(argValues.count), argValues, &tag))
             }
         }
+    }
+
+    /// Get the function's block as a Proc.
+    ///
+    /// If you want to just call the block then use `yieldBlock(args:)`.  Use this method
+    /// to store the block or do things to it.
+    ///
+    /// - returns: an `RbObject` for a `Proc` object wrapping the passed block.
+    /// - throws: `RbError.rubyException(_:)` if the function does not have a block.
+    public func captureBlock() throws -> RbObject {
+        try needsBlock()
+        return RbObject(rubyValue: rb_block_proc())
     }
 }
 
