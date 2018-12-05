@@ -172,8 +172,9 @@ private struct RbMethodDispatch {
 
 /// Structure passed in to Swift implementations of Ruby functions offering useful services.
 public struct RbMethod {
-
     /// The raw Ruby objects passed as args to the function.
+    ///
+    /// You normally don't access this, use `getArgs(spec:)` instead.
     public let argv: [RbObject]
 
     init(argv: [RbObject]) {
@@ -221,6 +222,138 @@ public struct RbMethod {
     public func captureBlock() throws -> RbObject {
         try needsBlock()
         return RbObject(rubyValue: rb_block_proc())
+    }
+
+    /// Decode the arguments passed to a function and make them available.
+    ///
+    /// Includes all error checking from `rb_scan_args` and `rb_get_kwargs`.
+    ///
+    /// - parameter spec: A description of the style of arguments taken by
+    ///                   the function along with default values.
+    /// - throws: `RbError.RbException(_:)` if the provided arguments do
+    ///           not match the spec.
+    /// - returns: The arguments to the function, decoded.  This is guaranteed
+    ///            to be entirely consistent with `spec`.
+    public func getArgs(spec: RbMethodArgsSpec) throws -> RbMethodArgs {
+        return RbMethodArgs()
+    }
+}
+
+/// The various types of argument passed to a Ruby function implemented in Swift.
+///
+/// From the body of such a function you access this via `RbMethod.getArgs(spec:)`.
+public struct RbMethodArgs {
+    /// The mandatory positional arguments to the function, comprising the
+    /// leading mandatory arguments followed by the trailing mandatory arguments
+    public let mandatory: [RbObject]
+
+    /// The optional positional arguments to the function.  If caller did not
+    /// provide a value then it is pulled from the `RbMethodArgsSpec`.
+    public let optional: [RbObject]
+
+    /// The splatted (variable length) arguments to the function.
+    public let splatted: [RbObject]
+
+    /// The keyword arguments to the function.  If caller omitted a keyword argument
+    /// with a default value then the value is pulled from the `RbMethodArgsSpec`.
+    public let keyword: [String : RbObject]
+
+    init() {
+        mandatory = []
+        optional = []
+        splatted = []
+        keyword = [:]
+    }
+}
+
+/// A description of how a Ruby function implemented in Swift is supposed to be called.
+///
+/// Ruby supports several different ways of passing arguments to a function.  A function
+/// can support a mixture of positional, keyword, and variable-length (splatted) arguments.
+///
+/// You should create one of these `RbMethodArgsSpec` objects per function and pass it
+/// into `RbMethod.getArgs(spec:)` each time the function is called to parse the arguments
+/// and get access to them.
+public struct RbMethodArgsSpec {
+    public let leadingMandatoryCount: Int
+    public let optionals: [RbObject]
+    public var optionalCount: Int {
+        return optionals.count
+    }
+    public let supportsSplat: Bool
+    public let trailingMandatoryCount: Int
+    public let mandatoryKeywords: [String]
+    public let optionalKeywords: [String: RbObject]
+    public var supportsKeywords: Bool {
+        return mandatoryKeywords.count > 0 || optionalKeywords.count > 0
+    }
+
+    init(leadingMandatoryCount: Int,
+         optionals: [RbObject],
+         supportsSplat: Bool,
+         trailingMandatoryCount: Int,
+         mandatoryKeywords: [String],
+         optionalKeywords: [String: RbObject]) {
+        self.leadingMandatoryCount = leadingMandatoryCount
+        self.optionals = optionals
+        self.supportsSplat = supportsSplat
+        self.trailingMandatoryCount = trailingMandatoryCount
+        self.mandatoryKeywords = mandatoryKeywords
+        self.optionalKeywords = optionalKeywords
+    }
+
+    public init(leadingMandatoryCount: Int) {
+        self.leadingMandatoryCount = leadingMandatoryCount
+        self.optionals = []
+        self.supportsSplat = false
+        self.trailingMandatoryCount = 0
+        self.mandatoryKeywords = []
+        self.optionalKeywords = [:]
+    }
+
+    public func with(optionalArgs: [RbObjectConvertible?]) -> RbMethodArgsSpec {
+        return RbMethodArgsSpec(leadingMandatoryCount: self.leadingMandatoryCount,
+                                optionals: optionalArgs.map { $0.rubyObject },
+                                supportsSplat: self.supportsSplat,
+                                trailingMandatoryCount: self.trailingMandatoryCount,
+                                mandatoryKeywords: self.mandatoryKeywords,
+                                optionalKeywords: self.optionalKeywords)
+    }
+
+    public func withSplattedArgs() -> RbMethodArgsSpec {
+        return RbMethodArgsSpec(leadingMandatoryCount: self.leadingMandatoryCount,
+                                optionals: self.optionals,
+                                supportsSplat: true,
+                                trailingMandatoryCount: self.trailingMandatoryCount,
+                                mandatoryKeywords: self.mandatoryKeywords,
+                                optionalKeywords: self.optionalKeywords)
+    }
+
+    public func with(trailingMandatoryArgs: Int) -> RbMethodArgsSpec {
+        return RbMethodArgsSpec(leadingMandatoryCount: self.leadingMandatoryCount,
+                                optionals: self.optionals,
+                                supportsSplat: self.supportsSplat,
+                                trailingMandatoryCount: trailingMandatoryArgs,
+                                mandatoryKeywords: self.mandatoryKeywords,
+                                optionalKeywords: self.optionalKeywords)
+    }
+
+    public func with(mandatoryKeywordArgs: [String]) -> RbMethodArgsSpec {
+        return RbMethodArgsSpec(leadingMandatoryCount: self.leadingMandatoryCount,
+                                optionals: self.optionals,
+                                supportsSplat: self.supportsSplat,
+                                trailingMandatoryCount: self.trailingMandatoryCount,
+                                mandatoryKeywords: mandatoryKeywordArgs,
+                                optionalKeywords: self.optionalKeywords)
+    }
+
+    public func with(optionalKeywordArgs: [String : RbObjectConvertible?]) -> RbMethodArgsSpec {
+        return RbMethodArgsSpec(leadingMandatoryCount: self.leadingMandatoryCount,
+                                optionals: self.optionals,
+                                supportsSplat: self.supportsSplat,
+                                trailingMandatoryCount: self.trailingMandatoryCount,
+                                mandatoryKeywords: self.mandatoryKeywords,
+                                optionalKeywords: optionalKeywordArgs.mapValues { $0.rubyObject })
     }
 }
 
