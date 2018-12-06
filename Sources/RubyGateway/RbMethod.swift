@@ -239,8 +239,7 @@ public struct RbMethod {
     ///            to be entirely consistent with `spec`.
     public func parseArgs(spec: RbMethodArgsSpec) throws -> RbMethodArgs {
         // This is a re-write of rb_scan_args() which is unusable from
-        // Swift (or dynamically in general?) due to heavy reliance on
-        // varargs.
+        // Swift (or dynamically in general?) due to varargs.
         guard argc >= spec.totalMandatoryCount else {
             // Not enough args.
             try spec.reportArityError(argc: argc)
@@ -266,7 +265,7 @@ public struct RbMethod {
         let tMandatory = argvCopy.popped(spec.trailingMandatoryCount)
         precondition(argvCopy.count == 0)
 
-        // Fill in defaults for optional args
+        // Fill in defaults for optional positional args
         if optional.count < spec.optionalCount {
             optional.append(contentsOf: spec.optionals[optional.count...])
         }

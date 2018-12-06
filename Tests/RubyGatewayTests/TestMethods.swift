@@ -9,6 +9,17 @@ import Foundation
 import XCTest
 import RubyGateway
 
+extension RbMethodArgsSpec {
+    func check(args: RbMethodArgs) {
+        XCTAssertEqual(totalMandatoryCount, args.mandatory.count)
+        XCTAssertEqual(optionalCount, args.optional.count)
+        if !supportsSplat {
+            XCTAssertEqual(0, args.splatted.count)
+        }
+        XCTAssertEqual(args.keyword, [:])
+    }
+}
+
 /// Swift methods
 class TestMethods: XCTestCase {
 
@@ -223,7 +234,8 @@ class TestMethods: XCTestCase {
             try argSpecs.forEach { spec in
                 let fname = "myfunc"
                 try Ruby.defineGlobalFunction(name: fname) { _, method in
-                    let _ = try method.parseArgs(spec: spec)
+                    let args = try method.parseArgs(spec: spec)
+                    spec.check(args: args)
                     return .nilObject
                 }
 
@@ -243,6 +255,120 @@ class TestMethods: XCTestCase {
         }
     }
 
+    // Optional args
+    func testOptionalArgs() {
+        doErrorFree {
+            // def f(a=3, b=4)
+            let spec_f = RbMethodArgsSpec().with(optionalArgs: [3, 4])
+            let func_f = "f"
+            var expectedArgs_f: [RbObject] = []
+            try Ruby.defineGlobalFunction(name: func_f) { _, method in
+                let args = try method.parseArgs(spec: spec_f)
+                spec_f.check(args: args)
+                XCTAssertEqual(expectedArgs_f, args.optional)
+                return .nilObject
+            }
+
+            let passedArgs = [ [],
+                               [RbObject(5)],
+                               [RbObject("A"), RbObject(1.3)] ]
+            let expectedArgs = [ [RbObject(3), RbObject(4)],
+                                 [RbObject(5), RbObject(4)],
+                                 [RbObject("A"), RbObject(1.3)] ]
+
+            try zip(passedArgs, expectedArgs).forEach { passed, expected in
+                expectedArgs_f = expected
+                try Ruby.call(func_f, args: passed)
+            }
+        }
+    }
+
+    // Splat args
+    func testSplatArgs() {
+        doErrorFree {
+            // def f(*a)
+            let spec_f = RbMethodArgsSpec().withSplattedArgs()
+            let func_f = "f"
+            var expectedArgs_f: [RbObject] = []
+            try Ruby.defineGlobalFunction(name: func_f) { _, method in
+                let args = try method.parseArgs(spec: spec_f)
+                spec_f.check(args: args)
+                XCTAssertEqual(expectedArgs_f, args.splatted)
+                return .nilObject
+            }
+
+            let passedArgs = [ [],
+                               [RbObject(5)],
+                               [RbObject("A"), RbObject(1.3)] ]
+
+            try passedArgs.forEach { args in
+                expectedArgs_f = args
+                try Ruby.call(func_f, args: args)
+            }
+        }
+    }
+
+    // Splat plus mandatory unusual error case
+    func testSplatMandatoryArgError() {
+        doErrorFree {
+            // def f(a, *b, c)
+            let spec_f = RbMethodArgsSpec(leadingMandatoryCount: 1).withSplattedArgs().with(trailingMandatoryArgs: 1)
+            let func_f = "f"
+            var a_val: RbObject = .nilObject
+            var c_val: RbObject = .nilObject
+            var b_count: Int = 0
+            try Ruby.defineGlobalFunction(name: func_f) { _, method in
+                let args = try method.parseArgs(spec: spec_f)
+                spec_f.check(args: args)
+                XCTAssertEqual(a_val, args.mandatory[0])
+                XCTAssertEqual(b_count, args.splatted.count)
+                XCTAssertEqual(c_val, args.mandatory[1])
+                return .nilObject
+            }
+
+            doError { try Ruby.call(func_f) }
+            doError { try Ruby.call(func_f, args: [1]) }
+            do {
+                a_val = 1
+                b_count = 0
+                c_val = "fish"
+                try Ruby.call(func_f, args: [a_val, c_val])
+            }
+            do {
+                a_val = 4
+                b_count = 2
+                c_val = 1.4
+                try Ruby.call(func_f, args: [a_val, 4, 8, c_val])
+            }
+        }
+    }
+
+    // Mix-up all pos arg types
+    func testAllPositionalArgTypes() {
+        doErrorFree {
+            // def f(a, b, c=8, *d, e, f)
+            let spec_f = RbMethodArgsSpec(leadingMandatoryCount: 2)
+                .with(optionalArgs: [8])
+                .withSplattedArgs()
+                .with(trailingMandatoryArgs: 2)
+            let func_f = "f"
+            let expectedM1 = [RbObject(5), RbObject(2)]
+            let expectedM2 = [RbObject(1.3), RbObject("fish")]
+            let expectedOptional = [RbObject(12)]
+            let expectedSplatted = [RbObject("bucket")]
+            try Ruby.defineGlobalFunction(name: func_f) { _, method in
+                let args = try method.parseArgs(spec: spec_f)
+                spec_f.check(args: args)
+                XCTAssertEqual(expectedM1 + expectedM2, args.mandatory)
+                XCTAssertEqual(expectedOptional, args.optional)
+                XCTAssertEqual(expectedSplatted, args.splatted)
+                return .nilObject
+            }
+
+            try Ruby.call(func_f, args: expectedM1 + expectedOptional + expectedSplatted + expectedM2)
+        }
+    }
+
     static var allTests = [
         ("testFixedArgsRoundTrip", testFixedArgsRoundTrip),
         ("testVarArgsRoundTrip", testVarArgsRoundTrip),
@@ -252,6 +378,11 @@ class TestMethods: XCTestCase {
         ("testErrorNoBlock", testErrorNoBlock),
         ("testManualBlock", testManualBlock),
         ("testBlockArgs", testBlockArgs),
-        ("testBlockBreakReturn", testBlockBreakReturn)
+        ("testBlockBreakReturn", testBlockBreakReturn),
+        ("testMandatoryArgCount", testMandatoryArgCount),
+        ("testOptionalArgs", testOptionalArgs),
+        ("testSplatArgs", testSplatArgs),
+        ("testSplatMandatoryArgError", testSplatMandatoryArgError),
+        ("testAllPositionalArgTypes", testAllPositionalArgTypes)
     ]
 }
