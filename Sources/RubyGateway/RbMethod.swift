@@ -172,10 +172,13 @@ private struct RbMethodDispatch {
 
 /// Structure passed in to Swift implementations of Ruby functions offering useful services.
 public struct RbMethod {
-    /// The raw Ruby objects passed as args to the function.
+    /// The raw Ruby objects passed as arguments to the function.
     ///
-    /// You normally don't access this, use `getArgs(spec:)` instead.
+    /// You normally don't access this, use `parseArgs(spec:)` instead.
     public let argv: [RbObject]
+    public var argc: Int {
+        return argv.count
+    }
 
     init(argv: [RbObject]) {
         self.argv = argv
@@ -230,18 +233,63 @@ public struct RbMethod {
     ///
     /// - parameter spec: A description of the style of arguments taken by
     ///                   the function along with default values.
-    /// - throws: `RbError.RbException(_:)` if the provided arguments do
-    ///           not match the spec.
+    /// - throws: `RbError.rubyException(_:)` or `RbException` if the
+    ///           provided arguments do not match the spec.
     /// - returns: The arguments to the function, decoded.  This is guaranteed
     ///            to be entirely consistent with `spec`.
-    public func getArgs(spec: RbMethodArgsSpec) throws -> RbMethodArgs {
-        return RbMethodArgs()
+    public func parseArgs(spec: RbMethodArgsSpec) throws -> RbMethodArgs {
+        // This is a re-write of rb_scan_args() which is unusable from
+        // Swift (or dynamically in general?) due to heavy reliance on
+        // varargs.
+        guard argc >= spec.totalMandatoryCount else {
+            // Not enough args.
+            try spec.reportArityError(argc: argc)
+        }
+        guard !spec.supportsKeywords else {
+            fatalError("Not implemented yet")
+        }
+
+        let passedAllOptional = argc - spec.totalMandatoryCount
+        let optionalCount = Swift.min(spec.optionalCount, passedAllOptional)
+        let splatCount = spec.supportsSplat ? (passedAllOptional - optionalCount) : 0
+
+        guard argc == spec.totalMandatoryCount + optionalCount + splatCount else {
+            // Too many args.
+            try spec.reportArityError(argc: argc)
+        }
+
+        // Slice up the argv
+        var argvCopy = argv
+        let lMandatory = argvCopy.popped(spec.leadingMandatoryCount)
+        var optional = argvCopy.popped(optionalCount)
+        let splatted = argvCopy.popped(splatCount)
+        let tMandatory = argvCopy.popped(spec.trailingMandatoryCount)
+        precondition(argvCopy.count == 0)
+
+        // Fill in defaults for optional args
+        if optional.count < spec.optionalCount {
+            optional.append(contentsOf: spec.optionals[optional.count...])
+        }
+
+        return RbMethodArgs(mandatory: Array(lMandatory) + Array(tMandatory),
+                            optional: Array(optional),
+                            splatted: Array(splatted),
+                            keyword: [:])
+    }
+}
+
+extension Array {
+    /// This must exist somewhere surely?
+    mutating func popped(_ count: Int) -> ArraySlice<Element> {
+        let prefix = self[..<count]
+        self = Array(self[count...])
+        return prefix
     }
 }
 
 /// The various types of argument passed to a Ruby function implemented in Swift.
 ///
-/// From the body of such a function you access this via `RbMethod.getArgs(spec:)`.
+/// From the body of such a function you access this via `RbMethod.parseArgs(spec:)`.
 public struct RbMethodArgs {
     /// The mandatory positional arguments to the function, comprising the
     /// leading mandatory arguments followed by the trailing mandatory arguments
@@ -257,13 +305,6 @@ public struct RbMethodArgs {
     /// The keyword arguments to the function.  If caller omitted a keyword argument
     /// with a default value then the value is pulled from the `RbMethodArgsSpec`.
     public let keyword: [String : RbObject]
-
-    init() {
-        mandatory = []
-        optional = []
-        splatted = []
-        keyword = [:]
-    }
 }
 
 /// A description of how a Ruby function implemented in Swift is supposed to be called.
@@ -272,22 +313,47 @@ public struct RbMethodArgs {
 /// can support a mixture of positional, keyword, and variable-length (splatted) arguments.
 ///
 /// You should create one of these `RbMethodArgsSpec` objects per function and pass it
-/// into `RbMethod.getArgs(spec:)` each time the function is called to parse the arguments
+/// into `RbMethod.parseArgs(spec:)` each time the function is called to parse the arguments
 /// and get access to them.
 public struct RbMethodArgsSpec {
+    /// Number of leading mandatory positional arguments
     public let leadingMandatoryCount: Int
+    /// Default values for all optional positional arguments
     public let optionals: [RbObject]
+    /// Number of optional positional arguments
     public var optionalCount: Int {
         return optionals.count
     }
+    /// Does the function support variable-length splatted arguments?
     public let supportsSplat: Bool
+    /// Number of trailing mandatory positional arguments
     public let trailingMandatoryCount: Int
+    /// Number of all mandatory positional arguments
+    public var totalMandatoryCount: Int {
+        return leadingMandatoryCount + trailingMandatoryCount
+    }
+    /// Names of mandatory keyword arguments
     public let mandatoryKeywords: [String]
+    /// Names and default values of optional keyword arguments
     public let optionalKeywords: [String: RbObject]
+    /// Does the function support keyword arguments?
     public var supportsKeywords: Bool {
         return mandatoryKeywords.count > 0 || optionalKeywords.count > 0
     }
 
+    // Call the Ruby function to report a decent error message for args mistakes.
+    func reportArityError(argc: Int) throws -> Never {
+        try RbVM.doProtect { tag in
+            rbg_error_arity(Int32(argc),
+                            Int32(totalMandatoryCount),
+                            supportsSplat ? UNLIMITED_ARGUMENTS : Int32(totalMandatoryCount + optionalCount),
+                            &tag)
+        }
+        // awkward
+        fatalError("Ought to have thrown by now")
+    }
+
+    /// Create a new function args spec.
     init(leadingMandatoryCount: Int,
          optionals: [RbObject],
          supportsSplat: Bool,
@@ -302,7 +368,10 @@ public struct RbMethodArgsSpec {
         self.optionalKeywords = optionalKeywords
     }
 
-    public init(leadingMandatoryCount: Int) {
+    /// Creates a new function arguments specification.
+    /// - parameter leadingMandatoryCount: The number of leading mandatory positional arguments,
+    ///                                    none by default.
+    public init(leadingMandatoryCount: Int = 0) {
         self.leadingMandatoryCount = leadingMandatoryCount
         self.optionals = []
         self.supportsSplat = false
@@ -311,6 +380,8 @@ public struct RbMethodArgsSpec {
         self.optionalKeywords = [:]
     }
 
+    /// Creates a new function arguments specification based on this one but also
+    /// supporting optional positional arguments.
     public func with(optionalArgs: [RbObjectConvertible?]) -> RbMethodArgsSpec {
         return RbMethodArgsSpec(leadingMandatoryCount: self.leadingMandatoryCount,
                                 optionals: optionalArgs.map { $0.rubyObject },
@@ -319,7 +390,8 @@ public struct RbMethodArgsSpec {
                                 mandatoryKeywords: self.mandatoryKeywords,
                                 optionalKeywords: self.optionalKeywords)
     }
-
+    /// Creates a new function arguments specification based on this one but also
+    /// supporting splatted / variable-length arguments.
     public func withSplattedArgs() -> RbMethodArgsSpec {
         return RbMethodArgsSpec(leadingMandatoryCount: self.leadingMandatoryCount,
                                 optionals: self.optionals,
@@ -329,6 +401,8 @@ public struct RbMethodArgsSpec {
                                 optionalKeywords: self.optionalKeywords)
     }
 
+    /// Creates a new function arguments specification based on this one but also
+    /// supporting trailing mandatory positional arguments.
     public func with(trailingMandatoryArgs: Int) -> RbMethodArgsSpec {
         return RbMethodArgsSpec(leadingMandatoryCount: self.leadingMandatoryCount,
                                 optionals: self.optionals,
@@ -338,6 +412,8 @@ public struct RbMethodArgsSpec {
                                 optionalKeywords: self.optionalKeywords)
     }
 
+    /// Creates a new function arguments specification based on this one but also
+    /// supporting mandatory keyword arguments.
     public func with(mandatoryKeywordArgs: [String]) -> RbMethodArgsSpec {
         return RbMethodArgsSpec(leadingMandatoryCount: self.leadingMandatoryCount,
                                 optionals: self.optionals,
@@ -347,6 +423,8 @@ public struct RbMethodArgsSpec {
                                 optionalKeywords: self.optionalKeywords)
     }
 
+    /// Creates a new function arguments specification based on this one but also
+    /// supporting optional keyword arguments.
     public func with(optionalKeywordArgs: [String : RbObjectConvertible?]) -> RbMethodArgsSpec {
         return RbMethodArgsSpec(leadingMandatoryCount: self.leadingMandatoryCount,
                                 optionals: self.optionals,

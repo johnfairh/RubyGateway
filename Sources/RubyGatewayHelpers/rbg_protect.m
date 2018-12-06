@@ -96,6 +96,7 @@ typedef enum {
     RBG_JOB_TO_DOUBLE,
     RBG_JOB_PROC_CALL,
     RBG_JOB_YIELD,
+    RBG_JOB_ERR_ARITY,
 } Rbg_job;
 
 typedef struct {
@@ -111,6 +112,9 @@ typedef struct {
     double        toDoubleResult;
     void         *blockContext;
     VALUE         blockArg;
+
+    int           arityMin;
+    int           arityMax;
 } Rbg_protect_data;
 
 #define RBG_PDATA_TO_VALUE(pdata) ((uintptr_t)(void *)(pdata))
@@ -171,6 +175,9 @@ static VALUE rbg_protect_thunk(VALUE value)
         break;
     case RBG_JOB_YIELD:
         rc = rb_yield_values2(d->argc, d->argv);
+        break;
+    case RBG_JOB_ERR_ARITY:
+        rb_error_arity(d->argc, d->arityMin, d->arityMax);
         break;
     }
     return rc;
@@ -406,6 +413,14 @@ static VALUE rbg_Hash(VALUE value)
 VALUE rbg_Hash_protect(VALUE v, int * _Nonnull status)
 {
     return rb_protect(rbg_Hash, v, status);
+}
+
+/// rb_error_arity - always raises an exception
+void rbg_error_arity(int argc, int min, int max, int * _Nonnull status)
+{
+    Rbg_protect_data data = { .job = RBG_JOB_ERR_ARITY,
+        .argc = argc, .arityMin = min, .arityMax = max };
+    (void) rbg_protect(&data, status);
 }
 
 //

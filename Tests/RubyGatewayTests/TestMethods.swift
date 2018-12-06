@@ -215,6 +215,34 @@ class TestMethods: XCTestCase {
         }
     }
 
+    // Mandatory arg counting
+    func testMandatoryArgCount() {
+        doErrorFree {
+            let argSpecs = [0, 1, 4].map { RbMethodArgsSpec(leadingMandatoryCount: $0) }
+
+            try argSpecs.forEach { spec in
+                let fname = "myfunc"
+                try Ruby.defineGlobalFunction(name: fname) { _, method in
+                    let _ = try method.parseArgs(spec: spec)
+                    return .nilObject
+                }
+
+                func callIt(argc: Int) throws {
+                    let argv = Array(repeating: RbObject.nilObject, count: argc)
+                    let rc = try Ruby.call(fname, args: argv)
+                    XCTAssertEqual(rc, .nilObject)
+                }
+
+                if spec.totalMandatoryCount > 0 {
+                    doError { try callIt(argc: 0) }
+                    doError { try callIt(argc: spec.totalMandatoryCount - 1) }
+                }
+                try callIt(argc: spec.totalMandatoryCount)
+                doError { try callIt(argc: spec.totalMandatoryCount + 1) }
+            }
+        }
+    }
+
     static var allTests = [
         ("testFixedArgsRoundTrip", testFixedArgsRoundTrip),
         ("testVarArgsRoundTrip", testVarArgsRoundTrip),

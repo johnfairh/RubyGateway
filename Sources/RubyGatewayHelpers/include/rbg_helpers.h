@@ -136,6 +136,9 @@ VALUE rbg_Array_protect(VALUE v, int * _Nonnull status);
 /// Safely call `rb_Hash` (sort of) and report exception status
 VALUE rbg_Hash_protect(VALUE v, int * _Nonnull status);
 
+/// Safely call `rb_error_arity` and report exception status
+void rbg_error_arity(int argc, int min, int max, int * _Nonnull status);
+
 /// Callback into Swift code for gvar access
 typedef VALUE (*Rbg_gvar_get_call)(ID id);
 typedef void (*Rbg_gvar_set_call)(ID id,
