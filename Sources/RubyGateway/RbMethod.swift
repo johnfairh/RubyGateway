@@ -244,21 +244,21 @@ public struct RbMethod {
             // Not enough args.
             try spec.reportArityError(argc: argc)
         }
-        guard !spec.supportsKeywords else {
-            fatalError("Not implemented yet")
-        }
 
-        let passedAllOptional = argc - spec.totalMandatoryCount
+        // Do complicated dance with keyword args
+        var (argvCopy, keywordArgs) = try parseKeywordArgs(spec: spec)
+
+        // Figure out what kind of optional args we have
+        let passedAllOptional = argvCopy.count - spec.totalMandatoryCount
         let optionalCount = Swift.min(spec.optionalCount, passedAllOptional)
         let splatCount = spec.supportsSplat ? (passedAllOptional - optionalCount) : 0
 
-        guard argc == spec.totalMandatoryCount + optionalCount + splatCount else {
+        guard argvCopy.count == spec.totalMandatoryCount + optionalCount + splatCount else {
             // Too many args.
-            try spec.reportArityError(argc: argc)
+            try spec.reportArityError(argc: argvCopy.count)
         }
 
         // Slice up the argv
-        var argvCopy = argv
         let lMandatory = argvCopy.popped(spec.leadingMandatoryCount)
         var optional = argvCopy.popped(optionalCount)
         let splatted = argvCopy.popped(splatCount)
@@ -270,10 +270,71 @@ public struct RbMethod {
             optional.append(contentsOf: spec.optionals[optional.count...])
         }
 
+        // Validate keyword args and add defaults.
+        // TODO: write me
+
         return RbMethodArgs(mandatory: Array(lMandatory) + Array(tMandatory),
                             optional: Array(optional),
                             splatted: Array(splatted),
                             keyword: [:])
+    }
+
+    /// Sort out keyword arguments and re-write argv as necessary.
+    ///
+    /// This is a huge bodge that has come from many years of Ruby
+    /// evolution, ported from `rb_scan_args`.
+    ///
+    /// All kw args (or a literal args hash from the previous generation)
+    /// are passed as the last element of argv.  If the user asks for it
+    /// then the basic case is to grab it and remove it from argv.
+    ///
+    /// But then the corner cases explode.  The most suprising to me is that
+    /// if the last param does convert into a hash, but that hash does not
+    /// have symbol keys, then the original argv element is NOT passed on to
+    /// the function -- instead, the function gets the hash that the last
+    /// argv element converts to.
+    private func parseKeywordArgs(spec: RbMethodArgsSpec) throws -> (argv: [RbObject], kwArgs: RbObject) {
+        guard spec.supportsKeywords && argc > spec.totalMandatoryCount else {
+            return (argv, .nilObject)
+        }
+
+        let last = argv.last!
+        let argvPrefix = argv.dropLast()
+
+        guard !last.isNil else {
+            // From Ruby source:
+            //    nil is taken as an empty option hash only if it is not
+            //    ambiguous; i.e. '*' is not specified and arguments are
+            //    given more than sufficient
+            if !spec.supportsSplat && spec.totalMandatoryCount + spec.optionalCount < argc {
+                return (Array(argvPrefix), .nilObject)
+            }
+            return (argv, .nilObject)
+        }
+
+        // Try to convert the last argv to a hash and decide if it is
+        // a keyword-args hash or just an innocent hash.
+        var isHash = Int32(0)
+        var isOpts = Int32(0)
+        let lastHashValue = try last.withRubyValue { lastValue in
+            try RbVM.doProtect { status in
+                rbg_scan_arg_hash_protect(lastValue, &isHash, &isOpts, &status)
+            }
+        }
+
+        guard isHash != 0 else {
+            // Not a hash of any kind.
+            return (argv, .nilObject)
+        }
+
+        let hashObject = RbObject(rubyValue: lastHashValue)
+        if isOpts != 0 {
+            // Keyword-args hash
+            return (Array(argvPrefix), hashObject)
+        } else {
+            // Innocent hash - replace original arg
+            return (Array(argvPrefix) + [hashObject], .nilObject)
+        }
     }
 }
 
@@ -332,7 +393,7 @@ public struct RbMethodArgsSpec {
         return leadingMandatoryCount + trailingMandatoryCount
     }
     /// Names of mandatory keyword arguments
-    public let mandatoryKeywords: [String]
+    public let mandatoryKeywords: [String] // XXX Set<String>
     /// Names and default values of optional keyword arguments
     public let optionalKeywords: [String: RbObject]
     /// Does the function support keyword arguments?
@@ -343,10 +404,11 @@ public struct RbMethodArgsSpec {
     // Call the Ruby function to report a decent error message for args mistakes.
     func reportArityError(argc: Int) throws -> Never {
         try RbVM.doProtect { tag in
-            rbg_error_arity(Int32(argc),
-                            Int32(totalMandatoryCount),
-                            supportsSplat ? UNLIMITED_ARGUMENTS : Int32(totalMandatoryCount + optionalCount),
-                            &tag)
+            rbg_error_arity_protect(Int32(argc),
+                                    Int32(totalMandatoryCount),
+                                    supportsSplat ? UNLIMITED_ARGUMENTS
+                                                  : Int32(totalMandatoryCount + optionalCount),
+                                    &tag)
         }
         // awkward
         fatalError("Ought to have thrown by now")

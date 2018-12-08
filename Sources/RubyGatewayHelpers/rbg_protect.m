@@ -97,6 +97,7 @@ typedef enum {
     RBG_JOB_PROC_CALL,
     RBG_JOB_YIELD,
     RBG_JOB_ERR_ARITY,
+    RBG_JOB_SCAN_ARG_HASH,
 } Rbg_job;
 
 typedef struct {
@@ -115,6 +116,9 @@ typedef struct {
 
     int           arityMin;
     int           arityMax;
+
+    int          *argIsHash;
+    int          *argIsOpts;
 } Rbg_protect_data;
 
 #define RBG_PDATA_TO_VALUE(pdata) ((uintptr_t)(void *)(pdata))
@@ -126,6 +130,9 @@ static VALUE rbg_block_pvoid_callback(VALUE yieldedArg, VALUE callbackArg,
                                       int argc, VALUE *argv, VALUE blockArg);
 static VALUE rbg_block_value_callback(VALUE yieldedArg, VALUE callbackArg,
                                       int argc, VALUE *argv, VALUE blockArg);
+static VALUE rbg_scan_arg_hash(VALUE last_arg,
+                               int * _Nonnull is_hash,
+                               int * _Nonnull is_opts);
 
 /// Callback made by Ruby from `rb_protect` -- OK to raise exceptions from here.
 static VALUE rbg_protect_thunk(VALUE value)
@@ -178,6 +185,9 @@ static VALUE rbg_protect_thunk(VALUE value)
         break;
     case RBG_JOB_ERR_ARITY:
         rb_error_arity(d->argc, d->arityMin, d->arityMax);
+        break;
+    case RBG_JOB_SCAN_ARG_HASH:
+        rc = rbg_scan_arg_hash(d->value, d->argIsHash, d->argIsOpts);
         break;
     }
     return rc;
@@ -416,11 +426,61 @@ VALUE rbg_Hash_protect(VALUE v, int * _Nonnull status)
 }
 
 /// rb_error_arity - always raises an exception
-void rbg_error_arity(int argc, int min, int max, int * _Nonnull status)
+void rbg_error_arity_protect(int argc, int min, int max, int * _Nonnull status)
 {
     Rbg_protect_data data = { .job = RBG_JOB_ERR_ARITY,
         .argc = argc, .arityMin = min, .arityMax = max };
     (void) rbg_protect(&data, status);
+}
+
+/// rb_scan_args / rb_extract_keywords
+///
+/// If user asks for a kw hash and there is a non-nil arg that could
+/// be it, there are four scenarios:
+///
+/// 1) Arg does not convert to a hash.
+/// 2) Arg is a hash, all keys are symbols => found kw hash.
+/// 3) Arg is a hash, no keys are symbols => just an arg.
+/// 4) Arg is a hash, keys mix symbols => exception.
+///
+/// This is a port of a fragment of rb_scan_args.
+///
+static VALUE rbg_scan_arg_hash(VALUE last_arg,
+                               int * _Nonnull is_hash,
+                               int * _Nonnull is_opts)
+{
+    VALUE retval = Qnil;
+    VALUE hash = rb_check_hash_type(last_arg); // try convert to hash, may raise.
+
+    if ( (*is_hash = !NIL_P(hash)) )
+    {
+        VALUE opts = rb_extract_keywords(&hash); // raises if mix sym/nonsym keys.
+        if (opts == 0)
+        {
+            // hash is NOT args, just a hash.
+            *is_opts = 0;
+            retval = hash;
+        }
+        else
+        {
+            // hash was an args hash.
+            *is_opts = 1;
+            retval = opts;
+        }
+    }
+
+    return retval;
+}
+
+/// Safely call `rb_extract/scan_args` and report exception status
+VALUE rbg_scan_arg_hash_protect(VALUE last_arg,
+                                int * _Nonnull is_hash,
+                                int * _Nonnull is_opts,
+                                int * _Nonnull status)
+{
+    Rbg_protect_data data = { .job = RBG_JOB_SCAN_ARG_HASH,
+        .value = last_arg, .argIsHash = is_hash, .argIsOpts = is_opts };
+    return rbg_protect(&data, status);
 }
 
 //
