@@ -399,7 +399,7 @@ static VALUE rbg_Hash(VALUE value)
     ID toHId = rb_intern("to_h");
 
     if (NIL_P(value)) {
-        return Qnil;
+        return rb_hash_new();
     }
 
     VALUE result;

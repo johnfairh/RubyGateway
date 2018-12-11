@@ -399,6 +399,32 @@ class TestMethods: XCTestCase {
         }
     }
 
+    // Mandatory keyword arg - error cases
+    func testErrorMandatoryKeywordArg() {
+        doErrorFree {
+            let argKey = "ar"
+            let func_f = "f"
+            // def f(ar:)
+            let spec_f = RbMethodArgsSpec(mandatoryKeywords: [argKey])
+
+            try Ruby.defineGlobalFunction(name: func_f) { _, method in
+                let _ = try method.parseArgs(spec: spec_f)
+                XCTFail("Ought to have failed parse")
+                return .nilObject
+            }
+
+            // missing kw
+            doError {
+                try Ruby.call(func_f)
+            }
+
+            // extraneous kw
+            doError {
+                try Ruby.call(func_f, kwArgs: [argKey : 1, "foo": 5.3, "bar": "Sandwich"])
+            }
+        }
+    }
+
     static var allTests = [
         ("testFixedArgsRoundTrip", testFixedArgsRoundTrip),
         ("testVarArgsRoundTrip", testVarArgsRoundTrip),
@@ -413,6 +439,8 @@ class TestMethods: XCTestCase {
         ("testOptionalArgs", testOptionalArgs),
         ("testSplatArgs", testSplatArgs),
         ("testSplatMandatoryArgError", testSplatMandatoryArgError),
-        ("testAllPositionalArgTypes", testAllPositionalArgTypes)
+        ("testAllPositionalArgTypes", testAllPositionalArgTypes),
+        ("testSimpleMandatoryKeywordArg", testSimpleMandatoryKeywordArg),
+        ("testErrorMandatoryKeywordArg", testErrorMandatoryKeywordArg)
     ]
 }

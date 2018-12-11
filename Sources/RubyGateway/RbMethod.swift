@@ -348,9 +348,8 @@ public struct RbMethod {
     /// - Throws: `RbError.rubyException(_:)` if an unknown keyword is supplied, or
     ///           if a mandatory keyword is omitted.
     private func resolveKeywords(spec: RbMethodArgsSpec, passed: RbObject) throws -> [String : RbObject] {
-        guard var passedDict = Dictionary<String, RbObject>(passed),
-            passedDict.count > 0 else {
-                return [:]
+        guard var passedDict = Dictionary<String, RbObject>(passed) else {
+            return [:] // unreachable ? :(
         }
 
         // Start with the defaults for optional params.
@@ -471,17 +470,17 @@ public struct RbMethodArgsSpec {
     ///   - mandatoryKeywords: The names of mandatory keyword arguments, none by default.
     ///   - optionalKeywords: The default values for optional keyword arguments, none by default.
     public init(leadingMandatoryCount: Int = 0,
-                optionalValues: [RbObject] = [],
+                optionalValues: [RbObjectConvertible?] = [],
                 supportsSplat: Bool = false,
                 trailingMandatoryCount: Int = 0,
                 mandatoryKeywords: Set<String> = [],
-                optionalKeywordValues: [String: RbObject] = [:]) {
+                optionalKeywordValues: [String: RbObjectConvertible?] = [:]) {
         self.leadingMandatoryCount = leadingMandatoryCount
-        self.optionalValues = optionalValues
+        self.optionalValues = optionalValues.map { $0.rubyObject }
         self.supportsSplat = supportsSplat
         self.trailingMandatoryCount = trailingMandatoryCount
         self.mandatoryKeywords = mandatoryKeywords
-        self.optionalKeywordValues = optionalKeywordValues
+        self.optionalKeywordValues = optionalKeywordValues.mapValues { $0.rubyObject }
     }
 
 }
