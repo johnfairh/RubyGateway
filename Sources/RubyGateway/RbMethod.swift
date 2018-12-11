@@ -267,7 +267,7 @@ public struct RbMethod {
 
         // Fill in defaults for optional positional args
         if optional.count < spec.optionalCount {
-            optional.append(contentsOf: spec.optionals[optional.count...])
+            optional.append(contentsOf: spec.optionalValues[optional.count...])
         }
 
         // Validate keyword args and add defaults.
@@ -379,10 +379,10 @@ public struct RbMethodArgsSpec {
     /// Number of leading mandatory positional arguments
     public let leadingMandatoryCount: Int
     /// Default values for all optional positional arguments
-    public let optionals: [RbObject]
+    public let optionalValues: [RbObject]
     /// Number of optional positional arguments
     public var optionalCount: Int {
-        return optionals.count
+        return optionalValues.count
     }
     /// Does the function support variable-length splatted arguments?
     public let supportsSplat: Bool
@@ -393,12 +393,12 @@ public struct RbMethodArgsSpec {
         return leadingMandatoryCount + trailingMandatoryCount
     }
     /// Names of mandatory keyword arguments
-    public let mandatoryKeywords: [String] // XXX Set<String>
+    public let mandatoryKeywords: Set<String>
     /// Names and default values of optional keyword arguments
-    public let optionalKeywords: [String: RbObject]
+    public let optionalKeywordValues: [String: RbObject]
     /// Does the function support keyword arguments?
     public var supportsKeywords: Bool {
-        return mandatoryKeywords.count > 0 || optionalKeywords.count > 0
+        return mandatoryKeywords.count > 0 || optionalKeywordValues.count > 0
     }
 
     // Call the Ruby function to report a decent error message for args mistakes.
@@ -415,85 +415,31 @@ public struct RbMethodArgsSpec {
     }
 
     /// Create a new function args spec.
-    init(leadingMandatoryCount: Int,
-         optionals: [RbObject],
-         supportsSplat: Bool,
-         trailingMandatoryCount: Int,
-         mandatoryKeywords: [String],
-         optionalKeywords: [String: RbObject]) {
+    ///
+    /// - Parameters:
+    ///   - leadingMandatoryCount: The number of leading mandatory positional arguments,
+    ///     none by default.
+    ///   - optionals: The default values for optional positional arguments, none by default.
+    ///   - supportsSplat: Whether the function supports splatted variable-length args,
+    ///     `false` by default.
+    ///   - trailingMandatoryCount: The number of trailing mandatory positional arguments,
+    ///     none by default.
+    ///   - mandatoryKeywords: The names of mandatory keyword arguments, none by default.
+    ///   - optionalKeywords: The default values for optional keyword arguments, none by default.
+    public init(leadingMandatoryCount: Int = 0,
+                optionalValues: [RbObject] = [],
+                supportsSplat: Bool = false,
+                trailingMandatoryCount: Int = 0,
+                mandatoryKeywords: Set<String> = [],
+                optionalKeywordValues: [String: RbObject] = [:]) {
         self.leadingMandatoryCount = leadingMandatoryCount
-        self.optionals = optionals
+        self.optionalValues = optionalValues
         self.supportsSplat = supportsSplat
         self.trailingMandatoryCount = trailingMandatoryCount
         self.mandatoryKeywords = mandatoryKeywords
-        self.optionalKeywords = optionalKeywords
+        self.optionalKeywordValues = optionalKeywordValues
     }
 
-    /// Creates a new function arguments specification.
-    /// - parameter leadingMandatoryCount: The number of leading mandatory positional arguments,
-    ///                                    none by default.
-    public init(leadingMandatoryCount: Int = 0) {
-        self.leadingMandatoryCount = leadingMandatoryCount
-        self.optionals = []
-        self.supportsSplat = false
-        self.trailingMandatoryCount = 0
-        self.mandatoryKeywords = []
-        self.optionalKeywords = [:]
-    }
-
-    /// Creates a new function arguments specification based on this one but also
-    /// supporting optional positional arguments.
-    public func with(optionalArgs: [RbObjectConvertible?]) -> RbMethodArgsSpec {
-        return RbMethodArgsSpec(leadingMandatoryCount: self.leadingMandatoryCount,
-                                optionals: optionalArgs.map { $0.rubyObject },
-                                supportsSplat: self.supportsSplat,
-                                trailingMandatoryCount: self.trailingMandatoryCount,
-                                mandatoryKeywords: self.mandatoryKeywords,
-                                optionalKeywords: self.optionalKeywords)
-    }
-    /// Creates a new function arguments specification based on this one but also
-    /// supporting splatted / variable-length arguments.
-    public func withSplattedArgs() -> RbMethodArgsSpec {
-        return RbMethodArgsSpec(leadingMandatoryCount: self.leadingMandatoryCount,
-                                optionals: self.optionals,
-                                supportsSplat: true,
-                                trailingMandatoryCount: self.trailingMandatoryCount,
-                                mandatoryKeywords: self.mandatoryKeywords,
-                                optionalKeywords: self.optionalKeywords)
-    }
-
-    /// Creates a new function arguments specification based on this one but also
-    /// supporting trailing mandatory positional arguments.
-    public func with(trailingMandatoryArgs: Int) -> RbMethodArgsSpec {
-        return RbMethodArgsSpec(leadingMandatoryCount: self.leadingMandatoryCount,
-                                optionals: self.optionals,
-                                supportsSplat: self.supportsSplat,
-                                trailingMandatoryCount: trailingMandatoryArgs,
-                                mandatoryKeywords: self.mandatoryKeywords,
-                                optionalKeywords: self.optionalKeywords)
-    }
-
-    /// Creates a new function arguments specification based on this one but also
-    /// supporting mandatory keyword arguments.
-    public func with(mandatoryKeywordArgs: [String]) -> RbMethodArgsSpec {
-        return RbMethodArgsSpec(leadingMandatoryCount: self.leadingMandatoryCount,
-                                optionals: self.optionals,
-                                supportsSplat: self.supportsSplat,
-                                trailingMandatoryCount: self.trailingMandatoryCount,
-                                mandatoryKeywords: mandatoryKeywordArgs,
-                                optionalKeywords: self.optionalKeywords)
-    }
-
-    /// Creates a new function arguments specification based on this one but also
-    /// supporting optional keyword arguments.
-    public func with(optionalKeywordArgs: [String : RbObjectConvertible?]) -> RbMethodArgsSpec {
-        return RbMethodArgsSpec(leadingMandatoryCount: self.leadingMandatoryCount,
-                                optionals: self.optionals,
-                                supportsSplat: self.supportsSplat,
-                                trailingMandatoryCount: self.trailingMandatoryCount,
-                                mandatoryKeywords: self.mandatoryKeywords,
-                                optionalKeywords: optionalKeywordArgs.mapValues { $0.rubyObject })
-    }
 }
 
 // MARK: - Global functions

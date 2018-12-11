@@ -259,7 +259,7 @@ class TestMethods: XCTestCase {
     func testOptionalArgs() {
         doErrorFree {
             // def f(a=3, b=4)
-            let spec_f = RbMethodArgsSpec().with(optionalArgs: [3, 4])
+            let spec_f = RbMethodArgsSpec(optionalValues: [3, 4])
             let func_f = "f"
             var expectedArgs_f: [RbObject] = []
             try Ruby.defineGlobalFunction(name: func_f) { _, method in
@@ -287,7 +287,7 @@ class TestMethods: XCTestCase {
     func testSplatArgs() {
         doErrorFree {
             // def f(*a)
-            let spec_f = RbMethodArgsSpec().withSplattedArgs()
+            let spec_f = RbMethodArgsSpec(supportsSplat: true)
             let func_f = "f"
             var expectedArgs_f: [RbObject] = []
             try Ruby.defineGlobalFunction(name: func_f) { _, method in
@@ -312,7 +312,9 @@ class TestMethods: XCTestCase {
     func testSplatMandatoryArgError() {
         doErrorFree {
             // def f(a, *b, c)
-            let spec_f = RbMethodArgsSpec(leadingMandatoryCount: 1).withSplattedArgs().with(trailingMandatoryArgs: 1)
+            let spec_f = RbMethodArgsSpec(leadingMandatoryCount: 1,
+                                          supportsSplat: true,
+                                          trailingMandatoryCount: 1)
             let func_f = "f"
             var a_val: RbObject = .nilObject
             var c_val: RbObject = .nilObject
@@ -347,10 +349,10 @@ class TestMethods: XCTestCase {
     func testAllPositionalArgTypes() {
         doErrorFree {
             // def f(a, b, c=8, *d, e, f)
-            let spec_f = RbMethodArgsSpec(leadingMandatoryCount: 2)
-                .with(optionalArgs: [8])
-                .withSplattedArgs()
-                .with(trailingMandatoryArgs: 2)
+            let spec_f = RbMethodArgsSpec(leadingMandatoryCount: 2,
+                                          optionalValues: [8],
+                                          supportsSplat: true,
+                                          trailingMandatoryCount: 2)
             let func_f = "f"
             let expectedM1 = [RbObject(5), RbObject(2)]
             let expectedM2 = [RbObject(1.3), RbObject("fish")]
