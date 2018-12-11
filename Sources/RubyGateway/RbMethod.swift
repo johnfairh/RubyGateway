@@ -245,13 +245,13 @@ public struct RbMethod {
             try spec.reportArityError(argc: argc)
         }
 
-        // Do complicated dance with keyword args
-        var (argvCopy, keywordArgs) = try parseKeywordArgs(spec: spec)
+        // Do complicated dance #1 with keyword args.
+        var (argvCopy, passedKeywordArgs) = try parseKeywordArgs(spec: spec)
 
         // Figure out what kind of optional args we have
         let passedAllOptional = argvCopy.count - spec.totalMandatoryCount
-        let optionalCount = Swift.min(spec.optionalCount, passedAllOptional)
-        let splatCount = spec.supportsSplat ? (passedAllOptional - optionalCount) : 0
+        let optionalCount     = Swift.min(spec.optionalCount, passedAllOptional)
+        let splatCount        = spec.supportsSplat ? (passedAllOptional - optionalCount) : 0
 
         guard argvCopy.count == spec.totalMandatoryCount + optionalCount + splatCount else {
             // Too many args.
@@ -260,8 +260,8 @@ public struct RbMethod {
 
         // Slice up the argv
         let lMandatory = argvCopy.popped(spec.leadingMandatoryCount)
-        var optional = argvCopy.popped(optionalCount)
-        let splatted = argvCopy.popped(splatCount)
+        var optional   = argvCopy.popped(optionalCount)
+        let splatted   = argvCopy.popped(splatCount)
         let tMandatory = argvCopy.popped(spec.trailingMandatoryCount)
         precondition(argvCopy.count == 0)
 
@@ -270,13 +270,13 @@ public struct RbMethod {
             optional.append(contentsOf: spec.optionalValues[optional.count...])
         }
 
-        // Validate keyword args and add defaults.
-        // TODO: write me
+        // Validate keyword args and add defaults, dance #2.
+        let keywordArgs = try resolveKeywords(spec: spec, passed: passedKeywordArgs)
 
         return RbMethodArgs(mandatory: Array(lMandatory) + Array(tMandatory),
                             optional: Array(optional),
                             splatted: Array(splatted),
-                            keyword: [:])
+                            keyword: keywordArgs)
     }
 
     /// Sort out keyword arguments and re-write argv as necessary.
@@ -335,6 +335,50 @@ public struct RbMethod {
             // Innocent hash - replace original arg
             return (Array(argvPrefix) + [hashObject], .nilObject)
         }
+    }
+
+    /// Merge a passed keyword-args hash with the default keyword values,
+    /// check for errors, and present the final keyword-arg values.
+    ///
+    /// - Parameters:
+    ///   - spec: The function arguments specification.
+    ///   - passed: The passed args hash.  The keys are all Ruby symbols; the
+    ///             values are all Ruby objects of some kind.
+    /// - Returns: The resolved keywords args for the function including defaults.
+    /// - Throws: `RbError.rubyException(_:)` if an unknown keyword is supplied, or
+    ///           if a mandatory keyword is omitted.
+    private func resolveKeywords(spec: RbMethodArgsSpec, passed: RbObject) throws -> [String : RbObject] {
+        guard var passedDict = Dictionary<String, RbObject>(passed),
+            passedDict.count > 0 else {
+                return [:]
+        }
+
+        // Start with the defaults for optional params.
+        var resultDict = spec.optionalKeywordValues
+
+        // Add in the values provided by the user for mandatory keywords.
+        try spec.mandatoryKeywords.forEach { keyword in
+            guard let passedObj = passedDict.removeValue(forKey: keyword) else {
+                // Missing mandatory keyword
+                throw RbException(message: "Missing keyword argument '\(keyword)'")
+            }
+            resultDict[keyword] = passedObj
+        }
+
+        // Add in the user's values for optional keywords, overwriting any default.
+        spec.optionalKeywordValues.keys.forEach { keyword in
+            if let passedObj = passedDict.removeValue(forKey: keyword) {
+                resultDict[keyword] = passedObj
+            }
+        }
+
+        // Any keywords left are not supported by the function.
+        guard passedDict.isEmpty else {
+            let keys = Array(passedDict.keys)
+            throw RbException(message: "Unknown keyword arguments: \(keys)")
+        }
+
+        return resultDict
     }
 }
 

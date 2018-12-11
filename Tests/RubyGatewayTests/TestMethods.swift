@@ -371,6 +371,34 @@ class TestMethods: XCTestCase {
         }
     }
 
+    // Mandatory keyword arg
+    func testSimpleMandatoryKeywordArg() {
+        doErrorFree {
+            let argKey = "ar"
+            let func_f = "f"
+            // def f(ar:)
+            let spec_f = RbMethodArgsSpec(mandatoryKeywords: [argKey])
+            let expectedVal = 211.4896
+            var called = false
+
+            try Ruby.defineGlobalFunction(name: func_f) { _, method in
+                let args = try method.parseArgs(spec: spec_f)
+                XCTAssertEqual(1, args.keyword.count)
+                guard let arg = args.keyword[argKey] else {
+                    XCTFail("Arg for \(argKey) missing")
+                    return .nilObject
+                }
+                XCTAssertEqual(expectedVal, Double(arg))
+                XCTAssertFalse(called)
+                called = true
+                return .nilObject
+            }
+
+            try Ruby.call(func_f, kwArgs: [argKey : expectedVal])
+            XCTAssertTrue(called)
+        }
+    }
+
     static var allTests = [
         ("testFixedArgsRoundTrip", testFixedArgsRoundTrip),
         ("testVarArgsRoundTrip", testVarArgsRoundTrip),
