@@ -1,7 +1,9 @@
-# Testcases for sticky situations caused by invoking blocks
-# from Swift code.
+# Testcases for passing args and things to Swift.
 #
 # See TestMethods.swift
+#
+
+# Sticky situations caused by invoking blocks from Swift code.
 #
 # Swift defines, basically:
 #
@@ -50,4 +52,36 @@ def ruby_should_return_4
        redo if rv < 4
    }
    rv
+end
+
+# Keyword args from Ruby to Swift
+#
+# Swift defines:
+#
+# def swift_kwargs(a:, b:, c: 2, d: 3)
+#   a + b + c + d
+# end
+
+def ruby_kw_should_return_9
+    swift_kwargs(a: 3, b: 1)
+end
+
+def ruby_kw_should_return_20
+    swift_kwargs(a: 3, b: 1, c: 13)
+end
+
+def ruby_kw_should_return_14
+    swift_kwargs(a: 3, b: 1, c: 7, d: 3)
+end
+
+def ruby_kw_should_return_100
+    swift_kwargs
+rescue
+    100
+end
+
+def ruby_kw_should_return_200
+    swift_kwargs(e: 14)
+rescue
+    200
 end

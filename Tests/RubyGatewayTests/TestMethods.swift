@@ -7,7 +7,7 @@
 
 import Foundation
 import XCTest
-import RubyGateway
+@testable /* RbMethod internals */ import RubyGateway
 
 extension RbMethodArgsSpec {
     func check(args: RbMethodArgs) {
@@ -16,7 +16,9 @@ extension RbMethodArgsSpec {
         if !supportsSplat {
             XCTAssertEqual(0, args.splatted.count)
         }
-        XCTAssertEqual(args.keyword, [:])
+        let expectedKeywords = mandatoryKeywords.union(optionalKeywordValues.keys).sorted()
+        let actualKeywords = args.keyword.keys.sorted()
+        XCTAssertEqual(expectedKeywords, actualKeywords)
     }
 }
 
@@ -383,6 +385,7 @@ class TestMethods: XCTestCase {
 
             try Ruby.defineGlobalFunction(name: func_f) { _, method in
                 let args = try method.parseArgs(spec: spec_f)
+                spec_f.check(args: args)
                 XCTAssertEqual(1, args.keyword.count)
                 guard let arg = args.keyword[argKey] else {
                     XCTFail("Arg for \(argKey) missing")
@@ -408,7 +411,8 @@ class TestMethods: XCTestCase {
             let spec_f = RbMethodArgsSpec(mandatoryKeywords: [argKey])
 
             try Ruby.defineGlobalFunction(name: func_f) { _, method in
-                let _ = try method.parseArgs(spec: spec_f)
+                let args = try method.parseArgs(spec: spec_f)
+                spec_f.check(args: args)
                 XCTFail("Ought to have failed parse")
                 return .nilObject
             }
@@ -422,6 +426,102 @@ class TestMethods: XCTestCase {
             doError {
                 try Ruby.call(func_f, kwArgs: [argKey : 1, "foo": 5.3, "bar": "Sandwich"])
             }
+
+            // a data hash instead of a kw hash
+            doError {
+                try Ruby.call(func_f, args: [[1:2]])
+            }
+
+            // a string instead of a hash of any kind
+            doError {
+                try Ruby.call(func_f, args: ["bucket"])
+            }
+        }
+    }
+
+    // Optional keyword args
+    func testOptionalKeywordArgs() {
+        doErrorFree {
+            // def f(a: "fish")
+            let func_f = "f"
+            let f_opt_arg_kw = "a"
+            let f_opt_arg_def = "fish"
+            let spec_f = RbMethodArgsSpec(optionalKeywordValues: [f_opt_arg_kw: f_opt_arg_def])
+
+            var expect_arg_val = ""
+            try Ruby.defineGlobalFunction(name: func_f) { _, method in
+                let args = try method.parseArgs(spec: spec_f)
+                spec_f.check(args: args)
+                XCTAssertEqual(expect_arg_val, String(args.keyword[f_opt_arg_kw]!))
+                return .nilObject
+            }
+
+            expect_arg_val = f_opt_arg_def
+            try Ruby.call(func_f)
+
+            let overridden = "bucket"
+            expect_arg_val = overridden
+            try Ruby.call(func_f, kwArgs: [f_opt_arg_kw: overridden])
+        }
+    }
+
+    // Explicit nil vs. keyword args hash ambiguity
+    func testNilKeywordArgs() {
+        doErrorFree {
+            // def f(a, b:3)
+            let func_f = "f"
+            let kw_b = "b"
+            let kw_b_def = 3
+            let spec_f = RbMethodArgsSpec(leadingMandatoryCount: 1, optionalKeywordValues: [kw_b: kw_b_def])
+
+            var expect_a = ""
+
+            try Ruby.defineGlobalFunction(name: func_f) { _, method in
+                let args = try method.parseArgs(spec: spec_f)
+                spec_f.check(args: args)
+                XCTAssertEqual(expect_a, String(args.mandatory[0]))
+                XCTAssertEqual(kw_b_def, Int(args.keyword[kw_b]!))
+                return .nilObject
+            }
+
+            // No kw hash, last mando arg is nil -> invent nil & use default.
+            expect_a = ""
+            try Ruby.call(func_f, args: [nil])
+
+            // Explicit nil for kw hash -> consume it, no complaints, use default.
+            expect_a = "fish"
+            try Ruby.call(func_f, args: ["fish", nil])
+        }
+    }
+
+    // Check compatibility with actual Ruby
+    func testRubyCompatibility() {
+        doErrorFree {
+            try Ruby.require(filename: Helpers.fixturePath("swift_methods.rb"))
+
+            // def swift_kwargs(a:, b:, c: 2, d: 3)
+            let swift_kwargs_spec = RbMethodArgsSpec(mandatoryKeywords: ["a", "b"],
+                                                     optionalKeywordValues: ["c" : 2, "d" : 3])
+            try Ruby.defineGlobalFunction(name: "swift_kwargs") { _, method in
+                let args = try method.parseArgs(spec: swift_kwargs_spec)
+                swift_kwargs_spec.check(args: args)
+                return args.keyword["a"]! + args.keyword["b"]! + args.keyword["c"]! + args.keyword["d"]!
+            }
+
+            let testSuffixes = [9, 20, 14, 100, 200]
+            try testSuffixes.forEach { val in
+                let funcName = "ruby_kw_should_return_\(val)"
+                let result = try Ruby.call(funcName)
+                XCTAssertEqual(val, Int(result))
+            }
+        }
+    }
+
+    // Ruby confusion corner case, internals
+    func testBadArgsHash() {
+        doError {
+            let method = RbMethod(argv: [])
+            let _ = try method.resolveKeywords(spec: RbMethodArgsSpec(), passed: RbObject(2))
         }
     }
 
@@ -441,6 +541,10 @@ class TestMethods: XCTestCase {
         ("testSplatMandatoryArgError", testSplatMandatoryArgError),
         ("testAllPositionalArgTypes", testAllPositionalArgTypes),
         ("testSimpleMandatoryKeywordArg", testSimpleMandatoryKeywordArg),
-        ("testErrorMandatoryKeywordArg", testErrorMandatoryKeywordArg)
+        ("testErrorMandatoryKeywordArg", testErrorMandatoryKeywordArg),
+        ("testOptionalKeywordArgs", testOptionalKeywordArgs),
+        ("testNilKeywordArgs", testNilKeywordArgs),
+        ("testRubyCompatibility", testRubyCompatibility),
+        ("testBadArgsHash", testBadArgsHash)
     ]
 }

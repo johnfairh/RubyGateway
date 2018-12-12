@@ -347,9 +347,10 @@ public struct RbMethod {
     /// - Returns: The resolved keywords args for the function including defaults.
     /// - Throws: `RbError.rubyException(_:)` if an unknown keyword is supplied, or
     ///           if a mandatory keyword is omitted.
-    private func resolveKeywords(spec: RbMethodArgsSpec, passed: RbObject) throws -> [String : RbObject] {
+    func resolveKeywords(spec: RbMethodArgsSpec, passed: RbObject) throws -> [String : RbObject] {
         guard var passedDict = Dictionary<String, RbObject>(passed) else {
-            return [:] // unreachable ? :(
+            let exn = RbException(message: "Runtime confused, not a kw hash: \(passed)")
+            try RbError.raise(error: .rubyException(exn))
         }
 
         // Start with the defaults for optional params.
@@ -359,7 +360,8 @@ public struct RbMethod {
         try spec.mandatoryKeywords.forEach { keyword in
             guard let passedObj = passedDict.removeValue(forKey: keyword) else {
                 // Missing mandatory keyword
-                throw RbException(message: "Missing keyword argument '\(keyword)'")
+                let exn = RbException(argMessage: "Missing keyword argument: \"\(keyword)\"")
+                try RbError.raise(error: .rubyException(exn))
             }
             resultDict[keyword] = passedObj
         }
@@ -374,7 +376,8 @@ public struct RbMethod {
         // Any keywords left are not supported by the function.
         guard passedDict.isEmpty else {
             let keys = Array(passedDict.keys)
-            throw RbException(message: "Unknown keyword arguments: \(keys)")
+            let exn = RbException(argMessage: "Unknown keyword arguments: \(keys)")
+            try RbError.raise(error: .rubyException(exn))
         }
 
         return resultDict
