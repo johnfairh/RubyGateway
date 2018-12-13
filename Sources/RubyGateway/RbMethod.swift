@@ -112,6 +112,10 @@ private struct RbMethodExec {
     /// invoke the user function.
     func exec(rbSelf: RbObject, argv: [RbObject]) throws -> RbObject {
         let args = try argsSpec.parseArgs(argv: argv)
+        let method = RbMethod(args: args, argsSpec: argsSpec)
+        if argsSpec.requiresBlock {
+            try method.needsBlock()
+        }
         return try callback(rbSelf, RbMethod(args: args, argsSpec: argsSpec))
     }
 }
@@ -287,6 +291,8 @@ public struct RbMethodArgsSpec {
     public var supportsKeywords: Bool {
         return mandatoryKeywords.count > 0 || optionalKeywordValues.count > 0
     }
+    /// Does the function require a block?
+    public let requiresBlock: Bool
 
     // Call the Ruby function to report a decent error message for args mistakes.
     private func reportArityError(argc: Int) throws -> Never {
@@ -313,18 +319,22 @@ public struct RbMethodArgsSpec {
     ///     none by default.
     ///   - mandatoryKeywords: The names of mandatory keyword arguments, none by default.
     ///   - optionalKeywords: The default values for optional keyword arguments, none by default.
+    ///   - requiresBlock: Whether the function requires a block, `false` by default.  If this is
+    ///     `true` then the function may or may not be called with a block.
     public init(leadingMandatoryCount: Int = 0,
                 optionalValues: [RbObjectConvertible?] = [],
                 supportsSplat: Bool = false,
                 trailingMandatoryCount: Int = 0,
                 mandatoryKeywords: Set<String> = [],
-                optionalKeywordValues: [String: RbObjectConvertible?] = [:]) {
+                optionalKeywordValues: [String: RbObjectConvertible?] = [:],
+                requiresBlock: Bool = false) {
         self.leadingMandatoryCount = leadingMandatoryCount
         self.optionalValues = optionalValues.map { $0.rubyObject }
         self.supportsSplat = supportsSplat
         self.trailingMandatoryCount = trailingMandatoryCount
         self.mandatoryKeywords = mandatoryKeywords
         self.optionalKeywordValues = optionalKeywordValues.mapValues { $0.rubyObject }
+        self.requiresBlock = requiresBlock
     }
 
     /// Decode the arguments passed to a function and make them available.

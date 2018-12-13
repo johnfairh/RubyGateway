@@ -104,7 +104,7 @@ class TestMethods: XCTestCase {
             let expectedBlockResult = 4.0
             let expectedFuncResult = "alldone"
 
-            try Ruby.defineGlobalFunction(name: funcName) { _, method in
+            try Ruby.defineGlobalFunction(name: funcName, argsSpec: RbMethodArgsSpec(requiresBlock: true)) { _, method in
                 XCTAssertTrue(method.isBlockGiven)
                 XCTAssertFalse(funcCalled)
                 let blockResult = try method.yieldBlock()
@@ -183,7 +183,7 @@ class TestMethods: XCTestCase {
             var blockCalled = false
             let expectedBlockArg = 4.0
 
-            try Ruby.defineGlobalFunction(name: funcName) { _, method in
+            try Ruby.defineGlobalFunction(name: funcName, argsSpec: RbMethodArgsSpec(requiresBlock: true)) { _, method in
                 XCTAssertTrue(method.isBlockGiven)
                 try method.needsBlock()
                 XCTAssertFalse(funcCalled)
