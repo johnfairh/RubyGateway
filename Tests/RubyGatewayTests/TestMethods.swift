@@ -22,6 +22,12 @@ extension RbMethodArgsSpec {
     }
 }
 
+extension RbMethod {
+    func checkArgs() {
+        argsSpec.check(args: args)
+    }
+}
+
 /// Swift methods
 class TestMethods: XCTestCase {
 
@@ -34,11 +40,12 @@ class TestMethods: XCTestCase {
             let retValue = 8.9
             var visited = false
 
-            try Ruby.defineGlobalFunction(name: funcName, argc: argCount) { _, method in
+            try Ruby.defineGlobalFunction(name: funcName, argsSpec: RbMethodArgsSpec(leadingMandatoryCount: argCount)) { _, method in
+                method.checkArgs()
                 XCTAssertFalse(visited)
                 visited = true
-                XCTAssertEqual(argCount, method.argv.count)
-                XCTAssertEqual(argValue, String(method.argv[0]))
+                XCTAssertEqual(argCount, method.args.mandatory.count)
+                XCTAssertEqual(argValue, String(method.args.mandatory[0]))
                 return RbObject(retValue)
             }
 
@@ -56,9 +63,11 @@ class TestMethods: XCTestCase {
             var visited = false
 
             try Ruby.defineGlobalFunction(name: funcName) { _, method in
+                method.checkArgs()
                 XCTAssertFalse(visited)
                 visited = true
-                XCTAssertEqual(method.argv.count, 0)
+                XCTAssertEqual(method.args.mandatory.count, 0)
+                XCTAssertEqual(method.args.splatted.count, 0)
                 return RbObject(retValue)
             }
 
@@ -75,7 +84,7 @@ class TestMethods: XCTestCase {
             let funcName = "myGlobal"
             let expectedArgCount = 1
 
-            try Ruby.defineGlobalFunction(name: funcName, argc: expectedArgCount) { _, _ in
+            try Ruby.defineGlobalFunction(name: funcName, argsSpec: RbMethodArgsSpec(leadingMandatoryCount: expectedArgCount)) { _, _ in
                 XCTFail("Accidentally called function requiring an arg without any")
                 return .nilObject
             }
@@ -83,13 +92,6 @@ class TestMethods: XCTestCase {
             doError {
                 let _ = try Ruby.call(funcName)
             }
-        }
-    }
-
-    // invalid argc request
-    func testInvalidArgsCount() {
-        doError {
-            try Ruby.defineGlobalFunction(name: "bad_boy", argc: 103) { _, _ in return .nilObject }
         }
     }
 
@@ -235,9 +237,8 @@ class TestMethods: XCTestCase {
 
             try argSpecs.forEach { spec in
                 let fname = "myfunc"
-                try Ruby.defineGlobalFunction(name: fname) { _, method in
-                    let args = try method.parseArgs(spec: spec)
-                    spec.check(args: args)
+                try Ruby.defineGlobalFunction(name: fname, argsSpec: spec) { _, method in
+                    method.checkArgs()
                     return .nilObject
                 }
 
@@ -264,10 +265,9 @@ class TestMethods: XCTestCase {
             let spec_f = RbMethodArgsSpec(optionalValues: [3, 4])
             let func_f = "f"
             var expectedArgs_f: [RbObject] = []
-            try Ruby.defineGlobalFunction(name: func_f) { _, method in
-                let args = try method.parseArgs(spec: spec_f)
-                spec_f.check(args: args)
-                XCTAssertEqual(expectedArgs_f, args.optional)
+            try Ruby.defineGlobalFunction(name: func_f, argsSpec: spec_f) { _, method in
+                method.checkArgs()
+                XCTAssertEqual(expectedArgs_f, method.args.optional)
                 return .nilObject
             }
 
@@ -292,10 +292,9 @@ class TestMethods: XCTestCase {
             let spec_f = RbMethodArgsSpec(supportsSplat: true)
             let func_f = "f"
             var expectedArgs_f: [RbObject] = []
-            try Ruby.defineGlobalFunction(name: func_f) { _, method in
-                let args = try method.parseArgs(spec: spec_f)
-                spec_f.check(args: args)
-                XCTAssertEqual(expectedArgs_f, args.splatted)
+            try Ruby.defineGlobalFunction(name: func_f, argsSpec: spec_f) { _, method in
+                method.checkArgs()
+                XCTAssertEqual(expectedArgs_f, method.args.splatted)
                 return .nilObject
             }
 
@@ -321,12 +320,11 @@ class TestMethods: XCTestCase {
             var a_val: RbObject = .nilObject
             var c_val: RbObject = .nilObject
             var b_count: Int = 0
-            try Ruby.defineGlobalFunction(name: func_f) { _, method in
-                let args = try method.parseArgs(spec: spec_f)
-                spec_f.check(args: args)
-                XCTAssertEqual(a_val, args.mandatory[0])
-                XCTAssertEqual(b_count, args.splatted.count)
-                XCTAssertEqual(c_val, args.mandatory[1])
+            try Ruby.defineGlobalFunction(name: func_f, argsSpec: spec_f) { _, method in
+                method.checkArgs()
+                XCTAssertEqual(a_val, method.args.mandatory[0])
+                XCTAssertEqual(b_count, method.args.splatted.count)
+                XCTAssertEqual(c_val, method.args.mandatory[1])
                 return .nilObject
             }
 
@@ -360,12 +358,11 @@ class TestMethods: XCTestCase {
             let expectedM2 = [RbObject(1.3), RbObject("fish")]
             let expectedOptional = [RbObject(12)]
             let expectedSplatted = [RbObject("bucket")]
-            try Ruby.defineGlobalFunction(name: func_f) { _, method in
-                let args = try method.parseArgs(spec: spec_f)
-                spec_f.check(args: args)
-                XCTAssertEqual(expectedM1 + expectedM2, args.mandatory)
-                XCTAssertEqual(expectedOptional, args.optional)
-                XCTAssertEqual(expectedSplatted, args.splatted)
+            try Ruby.defineGlobalFunction(name: func_f, argsSpec: spec_f) { _, method in
+                method.checkArgs()
+                XCTAssertEqual(expectedM1 + expectedM2, method.args.mandatory)
+                XCTAssertEqual(expectedOptional, method.args.optional)
+                XCTAssertEqual(expectedSplatted, method.args.splatted)
                 return .nilObject
             }
 
@@ -383,11 +380,10 @@ class TestMethods: XCTestCase {
             let expectedVal = 211.4896
             var called = false
 
-            try Ruby.defineGlobalFunction(name: func_f) { _, method in
-                let args = try method.parseArgs(spec: spec_f)
-                spec_f.check(args: args)
-                XCTAssertEqual(1, args.keyword.count)
-                guard let arg = args.keyword[argKey] else {
+            try Ruby.defineGlobalFunction(name: func_f, argsSpec: spec_f) { _, method in
+                method.checkArgs()
+                XCTAssertEqual(1, method.args.keyword.count)
+                guard let arg = method.args.keyword[argKey] else {
                     XCTFail("Arg for \(argKey) missing")
                     return .nilObject
                 }
@@ -410,9 +406,7 @@ class TestMethods: XCTestCase {
             // def f(ar:)
             let spec_f = RbMethodArgsSpec(mandatoryKeywords: [argKey])
 
-            try Ruby.defineGlobalFunction(name: func_f) { _, method in
-                let args = try method.parseArgs(spec: spec_f)
-                spec_f.check(args: args)
+            try Ruby.defineGlobalFunction(name: func_f, argsSpec: spec_f) { _, method in
                 XCTFail("Ought to have failed parse")
                 return .nilObject
             }
@@ -449,10 +443,9 @@ class TestMethods: XCTestCase {
             let spec_f = RbMethodArgsSpec(optionalKeywordValues: [f_opt_arg_kw: f_opt_arg_def])
 
             var expect_arg_val = ""
-            try Ruby.defineGlobalFunction(name: func_f) { _, method in
-                let args = try method.parseArgs(spec: spec_f)
-                spec_f.check(args: args)
-                XCTAssertEqual(expect_arg_val, String(args.keyword[f_opt_arg_kw]!))
+            try Ruby.defineGlobalFunction(name: func_f, argsSpec: spec_f) { _, method in
+                method.checkArgs()
+                XCTAssertEqual(expect_arg_val, String(method.args.keyword[f_opt_arg_kw]!))
                 return .nilObject
             }
 
@@ -476,11 +469,10 @@ class TestMethods: XCTestCase {
 
             var expect_a = ""
 
-            try Ruby.defineGlobalFunction(name: func_f) { _, method in
-                let args = try method.parseArgs(spec: spec_f)
-                spec_f.check(args: args)
-                XCTAssertEqual(expect_a, String(args.mandatory[0]))
-                XCTAssertEqual(kw_b_def, Int(args.keyword[kw_b]!))
+            try Ruby.defineGlobalFunction(name: func_f, argsSpec: spec_f) { _, method in
+                method.checkArgs()
+                XCTAssertEqual(expect_a, String(method.args.mandatory[0]))
+                XCTAssertEqual(kw_b_def, Int(method.args.keyword[kw_b]!))
                 return .nilObject
             }
 
@@ -502,10 +494,12 @@ class TestMethods: XCTestCase {
             // def swift_kwargs(a:, b:, c: 2, d: 3)
             let swift_kwargs_spec = RbMethodArgsSpec(mandatoryKeywords: ["a", "b"],
                                                      optionalKeywordValues: ["c" : 2, "d" : 3])
-            try Ruby.defineGlobalFunction(name: "swift_kwargs") { _, method in
-                let args = try method.parseArgs(spec: swift_kwargs_spec)
-                swift_kwargs_spec.check(args: args)
-                return args.keyword["a"]! + args.keyword["b"]! + args.keyword["c"]! + args.keyword["d"]!
+            try Ruby.defineGlobalFunction(name: "swift_kwargs", argsSpec: swift_kwargs_spec) { _, method in
+                method.checkArgs()
+                return method.args.keyword["a"]! +
+                    method.args.keyword["b"]! +
+                    method.args.keyword["c"]! +
+                    method.args.keyword["d"]!
             }
 
             let testSuffixes = [9, 20, 14, 100, 200]
@@ -520,8 +514,8 @@ class TestMethods: XCTestCase {
     // Ruby confusion corner case, internals
     func testBadArgsHash() {
         doError {
-            let method = RbMethod(argv: [])
-            let _ = try method.resolveKeywords(spec: RbMethodArgsSpec(), passed: RbObject(2))
+            let spec = RbMethodArgsSpec()
+            let _ = try spec.resolveKeywords(passed: RbObject(2))
         }
     }
 
@@ -529,7 +523,6 @@ class TestMethods: XCTestCase {
         ("testFixedArgsRoundTrip", testFixedArgsRoundTrip),
         ("testVarArgsRoundTrip", testVarArgsRoundTrip),
         ("testArgcMismatch", testArgcMismatch),
-        ("testInvalidArgsCount", testInvalidArgsCount),
         ("testGoodBlock", testGoodBlock),
         ("testErrorNoBlock", testErrorNoBlock),
         ("testManualBlock", testManualBlock),
