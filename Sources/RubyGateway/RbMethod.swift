@@ -270,7 +270,7 @@ public struct RbMethodArgsSpec {
     /// Number of leading mandatory positional arguments
     public let leadingMandatoryCount: Int
     /// Default values for all optional positional arguments
-    public let optionalValues: [RbObject]
+    public let optionalValues: [() -> RbObject]
     /// Number of optional positional arguments
     public var optionalCount: Int {
         return optionalValues.count
@@ -286,7 +286,7 @@ public struct RbMethodArgsSpec {
     /// Names of mandatory keyword arguments
     public let mandatoryKeywords: Set<String>
     /// Names and default values of optional keyword arguments
-    public let optionalKeywordValues: [String: RbObject]
+    public let optionalKeywordValues: [String : () -> RbObject]
     /// Does the function support keyword arguments?
     public var supportsKeywords: Bool {
         return mandatoryKeywords.count > 0 || optionalKeywordValues.count > 0
@@ -329,11 +329,11 @@ public struct RbMethodArgsSpec {
                 optionalKeywordValues: [String: RbObjectConvertible?] = [:],
                 requiresBlock: Bool = false) {
         self.leadingMandatoryCount = leadingMandatoryCount
-        self.optionalValues = optionalValues.map { $0.rubyObject }
+        self.optionalValues = optionalValues.map { val in { val.rubyObject } }
         self.supportsSplat = supportsSplat
         self.trailingMandatoryCount = trailingMandatoryCount
         self.mandatoryKeywords = mandatoryKeywords
-        self.optionalKeywordValues = optionalKeywordValues.mapValues { $0.rubyObject }
+        self.optionalKeywordValues = optionalKeywordValues.mapValues { val in { val.rubyObject } }
         self.requiresBlock = requiresBlock
     }
 
@@ -377,7 +377,7 @@ public struct RbMethodArgsSpec {
 
         // Fill in defaults for optional positional args
         if optional.count < optionalCount {
-            optional.append(contentsOf: optionalValues[optional.count...])
+            optional.append(contentsOf: optionalValues[optional.count...].map { $0() })
         }
 
         // Validate keyword args and add defaults, dance #2.
@@ -463,8 +463,8 @@ public struct RbMethodArgsSpec {
             try RbError.raise(error: .rubyException(exn))
         }
 
-        // Start with the defaults for optional params.
-        var resultDict = optionalKeywordValues
+        // Start with no kw args
+        var resultDict: [String : RbObject] = [:]
 
         // Add in the values provided by the user for mandatory keywords.
         try mandatoryKeywords.forEach { keyword in
@@ -476,10 +476,13 @@ public struct RbMethodArgsSpec {
             resultDict[keyword] = passedObj
         }
 
-        // Add in the user's values for optional keywords, overwriting any default.
-        optionalKeywordValues.keys.forEach { keyword in
+        // Add in the user's values for optional keywords, generating defaults
+        // for any that are omitted.
+        optionalKeywordValues.forEach { keyword, valueGen in
             if let passedObj = passedDict.removeValue(forKey: keyword) {
                 resultDict[keyword] = passedObj
+            } else {
+                resultDict[keyword] = valueGen()
             }
         }
 

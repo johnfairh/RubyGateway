@@ -519,6 +519,24 @@ class TestMethods: XCTestCase {
         }
     }
 
+    // Prove that each invocation of the function gets its own default values
+    func testImmutableDefaultArgs() {
+        doErrorFree {
+            let f_name = "f"
+            let defaultVal = "fish"
+            let f_spec = RbMethodArgsSpec(optionalValues: [defaultVal])
+            try Ruby.defineGlobalFunction(name: f_name, argsSpec: f_spec) { _, method in
+                let arg = method.args.optional[0]
+                XCTAssertEqual(defaultVal, String(arg))
+                try arg.call("upcase!")
+                return .nilObject
+            }
+
+            try Ruby.call(f_name)
+            try Ruby.call(f_name)
+        }
+    }
+
     static var allTests = [
         ("testFixedArgsRoundTrip", testFixedArgsRoundTrip),
         ("testVarArgsRoundTrip", testVarArgsRoundTrip),
@@ -538,6 +556,7 @@ class TestMethods: XCTestCase {
         ("testOptionalKeywordArgs", testOptionalKeywordArgs),
         ("testNilKeywordArgs", testNilKeywordArgs),
         ("testRubyCompatibility", testRubyCompatibility),
-        ("testBadArgsHash", testBadArgsHash)
+        ("testBadArgsHash", testBadArgsHash),
+        ("testImmutableDefaultArgs", testImmutableDefaultArgs)
     ]
 }
