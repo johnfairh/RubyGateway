@@ -28,14 +28,20 @@ custom_categories:
           - RbObjectAccess
           - RbObjectCollection
 
+    - name: Swift Method APIs
+      abstract: These types are used to implement Ruby methods in Swift.
+      children:
+          - RbMethodArgsSpec
+          - RbMethodCallback
+          - RbMethod
+          - RbMethodArgs
+
     - name: Other APIs
       abstract: These types are used less often than those in [`Main APIs`](Main%20APIs.html).
       children:
           - RbBlockCallback
           - RbBlockRetention
           - RbBreak
-          - RbMethod
-          - RbMethodCallback
           - RbProc
           - RbSymbol
           - RbThread

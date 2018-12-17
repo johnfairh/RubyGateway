@@ -282,7 +282,7 @@ extension RbGateway {
     }
 }
 
-// MARK: - Run Ruby Code
+// MARK: - Ruby Code Execution
 
 extension RbGateway {
     /// Evaluate some Ruby and return the result.

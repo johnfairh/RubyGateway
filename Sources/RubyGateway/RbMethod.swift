@@ -11,43 +11,25 @@ import RubyGatewayHelpers
 // Stuff to deal with implementing Ruby methods in Swift and handling calls
 // from Ruby into Swift.
 //
-// Real struggle is how to model the full flexibility of Ruby invocation.
-// Answer has to be to provide scan_args wrappers - template at call time not
-// defn time for flexibility.
+// Struggle #1 is how to model the full flexibility of Ruby invocation.
+// The API functions rb_scan_args and friends are not helpful because of
+// varargs and other ugliness; we reimplement this stuff in RbMethodArgs
+// with minimal C-level helpers.
 //
-// Will use 'simple' fixed-arity functions as a bringup, we need them I suppose
-// to do arity-policing.
-//
-// The Swift function signatures feel different so will not try to wrap up both
-// styles of function in an enum. Tbd.
-//
-// super
-// yield
-// block-given
-// need-block
-// (scan_args)
-// These all work off of static thread context, ie. are free functions in the API.
-// For discoverability though I'm considering putting them in some kind of 'services'
-// object passed in the methods.
-//
-// that would unify the closure type by pushing the fixed args in too.
-//
-// the *real* real struggle of course is figuring out how to pass context around.  I
-// think we're going to have use the method name (symbol/whatevs) as a key and query
-// it at invocation time from the C shim to figure out where to go.
+// Struggle #2 is figuring out how to pass context around; again Ruby doesn't
+// give us anything to glom onto so we use the method name (symbol/whatevs)
+// as a key and query it at invocation time from the C shim to figure out where
+// to go.
 //
 // We need two separate callbacks, one for normal methods (keyed by class-of-object)
 // and one for static methods / singleton object methods (keyed by object).
 //
-// Ok.  Flaw: I forgot about dynamic dispatch.
-// So, if we define a method m in class A, and class B: A, and object b: B then
-// calling b.m causes self.class == B and m will not resolve.
-//
-// Could insist on unique method names but, well.
+// Then we need to solve dynamic dispatch: if we define a method m in class A,
+// and class B: A, and object b: B then calling b.m causes self.class == B and m will
+// not resolve.
 //
 // Ruby does make `ancestors` available to give class and hierarchy, importantly in
-// dispatch order.  So we can search ancestors looking for a match.  Will normally
-// hit in first position; if later up then can cache that for subsequent calls.
+// dynamic dispatch order.  So we can search this property looking for a match.
 // OK - not THAT bad!
 //
 // For regular methods need to do self.class.ancestors; for metatypes self.ancestors
@@ -58,9 +40,12 @@ import RubyGatewayHelpers
 /// The `RbObject` is the object the method is being invoked against.
 /// The `RbMethod` provides useful services such as argument access.
 ///
-/// You can throw `RbException` to send a Ruby exception back.  Throwing
-/// anything else gets wrapped up in an `RbException` and sent back
-/// to Ruby.
+/// You can throw an `RbException` to raise a Ruby exception instead of returning
+/// normally from the method.  Throwing another type gets wrapped up in an
+/// `RbException` and raised as a Ruby runtime exception.
+///
+/// You must explicitly return a value for Swift typechecking reasons.  If you don't
+/// have anything interesting to return then write `return .nilObject`.
 public typealias RbMethodCallback = (RbObject, RbMethod) throws -> RbObject
 
 // MARK: - Dispatch gorpy implementation
@@ -170,11 +155,14 @@ private struct RbMethodDispatch {
 
 // MARK: - RbMethod
 
-/// Structure passed in to Swift implementations of Ruby functions offering useful services.
+/// This offers useful services to Swift implementations of Ruby methods.
+///
+/// You do not create instances of this type: instead, RubyGateway creates
+/// instances and passes them to method callbacks.
 public struct RbMethod {
-    /// The arguments passed to the function, decoded according to the function's `RbMethodArgsSpec`.
+    /// The arguments passed to the method, decoded according to the method's `RbMethodArgsSpec`.
     public let args: RbMethodArgs
-    /// The function's arguments specification, originally set by the user at the point the function was defined.
+    /// The method's arguments specification, originally set by the user at the point the method was defined.
     public let argsSpec: RbMethodArgsSpec
 
     init(args: RbMethodArgs, argsSpec: RbMethodArgsSpec) {
@@ -182,28 +170,29 @@ public struct RbMethod {
         self.argsSpec = argsSpec
     }
 
-    /// Has the function been passed a block?
+    /// Has the method been passed a block?
     public var isBlockGiven: Bool {
         return rb_block_given_p() != 0
     }
 
-    /// Raise an exception if the function has not been passed a block.
+    /// Raise an exception if the method has not been passed a block.
     public func needsBlock() throws {
         if !isBlockGiven {
             throw RbException(message: "No block given")
         }
     }
 
-    /// Invoke the function's block and get the result.
+    /// Invoke the method's block and get the result.
     ///
-    /// If the function was not passed a block then a Ruby exception
+    /// If the method was not passed a block then a Ruby exception
     /// is raised.
     /// - parameter args: The arguments to pass to the block, none by default.
     /// - returns: The value returned by the block.
     /// - throws: `RbError.rubyException(_:)` if the block raises an exception.
-    ///           `RbError.rubyJump(_:)` if the block does `return` or `break`.
-    ///           You should not attempt to handle `rubyJump` errors: rethrow them
-    ///           back to Ruby as soon as possible.
+    ///
+    ///     `RbError.rubyJump(_:)` if the block does `return` or `break`.
+    ///     You should not attempt to handle `rubyJump` errors: rethrow them
+    ///     back to Ruby as soon as possible.
     public func yieldBlock(args: [RbObjectConvertible?] = []) throws -> RbObject {
         let argObjects = args.map { $0.rubyObject }
         return try argObjects.withRubyValues { argValues in
@@ -213,13 +202,13 @@ public struct RbMethod {
         }
     }
 
-    /// Get the function's block as a Proc.
+    /// Get the method's block as a Ruby `Proc`.
     ///
     /// If you want to just call the block then use `yieldBlock(args:)`.  Use this method
     /// to store the block or do things to it.
     ///
-    /// - returns: an `RbObject` for a `Proc` object wrapping the passed block.
-    /// - throws: `RbError.rubyException(_:)` if the function does not have a block.
+    /// - returns: An `RbObject` for a `Proc` object wrapping the passed block.
+    /// - throws: `RbError.rubyException(_:)` if the method does not have a block.
     public func captureBlock() throws -> RbObject {
         try needsBlock()
         return RbObject(rubyValue: rb_block_proc())
@@ -235,63 +224,64 @@ extension Array {
     }
 }
 
-/// The various types of argument passed to a Ruby function implemented in Swift.
+/// The various types of argument passed to a Ruby method implemented in Swift.
 ///
-/// Available via `RbMethod.args` when the function is invoked.
+/// Available via `RbMethod.args` when the method is invoked.
 public struct RbMethodArgs {
-    /// The mandatory positional arguments to the function, comprising the
-    /// leading mandatory arguments followed by the trailing mandatory arguments
+    /// The mandatory positional arguments to the method, comprising the
+    /// leading mandatory arguments followed by the trailing mandatory arguments.
     public let mandatory: [RbObject]
 
-    /// The optional positional arguments to the function.  If caller did not
-    /// provide a value for any of these then their values are copied from the
+    /// The optional positional arguments to the method.  If caller did not
+    /// provide a value for any of these then their values are created from the
     /// `RbMethodArgsSpec`.
     public let optional: [RbObject]
 
-    /// The splatted (variable length) arguments to the function.
+    /// The splatted (variable length) arguments to the method.
     public let splatted: [RbObject]
 
-    /// The keyword arguments to the function.  If caller omitted any keyword arguments
-    /// with default values then they are copied from the `RbMethodArgsSpec`.
+    /// The keyword arguments to the method.  If caller omitted any keyword arguments
+    /// with default values then they are created from the `RbMethodArgsSpec`.
     public let keyword: [String : RbObject]
 }
 
-/// A description of how a Ruby function implemented in Swift is supposed to be called.
+/// A description of how a Ruby method implemented in Swift is supposed to be called.
 ///
-/// Ruby supports several different ways of passing arguments to a function.  A function
+/// Ruby supports several different ways of passing arguments.  A single method
 /// can support a mixture of positional, keyword, and variable-length (splatted) arguments.
 ///
-/// You typically create one of these for each function defined so it knows how to decode
-/// the arguments passed to it before your `RbMethodCallback` is invoked.
+/// You supply one of these when defining a method so that RubyGateway knows how to decode
+/// the arguments passed to it before your `RbMethodCallback` is invoked.  The decoded
+/// arguments are stored in the `args` property of the `RbMethod` passed to your callback.
 ///
-/// If you want to say "accept any number of arguments" then do `RbMethodArgsSpec(supportsSplat: true)`
-/// and access the arguments via `method.args.splatted`.
+/// If you want to say "accept any number of arguments" then write
+/// `RbMethodArgsSpec(supportsSplat: true)` and access the arguments via `method.args.splatted`.
 public struct RbMethodArgsSpec {
-    /// Number of leading mandatory positional arguments
+    /// The number of leading mandatory positional arguments.
     public let leadingMandatoryCount: Int
-    /// Default values for all optional positional arguments
+    /// Default values for all optional positional arguments.
     public let optionalValues: [() -> RbObject]
-    /// Number of optional positional arguments
+    /// The number of optional positional arguments.
     public var optionalCount: Int {
         return optionalValues.count
     }
-    /// Does the function support variable-length splatted arguments?
+    /// Does the method support variable-length splatted arguments?
     public let supportsSplat: Bool
-    /// Number of trailing mandatory positional arguments
+    /// The number of trailing mandatory positional arguments.
     public let trailingMandatoryCount: Int
-    /// Number of all mandatory positional arguments
+    /// The number of all mandatory positional arguments.
     public var totalMandatoryCount: Int {
         return leadingMandatoryCount + trailingMandatoryCount
     }
-    /// Names of mandatory keyword arguments
+    /// Names of mandatory keyword arguments.
     public let mandatoryKeywords: Set<String>
-    /// Names and default values of optional keyword arguments
+    /// Names and default values of optional keyword arguments.
     public let optionalKeywordValues: [String : () -> RbObject]
-    /// Does the function support keyword arguments?
+    /// Does the method support keyword arguments?
     public var supportsKeywords: Bool {
         return mandatoryKeywords.count > 0 || optionalKeywordValues.count > 0
     }
-    /// Does the function require a block?
+    /// Does the method require a block?
     public let requiresBlock: Bool
 
     // Call the Ruby function to report a decent error message for args mistakes.
@@ -307,20 +297,20 @@ public struct RbMethodArgsSpec {
         fatalError("Ought to have thrown by now")
     }
 
-    /// Create a new function args spec.
+    /// Create a new method arguments specification.
     ///
     /// - Parameters:
     ///   - leadingMandatoryCount: The number of leading mandatory positional arguments,
     ///     none by default.
-    ///   - optionals: The default values for optional positional arguments, none by default.
-    ///   - supportsSplat: Whether the function supports splatted variable-length args,
+    ///   - optionalValues: The default values for optional positional arguments, none by default.
+    ///   - supportsSplat: Whether the method supports splatted variable-length args,
     ///     `false` by default.
     ///   - trailingMandatoryCount: The number of trailing mandatory positional arguments,
     ///     none by default.
     ///   - mandatoryKeywords: The names of mandatory keyword arguments, none by default.
-    ///   - optionalKeywords: The default values for optional keyword arguments, none by default.
-    ///   - requiresBlock: Whether the function requires a block, `false` by default.  If this is
-    ///     `true` then the function may or may not be called with a block.
+    ///   - optionalKeywordValues: The default values for optional keyword arguments, none by default.
+    ///   - requiresBlock: Whether the method requires a block, `false` by default.  If this is
+    ///     `true` then the method may or may not be called with a block.
     public init(leadingMandatoryCount: Int = 0,
                 optionalValues: [RbObjectConvertible?] = [],
                 supportsSplat: Bool = false,
@@ -451,10 +441,10 @@ public struct RbMethodArgsSpec {
     /// check for errors, and present the final keyword-arg values.
     ///
     /// - Parameters:
-    ///   - spec: The function arguments specification.
+    ///   - spec: The method arguments specification.
     ///   - passed: The passed args hash.  The keys are all Ruby symbols; the
     ///             values are all Ruby objects of some kind.
-    /// - Returns: The resolved keywords args for the function including defaults.
+    /// - Returns: The resolved keywords args for the method including defaults.
     /// - Throws: `RbError.rubyException(_:)` if an unknown keyword is supplied, or
     ///           if a mandatory keyword is omitted.
     func resolveKeywords(passed: RbObject) throws -> [String : RbObject] {
@@ -486,7 +476,7 @@ public struct RbMethodArgsSpec {
             }
         }
 
-        // Any keywords left are not supported by the function.
+        // Any keywords left are not supported by the method.
         guard passedDict.isEmpty else {
             let keys = Array(passedDict.keys)
             let exn = RbException(argMessage: "Unknown keyword arguments: \(keys)")
@@ -497,15 +487,18 @@ public struct RbMethodArgsSpec {
     }
 }
 
-// MARK: - Global functions
+// MARK: - Swift Global Functions
 
 extension RbGateway {
     /// Define a global function that can use positional, keyword, and optional
     /// arguments as well as splatting.  The function can also be passed a block.
     ///
     /// Use the `RbMethod` passed into `body` to access the function arguments;
-    /// RubyBridge validates the arguments according to your spec before invoking
+    /// RubyBridge validates the arguments according to `argsSpec` before invoking
     /// this callback.
+    ///
+    /// The first parameter to the `body` callback is best ignored: it is the Ruby
+    /// internal object that is used to implement so-called "global functions".
     ///
     /// - parameter name: The function name.
     /// - parameter argsSpec: A description of the arguments required by the function.
@@ -513,7 +506,8 @@ extension RbGateway {
     ///             take any arguments.
     /// - parameter body: The Swift code to run when the function is called.
     /// - throws: `RbError.badIdentifier(type:id:)` if `name` is bad.
-    ///           Some other kind of error if Ruby is not working.
+    ///
+    ///     Some other kind of `RbError` if Ruby is not working.
     public func defineGlobalFunction(name: String,
                                      argsSpec: RbMethodArgsSpec = RbMethodArgsSpec(),
                                      body: @escaping RbMethodCallback) throws {
