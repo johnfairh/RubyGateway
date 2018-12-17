@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>RbError Enumeration Reference</title>
+    <title>RbMethodArgsSpec Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Enum/RbError" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Struct/RbMethodArgsSpec" class="dashAnchor"></a>
 
-    <a title="RbError Enumeration Reference"></a>
+    <a title="RbMethodArgsSpec Structure Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -44,7 +44,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">RubyGateway Reference</a>
       <img class="carat" src="../img/carat.png" />
-      RbError Enumeration Reference
+      RbMethodArgsSpec Structure Reference
     </p>
 
     <div class="content-wrapper">
@@ -224,17 +224,24 @@
 
         <section class="section">
           <div class="section-content">
-            <h1>RbError</h1>
+            <h1>RbMethodArgsSpec</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">RbError</span> <span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/metalkit/mtktextureloader/error/">Error</a></span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RbMethodArgsSpec</span></code></pre>
 
                 </div>
               </div>
-            <p>An error raised by the RubyGateway module.  Ruby exceptions
-generate <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(_:)</a></code>, unusual Ruby flow control
-generates <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO8rubyJumpyACs5Int32VcACmF">RbError.rubyJump(_:)</a></code>, and the other cases correspond
-to error conditions encountered by the Swift software.</p>
+            <p>A description of how a Ruby method implemented in Swift is supposed to be called.</p>
+
+<p>Ruby supports several different ways of passing arguments.  A single method
+can support a mixture of positional, keyword, and variable-length (splatted) arguments.</p>
+
+<p>You supply one of these when defining a method so that RubyGateway knows how to decode
+the arguments passed to it before your <code><a href="../Swift Method APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a></code> is invoked.  The decoded
+arguments are stored in the <code>args</code> property of the <code><a href="../Structs/RbMethod.html">RbMethod</a></code> passed to your callback.</p>
+
+<p>If you want to say <q>accept any number of arguments</q> then write
+<code>RbMethodArgsSpec(supportsSplat: true)</code> and access the arguments via <code>method.args.splatted</code>.</p>
 
           </div>
         </section>
@@ -242,20 +249,13 @@ to error conditions encountered by the Swift software.</p>
         <section class="section">
           <div class="section-content">
             <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Cases"></a>
-                <a name="//apple_ref/swift/Section/Cases" class="dashAnchor"></a>
-                <a href="#/Cases">
-                  <h3 class="section-name">Cases</h3>
-                </a>
-              </div>
               <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway7RbErrorO5setupyACSScACmF"></a>
-                    <a name="//apple_ref/swift/Element/setup(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway7RbErrorO5setupyACSScACmF">setup(_:)</a>
+                    <a name="/s:11RubyGateway16RbMethodArgsSpecV21leadingMandatoryCountSivp"></a>
+                    <a name="//apple_ref/swift/Property/leadingMandatoryCount" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway16RbMethodArgsSpecV21leadingMandatoryCountSivp">leadingMandatoryCount</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -263,19 +263,19 @@ to error conditions encountered by the Swift software.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The Ruby VM could not be set up.</p>
+                        <p>The number of leading mandatory positional arguments.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">setup</span><span class="p">(</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">leadingMandatoryCount</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/int/">Int</a></span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L19">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L261">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -283,9 +283,9 @@ to error conditions encountered by the Swift software.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway7RbErrorO7badTypeyACSScACmF"></a>
-                    <a name="//apple_ref/swift/Element/badType(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway7RbErrorO7badTypeyACSScACmF">badType(_:)</a>
+                    <a name="/s:11RubyGateway16RbMethodArgsSpecV14optionalValuesSayAA0C6ObjectCycGvp"></a>
+                    <a name="//apple_ref/swift/Property/optionalValues" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway16RbMethodArgsSpecV14optionalValuesSayAA0C6ObjectCycGvp">optionalValues</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -293,21 +293,19 @@ to error conditions encountered by the Swift software.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An object has the wrong type for an operation.</p>
-
-<p>Raised for example when setting a CVar on a non-class object.</p>
+                        <p>Default values for all optional positional arguments.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">badType</span><span class="p">(</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">optionalValues</span><span class="p">:</span> <span class="p">[()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L24">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L263">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -315,9 +313,9 @@ to error conditions encountered by the Swift software.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway7RbErrorO12badParameteryACSScACmF"></a>
-                    <a name="//apple_ref/swift/Element/badParameter(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway7RbErrorO12badParameteryACSScACmF">badParameter(_:)</a>
+                    <a name="/s:11RubyGateway16RbMethodArgsSpecV13optionalCountSivp"></a>
+                    <a name="//apple_ref/swift/Property/optionalCount" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway16RbMethodArgsSpecV13optionalCountSivp">optionalCount</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -325,21 +323,19 @@ to error conditions encountered by the Swift software.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A value passed to the library is out of range for some reason.</p>
-
-<p>Raised for example when declaring a method with fixed arity &gt; 15.</p>
+                        <p>The number of optional positional arguments.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">badParameter</span><span class="p">(</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">optionalCount</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/int/">Int</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L29">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L265-L267">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -347,9 +343,9 @@ to error conditions encountered by the Swift software.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway7RbErrorO13badIdentifieryACSS_SStcACmF"></a>
-                    <a name="//apple_ref/swift/Element/badIdentifier(type:id:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway7RbErrorO13badIdentifieryACSS_SStcACmF">badIdentifier(type:id:)</a>
+                    <a name="/s:11RubyGateway16RbMethodArgsSpecV13supportsSplatSbvp"></a>
+                    <a name="//apple_ref/swift/Property/supportsSplat" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway16RbMethodArgsSpecV13supportsSplatSbvp">supportsSplat</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -357,21 +353,19 @@ to error conditions encountered by the Swift software.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An identifier looks to be spelt wrong.</p>
-
-<p>Raised for example when an IVar name does not begin with &lsquo;@&rsquo;.</p>
+                        <p>Does the method support variable-length splatted arguments?</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">badIdentifier</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="nv">id</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">supportsSplat</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/bool/">Bool</a></span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L34">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L269">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -379,9 +373,9 @@ to error conditions encountered by the Swift software.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway7RbErrorO14duplicateKwArgyACSScACmF"></a>
-                    <a name="//apple_ref/swift/Element/duplicateKwArg(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway7RbErrorO14duplicateKwArgyACSScACmF">duplicateKwArg(_:)</a>
+                    <a name="/s:11RubyGateway16RbMethodArgsSpecV22trailingMandatoryCountSivp"></a>
+                    <a name="//apple_ref/swift/Property/trailingMandatoryCount" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway16RbMethodArgsSpecV22trailingMandatoryCountSivp">trailingMandatoryCount</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -389,21 +383,19 @@ to error conditions encountered by the Swift software.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A keyword argument is duplicated.</p>
-
-<p>Raised when a <code>kwArgs</code> parameter is passed and the list contains duplicate argument keywords.</p>
+                        <p>The number of trailing mandatory positional arguments.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">duplicateKwArg</span><span class="p">(</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">trailingMandatoryCount</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/int/">Int</a></span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L39">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L271">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -411,9 +403,9 @@ to error conditions encountered by the Swift software.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF"></a>
-                    <a name="//apple_ref/swift/Element/rubyException(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">rubyException(_:)</a>
+                    <a name="/s:11RubyGateway16RbMethodArgsSpecV19totalMandatoryCountSivp"></a>
+                    <a name="//apple_ref/swift/Property/totalMandatoryCount" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway16RbMethodArgsSpecV19totalMandatoryCountSivp">totalMandatoryCount</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -421,23 +413,19 @@ to error conditions encountered by the Swift software.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A Ruby exception occurred.</p>
-
-<p>You are free to ignore or handle this error.  If your code has been
-invoked from Ruby then you can also re-throw the error to pass it back
-down the stack.</p>
+                        <p>The number of all mandatory positional arguments.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">rubyException</span><span class="p">(</span><span class="kt"><a href="../Structs/RbException.html">RbException</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">totalMandatoryCount</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/int/">Int</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L46">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L273-L275">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -445,9 +433,9 @@ down the stack.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway7RbErrorO8rubyJumpyACs5Int32VcACmF"></a>
-                    <a name="//apple_ref/swift/Element/rubyJump(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway7RbErrorO8rubyJumpyACs5Int32VcACmF">rubyJump(_:)</a>
+                    <a name="/s:11RubyGateway16RbMethodArgsSpecV17mandatoryKeywordsShySSGvp"></a>
+                    <a name="//apple_ref/swift/Property/mandatoryKeywords" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway16RbMethodArgsSpecV17mandatoryKeywordsShySSGvp">mandatoryKeywords</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -455,75 +443,19 @@ down the stack.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Some Ruby flow control has happened.</p>
-
-<p>Raised when you invoke a block from Swift and the block does <code>return</code> or <code>break</code>.
-You must do any Swift-side cleanup and re-throw the error without talking to Ruby,
-otherwise the Ruby runtime will become confused at best.</p>
+                        <p>Names of mandatory keyword arguments.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">rubyJump</span><span class="p">(</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/int32/">Int32</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">mandatoryKeywords</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/set/">Set</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L53">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Error%20History"></a>
-                <a name="//apple_ref/swift/Section/Error History" class="dashAnchor"></a>
-                <a href="#/Error%20History">
-                  <h3 class="section-name">Error History</h3>
-                </a>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway7RbErrorO7HistoryV"></a>
-                    <a name="//apple_ref/swift/Struct/History" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway7RbErrorO7HistoryV">History</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Holds the most recent errors thrown by RubyGateway.</p>
-
-<p>This can be useful when the module indicates an error has occurred
-through a <code>nil</code> result somewhere &ndash; the error causing the <code>nil</code> has
-still been generated internally and is stashed here.</p>
-
-<p>These <code>nil</code> results happen during type conversion to Swift, for example
-<code><a href="../Extensions/String.html#/s:SS11RubyGatewayEySSSgAA8RbObjectCcfc">String.init(_:)</a></code>, and when using the <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">RbObjectAccess.failable</a></code>
-adapter that suppresses throwing.</p>
-
-<p>Methods are thread-safe.</p>
-
-                        <a href="../Enums/RbError/History.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt"><a href="https://developer.apple.com/documentation/webkitjs/history/">History</a></span></code></pre>
-
-                        </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L68-L108">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L277">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -531,9 +463,9 @@ adapter that suppresses throwing.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ"></a>
-                    <a name="//apple_ref/swift/Variable/history" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">history</a>
+                    <a name="/s:11RubyGateway16RbMethodArgsSpecV21optionalKeywordValuesSDySSAA0C6ObjectCycGvp"></a>
+                    <a name="//apple_ref/swift/Property/optionalKeywordValues" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway16RbMethodArgsSpecV21optionalKeywordValuesSDySSAA0C6ObjectCycGvp">optionalKeywordValues</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -541,40 +473,29 @@ adapter that suppresses throwing.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A short history of errors thrown by RubyGateway</p>
+                        <p>Names and default values of optional keyword arguments.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">history</span><span class="p">:</span> <span class="kt">RbError</span><span class="o">.</span><span class="kt"><a href="../Enums/RbError/History.html">History</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">optionalKeywordValues</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span> <span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L117">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L279">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/CustomStringConvertible"></a>
-                <a name="//apple_ref/swift/Section/CustomStringConvertible" class="dashAnchor"></a>
-                <a href="#/CustomStringConvertible">
-                  <h3 class="section-name">CustomStringConvertible</h3>
-                </a>
-              </div>
-              <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway7RbErrorO11descriptionSSvp"></a>
-                    <a name="//apple_ref/swift/Property/description" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway7RbErrorO11descriptionSSvp">description</a>
+                    <a name="/s:11RubyGateway16RbMethodArgsSpecV16supportsKeywordsSbvp"></a>
+                    <a name="//apple_ref/swift/Property/supportsKeywords" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway16RbMethodArgsSpecV16supportsKeywordsSbvp">supportsKeywords</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -582,19 +503,180 @@ adapter that suppresses throwing.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A human-readable description of the error.</p>
+                        <p>Does the method support keyword arguments?</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">description</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">supportsKeywords</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/bool/">Bool</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L124-L141">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L281-L283">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway16RbMethodArgsSpecV13requiresBlockSbvp"></a>
+                    <a name="//apple_ref/swift/Property/requiresBlock" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway16RbMethodArgsSpecV13requiresBlockSbvp">requiresBlock</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Does the method require a block?</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">requiresBlock</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/bool/">Bool</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L285">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway16RbMethodArgsSpecV21leadingMandatoryCount14optionalValues13supportsSplat08trailinghI017mandatoryKeywords0j7KeywordK013requiresBlockACSi_SayAA0C17ObjectConvertible_pSgGSbSiShySSGSDySSALGSbtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(leadingMandatoryCount:optionalValues:supportsSplat:trailingMandatoryCount:mandatoryKeywords:optionalKeywordValues:requiresBlock:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway16RbMethodArgsSpecV21leadingMandatoryCount14optionalValues13supportsSplat08trailinghI017mandatoryKeywords0j7KeywordK013requiresBlockACSi_SayAA0C17ObjectConvertible_pSgGSbSiShySSGSDySSALGSbtcfc">init(leadingMandatoryCount:optionalValues:supportsSplat:trailingMandatoryCount:mandatoryKeywords:optionalKeywordValues:requiresBlock:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a new method arguments specification.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">leadingMandatoryCount</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/int/">Int</a></span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="nv">optionalValues</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?]</span> <span class="o">=</span> <span class="p">[],</span>
+            <span class="nv">supportsSplat</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/bool/">Bool</a></span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="nv">trailingMandatoryCount</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/int/">Int</a></span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="nv">mandatoryKeywords</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/set/">Set</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[],</span>
+            <span class="nv">optionalKeywordValues</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?]</span> <span class="o">=</span> <span class="p">[:],</span>
+            <span class="nv">requiresBlock</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/bool/">Bool</a></span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>leadingMandatoryCount</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of leading mandatory positional arguments,
+none by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>optionalValues</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The default values for optional positional arguments, none by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>supportsSplat</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether the method supports splatted variable-length args,
+<code>false</code> by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>trailingMandatoryCount</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of trailing mandatory positional arguments,
+none by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>mandatoryKeywords</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The names of mandatory keyword arguments, none by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>optionalKeywordValues</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The default values for optional keyword arguments, none by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>requiresBlock</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether the method requires a block, <code>false</code> by default.  If this is
+<code>true</code> then the method may or may not be called with a block.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L314-L328">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

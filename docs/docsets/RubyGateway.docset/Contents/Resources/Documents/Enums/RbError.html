@@ -232,7 +232,8 @@
                 </div>
               </div>
             <p>An error raised by the RubyGateway module.  Ruby exceptions
-generate <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(_:)</a></code>, the other cases correspond
+generate <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(_:)</a></code>, unusual Ruby flow control
+generates <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO8rubyJumpyACs5Int32VcACmF">RbError.rubyJump(_:)</a></code>, and the other cases correspond
 to error conditions encountered by the Swift software.</p>
 
           </div>
@@ -274,7 +275,7 @@ to error conditions encountered by the Swift software.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L18">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L19">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -306,7 +307,7 @@ to error conditions encountered by the Swift software.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L23">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L24">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -338,7 +339,7 @@ to error conditions encountered by the Swift software.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L28">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L29">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -370,7 +371,7 @@ to error conditions encountered by the Swift software.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L33">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L34">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -402,7 +403,7 @@ to error conditions encountered by the Swift software.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L38">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L39">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -436,7 +437,7 @@ down the stack.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L45">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L46">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -457,8 +458,8 @@ down the stack.</p>
                         <p>Some Ruby flow control has happened.</p>
 
 <p>Raised when you invoke a block from Swift and the block does <code>return</code> or <code>break</code>.
-You must do any Swift-side cleanup and re-throw the error, otherwise the Ruby
-runtime will become confused at best.</p>
+You must do any Swift-side cleanup and re-throw the error without talking to Ruby,
+otherwise the Ruby runtime will become confused at best.</p>
 
                       </div>
                       <div class="declaration">
@@ -470,7 +471,7 @@ runtime will become confused at best.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L52">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L53">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -522,7 +523,7 @@ adapter that suppresses throwing.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L67-L107">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L68-L108">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -552,7 +553,7 @@ adapter that suppresses throwing.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L116">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L117">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -593,7 +594,7 @@ adapter that suppresses throwing.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L123-L140">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L124-L141">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

@@ -8,7 +8,8 @@ import CRuby
 import RubyGatewayHelpers
 
 /// An error raised by the RubyGateway module.  Ruby exceptions
-/// generate `RbError.rubyException(_:)`, the other cases correspond
+/// generate `RbError.rubyException(_:)`, unusual Ruby flow control
+/// generates `RbError.rubyJump(_:)`, and the other cases correspond
 /// to error conditions encountered by the Swift software.
 public enum RbError: Error {
 
@@ -47,8 +48,8 @@ public enum RbError: Error {
     /// Some Ruby flow control has happened.
     ///
     /// Raised when you invoke a block from Swift and the block does `return` or `break`.
-    /// You must do any Swift-side cleanup and re-throw the error, otherwise the Ruby
-    /// runtime will become confused at best.
+    /// You must do any Swift-side cleanup and re-throw the error without talking to Ruby,
+    /// otherwise the Ruby runtime will become confused at best.
     case rubyJump(Int32)
 
     // MARK: - Error History

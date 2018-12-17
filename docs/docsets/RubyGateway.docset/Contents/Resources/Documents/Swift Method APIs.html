@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Error Handling  Reference</title>
+    <title>Swift Method APIs  Reference</title>
     <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Section/Error Handling" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Section/Swift Method APIs" class="dashAnchor"></a>
 
-    <a title="Error Handling  Reference"></a>
+    <a title="Swift Method APIs  Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -44,7 +44,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="index.html">RubyGateway Reference</a>
       <img class="carat" src="img/carat.png" />
-      Error Handling  Reference
+      Swift Method APIs  Reference
     </p>
 
     <div class="content-wrapper">
@@ -224,8 +224,8 @@
 
         <section class="section">
           <div class="section-content">
-            <h1>Error Handling</h1>
-            <p>These types are used to deal with error conditions.</p>
+            <h1>Swift Method APIs</h1>
+            <p>These types are used to implement Ruby methods in Swift.</p>
 
           </div>
         </section>
@@ -237,9 +237,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway7RbErrorO"></a>
-                    <a name="//apple_ref/swift/Enum/RbError" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway7RbErrorO">RbError</a>
+                    <a name="/s:11RubyGateway16RbMethodArgsSpecV"></a>
+                    <a name="//apple_ref/swift/Struct/RbMethodArgsSpec" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway16RbMethodArgsSpecV">RbMethodArgsSpec</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -247,23 +247,30 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An error raised by the RubyGateway module.  Ruby exceptions
-generate <code><a href="Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(_:)</a></code>, unusual Ruby flow control
-generates <code><a href="Enums/RbError.html#/s:11RubyGateway7RbErrorO8rubyJumpyACs5Int32VcACmF">RbError.rubyJump(_:)</a></code>, and the other cases correspond
-to error conditions encountered by the Swift software.</p>
+                        <p>A description of how a Ruby method implemented in Swift is supposed to be called.</p>
 
-                        <a href="Enums/RbError.html" class="slightly-smaller">See more</a>
+<p>Ruby supports several different ways of passing arguments.  A single method
+can support a mixture of positional, keyword, and variable-length (splatted) arguments.</p>
+
+<p>You supply one of these when defining a method so that RubyGateway knows how to decode
+the arguments passed to it before your <code><a href="Swift Method APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a></code> is invoked.  The decoded
+arguments are stored in the <code>args</code> property of the <code><a href="Structs/RbMethod.html">RbMethod</a></code> passed to your callback.</p>
+
+<p>If you want to say <q>accept any number of arguments</q> then write
+<code>RbMethodArgsSpec(supportsSplat: true)</code> and access the arguments via <code>method.args.splatted</code>.</p>
+
+                        <a href="Structs/RbMethodArgsSpec.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">RbError</span> <span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/metalkit/mtktextureloader/error/">Error</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RbMethodArgsSpec</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L14-L118">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L259-L488">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -271,9 +278,9 @@ to error conditions encountered by the Swift software.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway11RbExceptionV"></a>
-                    <a name="//apple_ref/swift/Struct/RbException" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway11RbExceptionV">RbException</a>
+                    <a name="/s:11RubyGateway16RbMethodCallbacka"></a>
+                    <a name="//apple_ref/swift/Alias/RbMethodCallback" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -281,27 +288,29 @@ to error conditions encountered by the Swift software.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A Ruby exception.</p>
+                        <p>The function signature for a Ruby method implemented in Swift.</p>
 
-<p>This provides some convenience methods on top of the underlying <code>Exception</code>
-object.  RubyGateway does not throw these directly, it always wraps them in
-an <code><a href="Enums/RbError.html">RbError</a></code> instance.</p>
+<p>The <code><a href="Classes/RbObject.html">RbObject</a></code> is the object the method is being invoked against.
+The <code><a href="Structs/RbMethod.html">RbMethod</a></code> provides useful services such as argument access.</p>
 
-<p>Create and throw one of these to raise a Ruby exception from
-a block implemented in Swift by an <code><a href="Other APIs.html#/s:11RubyGateway15RbBlockCallbacka">RbBlockCallback</a></code>.</p>
+<p>You can throw an <code><a href="Structs/RbException.html">RbException</a></code> to raise a Ruby exception instead of returning
+normally from the method.  Throwing another type gets wrapped up in an
+<code><a href="Structs/RbException.html">RbException</a></code> and raised as a Ruby runtime exception.</p>
 
-                        <a href="Structs/RbException.html" class="slightly-smaller">See more</a>
+<p>You must explicitly return a value for Swift typechecking reasons.  If you don&rsquo;t
+have anything interesting to return then write <code>return .nilObject</code>.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RbException</span> <span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/customstringconvertible/">CustomStringConvertible</a></span><span class="p">,</span> <span class="kt"><a href="https://developer.apple.com/documentation/metalkit/mtktextureloader/error/">Error</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">RbMethodCallback</span> <span class="o">=</span> <span class="p">(</span><span class="kt"><a href="Classes/RbObject.html">RbObject</a></span><span class="p">,</span> <span class="kt"><a href="Structs/RbMethod.html">RbMethod</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="Classes/RbObject.html">RbObject</a></span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbError.swift#L180-L221">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L49">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -309,9 +318,9 @@ a block implemented in Swift by an <code><a href="Other APIs.html#/s:11RubyGatew
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway16RbFailableAccessV"></a>
-                    <a name="//apple_ref/swift/Struct/RbFailableAccess" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV">RbFailableAccess</a>
+                    <a name="/s:11RubyGateway8RbMethodV"></a>
+                    <a name="//apple_ref/swift/Struct/RbMethod" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway8RbMethodV">RbMethod</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -319,37 +328,56 @@ a block implemented in Swift by an <code><a href="Other APIs.html#/s:11RubyGatew
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A way to call Ruby methods and so on with a different error-handling style
-to the try/catch approach of <code><a href="Classes/RbObjectAccess.html">RbObjectAccess</a></code>: the methods return <code>nil</code> in failure
-cases instead of throwing errors.  Get hold of this <em>failable</em> interface using
-<code>RbObject.failable</code> or <code>RbGateway.failable</code>:</p>
-<pre class="highlight swift"><code><span class="k">if</span> <span class="k">let</span> <span class="nv">classObj</span> <span class="o">=</span> <span class="kt">Ruby</span><span class="o">.</span><span class="n">failable</span><span class="o">.</span><span class="nf">getClass</span><span class="p">(</span><span class="s">"Mod::Service"</span><span class="p">),</span>
-   <span class="k">let</span> <span class="nv">instance</span> <span class="o">=</span> <span class="n">classObj</span><span class="o">.</span><span class="n">failable</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"new"</span><span class="p">),</span>
-   <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">failable</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"summary"</span><span class="p">)</span> <span class="p">{</span>
-   <span class="nf">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre>
+                        <p>This offers useful services to Swift implementations of Ruby methods.</p>
 
-<p>This interface makes it easier to ignore errors especially on setters where
-there is often no apparent need to check the result.  This may be construed
-as a feature; I&rsquo;m not really convinced it pulls its weight over <code>try?</code>.</p>
+<p>You do not create instances of this type: instead, RubyGateway creates
+instances and passes them to method callbacks.</p>
 
-<p>If any methods in this interface do return <code>nil</code> then an <code><a href="Enums/RbError.html">RbError</a></code> has been raised
-and suppressed.  You can access the most recent <code><a href="Enums/RbError.html">RbError</a></code>s whether suppressed or not
-via <code><a href="Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code>.</p>
-
-                        <a href="Structs/RbFailableAccess.html" class="slightly-smaller">See more</a>
+                        <a href="Structs/RbMethod.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RbFailableAccess</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RbMethod</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L26-L34">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L162-L216">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway12RbMethodArgsV"></a>
+                    <a name="//apple_ref/swift/Struct/RbMethodArgs" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway12RbMethodArgsV">RbMethodArgs</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The various types of argument passed to a Ruby method implemented in Swift.</p>
+
+<p>Available via <code><a href="Structs/RbMethod.html#/s:11RubyGateway8RbMethodV4argsAA0cD4ArgsVvp">RbMethod.args</a></code> when the method is invoked.</p>
+
+                        <a href="Structs/RbMethodArgs.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RbMethodArgs</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L230-L246">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

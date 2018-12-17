@@ -26,6 +26,13 @@ class TestErrors: XCTestCase {
 
         let err4 = RbError.duplicateKwArg(errStr)
         XCTAssertTrue(err4.description.contains(errStr))
+
+        let err5 = RbError.badParameter(errStr)
+        XCTAssertTrue(err5.description.contains(errStr))
+
+        let tagVal = Int32(22)
+        let jmpErr = RbError.rubyJump(tagVal)
+        XCTAssertTrue(jmpErr.description.contains(String(tagVal)))
     }
 
     /// Need this to avoid nutty 'code will never be executed' warning triggered
