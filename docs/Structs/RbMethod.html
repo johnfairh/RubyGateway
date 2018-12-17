@@ -82,6 +82,23 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Swift Method APIs.html">Swift Method APIs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Swift Method APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RbMethod.html">RbMethod</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RbMethodArgs.html">RbMethodArgs</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a class="nav-group-name-link" href="../Other APIs.html">Other APIs</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
@@ -92,12 +109,6 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/RbBreak.html">RbBreak</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/RbMethod.html">RbMethod</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Other APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/RbProc.html">RbProc</a>
@@ -220,7 +231,10 @@
 
                 </div>
               </div>
-            <p>Structure passed in to Swift implementations of Ruby functions offering useful services.</p>
+            <p>This offers useful services to Swift implementations of Ruby methods.</p>
+
+<p>You do not create instances of this type: instead, RubyGateway creates
+instances and passes them to method callbacks.</p>
 
           </div>
         </section>
@@ -232,9 +246,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway8RbMethodV4argvSayAA0C6ObjectCGvp"></a>
-                    <a name="//apple_ref/swift/Property/argv" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway8RbMethodV4argvSayAA0C6ObjectCGvp">argv</a>
+                    <a name="/s:11RubyGateway8RbMethodV4argsAA0cD4ArgsVvp"></a>
+                    <a name="//apple_ref/swift/Property/args" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway8RbMethodV4argsAA0cD4ArgsVvp">args</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -242,19 +256,216 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The raw Ruby objects passed as args to the function.</p>
+                        <p>The arguments passed to the method, decoded according to the method&rsquo;s <code><a href="../Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a></code>.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">argv</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">]</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">args</span><span class="p">:</span> <span class="kt"><a href="../Structs/RbMethodArgs.html">RbMethodArgs</a></span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L173">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L164">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway8RbMethodV8argsSpecAA0cd4ArgsF0Vvp"></a>
+                    <a name="//apple_ref/swift/Property/argsSpec" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway8RbMethodV8argsSpecAA0cd4ArgsF0Vvp">argsSpec</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The method&rsquo;s arguments specification, originally set by the user at the point the method was defined.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">argsSpec</span><span class="p">:</span> <span class="kt"><a href="../Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L166">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway8RbMethodV12isBlockGivenSbvp"></a>
+                    <a name="//apple_ref/swift/Property/isBlockGiven" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway8RbMethodV12isBlockGivenSbvp">isBlockGiven</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Has the method been passed a block?</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">isBlockGiven</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/bool/">Bool</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L174-L176">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway8RbMethodV10needsBlockyyKF"></a>
+                    <a name="//apple_ref/swift/Method/needsBlock()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway8RbMethodV10needsBlockyyKF">needsBlock()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Raise an exception if the method has not been passed a block.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">needsBlock</span><span class="p">()</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L179-L183">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway8RbMethodV10yieldBlock4argsAA0C6ObjectCSayAA0cH11Convertible_pSgG_tKF"></a>
+                    <a name="//apple_ref/swift/Method/yieldBlock(args:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway8RbMethodV10yieldBlock4argsAA0C6ObjectCSayAA0cH11Convertible_pSgG_tKF">yieldBlock(args:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Invoke the method&rsquo;s block and get the result.</p>
+
+<p>If the method was not passed a block then a Ruby exception
+is raised.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <p><code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(_:)</a></code> if the block raises an exception.</p>
+
+<p><code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO8rubyJumpyACs5Int32VcACmF">RbError.rubyJump(_:)</a></code> if the block does <code>return</code> or <code>break</code>.
+You should not attempt to handle <code>rubyJump</code> errors: rethrow them
+back to Ruby as soon as possible.</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">yieldBlock</span><span class="p">(</span><span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?]</span> <span class="o">=</span> <span class="p">[])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>args</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The arguments to pass to the block, none by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The value returned by the block.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L196-L203">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway8RbMethodV12captureBlockAA0C6ObjectCyKF"></a>
+                    <a name="//apple_ref/swift/Method/captureBlock()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway8RbMethodV12captureBlockAA0C6ObjectCyKF">captureBlock()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get the method&rsquo;s block as a Ruby <code>Proc</code>.</p>
+
+<p>If you want to just call the block then use <code><a href="../Structs/RbMethod.html#/s:11RubyGateway8RbMethodV10yieldBlock4argsAA0C6ObjectCSayAA0cH11Convertible_pSgG_tKF">yieldBlock(args:)</a></code>.  Use this method
+to store the block or do things to it.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(_:)</a></code> if the method does not have a block.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">captureBlock</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for a <code>Proc</code> object wrapping the passed block.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L212-L215">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

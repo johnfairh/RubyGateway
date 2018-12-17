@@ -537,6 +537,38 @@ class TestMethods: XCTestCase {
         }
     }
 
+    // Check the user guide examples actually work
+    func testUserGuideFunctionExamples() {
+        struct Logger {
+            static var logCount = 0
+            static func log(message: String?, priority: Int? = nil) {
+                logCount = logCount + 1
+            }
+        }
+
+        doErrorFree {
+            let logArgsSpec = RbMethodArgsSpec(leadingMandatoryCount: 1)
+            try Ruby.defineGlobalFunction(name: "log", argsSpec: logArgsSpec) { _, method in
+                Logger.log(message: String(method.args.mandatory[0]))
+                return .nilObject
+            }
+
+            let log2ArgsSpec = RbMethodArgsSpec(mandatoryKeywords: ["message"],
+                                                optionalKeywordValues: ["priority" : 0 ])
+            try Ruby.defineGlobalFunction(name: "log2",
+                                          argsSpec: log2ArgsSpec) { _, method in
+                Logger.log(message: String(method.args.keyword["message"]!),
+                           priority: Int(method.args.keyword["priority"]!))
+                return .nilObject
+            }
+
+            try Ruby.require(filename: Helpers.fixturePath("swift_methods.rb"))
+
+            try Ruby.call("ruby_test_logging_functions")
+            XCTAssertEqual(3, Logger.logCount)
+        }
+    }
+
     static var allTests = [
         ("testFixedArgsRoundTrip", testFixedArgsRoundTrip),
         ("testVarArgsRoundTrip", testVarArgsRoundTrip),
@@ -557,6 +589,7 @@ class TestMethods: XCTestCase {
         ("testNilKeywordArgs", testNilKeywordArgs),
         ("testRubyCompatibility", testRubyCompatibility),
         ("testBadArgsHash", testBadArgsHash),
-        ("testImmutableDefaultArgs", testImmutableDefaultArgs)
+        ("testImmutableDefaultArgs", testImmutableDefaultArgs),
+        ("testUserGuideFunctionExamples", testUserGuideFunctionExamples)
     ]
 }

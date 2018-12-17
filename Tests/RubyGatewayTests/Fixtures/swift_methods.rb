@@ -85,3 +85,12 @@ def ruby_kw_should_return_200
 rescue
     200
 end
+
+# Swift defines:
+# def log(msg);
+# def log2(message:, priority: 1);
+def ruby_test_logging_functions
+    log("Log 1")
+    log2(message: "Log 2")
+    log2(message: "Log 3", priority: 2)
+end

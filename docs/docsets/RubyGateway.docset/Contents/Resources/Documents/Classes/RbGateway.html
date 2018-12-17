@@ -82,6 +82,23 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Swift Method APIs.html">Swift Method APIs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Swift Method APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RbMethod.html">RbMethod</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RbMethodArgs.html">RbMethodArgs</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a class="nav-group-name-link" href="../Other APIs.html">Other APIs</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
@@ -92,12 +109,6 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/RbBreak.html">RbBreak</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/RbMethod.html">RbMethod</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Other APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/RbProc.html">RbProc</a>
@@ -835,10 +846,10 @@ feature.  See Ruby#14250.</li>
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Run%20Ruby%20Code"></a>
-                <a name="//apple_ref/swift/Section/Run Ruby Code" class="dashAnchor"></a>
-                <a href="#/Run%20Ruby%20Code">
-                  <h3 class="section-name">Run Ruby Code</h3>
+                <a name="/Ruby%20Code%20Execution"></a>
+                <a name="//apple_ref/swift/Section/Ruby Code Execution" class="dashAnchor"></a>
+                <a href="#/Ruby%20Code%20Execution">
+                  <h3 class="section-name">Ruby Code Execution</h3>
                 </a>
               </div>
               <ul class="item-container">
@@ -1212,19 +1223,19 @@ if the provided Ruby value is the wrong shape.</p>
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Global%20functions"></a>
-                <a name="//apple_ref/swift/Section/Global functions" class="dashAnchor"></a>
-                <a href="#/Global%20functions">
-                  <h3 class="section-name">Global functions</h3>
+                <a name="/Swift%20Global%20Functions"></a>
+                <a name="//apple_ref/swift/Section/Swift Global Functions" class="dashAnchor"></a>
+                <a href="#/Swift%20Global%20Functions">
+                  <h3 class="section-name">Swift Global Functions</h3>
                 </a>
               </div>
               <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway02RbB0C20defineGlobalFunction4name4bodyySS_AA0C6ObjectCAH_AA0C6MethodVtKctKF"></a>
-                    <a name="//apple_ref/swift/Method/defineGlobalFunction(name:body:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway02RbB0C20defineGlobalFunction4name4bodyySS_AA0C6ObjectCAH_AA0C6MethodVtKctKF">defineGlobalFunction(name:body:)</a>
+                    <a name="/s:11RubyGateway02RbB0C20defineGlobalFunction4name8argsSpec4bodyySS_AA0c10MethodArgsI0VAA0C6ObjectCAK_AA0cK0VtKctKF"></a>
+                    <a name="//apple_ref/swift/Method/defineGlobalFunction(name:argsSpec:body:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C20defineGlobalFunction4name8argsSpec4bodyySS_AA0c10MethodArgsI0VAA0C6ObjectCAK_AA0cK0VtKctKF">defineGlobalFunction(name:argsSpec:body:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1235,13 +1246,17 @@ if the provided Ruby value is the wrong shape.</p>
                         <p>Define a global function that can use positional, keyword, and optional
 arguments as well as splatting.  The function can also be passed a block.</p>
 
-<p>Use the <code><a href="../Structs/RbMethod.html">RbMethod</a></code> passed into <code>body</code> to access the function arguments.
-You have to implement all argument checking rules yourself.</p>
+<p>Use the <code><a href="../Structs/RbMethod.html">RbMethod</a></code> passed into <code>body</code> to access the function arguments;
+RubyBridge validates the arguments according to <code>argsSpec</code> before invoking
+this callback.</p>
+
+<p>The first parameter to the <code>body</code> callback is best ignored: it is the Ruby
+internal object that is used to implement so-called <q>global functions</q>.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifieryACSS_SStcACmF">RbError.badIdentifier(type:id:)</a></code> if <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> is bad.
-      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO12badParameteryACSScACmF">RbError.badParameter(_:)</a></code> if <code>args</code> is silly.
-      Some other kind of error if Ruby is not working.
+    <p><code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifieryACSS_SStcACmF">RbError.badIdentifier(type:id:)</a></code> if <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> is bad.</p>
+
+<p>Some other kind of <code><a href="../Enums/RbError.html">RbError</a></code> if Ruby is not working.</p>
 
 </div>
 
@@ -1250,7 +1265,9 @@ You have to implement all argument checking rules yourself.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">defineGlobalFunction</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="nv">body</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Other APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a></span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">defineGlobalFunction</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span>
+                                 <span class="nv">argsSpec</span><span class="p">:</span> <span class="kt"><a href="../Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a></span><span class="p">(),</span>
+                                 <span class="nv">body</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Swift Method APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a></span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -1273,87 +1290,14 @@ You have to implement all argument checking rules yourself.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>body</em>
+                                <em>argsSpec</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The Swift code to run when the function is called.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L198-L200">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway02RbB0C20defineGlobalFunction4name4argc4bodyySS_SiAA0C6ObjectCAI_AA0C6MethodVtKctKF"></a>
-                    <a name="//apple_ref/swift/Method/defineGlobalFunction(name:argc:body:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway02RbB0C20defineGlobalFunction4name4argc4bodyySS_SiAA0C6ObjectCAI_AA0C6MethodVtKctKF">defineGlobalFunction(name:argc:body:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Define a global function with a fixed number of positional arguments.
-The function can also be passed a block.</p>
-
-<p>RubyGateway guarantees that the <code>body</code> callback is invoked with the
-required number of parameters.</p>
-
-<p>To use other argument styles, use <code><a href="../Classes/RbGateway.html#/s:11RubyGateway02RbB0C20defineGlobalFunction4name4bodyySS_AA0C6ObjectCAH_AA0C6MethodVtKctKF">defineGlobalFunction(name:body:)</a></code>.</p>
-<div class="aside aside-throws">
-    <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifieryACSS_SStcACmF">RbError.badIdentifier(type:id:)</a></code> if <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> is bad.
-      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO12badParameteryACSScACmF">RbError.badParameter(_:)</a></code> if <code>args</code> is silly.
-      Some other kind of error if Ruby is not working.
-
-</div>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">defineGlobalFunction</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="nv">argc</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/int/">Int</a></span><span class="p">,</span> <span class="nv">body</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Other APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a></span><span class="p">)</span> <span class="k">throws</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>name</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The function name.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>argc</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The number of arguments the function requires, not
-              including any block.</p>
+                                  <p>A description of the arguments required by the function.
+        The default for this parameter specifies a function that does not
+        take any arguments.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1373,7 +1317,7 @@ required number of parameters.</p>
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L217-L219">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L511-L517">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

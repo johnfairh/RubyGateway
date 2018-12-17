@@ -99,7 +99,7 @@ There are a few approaches to make use of Ruby arrays depending on your goal.
 2. Use Ruby Array methods via `RbObjectAccess.call(...)`.  Doing more work in
    the Ruby domain can reduce the number of elements that need to be converted
    to Swift types.
-3. Use Swift collection methods using `RbObject.collection`.  This gives access
+3. Use Swift collection methods via `RbObject.collection`.  This gives access
    to the Swift collection APIs.  It's more efficient that approach #1 if you
    can avoid converting all the array elements and looks prettier if you are
    aiming to mutate the array because the mutations happen in-place.
@@ -128,7 +128,8 @@ let res = try arr.call("each", block: RbProc(object: RbSymbol("downcase")))
 
 ### Pass Swift code as a block
 
-Use an `RbObjectAccess.call(...)` variant with a `blockCall` argument.  Ruby:
+Use an `RbObjectAccess.call(...)` variant with a `blockCall` trailing-closure
+argument.  Ruby:
 ```ruby
 obj.meth { |x| puts(x) }
 ```
@@ -219,6 +220,82 @@ let myClass = try Ruby.getClass("MyClass")
 let count = try myClass.getClassVar("@@count")
 ```
 
+## Implement Ruby global variables in Swift
+
+See `RbGateway.defineGlobalVar(name:get:set:)`.  For example:
+```swift
+var currentEpoch: Int
+
+Ruby.defineGlobalVar(name: "$epoch",
+                     get: { currentEpoch },
+                     set: { notifyNewEpoch($0)})
+```
+
+## Implement Ruby global functions in Swift
+
+See `RbGateway.defineGlobalFunction(name:argsSpec:body:)`.  The
+`RbMethodArgsSpec` is how you set the signature for the function: how many
+arguments of what kinds, which ones have default values, which have keywords,
+and so on.  For example, this defines a function to Ruby called `log` that
+requires one argument and passes its string representation onwards;
+```swift
+let logArgsSpec = RbMethodArgsSpec(leadingMandatoryCount: 1)
+try Ruby.defineGlobalFunction(name: "log",
+                              argsSpec: logArgsSpec) { _, method in
+    Logger.log(message: String(method.args.mandatory[0]))
+    return .nilObject
+}
+```
+Call from Ruby:
+```ruby
+log(object_to_log)
+```
+
+A more complicated version taking keyword parameters including an optional
+priority:
+```swift
+let log2ArgsSpec = RbMethodArgsSpec(mandatoryKeywords: ["message"],
+                                    optionalKeywordValues: ["priority" : 0 ])
+try Ruby.defineGlobalFunction(name: "log2",
+                              argsSpec: log2ArgsSpec) { _, method in
+    Logger.log(message: String(method.args.keyword["message"]!),
+               priority: Int(method.args.keyword["priority"]!))
+    return .nilObject
+}
+```
+RubyGateway validates arguments and fills defaults before invoking the Swift
+callback so guarantees all keywords have values.
+
+Call from Ruby:
+```ruby
+log2(message: object_to_log)
+log2(message: object_to_log, priority: 2)
+```
+
+## Use blocks from Swift methods
+
+The `RbMethod` passed to your method callback provides access to the method's
+block.  The best way to invoke it is with an unguarded `try`, and let any
+thrown errors propagate back to Swift.  This ensures that the control flow will
+work properly should Ruby do `return` or `next` inside the block.
+
+For example:
+```swift
+let log3ArgsSpec = RbMethodArgsSpec(requiresBlock: true)
+try Ruby.defineGlobalFunction(name: "log3",
+                              argsSpec: log3ArgsSpec) { _, method in
+    let logContent = try method.yieldBlock()
+    Logger.log(message: logContent)
+    return .nilObject
+}
+```
+
+If you need to handle exceptions from the `yield`, perhaps to do your own
+cleanup or take some kind of special action, then pay attention to whether the
+error is `RbError.rubyJump(_:)` or `RbError.rubyException(_:)`: for the former,
+you can do your own cleanup but must rethrow the error and must not call into
+Ruby as part of the cleanup.
+
 ### Run finalizers before process exit
 
 If you want to stop using Ruby and get on with something else, and
@@ -231,17 +308,6 @@ See `RbComplex` for a thin wrapper to Ruby's `Complex` type.
 ## Work with Ruby rational numbers
 
 See `RbRational` for a thin wrapper to Ruby's `Rational` type.
-
-## Implement Ruby Global Variables in Swift
-
-See `RbGateway.defineGlobalVar(name:get:set:)`.  For example:
-```swift
-var currentEpoch: Int
-
-Ruby.defineGlobalVar(name: "$epoch",
-                     get: { currentEpoch },
-                     set: { notifyNewEpoch($0)})
-```
 
 ## Error Handling
 

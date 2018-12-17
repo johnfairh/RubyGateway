@@ -21,9 +21,10 @@ programs.  It's easy to pass Swift datatypes into Ruby and turn Ruby objects
 back into Swift types.
 
 The current version of the framework entirely covers calling Ruby from Swift,
-including passing Swift closures as blocks.  The main
-[features to add](https://johnfairh.github.io/RubyGateway/todo.html) cover
-implementing Ruby classes and methods in Swift.
+including passing Swift closures as blocks.  Support for calling Swift from
+Ruby is slowly improving: the most recent version supports global functions,
+and adding custom classes and methods should be in the 
+[next release](https://johnfairh.github.io/RubyGateway/todo.html).
 
 See [CRuby](https://github.com/johnfairh/CRuby) if you are looking for a
 low-level Ruby C API wrapper.
@@ -112,6 +113,23 @@ Ruby.defineGlobalVar(
         set: { epochStore.current = newEpoch })
 ```
 
+Global functions:
+```swift
+let logArgsSpec = RbMethodArgsSpec(leadingMandatoryCount: 1,
+                                   optionalKeywordValues: ["priority" : 0])
+try Ruby.defineGlobalFunction(name: "log",
+                              argsSpec: logArgsSpec) { _, method in
+    Logger.log(message: String(method.args.mandatory[0]),
+               priority: Int(method.args.keyword["priority"]!))
+    return .nilObject
+}
+```
+Calls from Ruby:
+```ruby
+log(object_to_log)
+log(object2_to_log, priority: 2)
+```
+
 ## Documentation
 
 * [User guide](https://johnfairh.github.io/RubyGateway/user-guide.html)
@@ -121,7 +139,7 @@ Ruby.defineGlobalVar(
 ## Requirements
 
 * Swift 4.2 or later, from swift.org or Xcode 10.0+
-* macOS (tested on 10.13.6) or Linux (tested on Ubuntu Bionic/18.04 on x86_64) with Clang 6.
+* macOS (tested on 10.14.2) or Linux (tested on Ubuntu Bionic/18.04 on x86_64) with Clang 6.
 * Ruby 2.2 or later including development files:
   * For macOS, these come with Xcode.
   * For Linux you may need to install a -dev package depending on how your Ruby
