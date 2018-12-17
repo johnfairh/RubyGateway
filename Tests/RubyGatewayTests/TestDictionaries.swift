@@ -95,11 +95,16 @@ class TestDictionaries: XCTestCase {
                 XCTFail("Unexpected conversion: \(unexpected)")
                 return
             }
+        }
+    }
 
-            if let unexpected = Dictionary<Int, Int>(RbObject.nilObject) {
-                XCTFail("Unexpected conversion of nil to dict: \(unexpected)")
+    func testNilConversion() {
+        doErrorFree {
+            guard let empty = Dictionary<Int, Int>(RbObject.nilObject) else {
+                XCTFail("Couldn't convert ruby nil to dict")
                 return
             }
+            XCTAssertEqual(0, empty.count)
         }
     }
 

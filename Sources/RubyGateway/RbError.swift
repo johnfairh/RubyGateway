@@ -194,6 +194,14 @@ public struct RbException: CustomStringConvertible, Error {
         RbError.history.record(exception: self)
     }
 
+    /// Internal version for ArgumentError
+    init(argMessage: String) {
+        exception = argMessage.withCString { cstr in
+            RbObject(rubyValue: rb_exc_new(rb_eArgError, cstr, argMessage.utf8.count))
+        }
+        RbError.history.record(exception: self)
+    }
+
     /// The backtrace from the Ruby exception
     public var backtrace: [String] {
         var bt = ["[unbacktraceable]"]
