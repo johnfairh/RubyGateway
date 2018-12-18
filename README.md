@@ -161,7 +161,7 @@ github "johnfairh/RubyGateway"
 
 Swift package manager for macOS or Linux:
 ```
-.package(url: "https://github.com/johnfairh/RubyGateway", from: "2.0.0")
+.package(url: "https://github.com/johnfairh/RubyGateway", from: "2.1.0")
 ```
 
 CocoaPods for macOS:

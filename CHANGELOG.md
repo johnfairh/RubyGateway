@@ -4,13 +4,19 @@
 
 ##### Enhancements
 
+##### Bug Fixes
+
+## 2.1.0 - 18th December 2018
+
+##### Enhancements
+
 * Implement global functions in Swift.
 
 ##### Bug Fixes
 
 * Ruby nil coerced to Dictionary should give empty not Swift nil.
 
-# 2.0.0 - 8th October 2018
+## 2.0.0 - 8th October 2018
 
 ##### Breaking
 
