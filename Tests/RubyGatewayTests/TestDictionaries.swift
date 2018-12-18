@@ -122,6 +122,7 @@ class TestDictionaries: XCTestCase {
         ("testDuplicateKey", testDuplicateKey),
         ("testLiteral", testLiteral),
         ("testNoConversion", testNoConversion),
+        ("testNilConversion", testNilConversion),
         ("testDupRubyConversion", testDupRubyConversion)
     ]
 }
