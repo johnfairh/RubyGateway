@@ -216,7 +216,7 @@ extension RbObject {
     /// - parameter kwArgs: keyword arguments to pass to the `new` call for the object.  Default none.
     public convenience init?(ofClass className: String,
                              args: [RbObjectConvertible?] = [],
-                             kwArgs: DictionaryLiteral<String, RbObjectConvertible?> = [:]) {
+                             kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:]) {
         guard let obj = try? Ruby.get(className).call("new", args: args, kwArgs: kwArgs) else {
             return nil
         }
@@ -238,7 +238,7 @@ extension RbObject {
     /// - parameter blockCall: Swift code to pass as a block to the method.
     public convenience init?(ofClass className: String,
                              args: [RbObjectConvertible?] = [],
-                             kwArgs: DictionaryLiteral<String, RbObjectConvertible?> = [:],
+                             kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:],
                              retainBlock: Bool = false,
                              blockCall: @escaping RbBlockCallback) {
         let retention: RbBlockRetention = retainBlock ? .returned : .none
