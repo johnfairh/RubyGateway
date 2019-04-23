@@ -223,7 +223,7 @@
       <article class="main-content">
 
         <section class="section">
-          <div class="section-content">
+          <div class="section-content top-matter">
             <h1>Main APIs</h1>
             <p>These types form the main API to RubyGateway.</p>
 
@@ -283,7 +283,7 @@ or call functions as you would at the top level of a Ruby script, for example:</
 </code></pre>
 
 <p>If you just want to create a Ruby object of some class, see
-<code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC7ofClass4args6kwArgsACSgSS_SayAA0cD11Convertible_pSgGs17DictionaryLiteralVySSAIGtcfc">RbObject.init(ofClass:args:kwArgs:)</a></code>.</p>
+<code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC7ofClass4args6kwArgsACSgSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSAIGtcfc">RbObject.init(ofClass:args:kwArgs:)</a></code>.</p>
 
                         <a href="Classes/RbGateway.html" class="slightly-smaller">See more</a>
                       </div>
@@ -319,7 +319,7 @@ or call functions as you would at the top level of a Ruby script, for example:</
 <p>All Ruby objects whatever their type or class are represented using this
 Swift type.</p>
 
-<p>Use <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC7ofClass4args6kwArgsACSgSS_SayAA0cD11Convertible_pSgGs17DictionaryLiteralVySSAIGtcfc">RbObject.init(ofClass:args:kwArgs:)</a></code> to create a new Ruby object of
+<p>Use <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC7ofClass4args6kwArgsACSgSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSAIGtcfc">RbObject.init(ofClass:args:kwArgs:)</a></code> to create a new Ruby object of
 some class:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">myObj</span> <span class="o">=</span> <span class="kt">RbObject</span><span class="p">(</span><span class="nv">ofClass</span><span class="p">:</span> <span class="s">"MyModule::MyClass"</span><span class="p">,</span> <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="s">"arg1"</span><span class="p">,</span> <span class="mf">25.3</span><span class="p">])</span>
 </code></pre>
@@ -385,6 +385,18 @@ the program will crash.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">RbObject</span> <span class="p">:</span> <span class="kt"><a href="Classes/RbObjectAccess.html">RbObjectAccess</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">RbObject</span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">RbObject</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/expressiblebystringliteral/">ExpressibleByStringLiteral</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">RbObject</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/expressiblebybooleanliteral/">ExpressibleByBooleanLiteral</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">RbObject</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/expressiblebyintegerliteral/">ExpressibleByIntegerLiteral</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">RbObject</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/expressiblebyfloatliteral/">ExpressibleByFloatLiteral</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">RbObject</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/expressiblebyarrayliteral/">ExpressibleByArrayLiteral</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">RbObject</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/expressiblebydictionaryliteral/">ExpressibleByDictionaryLiteral</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">RbObject</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/customstringconvertible/">CustomStringConvertible</a></span><span class="p">,</span>
+                    <span class="kt"><a href="https://developer.apple.com/documentation/swift/customdebugstringconvertible/">CustomDebugStringConvertible</a></span><span class="p">,</span>
+                    <span class="kt"><a href="https://developer.apple.com/documentation/swift/customplaygrounddisplayconvertible/">CustomPlaygroundDisplayConvertible</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">RbObject</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/hashable/">Hashable</a></span><span class="p">,</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/equatable/">Equatable</a></span><span class="p">,</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/comparable/">Comparable</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">RbObject</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/signednumeric/">SignedNumeric</a></span></code></pre>
 
                         </div>
                       </div>
@@ -528,7 +540,7 @@ namespace.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectCollection.swift#L23-L78">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectCollection.swift#L23-L74">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -542,7 +554,7 @@ namespace.</p>
     </div>
     <section class="footer">
       <p>Distributed under the MIT license.  Maintained by <a class="link" href="mailto:johnfairh@gmail.com" target="_blank" rel="external">John Fairhurst</a>.</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>-<a class="link" href="https://github.com/johnfairh/jazzy" target="_blank" rel="external">bebop</a>, originally a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>-<a class="link" href="https://github.com/johnfairh/jazzy" target="_blank" rel="external">bebop</a>, originally a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

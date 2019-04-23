@@ -223,7 +223,7 @@
       <article class="main-content">
 
         <section class="section">
-          <div class="section-content">
+          <div class="section-content top-matter">
             <h1>RbObjectAccess</h1>
               <div class="declaration">
                 <div class="language">
@@ -303,9 +303,11 @@ property.  See <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14R
               <div class="task-name-container">
                 <a name="/Instance%20Variables"></a>
                 <a name="//apple_ref/swift/Section/Instance Variables" class="dashAnchor"></a>
-                <a href="#/Instance%20Variables">
-                  <h3 class="section-name">Instance Variables</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Instance%20Variables"></a>
+                  <h3 class="section-name"><p>Instance Variables</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -450,9 +452,11 @@ if it doesn&rsquo;t exist yet.</p>
               <div class="task-name-container">
                 <a name="/Failable%20Access"></a>
                 <a name="//apple_ref/swift/Section/Failable Access" class="dashAnchor"></a>
-                <a href="#/Failable%20Access">
-                  <h3 class="section-name">Failable Access</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Failable%20Access"></a>
+                  <h3 class="section-name"><p>Failable Access</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -492,9 +496,11 @@ See <code><a href="../Structs/RbFailableAccess.html">RbFailableAccess</a></code>
               <div class="task-name-container">
                 <a name="/Constants"></a>
                 <a name="//apple_ref/swift/Section/Constants" class="dashAnchor"></a>
-                <a href="#/Constants">
-                  <h3 class="section-name">Constants</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Constants"></a>
+                  <h3 class="section-name"><p>Constants</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -654,17 +660,19 @@ to drill down through nested classes and modules.</p>
               <div class="task-name-container">
                 <a name="/Method%20Call"></a>
                 <a name="//apple_ref/swift/Section/Method Call" class="dashAnchor"></a>
-                <a href="#/Method%20Call">
-                  <h3 class="section-name">Method Call</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Method%20Call"></a>
+                  <h3 class="section-name"><p>Method Call</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs17DictionaryLiteralVySSAJGtKF"></a>
+                    <a name="/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSAJGtKF"></a>
                     <a name="//apple_ref/swift/Method/call(_:args:kwArgs:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs17DictionaryLiteralVySSAJGtKF">call(_:args:kwArgs:)</a>
+                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSAJGtKF">call(_:args:kwArgs:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -690,7 +698,7 @@ to drill down through nested classes and modules.</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">call</span><span class="p">(</span><span class="n">_</span> <span class="nv">methodName</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span>
                  <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?]</span> <span class="o">=</span> <span class="p">[],</span>
-                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/dictionaryliteral/">DictionaryLiteral</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
+                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/keyvaluepairs/">KeyValuePairs</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
 
                         </div>
                       </div>
@@ -750,9 +758,9 @@ to drill down through nested classes and modules.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgs14blockRetention0J4CallAA0cD0CSS_SayAA0cD11Convertible_pSgGs17DictionaryLiteralVySSALGAA0c5BlockK0OAJSayAJGKctKF"></a>
+                    <a name="/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgs14blockRetention0J4CallAA0cD0CSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSALGAA0c5BlockK0OAJSayAJGKctKF"></a>
                     <a name="//apple_ref/swift/Method/call(_:args:kwArgs:blockRetention:blockCall:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgs14blockRetention0J4CallAA0cD0CSS_SayAA0cD11Convertible_pSgGs17DictionaryLiteralVySSALGAA0c5BlockK0OAJSayAJGKctKF">call(_:args:kwArgs:blockRetention:blockCall:)</a>
+                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgs14blockRetention0J4CallAA0cD0CSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSALGAA0c5BlockK0OAJSayAJGKctKF">call(_:args:kwArgs:blockRetention:blockCall:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -778,7 +786,7 @@ to drill down through nested classes and modules.</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">call</span><span class="p">(</span><span class="n">_</span> <span class="nv">methodName</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span>
                  <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?]</span> <span class="o">=</span> <span class="p">[],</span>
-                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/dictionaryliteral/">DictionaryLiteral</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:],</span>
+                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/keyvaluepairs/">KeyValuePairs</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:],</span>
                  <span class="nv">blockRetention</span><span class="p">:</span> <span class="kt"><a href="../Enums/RbBlockRetention.html">RbBlockRetention</a></span> <span class="o">=</span> <span class="o">.</span><span class="k">none</span><span class="p">,</span>
                  <span class="nv">blockCall</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Other APIs.html#/s:11RubyGateway15RbBlockCallbacka">RbBlockCallback</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
 
@@ -865,9 +873,9 @@ to drill down through nested classes and modules.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgs5blockAA0cD0CSS_SayAA0cD11Convertible_pSgGs17DictionaryLiteralVySSAKGAaJ_ptKF"></a>
+                    <a name="/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgs5blockAA0cD0CSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSAKGAaJ_ptKF"></a>
                     <a name="//apple_ref/swift/Method/call(_:args:kwArgs:block:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgs5blockAA0cD0CSS_SayAA0cD11Convertible_pSgGs17DictionaryLiteralVySSAKGAaJ_ptKF">call(_:args:kwArgs:block:)</a>
+                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgs5blockAA0cD0CSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSAKGAaJ_ptKF">call(_:args:kwArgs:block:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -894,7 +902,7 @@ to drill down through nested classes and modules.</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">call</span><span class="p">(</span><span class="n">_</span> <span class="nv">methodName</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span>
                  <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?]</span> <span class="o">=</span> <span class="p">[],</span>
-                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/dictionaryliteral/">DictionaryLiteral</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:],</span>
+                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/keyvaluepairs/">KeyValuePairs</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:],</span>
                  <span class="nv">block</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
 
                         </div>
@@ -967,9 +975,9 @@ to drill down through nested classes and modules.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgsAA0cD0CAA0cD11Convertible_p_SayAaJ_pSgGs17DictionaryLiteralVySSAKGtKF"></a>
+                    <a name="/s:11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgsAA0cD0CAA0cD11Convertible_p_SayAaJ_pSgGs13KeyValuePairsVySSAKGtKF"></a>
                     <a name="//apple_ref/swift/Method/call(symbol:args:kwArgs:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgsAA0cD0CAA0cD11Convertible_p_SayAaJ_pSgGs17DictionaryLiteralVySSAKGtKF">call(symbol:args:kwArgs:)</a>
+                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgsAA0cD0CAA0cD11Convertible_p_SayAaJ_pSgGs13KeyValuePairsVySSAKGtKF">call(symbol:args:kwArgs:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -996,7 +1004,7 @@ to drill down through nested classes and modules.</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">call</span><span class="p">(</span><span class="nv">symbol</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">,</span>
                  <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?]</span> <span class="o">=</span> <span class="p">[],</span>
-                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/dictionaryliteral/">DictionaryLiteral</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
+                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/keyvaluepairs/">KeyValuePairs</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
 
                         </div>
                       </div>
@@ -1056,9 +1064,9 @@ to drill down through nested classes and modules.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgs14blockRetention0K4CallAA0cD0CAA0cD11Convertible_p_SayAaL_pSgGs17DictionaryLiteralVySSAMGAA0c5BlockL0OAKSayAKGKctKF"></a>
+                    <a name="/s:11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgs14blockRetention0K4CallAA0cD0CAA0cD11Convertible_p_SayAaL_pSgGs13KeyValuePairsVySSAMGAA0c5BlockL0OAKSayAKGKctKF"></a>
                     <a name="//apple_ref/swift/Method/call(symbol:args:kwArgs:blockRetention:blockCall:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgs14blockRetention0K4CallAA0cD0CAA0cD11Convertible_p_SayAaL_pSgGs17DictionaryLiteralVySSAMGAA0c5BlockL0OAKSayAKGKctKF">call(symbol:args:kwArgs:blockRetention:blockCall:)</a>
+                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgs14blockRetention0K4CallAA0cD0CAA0cD11Convertible_p_SayAaL_pSgGs13KeyValuePairsVySSAMGAA0c5BlockL0OAKSayAKGKctKF">call(symbol:args:kwArgs:blockRetention:blockCall:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1085,7 +1093,7 @@ to drill down through nested classes and modules.</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">call</span><span class="p">(</span><span class="nv">symbol</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">,</span>
                  <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?]</span> <span class="o">=</span> <span class="p">[],</span>
-                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/dictionaryliteral/">DictionaryLiteral</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:],</span>
+                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/keyvaluepairs/">KeyValuePairs</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:],</span>
                  <span class="nv">blockRetention</span><span class="p">:</span> <span class="kt"><a href="../Enums/RbBlockRetention.html">RbBlockRetention</a></span> <span class="o">=</span> <span class="o">.</span><span class="k">none</span><span class="p">,</span>
                  <span class="nv">blockCall</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Other APIs.html#/s:11RubyGateway15RbBlockCallbacka">RbBlockCallback</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
 
@@ -1172,9 +1180,9 @@ to drill down through nested classes and modules.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgs5blockAA0cD0CAA0cD11Convertible_p_SayAaK_pSgGs17DictionaryLiteralVySSALGAaK_ptKF"></a>
+                    <a name="/s:11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgs5blockAA0cD0CAA0cD11Convertible_p_SayAaK_pSgGs13KeyValuePairsVySSALGAaK_ptKF"></a>
                     <a name="//apple_ref/swift/Method/call(symbol:args:kwArgs:block:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgs5blockAA0cD0CAA0cD11Convertible_p_SayAaK_pSgGs17DictionaryLiteralVySSALGAaK_ptKF">call(symbol:args:kwArgs:block:)</a>
+                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgs5blockAA0cD0CAA0cD11Convertible_p_SayAaK_pSgGs13KeyValuePairsVySSALGAaK_ptKF">call(symbol:args:kwArgs:block:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1202,7 +1210,7 @@ to drill down through nested classes and modules.</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">call</span><span class="p">(</span><span class="nv">symbol</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">,</span>
                  <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?]</span> <span class="o">=</span> <span class="p">[],</span>
-                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/dictionaryliteral/">DictionaryLiteral</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:],</span>
+                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/keyvaluepairs/">KeyValuePairs</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:],</span>
                  <span class="nv">block</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
 
                         </div>
@@ -1278,9 +1286,11 @@ to drill down through nested classes and modules.</p>
               <div class="task-name-container">
                 <a name="/Attributes"></a>
                 <a name="//apple_ref/swift/Section/Attributes" class="dashAnchor"></a>
-                <a href="#/Attributes">
-                  <h3 class="section-name">Attributes</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Attributes"></a>
+                  <h3 class="section-name"><p>Attributes</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -1299,7 +1309,7 @@ to drill down through nested classes and modules.</p>
                         <p>Get an attribute of a Ruby object.</p>
 
 <p>Attributes are declared with <code>:attr_accessor</code> and so on &ndash; this routine is a
-simple wrapper around <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs17DictionaryLiteralVySSAJGtKF">call(...)</a></code> for symmetry with <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC12setAttribute_8newValueAA0cD0CSS_AA0cD11Convertible_pSgtKF">setAttribute(...)</a></code>.</p>
+simple wrapper around <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSAJGtKF">call(...)</a></code> for symmetry with <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC12setAttribute_8newValueAA0cD0CSS_AA0cD11Convertible_pSgtKF">setAttribute(...)</a></code>.</p>
 
 <p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
 <div class="aside aside-throws">
@@ -1432,9 +1442,11 @@ wrapper around a call to the <code>attrname=</code> method.</p>
               <div class="task-name-container">
                 <a name="/Class%20Variables"></a>
                 <a name="//apple_ref/swift/Section/Class Variables" class="dashAnchor"></a>
-                <a href="#/Class%20Variables">
-                  <h3 class="section-name">Class Variables</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Class%20Variables"></a>
+                  <h3 class="section-name"><p>Class Variables</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -1592,9 +1604,11 @@ object context to set a CVar on the object&rsquo;s class.</p>
               <div class="task-name-container">
                 <a name="/Global%20Variables"></a>
                 <a name="//apple_ref/swift/Section/Global Variables" class="dashAnchor"></a>
-                <a href="#/Global%20Variables">
-                  <h3 class="section-name">Global Variables</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Global%20Variables"></a>
+                  <h3 class="section-name"><p>Global Variables</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -1748,9 +1762,11 @@ to avoid calling the <code><a href="../Classes/RbObject.html">RbObject</a></code
               <div class="task-name-container">
                 <a name="/Polymorphic%20Getter"></a>
                 <a name="//apple_ref/swift/Section/Polymorphic Getter" class="dashAnchor"></a>
-                <a href="#/Polymorphic%20Getter">
-                  <h3 class="section-name">Polymorphic Getter</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Polymorphic%20Getter"></a>
+                  <h3 class="section-name"><p>Polymorphic Getter</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -1894,7 +1910,7 @@ implicit conversion via <code><a href="../Protocols/RbObjectConvertible.html">Rb
     </div>
     <section class="footer">
       <p>Distributed under the MIT license.  Maintained by <a class="link" href="mailto:johnfairh@gmail.com" target="_blank" rel="external">John Fairhurst</a>.</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>-<a class="link" href="https://github.com/johnfairh/jazzy" target="_blank" rel="external">bebop</a>, originally a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>-<a class="link" href="https://github.com/johnfairh/jazzy" target="_blank" rel="external">bebop</a>, originally a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

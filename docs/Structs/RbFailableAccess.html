@@ -223,7 +223,7 @@
       <article class="main-content">
 
         <section class="section">
-          <div class="section-content">
+          <div class="section-content top-matter">
             <h1>RbFailableAccess</h1>
               <div class="declaration">
                 <div class="language">
@@ -259,17 +259,19 @@ via <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7His
               <div class="task-name-container">
                 <a name="/Method%20Call"></a>
                 <a name="//apple_ref/swift/Section/Method Call" class="dashAnchor"></a>
-                <a href="#/Method%20Call">
-                  <h3 class="section-name">Method Call</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Method%20Call"></a>
+                  <h3 class="section-name"><p>Method Call</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway16RbFailableAccessV4call_4args6kwArgsAA0C6ObjectCSgSS_SayAA0cJ11Convertible_pSgGs17DictionaryLiteralVySSAKGtF"></a>
+                    <a name="/s:11RubyGateway16RbFailableAccessV4call_4args6kwArgsAA0C6ObjectCSgSS_SayAA0cJ11Convertible_pSgGs13KeyValuePairsVySSAKGtF"></a>
                     <a name="//apple_ref/swift/Method/call(_:args:kwArgs:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV4call_4args6kwArgsAA0C6ObjectCSgSS_SayAA0cJ11Convertible_pSgGs17DictionaryLiteralVySSAKGtF">call(_:args:kwArgs:)</a>
+                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV4call_4args6kwArgsAA0C6ObjectCSgSS_SayAA0cJ11Convertible_pSgGs13KeyValuePairsVySSAKGtF">call(_:args:kwArgs:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -279,7 +281,7 @@ via <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7His
                       <div class="abstract">
                         <p>Call a method of a Ruby object.</p>
 
-<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs17DictionaryLiteralVySSAJGtKF">RbObjectAccess.call(_:args:kwArgs:)</a></code>.
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSAJGtKF">RbObjectAccess.call(_:args:kwArgs:)</a></code>.
 See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
 
                       </div>
@@ -289,7 +291,7 @@ See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7His
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">call</span><span class="p">(</span><span class="n">_</span> <span class="nv">method</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span>
                  <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?]</span> <span class="o">=</span> <span class="p">[],</span>
-                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/dictionaryliteral/">DictionaryLiteral</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:])</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
+                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/keyvaluepairs/">KeyValuePairs</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:])</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -349,9 +351,9 @@ See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7His
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway16RbFailableAccessV4call_4args6kwArgs14blockRetention0J4CallAA0C6ObjectCSgSS_SayAA0cM11Convertible_pSgGs17DictionaryLiteralVySSAMGAA0c5BlockK0OAJSayAJGKctF"></a>
+                    <a name="/s:11RubyGateway16RbFailableAccessV4call_4args6kwArgs14blockRetention0J4CallAA0C6ObjectCSgSS_SayAA0cM11Convertible_pSgGs13KeyValuePairsVySSAMGAA0c5BlockK0OAJSayAJGKctF"></a>
                     <a name="//apple_ref/swift/Method/call(_:args:kwArgs:blockRetention:blockCall:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV4call_4args6kwArgs14blockRetention0J4CallAA0C6ObjectCSgSS_SayAA0cM11Convertible_pSgGs17DictionaryLiteralVySSAMGAA0c5BlockK0OAJSayAJGKctF">call(_:args:kwArgs:blockRetention:blockCall:)</a>
+                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV4call_4args6kwArgs14blockRetention0J4CallAA0C6ObjectCSgSS_SayAA0cM11Convertible_pSgGs13KeyValuePairsVySSAMGAA0c5BlockK0OAJSayAJGKctF">call(_:args:kwArgs:blockRetention:blockCall:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -361,7 +363,7 @@ See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7His
                       <div class="abstract">
                         <p>Call a method of a Ruby object passing Swift code as a block.</p>
 
-<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgs14blockRetention0J4CallAA0cD0CSS_SayAA0cD11Convertible_pSgGs17DictionaryLiteralVySSALGAA0c5BlockK0OAJSayAJGKctKF">RbObjectAccess.call(_:args:kwArgs:blockRetention:blockCall:)</a></code>.
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgs14blockRetention0J4CallAA0cD0CSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSALGAA0c5BlockK0OAJSayAJGKctKF">RbObjectAccess.call(_:args:kwArgs:blockRetention:blockCall:)</a></code>.
 See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
 
                       </div>
@@ -371,7 +373,7 @@ See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7His
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">call</span><span class="p">(</span><span class="n">_</span> <span class="nv">method</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span>
                  <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?]</span> <span class="o">=</span> <span class="p">[],</span>
-                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/dictionaryliteral/">DictionaryLiteral</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:],</span>
+                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/keyvaluepairs/">KeyValuePairs</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:],</span>
                  <span class="nv">blockRetention</span><span class="p">:</span> <span class="kt"><a href="../Enums/RbBlockRetention.html">RbBlockRetention</a></span> <span class="o">=</span> <span class="o">.</span><span class="k">none</span><span class="p">,</span>
                  <span class="nv">blockCall</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Other APIs.html#/s:11RubyGateway15RbBlockCallbacka">RbBlockCallback</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
 
@@ -458,9 +460,9 @@ See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7His
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway16RbFailableAccessV4call_4args6kwArgs5blockAA0C6ObjectCSgSS_SayAA0cK11Convertible_pSgGs17DictionaryLiteralVySSALGAaK_ptF"></a>
+                    <a name="/s:11RubyGateway16RbFailableAccessV4call_4args6kwArgs5blockAA0C6ObjectCSgSS_SayAA0cK11Convertible_pSgGs13KeyValuePairsVySSALGAaK_ptF"></a>
                     <a name="//apple_ref/swift/Method/call(_:args:kwArgs:block:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV4call_4args6kwArgs5blockAA0C6ObjectCSgSS_SayAA0cK11Convertible_pSgGs17DictionaryLiteralVySSALGAaK_ptF">call(_:args:kwArgs:block:)</a>
+                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV4call_4args6kwArgs5blockAA0C6ObjectCSgSS_SayAA0cK11Convertible_pSgGs13KeyValuePairsVySSALGAaK_ptF">call(_:args:kwArgs:block:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -470,7 +472,7 @@ See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7His
                       <div class="abstract">
                         <p>Call a method of a Ruby object passing a Ruby Proc as a block.</p>
 
-<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgs5blockAA0cD0CSS_SayAA0cD11Convertible_pSgGs17DictionaryLiteralVySSAKGAaJ_ptKF">RbObjectAccess.call(_:args:kwArgs:block:)</a></code>.
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgs5blockAA0cD0CSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSAKGAaJ_ptKF">RbObjectAccess.call(_:args:kwArgs:block:)</a></code>.
 See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
 
                       </div>
@@ -480,7 +482,7 @@ See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7His
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">call</span><span class="p">(</span><span class="n">_</span> <span class="nv">method</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span>
                  <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?]</span> <span class="o">=</span> <span class="p">[],</span>
-                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/dictionaryliteral/">DictionaryLiteral</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:],</span>
+                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/keyvaluepairs/">KeyValuePairs</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:],</span>
                  <span class="nv">block</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
 
                         </div>
@@ -553,9 +555,9 @@ See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7His
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgsAA0C6ObjectCSgAA0cK11Convertible_p_SayAaK_pSgGs17DictionaryLiteralVySSALGtF"></a>
+                    <a name="/s:11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgsAA0C6ObjectCSgAA0cK11Convertible_p_SayAaK_pSgGs13KeyValuePairsVySSALGtF"></a>
                     <a name="//apple_ref/swift/Method/call(symbol:args:kwArgs:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgsAA0C6ObjectCSgAA0cK11Convertible_p_SayAaK_pSgGs17DictionaryLiteralVySSALGtF">call(symbol:args:kwArgs:)</a>
+                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgsAA0C6ObjectCSgAA0cK11Convertible_p_SayAaK_pSgGs13KeyValuePairsVySSALGtF">call(symbol:args:kwArgs:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -565,7 +567,7 @@ See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7His
                       <div class="abstract">
                         <p>Call a method of a Ruby object using a symbol.</p>
 
-<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgsAA0cD0CAA0cD11Convertible_p_SayAaJ_pSgGs17DictionaryLiteralVySSAKGtKF">RbObjectAccess.call(symbol:args:kwArgs:)</a></code>.
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgsAA0cD0CAA0cD11Convertible_p_SayAaJ_pSgGs13KeyValuePairsVySSAKGtKF">RbObjectAccess.call(symbol:args:kwArgs:)</a></code>.
 See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
 
                       </div>
@@ -576,7 +578,7 @@ See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7His
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">call</span><span class="p">(</span><span class="nv">symbol</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">,</span>
                  <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?]</span> <span class="o">=</span> <span class="p">[],</span>
-                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/dictionaryliteral/">DictionaryLiteral</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:])</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
+                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/keyvaluepairs/">KeyValuePairs</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:])</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -636,9 +638,9 @@ See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7His
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgs14blockRetention0K4CallAA0C6ObjectCSgAA0cN11Convertible_p_SayAaM_pSgGs17DictionaryLiteralVySSANGAA0c5BlockL0OAKSayAKGKctF"></a>
+                    <a name="/s:11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgs14blockRetention0K4CallAA0C6ObjectCSgAA0cN11Convertible_p_SayAaM_pSgGs13KeyValuePairsVySSANGAA0c5BlockL0OAKSayAKGKctF"></a>
                     <a name="//apple_ref/swift/Method/call(symbol:args:kwArgs:blockRetention:blockCall:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgs14blockRetention0K4CallAA0C6ObjectCSgAA0cN11Convertible_p_SayAaM_pSgGs17DictionaryLiteralVySSANGAA0c5BlockL0OAKSayAKGKctF">call(symbol:args:kwArgs:blockRetention:blockCall:)</a>
+                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgs14blockRetention0K4CallAA0C6ObjectCSgAA0cN11Convertible_p_SayAaM_pSgGs13KeyValuePairsVySSANGAA0c5BlockL0OAKSayAKGKctF">call(symbol:args:kwArgs:blockRetention:blockCall:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -648,7 +650,7 @@ See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7His
                       <div class="abstract">
                         <p>Call a method of a Ruby object using a symbol passing Swift code as a block.</p>
 
-<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgs14blockRetention0K4CallAA0cD0CAA0cD11Convertible_p_SayAaL_pSgGs17DictionaryLiteralVySSAMGAA0c5BlockL0OAKSayAKGKctKF">RbObjectAccess.call(symbol:args:kwArgs:blockRetention:blockCall:)</a></code>.
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgs14blockRetention0K4CallAA0cD0CAA0cD11Convertible_p_SayAaL_pSgGs13KeyValuePairsVySSAMGAA0c5BlockL0OAKSayAKGKctKF">RbObjectAccess.call(symbol:args:kwArgs:blockRetention:blockCall:)</a></code>.
 See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
 
                       </div>
@@ -659,7 +661,7 @@ See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7His
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">call</span><span class="p">(</span><span class="nv">symbol</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">,</span>
                  <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?]</span> <span class="o">=</span> <span class="p">[],</span>
-                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/dictionaryliteral/">DictionaryLiteral</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:],</span>
+                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/keyvaluepairs/">KeyValuePairs</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:],</span>
                  <span class="nv">blockRetention</span><span class="p">:</span> <span class="kt"><a href="../Enums/RbBlockRetention.html">RbBlockRetention</a></span> <span class="o">=</span> <span class="o">.</span><span class="k">none</span><span class="p">,</span>
                  <span class="nv">blockCall</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Other APIs.html#/s:11RubyGateway15RbBlockCallbacka">RbBlockCallback</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
 
@@ -746,9 +748,9 @@ See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7His
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgs5blockAA0C6ObjectCSgAA0cL11Convertible_p_SayAaL_pSgGs17DictionaryLiteralVySSAMGAaL_ptF"></a>
+                    <a name="/s:11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgs5blockAA0C6ObjectCSgAA0cL11Convertible_p_SayAaL_pSgGs13KeyValuePairsVySSAMGAaL_ptF"></a>
                     <a name="//apple_ref/swift/Method/call(symbol:args:kwArgs:block:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgs5blockAA0C6ObjectCSgAA0cL11Convertible_p_SayAaL_pSgGs17DictionaryLiteralVySSAMGAaL_ptF">call(symbol:args:kwArgs:block:)</a>
+                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgs5blockAA0C6ObjectCSgAA0cL11Convertible_p_SayAaL_pSgGs13KeyValuePairsVySSAMGAaL_ptF">call(symbol:args:kwArgs:block:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -758,7 +760,7 @@ See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7His
                       <div class="abstract">
                         <p>Call a method of a Ruby object using a symbol passing a Ruby Proc as a block.</p>
 
-<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgs5blockAA0cD0CAA0cD11Convertible_p_SayAaK_pSgGs17DictionaryLiteralVySSALGAaK_ptKF">RbObjectAccess.call(symbol:args:kwArgs:block:)</a></code>.
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgs5blockAA0cD0CAA0cD11Convertible_p_SayAaK_pSgGs13KeyValuePairsVySSALGAaK_ptKF">RbObjectAccess.call(symbol:args:kwArgs:block:)</a></code>.
 See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
 
                       </div>
@@ -769,7 +771,7 @@ See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7His
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">call</span><span class="p">(</span><span class="nv">symbol</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">,</span>
                  <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?]</span> <span class="o">=</span> <span class="p">[],</span>
-                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/dictionaryliteral/">DictionaryLiteral</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:],</span>
+                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/keyvaluepairs/">KeyValuePairs</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:],</span>
                  <span class="nv">block</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
 
                         </div>
@@ -845,9 +847,11 @@ See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7His
               <div class="task-name-container">
                 <a name="/Attributes"></a>
                 <a name="//apple_ref/swift/Section/Attributes" class="dashAnchor"></a>
-                <a href="#/Attributes">
-                  <h3 class="section-name">Attributes</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Attributes"></a>
+                  <h3 class="section-name"><p>Attributes</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -980,9 +984,11 @@ See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7His
               <div class="task-name-container">
                 <a name="/Constants"></a>
                 <a name="//apple_ref/swift/Section/Constants" class="dashAnchor"></a>
-                <a href="#/Constants">
-                  <h3 class="section-name">Constants</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Constants"></a>
+                  <h3 class="section-name"><p>Constants</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -1103,9 +1109,11 @@ See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7His
               <div class="task-name-container">
                 <a name="/Instance%20Variables"></a>
                 <a name="//apple_ref/swift/Section/Instance Variables" class="dashAnchor"></a>
-                <a href="#/Instance%20Variables">
-                  <h3 class="section-name">Instance Variables</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Instance%20Variables"></a>
+                  <h3 class="section-name"><p>Instance Variables</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -1239,9 +1247,11 @@ See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7His
               <div class="task-name-container">
                 <a name="/Class%20Variables"></a>
                 <a name="//apple_ref/swift/Section/Class Variables" class="dashAnchor"></a>
-                <a href="#/Class%20Variables">
-                  <h3 class="section-name">Class Variables</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Class%20Variables"></a>
+                  <h3 class="section-name"><p>Class Variables</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -1379,9 +1389,11 @@ See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7His
               <div class="task-name-container">
                 <a name="/Global%20Variables"></a>
                 <a name="//apple_ref/swift/Section/Global Variables" class="dashAnchor"></a>
-                <a href="#/Global%20Variables">
-                  <h3 class="section-name">Global Variables</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Global%20Variables"></a>
+                  <h3 class="section-name"><p>Global Variables</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -1515,9 +1527,11 @@ See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7His
               <div class="task-name-container">
                 <a name="/Polymorphic%20Getter"></a>
                 <a name="//apple_ref/swift/Section/Polymorphic Getter" class="dashAnchor"></a>
-                <a href="#/Polymorphic%20Getter">
-                  <h3 class="section-name">Polymorphic Getter</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Polymorphic%20Getter"></a>
+                  <h3 class="section-name"><p>Polymorphic Getter</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -1586,7 +1600,7 @@ See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7His
     </div>
     <section class="footer">
       <p>Distributed under the MIT license.  Maintained by <a class="link" href="mailto:johnfairh@gmail.com" target="_blank" rel="external">John Fairhurst</a>.</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>-<a class="link" href="https://github.com/johnfairh/jazzy" target="_blank" rel="external">bebop</a>, originally a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>-<a class="link" href="https://github.com/johnfairh/jazzy" target="_blank" rel="external">bebop</a>, originally a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>
