@@ -66,10 +66,6 @@ public struct RbObjectCollection: RandomAccessCollection,
         return i + 1
     }
 
-    public func index(before i: Int) -> Int {
-        return i - 1
-    }
-
     public mutating func replaceSubrange<C>(_ subrange: Range<Int>, with newElements: C) where C: Collection, C.Element: RbObjectConvertible {
         let newArray = Array(newElements)
 

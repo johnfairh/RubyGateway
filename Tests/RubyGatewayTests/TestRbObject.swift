@@ -172,22 +172,39 @@ class TestRbObject: XCTestCase {
     }
 
     // Test RbObject alive prevents GC AND RbObject dead allows GC
+    //
+    // This test is very sensitive: it relies on Ruby being able to GC
+    // the object that is created at point #1 by the time the call to
+    // the GC at point #2 runs.
+    //
+    // This requires that Ruby cannot find a ref to the object somewhere
+    // on the stack.  Over various Swift versions, parts of the implementation
+    // have changed to make this harder and harder to track down: the structure
+    // of the function is just 'what works' on latest.  Adding debugging prints
+    // to places like `RbObject.deinit` tend to make the problem vanish because
+    // argh.
     func testObjectGc() {
+        var initialMTCount: Int = -1
+
         doErrorFree {
             try Ruby.require(filename: Helpers.fixturePath("methods.rb"))
+            try runGC()
+            initialMTCount = try getMethodsTestHeapCount()
+        }
 
+        doErrorFree {
             try runGC()
 
-            let initialMTCount = try getMethodsTestHeapCount()
-
             do {
-                let o = RbObject(ofClass: "MethodsTest")!
+                let o = RbObject(ofClass: "MethodsTest")! // POINT #1
 
                 XCTAssertEqual(initialMTCount + 1, try getMethodsTestHeapCount())
                 print("Hey Swift, please don't optimize away \(o)")
             }
+        }
 
-            try runGC()
+        doErrorFree {
+            try runGC() // POINT #2
 
             XCTAssertEqual(initialMTCount, try getMethodsTestHeapCount())
         }

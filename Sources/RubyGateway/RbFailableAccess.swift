@@ -57,7 +57,7 @@ extension RbFailableAccess {
     /// - returns: An `RbObject` for the result of the method, or `nil` if an error occurred.
     public func call(_ method: String,
                      args: [RbObjectConvertible?] = [],
-                     kwArgs: DictionaryLiteral<String, RbObjectConvertible?> = [:]) -> RbObject? {
+                     kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:]) -> RbObject? {
         return try? access.call(method, args: args, kwArgs: kwArgs)
     }
 
@@ -75,7 +75,7 @@ extension RbFailableAccess {
     /// - returns: An `RbObject` for the result of the method, or `nil` if an error occurred.
     public func call(_ method: String,
                      args: [RbObjectConvertible?] = [],
-                     kwArgs: DictionaryLiteral<String, RbObjectConvertible?> = [:],
+                     kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:],
                      blockRetention: RbBlockRetention = .none,
                      blockCall: @escaping RbBlockCallback) -> RbObject? {
         return try? access.call(method, args: args, kwArgs: kwArgs, blockRetention: blockRetention, blockCall: blockCall)
@@ -93,7 +93,7 @@ extension RbFailableAccess {
     /// - returns: An `RbObject` for the result of the method, or `nil` if an error occurred.
     public func call(_ method: String,
                      args: [RbObjectConvertible?] = [],
-                     kwArgs: DictionaryLiteral<String, RbObjectConvertible?> = [:],
+                     kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:],
                      block: RbObjectConvertible) -> RbObject? {
         return try? access.call(method, args: args, kwArgs: kwArgs, block: block)
     }
@@ -110,7 +110,7 @@ extension RbFailableAccess {
     @discardableResult
     public func call(symbol: RbObjectConvertible,
                      args: [RbObjectConvertible?] = [],
-                     kwArgs: DictionaryLiteral<String, RbObjectConvertible?> = [:]) -> RbObject? {
+                     kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:]) -> RbObject? {
         return try? access.call(symbol: symbol, args: args, kwArgs: kwArgs)
     }
 
@@ -129,7 +129,7 @@ extension RbFailableAccess {
     @discardableResult
     public func call(symbol: RbObjectConvertible,
                      args: [RbObjectConvertible?] = [],
-                     kwArgs: DictionaryLiteral<String, RbObjectConvertible?> = [:],
+                     kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:],
                      blockRetention: RbBlockRetention = .none,
                      blockCall: @escaping RbBlockCallback) -> RbObject? {
         return try? access.call(symbol: symbol, args: args, kwArgs: kwArgs, blockRetention: blockRetention, blockCall: blockCall)
@@ -148,7 +148,7 @@ extension RbFailableAccess {
     @discardableResult
     public func call(symbol: RbObjectConvertible,
                      args: [RbObjectConvertible?] = [],
-                     kwArgs: DictionaryLiteral<String, RbObjectConvertible?> = [:],
+                     kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:],
                      block: RbObjectConvertible) -> RbObject? {
         return try? access.call(symbol: symbol, args: args, kwArgs: kwArgs, block: block)
     }

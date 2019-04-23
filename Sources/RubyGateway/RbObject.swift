@@ -216,7 +216,7 @@ extension RbObject {
     /// - parameter kwArgs: keyword arguments to pass to the `new` call for the object.  Default none.
     public convenience init?(ofClass className: String,
                              args: [RbObjectConvertible?] = [],
-                             kwArgs: DictionaryLiteral<String, RbObjectConvertible?> = [:]) {
+                             kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:]) {
         guard let obj = try? Ruby.get(className).call("new", args: args, kwArgs: kwArgs) else {
             return nil
         }
@@ -238,7 +238,7 @@ extension RbObject {
     /// - parameter blockCall: Swift code to pass as a block to the method.
     public convenience init?(ofClass className: String,
                              args: [RbObjectConvertible?] = [],
-                             kwArgs: DictionaryLiteral<String, RbObjectConvertible?> = [:],
+                             kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:],
                              retainBlock: Bool = false,
                              blockCall: @escaping RbBlockCallback) {
         let retention: RbBlockRetention = retainBlock ? .returned : .none
@@ -307,10 +307,10 @@ extension RbObject: Hashable, Equatable, Comparable {
     /// Calls the Ruby `hash` method.
     /// - note: Crashes the process (`fatalError`) if the object does not support `hash`
     ///   or if the `hash` call returns something that can't be converted to `Int`.
-    public var hashValue: Int {
+    public func hash(into hasher: inout Hasher) {
         // Have to do this to avoid dictionary literal type stuff causing crashes when setup has failed.
         guard Ruby.softSetup() else {
-            return 0
+            return
         }
         // not super happy about this - could we instead call hash just once, cache
         // result + use some arbitrary value on failure?
@@ -319,7 +319,7 @@ extension RbObject: Hashable, Equatable, Comparable {
             guard let hash = Int(hashObj) else {
                 fatalError("Hash value for \(self) not numeric: \(hashObj)")
             }
-            return hash
+            hasher.combine(hash)
         } catch {
             fatalError("Calling 'hash' on \(self) failed: \(error)")
         }

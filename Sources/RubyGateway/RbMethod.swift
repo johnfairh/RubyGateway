@@ -294,7 +294,7 @@ public struct RbMethodArgsSpec {
                                     &tag)
         }
         // awkward
-        fatalError("Ought to have thrown by now")
+        fatalError()
     }
 
     /// Create a new method arguments specification.
@@ -431,10 +431,10 @@ public struct RbMethodArgsSpec {
         if isOpts != 0 {
             // Keyword-args hash
             return (Array(argvPrefix), hashObject)
-        } else {
-            // Innocent hash - replace original arg
-            return (Array(argvPrefix) + [hashObject], .nilObject)
         }
+
+        // Innocent hash - replace original arg
+        return (Array(argvPrefix) + [hashObject], .nilObject)
     }
 
     /// Merge a passed keyword-args hash with the default keyword values,
