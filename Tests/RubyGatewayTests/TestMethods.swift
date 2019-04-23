@@ -461,27 +461,36 @@ class TestMethods: XCTestCase {
     // Explicit nil vs. keyword args hash ambiguity
     func testNilKeywordArgs() {
         doErrorFree {
-            // def f(a, b:3)
+            // def f(a, b=2, c:3)
             let func_f = "f"
-            let kw_b = "b"
-            let kw_b_def = 3
-            let spec_f = RbMethodArgsSpec(leadingMandatoryCount: 1, optionalKeywordValues: [kw_b: kw_b_def])
+            let b_def = RbObject(2)
+            let kw_c = "c"
+            let kw_c_def = 3
+            let spec_f = RbMethodArgsSpec(leadingMandatoryCount: 1,
+                                          optionalValues: [b_def],
+                                          optionalKeywordValues: [kw_c: kw_c_def])
 
             var expect_a = ""
+            var expect_b = RbObject(b_def)
 
             try Ruby.defineGlobalFunction(name: func_f, argsSpec: spec_f) { _, method in
                 method.checkArgs()
                 XCTAssertEqual(expect_a, String(method.args.mandatory[0]))
-                XCTAssertEqual(kw_b_def, Int(method.args.keyword[kw_b]!))
+                XCTAssertEqual(expect_b, method.args.optional[0])
+                XCTAssertEqual(kw_c_def, Int(method.args.keyword[kw_c]!))
                 return .nilObject
             }
 
-            // No kw hash, last mando arg is nil -> invent nil & use default.
+            // No kw hash, last mando arg is nil -> invent nil & use default (case i).
             expect_a = ""
             try Ruby.call(func_f, args: [nil])
 
             // Explicit nil for kw hash -> consume it, no complaints, use default.
             expect_a = "fish"
+            try Ruby.call(func_f, args: ["fish", b_def, nil])
+
+            // No kw hash, last optional arg is nil -> invent nil & use default (case ii).
+            expect_b = .nilObject
             try Ruby.call(func_f, args: ["fish", nil])
         }
     }
