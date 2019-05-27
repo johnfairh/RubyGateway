@@ -2,6 +2,8 @@
 
 ##### Breaking
 
+* Require minimum Swift 5 / Xcode 10.2.
+
 ##### Enhancements
 
 ##### Bug Fixes
