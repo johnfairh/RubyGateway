@@ -626,20 +626,20 @@ ID rbg_create_virtual_gvar(const char * _Nonnull name, int readonly)
 /// This is `rbmethod_callback` in RbMethod.swift.
 static Rbg_method_call rbg_method_call;
 
-static ID rbg_method_callee_id;
+static ID rbg_method_method_id;
 static ID rbg_method_ancestors_id;
 
 void rbg_register_method_callback(Rbg_method_call call)
 {
     rbg_method_call = call;
-    rbg_method_callee_id = rb_intern("__callee__");
+    rbg_method_method_id = rb_intern("__method__");
     rbg_method_ancestors_id = rb_intern("ancestors");
 }
 
 /// Callback to implement regular methods
 static VALUE rbg_method_varargs_callback(int argc, VALUE *argv, VALUE self)
 {
-    VALUE methodSym = rb_funcall(rb_mKernel, rbg_method_callee_id, 0);
+    VALUE methodSym = rb_funcall(rb_mKernel, rbg_method_method_id, 0);
     VALUE clazz     = rb_class_of(self);
     VALUE ancestors = rb_funcall(clazz, rbg_method_ancestors_id, 0);
 
