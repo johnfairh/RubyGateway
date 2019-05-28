@@ -151,6 +151,12 @@ private struct RbMethodDispatch {
         let mid = rbg_define_global_function(name)
         callbacks[mid] = RbMethodExec(argsSpec: argsSpec, callback: body)
     }
+
+    static func defineMethod(classValue: VALUE, name: String, argsSpec: RbMethodArgsSpec, body: @escaping RbMethodCallback) {
+        let _ = initOnce
+        let mid = rbg_define_method(classValue, name)
+        callbacks[mid] = RbMethodExec(argsSpec: argsSpec, callback: body)
+    }
 }
 
 // MARK: - RbMethod
@@ -514,5 +520,21 @@ extension RbGateway {
         try setup()
         try name.checkRubyMethodName()
         RbMethodDispatch.defineGlobalFunction(name: name, argsSpec: argsSpec, body: body)
+    }
+}
+
+// MARK: - Swift Methods
+
+extension RbObject {
+    public func defineMethod(name: String,
+                             argsSpec: RbMethodArgsSpec = RbMethodArgsSpec(),
+                             body: @escaping RbMethodCallback) throws {
+        try name.checkRubyMethodName()
+        guard rubyType == .T_CLASS || rubyType == .T_MODULE || rubyType == .T_ICLASS else {
+            throw RbError.badType("Expected T_CLASS/T_MODULE got \(rubyType)")
+        }
+        withRubyValue { rubyValue in
+            RbMethodDispatch.defineMethod(classValue: rubyValue, name: name, argsSpec: argsSpec, body: body)
+        }
     }
 }

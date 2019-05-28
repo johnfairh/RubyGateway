@@ -667,3 +667,16 @@ Rbg_method_id rbg_define_global_function(const char * _Nonnull name)
 
     return mid;
 }
+
+Rbg_method_id rbg_define_method(VALUE clazz, const char * _Nonnull name)
+{
+    Rbg_method_id mid = { 0 };
+
+    // Always say varargs here - have to do policing in Swift.
+    rb_define_method(clazz, name, rbg_method_varargs_callback, -1);
+
+    mid.method = rb_id2sym(rb_intern(name));
+    mid.target = clazz;
+
+    return mid;
+}

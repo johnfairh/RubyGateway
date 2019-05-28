@@ -9,6 +9,11 @@ import Foundation
 import XCTest
 @testable /* RbMethod internals */ import RubyGateway
 
+//
+// Stuff here is about the method/args empire, using global function definitions
+// as a driver.
+//
+
 extension RbMethodArgsSpec {
     func check(args: RbMethodArgs) {
         XCTAssertEqual(totalMandatoryCount, args.mandatory.count)
