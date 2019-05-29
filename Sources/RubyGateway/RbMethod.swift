@@ -152,9 +152,11 @@ private struct RbMethodDispatch {
         callbacks[mid] = RbMethodExec(argsSpec: argsSpec, callback: body)
     }
 
-    static func defineMethod(classValue: VALUE, name: String, argsSpec: RbMethodArgsSpec, body: @escaping RbMethodCallback) {
+    static func defineMethod(value: VALUE, name: String, argsSpec: RbMethodArgsSpec, body: @escaping RbMethodCallback, singleton: Bool) {
         let _ = initOnce
-        let mid = rbg_define_method(classValue, name)
+        let cfn = singleton ? rbg_define_singleton_method : rbg_define_method
+        let mid = cfn(value, name)
+
         callbacks[mid] = RbMethodExec(argsSpec: argsSpec, callback: body)
     }
 }
@@ -549,12 +551,29 @@ extension RbObject {
     public func defineMethod(name: String,
                              argsSpec: RbMethodArgsSpec = RbMethodArgsSpec(),
                              body: @escaping RbMethodCallback) throws {
-        try name.checkRubyMethodName()
         guard rubyType == .T_CLASS || rubyType == .T_MODULE || rubyType == .T_ICLASS else {
             throw RbError.badType("Expected T_CLASS/T_MODULE got \(rubyType)")
         }
+        try doDefineMethod(name: name, argsSpec: argsSpec, body: body, singleton: false)
+    }
+
+    public func defineSingletonMethod(name: String,
+                                      argsSpec: RbMethodArgsSpec = RbMethodArgsSpec(),
+                                      body: @escaping RbMethodCallback) throws {
+        try doDefineMethod(name: name, argsSpec: argsSpec, body: body, singleton: true)
+    }
+
+    private func doDefineMethod(name: String,
+                                argsSpec: RbMethodArgsSpec,
+                                body: @escaping RbMethodCallback,
+                                singleton: Bool) throws {
+        try name.checkRubyMethodName()
         withRubyValue { rubyValue in
-            RbMethodDispatch.defineMethod(classValue: rubyValue, name: name, argsSpec: argsSpec, body: body)
+            RbMethodDispatch.defineMethod(value: rubyValue,
+                                          name: name,
+                                          argsSpec: argsSpec,
+                                          body: body,
+                                          singleton: singleton)
         }
     }
 }

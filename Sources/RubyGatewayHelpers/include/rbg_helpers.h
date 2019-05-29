@@ -204,7 +204,7 @@ void rbg_register_method_callback(Rbg_method_call _Nonnull);
 Rbg_method_id rbg_define_global_function(const char * _Nonnull name);
 /// Define a regular method on some class
 Rbg_method_id rbg_define_method(VALUE clazz, const char * _Nonnull name);
-/// Define a method for just this object - use for eg. class methods.
+/// Define a singleton method for some object
 Rbg_method_id rbg_define_singleton_method(VALUE object, const char * _Nonnull name);
 
 #endif /* rbg_helpers_h */
