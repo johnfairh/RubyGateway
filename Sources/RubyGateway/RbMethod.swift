@@ -529,8 +529,15 @@ extension RbObject {
     /// Add or replace a method in all instances of the Ruby class.
     ///
     /// The `RbObject` must be for a Ruby class or module.  The method is
-    /// immediately available to all instances of the class/module.
+    /// immediately available to all instances of the class.
     ///
+    /// You can get hold of a class object from the global `Ruby` object, for example:
+    /// ```swift
+    /// let clazz = try Ruby.get("Array")
+    /// try clazz.defineMethod(name: "sum") { rbSelf, method in
+    ///   rbSelf.collection.reduce(0, +)
+    /// }
+    /// ```
     /// - Parameters:
     ///   - name: The method name.
     ///   - argsSpec: A description of the arguments required by the method.
@@ -538,7 +545,7 @@ extension RbObject {
     ///               does not take any arguments.
     ///   - body: The Swift code to run when the method is called.
     /// - Throws: `RbError.badIdentifier(type:id:)` if `name` is bad.
-    ///           `RbError.badType(...)` if the object is not a class or module.
+    ///           `RbError.badType(...)` if the object is neither a class nor a module.
     public func defineMethod(name: String,
                              argsSpec: RbMethodArgsSpec = RbMethodArgsSpec(),
                              body: @escaping RbMethodCallback) throws {

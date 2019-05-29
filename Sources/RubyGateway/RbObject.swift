@@ -159,7 +159,7 @@ public final class RbObject: RbObjectAccess {
     /// A view onto the Ruby object using Swift collection APIs.
     ///
     /// Intended for use with Ruby arrays, but any object will work provided
-    /// it implements `[]`, `[]=`, and `length` like Array does
+    /// it implements `[]`, `[]=`, and `length` like Array.
     ///
     /// This property has a setter to permit syntax like:
     /// ```swift
