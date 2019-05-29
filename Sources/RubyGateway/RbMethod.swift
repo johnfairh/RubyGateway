@@ -526,6 +526,19 @@ extension RbGateway {
 // MARK: - Swift Methods
 
 extension RbObject {
+    /// Add or replace a method in all instances of the Ruby class.
+    ///
+    /// The `RbObject` must be for a Ruby class or module.  The method is
+    /// immediately available to all instances of the class/module.
+    ///
+    /// - Parameters:
+    ///   - name: The method name.
+    ///   - argsSpec: A description of the arguments required by the method.
+    ///               The default for this parameter specifies a function that
+    ///               does not take any arguments.
+    ///   - body: The Swift code to run when the method is called.
+    /// - Throws: `RbError.badIdentifier(type:id:)` if `name` is bad.
+    ///           `RbError.badType(...)` if the object is not a class or module.
     public func defineMethod(name: String,
                              argsSpec: RbMethodArgsSpec = RbMethodArgsSpec(),
                              body: @escaping RbMethodCallback) throws {
