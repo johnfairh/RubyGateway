@@ -335,6 +335,20 @@ public struct RbMethodArgsSpec {
         self.requiresBlock = requiresBlock
     }
 
+    /// Helper to quickly create a spec for a method with a fixed number of arguments.
+    ///
+    /// Example usage:
+    /// ```swift
+    /// try myClass.defineMethod(name: "addScore", argsSpec: .basic(1)) { ...
+    /// }
+    /// ```
+    ///
+    /// - parameter count: the number of arguments not including any block that the
+    ///                    method must be passed.
+    public static func basic(_ count: Int) -> RbMethodArgsSpec {
+        return RbMethodArgsSpec(leadingMandatoryCount: count)
+    }
+
     /// Decode the arguments passed to a function and make them available.
     ///
     /// Includes all error checking from `rb_scan_args` and `rb_get_kwargs`.
