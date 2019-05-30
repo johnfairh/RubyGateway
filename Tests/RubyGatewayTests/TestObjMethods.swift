@@ -142,7 +142,7 @@ class TestObjMethods: XCTestCase {
     func testArraySum() {
         doErrorFree {
             let clazz = try Ruby.get("Array")
-            try clazz.defineMethod(name: "sum") { rbSelf, method in
+            try clazz.defineMethod(name: "sum") { rbSelf, _ in
                 rbSelf.collection.reduce(0, +)
             }
 

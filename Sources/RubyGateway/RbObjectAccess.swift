@@ -472,7 +472,8 @@ extension RbObjectAccess {
 extension RbObjectAccess {
     /// Check the associated rubyValue is for a class.
     private func checkClass() throws {
-        guard TYPE(getValue()) == .T_CLASS else {
+        let type = TYPE(getValue())
+        guard type == .T_CLASS || type == .T_MODULE || type == .T_ICLASS else {
             try RbError.raise(error: .badType("\(getValue()) is not a class, cannot get/setClassVar() on it."))
         }
     }

@@ -6,6 +6,8 @@
 
 ##### Enhancements
 
+* Implement class and singleton-class methods in Swift.
+
 ##### Bug Fixes
 
 ## 2.1.0 - 18th December 2018

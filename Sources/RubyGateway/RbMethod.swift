@@ -550,7 +550,7 @@ extension RbObject {
     /// You can get hold of a class object from the global `Ruby` object, for example:
     /// ```swift
     /// let clazz = try Ruby.get("Array")
-    /// try clazz.defineMethod(name: "sum") { rbSelf, method in
+    /// try clazz.defineMethod(name: "sum") { rbSelf, _ in
     ///   rbSelf.collection.reduce(0, +)
     /// }
     /// ```
@@ -571,6 +571,19 @@ extension RbObject {
         try doDefineMethod(name: name, argsSpec: argsSpec, body: body, singleton: false)
     }
 
+    /// Add or replace a method in the Ruby object's singleton class.
+    ///
+    /// In practice this means: if the `RbObject` is a class then this adds a class method.
+    /// Otherwise, if the `RbObject` is a 'normal' instance object then it adds a method
+    /// valid just for this instance.
+    ///
+    /// - Parameters:
+    ///   - name: The method name.
+    ///   - argsSpec: A description of the arguments required by the method.
+    ///               The default for this parameter specifies a function that
+    ///               does not take any arguments.
+    ///   - body: The Swift code to run when the method is called.
+    /// - Throws: `RbError.badIdentifier(type:id:)` if `name` is bad.
     public func defineSingletonMethod(name: String,
                                       argsSpec: RbMethodArgsSpec = RbMethodArgsSpec(),
                                       body: @escaping RbMethodCallback) throws {

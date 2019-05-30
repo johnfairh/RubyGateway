@@ -636,11 +636,10 @@ void rbg_register_method_callback(Rbg_method_call call)
     rbg_method_ancestors_id = rb_intern("ancestors");
 }
 
-/// Callback to implement regular methods
-static VALUE rbg_method_varargs_callback(int argc, VALUE *argv, VALUE self)
+/// Common method callback handler
+static VALUE rbg_method_do_callback(VALUE clazz, VALUE self, int argc, VALUE *argv)
 {
     VALUE methodSym = rb_funcall(rb_mKernel, rbg_method_method_id, 0);
-    VALUE clazz     = rb_class_of(self);
     VALUE ancestors = rb_funcall(clazz, rbg_method_ancestors_id, 0);
 
     Rbg_return_value rv = { 0 };
@@ -655,60 +654,41 @@ static VALUE rbg_method_varargs_callback(int argc, VALUE *argv, VALUE self)
     return rbg_handle_return_value(&rv);
 }
 
-/// Callback to implement singleton methods
-static VALUE rbg_method_singleton_varargs_callback(int argc, VALUE *argv, VALUE self)
+/// Callback to implement regular methods
+static VALUE rbg_method_callback(int argc, VALUE *argv, VALUE self)
 {
-    VALUE methodSym = rb_funcall(rb_mKernel, rbg_method_method_id, 0);
-    VALUE clazz     = rb_singleton_class(self);
-    VALUE ancestors = rb_funcall(clazz, rbg_method_ancestors_id, 0);
+    VALUE clazz = rb_class_of(self);
+    return rbg_method_do_callback(clazz, self, argc, argv);
+}
 
-    Rbg_return_value rv = { 0 };
-    rbg_method_call(methodSym,
-                    RARRAY_LEN(ancestors),
-                    RARRAY_CONST_PTR(ancestors),
-                    self,
-                    argc,
-                    argv,
-                    &rv);
+/// Callback to implement singleton methods
+static VALUE rbg_method_singleton_callback(int argc, VALUE *argv, VALUE self)
+{
+    VALUE clazz = rb_singleton_class(self);
+    return rbg_method_do_callback(clazz, self, argc, argv);
+}
 
-    return rbg_handle_return_value(&rv);
+/// Helper to return callback token to Swift
+static Rbg_method_id rbg_method_id_create(const char * _Nonnull name, VALUE target)
+{
+    Rbg_method_id mid = { .method = rb_id2sym(rb_intern(name)), .target = target };
+    return mid;
 }
 
 Rbg_method_id rbg_define_global_function(const char * _Nonnull name)
 {
-    Rbg_method_id mid = { 0 };
-
-    // Always say varargs here - have to do policing in Swift.
-    rb_define_global_function(name, rbg_method_varargs_callback, -1);
-
-    mid.method = rb_id2sym(rb_intern(name));
-    mid.target = rb_mKernel;
-
-    return mid;
+    rb_define_global_function(name, rbg_method_callback, -1);
+    return rbg_method_id_create(name, rb_mKernel);
 }
 
 Rbg_method_id rbg_define_method(VALUE clazz, const char * _Nonnull name)
 {
-    Rbg_method_id mid = { 0 };
-
-    // Always say varargs here - have to do policing in Swift.
-    rb_define_method(clazz, name, rbg_method_varargs_callback, -1);
-
-    mid.method = rb_id2sym(rb_intern(name));
-    mid.target = clazz;
-
-    return mid;
+    rb_define_method(clazz, name, rbg_method_callback, -1);
+    return rbg_method_id_create(name, clazz);
 }
 
 Rbg_method_id rbg_define_singleton_method(VALUE object, const char * _Nonnull name)
 {
-    Rbg_method_id mid = { 0 };
-
-    // Always say varargs here - have to do policing in Swift.
-    rb_define_singleton_method(object, name, rbg_method_singleton_varargs_callback, -1);
-
-    mid.method = rb_id2sym(rb_intern(name));
-    mid.target = rb_singleton_class(object);
-
-    return mid;
+    rb_define_singleton_method(object, name, rbg_method_singleton_callback, -1);
+    return rbg_method_id_create(name, rb_singleton_class(object));
 }
