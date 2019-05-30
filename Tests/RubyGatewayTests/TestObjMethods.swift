@@ -148,10 +148,77 @@ class TestObjMethods: XCTestCase {
 
             let theArray = [1, 2, 3]
 
-
             let arr = RbObject(theArray)
             let theSum = try arr.call("sum")
             XCTAssertEqual(theArray.reduce(0, +), Int(theSum))
+        }
+    }
+
+    // Simple singleton method
+    func testSingleton() {
+        doErrorFree {
+            let module = try Ruby.get("Math")
+            var called = false
+            try module.defineSingletonMethod(name: "double", argsSpec: .basic(1)) { _, method in
+                called = true
+                return method.args.mandatory[0] * 2
+            }
+
+            let result = try Ruby.eval(ruby: "Math.double(22)")
+            XCTAssertEqual(44, result)
+            XCTAssertTrue(called)
+        }
+    }
+
+    // Singleton on instance
+    func testSingletonInstance() {
+        doErrorFree {
+            try Ruby.require(filename: Helpers.fixturePath("swift_obj_methods.rb"))
+
+            guard let obj1 = RbObject(ofClass: "SingSimpleClass") else {
+                XCTFail("Can't create instance")
+                return
+            }
+            XCTAssertEqual(22, try obj1.call("answer"))
+
+            guard let obj2 = RbObject(ofClass: "SingSimpleClass") else {
+                XCTFail("Can't create instance")
+                return
+            }
+            XCTAssertEqual(22, try obj2.call("answer"))
+
+            try obj1.defineSingletonMethod(name: "answer") { rbSelf, method in
+                return RbObject(50)
+            }
+
+            XCTAssertEqual(50, try obj1.call("answer"))
+            XCTAssertEqual(22, try obj2.call("answer"))
+
+            guard let obj3 = RbObject(ofClass: "SingSimpleClass") else {
+                XCTFail("Can't create instance")
+                return
+            }
+            XCTAssertEqual(22, try obj3.call("answer"))
+        }
+    }
+
+    // Validate self is correct - inheritance case too
+    func testSingletonDerived() {
+        doErrorFree {
+            try Ruby.require(filename: Helpers.fixturePath("swift_obj_methods.rb"))
+
+            var called = false
+
+            let clazz = try Ruby.get("SingBase")
+            try clazz.defineSingletonMethod(name: "value2") { rbSelf, _ in
+                called = true
+                let clazzName = String(rbSelf)
+                XCTAssertEqual("SingDerived", clazzName)
+                return RbObject(10)
+            }
+
+            let _ = try Ruby.eval(ruby: "test_ston_overridden")
+            XCTAssertTrue(called)
         }
     }
 
@@ -162,6 +229,9 @@ class TestObjMethods: XCTestCase {
         ("testSelf", testSelf),
         ("testInherited", testInherited),
         ("testOverridden", testOverridden),
-        ("testArraySum", testArraySum)
+        ("testArraySum", testArraySum),
+        ("testSingletonClass", testSingleton),
+        ("testSingletonInstance", testSingletonInstance),
+        ("testSingletonDerived", testSingletonDerived)
     ]
 }
