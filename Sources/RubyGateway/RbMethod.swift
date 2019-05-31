@@ -120,16 +120,6 @@ private struct RbMethodDispatch {
         guard let callback = callbacks[mid] else {
             return nil
         }
-        // Spot case where we define a method and get called from a subclass instance.
-        // Remember what happened so we don't have to walk the hierarchy next time.
-        //
-        // XXX this needs interlock with 'define new value for existing method'
-        // XXX to entirely purge DB of original values....
-        //
-//        if target != firstTarget {
-//            let firstMid = Rbg_method_id(method: symbol, target: firstTarget)
-//            callbacks[firstMid] = callback
-//        }
         return callback
     }
 
@@ -539,7 +529,7 @@ extension RbGateway {
     }
 }
 
-// MARK: - Swift Methods
+// MARK: - Defining Methods
 
 extension RbObject {
     /// Add or replace a method in all instances of the Ruby class.
