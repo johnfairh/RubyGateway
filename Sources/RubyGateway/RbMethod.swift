@@ -120,16 +120,6 @@ private struct RbMethodDispatch {
         guard let callback = callbacks[mid] else {
             return nil
         }
-        // Spot case where we define a method and get called from a subclass instance.
-        // Remember what happened so we don't have to walk the hierarchy next time.
-        //
-        // XXX this needs interlock with 'define new value for existing method'
-        // XXX to entirely purge DB of original values....
-        //
-//        if target != firstTarget {
-//            let firstMid = Rbg_method_id(method: symbol, target: firstTarget)
-//            callbacks[firstMid] = callback
-//        }
         return callback
     }
 
@@ -149,6 +139,14 @@ private struct RbMethodDispatch {
     static func defineGlobalFunction(name: String, argsSpec: RbMethodArgsSpec, body: @escaping RbMethodCallback) {
         let _ = initOnce
         let mid = rbg_define_global_function(name)
+        callbacks[mid] = RbMethodExec(argsSpec: argsSpec, callback: body)
+    }
+
+    static func defineMethod(value: VALUE, name: String, argsSpec: RbMethodArgsSpec, body: @escaping RbMethodCallback, singleton: Bool) {
+        let _ = initOnce
+        let cfn = singleton ? rbg_define_singleton_method : rbg_define_method
+        let mid = cfn(value, name)
+
         callbacks[mid] = RbMethodExec(argsSpec: argsSpec, callback: body)
     }
 }
@@ -325,6 +323,20 @@ public struct RbMethodArgsSpec {
         self.mandatoryKeywords = mandatoryKeywords
         self.optionalKeywordValues = optionalKeywordValues.mapValues { val in { val.rubyObject } }
         self.requiresBlock = requiresBlock
+    }
+
+    /// Helper to quickly create a spec for a method with a fixed number of arguments.
+    ///
+    /// Example usage:
+    /// ```swift
+    /// try myClass.defineMethod(name: "addScore", argsSpec: .basic(1)) { ...
+    /// }
+    /// ```
+    ///
+    /// - parameter count: the number of arguments not including any block that the
+    ///                    method must be passed.
+    public static func basic(_ count: Int) -> RbMethodArgsSpec {
+        return RbMethodArgsSpec(leadingMandatoryCount: count)
     }
 
     /// Decode the arguments passed to a function and make them available.
@@ -514,5 +526,71 @@ extension RbGateway {
         try setup()
         try name.checkRubyMethodName()
         RbMethodDispatch.defineGlobalFunction(name: name, argsSpec: argsSpec, body: body)
+    }
+}
+
+// MARK: - Defining Methods
+
+extension RbObject {
+    /// Add or replace a method in all instances of the Ruby class.
+    ///
+    /// The `RbObject` must be for a Ruby class or module.  The method is
+    /// immediately available to all instances of the class.
+    ///
+    /// You can get hold of a class object from the global `Ruby` object, for example:
+    /// ```swift
+    /// let clazz = try Ruby.get("Array")
+    /// try clazz.defineMethod(name: "sum") { rbSelf, _ in
+    ///   rbSelf.collection.reduce(0, +)
+    /// }
+    /// ```
+    /// - Parameters:
+    ///   - name: The method name.
+    ///   - argsSpec: A description of the arguments required by the method.
+    ///               The default for this parameter specifies a function that
+    ///               does not take any arguments.
+    ///   - body: The Swift code to run when the method is called.
+    /// - Throws: `RbError.badIdentifier(type:id:)` if `name` is bad.
+    ///           `RbError.badType(...)` if the object is neither a class nor a module.
+    public func defineMethod(name: String,
+                             argsSpec: RbMethodArgsSpec = RbMethodArgsSpec(),
+                             body: @escaping RbMethodCallback) throws {
+        guard rubyType == .T_CLASS || rubyType == .T_MODULE || rubyType == .T_ICLASS else {
+            throw RbError.badType("Expected T_CLASS/T_MODULE got \(rubyType)")
+        }
+        try doDefineMethod(name: name, argsSpec: argsSpec, body: body, singleton: false)
+    }
+
+    /// Add or replace a method in the Ruby object's singleton class.
+    ///
+    /// In practice this means: if the `RbObject` is a class then this adds a class method.
+    /// Otherwise, if the `RbObject` is a 'normal' instance object then it adds a method
+    /// valid just for this instance.
+    ///
+    /// - Parameters:
+    ///   - name: The method name.
+    ///   - argsSpec: A description of the arguments required by the method.
+    ///               The default for this parameter specifies a function that
+    ///               does not take any arguments.
+    ///   - body: The Swift code to run when the method is called.
+    /// - Throws: `RbError.badIdentifier(type:id:)` if `name` is bad.
+    public func defineSingletonMethod(name: String,
+                                      argsSpec: RbMethodArgsSpec = RbMethodArgsSpec(),
+                                      body: @escaping RbMethodCallback) throws {
+        try doDefineMethod(name: name, argsSpec: argsSpec, body: body, singleton: true)
+    }
+
+    private func doDefineMethod(name: String,
+                                argsSpec: RbMethodArgsSpec,
+                                body: @escaping RbMethodCallback,
+                                singleton: Bool) throws {
+        try name.checkRubyMethodName()
+        withRubyValue { rubyValue in
+            RbMethodDispatch.defineMethod(value: rubyValue,
+                                          name: name,
+                                          argsSpec: argsSpec,
+                                          body: body,
+                                          singleton: singleton)
+        }
     }
 }

@@ -77,6 +77,11 @@ import RubyGatewayHelpers
 ///
 /// Again you must take ensure that your Ruby objects support these operators or
 /// the program will crash.
+///
+/// ## Defining methods
+///
+/// Use `RbObject.defineMethod(...)` and `RbObject.defineSingletonMethod(...)` to
+/// add methods implemented in Swift to an object or class.
 public final class RbObject: RbObjectAccess {
     internal let valueBox: UnsafeMutablePointer<Rbg_value>
 
@@ -159,7 +164,7 @@ public final class RbObject: RbObjectAccess {
     /// A view onto the Ruby object using Swift collection APIs.
     ///
     /// Intended for use with Ruby arrays, but any object will work provided
-    /// it implements `[]`, `[]=`, and `length` like Array does
+    /// it implements `[]`, `[]=`, and `length` like Array.
     ///
     /// This property has a setter to permit syntax like:
     /// ```swift
