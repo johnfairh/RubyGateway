@@ -352,7 +352,7 @@ extension RbGateway {
 
         var scopeClass: RbObject = .nilObject // Qnil special case in rbg_helpers
         if let parentScope = parentScope {
-            scopeClass = try getClass(parentScope)
+            scopeClass = try get(parentScope)
         }
 
         let parent = parentClass ?? RbObject(rubyValue: rb_cObject)
@@ -384,7 +384,7 @@ extension RbGateway {
 
         var scopeClass: RbObject = .nilObject // Qnil special case in rbg_helpers
         if let parentScope = parentScope {
-            scopeClass = try getClass(parentScope)
+            scopeClass = try get(parentScope)
         }
 
         return try scopeClass.withRubyValue { scopeVal in

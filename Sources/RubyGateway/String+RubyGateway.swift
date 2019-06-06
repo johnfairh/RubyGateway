@@ -29,11 +29,6 @@ extension String {
         return false
     }
 
-    /// Throw if the string does not look like a constant name.
-    func checkRubyConstantName() throws {
-        try check(\String.isRubyConstantName, "constant (capital, no ::s)")
-    }
-
     /// Does the string look like a Ruby constant path name?
     var isRubyConstantPath: Bool {
         guard !hasSuffix("::") else {
