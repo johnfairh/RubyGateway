@@ -14,7 +14,7 @@ class TestClassDef: XCTestCase {
     func testSimpleClass() {
         doErrorFree {
             let className = "MyClass"
-            let myClass = try Ruby.defineClass(name: className)
+            let myClass = try Ruby.defineClass(className)
             XCTAssertEqual(className, String(myClass))
             XCTAssertEqual([className, "Object", "Kernel", "BasicObject"], Array<String>(try myClass.call("ancestors")))
 
@@ -35,8 +35,18 @@ class TestClassDef: XCTestCase {
         let notAclass = RbObject(5)
         let className = "MyClass"
         doError {
-            let myClass = try Ruby.defineClass(name: className, parent: notAclass)
+            let myClass = try Ruby.defineClass(className, parent: notAclass)
             XCTFail("Managed to inherit from an instance: \(myClass)")
+        }
+
+        doError {
+            let myClass = try Ruby.defineClass(className, under: notAclass)
+            XCTFail("Managed to nest under an instance: \(myClass)")
+        }
+
+        doError {
+            let myMod = try Ruby.defineModule(className, under: notAclass)
+            XCTFail("Managed to nest a module under an instance: \(myMod)")
         }
     }
 
@@ -44,7 +54,7 @@ class TestClassDef: XCTestCase {
     func testSimpleModule() {
         doErrorFree {
             let modName = "MyModule"
-            let myMod = try Ruby.defineModule(name: modName)
+            let myMod = try Ruby.defineModule(modName)
             XCTAssertEqual(modName, String(myMod))
             XCTAssertEqual("Module", String(myMod.class!))
 
@@ -59,11 +69,11 @@ class TestClassDef: XCTestCase {
         doErrorFree {
             try Ruby.require(filename: Helpers.fixturePath("swift_classes.rb"))
 
-            try Ruby.defineModule(name: "MyOuterModule")
-            try Ruby.defineModule(name: "MyOuterModule::MyInnerModule")
+            try Ruby.defineModule("MyOuterModule")
+            try Ruby.defineModule("MyOuterModule::MyInnerModule")
 
             let parentClass = try Ruby.get("MyParentClass")
-            let myClass = try Ruby.defineClass(name: "MyOuterModule::MyInnerModule::MyClass", parent: parentClass)
+            let myClass = try Ruby.defineClass("MyOuterModule::MyInnerModule::MyClass", parent: parentClass)
             var called = false
             try myClass.defineMethod(name: "value") { _, _ in
                 called = true
@@ -75,10 +85,33 @@ class TestClassDef: XCTestCase {
         }
     }
 
+    // Nested and Ruby access again - this time using explicit 'under'
+    func testNestedDefs2() {
+        doErrorFree {
+            try Ruby.require(filename: Helpers.fixturePath("swift_classes.rb"))
+
+            let outerMod = try Ruby.defineModule("MyOuterModule")
+            let innerMod = try Ruby.defineModule("MyInnerModule", under: outerMod)
+
+            let parentClass = try Ruby.get("MyParentClass")
+            let myClass = try Ruby.defineClass("MyClass", parent: parentClass, under: innerMod)
+            var called = false
+            try myClass.defineMethod(name: "value") { _, _ in
+                called = true
+                return RbObject(100)
+            }
+
+            let _ = try Ruby.eval(ruby: "test_swiftclass")
+            XCTAssertTrue(called)
+        }
+    }
+
+
     static var allTests = [
         ("testSimpleClass", testSimpleClass),
         ("testBadClassDef", testBadClassDef),
         ("testSimpleModule", testSimpleModule),
         ("testNestedDefs", testNestedDefs),
+        ("testNestedDefs2", testNestedDefs2),
     ]
 }

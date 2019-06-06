@@ -189,7 +189,7 @@ static VALUE rbg_protect_thunk(VALUE value)
         break;
     case RBG_JOB_ERR_ARITY:
         rb_error_arity(d->argc, d->arityMin, d->arityMax);
-        break;
+        /* break; */
     case RBG_JOB_SCAN_ARG_HASH:
         rc = rbg_scan_arg_hash(d->value, d->argIsHash, d->argIsOpts);
         break;

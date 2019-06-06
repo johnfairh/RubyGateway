@@ -43,6 +43,7 @@
 		0249235120335C0D00E3AAF4 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0249235020335C0D00E3AAF4 /* Helpers.swift */; };
 		025765EA229D4E8800EE9570 /* TestObjMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025765E9229D4E8800EE9570 /* TestObjMethods.swift */; };
 		025A652F22A9210A006CBD60 /* TestClassDef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025A652E22A9210A006CBD60 /* TestClassDef.swift */; };
+		025A653222AA621B006CBD60 /* RbClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025A653122AA621B006CBD60 /* RbClass.swift */; };
 		026F1B042070CDB0002E8C45 /* TestArrays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026F1B032070CDB0002E8C45 /* TestArrays.swift */; };
 		02706177204EB47600C336B8 /* RbOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02706176204EB47600C336B8 /* RbOperators.swift */; };
 		02706179204EC36E00C336B8 /* TestOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02706178204EC36E00C336B8 /* TestOperators.swift */; };
@@ -130,6 +131,7 @@
 		025765EB229D4FAC00EE9570 /* swift_obj_methods.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = swift_obj_methods.rb; sourceTree = "<group>"; };
 		025A652E22A9210A006CBD60 /* TestClassDef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestClassDef.swift; sourceTree = "<group>"; };
 		025A653022A99814006CBD60 /* swift_classes.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = swift_classes.rb; sourceTree = "<group>"; };
+		025A653122AA621B006CBD60 /* RbClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbClass.swift; sourceTree = "<group>"; };
 		026F1B032070CDB0002E8C45 /* TestArrays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestArrays.swift; sourceTree = "<group>"; };
 		02706176204EB47600C336B8 /* RbOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbOperators.swift; sourceTree = "<group>"; };
 		02706178204EC36E00C336B8 /* TestOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestOperators.swift; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 				022BD881205EEA9B00DA077F /* RbBlockCall.swift */,
 				02460F1D20FDF6BB006DB2D4 /* RbGlobalVar.swift */,
 				02ABDBA3216CF7BF00AFDB64 /* RbMethod.swift */,
+				025A653122AA621B006CBD60 /* RbClass.swift */,
 				02300765204AFA3600044B8E /* RbObjectAccess.swift */,
 				0205A8A82043287B00076840 /* RbFailableAccess.swift */,
 				0249234920334ADE00E3AAF4 /* RbError.swift */,
@@ -540,6 +543,7 @@
 				022BD882205EEA9B00DA077F /* RbBlockCall.swift in Sources */,
 				0205A89E204088F900076840 /* RbNumericConversions.swift in Sources */,
 				022F3AB220360B9F009E69BE /* CRubyMacros.swift in Sources */,
+				025A653222AA621B006CBD60 /* RbClass.swift in Sources */,
 				0290133A203ED8D60090C5C9 /* RbConversions.swift in Sources */,
 				02C5C85520F0CD24007138A2 /* RbRational.swift in Sources */,
 				0205A8A72043284C00076840 /* String+RubyGateway.swift in Sources */,

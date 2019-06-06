@@ -20,6 +20,9 @@ extension String {
 
     /// Does the string look like a Ruby constant name?
     var isRubyConstantName: Bool {
+        guard !contains("::") else {
+            return false
+        }
         // Ruby supports full utf8 character set for identifiers.
         // However Ruby constants are defined as beginning with an ASCII
         // capital letter.  `rb_isupper` is locale-insensitive.
@@ -27,6 +30,11 @@ extension String {
             return rb_isupper(Int32(firstChar)) != 0
         }
         return false
+    }
+
+    /// Throw if the string does not look like a constant name.
+    func checkRubyConstantName() throws {
+        try check(\String.isRubyConstantName, "constant (capital, no ::)")
     }
 
     /// Does the string look like a Ruby constant path name?
