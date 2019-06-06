@@ -160,7 +160,7 @@ extension RbObjectAccess {
     /// - throws: `RbError.rubyException(_:)` if the constant cannot be found.
     public func getConstant(_ name: String) throws -> RbObject {
         try Ruby.setup()
-        try name.checkRubyConstantName()
+        try name.checkRubyConstantPath()
 
         var nextValue = getValue()
 

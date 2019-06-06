@@ -151,6 +151,11 @@ VALUE rbg_define_class_protect(const char * _Nonnull name,
                                VALUE parentClass,
                                int * _Nonnull status);
 
+/// Safely call rb_define_module[_under] and report exception status.
+VALUE rbg_define_module_protect(const char * _Nonnull name,
+                                VALUE underClass,
+                                int * _Nonnull status);
+
 /// Callback into Swift code for gvar access
 typedef VALUE (*Rbg_gvar_get_call)(ID id);
 typedef void (*Rbg_gvar_set_call)(ID id,

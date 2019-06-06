@@ -99,6 +99,7 @@ typedef enum {
     RBG_JOB_ERR_ARITY,
     RBG_JOB_SCAN_ARG_HASH,
     RBG_JOB_DEFINE_CLASS,
+    RBG_JOB_DEFINE_MODULE,
 } Rbg_job;
 
 typedef struct {
@@ -197,6 +198,13 @@ static VALUE rbg_protect_thunk(VALUE value)
             rc = rb_define_class(d->name, d->value);
         } else {
             rc = rb_define_class_under(d->insideClass, d->name, d->value);
+        }
+        break;
+    case RBG_JOB_DEFINE_MODULE:
+        if (d->insideClass == Qnil) {
+            rc = rb_define_module(d->name);
+        } else {
+            rc = rb_define_module_under(d->insideClass, d->name);
         }
         break;
     }
@@ -500,6 +508,16 @@ VALUE rbg_define_class_protect(const char * _Nonnull name,
 {
     Rbg_protect_data data = { .job = RBG_JOB_DEFINE_CLASS,
         .value = parentClass, .name = name, .insideClass = underClass
+    };
+    return rbg_protect(&data, status);
+}
+
+VALUE rbg_define_module_protect(const char * _Nonnull name,
+                                VALUE underClass,
+                                int * _Nonnull status)
+{
+    Rbg_protect_data data = { .job = RBG_JOB_DEFINE_MODULE,
+        .name = name, .insideClass = underClass
     };
     return rbg_protect(&data, status);
 }

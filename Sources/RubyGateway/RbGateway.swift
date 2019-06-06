@@ -348,15 +348,11 @@ extension RbGateway {
     @discardableResult
     public func defineClass(name: String, parent parentClass: RbObject? = nil) throws -> RbObject {
         try setup()
-        try name.checkRubyConstantName()
+        let (parentScope, className) = try name.decomposedConstantPath()
 
-        let nameComponents = name.components(separatedBy: "::")
-        let className = nameComponents.last!
-
-        let nameScope = nameComponents.dropLast()
-        var scopeClass: RbObject = .nilObject
-        if nameScope.count > 0 {
-            scopeClass = try getClass(nameScope.joined(separator: "::"))
+        var scopeClass: RbObject = .nilObject // Qnil special case in rbg_helpers
+        if let parentScope = parentScope {
+            scopeClass = try getClass(parentScope)
         }
 
         let parent = parentClass ?? RbObject(rubyValue: rb_cObject)
@@ -369,6 +365,31 @@ extension RbGateway {
                 try RbVM.doProtect { tag in
                     RbObject(rubyValue: rbg_define_class_protect(className, scopeVal, parentVal, &tag))
                 }
+            }
+        }
+    }
+
+    /// Define a new, empty, Ruby module
+    ///
+    /// - Parameter name: Name of the module.  Can contain `::` sequences to nest the class
+    ///                   inside other classes or modules.
+    /// - Returns: The module object for the new module.
+    /// - Throws: `RbError.badIdentifier(type:id:)` if `name` is bad.  `RbError.rubyException(...)` if
+    ///           Ruby is unhappy with the definition, for example when a non-module constant already
+    ///           exists with this name.
+    @discardableResult
+    public func defineModule(name: String) throws -> RbObject {
+        try setup()
+        let (parentScope, className) = try name.decomposedConstantPath()
+
+        var scopeClass: RbObject = .nilObject // Qnil special case in rbg_helpers
+        if let parentScope = parentScope {
+            scopeClass = try getClass(parentScope)
+        }
+
+        return try scopeClass.withRubyValue { scopeVal in
+            try RbVM.doProtect { tag in
+                RbObject(rubyValue: rbg_define_module_protect(className, scopeVal, &tag))
             }
         }
     }
