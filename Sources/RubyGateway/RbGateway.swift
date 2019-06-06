@@ -331,6 +331,48 @@ extension RbGateway {
     }
 }
 
+// MARK: - Class and module definition
+
+extension RbGateway {
+    /// Define a new, empty, Ruby class.
+    ///
+    /// - Parameter name: Name of the class.  Can contain `::` sequences to nest the class
+    ///                   inside other classes or modules.
+    /// - Parameter parentClass: Parent class for the new class to inherit from.  The default
+    ///                          is `nil` which means the new class inherits from `Object`.
+    /// - Returns: The class object for the new class.
+    /// - Throws: `RbError.badIdentifier(type:id:)` if `name` is bad.  `RbError.badType(...)` if
+    ///           `parentClass` is provided but is not a class.  `RbError.rubyException(...)` if
+    ///           Ruby is unhappy with the definition, for example when the class already exists
+    ///           with a different parent.
+    @discardableResult
+    public func defineClass(name: String, parent parentClass: RbObject? = nil) throws -> RbObject {
+        try setup()
+        try name.checkRubyConstantName()
+
+        let nameComponents = name.components(separatedBy: "::")
+        let className = nameComponents.last!
+
+        let nameScope = nameComponents.dropLast()
+        var scopeClass: RbObject = .nilObject
+        if nameScope.count > 0 {
+            scopeClass = try getClass(nameScope.joined(separator: "::"))
+        }
+
+        let parent = parentClass ?? RbObject(rubyValue: rb_cObject)
+        guard parent.rubyType == .T_CLASS else {
+            throw RbError.badType("Can't define class '\(name)' inheriting from non-T_CLASS type \(parent)")
+        }
+
+        return try scopeClass.withRubyValue { scopeVal in
+            try parent.withRubyValue { parentVal in
+                try RbVM.doProtect { tag in
+                    RbObject(rubyValue: rbg_define_class_protect(className, scopeVal, parentVal, &tag))
+                }
+            }
+        }
+    }
+}
 
 // MARK: - Global declaration
 

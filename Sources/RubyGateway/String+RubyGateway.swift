@@ -20,6 +20,9 @@ extension String {
 
     /// Does the string look like a Ruby constant name?
     var isRubyConstantName: Bool {
+        if hasSuffix("::") {
+            return false
+        }
         // Ruby supports full utf8 character set for identifiers.
         // However Ruby constants are defined as beginning with an ASCII
         // capital letter.  `rb_isupper` is locale-insensitive.

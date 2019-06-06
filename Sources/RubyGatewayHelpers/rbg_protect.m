@@ -98,6 +98,7 @@ typedef enum {
     RBG_JOB_YIELD,
     RBG_JOB_ERR_ARITY,
     RBG_JOB_SCAN_ARG_HASH,
+    RBG_JOB_DEFINE_CLASS,
 } Rbg_job;
 
 typedef struct {
@@ -107,7 +108,7 @@ typedef struct {
     ID            id;
 
     bool          loadWrap;
-    const char   *internName;
+    const char   *name;
     int           argc;
     const VALUE  *argv;
     double        toDoubleResult;
@@ -119,6 +120,8 @@ typedef struct {
 
     int          *argIsHash;
     int          *argIsOpts;
+
+    VALUE         insideClass;
 } Rbg_protect_data;
 
 #define RBG_PDATA_TO_VALUE(pdata) ((uintptr_t)(void *)(pdata))
@@ -146,7 +149,7 @@ static VALUE rbg_protect_thunk(VALUE value)
         rb_load(d->value, d->loadWrap);
         break;
     case RBG_JOB_INTERN:
-        rc = (VALUE) rb_intern(d->internName);
+        rc = (VALUE) rb_intern(d->name);
         break;
     case RBG_JOB_CONST_GET:
         rc = rb_const_get(d->value, d->id);
@@ -189,6 +192,13 @@ static VALUE rbg_protect_thunk(VALUE value)
     case RBG_JOB_SCAN_ARG_HASH:
         rc = rbg_scan_arg_hash(d->value, d->argIsHash, d->argIsOpts);
         break;
+    case RBG_JOB_DEFINE_CLASS:
+        if (d->insideClass == Qnil) {
+            rc = rb_define_class(d->name, d->value);
+        } else {
+            rc = rb_define_class_under(d->insideClass, d->name, d->value);
+        }
+        break;
     }
     return rc;
 }
@@ -210,7 +220,7 @@ void rbg_load_protect(VALUE fname, int wrap, int * _Nonnull status)
 // rb_intern - can technically run out of IDs....
 ID rbg_intern_protect(const char * _Nonnull name, int * _Nonnull status)
 {
-    Rbg_protect_data data = { .job = RBG_JOB_INTERN, .internName = name };
+    Rbg_protect_data data = { .job = RBG_JOB_INTERN, .name = name };
     return (ID) rbg_protect(&data, status);
 }
 
@@ -480,6 +490,17 @@ VALUE rbg_scan_arg_hash_protect(VALUE last_arg,
 {
     Rbg_protect_data data = { .job = RBG_JOB_SCAN_ARG_HASH,
         .value = last_arg, .argIsHash = is_hash, .argIsOpts = is_opts };
+    return rbg_protect(&data, status);
+}
+
+VALUE rbg_define_class_protect(const char * _Nonnull name,
+                               VALUE underClass,
+                               VALUE parentClass,
+                               int * _Nonnull status)
+{
+    Rbg_protect_data data = { .job = RBG_JOB_DEFINE_CLASS,
+        .value = parentClass, .name = name, .insideClass = underClass
+    };
     return rbg_protect(&data, status);
 }
 

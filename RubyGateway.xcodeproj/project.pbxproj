@@ -42,6 +42,7 @@
 		0249234D20335ADB00E3AAF4 /* TestVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0249234C20335ADB00E3AAF4 /* TestVM.swift */; };
 		0249235120335C0D00E3AAF4 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0249235020335C0D00E3AAF4 /* Helpers.swift */; };
 		025765EA229D4E8800EE9570 /* TestObjMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025765E9229D4E8800EE9570 /* TestObjMethods.swift */; };
+		025A652F22A9210A006CBD60 /* TestClassDef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025A652E22A9210A006CBD60 /* TestClassDef.swift */; };
 		026F1B042070CDB0002E8C45 /* TestArrays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026F1B032070CDB0002E8C45 /* TestArrays.swift */; };
 		02706177204EB47600C336B8 /* RbOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02706176204EB47600C336B8 /* RbOperators.swift */; };
 		02706179204EC36E00C336B8 /* TestOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02706178204EC36E00C336B8 /* TestOperators.swift */; };
@@ -127,6 +128,7 @@
 		02571723203C984C001E3C43 /* nesting.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = nesting.rb; sourceTree = "<group>"; };
 		025765E9229D4E8800EE9570 /* TestObjMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestObjMethods.swift; sourceTree = "<group>"; };
 		025765EB229D4FAC00EE9570 /* swift_obj_methods.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = swift_obj_methods.rb; sourceTree = "<group>"; };
+		025A652E22A9210A006CBD60 /* TestClassDef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestClassDef.swift; sourceTree = "<group>"; };
 		026F1B032070CDB0002E8C45 /* TestArrays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestArrays.swift; sourceTree = "<group>"; };
 		02706176204EB47600C336B8 /* RbOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbOperators.swift; sourceTree = "<group>"; };
 		02706178204EC36E00C336B8 /* TestOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestOperators.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				027061BC2059483C00C336B8 /* TestProcs.swift */,
 				02ABDBA5216D060300AFDB64 /* TestMethods.swift */,
 				025765E9229D4E8800EE9570 /* TestObjMethods.swift */,
+				025A652E22A9210A006CBD60 /* TestClassDef.swift */,
 				0230075D2046ED9900044B8E /* TestErrors.swift */,
 				02300767204BF3E800044B8E /* TestFailable.swift */,
 				020B4C1C2078D54F0073276B /* TestThreads.swift */,
@@ -488,6 +491,7 @@
 				0249235120335C0D00E3AAF4 /* Helpers.swift in Sources */,
 				02D9DA4920F61683006D1524 /* TestGlobalVars.swift in Sources */,
 				0249234D20335ADB00E3AAF4 /* TestVM.swift in Sources */,
+				025A652F22A9210A006CBD60 /* TestClassDef.swift in Sources */,
 				022F3ACD20385C3A009E69BE /* TestConstants.swift in Sources */,
 				02C5C85720F0D5E5007138A2 /* TestRational.swift in Sources */,
 				020B4C21207B7FEF0073276B /* TestRanges.swift in Sources */,
