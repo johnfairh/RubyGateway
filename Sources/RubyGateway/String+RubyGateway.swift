@@ -42,11 +42,7 @@ extension String {
         guard !hasSuffix("::") else {
             return false
         }
-        let pathComponents = components(separatedBy: "::")
-        guard !pathComponents.isEmpty else {
-            return false
-        }
-        return pathComponents.allSatisfy { $0.isRubyConstantName }
+        return components(separatedBy: "::").allSatisfy { $0.isRubyConstantName }
     }
 
     /// Throw if the string does not look like a constant path.

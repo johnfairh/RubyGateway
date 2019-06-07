@@ -48,6 +48,12 @@ class TestClassDef: XCTestCase {
             let myMod = try Ruby.defineModule(className, under: notAclass)
             XCTFail("Managed to nest a module under an instance: \(myMod)")
         }
+
+        let objClass = try! Ruby.get("Object")
+        doError {
+            let myClass = try Ruby.defineClass("::", under: objClass)
+            XCTFail("Managed to define class with odd name \(myClass)")
+        }
     }
 
     // Simple module
