@@ -28,14 +28,18 @@ extension RbGateway {
     @discardableResult
     public func defineClass(_ name: String, parent: RbObject? = nil) throws -> RbObject {
         try setup()
+        let (parentScope, className) = try decomposePath(name: name)
+        return try doDefineClass(name: className, parent: parent, under: parentScope)
+    }
+
+    private func decomposePath(name: String) throws -> (RbObject, String) {
         let (parentScope, className) = try name.decomposedConstantPath()
 
         var scopeClass: RbObject = .nilObject // Qnil special case in rbg_helpers
         if let parentScope = parentScope {
             scopeClass = try get(parentScope)
         }
-
-        return try doDefineClass(name: className, parent: parent, under: scopeClass)
+        return (scopeClass, className)
     }
 
     /// Define a new, empty, Ruby class nested under an existing class or module.
@@ -85,14 +89,8 @@ extension RbGateway {
     @discardableResult
     public func defineModule(_ name: String) throws -> RbObject {
         try setup()
-        let (underScope, modName) = try name.decomposedConstantPath()
-
-        var underClass: RbObject = .nilObject // Qnil special case in rbg_helpers
-        if let underScope = underScope {
-            underClass = try get(underScope)
-        }
-
-        return try doDefineModule(name: modName, under: underClass)
+        let (parentScope, modName) = try decomposePath(name: name)
+        return try doDefineModule(name: modName, under: parentScope)
     }
 
     /// Define a new, empty, Ruby module nested under an existing class or module.
