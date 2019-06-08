@@ -202,7 +202,27 @@ extension RbObject {
     /// Check object is a proc
     func checkIsProc() throws {
         guard rb_obj_is_proc(rubyValue) == Qtrue else {
-            throw RbError.badType("Expected proc, actual type: \(rubyType)")
+            throw RbError.badType("Expected proc, actual type: \(rubyType), \(self)")
+        }
+    }
+
+    /// Check object is a class
+    func checkIsClass() throws {
+        guard rubyType == .T_CLASS else {
+            throw RbError.badType("Expected class or module, actual \(rubyType), \(self)")
+        }
+    }
+    /// Check object is a module
+    func checkIsModule() throws {
+        guard rubyType == .T_MODULE else {
+            throw RbError.badType("Expected class or module, actual \(rubyType), \(self)")
+        }
+    }
+
+    /// Check object is a class or a module
+    func checkIsClassOrModule() throws {
+        guard rubyType == .T_CLASS || rubyType == .T_MODULE else {
+            throw RbError.badType("Expected class or module, actual \(rubyType), \(self)")
         }
     }
 }

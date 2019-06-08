@@ -56,18 +56,13 @@ extension RbGateway {
     @discardableResult
     public func defineClass(_ name: String, parent: RbObject? = nil, under: RbObject) throws -> RbObject {
         try name.checkRubyConstantName()
-        guard under.rubyType == .T_MODULE || under.rubyType == .T_CLASS else {
-            throw RbError.badType("Not a class or module: \(under)")
-        }
-
+        try under.checkIsClassOrModule()
         return try doDefineClass(name: name, parent: parent, under: under)
     }
 
     private func doDefineClass(name: String, parent: RbObject?, under: RbObject) throws -> RbObject {
         let parentClass = parent ?? RbObject(rubyValue: rb_cObject)
-        guard parentClass.rubyType == .T_CLASS else {
-            throw RbError.badType("Can't define class '\(name)' inheriting from non-T_CLASS type \(parentClass)")
-        }
+        try parentClass.checkIsClass()
 
         return try under.withRubyValue { underVal in
             try parentClass.withRubyValue { parentVal in
@@ -112,10 +107,7 @@ extension RbGateway {
     public func defineModule(_ name: String, under: RbObject) throws -> RbObject {
         try setup()
         try name.checkRubyConstantName()
-        guard under.rubyType == .T_MODULE || under.rubyType == .T_CLASS else {
-            throw RbError.badType("Not a class or module: \(under)")
-        }
-
+        try under.checkIsClassOrModule()
         return try doDefineModule(name: name, under: under)
     }
 
@@ -123,6 +115,56 @@ extension RbGateway {
         return try under.withRubyValue { scopeVal in
             try RbVM.doProtect { tag in
                 RbObject(rubyValue: rbg_define_module_protect(name, scopeVal, &tag))
+            }
+        }
+    }
+}
+
+// MARK: Importing modules
+
+extension RbObject {
+    /// Add methods from a module to a class such that methods from the class
+    /// override any that match in the module.
+    ///
+    /// - Parameter module: Module whose methods are to be added.
+    /// - Throws: <#throws value description#>
+    public func include(module: RbObject) throws {
+        try checkIsClass()
+        try module.checkIsModule()
+        try doInjectModule(module: module, type: RBG_INJECT_INCLUDE)
+    }
+
+    /// Add methods from a module to a class such that methods from the module
+    /// override any that match in the class.
+    ///
+    /// See `Module#prepend` for a better explanation.
+    ///
+    /// - Parameter module: Module whose methods are to be added.
+    /// - Throws: <#throws value description#>
+    public func prepend(module: RbObject) throws {
+        try checkIsClass()
+        try module.checkIsModule()
+        try doInjectModule(module: module, type: RBG_INJECT_PREPEND)
+    }
+
+    /// Add methods from a module to the singleton class of this object.
+    ///
+    /// See `Module#extend` for a better explanation.
+    ///
+    /// - Parameter module: Module whose methods are to be added.
+    /// - Throws: <#throws value description#>
+    public func extend(module: RbObject) throws {
+        try module.checkIsModule()
+        try doInjectModule(module: module, type: RBG_INJECT_EXTEND)
+    }
+
+    /// Helper for include/prepend/extend
+    private func doInjectModule(module: RbObject, type: Rbg_inject_type) throws {
+        try withRubyValue { myValue in
+            try module.withRubyValue { moduleValue in
+                try RbVM.doProtect { tag in
+                    rbg_inject_module_protect(myValue, moduleValue, type, &tag)
+                }
             }
         }
     }

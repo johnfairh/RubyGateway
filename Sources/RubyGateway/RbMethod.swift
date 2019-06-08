@@ -555,9 +555,7 @@ extension RbObject {
     public func defineMethod(name: String,
                              argsSpec: RbMethodArgsSpec = RbMethodArgsSpec(),
                              body: @escaping RbMethodCallback) throws {
-        guard rubyType == .T_CLASS || rubyType == .T_MODULE || rubyType == .T_ICLASS else {
-            throw RbError.badType("Expected T_CLASS/T_MODULE got \(rubyType)")
-        }
+        try checkIsClassOrModule()
         try doDefineMethod(name: name, argsSpec: argsSpec, body: body, singleton: false)
     }
 

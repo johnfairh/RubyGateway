@@ -100,6 +100,7 @@ typedef enum {
     RBG_JOB_SCAN_ARG_HASH,
     RBG_JOB_DEFINE_CLASS,
     RBG_JOB_DEFINE_MODULE,
+    RBG_JOB_INJECT_MODULE,
 } Rbg_job;
 
 typedef struct {
@@ -123,6 +124,8 @@ typedef struct {
     int          *argIsOpts;
 
     VALUE         insideClass;
+    VALUE         module;
+    Rbg_inject_type injectType;
 } Rbg_protect_data;
 
 #define RBG_PDATA_TO_VALUE(pdata) ((uintptr_t)(void *)(pdata))
@@ -205,6 +208,20 @@ static VALUE rbg_protect_thunk(VALUE value)
             rc = rb_define_module(d->name);
         } else {
             rc = rb_define_module_under(d->insideClass, d->name);
+        }
+        break;
+    case RBG_JOB_INJECT_MODULE:
+        switch (d->injectType)
+        {
+        case RBG_INJECT_EXTEND:
+            rb_extend_object(d->value, d->module);
+            break;
+        case RBG_INJECT_PREPEND:
+            rb_prepend_module(d->value, d->module);
+            break;
+        case RBG_INJECT_INCLUDE:
+            rb_include_module(d->value, d->module);
+            break;
         }
         break;
     }
@@ -517,9 +534,17 @@ VALUE rbg_define_module_protect(const char * _Nonnull name,
                                 int * _Nonnull status)
 {
     Rbg_protect_data data = { .job = RBG_JOB_DEFINE_MODULE,
-        .name = name, .insideClass = underClass
-    };
+        .name = name, .insideClass = underClass };
     return rbg_protect(&data, status);
+}
+
+void rbg_inject_module_protect(VALUE into, VALUE module,
+                               Rbg_inject_type type,
+                               int * _Nonnull status)
+{
+    Rbg_protect_data data = { .job = RBG_JOB_INJECT_MODULE,
+        .value = into, .module = module, .injectType = type };
+    (void) rbg_protect(&data, status);
 }
 
 //

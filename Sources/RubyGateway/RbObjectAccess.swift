@@ -209,9 +209,7 @@ extension RbObjectAccess {
     ///           `RbError.badType(_:)` if the constant is found but is not a class.
     public func getClass(_ name: String) throws -> RbObject {
         let obj = try getConstant(name)
-        guard obj.rubyType == .T_CLASS else {
-            try RbError.raise(error: .badType("Found constant called \(name) but it is not a class."))
-        }
+        try obj.checkIsClass()
         return obj
     }
 }
@@ -471,7 +469,7 @@ extension RbObjectAccess {
 
 extension RbObjectAccess {
     /// Check the associated rubyValue is for a class.
-    private func checkClass() throws {
+    private func hasClassVars() throws {
         let type = TYPE(getValue())
         guard type == .T_CLASS || type == .T_MODULE || type == .T_ICLASS else {
             try RbError.raise(error: .badType("\(getValue()) is not a class, cannot get/setClassVar() on it."))
@@ -498,7 +496,7 @@ extension RbObjectAccess {
     public func getClassVar(_ name: String) throws -> RbObject {
         try Ruby.setup()
         try name.checkRubyClassVarName()
-        try checkClass()
+        try hasClassVars()
 
         let id = try Ruby.getID(for: name)
 
@@ -525,7 +523,7 @@ extension RbObjectAccess {
     public func setClassVar(_ name: String, newValue: RbObjectConvertible?) throws -> RbObject {
         try Ruby.setup()
         try name.checkRubyClassVarName()
-        try checkClass()
+        try hasClassVars()
 
         let id = try Ruby.getID(for: name)
 

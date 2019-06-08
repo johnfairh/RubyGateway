@@ -7,6 +7,7 @@
 ##### Enhancements
 
 * Implement class and singleton-class methods in Swift.
+* Define classes and modules from Swift.
 
 ##### Bug Fixes
 

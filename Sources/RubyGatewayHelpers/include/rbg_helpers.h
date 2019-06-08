@@ -156,6 +156,17 @@ VALUE rbg_define_module_protect(const char * _Nonnull name,
                                 VALUE underClass,
                                 int * _Nonnull status);
 
+typedef enum {
+    RBG_INJECT_INCLUDE,
+    RBG_INJECT_PREPEND,
+    RBG_INJECT_EXTEND
+} Rbg_inject_type;
+
+/// Safely call rb_include/prepend/extend and report exception status.
+void rbg_inject_module_protect(VALUE into, VALUE module,
+                               Rbg_inject_type type,
+                               int * _Nonnull status);
+
 /// Callback into Swift code for gvar access
 typedef VALUE (*Rbg_gvar_get_call)(ID id);
 typedef void (*Rbg_gvar_set_call)(ID id,
