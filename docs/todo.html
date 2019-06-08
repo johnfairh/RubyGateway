@@ -227,30 +227,8 @@
             <h2 id='2-2' class='heading'>2.2</h2>
 
 <ul>
-<li>Swift implementations of classes</li>
+<li>Define classes in swift</li>
 </ul>
-
-<!--
-define_class - name [parse ::s?]
-             - inherits_from [default Object]
-             - under [default nil]
-
-define_module - name [parse ::s?]
-              - under [default nil]
-
-include_module - add module methods to a class, ancestors class->module
-prepend_module - add module methods to a class, ancestors module->class
-
-extend_object - add module methods to the singleton class of an object
-                FFS.  Usually the &lsquo;object&rsquo; is a class, and this means
-                &lsquo;add the class methods of a module to the class methods
-                 of this thing&rsquo;
-                So you would do
-                myClass = define_class(&ldquo;My&rdquo;)
-                myClass.include(module: someModule) // get instance stuff
-                myClass.extend(module: someModule) // get class stuff
-                === myClass.singleton_class.include(module: someModule)
-&ndash;>
 <h2 id='other' class='heading'>Other</h2>
 
 <p>Optimize GC interaction</p>
@@ -261,7 +239,8 @@ extend_object - add module methods to the singleton class of an object
 <li>Policy or something to avoid crashes in operators</li>
 </ul>
 
-<p>Dynamic callable &ndash; will need to write the Swift patch myself though&hellip;</p>
+<p>Dynamic callable &ndash; will need to write the Swift patch myself though,
+or give up on &lsquo;property&rsquo; access and require call syntax everywhere.</p>
 
           </div>
         </section>

@@ -247,8 +247,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Provides information about the Ruby VM, some control over how code is run,
-and services to access various kinds of Ruby objects from the top level.</p>
+                        <p>Provides top-level Ruby services: information about the Ruby VM, evaluate
+expressions, access various kinds of Ruby objects, and define new Ruby
+classes, modules, and functions.</p>
 
 <p>You cannot instantiate this type.  Instead RubyGateway exports a public
 instance <code>Ruby</code>.  Among other things this permits a dynamic member lookup
@@ -284,6 +285,17 @@ or call functions as you would at the top level of a Ruby script, for example:</
 
 <p>If you just want to create a Ruby object of some class, see
 <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC7ofClass4args6kwArgsACSgSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSAIGtcfc">RbObject.init(ofClass:args:kwArgs:)</a></code>.</p>
+<h2 id='running-ruby-code' class='heading'>Running Ruby code</h2>
+
+<p>Use <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C4eval4rubyAA0C6ObjectCSS_tKF">RbGateway.eval(ruby:)</a></code> to evaulate a Ruby expression in the current VM.
+For example:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">eval</span><span class="p">(</span><span class="nv">ruby</span><span class="p">:</span> <span class="s">"Rouge.highlight('let a = 1', 'swift', 'html')"</span><span class="p">)</span>
+</code></pre>
+<h2 id='defining-new-ruby-classes' class='heading'>Defining new Ruby classes</h2>
+
+<p>Use <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C11defineClass_6parentAA0C6ObjectCSS_AGSgtKF">RbGateway.defineClass(_:parent:)</a></code> and <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C12defineModuleyAA0C6ObjectCSSKF">RbGateway.defineModule(_:)</a></code> to define new
+classes and modules.  Then add methods using <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC12defineMethod4name8argsSpec4bodyySS_AA0cf4ArgsI0VA2C_AA0cF0VtKctKF">RbObject.defineMethod(...)</a></code> and
+<code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC21defineSingletonMethod4name8argsSpec4bodyySS_AA0cg4ArgsJ0VA2C_AA0cG0VtKctKF">RbObject.defineSingletonMethod(...)</a></code>.</p>
 
                         <a href="Classes/RbGateway.html" class="slightly-smaller">See more</a>
                       </div>
@@ -296,7 +308,7 @@ or call functions as you would at the top level of a Ruby script, for example:</
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L51-L160">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L67-L176">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

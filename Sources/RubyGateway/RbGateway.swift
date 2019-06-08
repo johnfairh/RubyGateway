@@ -8,8 +8,9 @@
 import CRuby
 import RubyGatewayHelpers
 
-/// Provides information about the Ruby VM, some control over how code is run,
-/// and services to access various kinds of Ruby objects from the top level.
+/// Provides top-level Ruby services: information about the Ruby VM, evaluate
+/// expressions, access various kinds of Ruby objects, and define new Ruby
+/// classes, modules, and functions.
 ///
 /// You cannot instantiate this type.  Instead RubyGateway exports a public
 /// instance `Ruby`.  Among other things this permits a dynamic member lookup
@@ -48,6 +49,21 @@ import RubyGatewayHelpers
 ///
 /// If you just want to create a Ruby object of some class, see
 /// `RbObject.init(ofClass:args:kwArgs:)`.
+///
+/// ## Running Ruby code
+///
+/// Use `RbGateway.eval(ruby:)` to evaulate a Ruby expression in the current VM.
+/// For example:
+/// ```swift
+/// let result = try Ruby.eval(ruby: "Rouge.highlight('let a = 1', 'swift', 'html')")
+/// ```
+///
+/// ## Defining new Ruby classes
+///
+/// Use `RbGateway.defineClass(_:parent:)` and `RbGateway.defineModule(_:)` to define new
+/// classes and modules.  Then add methods using `RbObject.defineMethod(...)` and
+/// `RbObject.defineSingletonMethod(...)`.
+///
 public final class RbGateway: RbObjectAccess {
 
     /// The VM - not initialized until `setup()` is called.
@@ -330,7 +346,6 @@ extension RbGateway {
         }
     }
 }
-
 
 // MARK: - Global declaration
 

@@ -20,6 +20,9 @@ extension String {
 
     /// Does the string look like a Ruby constant name?
     var isRubyConstantName: Bool {
+        guard !contains("::") else {
+            return false
+        }
         // Ruby supports full utf8 character set for identifiers.
         // However Ruby constants are defined as beginning with an ASCII
         // capital letter.  `rb_isupper` is locale-insensitive.
@@ -31,7 +34,20 @@ extension String {
 
     /// Throw if the string does not look like a constant name.
     func checkRubyConstantName() throws {
-        try check(\String.isRubyConstantName, "constant (capital)")
+        try check(\String.isRubyConstantName, "constant (capital, no ::)")
+    }
+
+    /// Does the string look like a Ruby constant path name?
+    var isRubyConstantPath: Bool {
+        guard !hasSuffix("::") else {
+            return false
+        }
+        return components(separatedBy: "::").allSatisfy { $0.isRubyConstantName }
+    }
+
+    /// Throw if the string does not look like a constant path.
+    func checkRubyConstantPath() throws {
+        try check(\String.isRubyConstantPath, "constant (capital)")
     }
 
     /// Does the string look like a Ruby global variable name?
@@ -72,5 +88,19 @@ extension String {
     /// Throw if the string does not look like a method name.
     func checkRubyMethodName() throws {
         try check(\String.isRubyMethodName, "method")
+    }
+}
+
+extension String {
+    /// Split a constant path into an ancestors path and a leaf name
+    func decomposedConstantPath() throws -> (String?, String) {
+        try checkRubyConstantPath()
+        let pathComponents = components(separatedBy: "::")
+        let constant = pathComponents.last! // because checkRubyConstantPath
+        let ancestors = pathComponents.dropLast()
+        guard !ancestors.isEmpty else {
+            return (nil, constant)
+        }
+        return (ancestors.joined(separator: "::"), constant)
     }
 }

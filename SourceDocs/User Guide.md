@@ -53,6 +53,29 @@ do {
 }
 ```
 
+RubyGateway lets you use Swift to define Ruby classes, modules, global
+functions, and global variables that can be used by Ruby code identically
+to the Ruby-native versions.  There are more details about these use cases
+below; in general start with `RbGateway` methods beginning with _define_.
+
+An example defining a module with a static API:
+```swift
+let myModule = try Ruby.defineModule("Bakery")
+
+try myModule.defineSingletonMethod("reserve_cakes", .basic(1)) { _, method in
+    if let cakeCount = Int(method.args.mandatory[0]) {
+        Cakes.reserve(cakeCount)
+    }
+    return .nilObject
+}
+```
+...called from Ruby:
+```ruby
+def daily_routine
+  Bakery.reserve_cakes(4)
+end
+```
+
 ## How to ...
 
 A few Ruby-ish tasks.  Lots of these are more long-winded in Swift.  The idea
@@ -220,7 +243,7 @@ let myClass = try Ruby.getClass("MyClass")
 let count = try myClass.getClassVar("@@count")
 ```
 
-## Implement Ruby global variables in Swift
+### Implement Ruby global variables in Swift
 
 See `RbGateway.defineGlobalVar(name:get:set:)`.  For example:
 ```swift
@@ -231,10 +254,15 @@ Ruby.defineGlobalVar(name: "$epoch",
                      set: { notifyNewEpoch($0)})
 ```
 
-## Implement Ruby global functions in Swift
+### Define and implement methods in Swift
 
-See `RbGateway.defineGlobalFunction(name:argsSpec:body:)`.  The
-`RbMethodArgsSpec` is how you set the signature for the function: how many
+Global functions are defined using
+`RbGateway.defineGlobalFunction(name:argsSpec:body:)`; methods are defined
+using `RbObject.defineMethod(name:argsSpec:body:)`; and singleton methods are
+defined using `RbObject.defineSingletonMethod(name:argsSpec:body:)`.  These
+all follow the same pattern.
+
+The `RbMethodArgsSpec` is how you set the signature for the function: how many
 arguments of what kinds, which ones have default values, which have keywords,
 and so on.  For example, this defines a function to Ruby called `log` that
 requires one argument and passes its string representation onwards;
@@ -272,7 +300,7 @@ log2(message: object_to_log)
 log2(message: object_to_log, priority: 2)
 ```
 
-## Use blocks from Swift methods
+### Use blocks from Swift methods
 
 The `RbMethod` passed to your method callback provides access to the method's
 block.  The best way to invoke it is with an unguarded `try`, and let any
@@ -296,16 +324,39 @@ error is `RbError.rubyJump(_:)` or `RbError.rubyException(_:)`: for the former,
 you can do your own cleanup but must rethrow the error and must not call into
 Ruby as part of the cleanup.
 
+### Define new modules in Swift
+
+Use `RbGateway.defineModule(_:)` to define a new top-level module.  Use
+`RbGateway.defineModule(_:under:)` to define a new nested module.
+
+For example:
+```swift
+let outerModule = try Ruby.defineModule("MySystem")
+let innerModule = try Ruby.defineModule("SubsystemA", under: outerModule)
+
+try Ruby.defineSingletonMethod(name: "activate") { ... }
+```
+...is equivalent to, in Ruby:
+```ruby
+module MySystem
+  module SubsystemA
+    def self.activate
+      ...
+    end
+  end
+end
+```
+
 ### Run finalizers before process exit
 
 If you want to stop using Ruby and get on with something else, and
 never come back to Ruby in the process, use `RbGateway.cleanup()`.
 
-## Work with Ruby complex numbers
+### Work with Ruby complex numbers
 
 See `RbComplex` for a thin wrapper to Ruby's `Complex` type.
 
-## Work with Ruby rational numbers
+### Work with Ruby rational numbers
 
 See `RbRational` for a thin wrapper to Ruby's `Rational` type.
 

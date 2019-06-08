@@ -37,6 +37,7 @@ class TestConstants: XCTestCase {
     func testConstantName() {
         testBadName("lowercase")
         testBadName("")
+        testBadName("::")
     }
 
     func testNestedConstantAccess() {

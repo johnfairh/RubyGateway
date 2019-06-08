@@ -160,7 +160,7 @@ extension RbObjectAccess {
     /// - throws: `RbError.rubyException(_:)` if the constant cannot be found.
     public func getConstant(_ name: String) throws -> RbObject {
         try Ruby.setup()
-        try name.checkRubyConstantName()
+        try name.checkRubyConstantPath()
 
         var nextValue = getValue()
 
@@ -605,7 +605,7 @@ extension RbObjectAccess {
     ///           `RbError` of some other kind if `name` looks wrong in some way.
     @discardableResult
     public func get(_ name: String) throws -> RbObject {
-        if name.isRubyConstantName {
+        if name.isRubyConstantPath {
             return try getConstant(name)
         } else if name.isRubyGlobalVarName {
             return try getGlobalVar(name)
