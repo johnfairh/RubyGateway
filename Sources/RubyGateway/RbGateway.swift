@@ -309,6 +309,7 @@ extension RbGateway {
     /// - note: This is a lower level than `Kernel#eval` and less flexible - if you
     ///   need that function then access it via `RbGateway.call("eval")`.
     ///   Don't be tempted by `rb_eval_string_wrap()`, it is broken. #10466.
+    @discardableResult
     public func eval(ruby: String) throws -> RbObject {
         try setup()
         return RbObject(rubyValue: try RbVM.doProtect { tag in

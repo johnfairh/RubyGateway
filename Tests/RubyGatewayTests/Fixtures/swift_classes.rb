@@ -29,3 +29,58 @@ def test_swiftclass
   valo = inst.other_value
   raise "Bad other_val #{valo}" unless valo == 44
 end
+
+module InjectableModule
+    def value1
+        22
+    end
+
+    def value2
+        29
+    end
+end
+
+class InjecteeClass1
+    def value1
+        50
+    end
+end
+
+class InjecteeClass2
+    def value1
+        30
+    end
+end
+
+# Swift:
+# class InjecteeClass1
+#     include InjectableModule
+# end
+#
+# class InjecteeClass2
+#     prepend InjectableModule
+# end
+
+def test_inject1
+    o1 = InjecteeClass1.new
+    v1 = o1.value1
+    raise "Bad v1 #{v1}" unless v1 == 50
+    v2 = o1.value2
+    raise "Bad v2 #{v2}" unless v2 == 29
+
+    o2 = InjecteeClass2.new
+    v3 = o2.value1
+    raise "Bad v3 #{v3}" unless v3 == 22
+    v4 = o2.value2
+    raise "Bad v4 #{v4}" unless v4 == 29
+end
+
+# Swift:
+# class InjecteeClass1
+#     extend InjectableModule
+# end
+
+def test_inject2
+    v1 = InjecteeClass1.value1
+    raise "Bad 2.v1 #{v1}" unless v1 == 22
+end

@@ -54,6 +54,11 @@ class TestClassDef: XCTestCase {
             let myClass = try Ruby.defineClass("::", under: objClass)
             XCTFail("Managed to define class with odd name \(myClass)")
         }
+
+        doError {
+            try objClass.include(module: notAclass)
+            XCTFail("Managed to include an instance into a class")
+        }
     }
 
     // Simple module
@@ -112,6 +117,25 @@ class TestClassDef: XCTestCase {
         }
     }
 
+    // Module injection
+    func testModuleInjection() {
+        doErrorFree {
+            try Ruby.require(filename: Helpers.fixturePath("swift_classes.rb"))
+
+            let mod = try Ruby.get("InjectableModule")
+            let c1 = try Ruby.get("InjecteeClass1")
+            let c2 = try Ruby.get("InjecteeClass2")
+
+            try c1.include(module: mod)
+            try c2.prepend(module: mod)
+
+            try Ruby.eval(ruby: "test_inject1")
+
+            try c1.extend(module: mod)
+            try Ruby.eval(ruby: "test_inject2")
+        }
+    }
+
 
     static var allTests = [
         ("testSimpleClass", testSimpleClass),
@@ -119,5 +143,6 @@ class TestClassDef: XCTestCase {
         ("testSimpleModule", testSimpleModule),
         ("testNestedDefs", testNestedDefs),
         ("testNestedDefs2", testNestedDefs2),
+        ("testModuleInjection", testModuleInjection),
     ]
 }
