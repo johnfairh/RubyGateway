@@ -754,7 +754,7 @@ value if it doesn&rsquo;t exist yet.</p>
                         <p>The class object for the new class.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbClass.swift#L57-L64">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbClass.swift#L57-L61">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -816,7 +816,7 @@ value if it doesn&rsquo;t exist yet.</p>
                         <p>The module object for the new module.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbClass.swift#L90-L94">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbClass.swift#L85-L89">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -895,7 +895,7 @@ value if it doesn&rsquo;t exist yet.</p>
                         <p>The module object for the new module.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbClass.swift#L112-L120">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbClass.swift#L107-L112">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1220,7 +1220,8 @@ Don&rsquo;t be tempted by <code>rb_eval_string_wrap()</code>, it is broken. #104
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">eval</span><span class="p">(</span><span class="nv">ruby</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">eval</span><span class="p">(</span><span class="nv">ruby</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
 
                         </div>
                       </div>
@@ -1248,7 +1249,7 @@ Don&rsquo;t be tempted by <code>rb_eval_string_wrap()</code>, it is broken. #104
                         <p>The result of executing the code.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L312-L317">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L313-L318">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1310,7 +1311,7 @@ method is dispatched dynamically so it will invoke any replacements of
                         <p><code>true</code> if the file was loaded OK, <code>false</code> if it is already loaded.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L328-L332">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L329-L333">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1377,7 +1378,7 @@ instead of the current program.  See <code>Kernel#load</code>.</p>
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L340-L347">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L341-L348">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

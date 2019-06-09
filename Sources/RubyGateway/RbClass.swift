@@ -120,14 +120,16 @@ extension RbGateway {
     }
 }
 
-// MARK: Importing modules
+// MARK: Importing Modules
 
 extension RbObject {
     /// Add methods from a module to a class such that methods from the class
     /// override any that match in the module.
     ///
     /// - Parameter module: Module whose methods are to be added.
-    /// - Throws: <#throws value description#>
+    /// - Throws: `RbError.badType(...)` if this object is not a class or if `module`
+    ///            is not a module.  `RbError.rubyException(...)` if Ruby is unhappy,
+    ///            for example if the operation creates a circular dependency.
     public func include(module: RbObject) throws {
         try checkIsClass()
         try module.checkIsModule()
@@ -140,7 +142,9 @@ extension RbObject {
     /// See `Module#prepend` for a better explanation.
     ///
     /// - Parameter module: Module whose methods are to be added.
-    /// - Throws: <#throws value description#>
+    /// - Throws: `RbError.badType(...)` if this object is not a class or if `module`
+    ///            is not a module.  `RbError.rubyException(...)` if Ruby is unhappy,
+    ///            for example if the operation creates a circular dependency.
     public func prepend(module: RbObject) throws {
         try checkIsClass()
         try module.checkIsModule()
@@ -152,7 +156,9 @@ extension RbObject {
     /// See `Module#extend` for a better explanation.
     ///
     /// - Parameter module: Module whose methods are to be added.
-    /// - Throws: <#throws value description#>
+    /// - Throws: `RbError.badType(...)` if `module` is not a module.
+    ///            `RbError.rubyException(...)` if Ruby is unhappy,
+    ///            for example if the operation creates a circular dependency.
     public func extend(module: RbObject) throws {
         try module.checkIsModule()
         try doInjectModule(module: module, type: RBG_INJECT_EXTEND)

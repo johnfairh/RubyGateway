@@ -309,7 +309,8 @@ the program will crash.</p>
 <h2 id='defining-methods' class='heading'>Defining methods</h2>
 
 <p>Use <code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectC12defineMethod4name8argsSpec4bodyySS_AA0cf4ArgsI0VA2C_AA0cF0VtKctKF">RbObject.defineMethod(...)</a></code> and <code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectC21defineSingletonMethod4name8argsSpec4bodyySS_AA0cg4ArgsJ0VA2C_AA0cG0VtKctKF">RbObject.defineSingletonMethod(...)</a></code> to
-add methods implemented in Swift to an object or class.</p>
+add methods implemented in Swift to an object or class.  Use
+<code><a href="../Classes/RbGateway.html#/s:11RubyGateway02RbB0C11defineClass_6parentAA0C6ObjectCSS_AGSgtKF">RbGateway.defineClass(_:parent:)</a></code> to define entirely new classes.</p>
 
           </div>
         </section>
@@ -349,7 +350,7 @@ of the Ruby API.  It is not normally needed.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L95-L98">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L96-L99">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -387,7 +388,7 @@ a separate Ruby object do:</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L110-L114">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L111-L115">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -440,7 +441,7 @@ outside the corresponding <code>RbObject</code>&lsquo;s lifetime.</p>
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L134-L136">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L135-L137">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -471,7 +472,7 @@ might be useful for debugging.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L140-L142">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L141-L143">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -501,7 +502,7 @@ might be useful for debugging.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L145-L147">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L146-L148">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -538,7 +539,7 @@ Ruby worked but the call evaluated to [Ruby] <code>nil</code>.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L157-L159">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L158-L160">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -568,7 +569,7 @@ Ruby worked but the call evaluated to [Ruby] <code>nil</code>.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L162">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L163">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -609,7 +610,194 @@ it implements <code>[]</code>, <code>[]=</code>, and <code>length</code> like Ar
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L176-L183">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L177-L184">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Importing%20Modules"></a>
+                <a name="//apple_ref/swift/Section/Importing Modules" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Importing%20Modules"></a>
+                  <h3 class="section-name"><p>Importing Modules</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway8RbObjectC7include6moduleyAC_tKF"></a>
+                    <a name="//apple_ref/swift/Method/include(module:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway8RbObjectC7include6moduleyAC_tKF">include(module:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add methods from a module to a class such that methods from the class
+override any that match in the module.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeyACSScACmF">RbError.badType(...)</a></code> if this object is not a class or if <code><a href="https://developer.apple.com/documentation/objectivec/module/">module</a></code>
+       is not a module.  <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(...)</a></code> if Ruby is unhappy,
+       for example if the operation creates a circular dependency.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">include</span><span class="p">(</span><span class="nv">module</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>module</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Module whose methods are to be added.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbClass.swift#L133-L137">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway8RbObjectC7prepend6moduleyAC_tKF"></a>
+                    <a name="//apple_ref/swift/Method/prepend(module:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway8RbObjectC7prepend6moduleyAC_tKF">prepend(module:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add methods from a module to a class such that methods from the module
+override any that match in the class.</p>
+
+<p>See <code>Module#prepend</code> for a better explanation.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeyACSScACmF">RbError.badType(...)</a></code> if this object is not a class or if <code><a href="https://developer.apple.com/documentation/objectivec/module/">module</a></code>
+       is not a module.  <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(...)</a></code> if Ruby is unhappy,
+       for example if the operation creates a circular dependency.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">prepend</span><span class="p">(</span><span class="nv">module</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>module</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Module whose methods are to be added.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbClass.swift#L148-L152">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway8RbObjectC6extend6moduleyAC_tKF"></a>
+                    <a name="//apple_ref/swift/Method/extend(module:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway8RbObjectC6extend6moduleyAC_tKF">extend(module:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add methods from a module to the singleton class of this object.</p>
+
+<p>See <code>Module#extend</code> for a better explanation.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeyACSScACmF">RbError.badType(...)</a></code> if <code><a href="https://developer.apple.com/documentation/objectivec/module/">module</a></code> is not a module.
+       <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(...)</a></code> if Ruby is unhappy,
+       for example if the operation creates a circular dependency.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">extend</span><span class="p">(</span><span class="nv">module</span><span class="p">:</span> <span class="kt">RbObject</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>module</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Module whose methods are to be added.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbClass.swift#L162-L165">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1035,7 +1223,7 @@ immediately available to all instances of the class.</p>
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L555-L562">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L555-L560">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1121,7 +1309,7 @@ valid just for this instance.</p>
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L577-L581">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L575-L579">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1213,7 +1401,7 @@ find out what failed.</p>
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L222-L229">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L243-L250">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1320,7 +1508,7 @@ find out what failed.</p>
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L244-L257">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L265-L278">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1375,7 +1563,7 @@ find out what failed.</p>
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L264-L270">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L285-L291">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1420,7 +1608,7 @@ find out what failed.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L281-L286">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L302-L307">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1452,7 +1640,7 @@ find out what failed.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L291-L299">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L312-L320">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1482,7 +1670,7 @@ find out what failed.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L302-L304">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L323-L325">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1533,7 +1721,7 @@ or if the <code>hash</code> call returns something that can&rsquo;t be converted
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L315-L331">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L336-L352">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1574,7 +1762,7 @@ or if the <code>hash</code> call returns something that can&rsquo;t be converted
                         <p>Whether the objects are the same under <code>==</code>.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L338-L348">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L359-L369">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1612,7 +1800,7 @@ argument is less than that of the second argument.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L355-L363">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L376-L384">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
