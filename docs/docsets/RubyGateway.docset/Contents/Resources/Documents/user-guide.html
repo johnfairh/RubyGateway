@@ -528,8 +528,7 @@ you can do your own cleanup but must rethrow the error and must not call into
 Ruby as part of the cleanup.</p>
 <h3 id='define-new-modules-in-swift' class='heading'>Define new modules in Swift</h3>
 
-<p>Use <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C12defineModuleyAA0C6ObjectCSSKF">RbGateway.defineModule(_:)</a></code> to define a new top-level module.  Use
-<code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C12defineModule_5underAA0C6ObjectCSS_AGtKF">RbGateway.defineModule(_:under:)</a></code> to define a new nested module.</p>
+<p>Use <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C12defineModule_5underAA0C6ObjectCSS_AGSgtKF">RbGateway.defineModule(_:under:)</a></code> to define a new module.</p>
 
 <p>For example:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">outerModule</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineModule</span><span class="p">(</span><span class="s">"MySystem"</span><span class="p">)</span>

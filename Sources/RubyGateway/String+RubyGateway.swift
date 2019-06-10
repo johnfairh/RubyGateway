@@ -90,17 +90,3 @@ extension String {
         try check(\String.isRubyMethodName, "method")
     }
 }
-
-extension String {
-    /// Split a constant path into an ancestors path and a leaf name
-    func decomposedConstantPath() throws -> (String?, String) {
-        try checkRubyConstantPath()
-        let pathComponents = components(separatedBy: "::")
-        let constant = pathComponents.last! // because checkRubyConstantPath
-        let ancestors = pathComponents.dropLast()
-        guard !ancestors.isEmpty else {
-            return (nil, constant)
-        }
-        return (ancestors.joined(separator: "::"), constant)
-    }
-}

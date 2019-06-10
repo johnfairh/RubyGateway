@@ -80,27 +80,6 @@ class TestClassDef: XCTestCase {
         doErrorFree {
             try Ruby.require(filename: Helpers.fixturePath("swift_classes.rb"))
 
-            try Ruby.defineModule("MyOuterModule")
-            try Ruby.defineModule("MyOuterModule::MyInnerModule")
-
-            let parentClass = try Ruby.get("MyParentClass")
-            let myClass = try Ruby.defineClass("MyOuterModule::MyInnerModule::MyClass", parent: parentClass)
-            var called = false
-            try myClass.defineMethod(name: "value") { _, _ in
-                called = true
-                return RbObject(100)
-            }
-
-            let _ = try Ruby.eval(ruby: "test_swiftclass")
-            XCTAssertTrue(called)
-        }
-    }
-
-    // Nested and Ruby access again - this time using explicit 'under'
-    func testNestedDefs2() {
-        doErrorFree {
-            try Ruby.require(filename: Helpers.fixturePath("swift_classes.rb"))
-
             let outerMod = try Ruby.defineModule("MyOuterModule")
             let innerMod = try Ruby.defineModule("MyInnerModule", under: outerMod)
 
@@ -142,7 +121,6 @@ class TestClassDef: XCTestCase {
         ("testBadClassDef", testBadClassDef),
         ("testSimpleModule", testSimpleModule),
         ("testNestedDefs", testNestedDefs),
-        ("testNestedDefs2", testNestedDefs2),
         ("testModuleInjection", testModuleInjection),
     ]
 }

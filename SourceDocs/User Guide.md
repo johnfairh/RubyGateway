@@ -326,8 +326,7 @@ Ruby as part of the cleanup.
 
 ### Define new modules in Swift
 
-Use `RbGateway.defineModule(_:)` to define a new top-level module.  Use
-`RbGateway.defineModule(_:under:)` to define a new nested module.
+Use `RbGateway.defineModule(_:under:)` to define a new module.
 
 For example:
 ```swift

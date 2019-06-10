@@ -8,6 +8,7 @@
 
 * Implement class and singleton-class methods in Swift.
 * Define classes and modules from Swift.
+* Add `RbObject` to module mix-in functions.
 
 ##### Bug Fixes
 

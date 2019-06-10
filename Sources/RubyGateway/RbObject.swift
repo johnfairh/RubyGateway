@@ -82,7 +82,7 @@ import RubyGatewayHelpers
 ///
 /// Use `RbObject.defineMethod(...)` and `RbObject.defineSingletonMethod(...)` to
 /// add methods implemented in Swift to an object or class.  Use
-/// `RbGateway.defineClass(_:parent:)` to define entirely new classes.
+/// `RbGateway.defineClass(...)` to define entirely new classes.
 public final class RbObject: RbObjectAccess {
     internal let valueBox: UnsafeMutablePointer<Rbg_value>
 

@@ -277,9 +277,9 @@ For example:</p>
 </code></pre>
 <h2 id='defining-new-ruby-classes' class='heading'>Defining new Ruby classes</h2>
 
-<p>Use <code><a href="../Classes/RbGateway.html#/s:11RubyGateway02RbB0C11defineClass_6parentAA0C6ObjectCSS_AGSgtKF">RbGateway.defineClass(_:parent:)</a></code> and <code><a href="../Classes/RbGateway.html#/s:11RubyGateway02RbB0C12defineModuleyAA0C6ObjectCSSKF">RbGateway.defineModule(_:)</a></code> to define new
-classes and modules.  Then add methods using <code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectC12defineMethod4name8argsSpec4bodyySS_AA0cf4ArgsI0VA2C_AA0cF0VtKctKF">RbObject.defineMethod(...)</a></code> and
-<code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectC21defineSingletonMethod4name8argsSpec4bodyySS_AA0cg4ArgsJ0VA2C_AA0cG0VtKctKF">RbObject.defineSingletonMethod(...)</a></code>.</p>
+<p>Use <code><a href="../Classes/RbGateway.html#/s:11RubyGateway02RbB0C11defineClass_6parent5underAA0C6ObjectCSS_AHSgAItKF">RbGateway.defineClass(_:parent:under:)</a></code> and <code><a href="../Classes/RbGateway.html#/s:11RubyGateway02RbB0C12defineModule_5underAA0C6ObjectCSS_AGSgtKF">RbGateway.defineModule(_:under:)</a></code>
+to define new classes and modules.  Then add methods using <code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectC12defineMethod4name8argsSpec4bodyySS_AA0cf4ArgsI0VA2C_AA0cF0VtKctKF">RbObject.defineMethod(...)</a></code>
+and <code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectC21defineSingletonMethod4name8argsSpec4bodyySS_AA0cg4ArgsJ0VA2C_AA0cG0VtKctKF">RbObject.defineSingletonMethod(...)</a></code>.</p>
 
           </div>
         </section>
@@ -599,9 +599,9 @@ value if it doesn&rsquo;t exist yet.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway02RbB0C11defineClass_6parentAA0C6ObjectCSS_AGSgtKF"></a>
-                    <a name="//apple_ref/swift/Method/defineClass(_:parent:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway02RbB0C11defineClass_6parentAA0C6ObjectCSS_AGSgtKF">defineClass(_:parent:)</a>
+                    <a name="/s:11RubyGateway02RbB0C11defineClass_6parent5underAA0C6ObjectCSS_AHSgAItKF"></a>
+                    <a name="//apple_ref/swift/Method/defineClass(_:parent:under:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C11defineClass_6parent5underAA0C6ObjectCSS_AHSgAItKF">defineClass(_:parent:under:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -610,82 +610,6 @@ value if it doesn&rsquo;t exist yet.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Define a new, empty, Ruby class.</p>
-<div class="aside aside-throws">
-    <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifieryACSS_SStcACmF">RbError.badIdentifier(type:id:)</a></code> if <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> is bad.  <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeyACSScACmF">RbError.badType(...)</a></code> if
-      <code>parent</code> is provided but is not a class.  <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(...)</a></code> if
-      Ruby is unhappy with the definition, for example when the class already exists
-      with a different parent.
-
-</div>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">defineClass</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="nv">parent</span><span class="p">:</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>name</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Name of the class.  Can contain <code>::</code> sequences to nest the class
-              inside other classes or modules.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>parent</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Parent class for the new class to inherit from.  The default
-                is <code>nil</code> which means the new class inherits from <code><a href="https://developer.apple.com/documentation/objectivec/object/">Object</a></code>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>The class object for the new class.</p>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbClass.swift#L29-L33">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway02RbB0C11defineClass_6parent5underAA0C6ObjectCSS_AHSgAHtKF"></a>
-                    <a name="//apple_ref/swift/Method/defineClass(_:parent:under:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway02RbB0C11defineClass_6parent5underAA0C6ObjectCSS_AHSgAHtKF">defineClass(_:parent:under:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Define a new, empty, Ruby class nested under an existing class or module.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifieryACSS_SStcACmF">RbError.badIdentifier(type:id:)</a></code> if <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> is bad.  <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeyACSScACmF">RbError.badType(...)</a></code> if
@@ -701,7 +625,7 @@ value if it doesn&rsquo;t exist yet.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">defineClass</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="nv">parent</span><span class="p">:</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">under</span><span class="p">:</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">defineClass</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="nv">parent</span><span class="p">:</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">under</span><span class="p">:</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
 
                         </div>
                       </div>
@@ -717,7 +641,7 @@ value if it doesn&rsquo;t exist yet.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Name of the class.  Cannot contain <code>::</code> sequences.</p>
+                                  <p>Name of the class.</p>
                                 </div>
                               </td>
                             </tr>
@@ -742,7 +666,8 @@ value if it doesn&rsquo;t exist yet.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The class or module under which to nest this new class.</p>
+                                  <p>The class or module under which to nest this new class.  The
+               default is <code>nil</code> which means the class is at the top level.</p>
                                 </div>
                               </td>
                             </tr>
@@ -754,7 +679,7 @@ value if it doesn&rsquo;t exist yet.</p>
                         <p>The class object for the new class.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbClass.swift#L57-L61">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbClass.swift#L30-L46">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -762,9 +687,9 @@ value if it doesn&rsquo;t exist yet.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway02RbB0C12defineModuleyAA0C6ObjectCSSKF"></a>
-                    <a name="//apple_ref/swift/Method/defineModule(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway02RbB0C12defineModuleyAA0C6ObjectCSSKF">defineModule(_:)</a>
+                    <a name="/s:11RubyGateway02RbB0C12defineModule_5underAA0C6ObjectCSS_AGSgtKF"></a>
+                    <a name="//apple_ref/swift/Method/defineModule(_:under:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C12defineModule_5underAA0C6ObjectCSS_AGSgtKF">defineModule(_:under:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -773,68 +698,6 @@ value if it doesn&rsquo;t exist yet.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Define a new, empty, Ruby module.</p>
-<div class="aside aside-throws">
-    <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifieryACSS_SStcACmF">RbError.badIdentifier(type:id:)</a></code> if <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> is bad.  <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(...)</a></code> if
-      Ruby is unhappy with the definition, for example when a non-module constant already
-      exists with this name.
-
-</div>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">defineModule</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>name</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Name of the module.  Can contain <code>::</code> sequences to nest the class
-              under other classes or modules.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>The module object for the new module.</p>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbClass.swift#L85-L89">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway02RbB0C12defineModule_5underAA0C6ObjectCSS_AGtKF"></a>
-                    <a name="//apple_ref/swift/Method/defineModule(_:under:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway02RbB0C12defineModule_5underAA0C6ObjectCSS_AGtKF">defineModule(_:under:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Define a new, empty, Ruby module nested under an existing class or module.</p>
 
 <p>For example to create a module <code>Math::Advanced</code>:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">mathModule</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"Math"</span><span class="p">)</span>
@@ -855,7 +718,7 @@ value if it doesn&rsquo;t exist yet.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">defineModule</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="nv">under</span><span class="p">:</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">defineModule</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="nv">under</span><span class="p">:</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
 
                         </div>
                       </div>
@@ -871,7 +734,7 @@ value if it doesn&rsquo;t exist yet.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Name of the module.  Cannot contain <code>::</code> sequences.</p>
+                                  <p>Name of the module.</p>
                                 </div>
                               </td>
                             </tr>
@@ -895,7 +758,7 @@ value if it doesn&rsquo;t exist yet.</p>
                         <p>The module object for the new module.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbClass.swift#L107-L112">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbClass.swift#L64-L76">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

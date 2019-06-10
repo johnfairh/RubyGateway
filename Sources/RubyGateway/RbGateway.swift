@@ -60,9 +60,9 @@ import RubyGatewayHelpers
 ///
 /// ## Defining new Ruby classes
 ///
-/// Use `RbGateway.defineClass(_:parent:)` and `RbGateway.defineModule(_:)` to define new
-/// classes and modules.  Then add methods using `RbObject.defineMethod(...)` and
-/// `RbObject.defineSingletonMethod(...)`.
+/// Use `RbGateway.defineClass(_:parent:under:)` and `RbGateway.defineModule(_:under:)`
+/// to define new classes and modules.  Then add methods using `RbObject.defineMethod(...)`
+/// and `RbObject.defineSingletonMethod(...)`.
 ///
 public final class RbGateway: RbObjectAccess {
 
