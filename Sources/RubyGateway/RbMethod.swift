@@ -520,7 +520,7 @@ extension RbGateway {
     /// - throws: `RbError.badIdentifier(type:id:)` if `name` is bad.
     ///
     ///     Some other kind of `RbError` if Ruby is not working.
-    public func defineGlobalFunction(name: String,
+    public func defineGlobalFunction(_ name: String,
                                      argsSpec: RbMethodArgsSpec = RbMethodArgsSpec(),
                                      body: @escaping RbMethodCallback) throws {
         try setup()
@@ -552,7 +552,7 @@ extension RbObject {
     ///   - body: The Swift code to run when the method is called.
     /// - Throws: `RbError.badIdentifier(type:id:)` if `name` is bad.
     ///           `RbError.badType(...)` if the object is neither a class nor a module.
-    public func defineMethod(name: String,
+    public func defineMethod(_ name: String,
                              argsSpec: RbMethodArgsSpec = RbMethodArgsSpec(),
                              body: @escaping RbMethodCallback) throws {
         try checkIsClassOrModule()
@@ -572,7 +572,7 @@ extension RbObject {
     ///               does not take any arguments.
     ///   - body: The Swift code to run when the method is called.
     /// - Throws: `RbError.badIdentifier(type:id:)` if `name` is bad.
-    public func defineSingletonMethod(name: String,
+    public func defineSingletonMethod(_ name: String,
                                       argsSpec: RbMethodArgsSpec = RbMethodArgsSpec(),
                                       body: @escaping RbMethodCallback) throws {
         try doDefineMethod(name: name, argsSpec: argsSpec, body: body, singleton: true)

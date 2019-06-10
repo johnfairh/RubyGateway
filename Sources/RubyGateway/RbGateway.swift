@@ -170,7 +170,7 @@ public final class RbGateway: RbObjectAccess {
         try name.checkRubyInstanceVarName()
 
         let ivarWorkaroundName = "$RbGatewayTopSelfIvarWorkaround"
-        try defineGlobalVar(name: ivarWorkaroundName, get: { newValue.rubyObject })
+        try defineGlobalVar(ivarWorkaroundName, get: { newValue.rubyObject })
         return try eval(ruby: "\(name) = \(ivarWorkaroundName)")
     }
 }

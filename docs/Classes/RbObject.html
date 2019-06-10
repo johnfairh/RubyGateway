@@ -308,7 +308,7 @@ happens to support those operators.</p>
 the program will crash.</p>
 <h2 id='defining-methods' class='heading'>Defining methods</h2>
 
-<p>Use <code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectC12defineMethod4name8argsSpec4bodyySS_AA0cf4ArgsI0VA2C_AA0cF0VtKctKF">RbObject.defineMethod(...)</a></code> and <code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectC21defineSingletonMethod4name8argsSpec4bodyySS_AA0cg4ArgsJ0VA2C_AA0cG0VtKctKF">RbObject.defineSingletonMethod(...)</a></code> to
+<p>Use <code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectC12defineMethod_8argsSpec4bodyySS_AA0cf4ArgsH0VA2C_AA0cF0VtKctKF">RbObject.defineMethod(...)</a></code> and <code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectC21defineSingletonMethod_8argsSpec4bodyySS_AA0cg4ArgsI0VA2C_AA0cG0VtKctKF">RbObject.defineSingletonMethod(...)</a></code> to
 add methods implemented in Swift to an object or class.  Use
 <code><a href="../Classes/RbGateway.html#/s:11RubyGateway02RbB0C11defineClass_6parent5underAA0C6ObjectCSS_AHSgAItKF">RbGateway.defineClass(...)</a></code> to define entirely new classes.</p>
 
@@ -1138,9 +1138,9 @@ that gets applied recursively.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway8RbObjectC12defineMethod4name8argsSpec4bodyySS_AA0cf4ArgsI0VA2C_AA0cF0VtKctKF"></a>
-                    <a name="//apple_ref/swift/Method/defineMethod(name:argsSpec:body:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway8RbObjectC12defineMethod4name8argsSpec4bodyySS_AA0cf4ArgsI0VA2C_AA0cF0VtKctKF">defineMethod(name:argsSpec:body:)</a>
+                    <a name="/s:11RubyGateway8RbObjectC12defineMethod_8argsSpec4bodyySS_AA0cf4ArgsH0VA2C_AA0cF0VtKctKF"></a>
+                    <a name="//apple_ref/swift/Method/defineMethod(_:argsSpec:body:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway8RbObjectC12defineMethod_8argsSpec4bodyySS_AA0cf4ArgsH0VA2C_AA0cF0VtKctKF">defineMethod(_:argsSpec:body:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1171,7 +1171,7 @@ immediately available to all instances of the class.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">defineMethod</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">defineMethod</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span>
                          <span class="nv">argsSpec</span><span class="p">:</span> <span class="kt"><a href="../Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a></span><span class="p">(),</span>
                          <span class="nv">body</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Swift Method APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a></span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
@@ -1231,9 +1231,9 @@ immediately available to all instances of the class.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11RubyGateway8RbObjectC21defineSingletonMethod4name8argsSpec4bodyySS_AA0cg4ArgsJ0VA2C_AA0cG0VtKctKF"></a>
-                    <a name="//apple_ref/swift/Method/defineSingletonMethod(name:argsSpec:body:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway8RbObjectC21defineSingletonMethod4name8argsSpec4bodyySS_AA0cg4ArgsJ0VA2C_AA0cG0VtKctKF">defineSingletonMethod(name:argsSpec:body:)</a>
+                    <a name="/s:11RubyGateway8RbObjectC21defineSingletonMethod_8argsSpec4bodyySS_AA0cg4ArgsI0VA2C_AA0cG0VtKctKF"></a>
+                    <a name="//apple_ref/swift/Method/defineSingletonMethod(_:argsSpec:body:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway8RbObjectC21defineSingletonMethod_8argsSpec4bodyySS_AA0cg4ArgsI0VA2C_AA0cG0VtKctKF">defineSingletonMethod(_:argsSpec:body:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1257,7 +1257,7 @@ valid just for this instance.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">defineSingletonMethod</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">defineSingletonMethod</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span>
                                   <span class="nv">argsSpec</span><span class="p">:</span> <span class="kt"><a href="../Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a></span><span class="p">(),</span>
                                   <span class="nv">body</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Swift Method APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a></span><span class="p">)</span> <span class="k">throws</span></code></pre>
 

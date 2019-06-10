@@ -454,19 +454,19 @@ Ruby API not Ruby as written.  Ruby:</p>
 </code></pre>
 <h3 id='implement-ruby-global-variables-in-swift' class='heading'>Implement Ruby global variables in Swift</h3>
 
-<p>See <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C15defineGlobalVar4name3get3setySS_xycyxKctKAA0C17ObjectConvertibleRzlF">RbGateway.defineGlobalVar(name:get:set:)</a></code>.  For example:</p>
+<p>See <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C15defineGlobalVar_3get3setySS_xycyxKctKAA0C17ObjectConvertibleRzlF">RbGateway.defineGlobalVar(_:get:set:)</a></code>.  For example:</p>
 <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">currentEpoch</span><span class="p">:</span> <span class="kt">Int</span>
 
-<span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineGlobalVar</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"$epoch"</span><span class="p">,</span>
+<span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineGlobalVar</span><span class="p">(</span><span class="s">"$epoch"</span><span class="p">,</span>
                      <span class="nv">get</span><span class="p">:</span> <span class="p">{</span> <span class="n">currentEpoch</span> <span class="p">},</span>
                      <span class="nv">set</span><span class="p">:</span> <span class="p">{</span> <span class="nf">notifyNewEpoch</span><span class="p">(</span><span class="nv">$0</span><span class="p">)})</span>
 </code></pre>
 <h3 id='define-and-implement-methods-in-swift' class='heading'>Define and implement methods in Swift</h3>
 
 <p>Global functions are defined using
-<code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C20defineGlobalFunction4name8argsSpec4bodyySS_AA0c10MethodArgsI0VAA0C6ObjectCAK_AA0cK0VtKctKF">RbGateway.defineGlobalFunction(name:argsSpec:body:)</a></code>; methods are defined
-using <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC12defineMethod4name8argsSpec4bodyySS_AA0cf4ArgsI0VA2C_AA0cF0VtKctKF">RbObject.defineMethod(name:argsSpec:body:)</a></code>; and singleton methods are
-defined using <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC21defineSingletonMethod4name8argsSpec4bodyySS_AA0cg4ArgsJ0VA2C_AA0cG0VtKctKF">RbObject.defineSingletonMethod(name:argsSpec:body:)</a></code>.  These
+<code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C20defineGlobalFunction_8argsSpec4bodyySS_AA0c10MethodArgsH0VAA0C6ObjectCAJ_AA0cJ0VtKctKF">RbGateway.defineGlobalFunction(_:argsSpec:body:)</a></code>; methods are defined
+using <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC12defineMethod_8argsSpec4bodyySS_AA0cf4ArgsH0VA2C_AA0cF0VtKctKF">RbObject.defineMethod(_:argsSpec:body:)</a></code>; and singleton methods are
+defined using <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC21defineSingletonMethod_8argsSpec4bodyySS_AA0cg4ArgsI0VA2C_AA0cG0VtKctKF">RbObject.defineSingletonMethod(_:argsSpec:body:)</a></code>.  These
 all follow the same pattern.</p>
 
 <p>The <code><a href="Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a></code> is how you set the signature for the function: how many
@@ -474,7 +474,7 @@ arguments of what kinds, which ones have default values, which have keywords,
 and so on.  For example, this defines a function to Ruby called <code>log</code> that
 requires one argument and passes its string representation onwards;</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">logArgsSpec</span> <span class="o">=</span> <span class="kt">RbMethodArgsSpec</span><span class="p">(</span><span class="nv">leadingMandatoryCount</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
-<span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineGlobalFunction</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"log"</span><span class="p">,</span>
+<span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineGlobalFunction</span><span class="p">(</span><span class="s">"log"</span><span class="p">,</span>
                               <span class="nv">argsSpec</span><span class="p">:</span> <span class="n">logArgsSpec</span><span class="p">)</span> <span class="p">{</span> <span class="n">_</span><span class="p">,</span> <span class="n">method</span> <span class="k">in</span>
     <span class="kt">Logger</span><span class="o">.</span><span class="nf">log</span><span class="p">(</span><span class="nv">message</span><span class="p">:</span> <span class="kt">String</span><span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">mandatory</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
     <span class="k">return</span> <span class="o">.</span><span class="n">nilObject</span>
@@ -489,7 +489,7 @@ requires one argument and passes its string representation onwards;</p>
 priority:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">log2ArgsSpec</span> <span class="o">=</span> <span class="kt">RbMethodArgsSpec</span><span class="p">(</span><span class="nv">mandatoryKeywords</span><span class="p">:</span> <span class="p">[</span><span class="s">"message"</span><span class="p">],</span>
                                     <span class="nv">optionalKeywordValues</span><span class="p">:</span> <span class="p">[</span><span class="s">"priority"</span> <span class="p">:</span> <span class="mi">0</span> <span class="p">])</span>
-<span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineGlobalFunction</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"log2"</span><span class="p">,</span>
+<span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineGlobalFunction</span><span class="p">(</span><span class="s">"log2"</span><span class="p">,</span>
                               <span class="nv">argsSpec</span><span class="p">:</span> <span class="n">log2ArgsSpec</span><span class="p">)</span> <span class="p">{</span> <span class="n">_</span><span class="p">,</span> <span class="n">method</span> <span class="k">in</span>
     <span class="kt">Logger</span><span class="o">.</span><span class="nf">log</span><span class="p">(</span><span class="nv">message</span><span class="p">:</span> <span class="kt">String</span><span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">keyword</span><span class="p">[</span><span class="s">"message"</span><span class="p">]</span><span class="o">!</span><span class="p">),</span>
                <span class="nv">priority</span><span class="p">:</span> <span class="kt">Int</span><span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">keyword</span><span class="p">[</span><span class="s">"priority"</span><span class="p">]</span><span class="o">!</span><span class="p">))</span>
@@ -513,7 +513,7 @@ work properly should Ruby do <code>return</code> or <code>next</code> inside the
 
 <p>For example:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">log3ArgsSpec</span> <span class="o">=</span> <span class="kt">RbMethodArgsSpec</span><span class="p">(</span><span class="nv">requiresBlock</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
-<span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineGlobalFunction</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"log3"</span><span class="p">,</span>
+<span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineGlobalFunction</span><span class="p">(</span><span class="s">"log3"</span><span class="p">,</span>
                               <span class="nv">argsSpec</span><span class="p">:</span> <span class="n">log3ArgsSpec</span><span class="p">)</span> <span class="p">{</span> <span class="n">_</span><span class="p">,</span> <span class="n">method</span> <span class="k">in</span>
     <span class="k">let</span> <span class="nv">logContent</span> <span class="o">=</span> <span class="k">try</span> <span class="n">method</span><span class="o">.</span><span class="nf">yieldBlock</span><span class="p">()</span>
     <span class="kt">Logger</span><span class="o">.</span><span class="nf">log</span><span class="p">(</span><span class="nv">message</span><span class="p">:</span> <span class="n">logContent</span><span class="p">)</span>
@@ -534,7 +534,7 @@ Ruby as part of the cleanup.</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">outerModule</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineModule</span><span class="p">(</span><span class="s">"MySystem"</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">innerModule</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineModule</span><span class="p">(</span><span class="s">"SubsystemA"</span><span class="p">,</span> <span class="nv">under</span><span class="p">:</span> <span class="n">outerModule</span><span class="p">)</span>
 
-<span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineSingletonMethod</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"activate"</span><span class="p">)</span> <span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
+<span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineSingletonMethod</span><span class="p">(</span><span class="s">"activate"</span><span class="p">)</span> <span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
 </code></pre>
 
 <p>&hellip;is equivalent to, in Ruby:</p>

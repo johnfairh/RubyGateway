@@ -245,11 +245,11 @@ let count = try myClass.getClassVar("@@count")
 
 ### Implement Ruby global variables in Swift
 
-See `RbGateway.defineGlobalVar(name:get:set:)`.  For example:
+See `RbGateway.defineGlobalVar(_:get:set:)`.  For example:
 ```swift
 var currentEpoch: Int
 
-Ruby.defineGlobalVar(name: "$epoch",
+Ruby.defineGlobalVar("$epoch",
                      get: { currentEpoch },
                      set: { notifyNewEpoch($0)})
 ```
@@ -257,9 +257,9 @@ Ruby.defineGlobalVar(name: "$epoch",
 ### Define and implement methods in Swift
 
 Global functions are defined using
-`RbGateway.defineGlobalFunction(name:argsSpec:body:)`; methods are defined
-using `RbObject.defineMethod(name:argsSpec:body:)`; and singleton methods are
-defined using `RbObject.defineSingletonMethod(name:argsSpec:body:)`.  These
+`RbGateway.defineGlobalFunction(_:argsSpec:body:)`; methods are defined
+using `RbObject.defineMethod(_:argsSpec:body:)`; and singleton methods are
+defined using `RbObject.defineSingletonMethod(_:argsSpec:body:)`.  These
 all follow the same pattern.
 
 The `RbMethodArgsSpec` is how you set the signature for the function: how many
@@ -268,7 +268,7 @@ and so on.  For example, this defines a function to Ruby called `log` that
 requires one argument and passes its string representation onwards;
 ```swift
 let logArgsSpec = RbMethodArgsSpec(leadingMandatoryCount: 1)
-try Ruby.defineGlobalFunction(name: "log",
+try Ruby.defineGlobalFunction("log",
                               argsSpec: logArgsSpec) { _, method in
     Logger.log(message: String(method.args.mandatory[0]))
     return .nilObject
@@ -284,7 +284,7 @@ priority:
 ```swift
 let log2ArgsSpec = RbMethodArgsSpec(mandatoryKeywords: ["message"],
                                     optionalKeywordValues: ["priority" : 0 ])
-try Ruby.defineGlobalFunction(name: "log2",
+try Ruby.defineGlobalFunction("log2",
                               argsSpec: log2ArgsSpec) { _, method in
     Logger.log(message: String(method.args.keyword["message"]!),
                priority: Int(method.args.keyword["priority"]!))
@@ -310,7 +310,7 @@ work properly should Ruby do `return` or `next` inside the block.
 For example:
 ```swift
 let log3ArgsSpec = RbMethodArgsSpec(requiresBlock: true)
-try Ruby.defineGlobalFunction(name: "log3",
+try Ruby.defineGlobalFunction("log3",
                               argsSpec: log3ArgsSpec) { _, method in
     let logContent = try method.yieldBlock()
     Logger.log(message: logContent)
@@ -333,7 +333,7 @@ For example:
 let outerModule = try Ruby.defineModule("MySystem")
 let innerModule = try Ruby.defineModule("SubsystemA", under: outerModule)
 
-try Ruby.defineSingletonMethod(name: "activate") { ... }
+try Ruby.defineSingletonMethod("activate") { ... }
 ```
 ...is equivalent to, in Ruby:
 ```ruby

@@ -107,8 +107,7 @@ Global variables:
 ```swift
 // epochStore.current: Int
 
-Ruby.defineGlobalVar(
-        name: "$epoch",
+Ruby.defineGlobalVar("$epoch",
         get: { epochStore.current },
         set: { epochStore.current = newEpoch })
 ```
@@ -117,7 +116,7 @@ Global functions:
 ```swift
 let logArgsSpec = RbMethodArgsSpec(leadingMandatoryCount: 1,
                                    optionalKeywordValues: ["priority" : 0])
-try Ruby.defineGlobalFunction(name: "log",
+try Ruby.defineGlobalFunction("log",
                               argsSpec: logArgsSpec) { _, method in
     Logger.log(message: String(method.args.mandatory[0]),
                priority: Int(method.args.keyword["priority"]!))

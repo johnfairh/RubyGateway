@@ -3,6 +3,7 @@
 ##### Breaking
 
 * Require minimum Swift 5 / Xcode 10.2.
+* Standardize all APIs to not require a leading `name` arg label.
 
 ##### Enhancements
 
