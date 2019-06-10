@@ -24,7 +24,7 @@ class TestObjMethods: XCTestCase {
             let clazz = try Ruby.get("EmptyClass")
 
             let argsSpec = RbMethodArgsSpec(leadingMandatoryCount: 1)
-            try clazz.defineMethod(name: "double", argsSpec: argsSpec) { _, method in
+            try clazz.defineMethod("double", argsSpec: argsSpec) { _, method in
                 callCount += 1
                 let value = Int(method.args.mandatory[0])!
                 return RbObject(value * 2)
@@ -52,13 +52,13 @@ class TestObjMethods: XCTestCase {
 
             // bad name checked
             doError {
-                try clazz.defineMethod(name: "BadNameForAMethod") { _, _ in .nilObject }
+                try clazz.defineMethod("BadNameForAMethod") { _, _ in .nilObject }
             }
 
             // define method on non-class thing
             let notAClass = RbObject("Not a class")
             doError {
-                try notAClass.defineMethod(name: "myMethod") { _, _ in .nilObject }
+                try notAClass.defineMethod("myMethod") { _, _ in .nilObject }
             }
         }
     }
@@ -73,7 +73,7 @@ class TestObjMethods: XCTestCase {
             let module = try Ruby.get("EmptyModule")
             XCTAssertEqual(RbType.T_MODULE, module.rubyType)
 
-            try module.defineMethod(name: "answer") { _, _ in
+            try module.defineMethod("answer") { _, _ in
                 called = true
                 return RbObject("true")
             }
@@ -91,7 +91,7 @@ class TestObjMethods: XCTestCase {
             var callCount = 0
 
             let clazz = try Ruby.get("IdentifiedClass")
-            try clazz.defineMethod(name: "doubleId") { rbSelf, method in
+            try clazz.defineMethod("doubleId") { rbSelf, method in
                 callCount += 1
                 let myId = try rbSelf.call("uniqueId")
                 return myId * 2
@@ -110,7 +110,7 @@ class TestObjMethods: XCTestCase {
             var callCount = 0
 
             let clazz = try Ruby.get("BaseClass")
-            try clazz.defineMethod(name: "getValue") { rbSelf, method in
+            try clazz.defineMethod("getValue") { rbSelf, method in
                 callCount += 1
                 return RbObject(22)
             }
@@ -128,7 +128,7 @@ class TestObjMethods: XCTestCase {
             var callCount = 0
 
             let clazz = try Ruby.get("OverriddenClass")
-            try clazz.defineMethod(name: "getValue") { rbSelf, method in
+            try clazz.defineMethod("getValue") { rbSelf, method in
                 callCount += 1
                 return RbObject(22)
             }
@@ -142,7 +142,7 @@ class TestObjMethods: XCTestCase {
     func testArraySum() {
         doErrorFree {
             let clazz = try Ruby.get("Array")
-            try clazz.defineMethod(name: "sum") { rbSelf, _ in
+            try clazz.defineMethod("sum") { rbSelf, _ in
                 rbSelf.collection.reduce(0, +)
             }
 
@@ -159,7 +159,7 @@ class TestObjMethods: XCTestCase {
         doErrorFree {
             let module = try Ruby.get("Math")
             var called = false
-            try module.defineSingletonMethod(name: "double", argsSpec: .basic(1)) { _, method in
+            try module.defineSingletonMethod("double", argsSpec: .basic(1)) { _, method in
                 called = true
                 return method.args.mandatory[0] * 2
             }
@@ -187,7 +187,7 @@ class TestObjMethods: XCTestCase {
             }
             XCTAssertEqual(22, try obj2.call("answer"))
 
-            try obj1.defineSingletonMethod(name: "answer") { rbSelf, method in
+            try obj1.defineSingletonMethod("answer") { rbSelf, method in
                 return RbObject(50)
             }
 
@@ -210,7 +210,7 @@ class TestObjMethods: XCTestCase {
             var called = false
 
             let clazz = try Ruby.get("SingBase")
-            try clazz.defineSingletonMethod(name: "value2") { rbSelf, _ in
+            try clazz.defineSingletonMethod("value2") { rbSelf, _ in
                 called = true
                 let clazzName = String(rbSelf)
                 XCTAssertEqual("SingDerived", clazzName)

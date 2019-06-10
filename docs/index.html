@@ -324,8 +324,7 @@ low-level Ruby C API wrapper.</p>
 <p>Global variables:</p>
 <pre class="highlight swift"><code><span class="c1">// epochStore.current: Int</span>
 
-<span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineGlobalVar</span><span class="p">(</span>
-        <span class="nv">name</span><span class="p">:</span> <span class="s">"$epoch"</span><span class="p">,</span>
+<span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineGlobalVar</span><span class="p">(</span><span class="s">"$epoch"</span><span class="p">,</span>
         <span class="nv">get</span><span class="p">:</span> <span class="p">{</span> <span class="n">epochStore</span><span class="o">.</span><span class="n">current</span> <span class="p">},</span>
         <span class="nv">set</span><span class="p">:</span> <span class="p">{</span> <span class="n">epochStore</span><span class="o">.</span><span class="n">current</span> <span class="o">=</span> <span class="n">newEpoch</span> <span class="p">})</span>
 </code></pre>
@@ -333,7 +332,7 @@ low-level Ruby C API wrapper.</p>
 <p>Global functions:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">logArgsSpec</span> <span class="o">=</span> <span class="kt">RbMethodArgsSpec</span><span class="p">(</span><span class="nv">leadingMandatoryCount</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
                                    <span class="nv">optionalKeywordValues</span><span class="p">:</span> <span class="p">[</span><span class="s">"priority"</span> <span class="p">:</span> <span class="mi">0</span><span class="p">])</span>
-<span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineGlobalFunction</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"log"</span><span class="p">,</span>
+<span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineGlobalFunction</span><span class="p">(</span><span class="s">"log"</span><span class="p">,</span>
                               <span class="nv">argsSpec</span><span class="p">:</span> <span class="n">logArgsSpec</span><span class="p">)</span> <span class="p">{</span> <span class="n">_</span><span class="p">,</span> <span class="n">method</span> <span class="k">in</span>
     <span class="kt">Logger</span><span class="o">.</span><span class="nf">log</span><span class="p">(</span><span class="nv">message</span><span class="p">:</span> <span class="kt">String</span><span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">mandatory</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
                <span class="nv">priority</span><span class="p">:</span> <span class="kt">Int</span><span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">keyword</span><span class="p">[</span><span class="s">"priority"</span><span class="p">]</span><span class="o">!</span><span class="p">))</span>

@@ -86,7 +86,7 @@ class TestClassDef: XCTestCase {
             let parentClass = try Ruby.get("MyParentClass")
             let myClass = try Ruby.defineClass("MyClass", parent: parentClass, under: innerMod)
             var called = false
-            try myClass.defineMethod(name: "value") { _, _ in
+            try myClass.defineMethod("value") { _, _ in
                 called = true
                 return RbObject(100)
             }

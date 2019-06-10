@@ -21,7 +21,7 @@ class TestGlobalVars: XCTestCase {
 
             let gvarName = "$myVirtualGlobal"
 
-            try Ruby.defineGlobalVar(name: gvarName,
+            try Ruby.defineGlobalVar(gvarName,
                                      get: { modelValue },
                                      set: { modelValue = $0 })
 
@@ -49,7 +49,7 @@ class TestGlobalVars: XCTestCase {
             var wrappedObj = RbObject(initialIntValue)
             let gvarName = "$myGlobal"
 
-            try Ruby.defineGlobalVar(name: gvarName,
+            try Ruby.defineGlobalVar(gvarName,
                                      get: { wrappedObj },
                                      set: { wrappedObj = $0 })
 
@@ -66,7 +66,7 @@ class TestGlobalVars: XCTestCase {
             let gvarName = "$myVirtualGlobal"
             let modelValue = "Fish"
 
-            try Ruby.defineGlobalVar(name: gvarName) { modelValue }
+            try Ruby.defineGlobalVar(gvarName) { modelValue }
 
             let rbCurrent = try Ruby.eval(ruby: gvarName)
             XCTAssertEqual(modelValue, String(rbCurrent))
@@ -82,7 +82,7 @@ class TestGlobalVars: XCTestCase {
         doErrorFree {
             let gvarName = "$myVirtualGlobal"
 
-            try Ruby.defineGlobalVar(name: gvarName,
+            try Ruby.defineGlobalVar(gvarName,
                                      get: { 22 },
                                      set: { _ in throw RbException(message: "Bad new value!") })
 
