@@ -227,6 +227,25 @@ Rbg_method_id rbg_define_global_function(const char * _Nonnull name);
 /// Define a regular method on some class
 Rbg_method_id rbg_define_method(VALUE clazz, const char * _Nonnull name);
 /// Define a singleton method for some object
-Rbg_method_id rbg_define_singleton_method(VALUE object, const char * _Nonnull name);
+Rbg_method_id rbg_define_singleton_method(VALUE object,
+                                          const char * _Nonnull name);
+
+/// Instance binding
+
+/// Callback into Swift code for instance alloc/free
+typedef void * _Nonnull (*Rbg_bind_allocate_call)(const char * _Nonnull);
+typedef void (*Rbg_bind_free_call)(const char * _Nonnull, void * _Nonnull);
+
+/// Set the single functions where all gvar calls go
+void rbg_register_object_binding_callbacks(
+        Rbg_bind_allocate_call _Nonnull alloc,
+        Rbg_bind_free_call _Nonnull free);
+
+/// Have Ruby associate Swift instances with this class.
+void rbg_bind_class(VALUE rubyClass);
+
+/// Get hold of the Swift object for this instance of a bound class, or NULL
+/// if something is amiss.
+void * _Nullable rbg_get_bound_object(VALUE instance);
 
 #endif /* rbg_helpers_h */

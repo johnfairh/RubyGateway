@@ -115,6 +115,53 @@ class TestClassDef: XCTestCase {
         }
     }
 
+    private func runGC() throws {
+        try Ruby.get("GC").call("start")
+    }
+
+    // Bound Swift class
+    func testBoundSwiftClass() {
+
+        class MyBoundClass {
+            static var initCount = 0
+            static var deinitCount = 0
+
+            init() {
+                MyBoundClass.initCount += 1
+            }
+
+            deinit {
+                MyBoundClass.deinitCount += 1
+            }
+        }
+
+        doErrorFree {
+            let boundClass = try Ruby.defineClass("SwiftBound", maker: MyBoundClass.init)
+
+            XCTAssertEqual(0, MyBoundClass.initCount)
+            XCTAssertEqual(0, MyBoundClass.deinitCount)
+
+            func localFunc() {
+                guard let inst = RbObject(ofClass: "SwiftBound") else {
+                    XCTFail("Can't create instance")
+                    return
+                }
+
+                withExtendedLifetime(inst) {
+                    XCTAssertEqual(1, MyBoundClass.initCount)
+                    XCTAssertEqual(0, MyBoundClass.deinitCount)
+                }
+            }
+
+            localFunc()
+
+            try runGC()
+            
+            XCTAssertEqual(1, MyBoundClass.deinitCount)
+        }
+    }
+
+
 
     static var allTests = [
         ("testSimpleClass", testSimpleClass),
@@ -122,5 +169,6 @@ class TestClassDef: XCTestCase {
         ("testSimpleModule", testSimpleModule),
         ("testNestedDefs", testNestedDefs),
         ("testModuleInjection", testModuleInjection),
+        ("testBoundSwiftClass", testBoundSwiftClass)
     ]
 }

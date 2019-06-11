@@ -756,3 +756,78 @@ Rbg_method_id rbg_define_singleton_method(VALUE object, const char * _Nonnull na
     rb_define_singleton_method(object, name, rbg_method_singleton_callback, -1);
     return rbg_method_id_create(name, rb_singleton_class(object));
 }
+
+//
+// Swift object instance binding
+//
+
+// To `rbbinding_alloc` in RbClass.swift
+static Rbg_bind_allocate_call rbg_bind_allocate_call;
+
+// To `rbbinding_free` in RbClass.swift
+static Rbg_bind_free_call rbg_bind_free_call;
+
+void rbg_register_object_binding_callbacks(
+    Rbg_bind_allocate_call _Nonnull allocfn,
+    Rbg_bind_free_call _Nonnull freefn)
+{
+    rbg_bind_allocate_call = allocfn;
+    rbg_bind_free_call = freefn;
+}
+
+static void rbg_bound_free_data(void *);
+
+static rb_data_type_t rbg_bound_data_type = {
+    .wrap_struct_name = "RubyGateway",
+    .function = {
+        .dmark = NULL,
+        .dfree = rbg_bound_free_data,
+        .dsize = NULL,
+    },
+    .data = NULL,
+    .flags = 0
+};
+
+// We indirect so we know what is going on at `free` time....
+typedef struct {
+    char *rubyClassName;
+    void *swiftObject;
+} Rbg_bound_data;
+
+static VALUE rbg_bound_alloc_instance(VALUE rubyClass)
+{
+    Rbg_bound_data *bdata = malloc(sizeof(*bdata));
+    bdata->rubyClassName = strdup(rb_class2name(rubyClass));
+    bdata->swiftObject = rbg_bind_allocate_call(bdata->rubyClassName);
+
+    return TypedData_Wrap_Struct(rubyClass, &rbg_bound_data_type, bdata);
+}
+
+static void rbg_bound_free_data(void *handle)
+{
+    Rbg_bound_data *bdata = handle;
+    rbg_bind_free_call(bdata->rubyClassName, bdata->swiftObject);
+    free(bdata->rubyClassName);
+    free(bdata);
+}
+
+void *rbg_get_bound_object(VALUE instance)
+{
+    Rbg_bound_data *bdata;
+    if ( TYPE(instance) != T_DATA )
+    {
+        return NULL;
+    }
+    TypedData_Get_Struct(instance, Rbg_bound_data, &rbg_bound_data_type, bdata);
+    if ( bdata == NULL )
+    {
+        return NULL;
+    }
+    return bdata->swiftObject;
+}
+
+void rbg_bind_class(VALUE rubyClass)
+{
+    rb_define_alloc_func(rubyClass, rbg_bound_alloc_instance);
+}
+
