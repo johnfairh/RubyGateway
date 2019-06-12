@@ -125,7 +125,11 @@ class TestClassDef: XCTestCase {
     class MyBoundClass {
         static var initCount = 0
         static var deinitCount = 0
-        
+
+        static var fingerprintValue = "FINGERPRINT"
+
+        var fingerprint = MyBoundClass.fingerprintValue
+
         init() {
             MyBoundClass.initCount += 1
         }
@@ -143,29 +147,20 @@ class TestClassDef: XCTestCase {
             XCTAssertEqual(0, MyBoundClass.initCount)
             XCTAssertEqual(0, MyBoundClass.deinitCount)
 
-            func localFunc() {
+            func localFunc() throws {
                 guard let inst = RbObject(ofClass: "SwiftBound") else {
                     XCTFail("Can't create instance")
                     return
                 }
 
-                withExtendedLifetime(inst) {
-                    XCTAssertEqual(1, MyBoundClass.initCount)
-                    XCTAssertEqual(0, MyBoundClass.deinitCount)
+                XCTAssertEqual(1, MyBoundClass.initCount)
+                XCTAssertEqual(0, MyBoundClass.deinitCount)
 
-                    // this part checks the bound object can be externally queried
-                    let opaque = inst.withRubyValue { rbg_get_bound_object($0) }
-                    guard opaque != nil else {
-                        XCTFail("Bound object missing")
-                        return
-                    }
-
-                    let unmanaged = Unmanaged<MyBoundClass>.fromOpaque(opaque!)
-                    let _ = unmanaged.takeUnretainedValue()
-                }
+                let obj = try inst.getBoundObject(type: MyBoundClass.self)
+                XCTAssertEqual(MyBoundClass.fingerprintValue, obj.fingerprint)
             }
 
-            localFunc()
+            try localFunc()
 
             try runGC()
             
@@ -200,6 +195,11 @@ class TestClassDef: XCTestCase {
                 let obj = RbObject(22)
                 let opaque = obj.withRubyValue { rbg_get_bound_object($0) }
                 XCTAssertNil(opaque)
+
+                doError {
+                    let val = try obj.getBoundObject(type: AnyObject.self)
+                    XCTFail("Managed to get bound object from an int: \(val)")
+                }
             }
         }
     }

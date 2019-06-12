@@ -75,6 +75,31 @@ internal enum RbClassBinding {
     }
 }
 
+// MARK: Retrieving a bound Swift object
+
+extension RbObject {
+    /// Retrieve the Swift object bound to this Ruby object.
+    ///
+    /// This is for use on Ruby objects created from classes defined with
+    /// `RbGateway.defineClass(_:under:initializer:)` to retrieve the bound
+    /// object.
+    ///
+    /// This function performs an unsafe cast to the type you specify so be
+    /// sure to get it right.
+    ///
+    /// - Parameter type: The type of the bound object
+    /// - Returns: The bound object
+    /// - Throws: `RbError.badType(...)` if the object doesn't have a bound Swift
+    ///           class.
+    public func getBoundObject<T: AnyObject>(type: T.Type) throws -> T {
+        guard let opaque = withRubyValue(call: { rbg_get_bound_object($0) }) else {
+            throw RbError.badType("Expected bound T_DATA got \(self)")
+        }
+        let unmanaged = Unmanaged<T>.fromOpaque(opaque)
+        return unmanaged.takeUnretainedValue()
+    }
+}
+
 // Class and module definitions.
 // Really just under RbGateway as a namespace.
 

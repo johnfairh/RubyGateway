@@ -211,15 +211,6 @@ public struct RbMethod {
         try needsBlock()
         return RbObject(rubyValue: rb_block_proc())
     }
-
-//    public func getBoundObject<T: AnyObject>(rubySelf: RbObject, type: T.Type) throws -> T {
-//
-//        guard let opaque = rubySelf.withRubyValue(call: { rbg_get_bound_object($0) }) else {
-//            throw RbError.badType("Expected bound T_DATA got \(rubySelf)")
-//        }
-//        let unmanaged = Unmanaged<T>.fromOpaque(opaque)
-//        return unmanaged.takeUnretainedValue()
-//    }
 }
 
 extension Array {
