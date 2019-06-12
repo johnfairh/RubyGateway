@@ -6,7 +6,8 @@
 //
 
 import XCTest
-import RubyGateway
+@testable /* RbObjectBinding */ import RubyGateway
+import RubyGatewayHelpers
 
 class TestClassDef: XCTestCase {
 
@@ -119,24 +120,25 @@ class TestClassDef: XCTestCase {
         try Ruby.get("GC").call("start")
     }
 
-    // Bound Swift class
-    func testBoundSwiftClass() {
+    // Bound Swift classes
 
-        class MyBoundClass {
-            static var initCount = 0
-            static var deinitCount = 0
-
-            init() {
-                MyBoundClass.initCount += 1
-            }
-
-            deinit {
-                MyBoundClass.deinitCount += 1
-            }
+    class MyBoundClass {
+        static var initCount = 0
+        static var deinitCount = 0
+        
+        init() {
+            MyBoundClass.initCount += 1
         }
+        
+        deinit {
+            MyBoundClass.deinitCount += 1
+        }
+    }
 
+    // Basic create/delete matching
+    func testBoundSwiftClass() {
         doErrorFree {
-            let boundClass = try Ruby.defineClass("SwiftBound", maker: MyBoundClass.init)
+            let boundClass = try Ruby.defineClass("SwiftBound", initializer: MyBoundClass.init)
 
             XCTAssertEqual(0, MyBoundClass.initCount)
             XCTAssertEqual(0, MyBoundClass.deinitCount)
@@ -150,6 +152,16 @@ class TestClassDef: XCTestCase {
                 withExtendedLifetime(inst) {
                     XCTAssertEqual(1, MyBoundClass.initCount)
                     XCTAssertEqual(0, MyBoundClass.deinitCount)
+
+                    // this part checks the bound object can be externally queried
+                    let opaque = inst.withRubyValue { rbg_get_bound_object($0) }
+                    guard opaque != nil else {
+                        XCTFail("Bound object missing")
+                        return
+                    }
+
+                    let unmanaged = Unmanaged<MyBoundClass>.fromOpaque(opaque!)
+                    let _ = unmanaged.takeUnretainedValue()
                 }
             }
 
@@ -161,7 +173,36 @@ class TestClassDef: XCTestCase {
         }
     }
 
+    // Nesting name resolution works properly
+    func testNestedBound() {
+        doErrorFree {
+            let module = try Ruby.defineModule("RbTests")
+            let _ = try Ruby.defineClass("BoundNested", under: module) {
+                MyBoundClass()
+            }
 
+            guard let _ = RbObject(ofClass: "RbTests::BoundNested") else {
+                XCTFail("Can't create instance")
+                return
+            }
+        }
+    }
+
+    // Internal special cases
+    func testSpecialCases() {
+        doErrorFree {
+            do {
+                let instance = RbClassBinding.alloc(name: "NotABoundClass")
+                XCTAssertNil(instance)
+            }
+
+            do {
+                let obj = RbObject(22)
+                let opaque = obj.withRubyValue { rbg_get_bound_object($0) }
+                XCTAssertNil(opaque)
+            }
+        }
+    }
 
     static var allTests = [
         ("testSimpleClass", testSimpleClass),
@@ -169,6 +210,8 @@ class TestClassDef: XCTestCase {
         ("testSimpleModule", testSimpleModule),
         ("testNestedDefs", testNestedDefs),
         ("testModuleInjection", testModuleInjection),
-        ("testBoundSwiftClass", testBoundSwiftClass)
+        ("testBoundSwiftClass", testBoundSwiftClass),
+        ("testSpecialCases", testSpecialCases),
+        ("testNestedBound", testNestedBound),
     ]
 }

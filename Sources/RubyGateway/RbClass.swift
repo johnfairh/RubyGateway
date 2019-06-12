@@ -8,16 +8,23 @@
 import RubyGatewayHelpers
 import CRuby
 
+//
+// Support for binding Swift objects to Ruby objects.
+//
+// Usual lack-of-context problem from Ruby, we indirect in a couple of
+// places and use the fully qualified Ruby class name as a key in a hash
+// on the Swift side to identify the Swift type and initializer.
+//
 private protocol RbBoundClassProtocol {
     func createInstance() -> UnsafeMutableRawPointer
     func deleteInstance(_ instance: UnsafeMutableRawPointer)
 }
 
 private struct RbBoundClass<T: AnyObject> : RbBoundClassProtocol {
-    var maker: () -> T
+    var initializer: () -> T
 
     func createInstance() -> UnsafeMutableRawPointer {
-        let instance = maker()
+        let instance = initializer()
         return Unmanaged<T>.passRetained(instance).toOpaque()
     }
 
@@ -27,16 +34,19 @@ private struct RbBoundClass<T: AnyObject> : RbBoundClassProtocol {
     }
 }
 
-private func rbbinding_alloc(className: UnsafePointer<Int8>) -> UnsafeMutableRawPointer {
+// Called from rbg_protect.m / rbg_bound_alloc_instance
+private func rbbinding_alloc(className: UnsafePointer<Int8>) -> UnsafeMutableRawPointer? {
     let name = String(cString: className)
     return RbClassBinding.alloc(name: name)
 }
 
+// Called from rbg_protect.m / rbg_bound_free_data
 private func rbbinding_free(className: UnsafePointer<Int8>, instance: UnsafeMutableRawPointer) {
     let name = String(cString: className)
     RbClassBinding.free(name: name, instance: instance)
 }
 
+// namespace
 internal enum RbClassBinding {
 
     /// One-time init to register the callbacks
@@ -46,23 +56,22 @@ internal enum RbClassBinding {
 
     private static var bindings = [String : RbBoundClassProtocol]()
 
-    fileprivate static func register<T: AnyObject>(name: String, maker: @escaping () -> T) {
+    fileprivate static func register<T: AnyObject>(name: String, initializer: @escaping () -> T) {
         let _ = initOnce
-        bindings[name] = RbBoundClass(maker: maker)
+        bindings[name] = RbBoundClass(initializer: initializer)
     }
 
-    fileprivate static func alloc(name: String) -> UnsafeMutableRawPointer {
+    static func alloc(name: String) -> UnsafeMutableRawPointer? {
         guard let binding = bindings[name] else {
-            fatalError("oops")
+            return nil
         }
         return binding.createInstance()
     }
 
-    fileprivate static func free(name: String, instance: UnsafeMutableRawPointer) {
-        guard let binding = bindings[name] else {
-            fatalError("oops")
+    static func free(name: String, instance: UnsafeMutableRawPointer) {
+        if let binding = bindings[name] {
+            binding.deleteInstance(instance)
         }
-        return binding.deleteInstance(instance)
     }
 }
 
@@ -105,11 +114,17 @@ extension RbGateway {
 
     /// Define a new, empty, Ruby class associated with a Swift class.
     ///
+    /// When any new instance of the Ruby class is created, the `initializer` closure
+    /// is called to get hold of an instance of the bound Swift class.  Typically this closure
+    /// is an initializer for the Swift class.  A strong reference is held to the Swift object
+    /// while the Ruby object is live; this reference is released only when the Ruby object is
+    /// garbage-collected.
+    ///
     /// - Parameter name: Name of the class.
-    /// - Parameter parent: Parent class for the new class to inherit from.  The default
-    ///                     is `nil` which means the new class inherits from `Object`.
     /// - Parameter under: The class or module under which to nest this new class.  The
     ///                    default is `nil` which means the class is at the top level.
+    /// - Parameter initializer: Closure to return an instance of `SwiftPeer`, typically a new
+    ///                          instance.
     /// - Returns: The class object for the new class.
     /// - Throws: `RbError.badIdentifier(type:id:)` if `name` is bad.  `RbError.badType(...)` if
     ///           `parent` is provided but is not a class, or if `under` is neither class nor
@@ -118,11 +133,11 @@ extension RbGateway {
     @discardableResult
     public func defineClass<SwiftPeer: AnyObject>(_ name: String,
                                                   under: RbObject? = nil,
-                                                  maker: @escaping () -> SwiftPeer) throws -> RbObject {
+                                                  initializer: @escaping () -> SwiftPeer) throws -> RbObject {
         try setup()
         let classObj = try defineClass(name, parent: RbObject(rubyValue: rb_cData), under: under)
 
-        RbClassBinding.register(name: String(try classObj.call("name"))!, maker: maker)
+        RbClassBinding.register(name: String(try classObj.call("name"))!, initializer: initializer)
         classObj.withRubyValue { rbg_bind_class($0) }
 
         return classObj

@@ -233,7 +233,7 @@ Rbg_method_id rbg_define_singleton_method(VALUE object,
 /// Instance binding
 
 /// Callback into Swift code for instance alloc/free
-typedef void * _Nonnull (*Rbg_bind_allocate_call)(const char * _Nonnull);
+typedef void * _Nullable (*Rbg_bind_allocate_call)(const char * _Nonnull);
 typedef void (*Rbg_bind_free_call)(const char * _Nonnull, void * _Nonnull);
 
 /// Set the single functions where all gvar calls go

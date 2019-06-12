@@ -806,7 +806,10 @@ static VALUE rbg_bound_alloc_instance(VALUE rubyClass)
 static void rbg_bound_free_data(void *handle)
 {
     Rbg_bound_data *bdata = handle;
-    rbg_bind_free_call(bdata->rubyClassName, bdata->swiftObject);
+    if ( bdata->swiftObject != NULL )
+    {
+        rbg_bind_free_call(bdata->rubyClassName, bdata->swiftObject);
+    }
     free(bdata->rubyClassName);
     free(bdata);
 }
@@ -819,10 +822,6 @@ void *rbg_get_bound_object(VALUE instance)
         return NULL;
     }
     TypedData_Get_Struct(instance, Rbg_bound_data, &rbg_bound_data_type, bdata);
-    if ( bdata == NULL )
-    {
-        return NULL;
-    }
     return bdata->swiftObject;
 }
 
