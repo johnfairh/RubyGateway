@@ -33,6 +33,7 @@ custom_categories:
       children:
           - RbMethodArgsSpec
           - RbMethodCallback
+          - RbBoundMethodCallback
           - RbMethod
           - RbMethodArgs
 

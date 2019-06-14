@@ -91,6 +91,9 @@
                 <a class="nav-group-task-link" href="Swift Method APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Swift Method APIs.html#/s:11RubyGateway21RbBoundMethodCallbacka">RbBoundMethodCallback</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/RbMethod.html">RbMethod</a>
               </li>
               <li class="nav-group-task">
@@ -351,10 +354,14 @@ constants from an <code>RbObject</code>:</p>
 object to get started finding constants or calling global functions.</p>
 <h2 id='converting-to-and-from-swift-types' class='heading'>Converting to and from Swift types</h2>
 
-<p>Convert <code>RbObject</code>s to Swift types using failable initializers:</p>
+<p>Convert <code>RbObject</code>s to Swift types using failable initializers or the throwing
+<code>convert</code> methods:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">height</span> <span class="o">=</span> <span class="kt">Double</span><span class="p">(</span><span class="n">myObj</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">allHeights</span> <span class="o">=</span> <span class="kt">Array</span><span class="o">&lt;</span><span class="kt">Double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">myObj</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">heightDb</span> <span class="o">=</span> <span class="kt">Dictionary</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">Double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">myObj</span><span class="p">)</span>
+
+<span class="k">let</span> <span class="nv">width</span> <span class="o">=</span> <span class="k">try</span> <span class="n">myObj</span><span class="o">.</span><span class="nf">convert</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="kt">Double</span><span class="o">.</span><span class="k">self</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">field</span> <span class="o">=</span> <span class="k">try</span> <span class="n">myObj</span><span class="o">.</span><span class="nf">convert</span><span class="p">()</span>
 </code></pre>
 
 <p>Check <code><a href="Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to see the cause of failed initializations.</p>
@@ -378,7 +385,7 @@ example this is poison:</p>
 <pre class="highlight swift"><code><span class="kt">RbObject</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">&lt;</span> <span class="kt">RbObject</span><span class="p">(</span><span class="s">"barney"</span><span class="p">)</span>
 </code></pre>
 
-<p>I plan to add more control over what happens here.</p>
+<p>Future releases may add more control over what happens here.</p>
 <h2 id='arithmetic-operators' class='heading'>Arithmetic operators</h2>
 
 <p><code>RbObject</code> conforms to the <code><a href="https://developer.apple.com/documentation/swift/signednumeric/">SignedNumeric</a></code> protocol by forwarding the regular
@@ -418,7 +425,7 @@ add methods implemented in Swift to an object or class.  Use
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L86-L185">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L90-L189">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

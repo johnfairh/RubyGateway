@@ -91,6 +91,9 @@
                 <a class="nav-group-task-link" href="Swift Method APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Swift Method APIs.html#/s:11RubyGateway21RbBoundMethodCallbacka">RbBoundMethodCallback</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/RbMethod.html">RbMethod</a>
               </li>
               <li class="nav-group-task">
@@ -270,7 +273,7 @@ arguments are stored in the <code>args</code> property of the <code><a href="Str
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L257-L500">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L280-L523">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -288,10 +291,59 @@ arguments are stored in the <code>args</code> property of the <code><a href="Str
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The function signature for a Ruby method implemented in Swift.</p>
+                        <p>The function signature for a Ruby method implemented as a Swift free function
+or closure.</p>
 
 <p>The <code><a href="Classes/RbObject.html">RbObject</a></code> is the object the method is being invoked against.
 The <code><a href="Structs/RbMethod.html">RbMethod</a></code> provides useful services such as argument access.</p>
+
+<p>You can throw an <code><a href="Structs/RbException.html">RbException</a></code> to raise a Ruby exception instead of returning
+normally from the method.  Throwing another type gets wrapped up in an
+<code><a href="Structs/RbException.html">RbException</a></code> and raised as a Ruby runtime exception.</p>
+
+<p>You must explicitly return a value for Swift typechecking reasons.  If you don&rsquo;t
+have anything interesting to return then write <code>return .nilObject</code>.</p>
+
+<p>See <code>RbBoundMethod</code> for use with custom Ruby classes that are bound
+to Swift types.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">RbMethodCallback</span> <span class="o">=</span> <span class="p">(</span><span class="kt"><a href="Classes/RbObject.html">RbObject</a></span><span class="p">,</span> <span class="kt"><a href="Structs/RbMethod.html">RbMethod</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="Classes/RbObject.html">RbObject</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L50">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway21RbBoundMethodCallbacka"></a>
+                    <a name="//apple_ref/swift/Alias/RbBoundMethodCallback" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway21RbBoundMethodCallbacka">RbBoundMethodCallback</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The function signature for a Ruby method implemented as a Swift method of
+a Swift bound object.</p>
+
+<p>These classes are defined with <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C11defineClass_5under11initializerAA0C6ObjectCSS_AHSgxyctKRlzClF">RbGateway.defineClass(_:under:initializer:)</a></code>
+and methods on them defined with <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC12defineMethod_8argsSpec6methodySS_AA0cf4ArgsH0VAcA0cF0VKcxctKRlzClF">RbObject.defineMethod(_:argsSpec:method:)</a></code>.</p>
+
+<p>This typealias describe methods on the type <code>SwiftPeer</code> that take a single
+<code><a href="Structs/RbMethod.html">RbMethod</a></code> and return an <code><a href="Classes/RbObject.html">RbObject</a></code>.  The <code>SwiftPeer</code> is the instance associated
+with the Ruby object; the <code><a href="Structs/RbMethod.html">RbMethod</a></code> provides useful services such as argument access.</p>
 
 <p>You can throw an <code><a href="Structs/RbException.html">RbException</a></code> to raise a Ruby exception instead of returning
 normally from the method.  Throwing another type gets wrapped up in an
@@ -305,12 +357,12 @@ have anything interesting to return then write <code>return .nilObject</code>.</
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">RbMethodCallback</span> <span class="o">=</span> <span class="p">(</span><span class="kt"><a href="Classes/RbObject.html">RbObject</a></span><span class="p">,</span> <span class="kt"><a href="Structs/RbMethod.html">RbMethod</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="Classes/RbObject.html">RbObject</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">RbBoundMethodCallback</span><span class="o">&lt;</span><span class="kt">SwiftPeer</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">(</span><span class="kt">SwiftPeer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt"><a href="Structs/RbMethod.html">RbMethod</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="Classes/RbObject.html">RbObject</a></span> <span class="k">where</span> <span class="kt">SwiftPeer</span> <span class="p">:</span> <span class="kt">AnyObject</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L49">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L68">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -344,7 +396,7 @@ instances and passes them to method callbacks.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L160-L214">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L180-L237">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -377,7 +429,7 @@ instances and passes them to method callbacks.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L228-L244">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L251-L267">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
