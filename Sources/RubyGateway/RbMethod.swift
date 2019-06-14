@@ -32,7 +32,8 @@ import RubyGatewayHelpers
 // dynamic dispatch order.  So we can search this property looking for a match.
 // OK - not THAT bad!
 
-/// The function signature for a Ruby method implemented in Swift.
+/// The function signature for a Ruby method implemented as a Swift free function
+/// or closure.
 ///
 /// The `RbObject` is the object the method is being invoked against.
 /// The `RbMethod` provides useful services such as argument access.
@@ -48,11 +49,11 @@ import RubyGatewayHelpers
 /// to Swift types.
 public typealias RbMethodCallback = (RbObject, RbMethod) throws -> RbObject
 
-/// The function signature for a Ruby method implemented in Swift for
-/// a Ruby class with an associated Swift class.
+/// The function signature for a Ruby method implemented as a Swift method of
+/// a Swift bound object.
 ///
 /// These classes are defined with `RbGateway.defineClass(_:under:initializer:)`
-/// and methods on them defined with `RbObject.defineMethod(_:argsSpec:body:)`.
+/// and methods on them defined with `RbObject.defineMethod(_:argsSpec:method:)`.
 ///
 /// This typealias describe methods on the type `SwiftPeer` that take a single
 /// `RbMethod` and return an `RbObject`.  The `SwiftPeer` is the instance associated
@@ -64,7 +65,8 @@ public typealias RbMethodCallback = (RbObject, RbMethod) throws -> RbObject
 ///
 /// You must explicitly return a value for Swift typechecking reasons.  If you don't
 /// have anything interesting to return then write `return .nilObject`.
-public typealias RbBoundMethod<SwiftPeer: AnyObject> = (SwiftPeer) -> (RbMethod) throws -> RbObject
+public typealias RbBoundMethodCallback<SwiftPeer: AnyObject> =
+    (SwiftPeer) -> (RbMethod) throws -> RbObject
 
 // MARK: - Dispatch gorpy implementation
 
@@ -583,9 +585,21 @@ extension RbObject {
 
     /// Add or replace a method in all instances of the Ruby class.
     ///
-    /// The `RbObject` must be for a Ruby class defined using
+    /// The object must be a Ruby class defined using
     /// `RbGateway.defineClass(_:under:initializer:)` sharing the same type for
-    /// `SwiftPeer`.
+    /// `SwiftPeer`.  For example:
+    /// ```swift
+    /// class InvaderModel {
+    ///     init() { ... }
+    ///     func fire(rbMethod: RbMethod) throws -> RbObject { ... }
+    /// }
+    ///
+    /// let invaderClass = try Ruby.defineClass("Invader", initializer: InvaderModel.init)
+    /// try invaderClass.defineMethod("fire", method: Invader.fire)
+    /// ```
+    ///
+    /// There are unsafe casts involved here so you must be sure to get the types
+    /// right.
     ///
     /// - Parameters:
     ///   - name: The method name.
@@ -595,9 +609,10 @@ extension RbObject {
     ///   - method: The Swift method to call to fulfill the Ruby method.
     /// - Throws: `RbError.badIdentifier(type:id:)` if `name` is bad.
     ///           `RbError.badType(...)` if the object is not a class.
-    public func defineMethod<SwiftPeer: AnyObject>(_ name: String,
-                                                   argsSpec: RbMethodArgsSpec = RbMethodArgsSpec(),
-                                                   method: @escaping RbBoundMethod<SwiftPeer>) throws {
+    public func defineMethod<SwiftPeer: AnyObject>(
+                    _ name: String,
+                    argsSpec: RbMethodArgsSpec = RbMethodArgsSpec(),
+                    method: @escaping RbBoundMethodCallback<SwiftPeer>) throws {
         try checkIsBoundClass()
         return try defineMethod(name, argsSpec: argsSpec) { rbSelf, rbMethod in
             let swiftSelf = try rbSelf.getBoundObject(type: SwiftPeer.self)

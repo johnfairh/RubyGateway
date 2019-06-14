@@ -82,12 +82,29 @@ class TestMiscObjTypes: XCTestCase {
         }
     }
 
+    func testBadCoerce() {
+        doErrorFree {
+            let obj = RbObject("string")
+
+            doError {
+                let a: Int = try obj.convert()
+                XCTFail("Managed to convert string to int: \(a)")
+            }
+
+            doError {
+                let a = try obj.convert(to: Int.self)
+                XCTFail("Managed to convert string to int: \(a)")
+            }
+        }
+    }
+
     static var allTests = [
         ("testNilConstants", testNilConstants),
         ("testNilLiteralPromotion", testNilLiteralPromotion),
         ("testBoolRoundTrip", testBoolRoundTrip),
         ("testFailedBoolConversion", testFailedBoolConversion),
         ("testBoolLiteralPromotion", testBoolLiteralPromotion),
-        ("testSymbols", testSymbols)
+        ("testSymbols", testSymbols),
+        ("testBadCoerce", testBadCoerce)
     ]
 }

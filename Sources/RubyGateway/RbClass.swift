@@ -139,6 +139,8 @@ extension RbGateway {
 
     /// Define a new, empty, Ruby class associated with a Swift class.
     ///
+    /// The Ruby class inherits from the Ruby `Data` class.
+    ///
     /// When any new instance of the Ruby class is created, the `initializer` closure
     /// is called to get hold of an instance of the bound Swift class.  Typically this closure
     /// is an initializer for the Swift class.  A strong reference is held to the Swift object
@@ -159,9 +161,10 @@ extension RbGateway {
     ///           module. `RbError.rubyException(...)` if Ruby is unhappy with the definition,
     ///           for example when the class already exists with a different parent.
     @discardableResult
-    public func defineClass<SwiftPeer: AnyObject>(_ name: String,
-                                                  under: RbObject? = nil,
-                                                  initializer: @escaping () -> SwiftPeer) throws -> RbObject {
+    public func defineClass<SwiftPeer: AnyObject>(
+                    _ name: String,
+                    under: RbObject? = nil,
+                    initializer: @escaping () -> SwiftPeer) throws -> RbObject {
         try setup()
         let classObj = try defineClass(name, parent: RbObject(rubyValue: rb_cData), under: under)
 

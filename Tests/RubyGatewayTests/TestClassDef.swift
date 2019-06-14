@@ -236,6 +236,44 @@ class TestClassDef: XCTestCase {
             }
             let fingerprint = try instance.call("fingerprint")
             XCTAssertEqual(MyBoundClass.fingerprintValue, String(fingerprint))
+
+            try Ruby.require(filename: Helpers.fixturePath("swift_classes.rb"))
+
+            try _ = Ruby.eval(ruby: "test_bound1")
+        }
+    }
+
+    class InvaderModel {
+        private var name = ""
+
+        init() {
+        }
+
+        func initialize(rbMethod: RbMethod) throws -> RbObject {
+            name = try rbMethod.args.mandatory[0].convert()
+            return .nilObject
+        }
+
+        func fire(rbMethod: RbMethod) throws -> RbObject {
+            return true
+        }
+
+        func name(rbMethod: RbMethod) throws -> RbObject {
+            return RbObject(name)
+        }
+    }
+
+    func testDemoCode() {
+        doErrorFree {
+            let invaderClass = try Ruby.defineClass("Invader", initializer: InvaderModel.init)
+            try invaderClass.defineMethod("initialize", argsSpec: .basic(1), method: InvaderModel.initialize)
+            try invaderClass.defineMethod("fire", method: InvaderModel.fire)
+            try invaderClass.defineMethod("name", method: InvaderModel.name)
+
+            try Ruby.require(filename: Helpers.fixturePath("swift_classes.rb"))
+
+            let res = try Ruby.eval(ruby: "test_invader")
+            XCTAssertEqual(true, res)
         }
     }
 
@@ -248,6 +286,7 @@ class TestClassDef: XCTestCase {
         ("testBoundSwiftClass", testBoundSwiftClass),
         ("testSpecialCases", testSpecialCases),
         ("testNestedBound", testNestedBound),
-        ("testBoundMethods", testBoundMethods)
+        ("testBoundMethods", testBoundMethods),
+        ("testDemoCode", testDemoCode)
     ]
 }

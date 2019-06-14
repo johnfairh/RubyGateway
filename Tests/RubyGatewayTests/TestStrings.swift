@@ -57,25 +57,20 @@ class TestStrings: XCTestCase {
 
     // to_s, to_str, priority
     func testConversion() {
-        try! Ruby.require(filename: Helpers.fixturePath("nonconvert.rb"))
+        doErrorFree {
+            try Ruby.require(filename: Helpers.fixturePath("nonconvert.rb"))
 
-        guard let i1 = RbObject(ofClass: "JustToS"),
-              let i2 = RbObject(ofClass: "BothToSAndToStr") else {
-            XCTFail("Couldn't create objects")
-            return
+            guard let i1 = RbObject(ofClass: "JustToS"),
+                let i2 = RbObject(ofClass: "BothToSAndToStr") else {
+                    XCTFail("Couldn't create objects")
+                    return
+            }
+
+            let _ = try i1.convert(to: String.self)
+            let s2 = try i2.convert(to: String.self)
+            
+            XCTAssertEqual("to_str", s2)
         }
-
-        guard let _ = String(i1) else {
-            XCTFail("Couldn't convert JustToS")
-            return
-        }
-
-        guard let s2 = String(i2) else {
-            XCTFail("Couldn't convert BothToSAndToStr")
-            return
-        }
-
-        XCTAssertEqual("to_str", s2)
     }
 
     func testLiteralPromotion() {

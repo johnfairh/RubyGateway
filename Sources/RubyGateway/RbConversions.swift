@@ -54,6 +54,37 @@ extension RbObject: RbObjectConvertible {
     // TBD.  Perhaps need two accessors with default implementation.
 }
 
+extension RbObject {
+    /// Convert an RbObject to some Swift type.
+    ///
+    /// This is a convenience wrapper around optional conversion for cases where
+    /// the Swift type can be inferred.  See `convert(to:)` to explicitly specify
+    /// the desired type.
+    ///
+    /// - throws: `RbError.badType(...)` if the conversion fails.  There may be a more
+    ///            detailed exception inside `RbError.history`.
+    public func convert<T: RbObjectConvertible>() throws -> T {
+        guard let value = T(self) else {
+            throw RbError.badType("Cannot convert \(self) to Swift type \(T.self)")
+        }
+        return value
+    }
+
+    /// Convert an RbObject to some Swift type.
+    ///
+    /// This is a convenience wrapper around optional conversion.  See `convert()`
+    /// for when the desired type can be inferred by the compiler.
+    ///
+    /// - throws: `RbError.badType(...)` if the conversion fails.  There may be a more
+    ///            detailed exception inside `RbError.history`.
+    public func convert<T: RbObjectConvertible>(to type: T.Type) throws -> T {
+        guard let value = T(self) else {
+            throw RbError.badType("Cannot convert \(self) to Swift type \(T.self)")
+        }
+        return value
+    }
+}
+
 // MARK: - String
 
 extension String: RbObjectConvertible {
