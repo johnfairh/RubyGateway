@@ -42,31 +42,42 @@ import RubyGatewayHelpers
 /// normally from the method.  Throwing another type gets wrapped up in an
 /// `RbException` and raised as a Ruby runtime exception.
 ///
-/// You must explicitly return a value for Swift typechecking reasons.  If you don't
-/// have anything interesting to return then write `return .nilObject`.
-///
-/// See `RbBoundMethod` for use with custom Ruby classes that are bound
-/// to Swift types.
+/// See `RbBoundMethodCallback` and `RbBoundMethodVoidCallback` for use with
+/// custom Ruby classes that are bound to Swift types.
 public typealias RbMethodCallback = (RbObject, RbMethod) throws -> RbObject
 
 /// The function signature for a Ruby method implemented as a Swift method of
-/// a Swift bound object.
+/// a Swift bound object that returns a value.
 ///
 /// These classes are defined with `RbGateway.defineClass(_:under:initializer:)`
 /// and methods on them defined with `RbObject.defineMethod(_:argsSpec:method:)`.
 ///
 /// This typealias describe methods on the type `SwiftPeer` that take a single
-/// `RbMethod` and return an `RbObject`.  The `SwiftPeer` is the instance associated
-/// with the Ruby object; the `RbMethod` provides useful services such as argument access.
+/// `RbMethod` and return some type that can convert to `RbObject`.
+/// The `SwiftPeer` is the instance associated with the Ruby object; the `RbMethod`
+/// provides useful services such as argument access.
 ///
 /// You can throw an `RbException` to raise a Ruby exception instead of returning
 /// normally from the method.  Throwing another type gets wrapped up in an
 /// `RbException` and raised as a Ruby runtime exception.
+public typealias RbBoundMethodCallback<SwiftPeer: AnyObject, Return: RbObjectConvertible> =
+    (SwiftPeer) -> (RbMethod) throws -> Return
+
+/// The function signature for a Ruby method implemented as a Swift method of
+/// a Swift bound object that does not return a value.
 ///
-/// You must explicitly return a value for Swift typechecking reasons.  If you don't
-/// have anything interesting to return then write `return .nilObject`.
-public typealias RbBoundMethodCallback<SwiftPeer: AnyObject> =
-    (SwiftPeer) -> (RbMethod) throws -> RbObject
+/// These classes are defined with `RbGateway.defineClass(_:under:initializer:)`
+/// and methods on them defined with `RbObject.defineMethod(_:argsSpec:method:)`.
+///
+/// This typealias describe methods on the type `SwiftPeer` that take a single
+/// `RbMethod`.  The `SwiftPeer` is the instance associated with the Ruby object;
+/// the `RbMethod` provides useful services such as argument access.
+///
+/// You can throw an `RbException` to raise a Ruby exception instead of returning
+/// normally from the method.  Throwing another type gets wrapped up in an
+/// `RbException` and raised as a Ruby runtime exception.
+public typealias RbBoundMethodVoidCallback<SwiftPeer: AnyObject> =
+    (SwiftPeer) -> (RbMethod) throws -> Void
 
 // MARK: - Dispatch gorpy implementation
 
@@ -585,13 +596,15 @@ extension RbObject {
 
     /// Add or replace a method in all instances of the Ruby class.
     ///
+    /// This version is for methods that have a value to return.
+    ///
     /// The object must be a Ruby class defined using
     /// `RbGateway.defineClass(_:under:initializer:)` sharing the same type for
     /// `SwiftPeer`.  For example:
     /// ```swift
     /// class InvaderModel {
     ///     init() { ... }
-    ///     func fire(rbMethod: RbMethod) throws -> RbObject { ... }
+    ///     func fire(rbMethod: RbMethod) throws -> Bool { ... }
     /// }
     ///
     /// let invaderClass = try Ruby.defineClass("Invader", initializer: InvaderModel.init)
@@ -609,14 +622,58 @@ extension RbObject {
     ///   - method: The Swift method to call to fulfill the Ruby method.
     /// - Throws: `RbError.badIdentifier(type:id:)` if `name` is bad.
     ///           `RbError.badType(...)` if the object is not a class.
-    public func defineMethod<SwiftPeer: AnyObject>(
+    public func defineMethod<SwiftPeer: AnyObject, Return: RbObjectConvertible>(
                     _ name: String,
                     argsSpec: RbMethodArgsSpec = RbMethodArgsSpec(),
-                    method: @escaping RbBoundMethodCallback<SwiftPeer>) throws {
+                    method: @escaping RbBoundMethodCallback<SwiftPeer, Return>) throws {
         try checkIsBoundClass()
         return try defineMethod(name, argsSpec: argsSpec) { rbSelf, rbMethod in
             let swiftSelf = try rbSelf.getBoundObject(type: SwiftPeer.self)
-            return try method(swiftSelf)(rbMethod)
+            let retval = try method(swiftSelf)(rbMethod)
+            return RbObject(retval)
+        }
+    }
+
+    /// Add or replace a method in all instances of the Ruby class.
+    ///
+    /// This version is for methods that have no return value.  In Ruby
+    /// all methods return values so RubyBridge substitutes the object itself.
+    ///
+    /// The object must be a Ruby class defined using
+    /// `RbGateway.defineClass(_:under:initializer:)` sharing the same type for
+    /// `SwiftPeer`.  For example:
+    /// ```swift
+    /// class InvaderModel {
+    ///     init() { ... }
+    ///     func initialize(rbMethod: RbMethod) throws -> Void { ... }
+    /// }
+    ///
+    /// let invaderClass = try Ruby.defineClass("Invader", initializer: InvaderModel.init)
+    /// try invaderClass.defineMethod("initialize",
+    ///                               argsSpec: .basic(1),
+    ///                               method: InvaderModel.initialize)
+    /// ```
+    ///
+    /// There are unsafe casts involved here so you must be sure to get the types
+    /// right.
+    ///
+    /// - Parameters:
+    ///   - name: The method name.
+    ///   - argsSpec: A description of the arguments required by the method.
+    ///               The default for this parameter specifies a function that
+    ///               does not take any arguments.
+    ///   - method: The Swift method to call to fulfill the Ruby method.
+    /// - Throws: `RbError.badIdentifier(type:id:)` if `name` is bad.
+    ///           `RbError.badType(...)` if the object is not a class.
+    public func defineMethod<SwiftPeer: AnyObject>(
+                    _ name: String,
+                    argsSpec: RbMethodArgsSpec = RbMethodArgsSpec(),
+                    method: @escaping RbBoundMethodVoidCallback<SwiftPeer>) throws {
+        try checkIsBoundClass()
+        return try defineMethod(name, argsSpec: argsSpec) { rbSelf, rbMethod in
+            let swiftSelf = try rbSelf.getBoundObject(type: SwiftPeer.self)
+            try method(swiftSelf)(rbMethod)
+            return rbMethod.rubySelf
         }
     }
 

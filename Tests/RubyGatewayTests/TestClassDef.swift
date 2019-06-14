@@ -249,17 +249,16 @@ class TestClassDef: XCTestCase {
         init() {
         }
 
-        func initialize(rbMethod: RbMethod) throws -> RbObject {
+        func initialize(rbMethod: RbMethod) throws -> Void {
             name = try rbMethod.args.mandatory[0].convert()
-            return .nilObject
         }
 
-        func fire(rbMethod: RbMethod) throws -> RbObject {
+        func fire(rbMethod: RbMethod) throws -> Bool {
             return true
         }
 
-        func name(rbMethod: RbMethod) throws -> RbObject {
-            return RbObject(name)
+        func name(rbMethod: RbMethod) throws -> String {
+            return name
         }
     }
 

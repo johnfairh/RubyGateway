@@ -147,6 +147,10 @@ extension RbGateway {
     /// while the Ruby object is live; this reference is released only when the Ruby object is
     /// garbage-collected.
     ///
+    /// If you want to implement the Ruby `initialize` entrypoint to support passing arguments
+    /// to `new` then you need to do that separately with one of the
+    /// `RbObject.defineMethod(_:argsSpec:method:)` methods.
+    ///
     /// Ruby methods defined with `RbObject.defineMethod(_:argsSpec:method:)` can be bound
     /// directly to methods of the `SwiftPeer` class.
     ///

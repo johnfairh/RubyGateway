@@ -34,6 +34,7 @@ custom_categories:
           - RbMethodArgsSpec
           - RbMethodCallback
           - RbBoundMethodCallback
+          - RbBoundMethodVoidCallback
           - RbMethod
           - RbMethodArgs
 

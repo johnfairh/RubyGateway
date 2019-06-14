@@ -9,7 +9,8 @@
 
 * Implement class and singleton-class methods in Swift.
 * Define classes and modules from Swift.
-* Add `RbObject` to module mix-in functions.
+* Add module mix-in functions to `RbObject`.
+* Bind Ruby objects and methods directly to Swift objects and methods.
 
 ##### Bug Fixes
 
