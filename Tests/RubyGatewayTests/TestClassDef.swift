@@ -126,9 +126,18 @@ class TestClassDef: XCTestCase {
         static var initCount = 0
         static var deinitCount = 0
 
+        static func resetCounts() {
+            initCount = 0
+            deinitCount = 0
+        }
+
         static var fingerprintValue = "FINGERPRINT"
 
         var fingerprint = MyBoundClass.fingerprintValue
+
+        func getFingerprint(method: RbMethod) throws -> RbObject {
+            return RbObject(fingerprint)
+        }
 
         init() {
             MyBoundClass.initCount += 1
@@ -142,6 +151,9 @@ class TestClassDef: XCTestCase {
     // Basic create/delete matching
     func testBoundSwiftClass() {
         doErrorFree {
+            try runGC()
+            MyBoundClass.resetCounts()
+
             let boundClass = try Ruby.defineClass("SwiftBound", initializer: MyBoundClass.init)
 
             XCTAssertEqual(0, MyBoundClass.initCount)
@@ -201,6 +213,29 @@ class TestClassDef: XCTestCase {
                     XCTFail("Managed to get bound object from an int: \(val)")
                 }
             }
+
+            do {
+                let clazz = try Ruby.defineClass("NotABoundClassEither")
+                doError {
+                    try clazz.defineMethod("method", method: MyBoundClass.getFingerprint)
+                    XCTFail("Managed to bind a Swift method to an unbound class")
+                }
+            }
+        }
+    }
+
+    // Bound methods
+    func testBoundMethods() {
+        doErrorFree {
+            let myClass = try Ruby.defineClass("PeerMethods", initializer: MyBoundClass.init)
+            try myClass.defineMethod("fingerprint", method: MyBoundClass.getFingerprint)
+
+            guard let instance = RbObject(ofClass: "PeerMethods") else {
+                XCTFail("Can't create instance")
+                return
+            }
+            let fingerprint = try instance.call("fingerprint")
+            XCTAssertEqual(MyBoundClass.fingerprintValue, String(fingerprint))
         }
     }
 
@@ -213,5 +248,6 @@ class TestClassDef: XCTestCase {
         ("testBoundSwiftClass", testBoundSwiftClass),
         ("testSpecialCases", testSpecialCases),
         ("testNestedBound", testNestedBound),
+        ("testBoundMethods", testBoundMethods)
     ]
 }

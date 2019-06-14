@@ -829,4 +829,3 @@ void rbg_bind_class(VALUE rubyClass)
 {
     rb_define_alloc_func(rubyClass, rbg_bound_alloc_instance);
 }
-

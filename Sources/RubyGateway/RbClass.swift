@@ -145,6 +145,9 @@ extension RbGateway {
     /// while the Ruby object is live; this reference is released only when the Ruby object is
     /// garbage-collected.
     ///
+    /// Ruby methods defined with `RbObject.defineMethod(_:argsSpec:method:)` can be bound
+    /// directly to methods of the `SwiftPeer` class.
+    ///
     /// - Parameter name: Name of the class.
     /// - Parameter under: The class or module under which to nest this new class.  The
     ///                    default is `nil` which means the class is at the top level.
@@ -162,7 +165,7 @@ extension RbGateway {
         try setup()
         let classObj = try defineClass(name, parent: RbObject(rubyValue: rb_cData), under: under)
 
-        RbClassBinding.register(name: String(try classObj.call("name"))!, initializer: initializer)
+        RbClassBinding.register(name: String(classObj)!, initializer: initializer)
         classObj.withRubyValue { rbg_bind_class($0) }
 
         return classObj
@@ -195,6 +198,17 @@ extension RbGateway {
             try RbVM.doProtect { tag in
                 RbObject(rubyValue: rbg_define_module_protect(name, underVal, &tag))
             }
+        }
+    }
+}
+
+extension RbObject {
+    func checkIsBoundClass() throws {
+        try checkIsClass()
+        let ancestors = try call("ancestors")
+        let hasData = ancestors.collection.contains { String($0)! == "Data" }
+        guard hasData else {
+            throw RbError.badType("Class \(self) does not inherit from Data, not bound to Swift type")
         }
     }
 }
