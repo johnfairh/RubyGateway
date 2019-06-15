@@ -713,6 +713,10 @@ is an initializer for the Swift class.  A strong reference is held to the Swift 
 while the Ruby object is live; this reference is released only when the Ruby object is
 garbage-collected.</p>
 
+<p>If you want to implement the Ruby <code>initialize</code> entrypoint to support passing arguments
+to <code>new</code> then you need to do that separately with one of the
+<code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectC12defineMethod_8argsSpec6methodySS_AA0cf4ArgsH0Vq_AA0cF0VKcxctKRlzCAA0cD11ConvertibleR_r0_lF">RbObject.defineMethod(_:argsSpec:method:)</a></code> methods.</p>
+
 <p>Ruby methods defined with <code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectC12defineMethod_8argsSpec6methodySS_AA0cf4ArgsH0Vq_AA0cF0VKcxctKRlzCAA0cD11ConvertibleR_r0_lF">RbObject.defineMethod(_:argsSpec:method:)</a></code> can be bound
 directly to methods of the <code>SwiftPeer</code> class.</p>
 <div class="aside aside-throws">
@@ -787,7 +791,7 @@ directly to methods of the <code>SwiftPeer</code> class.</p>
                         <p>The class object for the new class.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbClass.swift#L164-L175">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbClass.swift#L168-L179">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -866,7 +870,7 @@ directly to methods of the <code>SwiftPeer</code> class.</p>
                         <p>The module object for the new module.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbClass.swift#L193-L205">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbClass.swift#L197-L209">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1628,7 +1632,7 @@ internal object that is used to implement so-called <q>global functions</q>.</p>
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L557-L563">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L558-L564">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

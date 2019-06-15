@@ -249,16 +249,26 @@ class TestClassDef: XCTestCase {
         init() {
         }
 
-        func initialize(rbMethod: RbMethod) throws -> Void {
+        func initialize(rbMethod: RbMethod) throws {
             name = try rbMethod.args.mandatory[0].convert()
-        }
-
-        func fire(rbMethod: RbMethod) throws -> Bool {
-            return true
         }
 
         func name(rbMethod: RbMethod) throws -> String {
             return name
+        }
+
+        func listStats(rbMethod: RbMethod) throws -> RbObject {
+            if rbMethod.isBlockGiven {
+                try rbMethod.yieldBlock(args: ["Health", 100])
+                try rbMethod.yieldBlock(args: ["Shield", 25])
+                return .nilObject
+            } else {
+                return ["Health", 100, "Shield", 25]
+            }
+        }
+
+        func fire(rbMethod: RbMethod) throws {
+            // bang
         }
     }
 
@@ -266,8 +276,9 @@ class TestClassDef: XCTestCase {
         doErrorFree {
             let invaderClass = try Ruby.defineClass("Invader", initializer: InvaderModel.init)
             try invaderClass.defineMethod("initialize", argsSpec: .basic(1), method: InvaderModel.initialize)
-            try invaderClass.defineMethod("fire", method: InvaderModel.fire)
             try invaderClass.defineMethod("name", method: InvaderModel.name)
+            try invaderClass.defineMethod("list_stats", method: InvaderModel.listStats)
+            try invaderClass.defineMethod("fire", method: InvaderModel.fire)
 
             try Ruby.require(filename: Helpers.fixturePath("swift_classes.rb"))
 

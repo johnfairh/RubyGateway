@@ -53,12 +53,12 @@ do {
 }
 ```
 
-RubyGateway lets you use Swift to define Ruby classes, modules, global
-functions, and global variables that can be used by Ruby code identically
-to the Ruby-native versions.  There are more details about these use cases
-below; in general start with `RbGateway` methods beginning with _define_.
+Define new modules with `RbGateway.defineModule(_:under:)` and new classes with
+`RbGateway.defineClass(_:parent:under:)`.  Define methods on new or existing
+classes or modules with `RbObject.defineMethod(_:argsSpec:body:)` and
+`RbObject.defineSingletonMethod(_:argsSpec:body:)`.
 
-An example defining a module with a static API:
+Defining a module with a static API:
 ```swift
 let myModule = try Ruby.defineModule("Bakery")
 
@@ -74,6 +74,29 @@ try myModule.defineSingletonMethod("reserve_cakes", .basic(1)) { _, method in
 def daily_routine
   Bakery.reserve_cakes(4)
 end
+```
+
+Define new classes bound directly to Swift classes with
+`RbGateway.defineClass(_:under:initializer:)` and define methods on them bound
+directly to Swift methods with `RbObject.defineMethod(_:argsSpec:method:)`.
+See [below](#define-new-classes-in-swift) for more on this.
+
+```swift
+let cellClass = try Ruby.defineClass("Cell", initializer: Cell.init)
+
+try cellClass.defineMethod("initialize",
+        argsSpec: RbMethodArgsSpec(mandatoryKeywords: ["width", "height"])
+        method: Cell.setup)
+
+try cellClass.defineMethod("content",
+        argsSpec: RbMethodArgsSpec(requiresBlock: true),
+        method: Cell.getContent)
+```
+
+...called from Ruby:
+```ruby
+cell = Cell.new(width: 200, height: 100)
+cell.content { |c| prettyprint(c) }
 ```
 
 ## How to ...
@@ -97,6 +120,8 @@ RubyBridge provides extensions to most Swift types so you can initialize
 * `Dictionary` with supported key and value types
 * `Set` with supported element type
 * Range types with supported bound types - `Range`, `ClosedRange`
+
+See `RbObject.convert(to:)` as a throwing alternative to optional initializers.
 
 ### Exchange `nil` with Ruby
 
@@ -344,6 +369,81 @@ module MySystem
     end
   end
 end
+```
+
+### Define new classes in Swift
+
+There are two different ways of doing this.  The first way is with
+`RbGateway.defineClass(_:parent:under:)` which works just like the module
+example above, except it also supports `RbObject.defineMethod(_:argsSpec:body:)`
+to define methods.
+
+The other way is to bind a Swift class to the Ruby class.  A new instance
+of the Swift class is associated with each instance of the Ruby class, and
+Ruby methods are implemented by methods of the bound Swift class.
+
+These classes are created with `RbGateway.defineClass(_:under:initializer:)`
+and have methods defined with `RbObject.defineMethod(_:argsSpec:method:)`.
+
+RubyGateway holds a strong reference to the object returned by the `initializer`
+parameter throughout the life of the Ruby object, releasing it only when the
+Ruby object is garbage-collected.
+
+For example:
+```swift
+// Must be a class, cannot be a struct.
+class Invader {
+    private var name = ""
+
+    // Called during Ruby object allocation
+    init() {
+    }
+
+    // Explicitly bound `initialize` called during Ruby `new`.
+    func initialize(rbMethod: RbMethod) throws {
+        name = try rbMethod.args.mandatory[0].convert()
+    }
+
+    // Bound methods can return any type conforming to `RbObjectConvertible`
+    func name(rbMethod: RbMethod) throws -> String {
+        return name
+    }
+
+    // Bound methods can return `RbObject` to return various
+    // Ruby types.  They also support blocks and any other variations
+    // of Ruby argument passing.
+    func listStats(rbMethod: RbMethod) throws -> RbObject {
+        if rbMethod.isBlockGiven {
+            try rbMethod.yieldBlock(args: ["Health", 100])
+            try rbMethod.yieldBlock(args: ["Shield", 25])
+            return .nilObject
+        } else {
+            return ["Health", 100, "Shield", 25]
+        }
+    }
+
+    // Bound methods can be 'Void' in Swift; RubyGateway inserts
+    // the equivalent of 'return self' to Ruby.
+    func fire(rbMethod: RbMethod) throws {
+        ...
+    }
+}
+
+let invaderClass = try Ruby.defineClass("Invader", initializer: Invader.init)
+try invaderClass.defineMethod("initialize",
+                              argsSpec: .basic(1),
+                              method: Invader.initialize)
+try invaderClass.defineMethod("name", method: Invader.name)
+try invaderClass.defineMethod("list_stats", method: Invader.listStats)
+try invaderClass.defineMethod("fire, method: Invader.fire)
+```
+Use from Ruby:
+```ruby
+invader = Invader.new("Miles")
+invader.list_stats do |name, score| in
+  ...
+end
+invader.fire
 ```
 
 ### Run finalizers before process exit

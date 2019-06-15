@@ -225,6 +225,7 @@ public struct RbMethod {
     ///     `RbError.rubyJump(_:)` if the block does `return` or `break`.
     ///     You should not attempt to handle `rubyJump` errors: rethrow them
     ///     back to Ruby as soon as possible.
+    @discardableResult
     public func yieldBlock(args: [RbObjectConvertible?] = []) throws -> RbObject {
         let argObjects = args.map { $0.rubyObject }
         return try argObjects.withRubyValues { argValues in

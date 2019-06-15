@@ -111,8 +111,16 @@ end
 # end
 
 def test_invader
-   inv1 = Invader.new("fred")
-   n = inv1.name
-   raise "Bad name" unless n == "fred"
-   inv1.fire
+  inv1 = Invader.new("fred")
+  n = inv1.name
+  raise "Bad name" unless n == "fred"
+  stats = inv1.list_stats
+  inv1.list_stats do |s_name, s_count|
+    stats.delete_if { |s| s == s_name }
+    stats.delete_if { |s| s == s_count }
+  end
+  raise "Bad stats? #{stats}" unless stats.empty?
+  r = inv1.fire
+  raise "Bad fire rc #{r}" unless r == inv1
+  true
 end
