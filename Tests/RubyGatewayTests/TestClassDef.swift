@@ -153,13 +153,17 @@ class TestClassDef: XCTestCase {
         doErrorFree {
             try runGC()
             MyBoundClass.resetCounts()
+        }
 
-            let boundClass = try Ruby.defineClass("SwiftBound", initializer: MyBoundClass.init)
+        doErrorFree {
+            try runGC()
+
+            try Ruby.defineClass("SwiftBound", initializer: MyBoundClass.init)
 
             XCTAssertEqual(0, MyBoundClass.initCount)
             XCTAssertEqual(0, MyBoundClass.deinitCount)
 
-            func localFunc() throws {
+            do {
                 guard let inst = RbObject(ofClass: "SwiftBound") else {
                     XCTFail("Can't create instance")
                     return
@@ -171,11 +175,11 @@ class TestClassDef: XCTestCase {
                 let obj = try inst.getBoundObject(type: MyBoundClass.self)
                 XCTAssertEqual(MyBoundClass.fingerprintValue, obj.fingerprint)
             }
+        }
 
-            try localFunc()
-
+        doErrorFree {
             try runGC()
-            
+
             XCTAssertEqual(1, MyBoundClass.deinitCount)
         }
     }
