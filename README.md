@@ -13,18 +13,17 @@ Distributed under the MIT license, see LICENSE.
 ![Platforms](https://img.shields.io/badge/platform-macOS%20%7C%20linux-lightgrey.svg)
 ![License](https://cocoapod-badges.herokuapp.com/l/RubyGateway/badge.png)
 
-Embed Ruby in Swift: load Gems, run Ruby scripts, get results.
+Embed Ruby in Swift: load Gems, run Ruby scripts, invoke APIs seamlessly in
+both directions.
 
 RubyGateway is a framework built on the Ruby C API that lets Swift programs
 running on macOS or Linux painlessly and safely run and interact with Ruby
-programs.  It's easy to pass Swift datatypes into Ruby and turn Ruby objects
+programs.  It's easy to pass Swift values into Ruby and turn Ruby objects
 back into Swift types.
 
-The current version of the framework entirely covers calling Ruby from Swift,
-including passing Swift closures as blocks.  Support for calling Swift from
-Ruby is slowly improving: the most recent version supports global functions,
-and adding custom classes and methods should be in the 
-[next release](https://johnfairh.github.io/RubyGateway/todo.html).
+RubyGateway lets you call any Ruby method from Swift, including passing Swift
+closures as blocks.  It lets you define Ruby classes and methods that are
+implemented in Swift.
 
 See [CRuby](https://github.com/johnfairh/CRuby) if you are looking for a
 low-level Ruby C API wrapper.
@@ -47,25 +46,16 @@ html = Rouge.highlight("let a = 3", "swift", "html")
 puts(html)
 ```
 
-In Swift 4.2 with similar [lack of] error checking:
+In Swift:
 ```swift
 import RubyGateway
 
-try! Ruby.require(filename: "rouge")
-let html = try! Ruby.get("Rouge").call("highlight", args: ["let a = 3", "swift", "html"])
+try Ruby.require(filename: "rouge")
+let html = try Ruby.get("Rouge").call("highlight", args: ["let a = 3", "swift", "html"])
 print(html)
 ```
 
-Or using dynamic member lookup:
-```swift
-import RubyGateway
-
-try! Ruby.require(filename: "rouge")
-let html = try! Ruby.Rouge!.call("highlight", args: ["let a = 3", "swift", "html"])
-print(html)
-```
-
-### Objects
+### Calling Ruby
 
 ```swift
 // Create an object.  Use keyword arguments with initializer
@@ -101,7 +91,38 @@ let subjects = Array<String>(student.all_subjects!)
 subjectsPopularityDb.submit(subjects: subjects)
 ```
 
-## Dynamic data exchange
+## Calling Swift
+
+Bound class definition:
+```swift
+class Cell {
+    init() {
+    }
+
+    func setup(m: RbMethod) throws {
+        ...
+    }
+    
+    func getContent(m: RbMethod) throws -> String {
+        ...
+    }
+}
+
+let cellClass = try Ruby.defineClass("Cell", initializer: Cell.init)
+
+try cellClass.defineMethod("initialize",
+        argsSpec: RbMethodArgsSpec(mandatoryKeywords: ["width", "height"])
+        method: Cell.setup)
+
+try cellClass.defineMethod("content",
+        argsSpec: RbMethodArgsSpec(requiresBlock: true),
+        method: Cell.getContent)
+```
+Called from Ruby:
+```ruby
+cell = Cell.new(width: 200, height: 100)
+cell.content { |c| prettyprint(c) }
+```
 
 Global variables:
 ```swift
@@ -137,9 +158,9 @@ log(object2_to_log, priority: 2)
 
 ## Requirements
 
-* Swift 4.2 or later, from swift.org or Xcode 10.0+
-* macOS (tested on 10.14.2) or Linux (tested on Ubuntu Bionic/18.04 on x86_64) with Clang 6.
-* Ruby 2.2 or later including development files:
+* Swift 5.0 or later, from swift.org or Xcode 10.2+
+* macOS (tested on 10.14.5) or Linux (tested on Ubuntu Bionic/18.04 on x86_64) with Clang 6.
+* Ruby 2.3 or later including development files:
   * For macOS, these come with Xcode.
   * For Linux you may need to install a -dev package depending on how your Ruby
     is installed.

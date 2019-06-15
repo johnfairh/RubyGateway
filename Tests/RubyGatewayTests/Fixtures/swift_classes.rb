@@ -84,3 +84,43 @@ def test_inject2
     v1 = InjecteeClass1.value1
     raise "Bad 2.v1 #{v1}" unless v1 == 22
 end
+
+# Swift:
+# class PeerMethods
+#   def fingerprint
+#    "FINGERPRINT"
+#   end
+# end
+
+def test_bound1
+  i1 = PeerMethods.new
+  v1 = i1.fingerprint
+  raise "Bad fingerprint" unless v1 == "FINGERPRINT"
+end
+
+# Swift:
+# class Invader
+#   def initialize(name)
+#   end
+#
+#   def fire
+#   end
+#
+#   def name
+#   end
+# end
+
+def test_invader
+  inv1 = Invader.new("fred")
+  n = inv1.name
+  raise "Bad name" unless n == "fred"
+  stats = inv1.list_stats
+  inv1.list_stats do |s_name, s_count|
+    stats.delete_if { |s| s == s_name }
+    stats.delete_if { |s| s == s_count }
+  end
+  raise "Bad stats? #{stats}" unless stats.empty?
+  r = inv1.fire
+  raise "Bad fire rc #{r}" unless r == inv1
+  true
+end

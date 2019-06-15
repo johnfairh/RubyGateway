@@ -90,6 +90,12 @@
                 <a class="nav-group-task-link" href="Swift Method APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Swift Method APIs.html#/s:11RubyGateway21RbBoundMethodCallbacka">RbBoundMethodCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Swift Method APIs.html#/s:11RubyGateway25RbBoundMethodVoidCallbacka">RbBoundMethodVoidCallback</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/RbMethod.html">RbMethod</a>
               </li>
               <li class="nav-group-task">
@@ -277,12 +283,12 @@ implicitly/explicitly access <code><a href="Classes/RbObject.html#/s:11RubyGatew
 <span class="p">}</span>
 </code></pre>
 
-<p>RubyGateway lets you use Swift to define Ruby classes, modules, global
-functions, and global variables that can be used by Ruby code identically
-to the Ruby-native versions.  There are more details about these use cases
-below; in general start with <code><a href="Classes/RbGateway.html">RbGateway</a></code> methods beginning with <em>define</em>.</p>
+<p>Define new modules with <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C12defineModule_5underAA0C6ObjectCSS_AGSgtKF">RbGateway.defineModule(_:under:)</a></code> and new classes with
+<code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C11defineClass_6parent5underAA0C6ObjectCSS_AHSgAItKF">RbGateway.defineClass(_:parent:under:)</a></code>.  Define methods on new or existing
+classes or modules with <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC12defineMethod_8argsSpec4bodyySS_AA0cf4ArgsH0VA2C_AA0cF0VtKctKF">RbObject.defineMethod(_:argsSpec:body:)</a></code> and
+<code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC21defineSingletonMethod_8argsSpec4bodyySS_AA0cg4ArgsI0VA2C_AA0cG0VtKctKF">RbObject.defineSingletonMethod(_:argsSpec:body:)</a></code>.</p>
 
-<p>An example defining a module with a static API:</p>
+<p>Defining a module with a static API:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">myModule</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineModule</span><span class="p">(</span><span class="s">"Bakery"</span><span class="p">)</span>
 
 <span class="k">try</span> <span class="n">myModule</span><span class="o">.</span><span class="nf">defineSingletonMethod</span><span class="p">(</span><span class="s">"reserve_cakes"</span><span class="p">,</span> <span class="o">.</span><span class="nf">basic</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="p">{</span> <span class="n">_</span><span class="p">,</span> <span class="n">method</span> <span class="k">in</span>
@@ -297,6 +303,26 @@ below; in general start with <code><a href="Classes/RbGateway.html">RbGateway</a
 <pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">daily_routine</span>
   <span class="no">Bakery</span><span class="p">.</span><span class="nf">reserve_cakes</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="k">end</span>
+</code></pre>
+
+<p>Define new classes bound directly to Swift classes with
+<code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C11defineClass_5under11initializerAA0C6ObjectCSS_AHSgxyctKRlzClF">RbGateway.defineClass(_:under:initializer:)</a></code> and define methods on them bound
+directly to Swift methods with <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC12defineMethod_8argsSpec6methodySS_AA0cf4ArgsH0Vq_AA0cF0VKcxctKRlzCAA0cD11ConvertibleR_r0_lF">RbObject.defineMethod(_:argsSpec:method:)</a></code>.
+See <a href="#define-new-classes-in-swift">below</a> for more on this.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">cellClass</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineClass</span><span class="p">(</span><span class="s">"Cell"</span><span class="p">,</span> <span class="nv">initializer</span><span class="p">:</span> <span class="kt">Cell</span><span class="o">.</span><span class="kd">init</span><span class="p">)</span>
+
+<span class="k">try</span> <span class="n">cellClass</span><span class="o">.</span><span class="nf">defineMethod</span><span class="p">(</span><span class="s">"initialize"</span><span class="p">,</span>
+        <span class="nv">argsSpec</span><span class="p">:</span> <span class="kt">RbMethodArgsSpec</span><span class="p">(</span><span class="nv">mandatoryKeywords</span><span class="p">:</span> <span class="p">[</span><span class="s">"width"</span><span class="p">,</span> <span class="s">"height"</span><span class="p">])</span>
+        <span class="nv">method</span><span class="p">:</span> <span class="kt">Cell</span><span class="o">.</span><span class="n">setup</span><span class="p">)</span>
+
+<span class="k">try</span> <span class="n">cellClass</span><span class="o">.</span><span class="nf">defineMethod</span><span class="p">(</span><span class="s">"content"</span><span class="p">,</span>
+        <span class="nv">argsSpec</span><span class="p">:</span> <span class="kt">RbMethodArgsSpec</span><span class="p">(</span><span class="nv">requiresBlock</span><span class="p">:</span> <span class="kc">true</span><span class="p">),</span>
+        <span class="nv">method</span><span class="p">:</span> <span class="kt">Cell</span><span class="o">.</span><span class="n">getContent</span><span class="p">)</span>
+</code></pre>
+
+<p>&hellip;called from Ruby:</p>
+<pre class="highlight ruby"><code><span class="n">cell</span> <span class="o">=</span> <span class="no">Cell</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">width: </span><span class="mi">200</span><span class="p">,</span> <span class="ss">height: </span><span class="mi">100</span><span class="p">)</span>
+<span class="n">cell</span><span class="p">.</span><span class="nf">content</span> <span class="p">{</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span> <span class="n">prettyprint</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="p">}</span>
 </code></pre>
 <h2 id='how-to' class='heading'>How to &hellip;</h2>
 
@@ -321,6 +347,8 @@ which will sometimes require driving the Ruby code in these ways.</p>
 <li><code><a href="https://developer.apple.com/documentation/swift/set/">Set</a></code> with supported element type</li>
 <li>Range types with supported bound types - <code><a href="https://developer.apple.com/documentation/swift/range/">Range</a></code>, <code><a href="https://developer.apple.com/documentation/swift/closedrange/">ClosedRange</a></code></li>
 </ul>
+
+<p>See <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC7convert2toxxm_tKAA0cD11ConvertibleRzlF">RbObject.convert(to:)</a></code> as a throwing alternative to optional initializers.</p>
 <h3 id='exchange-code-nil-code-with-ruby' class='heading'>Exchange <code>nil</code> with Ruby</h3>
 
 <p>The static <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC03nilD0ACvpZ">RbObject.nilObject</a></code> represents Ruby <code>nil</code> and can be passed to Ruby
@@ -545,6 +573,79 @@ Ruby as part of the cleanup.</p>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
+</code></pre>
+<h3 id='define-new-classes-in-swift' class='heading'>Define new classes in Swift</h3>
+
+<p>There are two different ways of doing this.  The first way is with
+<code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C11defineClass_6parent5underAA0C6ObjectCSS_AHSgAItKF">RbGateway.defineClass(_:parent:under:)</a></code> which works just like the module
+example above, except it also supports <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC12defineMethod_8argsSpec4bodyySS_AA0cf4ArgsH0VA2C_AA0cF0VtKctKF">RbObject.defineMethod(_:argsSpec:body:)</a></code>
+to define methods.</p>
+
+<p>The other way is to bind a Swift class to the Ruby class.  A new instance
+of the Swift class is associated with each instance of the Ruby class, and
+Ruby methods are implemented by methods of the bound Swift class.</p>
+
+<p>These classes are created with <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C11defineClass_5under11initializerAA0C6ObjectCSS_AHSgxyctKRlzClF">RbGateway.defineClass(_:under:initializer:)</a></code>
+and have methods defined with <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC12defineMethod_8argsSpec6methodySS_AA0cf4ArgsH0Vq_AA0cF0VKcxctKRlzCAA0cD11ConvertibleR_r0_lF">RbObject.defineMethod(_:argsSpec:method:)</a></code>.</p>
+
+<p>RubyGateway holds a strong reference to the object returned by the <code>initializer</code>
+parameter throughout the life of the Ruby object, releasing it only when the
+Ruby object is garbage-collected.</p>
+
+<p>For example:</p>
+<pre class="highlight swift"><code><span class="c1">// Must be a class, cannot be a struct.</span>
+<span class="kd">class</span> <span class="kt">Invader</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">name</span> <span class="o">=</span> <span class="s">""</span>
+
+    <span class="c1">// Called during Ruby object allocation</span>
+    <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Explicitly bound `initialize` called during Ruby `new`.</span>
+    <span class="kd">func</span> <span class="nf">initialize</span><span class="p">(</span><span class="nv">rbMethod</span><span class="p">:</span> <span class="kt">RbMethod</span><span class="p">)</span> <span class="k">throws</span> <span class="p">{</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="k">try</span> <span class="n">rbMethod</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">mandatory</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="nf">convert</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Bound methods can return any type conforming to `RbObjectConvertible`</span>
+    <span class="kd">func</span> <span class="nf">name</span><span class="p">(</span><span class="nv">rbMethod</span><span class="p">:</span> <span class="kt">RbMethod</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">name</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Bound methods can return `RbObject` to return various</span>
+    <span class="c1">// Ruby types.  They also support blocks and any other variations</span>
+    <span class="c1">// of Ruby argument passing.</span>
+    <span class="kd">func</span> <span class="nf">listStats</span><span class="p">(</span><span class="nv">rbMethod</span><span class="p">:</span> <span class="kt">RbMethod</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">RbObject</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="n">rbMethod</span><span class="o">.</span><span class="n">isBlockGiven</span> <span class="p">{</span>
+            <span class="k">try</span> <span class="n">rbMethod</span><span class="o">.</span><span class="nf">yieldBlock</span><span class="p">(</span><span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="s">"Health"</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+            <span class="k">try</span> <span class="n">rbMethod</span><span class="o">.</span><span class="nf">yieldBlock</span><span class="p">(</span><span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="s">"Shield"</span><span class="p">,</span> <span class="mi">25</span><span class="p">])</span>
+            <span class="k">return</span> <span class="o">.</span><span class="n">nilObject</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">[</span><span class="s">"Health"</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="s">"Shield"</span><span class="p">,</span> <span class="mi">25</span><span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Bound methods can be 'Void' in Swift; RubyGateway inserts</span>
+    <span class="c1">// the equivalent of 'return self' to Ruby.</span>
+    <span class="kd">func</span> <span class="nf">fire</span><span class="p">(</span><span class="nv">rbMethod</span><span class="p">:</span> <span class="kt">RbMethod</span><span class="p">)</span> <span class="k">throws</span> <span class="p">{</span>
+        <span class="o">...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">invaderClass</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineClass</span><span class="p">(</span><span class="s">"Invader"</span><span class="p">,</span> <span class="nv">initializer</span><span class="p">:</span> <span class="kt">Invader</span><span class="o">.</span><span class="kd">init</span><span class="p">)</span>
+<span class="k">try</span> <span class="n">invaderClass</span><span class="o">.</span><span class="nf">defineMethod</span><span class="p">(</span><span class="s">"initialize"</span><span class="p">,</span>
+                              <span class="nv">argsSpec</span><span class="p">:</span> <span class="o">.</span><span class="nf">basic</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+                              <span class="nv">method</span><span class="p">:</span> <span class="kt">Invader</span><span class="o">.</span><span class="n">initialize</span><span class="p">)</span>
+<span class="k">try</span> <span class="n">invaderClass</span><span class="o">.</span><span class="nf">defineMethod</span><span class="p">(</span><span class="s">"name"</span><span class="p">,</span> <span class="nv">method</span><span class="p">:</span> <span class="kt">Invader</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="k">try</span> <span class="n">invaderClass</span><span class="o">.</span><span class="nf">defineMethod</span><span class="p">(</span><span class="s">"list_stats"</span><span class="p">,</span> <span class="nv">method</span><span class="p">:</span> <span class="kt">Invader</span><span class="o">.</span><span class="n">listStats</span><span class="p">)</span>
+<span class="k">try</span> <span class="n">invaderClass</span><span class="o">.</span><span class="nf">defineMethod</span><span class="p">(</span><span class="s">"fire, method: Invader.fire)
+</span></code></pre>
+
+<p>Use from Ruby:</p>
+<pre class="highlight ruby"><code><span class="n">invader</span> <span class="o">=</span> <span class="no">Invader</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"Miles"</span><span class="p">)</span>
+<span class="n">invader</span><span class="p">.</span><span class="nf">list_stats</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="p">,</span> <span class="n">score</span><span class="o">|</span> <span class="k">in</span>
+  <span class="o">...</span>
+<span class="k">end</span>
+<span class="n">invader</span><span class="p">.</span><span class="nf">fire</span>
 </code></pre>
 <h3 id='run-finalizers-before-process-exit' class='heading'>Run finalizers before process exit</h3>
 

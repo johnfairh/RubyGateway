@@ -91,6 +91,12 @@
                 <a class="nav-group-task-link" href="../Swift Method APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Swift Method APIs.html#/s:11RubyGateway21RbBoundMethodCallbacka">RbBoundMethodCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Swift Method APIs.html#/s:11RubyGateway25RbBoundMethodVoidCallbacka">RbBoundMethodVoidCallback</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/RbMethod.html">RbMethod</a>
               </li>
               <li class="nav-group-task">
@@ -246,6 +252,36 @@ instances and passes them to method callbacks.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:11RubyGateway8RbMethodV8rubySelfAA0C6ObjectCvp"></a>
+                    <a name="//apple_ref/swift/Property/rubySelf" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway8RbMethodV8rubySelfAA0C6ObjectCvp">rubySelf</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The object against which the method has been invoked.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">rubySelf</span><span class="p">:</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L193">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:11RubyGateway8RbMethodV4argsAA0cD4ArgsVvp"></a>
                     <a name="//apple_ref/swift/Property/args" class="dashAnchor"></a>
                     <a class="token" href="#/s:11RubyGateway8RbMethodV4argsAA0cD4ArgsVvp">args</a>
@@ -268,7 +304,7 @@ instances and passes them to method callbacks.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L162">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L195">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -298,7 +334,7 @@ instances and passes them to method callbacks.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L164">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L197">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -328,7 +364,7 @@ instances and passes them to method callbacks.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L172-L174">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L206-L208">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -358,7 +394,7 @@ instances and passes them to method callbacks.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L177-L181">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L211-L215">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -395,7 +431,8 @@ back to Ruby as soon as possible.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">yieldBlock</span><span class="p">(</span><span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?]</span> <span class="o">=</span> <span class="p">[])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">yieldBlock</span><span class="p">(</span><span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?]</span> <span class="o">=</span> <span class="p">[])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
 
                         </div>
                       </div>
@@ -423,7 +460,7 @@ back to Ruby as soon as possible.</p>
                         <p>The value returned by the block.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L194-L201">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L229-L236">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -465,7 +502,7 @@ to store the block or do things to it.</p>
                         <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for a <code>Proc</code> object wrapping the passed block.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L210-L213">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L245-L248">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

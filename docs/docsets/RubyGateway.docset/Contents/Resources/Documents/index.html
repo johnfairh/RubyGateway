@@ -90,6 +90,12 @@
                 <a class="nav-group-task-link" href="Swift Method APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Swift Method APIs.html#/s:11RubyGateway21RbBoundMethodCallbacka">RbBoundMethodCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Swift Method APIs.html#/s:11RubyGateway25RbBoundMethodVoidCallbacka">RbBoundMethodVoidCallback</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/RbMethod.html">RbMethod</a>
               </li>
               <li class="nav-group-task">
@@ -238,18 +244,17 @@ Distributed under the MIT license, see LICENSE.
 <img src="https://img.shields.io/badge/platform-macOS%20%7C%20linux-lightgrey.svg" alt="Platforms">
 <img src="https://cocoapod-badges.herokuapp.com/l/RubyGateway/badge.png" alt="License"></p>
 
-<p>Embed Ruby in Swift: load Gems, run Ruby scripts, get results.</p>
+<p>Embed Ruby in Swift: load Gems, run Ruby scripts, invoke APIs seamlessly in
+both directions.</p>
 
 <p>RubyGateway is a framework built on the Ruby C API that lets Swift programs
 running on macOS or Linux painlessly and safely run and interact with Ruby
-programs.  It&rsquo;s easy to pass Swift datatypes into Ruby and turn Ruby objects
+programs.  It&rsquo;s easy to pass Swift values into Ruby and turn Ruby objects
 back into Swift types.</p>
 
-<p>The current version of the framework entirely covers calling Ruby from Swift,
-including passing Swift closures as blocks.  Support for calling Swift from
-Ruby is slowly improving: the most recent version supports global functions,
-and adding custom classes and methods should be in the 
-<a href="https://johnfairh.github.io/RubyGateway/todo.html">next release</a>.</p>
+<p>RubyGateway lets you call any Ruby method from Swift, including passing Swift
+closures as blocks.  It lets you define Ruby classes and methods that are
+implemented in Swift.</p>
 
 <p>See <a href="https://github.com/johnfairh/CRuby">CRuby</a> if you are looking for a
 low-level Ruby C API wrapper.</p>
@@ -271,22 +276,14 @@ low-level Ruby C API wrapper.</p>
 <span class="nb">puts</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
 </code></pre>
 
-<p>In Swift 4.2 with similar [lack of] error checking:</p>
+<p>In Swift:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">RubyGateway</span>
 
-<span class="k">try!</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">require</span><span class="p">(</span><span class="nv">filename</span><span class="p">:</span> <span class="s">"rouge"</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">html</span> <span class="o">=</span> <span class="k">try!</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"Rouge"</span><span class="p">)</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"highlight"</span><span class="p">,</span> <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="s">"let a = 3"</span><span class="p">,</span> <span class="s">"swift"</span><span class="p">,</span> <span class="s">"html"</span><span class="p">])</span>
+<span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">require</span><span class="p">(</span><span class="nv">filename</span><span class="p">:</span> <span class="s">"rouge"</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">html</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"Rouge"</span><span class="p">)</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"highlight"</span><span class="p">,</span> <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="s">"let a = 3"</span><span class="p">,</span> <span class="s">"swift"</span><span class="p">,</span> <span class="s">"html"</span><span class="p">])</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
 </code></pre>
-
-<p>Or using dynamic member lookup:</p>
-<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">RubyGateway</span>
-
-<span class="k">try!</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">require</span><span class="p">(</span><span class="nv">filename</span><span class="p">:</span> <span class="s">"rouge"</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">html</span> <span class="o">=</span> <span class="k">try!</span> <span class="kt">Ruby</span><span class="o">.</span><span class="kt">Rouge</span><span class="o">!.</span><span class="nf">call</span><span class="p">(</span><span class="s">"highlight"</span><span class="p">,</span> <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="s">"let a = 3"</span><span class="p">,</span> <span class="s">"swift"</span><span class="p">,</span> <span class="s">"html"</span><span class="p">])</span>
-<span class="nf">print</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
-</code></pre>
-<h3 id='objects' class='heading'>Objects</h3>
+<h3 id='calling-ruby' class='heading'>Calling Ruby</h3>
 <pre class="highlight swift"><code><span class="c1">// Create an object.  Use keyword arguments with initializer</span>
 <span class="k">let</span> <span class="nv">student</span> <span class="o">=</span> <span class="kt">RbObject</span><span class="p">(</span><span class="nv">ofClass</span><span class="p">:</span> <span class="s">"Academy::Student"</span><span class="p">,</span> <span class="nv">kwArgs</span><span class="p">:</span> <span class="p">[</span><span class="s">"name"</span><span class="p">:</span> <span class="s">"barney"</span><span class="p">])</span><span class="o">!</span>
 
@@ -319,7 +316,37 @@ low-level Ruby C API wrapper.</p>
 <span class="k">let</span> <span class="nv">subjects</span> <span class="o">=</span> <span class="kt">Array</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">(</span><span class="n">student</span><span class="o">.</span><span class="n">all_subjects</span><span class="o">!</span><span class="p">)</span>
 <span class="n">subjectsPopularityDb</span><span class="o">.</span><span class="nf">submit</span><span class="p">(</span><span class="nv">subjects</span><span class="p">:</span> <span class="n">subjects</span><span class="p">)</span>
 </code></pre>
-<h2 id='dynamic-data-exchange' class='heading'>Dynamic data exchange</h2>
+<h2 id='calling-swift' class='heading'>Calling Swift</h2>
+
+<p>Bound class definition:</p>
+<pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">Cell</span> <span class="p">{</span>
+    <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">setup</span><span class="p">(</span><span class="nv">m</span><span class="p">:</span> <span class="kt">RbMethod</span><span class="p">)</span> <span class="k">throws</span> <span class="p">{</span>
+        <span class="o">...</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">getContent</span><span class="p">(</span><span class="nv">m</span><span class="p">:</span> <span class="kt">RbMethod</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
+        <span class="o">...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">cellClass</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineClass</span><span class="p">(</span><span class="s">"Cell"</span><span class="p">,</span> <span class="nv">initializer</span><span class="p">:</span> <span class="kt">Cell</span><span class="o">.</span><span class="kd">init</span><span class="p">)</span>
+
+<span class="k">try</span> <span class="n">cellClass</span><span class="o">.</span><span class="nf">defineMethod</span><span class="p">(</span><span class="s">"initialize"</span><span class="p">,</span>
+        <span class="nv">argsSpec</span><span class="p">:</span> <span class="kt">RbMethodArgsSpec</span><span class="p">(</span><span class="nv">mandatoryKeywords</span><span class="p">:</span> <span class="p">[</span><span class="s">"width"</span><span class="p">,</span> <span class="s">"height"</span><span class="p">])</span>
+        <span class="nv">method</span><span class="p">:</span> <span class="kt">Cell</span><span class="o">.</span><span class="n">setup</span><span class="p">)</span>
+
+<span class="k">try</span> <span class="n">cellClass</span><span class="o">.</span><span class="nf">defineMethod</span><span class="p">(</span><span class="s">"content"</span><span class="p">,</span>
+        <span class="nv">argsSpec</span><span class="p">:</span> <span class="kt">RbMethodArgsSpec</span><span class="p">(</span><span class="nv">requiresBlock</span><span class="p">:</span> <span class="kc">true</span><span class="p">),</span>
+        <span class="nv">method</span><span class="p">:</span> <span class="kt">Cell</span><span class="o">.</span><span class="n">getContent</span><span class="p">)</span>
+</code></pre>
+
+<p>Called from Ruby:</p>
+<pre class="highlight ruby"><code><span class="n">cell</span> <span class="o">=</span> <span class="no">Cell</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">width: </span><span class="mi">200</span><span class="p">,</span> <span class="ss">height: </span><span class="mi">100</span><span class="p">)</span>
+<span class="n">cell</span><span class="p">.</span><span class="nf">content</span> <span class="p">{</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span> <span class="n">prettyprint</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="p">}</span>
+</code></pre>
 
 <p>Global variables:</p>
 <pre class="highlight swift"><code><span class="c1">// epochStore.current: Int</span>
@@ -354,9 +381,9 @@ low-level Ruby C API wrapper.</p>
 <h2 id='requirements' class='heading'>Requirements</h2>
 
 <ul>
-<li>Swift 4.2 or later, from swift.org or Xcode 10.0+</li>
-<li>macOS (tested on 10.14.2) or Linux (tested on Ubuntu Bionic/18.04 on x86_64) with Clang 6.</li>
-<li>Ruby 2.2 or later including development files:
+<li>Swift 5.0 or later, from swift.org or Xcode 10.2+</li>
+<li>macOS (tested on 10.14.5) or Linux (tested on Ubuntu Bionic/18.04 on x86_64) with Clang 6.</li>
+<li>Ruby 2.3 or later including development files:
 
 <ul>
 <li>For macOS, these come with Xcode.</li>

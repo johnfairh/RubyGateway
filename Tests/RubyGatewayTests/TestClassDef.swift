@@ -6,7 +6,8 @@
 //
 
 import XCTest
-import RubyGateway
+@testable /* RbObjectBinding */ import RubyGateway
+import RubyGatewayHelpers
 
 class TestClassDef: XCTestCase {
 
@@ -115,6 +116,180 @@ class TestClassDef: XCTestCase {
         }
     }
 
+    private func runGC() throws {
+        try Ruby.get("GC").call("start")
+    }
+
+    // Bound Swift classes
+
+    class MyBoundClass {
+        static var initCount = 0
+        static var deinitCount = 0
+
+        static func resetCounts() {
+            initCount = 0
+            deinitCount = 0
+        }
+
+        static var fingerprintValue = "FINGERPRINT"
+
+        var fingerprint = MyBoundClass.fingerprintValue
+
+        func getFingerprint(method: RbMethod) throws -> RbObject {
+            return RbObject(fingerprint)
+        }
+
+        init() {
+            MyBoundClass.initCount += 1
+        }
+        
+        deinit {
+            MyBoundClass.deinitCount += 1
+        }
+    }
+
+    // Basic create/delete matching
+    func testBoundSwiftClass() {
+        doErrorFree {
+            try runGC()
+            MyBoundClass.resetCounts()
+        }
+
+        doErrorFree {
+            try runGC()
+
+            try Ruby.defineClass("SwiftBound", initializer: MyBoundClass.init)
+
+            XCTAssertEqual(0, MyBoundClass.initCount)
+            XCTAssertEqual(0, MyBoundClass.deinitCount)
+
+            do {
+                guard let inst = RbObject(ofClass: "SwiftBound") else {
+                    XCTFail("Can't create instance")
+                    return
+                }
+
+                XCTAssertEqual(1, MyBoundClass.initCount)
+                XCTAssertEqual(0, MyBoundClass.deinitCount)
+
+                let obj = try inst.getBoundObject(type: MyBoundClass.self)
+                XCTAssertEqual(MyBoundClass.fingerprintValue, obj.fingerprint)
+            }
+        }
+
+        doErrorFree {
+            try runGC()
+
+            XCTAssertEqual(1, MyBoundClass.deinitCount)
+        }
+    }
+
+    // Nesting name resolution works properly
+    func testNestedBound() {
+        doErrorFree {
+            let module = try Ruby.defineModule("RbTests")
+            let _ = try Ruby.defineClass("BoundNested", under: module) {
+                MyBoundClass()
+            }
+
+            guard let _ = RbObject(ofClass: "RbTests::BoundNested") else {
+                XCTFail("Can't create instance")
+                return
+            }
+        }
+    }
+
+    // Internal special cases
+    func testSpecialCases() {
+        doErrorFree {
+            do {
+                let instance = RbClassBinding.alloc(name: "NotABoundClass")
+                XCTAssertNil(instance)
+            }
+
+            do {
+                let obj = RbObject(22)
+                let opaque = obj.withRubyValue { rbg_get_bound_object($0) }
+                XCTAssertNil(opaque)
+
+                doError {
+                    let val = try obj.getBoundObject(type: AnyObject.self)
+                    XCTFail("Managed to get bound object from an int: \(val)")
+                }
+            }
+
+            do {
+                let clazz = try Ruby.defineClass("NotABoundClassEither")
+                doError {
+                    try clazz.defineMethod("method", method: MyBoundClass.getFingerprint)
+                    XCTFail("Managed to bind a Swift method to an unbound class")
+                }
+            }
+        }
+    }
+
+    // Bound methods
+    func testBoundMethods() {
+        doErrorFree {
+            let myClass = try Ruby.defineClass("PeerMethods", initializer: MyBoundClass.init)
+            try myClass.defineMethod("fingerprint", method: MyBoundClass.getFingerprint)
+
+            guard let instance = RbObject(ofClass: "PeerMethods") else {
+                XCTFail("Can't create instance")
+                return
+            }
+            let fingerprint = try instance.call("fingerprint")
+            XCTAssertEqual(MyBoundClass.fingerprintValue, String(fingerprint))
+
+            try Ruby.require(filename: Helpers.fixturePath("swift_classes.rb"))
+
+            try _ = Ruby.eval(ruby: "test_bound1")
+        }
+    }
+
+    class InvaderModel {
+        private var name = ""
+
+        init() {
+        }
+
+        func initialize(rbMethod: RbMethod) throws {
+            name = try rbMethod.args.mandatory[0].convert()
+        }
+
+        func name(rbMethod: RbMethod) throws -> String {
+            return name
+        }
+
+        func listStats(rbMethod: RbMethod) throws -> RbObject {
+            if rbMethod.isBlockGiven {
+                try rbMethod.yieldBlock(args: ["Health", 100])
+                try rbMethod.yieldBlock(args: ["Shield", 25])
+                return .nilObject
+            } else {
+                return ["Health", 100, "Shield", 25]
+            }
+        }
+
+        func fire(rbMethod: RbMethod) throws {
+            // bang
+        }
+    }
+
+    func testDemoCode() {
+        doErrorFree {
+            let invaderClass = try Ruby.defineClass("Invader", initializer: InvaderModel.init)
+            try invaderClass.defineMethod("initialize", argsSpec: .basic(1), method: InvaderModel.initialize)
+            try invaderClass.defineMethod("name", method: InvaderModel.name)
+            try invaderClass.defineMethod("list_stats", method: InvaderModel.listStats)
+            try invaderClass.defineMethod("fire", method: InvaderModel.fire)
+
+            try Ruby.require(filename: Helpers.fixturePath("swift_classes.rb"))
+
+            let res = try Ruby.eval(ruby: "test_invader")
+            XCTAssertEqual(true, res)
+        }
+    }
 
     static var allTests = [
         ("testSimpleClass", testSimpleClass),
@@ -122,5 +297,10 @@ class TestClassDef: XCTestCase {
         ("testSimpleModule", testSimpleModule),
         ("testNestedDefs", testNestedDefs),
         ("testModuleInjection", testModuleInjection),
+        ("testBoundSwiftClass", testBoundSwiftClass),
+        ("testSpecialCases", testSpecialCases),
+        ("testNestedBound", testNestedBound),
+        ("testBoundMethods", testBoundMethods),
+        ("testDemoCode", testDemoCode)
     ]
 }

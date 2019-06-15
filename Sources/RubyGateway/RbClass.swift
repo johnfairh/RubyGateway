@@ -8,6 +8,98 @@
 import RubyGatewayHelpers
 import CRuby
 
+//
+// Support for binding Swift objects to Ruby objects.
+//
+// Usual lack-of-context problem from Ruby, we indirect in a couple of
+// places and use the fully qualified Ruby class name as a key in a hash
+// on the Swift side to identify the Swift type and initializer.
+//
+private protocol RbBoundClassProtocol {
+    func createInstance() -> UnsafeMutableRawPointer
+    func deleteInstance(_ instance: UnsafeMutableRawPointer)
+}
+
+private struct RbBoundClass<T: AnyObject> : RbBoundClassProtocol {
+    var initializer: () -> T
+
+    func createInstance() -> UnsafeMutableRawPointer {
+        let instance = initializer()
+        return Unmanaged<T>.passRetained(instance).toOpaque()
+    }
+
+    func deleteInstance(_ instance: UnsafeMutableRawPointer) {
+        let instance = Unmanaged<T>.fromOpaque(instance)
+        instance.release()
+    }
+}
+
+// Called from rbg_protect.m / rbg_bound_alloc_instance
+private func rbbinding_alloc(className: UnsafePointer<Int8>) -> UnsafeMutableRawPointer? {
+    let name = String(cString: className)
+    return RbClassBinding.alloc(name: name)
+}
+
+// Called from rbg_protect.m / rbg_bound_free_data
+private func rbbinding_free(className: UnsafePointer<Int8>, instance: UnsafeMutableRawPointer) {
+    let name = String(cString: className)
+    RbClassBinding.free(name: name, instance: instance)
+}
+
+// namespace
+internal enum RbClassBinding {
+
+    /// One-time init to register the callbacks
+    private static var initOnce: Void = {
+        rbg_register_object_binding_callbacks(rbbinding_alloc, rbbinding_free)
+    }()
+
+    private static var bindings = [String : RbBoundClassProtocol]()
+
+    fileprivate static func register<T: AnyObject>(name: String, initializer: @escaping () -> T) {
+        let _ = initOnce
+        bindings[name] = RbBoundClass(initializer: initializer)
+    }
+
+    static func alloc(name: String) -> UnsafeMutableRawPointer? {
+        guard let binding = bindings[name] else {
+            return nil
+        }
+        return binding.createInstance()
+    }
+
+    static func free(name: String, instance: UnsafeMutableRawPointer) {
+        if let binding = bindings[name] {
+            binding.deleteInstance(instance)
+        }
+    }
+}
+
+// MARK: Retrieving a bound Swift object
+
+extension RbObject {
+    /// Retrieve the Swift object bound to this Ruby object.
+    ///
+    /// This is for use on Ruby objects created from classes defined with
+    /// `RbGateway.defineClass(_:under:initializer:)` to retrieve the bound
+    /// object.
+    ///
+    /// This function performs an unsafe cast to the type you specify so be
+    /// sure to get it right.
+    ///
+    /// - Parameter type: The type of the bound object
+    /// - Returns: The bound object
+    /// - Throws: `RbError.badType(...)` if the object doesn't have a bound Swift
+    ///           class.
+    public func getBoundObject<T: AnyObject>(type: T.Type) throws -> T {
+        guard let opaque = withRubyValue(call: { rbg_get_bound_object($0) }) else {
+            throw RbError.badType("Expected bound T_DATA got \(self)")
+        }
+        let unmanaged = Unmanaged<T>.fromOpaque(opaque)
+        return unmanaged.takeUnretainedValue()
+    }
+}
+
 // Class and module definitions.
 // Really just under RbGateway as a namespace.
 
@@ -45,6 +137,47 @@ extension RbGateway {
         }
     }
 
+    /// Define a new, empty, Ruby class associated with a Swift class.
+    ///
+    /// The Ruby class inherits from the Ruby `Data` class.
+    ///
+    /// When any new instance of the Ruby class is created, the `initializer` closure
+    /// is called to get hold of an instance of the bound Swift class.  Typically this closure
+    /// is an initializer for the Swift class.  A strong reference is held to the Swift object
+    /// while the Ruby object is live; this reference is released only when the Ruby object is
+    /// garbage-collected.
+    ///
+    /// If you want to implement the Ruby `initialize` entrypoint to support passing arguments
+    /// to `new` then you need to do that separately with one of the
+    /// `RbObject.defineMethod(_:argsSpec:method:)` methods.
+    ///
+    /// Ruby methods defined with `RbObject.defineMethod(_:argsSpec:method:)` can be bound
+    /// directly to methods of the `SwiftPeer` class.
+    ///
+    /// - Parameter name: Name of the class.
+    /// - Parameter under: The class or module under which to nest this new class.  The
+    ///                    default is `nil` which means the class is at the top level.
+    /// - Parameter initializer: Closure to return an instance of `SwiftPeer`, typically a new
+    ///                          instance.
+    /// - Returns: The class object for the new class.
+    /// - Throws: `RbError.badIdentifier(type:id:)` if `name` is bad.  `RbError.badType(...)` if
+    ///           `parent` is provided but is not a class, or if `under` is neither class nor
+    ///           module. `RbError.rubyException(...)` if Ruby is unhappy with the definition,
+    ///           for example when the class already exists with a different parent.
+    @discardableResult
+    public func defineClass<SwiftPeer: AnyObject>(
+                    _ name: String,
+                    under: RbObject? = nil,
+                    initializer: @escaping () -> SwiftPeer) throws -> RbObject {
+        try setup()
+        let classObj = try defineClass(name, parent: RbObject(rubyValue: rb_cData), under: under)
+
+        RbClassBinding.register(name: String(classObj)!, initializer: initializer)
+        classObj.withRubyValue { rbg_bind_class($0) }
+
+        return classObj
+    }
+
     /// Define a new, empty, Ruby module.
     ///
     /// For example to create a module `Math::Advanced`:
@@ -72,6 +205,17 @@ extension RbGateway {
             try RbVM.doProtect { tag in
                 RbObject(rubyValue: rbg_define_module_protect(name, underVal, &tag))
             }
+        }
+    }
+}
+
+extension RbObject {
+    func checkIsBoundClass() throws {
+        try checkIsClass()
+        let ancestors = try call("ancestors")
+        let hasData = ancestors.collection.contains { String($0)! == "Data" }
+        guard hasData else {
+            throw RbError.badType("Class \(self) does not inherit from Data, not bound to Swift type")
         }
     }
 }

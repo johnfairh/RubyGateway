@@ -35,11 +35,15 @@ import RubyGatewayHelpers
 ///
 /// ## Converting to and from Swift types
 ///
-/// Convert `RbObject`s to Swift types using failable initializers:
+/// Convert `RbObject`s to Swift types using failable initializers or the throwing
+/// `convert` methods:
 /// ```swift
 /// let height = Double(myObj)
 /// let allHeights = Array<Double>(myObj)
 /// let heightDb = Dictionary<String, Double>(myObj)
+///
+/// let width = try myObj.convert(to: Double.self)
+/// model.field = try myObj.convert()
 /// ```
 /// Check `RbError.history` to see the cause of failed initializations.
 ///
@@ -65,7 +69,7 @@ import RubyGatewayHelpers
 /// ```swift
 /// RbObject(3) < RbObject("barney")
 /// ```
-/// I plan to add more control over what happens here.
+/// Future releases may add more control over what happens here.
 ///
 /// ## Arithmetic operators
 ///
@@ -82,7 +86,7 @@ import RubyGatewayHelpers
 ///
 /// Use `RbObject.defineMethod(...)` and `RbObject.defineSingletonMethod(...)` to
 /// add methods implemented in Swift to an object or class.  Use
-/// `RbGateway.defineClass(...)` to define entirely new classes.
+/// `RbGateway.defineClass(_:parent:under:)` to define entirely new classes.
 public final class RbObject: RbObjectAccess {
     internal let valueBox: UnsafeMutablePointer<Rbg_value>
 
