@@ -11,6 +11,7 @@
 * Define classes and modules from Swift.
 * Add module mix-in functions to `RbObject`.
 * Bind Ruby objects and methods directly to Swift objects and methods.
+* Add throwing conversion as alternative to optional initializer.
 
 ##### Bug Fixes
 
