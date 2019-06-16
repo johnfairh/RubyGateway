@@ -357,7 +357,7 @@ extension RbObjectAccess {
     }
 
     /// Backend to method-call / message-send.
-    private func doCall(id: ID,
+    private func doCall(id: ID, 
                         args: [RbObjectConvertible?],
                         kwArgs: KeyValuePairs<String, RbObjectConvertible?>,
                         blockRetention: RbBlockRetention = .none,
@@ -376,7 +376,7 @@ extension RbObjectAccess {
         var argObjects = args.map { $0.rubyObject }
 
         if kwArgs.count > 0 {
-            try argObjects.append(buildKwArgsHash(from: kwArgs))
+            try argObjects.append(RbObjectAccess.buildKwArgsHash(from: kwArgs))
         }
 
         // Do call - more complicated if block is involved
@@ -408,8 +408,20 @@ extension RbObjectAccess {
         }
     }
 
+    /// Helper to massage Swift-format args ready for the API
+    internal static func flattenArgs(args: [RbObjectConvertible?],
+                                     kwArgs: KeyValuePairs<String, RbObjectConvertible?>) throws -> [RbObject] {
+
+        var argObjects = args.map { $0.rubyObject }
+
+        if kwArgs.count > 0 {
+            try argObjects.append(buildKwArgsHash(from: kwArgs))
+        }
+        return argObjects
+    }
+
     /// Build a keyword args hash.  The keys are Symbols of the keywords.
-    private func buildKwArgsHash(from kwArgs: KeyValuePairs<String, RbObjectConvertible?>) throws -> RbObject {
+    private static func buildKwArgsHash(from kwArgs: KeyValuePairs<String, RbObjectConvertible?>) throws -> RbObject {
         let hashValue = rb_hash_new()
         try kwArgs.forEach { (key, value) in
             try RbSymbol(key).rubyObject.withRubyValue { symValue in

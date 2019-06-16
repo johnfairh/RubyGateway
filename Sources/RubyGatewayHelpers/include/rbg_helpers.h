@@ -167,6 +167,9 @@ void rbg_inject_module_protect(VALUE into, VALUE module,
                                Rbg_inject_type type,
                                int * _Nonnull status);
 
+VALUE rbg_call_super_protect(int argc, const VALUE * _Nonnull argv,
+                             int * _Nonnull status);
+
 /// Callback into Swift code for gvar access
 typedef VALUE (*Rbg_gvar_get_call)(ID id);
 typedef void (*Rbg_gvar_set_call)(ID id,

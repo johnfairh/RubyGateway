@@ -136,3 +136,43 @@ def test_ston_overridden
   v1 = SingDerived.value2
   raise "Bad value #{v1}" unless v1 == 10
 end
+
+class SuperBase
+  def override_me
+    22
+  end
+
+  def override_me_too(a, b:)
+    a + b
+  end
+end
+
+# swift:
+#
+# class SuperDerived < SuperBase
+#   def override_me
+#     super
+#   end
+#
+#   def override_me_too
+#     super(1, b: 4)
+#   end
+#
+#   def override_error
+#     super
+#   end
+# end
+
+def test_override_super
+    val = SuperDerived.new
+    o1 = val.override_me
+    raise "Bad 1 value #{o1}" unless o1 == 22
+    o2 = val.override_me_too
+    raise "Bad 2 value #{o2}" unless o2 == 5
+    true
+end
+
+def test_override_super2
+    val = SuperDerived.new
+    val.override_error
+end

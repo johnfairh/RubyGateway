@@ -101,6 +101,7 @@ typedef enum {
     RBG_JOB_DEFINE_CLASS,
     RBG_JOB_DEFINE_MODULE,
     RBG_JOB_INJECT_MODULE,
+    RBG_JOB_CALL_SUPER,
 } Rbg_job;
 
 typedef struct {
@@ -223,6 +224,9 @@ static VALUE rbg_protect_thunk(VALUE value)
             rb_include_module(d->value, d->module);
             break;
         }
+        break;
+    case RBG_JOB_CALL_SUPER:
+        rc = rb_call_super(d->argc, d->argv);
         break;
     }
     return rc;
@@ -545,6 +549,14 @@ void rbg_inject_module_protect(VALUE into, VALUE module,
     Rbg_protect_data data = { .job = RBG_JOB_INJECT_MODULE,
         .value = into, .module = module, .injectType = type };
     (void) rbg_protect(&data, status);
+}
+
+VALUE rbg_call_super_protect(int argc, const VALUE * _Nonnull argv,
+                             int * _Nonnull status)
+{
+    Rbg_protect_data data = { .job = RBG_JOB_CALL_SUPER,
+        .argc = argc, .argv = argv };
+    return rbg_protect(&data, status);
 }
 
 //

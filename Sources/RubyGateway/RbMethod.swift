@@ -246,6 +246,30 @@ public struct RbMethod {
         try needsBlock()
         return RbObject(rubyValue: rb_block_proc())
     }
+
+    /// Call the overridden version of the current method.
+    ///
+    /// The current active block, if any, is passed on to the superclass method.
+    /// There is no RubyBridge equivalent to Ruby's 'raw super' keyword, you must
+    /// always explicitly specify the arguments to pass on.
+    ///
+    /// If there is no matching superclass method to call then Ruby raises a
+    /// `NoMethodError` that is thrown as an `RbError.rubyException(_:)`.
+    ///
+    /// - Parameter args: Positional arguments to pass to the superclass method.
+    /// - Parameter kwArgs: Keyword arguments to pass to the superclass method.
+    /// - Returns: The value returned by the superclass method.
+    /// - Throws: `RbError.rubyException(_:)` if there is a Ruby exception.
+    ///           `RbError.duplicateKwArg(_:)` if there are duplicate keywords in `kwArgs`.
+    public func callSuper(args: [RbObjectConvertible?] = [],
+                          kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:]) throws -> RbObject {
+        let rubyArgs = try RbObjectAccess.flattenArgs(args: args, kwArgs: kwArgs)
+        return RbObject(rubyValue: try rubyArgs.withRubyValues { rubyValues in
+            try RbVM.doProtect { tag in
+                rbg_call_super_protect(Int32(rubyValues.count), rubyValues, &tag)
+            }
+        })
+    }
 }
 
 extension Array {

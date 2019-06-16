@@ -222,6 +222,32 @@ class TestObjMethods: XCTestCase {
         }
     }
 
+    // Test calling overridden method
+    func testCallSuper() {
+        doErrorFree {
+            try Ruby.require(filename: Helpers.fixturePath("swift_obj_methods.rb"))
+
+            let baseClass = try Ruby.get("SuperBase")
+            let derClass = try Ruby.defineClass("SuperDerived", parent: baseClass)
+            try derClass.defineMethod("override_me") { _, m in
+                try m.callSuper()
+            }
+            try derClass.defineMethod("override_me_too") { _, m in
+                try m.callSuper(args: [1], kwArgs: ["b": 4])
+            }
+            try derClass.defineMethod("override_error") { _, m in
+                try m.callSuper()
+            }
+
+            let rc = try Ruby.eval(ruby: "test_override_super")
+            XCTAssertEqual(true, rc)
+
+            doError {
+                try Ruby.eval(ruby: "test_override_super2")
+            }
+        }
+    }
+
     static var allTests = [
         ("testSimple", testSimple),
         ("testInterfaceErrors", testInterfaceErrors),
@@ -232,6 +258,7 @@ class TestObjMethods: XCTestCase {
         ("testArraySum", testArraySum),
         ("testSingletonClass", testSingleton),
         ("testSingletonInstance", testSingletonInstance),
-        ("testSingletonDerived", testSingletonDerived)
+        ("testSingletonDerived", testSingletonDerived),
+        ("testCallSuper", testCallSuper)
     ]
 }
