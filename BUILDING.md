@@ -64,12 +64,12 @@ Everything is just about OK.
 ## Releasing
 
 * Update docs if needed, separate commit.
-* Update podspec, changelog, TODO, README.
+* Update podspec, changelog, TODO, README, LICENSE if year changed.
 * Commit + tag + push with `--tags`.  Check CI.
 * `pod spec lint` -- *not* `pod lib lint`
   * `pod cache clean 'RubyGateway' --all` if you mess up the tag + have to repush it
 * `pod trunk me` -- if bad then `pod trunk register` until good
 * `pod trunk push`
-* Github code -> releases -> tags -> 'Add release notes'
+* Github code -> releases -> tags -> 'Create release'
   * Title is just release triple
   * Paste in changelog section
