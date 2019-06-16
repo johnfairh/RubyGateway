@@ -23,7 +23,7 @@ class TestClassDef: XCTestCase {
                 XCTFail("Can't create instance")
                 return
             }
-            XCTAssertEqual(className, String(myInstance.class!))
+            XCTAssertEqual(className, String(try myInstance.call("class")))
 
             let myClass2 = try Ruby.get(className)
             XCTAssertEqual(RbType.T_CLASS, myClass2.rubyType)
@@ -68,7 +68,7 @@ class TestClassDef: XCTestCase {
             let modName = "MyModule"
             let myMod = try Ruby.defineModule(modName)
             XCTAssertEqual(modName, String(myMod))
-            XCTAssertEqual("Module", String(myMod.class!))
+            XCTAssertEqual("Module", String(try myMod.call("class")))
 
             let myMod2 = try Ruby.get(modName)
             XCTAssertEqual(myMod2.rubyType, RbType.T_MODULE)

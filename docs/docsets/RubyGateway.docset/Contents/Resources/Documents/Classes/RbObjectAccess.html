@@ -233,8 +233,7 @@
             <h1>RbObjectAccess</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">@dynamicMemberLookup</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">RbObjectAccess</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">RbObjectAccess</span></code></pre>
 
                 </div>
               </div>
@@ -289,16 +288,6 @@ a Ruby Proc.</li>
     <span class="o">...</span>
 <span class="p">}</span>
 </code></pre>
-<h2 id='dynamic-member-lookup' class='heading'>Dynamic Member Lookup</h2>
-
-<p>This feature lets you access Ruby properties or 0-argument methods directly,
-for example:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">currentName</span> <span class="o">=</span> <span class="n">myRbObject</span><span class="o">.</span><span class="n">real_name</span>
-<span class="n">myObject</span><span class="o">.</span><span class="n">real_name</span> <span class="o">=</span> <span class="kt">RbObject</span><span class="p">(</span><span class="s">"Anonymous"</span><span class="p">)</span>
-</code></pre>
-
-<p>&hellip;where <code>real_name</code> is not defined in Swift at all but is the underlying Ruby
-property.  See <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC13dynamicMemberAA0cD0CSgSS_tcip">RbObjectAccess.subscript(dynamicMember:)</a></code>.</p>
 
           </div>
         </section>
@@ -373,7 +362,7 @@ if it doesn&rsquo;t exist yet.</p>
                         <p>Value of the IVar or Ruby <code>nil</code> if it has not been assigned yet.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L107-L113">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L95-L101">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -447,7 +436,7 @@ if it doesn&rsquo;t exist yet.</p>
                         <p>The value that was set.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L125-L133">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L113-L121">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -578,7 +567,7 @@ to drill down through nested classes and modules.</p>
                         <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the constant.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L161-L182">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L149-L170">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -655,7 +644,7 @@ to drill down through nested classes and modules.</p>
                         <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the class.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L210-L214">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L198-L202">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -756,7 +745,7 @@ to drill down through nested classes and modules.</p>
                         <p>The result of calling the method.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L231-L237">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L219-L225">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -871,7 +860,7 @@ to drill down through nested classes and modules.</p>
                         <p>The result of calling the method.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L253-L264">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L241-L252">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -973,7 +962,7 @@ to drill down through nested classes and modules.</p>
                         <p>The result of calling the method.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L279-L286">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L267-L274">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1062,7 +1051,7 @@ to drill down through nested classes and modules.</p>
                         <p>The result of calling the method.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L300-L307">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L288-L295">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1178,7 +1167,7 @@ to drill down through nested classes and modules.</p>
                         <p>The result of calling the method.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L324-L333">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L312-L321">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1281,7 +1270,7 @@ to drill down through nested classes and modules.</p>
                         <p>The result of calling the method.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L349-L357">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L337-L345">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1359,7 +1348,7 @@ simple wrapper around <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGat
                         <p>The value of the attribute.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L455-L458">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L443-L446">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1437,7 +1426,7 @@ wrapper around a call to the <code>attrname=</code> method.</p>
                         <p>Whatever the attribute setter returns, typically the new value.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L474-L477">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L462-L465">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1520,7 +1509,7 @@ or GVars.  This is how Ruby works; one more reason to avoid CVars.</p>
                         <p>The value of the CVar.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L508-L518">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L496-L506">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1599,7 +1588,7 @@ object context to set a CVar on the object&rsquo;s class.</p>
                         <p>The value that was set.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L535-L545">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L523-L533">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1678,7 +1667,7 @@ to avoid calling the <code><a href="../Classes/RbObject.html">RbObject</a></code
                         <p>Value of the variable, or Ruby nil if not set before.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L564-L569">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L552-L557">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1757,7 +1746,7 @@ to avoid calling the <code><a href="../Classes/RbObject.html">RbObject</a></code
                         <p>The value that was set.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L586-L595">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L574-L583">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1842,67 +1831,7 @@ worrying about precisely what they are.</p>
                         <p>The accessed thing .</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L617-L628">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway14RbObjectAccessC13dynamicMemberAA0cD0CSgSS_tcip"></a>
-                    <a name="//apple_ref/swift/Method/subscript(dynamicMember:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC13dynamicMemberAA0cD0CSgSS_tcip">subscript(dynamicMember:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Dynamic member lookup.</p>
-
-<p>Reads from unknown members are forwared to <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC3getyAA0cD0CSSKF">get(_:)</a></code>.  The subscript
-returns <code>nil</code> when there has been a Ruby exception.  The Swift error
-describing the Ruby exception can be retrieved from <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code>.</p>
-
-<p>Writes to unknown members are converted to calls to Ruby property
-setters. For example:</p>
-<pre class="highlight swift"><code><span class="c1">// Using dynamic member lookup:</span>
-<span class="n">obj</span><span class="o">.</span><span class="n">property</span> <span class="o">=</span> <span class="kt">RbObject</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-
-<span class="c1">// Same as:</span>
-<span class="n">obj</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"property="</span><span class="p">,</span> <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">])</span>
-
-<span class="c1">// Same as:</span>
-<span class="n">obj</span><span class="o">.</span><span class="nf">setAttribute</span><span class="p">(</span><span class="s">"property"</span><span class="p">,</span> <span class="nv">newValue</span><span class="p">:</span> <span class="mi">5</span><span class="p">)</span>
-</code></pre>
-<div class="aside aside-note">
-    <p class="aside-title">Note</p>
-    <p>Any error in the write direction cannot be detected at the
-call site and must be checked via <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code>.</p>
-
-</div>
-<div class="aside aside-note">
-    <p class="aside-title">Note</p>
-    <p>In the write direction the assigned type must be <code><a href="../Classes/RbObject.html">RbObject</a></code>, no
-implicit conversion via <code><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code> here.</p>
-
-</div>
-
-<p>These are both current Swift limitations.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">subscript</span><span class="p">(</span><span class="n">dynamicMember</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L655-L662">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L605-L616">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

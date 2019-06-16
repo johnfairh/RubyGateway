@@ -269,10 +269,6 @@ or call functions as you would at the top level of a Ruby script, for example:</
 <span class="p">}</span>
 </code></pre>
 
-<p>Or using dynamic member lookup:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">html</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="kt">Rouge</span><span class="o">!.</span><span class="nf">call</span><span class="p">(</span><span class="s">"highlight"</span><span class="p">,</span> <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="s">"let a = 1"</span><span class="p">,</span> <span class="s">"swift"</span><span class="p">,</span> <span class="s">"html"</span><span class="p">])</span>
-</code></pre>
-
 <p>If you just want to create a Ruby object of some class, see
 <code><a href="../Classes/RbObject.html#/s:11RubyGateway8RbObjectC7ofClass4args6kwArgsACSgSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSAIGtcfc">RbObject.init(ofClass:args:kwArgs:)</a></code>.</p>
 <h2 id='running-ruby-code' class='heading'>Running Ruby code</h2>
@@ -330,7 +326,7 @@ be re-setup.</p>
                         <p>0 if the cleanup went fine, otherwise some error code from Ruby.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L96-L98">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L91-L93">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -392,7 +388,7 @@ probably means the <code><a href="https://developer.apple.com/documentation/clou
                         <p>The corresponding ID.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L109-L111">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L104-L106">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -431,7 +427,7 @@ custom types.  It is not required for regular RubyGateway use.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L123-L128">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L118-L123">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -508,7 +504,7 @@ value if it doesn&rsquo;t exist yet.</p>
                         <p>Value of the IVar or Ruby <code>nil</code> if it has not been assigned yet.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L150-L154">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L145-L149">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -584,7 +580,7 @@ value if it doesn&rsquo;t exist yet.</p>
                         <p>The value that was set.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L168-L175">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L163-L170">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -913,7 +909,7 @@ directly to methods of the <code>SwiftPeer</code> class.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L182-L197">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L177-L192">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -944,7 +940,7 @@ directly to methods of the <code>SwiftPeer</code> class.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L200-L207">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L195-L202">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -974,7 +970,7 @@ directly to methods of the <code>SwiftPeer</code> class.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L210-L234">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L205-L229">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1004,7 +1000,7 @@ directly to methods of the <code>SwiftPeer</code> class.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L237-L252">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L232-L247">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1053,7 +1049,7 @@ feature.  See Ruby#14250.</li>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L270-L281">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L265-L276">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1083,7 +1079,7 @@ feature.  See Ruby#14250.</li>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L284-L286">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L279-L281">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1113,7 +1109,7 @@ feature.  See Ruby#14250.</li>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L289-L291">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L284-L286">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1145,7 +1141,7 @@ feature.  See Ruby#14250.</li>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L296-L298">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L291-L293">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1224,7 +1220,7 @@ Don&rsquo;t be tempted by <code>rb_eval_string_wrap()</code>, it is broken. #104
                         <p>The result of executing the code.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L313-L318">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L308-L313">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1286,7 +1282,7 @@ method is dispatched dynamically so it will invoke any replacements of
                         <p><code>true</code> if the file was loaded OK, <code>false</code> if it is already loaded.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L329-L333">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L324-L328">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1353,7 +1349,7 @@ instead of the current program.  See <code>Kernel#load</code>.</p>
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L341-L348">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L336-L343">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

@@ -23,8 +23,6 @@ import RubyGatewayHelpers
 /// ```swift
 /// try myObj.set("name", "fred")  // explicit property set
 ///
-/// myObj.name = RbObject("fred")  // dynamic member lookup
-///
 /// let results = try myObj.call("process", args: ["arg1", 100])
 ///
 /// let answer = try myObj.call("pose", kwArgs: ["questionNumber": 40])

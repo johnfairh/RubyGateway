@@ -12,7 +12,7 @@ XCTMain([
     testCase(TestVM.allTests),
     testCase(TestDemo.allTests),
     testCase(TestRbObject.allTests),
-    testCase(TestDynamic.allTests),
+//    testCase(TestDynamic.allTests),
     testCase(TestNumerics.allTests),
     testCase(TestOperators.allTests),
     testCase(TestMiscObjTypes.allTests),

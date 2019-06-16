@@ -42,11 +42,6 @@ import RubyGatewayHelpers
 /// }
 /// ```
 ///
-/// Or using dynamic member lookup:
-/// ```swift
-/// let html = try Ruby.Rouge!.call("highlight", args: ["let a = 1", "swift", "html"])
-/// ```
-///
 /// If you just want to create a Ruby object of some class, see
 /// `RbObject.init(ofClass:args:kwArgs:)`.
 ///

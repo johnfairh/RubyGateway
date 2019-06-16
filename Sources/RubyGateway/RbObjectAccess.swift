@@ -55,18 +55,6 @@ import RubyGatewayHelpers
 ///     ...
 /// }
 /// ```
-///
-/// ## Dynamic Member Lookup
-///
-/// This feature lets you access Ruby properties or 0-argument methods directly,
-/// for example:
-/// ```swift
-/// let currentName = myRbObject.real_name
-/// myObject.real_name = RbObject("Anonymous")
-/// ```
-/// ...where `real_name` is not defined in Swift at all but is the underlying Ruby
-/// property.  See `RbObjectAccess.subscript(dynamicMember:)`.
-@dynamicMemberLookup
 public class RbObjectAccess {
     /// Getter for the `VALUE` associated with this object
     private let getValue: () -> VALUE
@@ -625,39 +613,5 @@ extension RbObjectAccess {
             return try getClassVar(name)
         }
         return try call(name)
-    }
-
-    /// Dynamic member lookup.
-    ///
-    /// Reads from unknown members are forwared to `get(_:)`.  The subscript
-    /// returns `nil` when there has been a Ruby exception.  The Swift error
-    /// describing the Ruby exception can be retrieved from `RbError.history`.
-    ///
-    /// Writes to unknown members are converted to calls to Ruby property
-    /// setters. For example:
-    /// ```swift
-    /// // Using dynamic member lookup:
-    /// obj.property = RbObject(5)
-    ///
-    /// // Same as:
-    /// obj.call("property=", args: [5])
-    ///
-    /// // Same as:
-    /// obj.setAttribute("property", newValue: 5)
-    /// ```
-    /// - note: Any error in the write direction cannot be detected at the
-    ///   call site and must be checked via `RbError.history`.
-    ///
-    /// - note: In the write direction the assigned type must be `RbObject`, no
-    ///   implicit conversion via `RbObjectConvertible` here.
-    ///
-    /// These are both current Swift limitations.
-    public subscript(dynamicMember name: String) -> RbObject? {
-        get {
-            return try? get(name)
-        }
-        set {
-            _ = try? call("\(name)=", args: [newValue ?? .nilObject])
-        }
     }
 }
