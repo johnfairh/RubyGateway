@@ -1,13 +1,10 @@
-## 2.2
-
-* Define classes in swift
-
-## Other
+## One day
 
 Optimize GC interaction
 
 Crashiness
 * Policy or something to avoid crashes in operators
 
-Dynamic callable -- will need to write the Swift patch myself though,
-or give up on 'property' access and require call syntax everywhere.
+Dynamic callable / member lookup.  Swift is not going to support X.Y(a) where
+Y is dynamic so we will have to compromise somewhere with Ruby, probably by
+requiring () even for calling 0-args functions / accessing properties.

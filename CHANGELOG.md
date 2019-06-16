@@ -1,8 +1,8 @@
-## Master
+## 3.0.0
 
 ##### Breaking
 
-* Require minimum Swift 5 / Xcode 10.2.
+* Require minimum Swift 5 / Xcode 10.2 / Ruby 2.3.
 * Standardize all APIs to not require a leading `name` arg label.
 * Retire @dynamicMemberLookup support now the level of support from Swift
   is clearer.  May revisit this in future.
