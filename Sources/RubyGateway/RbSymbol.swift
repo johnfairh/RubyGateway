@@ -18,7 +18,7 @@ import CRuby
 /// ```swift
 /// try obj.call("meth", args: [RbSymbol("value")])
 /// ```
-public struct RbSymbol: RbObjectConvertible {
+public struct RbSymbol: RbObjectConvertible, Hashable {
     private let name: String
 
     /// Create from the name for the symbol.  No leading colon.

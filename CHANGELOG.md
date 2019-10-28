@@ -4,6 +4,8 @@
 
 #### Enhancements
 
+* Add `Hashable` conformance to `RbSymbol`.
+
 #### Bug Fixes
 
 ## 3.0.0

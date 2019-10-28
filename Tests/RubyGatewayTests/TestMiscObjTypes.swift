@@ -82,6 +82,15 @@ class TestMiscObjTypes: XCTestCase {
         }
     }
 
+    func testHashableSymbols() {
+        let h1 = [RbSymbol("one"): "One", RbSymbol("two"): "Two"]
+        let h2 = [RbSymbol("one").rubyObject: "One", RbSymbol("two").rubyObject: "Two"]
+
+        let rh1 = h1.rubyObject
+        let rh2 = h2.rubyObject
+        XCTAssertEqual(rh1, rh2)
+    }
+
     func testBadCoerce() {
         doErrorFree {
             let obj = RbObject("string")
@@ -105,6 +114,7 @@ class TestMiscObjTypes: XCTestCase {
         ("testFailedBoolConversion", testFailedBoolConversion),
         ("testBoolLiteralPromotion", testBoolLiteralPromotion),
         ("testSymbols", testSymbols),
+        ("testHashableSymbols", testHashableSymbols),
         ("testBadCoerce", testBadCoerce)
     ]
 }
