@@ -174,6 +174,12 @@ class TestClassDef: XCTestCase {
 
                 let obj = try inst.getBoundObject(type: MyBoundClass.self)
                 XCTAssertEqual(MyBoundClass.fingerprintValue, obj.fingerprint)
+
+                guard let dummy = RbObject(ofClass: "String") else {
+                    XCTFail("Can't create string!")
+                    return
+                }
+                print("The point of dummy is to overwrite any SwiftBound VALUE on the stack: \(dummy)")
             }
         }
 

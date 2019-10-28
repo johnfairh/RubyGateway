@@ -1,4 +1,4 @@
-// swift-tools-version:4.0
+// swift-tools-version:5.1.0
 
 //  Package.swift
 //  RubyGateway
@@ -15,7 +15,7 @@ let package = Package(
             targets: ["RubyGateway", "RubyGatewayHelpers"])
     ],
     dependencies: [
-        .package(url: "https://github.com/johnfairh/CRuby", from: "1.0.0"),
+        .package(url: "https://github.com/johnfairh/CRuby", from: "1.0.1"),
     ],
     targets: [
         .target(
