@@ -200,6 +200,9 @@ class TestRbObject: XCTestCase {
 
                 XCTAssertEqual(initialMTCount + 1, try getMethodsTestHeapCount())
                 print("Hey Swift, please don't optimize away \(o)")
+
+                let object = RbObject(ofClass: "String")!
+                print("This object is to wipe the stack of refs to 'o's VALUE: \(object)")
             }
         }
 
