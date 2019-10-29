@@ -62,7 +62,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Main APIs.html">Main APIs</a>
+            <a class="nav-group-name-link" href="../Main%20APIs.html">Main APIs</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RbGateway.html">RbGateway</a>
@@ -82,19 +82,19 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Swift Method APIs.html">Swift Method APIs</a>
+            <a class="nav-group-name-link" href="../Swift%20Method%20APIs.html">Swift Method APIs</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Swift Method APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a>
+                <a class="nav-group-task-link" href="../Swift%20Method%20APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Swift Method APIs.html#/s:11RubyGateway21RbBoundMethodCallbacka">RbBoundMethodCallback</a>
+                <a class="nav-group-task-link" href="../Swift%20Method%20APIs.html#/s:11RubyGateway21RbBoundMethodCallbacka">RbBoundMethodCallback</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Swift Method APIs.html#/s:11RubyGateway25RbBoundMethodVoidCallbacka">RbBoundMethodVoidCallback</a>
+                <a class="nav-group-task-link" href="../Swift%20Method%20APIs.html#/s:11RubyGateway25RbBoundMethodVoidCallbacka">RbBoundMethodVoidCallback</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/RbMethod.html">RbMethod</a>
@@ -105,10 +105,10 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Other APIs.html">Other APIs</a>
+            <a class="nav-group-name-link" href="../Other%20APIs.html">Other APIs</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Other APIs.html#/s:11RubyGateway15RbBlockCallbacka">RbBlockCallback</a>
+                <a class="nav-group-task-link" href="../Other%20APIs.html#/s:11RubyGateway15RbBlockCallbacka">RbBlockCallback</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/RbBlockRetention.html">RbBlockRetention</a>
@@ -134,7 +134,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Error Handling.html">Error Handling</a>
+            <a class="nav-group-name-link" href="../Error%20Handling.html">Error Handling</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/RbError.html">RbError</a>
@@ -151,7 +151,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Swift Interop.html">Swift Interop</a>
+            <a class="nav-group-name-link" href="../Swift%20Interop.html">Swift Interop</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>
@@ -340,7 +340,7 @@ add methods implemented in Swift to an object or class.  Use
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Wrap up a Ruby object using the its <code>VALUE</code> API handle.</p>
+                        <p>Wrap up a Ruby object using the its <code><a href="https://developer.apple.com/documentation/coremedia/cmattachmentbearerattachments/value/">VALUE</a></code> API handle.</p>
 
 <p>The Ruby object is kept safe from garbage collection until
 the Swift object is deallocated.</p>
@@ -353,7 +353,7 @@ of the Ruby API.  It is not normally needed.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">rubyValue</span><span class="p">:</span> <span class="kt">VALUE</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">rubyValue</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/coremedia/cmattachmentbearerattachments/value/">VALUE</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -414,9 +414,9 @@ a separate Ruby object do:</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Safely access the <code>VALUE</code> object handle for use with the Ruby C API.</p>
+                        <p>Safely access the <code><a href="https://developer.apple.com/documentation/coremedia/cmattachmentbearerattachments/value/">VALUE</a></code> object handle for use with the Ruby C API.</p>
 
-<p>There is no direct access to the <code>VALUE</code> to prevent accidental use
+<p>There is no direct access to the <code><a href="https://developer.apple.com/documentation/coremedia/cmattachmentbearerattachments/value/">VALUE</a></code> to prevent accidental use
 outside the corresponding <code>RbObject</code>&lsquo;s lifetime.</p>
 
                       </div>
@@ -425,7 +425,7 @@ outside the corresponding <code>RbObject</code>&lsquo;s lifetime.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="n">withRubyValue</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">call</span><span class="p">:</span> <span class="p">(</span><span class="kt">VALUE</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">T</span><span class="p">)</span> <span class="k">rethrows</span> <span class="o">-&gt;</span> <span class="kt">T</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="n">withRubyValue</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">call</span><span class="p">:</span> <span class="p">(</span><span class="kt"><a href="https://developer.apple.com/documentation/coremedia/cmattachmentbearerattachments/value/">VALUE</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">T</span><span class="p">)</span> <span class="k">rethrows</span> <span class="o">-&gt;</span> <span class="kt">T</span></code></pre>
 
                         </div>
                       </div>
@@ -441,7 +441,7 @@ outside the corresponding <code>RbObject</code>&lsquo;s lifetime.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The closure to pass the object&rsquo;s <code>VALUE</code> on to.</p>
+                                  <p>The closure to pass the object&rsquo;s <code><a href="https://developer.apple.com/documentation/coremedia/cmattachmentbearerattachments/value/">VALUE</a></code> on to.</p>
                                 </div>
                               </td>
                             </tr>
@@ -732,7 +732,7 @@ sure to get it right.</p>
 override any that match in the module.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeyACSScACmF">RbError.badType(...)</a></code> if this object is not a class or if <code><a href="https://developer.apple.com/documentation/objectivec/module/">module</a></code>
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeyACSScACmF">RbError.badType(...)</a></code> if this object is not a class or if <code>module</code>
        is not a module.  <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(...)</a></code> if Ruby is unhappy,
        for example if the operation creates a circular dependency.
 
@@ -791,7 +791,7 @@ override any that match in the class.</p>
 <p>See <code>Module#prepend</code> for a better explanation.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeyACSScACmF">RbError.badType(...)</a></code> if this object is not a class or if <code><a href="https://developer.apple.com/documentation/objectivec/module/">module</a></code>
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeyACSScACmF">RbError.badType(...)</a></code> if this object is not a class or if <code>module</code>
        is not a module.  <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(...)</a></code> if Ruby is unhappy,
        for example if the operation creates a circular dependency.
 
@@ -849,7 +849,7 @@ override any that match in the class.</p>
 <p>See <code>Module#extend</code> for a better explanation.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeyACSScACmF">RbError.badType(...)</a></code> if <code><a href="https://developer.apple.com/documentation/objectivec/module/">module</a></code> is not a module.
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeyACSScACmF">RbError.badType(...)</a></code> if <code>module</code> is not a module.
        <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(...)</a></code> if Ruby is unhappy,
        for example if the operation creates a circular dependency.
 
@@ -1340,7 +1340,7 @@ or get hold of an existing class from the global <code>Ruby</code> object, for e
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">defineMethod</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span>
                          <span class="nv">argsSpec</span><span class="p">:</span> <span class="kt"><a href="../Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a></span><span class="p">(),</span>
-                         <span class="nv">body</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Swift Method APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a></span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                         <span class="nv">body</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Swift%20Method%20APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a></span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -1441,7 +1441,7 @@ right.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">defineMethod</span><span class="o">&lt;</span><span class="kt">SwiftPeer</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">,</span> <span class="kt">Return</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="o">&gt;</span><span class="p">(</span>
                 <span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span>
                 <span class="nv">argsSpec</span><span class="p">:</span> <span class="kt"><a href="../Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a></span><span class="p">(),</span>
-                <span class="nv">method</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Swift Method APIs.html#/s:11RubyGateway21RbBoundMethodCallbacka">RbBoundMethodCallback</a></span><span class="o">&lt;</span><span class="kt">SwiftPeer</span><span class="p">,</span> <span class="kt">Return</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                <span class="nv">method</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Swift%20Method%20APIs.html#/s:11RubyGateway21RbBoundMethodCallbacka">RbBoundMethodCallback</a></span><span class="o">&lt;</span><span class="kt">SwiftPeer</span><span class="p">,</span> <span class="kt">Return</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -1545,7 +1545,7 @@ right.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">defineMethod</span><span class="o">&lt;</span><span class="kt">SwiftPeer</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="o">&gt;</span><span class="p">(</span>
                 <span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span>
                 <span class="nv">argsSpec</span><span class="p">:</span> <span class="kt"><a href="../Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a></span><span class="p">(),</span>
-                <span class="nv">method</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Swift Method APIs.html#/s:11RubyGateway25RbBoundMethodVoidCallbacka">RbBoundMethodVoidCallback</a></span><span class="o">&lt;</span><span class="kt">SwiftPeer</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                <span class="nv">method</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Swift%20Method%20APIs.html#/s:11RubyGateway25RbBoundMethodVoidCallbacka">RbBoundMethodVoidCallback</a></span><span class="o">&lt;</span><span class="kt">SwiftPeer</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -1631,7 +1631,7 @@ valid just for this instance.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">defineSingletonMethod</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span>
                                   <span class="nv">argsSpec</span><span class="p">:</span> <span class="kt"><a href="../Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a></span><span class="p">(),</span>
-                                  <span class="nv">body</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Swift Method APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a></span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                                  <span class="nv">body</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Swift%20Method%20APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a></span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -1805,7 +1805,7 @@ find out what failed.</p>
                          <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?]</span> <span class="o">=</span> <span class="p">[],</span>
                          <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/keyvaluepairs/">KeyValuePairs</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:],</span>
                          <span class="nv">retainBlock</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/bool/">Bool</a></span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
-                         <span class="nv">blockCall</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Other APIs.html#/s:11RubyGateway15RbBlockCallbacka">RbBlockCallback</a></span><span class="p">)</span></code></pre>
+                         <span class="nv">blockCall</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Other%20APIs.html#/s:11RubyGateway15RbBlockCallbacka">RbBlockCallback</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1911,7 +1911,7 @@ find out what failed.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">blockCall</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Other APIs.html#/s:11RubyGateway15RbBlockCallbacka">RbBlockCallback</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">blockCall</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Other%20APIs.html#/s:11RubyGateway15RbBlockCallbacka">RbBlockCallback</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -2726,7 +2726,7 @@ work:</p>
     </div>
     <section class="footer">
       <p>Distributed under the MIT license.  Maintained by <a class="link" href="mailto:johnfairh@gmail.com" target="_blank" rel="external">John Fairhurst</a>.</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.10.0</a>-<a class="link" href="https://github.com/johnfairh/jazzy" target="_blank" rel="external">bebop</a>, originally a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>-<a class="link" href="https://github.com/johnfairh/jazzy" target="_blank" rel="external">bebop</a>, originally a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

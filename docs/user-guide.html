@@ -61,7 +61,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Main APIs.html">Main APIs</a>
+            <a class="nav-group-name-link" href="Main%20APIs.html">Main APIs</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/RbGateway.html">RbGateway</a>
@@ -81,19 +81,19 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Swift Method APIs.html">Swift Method APIs</a>
+            <a class="nav-group-name-link" href="Swift%20Method%20APIs.html">Swift Method APIs</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Swift Method APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a>
+                <a class="nav-group-task-link" href="Swift%20Method%20APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Swift Method APIs.html#/s:11RubyGateway21RbBoundMethodCallbacka">RbBoundMethodCallback</a>
+                <a class="nav-group-task-link" href="Swift%20Method%20APIs.html#/s:11RubyGateway21RbBoundMethodCallbacka">RbBoundMethodCallback</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Swift Method APIs.html#/s:11RubyGateway25RbBoundMethodVoidCallbacka">RbBoundMethodVoidCallback</a>
+                <a class="nav-group-task-link" href="Swift%20Method%20APIs.html#/s:11RubyGateway25RbBoundMethodVoidCallbacka">RbBoundMethodVoidCallback</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/RbMethod.html">RbMethod</a>
@@ -104,10 +104,10 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Other APIs.html">Other APIs</a>
+            <a class="nav-group-name-link" href="Other%20APIs.html">Other APIs</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Other APIs.html#/s:11RubyGateway15RbBlockCallbacka">RbBlockCallback</a>
+                <a class="nav-group-task-link" href="Other%20APIs.html#/s:11RubyGateway15RbBlockCallbacka">RbBlockCallback</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums/RbBlockRetention.html">RbBlockRetention</a>
@@ -133,7 +133,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Error Handling.html">Error Handling</a>
+            <a class="nav-group-name-link" href="Error%20Handling.html">Error Handling</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums/RbError.html">RbError</a>
@@ -150,7 +150,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Swift Interop.html">Swift Interop</a>
+            <a class="nav-group-name-link" href="Swift%20Interop.html">Swift Interop</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a>
@@ -754,8 +754,8 @@ much of the <code>libruby</code> API as makes it through the importer.  You can 
 in conjunction with RubyGateway to access more of the API than RubyGateway itself
 provides.</p>
 
-<p>Each <code><a href="Classes/RbObject.html">RbObject</a></code> wraps one <code>VALUE</code> keeping it safe from garbage collection.  You
-can access that <code>VALUE</code> using <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC04withA5Value4callxxSuKXE_tKlF">RbObject.withRubyValue(call:)</a></code>.</p>
+<p>Each <code><a href="Classes/RbObject.html">RbObject</a></code> wraps one <code><a href="https://developer.apple.com/documentation/coremedia/cmattachmentbearerattachments/value/">VALUE</a></code> keeping it safe from garbage collection.  You
+can access that <code><a href="https://developer.apple.com/documentation/coremedia/cmattachmentbearerattachments/value/">VALUE</a></code> using <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC04withA5Value4callxxSuKXE_tKlF">RbObject.withRubyValue(call:)</a></code>.</p>
 
 <p>RubyGateway caches intern&#39;ed Ruby strings - you can access the cache using
 <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C5getID3forSuSS_tKF">RbGateway.getID(for:)</a></code>.</p>
@@ -775,13 +775,13 @@ objects while they are live.  Two relevant techniques for this are:</p>
 <li>Stack snooping.</li>
 </ol>
 
-<p><code><a href="Classes/RbObject.html">RbObject</a></code> holds one <code>VALUE</code> and stores it on the known list while the Swift
+<p><code><a href="Classes/RbObject.html">RbObject</a></code> holds one <code><a href="https://developer.apple.com/documentation/coremedia/cmattachmentbearerattachments/value/">VALUE</a></code> and stores it on the known list while the Swift
 object is alive.  So if you solely use <code><a href="Classes/RbObject.html">RbObject</a></code>s then everything should be
 fine. The only risk is that the Swift object dies before you expect it to;
 the standard library includes <code>withExtendedLifetime(_:_:)</code> to help reason about
 this.</p>
 
-<p>Ruby GC scans the stack of each Ruby thread searching for <code>VALUE</code>s.  In very
+<p>Ruby GC scans the stack of each Ruby thread searching for <code><a href="https://developer.apple.com/documentation/coremedia/cmattachmentbearerattachments/value/">VALUE</a></code>s.  In very
 old Ruby, the position of the stack was found from the address of a local
 variable in an init function.  In modern Ruby, at least on Darwin &amp; Linux,
 various pthread APIs are used instead which means there are no unwritten
@@ -789,7 +789,7 @@ rules about where the init function is called.</p>
 
 <p>See <code>TestRbObject.testStackGc()</code> for a demo of this working in Swift.</p>
 
-<p>This relies on the compiler actually placing <code>VALUE</code>s on the stack, which it is
+<p>This relies on the compiler actually placing <code><a href="https://developer.apple.com/documentation/coremedia/cmattachmentbearerattachments/value/">VALUE</a></code>s on the stack, which it is
 not obliged to do.  In C the <code>RB_GC_GUARD()</code> macro forces its hand &ndash; a similar
 thing should work in Swift but I haven&rsquo;t managed to find a situation where the
 Swift compiler does <em>not</em> put it on the stack so can&rsquo;t test it.</p>
@@ -812,7 +812,7 @@ interesting overview of GC pre + @ 2.2.</li>
     </div>
     <section class="footer">
       <p>Distributed under the MIT license.  Maintained by <a class="link" href="mailto:johnfairh@gmail.com" target="_blank" rel="external">John Fairhurst</a>.</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.10.0</a>-<a class="link" href="https://github.com/johnfairh/jazzy" target="_blank" rel="external">bebop</a>, originally a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>-<a class="link" href="https://github.com/johnfairh/jazzy" target="_blank" rel="external">bebop</a>, originally a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>
