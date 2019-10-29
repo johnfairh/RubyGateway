@@ -1,3 +1,17 @@
+## Master
+
+#### Breaking
+
+* None
+
+#### Enhancements
+
+* None
+
+#### Bug Fixes
+
+* None
+
 ## 3.1.0 - 29th October 2019
 
 #### Enhancements
