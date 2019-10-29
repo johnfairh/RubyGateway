@@ -1,14 +1,11 @@
-## Master
-
-#### Breaking
+## 3.1.0 - 29th October 2019
 
 #### Enhancements
 
 * Add `Hashable` conformance to `RbSymbol`.
+* Tests pass on Ruby 2.6 / Xcode 11.2.
 
-#### Bug Fixes
-
-## 3.0.0
+## 3.0.0 - 16th June 2019
 
 ##### Breaking
 
