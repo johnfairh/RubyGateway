@@ -6,7 +6,7 @@
 
 #### Enhancements
 
-* None
+* Add `RbObjectAccess.setConstant(_:newValue:)`, somehow overlooked!
 
 #### Bug Fixes
 

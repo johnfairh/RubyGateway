@@ -169,6 +169,56 @@ extension RbObjectAccess {
         return RbObject(rubyValue: nextValue)
     }
 
+    /// Bind an object to a constant name.
+    ///
+    /// Use this to add value-constants to the class/module name hierarchy.  For example:
+    /// ```swift
+    /// let defaultInvader = RbObject(ofClass: "Invader", kwArgs: ["name" : "Zaltor"])
+    /// try Ruby.setConstant("Game::Invaders::DEFAULT", defaultInvader)
+    /// ```
+    ///
+    /// To define new classes and modules, use `RbGateway.defineClass(...)` and
+    /// `RbGateway.defineModule(...)` instead of this method.
+    ///
+    /// For a version that does not throw, see `failable`.
+    ///
+    /// - parameter name: The name of the constant to create or replace.  Can contain '::' sequences
+    ///   to drill down through nested classes and modules.
+    /// - parameter newValue: The value for the constant.
+    /// - returns: The value set for the constant.
+    /// - throws: `RbError.badIdentifier(type:id:)` if `name` looks wrong.
+    ///           `rubyException(_:)` if there is a Ruby exception.
+    ///           `RbError.badType(_:)` if the current object is not a class or module.
+    @discardableResult
+    public func setConstant(_ name: String, newValue: RbObjectConvertible?) throws -> RbObject {
+        try Ruby.setup()
+        try name.checkRubyConstantPath()
+
+        let components = name.components(separatedBy: "::")
+
+        let constName = components.last!
+        let constId = try Ruby.getID(for: constName)
+
+        let rubyClass: RbObject
+        if components.count > 1 {
+            rubyClass = try getConstant(components.dropLast().joined(separator: "::"))
+        } else {
+            rubyClass = RbObject(rubyValue: getValue())
+            try rubyClass.checkIsClassOrModule()
+        }
+
+        let constObject = newValue.rubyObject
+        try rubyClass.withRubyValue { clazzValue in
+            try constObject.withRubyValue { constValue in
+                try RbVM.doProtect { tag in
+                    rbg_const_set_protect(clazzValue, constId, constValue, &tag)
+                }
+            }
+        }
+
+        return constObject
+    }
+
     /// Get an `RbObject` that represents a Ruby class.
     ///
     /// This is a dynamic call into Ruby that can cause calls to `const_missing`

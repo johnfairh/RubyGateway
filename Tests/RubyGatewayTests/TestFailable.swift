@@ -32,6 +32,17 @@ class TestFailable: XCTestCase {
 
         if let const = cls.failable.getConstant("Nope") {
             XCTFail("Managed to get 'Nope': \(const)")
+            return
+        }
+
+        guard nil != cls.failable.setConstant("NuConstant", newValue: "Val") else {
+            XCTFail("Couldn't set constant")
+            return
+        }
+
+        if let nuConst = RbObject.nilObject.failable.setConstant("NuConst2", newValue: "Val2") {
+            XCTFail("Managed to set constant on non-class: \(nuConst)")
+            return
         }
     }
 

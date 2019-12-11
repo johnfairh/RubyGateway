@@ -205,6 +205,19 @@ extension RbFailableAccess {
     public func getClass(_ name: String) -> RbObject? {
         return try? access.getClass(name)
     }
+
+    /// Bind an object to a constant name.
+    ///
+    /// This is a non-throwing version of `RbObjectAccess.setConstant(_:newValue:)`.
+    /// See `RbError.history` to retrieve error details.
+    ///
+    /// - parameter name: The name of the constant to create or replace.
+    /// - parameter newValue: The value for the constant.
+    /// - returns: The value set for the constant or `nil` if an error occurred.
+    @discardableResult
+    public func setConstant(_ name: String, newValue: RbObjectConvertible?) -> RbObject? {
+        return try? access.setConstant(name, newValue: newValue)
+    }
 }
 
 // MARK: - Instance Variables

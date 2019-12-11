@@ -87,6 +87,7 @@ typedef enum {
     RBG_JOB_INTERN,
     RBG_JOB_CONST_GET,
     RBG_JOB_CONST_GET_AT,
+    RBG_JOB_CONST_SET,
     RBG_JOB_FUNCALLV,
     RBG_JOB_BLOCK_CALL_PVOID,
     RBG_JOB_BLOCK_CALL_VALUE,
@@ -126,6 +127,7 @@ typedef struct {
 
     VALUE         insideClass;
     VALUE         module;
+    VALUE         constant;
     Rbg_inject_type injectType;
 } Rbg_protect_data;
 
@@ -161,6 +163,9 @@ static VALUE rbg_protect_thunk(VALUE value)
         break;
     case RBG_JOB_CONST_GET_AT:
         rc = rb_const_get_at(d->value, d->id);
+        break;
+    case RBG_JOB_CONST_SET:
+        rb_const_set(d->value, d->id, d->constant);
         break;
     case RBG_JOB_FUNCALLV:
         rc = rb_funcallv(d->value, d->id, d->argc, d->argv);
@@ -265,6 +270,15 @@ VALUE rbg_const_get_at_protect(VALUE value, ID id, int * _Nonnull status)
 {
     Rbg_protect_data data = { .job = RBG_JOB_CONST_GET_AT, .value = value, .id = id };
     return rbg_protect(&data, status);
+}
+
+// rb_const_set - raises for various reasons
+void rbg_const_set_protect(VALUE clazz, ID id, VALUE constant,
+                           int * _Nonnull status)
+{
+    Rbg_protect_data data = { .job = RBG_JOB_CONST_SET, .value = clazz,
+                              .id = id, .constant = constant };
+    (void) rbg_protect(&data, status);
 }
 
 // rb_inspect - raises if can't get a string out

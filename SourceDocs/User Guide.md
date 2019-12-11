@@ -358,7 +358,7 @@ For example:
 let outerModule = try Ruby.defineModule("MySystem")
 let innerModule = try Ruby.defineModule("SubsystemA", under: outerModule)
 
-try Ruby.defineSingletonMethod("activate") { ... }
+try innerModule.defineSingletonMethod("activate") { ... }
 ```
 ...is equivalent to, in Ruby:
 ```ruby

@@ -92,12 +92,61 @@ class TestConstants: XCTestCase {
         }
     }
 
+    func testSetTop() {
+        doErrorFree {
+            let constName = "NU_CONST"
+            let constVal = 48
+
+            try Ruby.setConstant(constName, newValue: constVal)
+
+            let readConst = try Ruby.getConstant(constName)
+            XCTAssertEqual(constVal, Int(readConst))
+        }
+    }
+
+    func testSetNested() {
+        doErrorFree {
+            try Ruby.require(filename: Helpers.fixturePath("nesting.rb"))
+
+            let midModule = try Ruby.get("Outer::Middle")
+
+            let constName = "INNER_CONSTANT_2"
+            let constVal = "Peace"
+
+            let setVal = try midModule.setConstant("Inner::\(constName)", newValue: constVal)
+            XCTAssertEqual(constVal, String(setVal))
+
+            let rbReadVal = try Ruby.eval(ruby: "Outer::Middle::Inner::\(constName)")
+            XCTAssertEqual(constVal, String(rbReadVal))
+        }
+    }
+
+    func testSetErrors() {
+        doError {
+            try Ruby.setConstant("unConstantName", newValue: 22)
+            XCTFail("Created badly named constant")
+        }
+
+        doError {
+            try Ruby.setConstant("Imaginary::Constant", newValue: 22)
+            XCTFail("Created badly namedspaced constant")
+        }
+
+        let obj = RbObject(22)
+        doError {
+            try obj.setConstant("SomeConstant", newValue: 22)
+            XCTFail("Created constant inside non-class object")
+        }
+    }
+
     static var allTests = [
         ("testConstantAccess", testConstantAccess),
         ("testConstantName", testConstantName),
         ("testNestedConstantAccess", testNestedConstantAccess),
         ("testPopupConstantAccess", testPopupConstantAccess),
         ("testFailedConstantAccess", testFailedConstantAccess),
-        ("testNotAClass", testNotAClass)
+        ("testNotAClass", testNotAClass),
+        ("testSetTop", testSetTop),
+        ("testSetNested", testSetNested)
     ]
 }

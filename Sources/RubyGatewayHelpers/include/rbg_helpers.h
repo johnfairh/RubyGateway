@@ -33,6 +33,10 @@ VALUE rbg_const_get_protect(VALUE value, ID id, int * _Nonnull status);
 /// Safely call `rb_const_get_at` and report exception status.
 VALUE rbg_const_get_at_protect(VALUE value, ID id, int * _Nonnull status);
 
+/// Safely call `rb_const_set` and report exception status.
+void rbg_const_set_protect(VALUE clazz, ID id, VALUE constant,
+                           int * _Nonnull status);
+
 /// Safely call `rb_inspect` and report exception status.
 VALUE rbg_inspect_protect(VALUE value, int * _Nonnull status);
 
