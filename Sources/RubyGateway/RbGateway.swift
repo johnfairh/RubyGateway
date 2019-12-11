@@ -291,6 +291,21 @@ extension RbGateway {
     public var versionDescription: String {
         return String(cString: rbg_ruby_description())
     }
+
+    /// Set the program arguments for the Ruby VM.
+    ///
+    /// Updates the `ARGV` constant.
+    ///
+    /// - parameter newArgv: The strings to make up the new version of `ARGV`.
+    /// - throws: Various `RbError`s if the arguments can't be set.
+    public func setArguments(_ newArgv: [String]) throws {
+        try setup()
+
+        // Don't actually assign the ARGV object to avoid warnings about modifying constants
+        let rubyArgv = try get("ARGV")
+        try rubyArgv.call("clear")
+        try rubyArgv.call("concat", args: [newArgv])
+    }
 }
 
 // MARK: - Ruby Code Execution

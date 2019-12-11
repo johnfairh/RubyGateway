@@ -265,6 +265,21 @@ class TestVM: XCTestCase {
         }
     }
 
+    /// ARGV
+    func testArgv() {
+        doErrorFree {
+            let rubyArgv = try Ruby.get("ARGV")
+
+            let argv1 = ["a", "b", "c"]
+            try Ruby.setArguments(argv1)
+            XCTAssertEqual(argv1, Array<String>(rubyArgv))
+
+            let argv2 = ["d"]
+            try Ruby.setArguments(argv2)
+            XCTAssertEqual(argv2, Array<String>(rubyArgv))
+        }
+    }
+
     static var allTests = [
         ("testInit", testInit),
         ("testEndToEnd", testEndToEnd),
@@ -279,6 +294,7 @@ class TestVM: XCTestCase {
         ("testSafeMode", testSafeMode),
         ("testVersion", testVersion),
         ("testSetupFailures", testSetupFailures),
-        ("testCleanedUpFailure", testCleanedUpFailure)
+        ("testCleanedUpFailure", testCleanedUpFailure),
+        ("testArgv", testArgv)
     ]
 }

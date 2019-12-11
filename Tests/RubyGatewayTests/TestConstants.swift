@@ -147,6 +147,7 @@ class TestConstants: XCTestCase {
         ("testFailedConstantAccess", testFailedConstantAccess),
         ("testNotAClass", testNotAClass),
         ("testSetTop", testSetTop),
-        ("testSetNested", testSetNested)
+        ("testSetNested", testSetNested),
+        ("testSetErrors", testSetErrors)
     ]
 }

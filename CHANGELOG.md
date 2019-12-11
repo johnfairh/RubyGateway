@@ -7,6 +7,7 @@
 #### Enhancements
 
 * Add `RbObjectAccess.setConstant(_:newValue:)`, somehow overlooked!
+* Add `RbGateway.setArguments(_:)` to help with ARGV-setting.
 
 #### Bug Fixes
 
