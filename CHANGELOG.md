@@ -1,3 +1,17 @@
+## Master
+
+#### Breaking
+
+* None
+
+#### Enhancements
+
+* None
+
+#### Bug Fixes
+
+* None
+
 ## 3.2.0 - 11th December 2019
 
 #### Breaking
