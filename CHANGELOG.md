@@ -1,4 +1,4 @@
-## Master
+## 3.2.0 - 11th December 2019
 
 #### Breaking
 
