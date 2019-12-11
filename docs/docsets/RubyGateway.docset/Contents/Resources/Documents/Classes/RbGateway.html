@@ -21,7 +21,7 @@
     <header class="header">
       <p class="header-col header-col--primary">
         <a class="header-link" href="../index.html">
-          RubyGateway 3.0.0 Docs
+          RubyGateway 3.2.0 Docs
         </a>
          (100% documented)
       </p>
@@ -1146,6 +1146,62 @@ feature.  See Ruby#14250.</li>
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11RubyGateway02RbB0C12setArgumentsyySaySSGKF"></a>
+                    <a name="//apple_ref/swift/Method/setArguments(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway02RbB0C12setArgumentsyySaySSGKF">setArguments(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set the program arguments for the Ruby VM.</p>
+
+<p>Updates the <code>ARGV</code> constant.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Various <code><a href="../Enums/RbError.html">RbError</a></code>s if the arguments can&rsquo;t be set.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setArguments</span><span class="p">(</span><span class="n">_</span> <span class="nv">newArgv</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">])</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>newArgv</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The strings to make up the new version of <code>ARGV</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L301-L308">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
             <div class="task-group">
@@ -1177,8 +1233,7 @@ feature.  See Ruby#14250.</li>
     <p class="aside-title">Throws</p>
     <code><a href="../Enums/RbError.html">RbError</a></code> if something goes wrong.
 
-</div>
-<div class="aside aside-note">
+</div><div class="aside aside-note">
     <p class="aside-title">Note</p>
     This is a lower level than <code>Kernel#eval</code> and less flexible - if you
 need that function then access it via <code>RbGateway.call(&quot;eval&quot;)</code>.
@@ -1220,7 +1275,7 @@ Don&rsquo;t be tempted by <code>rb_eval_string_wrap()</code>, it is broken. #104
                         <p>The result of executing the code.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L308-L313">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L323-L328">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1282,7 +1337,7 @@ method is dispatched dynamically so it will invoke any replacements of
                         <p><code>true</code> if the file was loaded OK, <code>false</code> if it is already loaded.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L324-L328">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L339-L343">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1349,7 +1404,7 @@ instead of the current program.  See <code>Kernel#load</code>.</p>
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L336-L343">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbGateway.swift#L351-L358">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1562,7 +1617,7 @@ RubyBridge validates the arguments according to <code>argsSpec</code> before inv
 this callback.</p>
 
 <p>The first parameter to the <code>body</code> callback is best ignored: it is the Ruby
-internal object that is used to implement so-called <q>global functions</q>.</p>
+internal object that is used to implement so-called &ldquo;global functions&rdquo;.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     <p><code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifieryACSS_SStcACmF">RbError.badIdentifier(type:id:)</a></code> if <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> is bad.</p>
@@ -1642,7 +1697,7 @@ internal object that is used to implement so-called <q>global functions</q>.</p>
     </div>
     <section class="footer">
       <p>Distributed under the MIT license.  Maintained by <a class="link" href="mailto:johnfairh@gmail.com" target="_blank" rel="external">John Fairhurst</a>.</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>-<a class="link" href="https://github.com/johnfairh/jazzy" target="_blank" rel="external">bebop</a>, originally a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.0</a>-<a class="link" href="https://github.com/johnfairh/jazzy" target="_blank" rel="external">bebop</a>, originally a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

@@ -21,7 +21,7 @@
     <header class="header">
       <p class="header-col header-col--primary">
         <a class="header-link" href="../index.html">
-          RubyGateway 3.0.0 Docs
+          RubyGateway 3.2.0 Docs
         </a>
          (100% documented)
       </p>
@@ -575,6 +575,90 @@ to drill down through nested classes and modules.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:11RubyGateway14RbObjectAccessC11setConstant_8newValueAA0cD0CSS_AA0cD11Convertible_pSgtKF"></a>
+                    <a name="//apple_ref/swift/Method/setConstant(_:newValue:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11RubyGateway14RbObjectAccessC11setConstant_8newValueAA0cD0CSS_AA0cD11Convertible_pSgtKF">setConstant(_:newValue:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Bind an object to a constant name.</p>
+
+<p>Use this to add value-constants to the class/module name hierarchy.  For example:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">defaultInvader</span> <span class="o">=</span> <span class="kt">RbObject</span><span class="p">(</span><span class="nv">ofClass</span><span class="p">:</span> <span class="s">"Invader"</span><span class="p">,</span> <span class="nv">kwArgs</span><span class="p">:</span> <span class="p">[</span><span class="s">"name"</span> <span class="p">:</span> <span class="s">"Zaltor"</span><span class="p">])</span>
+<span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">setConstant</span><span class="p">(</span><span class="s">"Game::Invaders::DEFAULT"</span><span class="p">,</span> <span class="n">defaultInvader</span><span class="p">)</span>
+</code></pre>
+
+<p>To define new classes and modules, use <code><a href="../Classes/RbGateway.html#/s:11RubyGateway02RbB0C11defineClass_6parent5underAA0C6ObjectCSS_AHSgAItKF">RbGateway.defineClass(...)</a></code> and
+<code><a href="../Classes/RbGateway.html#/s:11RubyGateway02RbB0C12defineModule_5underAA0C6ObjectCSS_AGSgtKF">RbGateway.defineModule(...)</a></code> instead of this method.</p>
+
+<p>For a version that does not throw, see <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8failableAA0c8FailableE0Vvp">failable</a></code>.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO13badIdentifieryACSS_SStcACmF">RbError.badIdentifier(type:id:)</a></code> if <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> looks wrong.
+      <code>rubyException(_:)</code> if there is a Ruby exception.
+      <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7badTypeyACSScACmF">RbError.badType(_:)</a></code> if the current object is not a class or module.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">setConstant</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="nv">newValue</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the constant to create or replace.  Can contain &lsquo;::&rsquo; sequences
+to drill down through nested classes and modules.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>newValue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The value for the constant.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The value set for the constant.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L193-L220">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:11RubyGateway14RbObjectAccessC8getClassyAA0cD0CSSKF"></a>
                     <a name="//apple_ref/swift/Method/getClass(_:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:11RubyGateway14RbObjectAccessC8getClassyAA0cD0CSSKF">getClass(_:)</a>
@@ -644,7 +728,7 @@ to drill down through nested classes and modules.</p>
                         <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the class.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L198-L202">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L248-L252">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -745,7 +829,7 @@ to drill down through nested classes and modules.</p>
                         <p>The result of calling the method.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L219-L225">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L269-L275">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -860,7 +944,7 @@ to drill down through nested classes and modules.</p>
                         <p>The result of calling the method.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L241-L252">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L291-L302">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -962,7 +1046,7 @@ to drill down through nested classes and modules.</p>
                         <p>The result of calling the method.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L267-L274">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L317-L324">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1051,7 +1135,7 @@ to drill down through nested classes and modules.</p>
                         <p>The result of calling the method.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L288-L295">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L338-L345">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1167,7 +1251,7 @@ to drill down through nested classes and modules.</p>
                         <p>The result of calling the method.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L312-L321">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L362-L371">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1270,7 +1354,7 @@ to drill down through nested classes and modules.</p>
                         <p>The result of calling the method.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L337-L345">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L387-L395">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1348,7 +1432,7 @@ simple wrapper around <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGat
                         <p>The value of the attribute.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L443-L446">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L493-L496">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1426,7 +1510,7 @@ wrapper around a call to the <code>attrname=</code> method.</p>
                         <p>Whatever the attribute setter returns, typically the new value.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L462-L465">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L512-L515">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1509,7 +1593,7 @@ or GVars.  This is how Ruby works; one more reason to avoid CVars.</p>
                         <p>The value of the CVar.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L496-L506">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L546-L556">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1588,7 +1672,7 @@ object context to set a CVar on the object&rsquo;s class.</p>
                         <p>The value that was set.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L523-L533">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L573-L583">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1667,7 +1751,7 @@ to avoid calling the <code><a href="../Classes/RbObject.html">RbObject</a></code
                         <p>Value of the variable, or Ruby nil if not set before.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L552-L557">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L602-L607">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1746,7 +1830,7 @@ to avoid calling the <code><a href="../Classes/RbObject.html">RbObject</a></code
                         <p>The value that was set.</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L574-L583">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L624-L633">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1831,7 +1915,7 @@ worrying about precisely what they are.</p>
                         <p>The accessed thing .</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L605-L616">Show on GitHub</a>
+                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L655-L666">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1845,7 +1929,7 @@ worrying about precisely what they are.</p>
     </div>
     <section class="footer">
       <p>Distributed under the MIT license.  Maintained by <a class="link" href="mailto:johnfairh@gmail.com" target="_blank" rel="external">John Fairhurst</a>.</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>-<a class="link" href="https://github.com/johnfairh/jazzy" target="_blank" rel="external">bebop</a>, originally a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.0</a>-<a class="link" href="https://github.com/johnfairh/jazzy" target="_blank" rel="external">bebop</a>, originally a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

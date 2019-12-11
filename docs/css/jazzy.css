@@ -235,7 +235,7 @@ pre code {
     pointer-events: none;
     z-index: 1; }
     .section-name-container .section-name a {
-      pointer-events: all; }
+      pointer-events: auto; }
 
 .item-container {
   padding: 0; }
