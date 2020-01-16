@@ -1,236 +1,258 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <title>User Guide  Reference</title>
-    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
-    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
     <meta charset="utf-8">
-    <script src="js/jquery.min.js" defer></script>
-    <script src="js/jazzy.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+    <link rel="stylesheet" href="css/fw2020.css">
     
-    <script src="js/lunr.min.js" defer></script>
-    <script src="js/typeahead.jquery.js" defer></script>
-    <script src="js/jazzy.search.js" defer></script>
+    <title>User Guide  Reference</title>
+    
   </head>
-  <body>
+  <body data-root-path="./">
 
-
-    <a title="User Guide  Reference"></a>
-
-    <header class="header">
-      <p class="header-col header-col--primary">
-        <a class="header-link" href="index.html">
-          RubyGateway 3.2.0 Docs
-        </a>
-         (100% documented)
-      </p>
-    
-      <p class="header-col--secondary">
-        <form role="search" action="search.json">
-          <input type="text" placeholder="Search documentation" data-typeahead>
+  <header class="j2-header">
+  <div class="navbar navbar-expand navbar-dark j2-titlebar">
+    <a class="sr-only-focusable sr-only font-weight-slightly-bold pr-2" href="#main-content">Skip to main content</a>
+    <a class="nav-item nav-link pl-0 pt-1 pr-2 d-md-none" id="nav-toggle-button" role="button" aria-controls="nav-column" aria-expanded="false" aria-label="Toggle navigation" href="#">
+      <span class="navbar-toggler-icon"></span>
+    </a>
+  
+    <div style="align-items-baseline">
+      <div class="navbar-brand mr-1 font-weight-slightly-bold">
+        <a href="index.html">RubyGateway 3.2.0 Docs</a>
+      </div>
+      <span class="navbar-text j2-coverage font-weight-slightly-bold small d-none d-lg-inline-block mr-2">(100% documented)</span>
+    </div>
+  
+    <div class="navbar-nav ml-auto justify-content-end flex-fill">
+  
+      <form class="form-inline d-none d-md-flex" role="search">
+        <input class="form-control form-control-sm w-100" type="search" placeHolder="Search" aria-label="Search" aria-keyshortcuts="/" data-search-format="span">
+      </form>
+  
+      <a class="nav-item nav-link d-none d-sm-inline" rel="external" href="https://github.com/johnfairh/RubyGateway">
+        <svg class="j2-title-svg" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 16 16"><title>Open on GitHub</title><path fill="currentcolor" fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+        </svg>
+      </a>
+  
+    </div>
+  </div>
+  
+  <!-- narrow-style searchbar -->
+  
+  <div class="container-fluid j2-titlebar d-md-none">
+    <div class="row">
+      <div class="col">
+        <form class="pb-2">
+          <input class="form-control form-control-sm" type="search" placeHolder="Search" aria-label="Search" aria-keyshortcuts="/" data-search-format="div">
         </form>
-      </p>
-    
-        <p class="header-col header-col--secondary">
-          <a class="header-link" href="https://github.com/johnfairh/RubyGateway">
-            <img class="header-icon" src="img/gh.png"/>
-            View on GitHub
-          </a>
-        </p>
-    
-    </header>
+      </div>
+    </div>
+  </div>
 
-    <p class="breadcrumbs">
-      <a class="breadcrumb" href="index.html">RubyGateway Reference</a>
-      <img class="carat" src="img/carat.png" />
-      User Guide  Reference
-    </p>
+  <!-- breadcrumb bar, jazzy doesn't really support -->
 
-    <div class="content-wrapper">
-      <nav class="navigation">
-        <ul class="nav-groups">
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Guides.html">Guides</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="user-guide.html">User Guide</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="todo.html">TODO</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Main%20APIs.html">Main APIs</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/RbGateway.html">RbGateway</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/RbGateway/Verbosity.html">– Verbosity</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/RbObject.html">RbObject</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/RbObjectAccess.html">RbObjectAccess</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/RbObjectCollection.html">RbObjectCollection</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Swift%20Method%20APIs.html">Swift Method APIs</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Swift%20Method%20APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Swift%20Method%20APIs.html#/s:11RubyGateway21RbBoundMethodCallbacka">RbBoundMethodCallback</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Swift%20Method%20APIs.html#/s:11RubyGateway25RbBoundMethodVoidCallbacka">RbBoundMethodVoidCallback</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/RbMethod.html">RbMethod</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/RbMethodArgs.html">RbMethodArgs</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Other%20APIs.html">Other APIs</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Other%20APIs.html#/s:11RubyGateway15RbBlockCallbacka">RbBlockCallback</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/RbBlockRetention.html">RbBlockRetention</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/RbBreak.html">RbBreak</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/RbProc.html">RbProc</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/RbSymbol.html">RbSymbol</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/RbThread.html">RbThread</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/RbThread/UnblockingFunc.html">– UnblockingFunc</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/RbType.html">RbType</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Error%20Handling.html">Error Handling</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/RbError.html">RbError</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/RbError/History.html">– History</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/RbException.html">RbException</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/RbFailableAccess.html">RbFailableAccess</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Swift%20Interop.html">Swift Interop</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/String.html">String</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/Bool.html">Bool</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/UInt.html">UInt</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/UInt64.html">UInt64</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/UInt32.html">UInt32</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/UInt16.html">UInt16</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/UInt8.html">UInt8</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/Int.html">Int</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/Int64.html">Int64</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/Int32.html">Int32</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/Int16.html">Int16</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/Int8.html">Int8</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/Double.html">Double</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/Float.html">Float</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/Array.html">Array</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/ArraySlice.html">ArraySlice</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/Dictionary.html">Dictionary</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/Set.html">Set</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/Range.html">Range</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/ClosedRange.html">ClosedRange</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/RbComplex.html">RbComplex</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/RbRational.html">RbRational</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-      <article class="main-content">
+  <nav aria-label="breadcrumb" class="small">
+    <ol class="breadcrumb j2-breadcrumb">
+      <li class="breadcrumb-item"><a href="index.html">RubyGateway Reference</a></li>
+      <li class="breadcrumb-item" aria-current="page">User Guide  Reference</li>
+    </ol>
+  </nav>
 
-        <section class="section">
-          <div class="section-content top-matter">
-            
-            <h1 id='using-rubygateway' class='heading'>Using RubyGateway</h1>
+  </header>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-auto d-none d-md-flex flex-column j2-nav" id="nav-column">
+        <nav aria-label="swift" class="j2-swift">
+          <ul class="j2-nav-list">
+            <li class="j2-nav-group">
+              <a class="j2-nav-item" href="Guides.html">Guides</a>
+              <ul class="j2-nav-sublist">
+                <li>
+                  <a class="j2-nav-item" href="user-guide.html">User Guide</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="todo.html">TODO</a>
+                </li>
+              </ul>
+            </li>
+            <li class="j2-nav-group">
+              <a class="j2-nav-item" href="Main%20APIs.html">Main APIs</a>
+              <ul class="j2-nav-sublist">
+                <li>
+                  <a class="j2-nav-item" href="Classes/RbGateway.html">RbGateway</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Classes/RbGateway/Verbosity.html">– Verbosity</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Classes/RbObject.html">RbObject</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Classes/RbObjectAccess.html">RbObjectAccess</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Structs/RbObjectCollection.html">RbObjectCollection</a>
+                </li>
+              </ul>
+            </li>
+            <li class="j2-nav-group">
+              <a class="j2-nav-item" href="Swift%20Method%20APIs.html">Swift Method APIs</a>
+              <ul class="j2-nav-sublist">
+                <li>
+                  <a class="j2-nav-item" href="Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Swift%20Method%20APIs.html#s11RubyGateway16RbMethodCallbacka">RbMethodCallback</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Swift%20Method%20APIs.html#s11RubyGateway21RbBoundMethodCallbacka">RbBoundMethodCallback</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Swift%20Method%20APIs.html#s11RubyGateway25RbBoundMethodVoidCallbacka">RbBoundMethodVoidCallback</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Structs/RbMethod.html">RbMethod</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Structs/RbMethodArgs.html">RbMethodArgs</a>
+                </li>
+              </ul>
+            </li>
+            <li class="j2-nav-group">
+              <a class="j2-nav-item" href="Other%20APIs.html">Other APIs</a>
+              <ul class="j2-nav-sublist">
+                <li>
+                  <a class="j2-nav-item" href="Other%20APIs.html#s11RubyGateway15RbBlockCallbacka">RbBlockCallback</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Enums/RbBlockRetention.html">RbBlockRetention</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Structs/RbBreak.html">RbBreak</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Structs/RbProc.html">RbProc</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Structs/RbSymbol.html">RbSymbol</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Enums/RbThread.html">RbThread</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Enums/RbThread/UnblockingFunc.html">– UnblockingFunc</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Enums/RbType.html">RbType</a>
+                </li>
+              </ul>
+            </li>
+            <li class="j2-nav-group">
+              <a class="j2-nav-item" href="Error%20Handling.html">Error Handling</a>
+              <ul class="j2-nav-sublist">
+                <li>
+                  <a class="j2-nav-item" href="Enums/RbError.html">RbError</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Enums/RbError/History.html">– History</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Structs/RbException.html">RbException</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Structs/RbFailableAccess.html">RbFailableAccess</a>
+                </li>
+              </ul>
+            </li>
+            <li class="j2-nav-group">
+              <a class="j2-nav-item" href="Swift%20Interop.html">Swift Interop</a>
+              <ul class="j2-nav-sublist">
+                <li>
+                  <a class="j2-nav-item" href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/String.html">String</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/Bool.html">Bool</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/UInt.html">UInt</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/UInt64.html">UInt64</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/UInt32.html">UInt32</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/UInt16.html">UInt16</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/UInt8.html">UInt8</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/Int.html">Int</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/Int64.html">Int64</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/Int32.html">Int32</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/Int16.html">Int16</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/Int8.html">Int8</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/Double.html">Double</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/Float.html">Float</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/Array.html">Array</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/ArraySlice.html">ArraySlice</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/Dictionary.html">Dictionary</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/Set.html">Set</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/Range.html">Range</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/ClosedRange.html">ClosedRange</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Structs/RbComplex.html">RbComplex</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Structs/RbRational.html">RbRational</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <main class="col col-xl-8 j2-article px-lg-4 px-xl-5" id="article-column">
+        <article class="j2-article-wrapper" id="main-content">
+
+        <!-- todo top of article.... -->
+
+        <section>
+
+          <div class="clearfix">
+            <h1 id='using-rubygateway' class='j2-anchor heading'><span data-anchor-id=using-rubygateway>Using RubyGateway</span></h1>
 
 <p>This document contains notes on using RubyGateway.  For installation tips
 see <a href="index.html">the README</a>.</p>
@@ -244,97 +266,91 @@ see <a href="index.html">the README</a>.</p>
 <li><a href="#using-the-cruby-api">Using the libruby API</a></li>
 <li><a href="#garbage-collection">Garbage collection notes</a></li>
 </ul>
-<h2 id='general-usage' class='heading'>General Usage</h2>
+<h2 id='general-usage' class='j2-anchor heading'><span data-anchor-id=general-usage>General Usage</span></h2>
 
 <p>The Ruby VM is initialized when you first try to use it and shut down when the
-process ends.  Load Ruby code using <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C4load8filename4wrapySS_SbtKF">RbGateway.load(filename:wrap:)</a></code> or
-<code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C7require8filenameSbSS_tKF">RbGateway.require(filename:)</a></code>.  Or just run some Ruby code and get the result
-using <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C4eval4rubyAA0C6ObjectCSS_tKF">RbGateway.eval(ruby:)</a></code>.  There already is a global instance of <code><a href="Classes/RbGateway.html">RbGateway</a></code>
+process ends.  Load Ruby code using <code><a href="Classes/RbGateway.html#s11RubyGateway02RbB0C4load8filename4wrapySS_SbtKF">RbGateway.load(filename:wrap:)</a></code> or
+<code><a href="Classes/RbGateway.html#s11RubyGateway02RbB0C7require8filenameSbSS_tKF">RbGateway.require(filename:)</a></code>.  Or just run some Ruby code and get the result
+using <code><a href="Classes/RbGateway.html#s11RubyGateway02RbB0C4eval4rubyAA0C6ObjectCSS_tKF">RbGateway.eval(ruby:)</a></code>.  There already is a global instance of <code><a href="Classes/RbGateway.html">RbGateway</a></code>
 called <code>Ruby</code> so the code looks like:</p>
-<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">RubyGateway</span>
+<pre><code class="language-swift">import RubyGateway
 
-<span class="k">do</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">eval</span><span class="p">(</span><span class="nv">ruby</span><span class="p">:</span> <span class="s">"'a' * 4"</span><span class="p">)</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-<span class="p">}</span>
+do {
+    let result = try Ruby.eval(ruby: &quot;&#39;a&#39; * 4&quot;)
+    print(result)
+} catch {
+}
 </code></pre>
-
-<p>Create objects using <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC7ofClass4args6kwArgsACSgSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSAIGtcfc">RbObject.init(ofClass:args:kwArgs:)</a></code>.  Pass Swift types
+<p>Create objects using <code><a href="Classes/RbObject.html#s11RubyGateway8RbObjectC7ofClass4args6kwArgsACSgSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSAIGtcfc">RbObject.init(ofClass:args:kwArgs:)</a></code>.  Pass Swift types
 or <code><a href="Classes/RbObject.html">RbObject</a></code>s to the <code>args</code> parameter.</p>
 
-<p>Use <code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSAJGtKF">RbObjectAccess.call(_:args:kwArgs:)</a></code> to call methods on the object.  See
+<p>Use <code><a href="Classes/RbObjectAccess.html#s11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSAJGtKF">RbObjectAccess.call(_:args:kwArgs:)</a></code> to call methods on the object.  See
 <code><a href="Classes/RbObjectAccess.html">RbObjectAccess</a></code> for more object operations and variations on <code>call</code> including
 passing Swift code as a block.  Again pass Swift types or <code><a href="Classes/RbObject.html">RbObject</a></code>s in the
 <code>args</code> parameter.</p>
 
 <p>Use optional initializers to convert from <code><a href="Classes/RbObject.html">RbObject</a></code>s back to Swift types, or
-implicitly/explicitly access <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC11descriptionSSvp">RbObject.description</a></code> if you just want <code><a href="https://developer.apple.com/documentation/swift/string/">String</a></code>.</p>
-<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">RubyGateway</span>
+implicitly/explicitly access <code><a href="Classes/RbObject.html#s11RubyGateway8RbObjectC11descriptionSSvp">RbObject.description</a></code> if you just want <code><a href="https://developer.apple.com/documentation/swift/string/">String</a></code>.</p>
+<pre><code class="language-swift">import RubyGateway
 
-<span class="k">do</span> <span class="p">{</span>
-    <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">require</span><span class="p">(</span><span class="nv">filename</span><span class="p">:</span> <span class="s">"academy"</span><span class="p">)</span>
-    <span class="k">let</span> <span class="nv">student</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">RbObject</span><span class="p">(</span><span class="nv">ofClass</span><span class="p">:</span> <span class="s">"Academy::Student"</span><span class="p">,</span>
-                               <span class="nv">kwArgs</span><span class="p">:</span> <span class="p">[</span><span class="s">"name"</span><span class="p">:</span> <span class="s">"Betty"</span><span class="p">])</span>
-    <span class="k">if</span> <span class="k">let</span> <span class="nv">bettyGpa</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Double</span><span class="p">(</span><span class="n">student</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"gpa"</span><span class="p">))</span> <span class="p">{</span>
-        <span class="nf">processScore</span><span class="p">(</span><span class="nv">gpa</span><span class="p">:</span> <span class="n">bettyGpa</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-<span class="p">}</span>
+do {
+    try Ruby.require(filename: &quot;academy&quot;)
+    let student = try RbObject(ofClass: &quot;Academy::Student&quot;,
+                               kwArgs: [&quot;name&quot;: &quot;Betty&quot;])
+    if let bettyGpa = try Double(student.get(&quot;gpa&quot;)) {
+        processScore(gpa: bettyGpa)
+    }
+} catch {
+}
 </code></pre>
-
-<p>Define new modules with <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C12defineModule_5underAA0C6ObjectCSS_AGSgtKF">RbGateway.defineModule(_:under:)</a></code> and new classes with
-<code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C11defineClass_6parent5underAA0C6ObjectCSS_AHSgAItKF">RbGateway.defineClass(_:parent:under:)</a></code>.  Define methods on new or existing
-classes or modules with <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC12defineMethod_8argsSpec4bodyySS_AA0cf4ArgsH0VA2C_AA0cF0VtKctKF">RbObject.defineMethod(_:argsSpec:body:)</a></code> and
-<code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC21defineSingletonMethod_8argsSpec4bodyySS_AA0cg4ArgsI0VA2C_AA0cG0VtKctKF">RbObject.defineSingletonMethod(_:argsSpec:body:)</a></code>.</p>
+<p>Define new modules with <code><a href="Classes/RbGateway.html#s11RubyGateway02RbB0C12defineModule_5underAA0C6ObjectCSS_AGSgtKF">RbGateway.defineModule(_:under:)</a></code> and new classes with
+<code><a href="Classes/RbGateway.html#s11RubyGateway02RbB0C11defineClass_6parent5underAA0C6ObjectCSS_AHSgAItKF">RbGateway.defineClass(_:parent:under:)</a></code>.  Define methods on new or existing
+classes or modules with <code><a href="Classes/RbObject.html#s11RubyGateway8RbObjectC12defineMethod_8argsSpec4bodyySS_AA0cf4ArgsH0VA2C_AA0cF0VtKctKF">RbObject.defineMethod(_:argsSpec:body:)</a></code> and
+<code><a href="Classes/RbObject.html#s11RubyGateway8RbObjectC21defineSingletonMethod_8argsSpec4bodyySS_AA0cg4ArgsI0VA2C_AA0cG0VtKctKF">RbObject.defineSingletonMethod(_:argsSpec:body:)</a></code>.</p>
 
 <p>Defining a module with a static API:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">myModule</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineModule</span><span class="p">(</span><span class="s">"Bakery"</span><span class="p">)</span>
+<pre><code class="language-swift">let myModule = try Ruby.defineModule(&quot;Bakery&quot;)
 
-<span class="k">try</span> <span class="n">myModule</span><span class="o">.</span><span class="nf">defineSingletonMethod</span><span class="p">(</span><span class="s">"reserve_cakes"</span><span class="p">,</span> <span class="o">.</span><span class="nf">basic</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="p">{</span> <span class="n">_</span><span class="p">,</span> <span class="n">method</span> <span class="k">in</span>
-    <span class="k">if</span> <span class="k">let</span> <span class="nv">cakeCount</span> <span class="o">=</span> <span class="kt">Int</span><span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">mandatory</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">{</span>
-        <span class="kt">Cakes</span><span class="o">.</span><span class="nf">reserve</span><span class="p">(</span><span class="n">cakeCount</span><span class="p">)</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="o">.</span><span class="n">nilObject</span>
-<span class="p">}</span>
+try myModule.defineSingletonMethod(&quot;reserve_cakes&quot;, .basic(1)) { _, method in
+    if let cakeCount = Int(method.args.mandatory[0]) {
+        Cakes.reserve(cakeCount)
+    }
+    return .nilObject
+}
 </code></pre>
-
 <p>&hellip;called from Ruby:</p>
-<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">daily_routine</span>
-  <span class="no">Bakery</span><span class="p">.</span><span class="nf">reserve_cakes</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-<span class="k">end</span>
+<pre><code class="language-ruby">def daily_routine
+  Bakery.reserve_cakes(4)
+end
 </code></pre>
-
 <p>Define new classes bound directly to Swift classes with
-<code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C11defineClass_5under11initializerAA0C6ObjectCSS_AHSgxyctKRlzClF">RbGateway.defineClass(_:under:initializer:)</a></code> and define methods on them bound
-directly to Swift methods with <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC12defineMethod_8argsSpec6methodySS_AA0cf4ArgsH0Vq_AA0cF0VKcxctKRlzCAA0cD11ConvertibleR_r0_lF">RbObject.defineMethod(_:argsSpec:method:)</a></code>.
+<code><a href="Classes/RbGateway.html#s11RubyGateway02RbB0C11defineClass_5under11initializerAA0C6ObjectCSS_AHSgxyctKRlzClF">RbGateway.defineClass(_:under:initializer:)</a></code> and define methods on them bound
+directly to Swift methods with <code><a href="Classes/RbObject.html#s11RubyGateway8RbObjectC12defineMethod_8argsSpec6methodySS_AA0cf4ArgsH0Vq_AA0cF0VKcxctKRlzCAA0cD11ConvertibleR_r0_lF">RbObject.defineMethod(_:argsSpec:method:)</a></code>.
 See <a href="#define-new-classes-in-swift">below</a> for more on this.</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">cellClass</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineClass</span><span class="p">(</span><span class="s">"Cell"</span><span class="p">,</span> <span class="nv">initializer</span><span class="p">:</span> <span class="kt">Cell</span><span class="o">.</span><span class="kd">init</span><span class="p">)</span>
+<pre><code class="language-swift">let cellClass = try Ruby.defineClass(&quot;Cell&quot;, initializer: Cell.init)
 
-<span class="k">try</span> <span class="n">cellClass</span><span class="o">.</span><span class="nf">defineMethod</span><span class="p">(</span><span class="s">"initialize"</span><span class="p">,</span>
-        <span class="nv">argsSpec</span><span class="p">:</span> <span class="kt">RbMethodArgsSpec</span><span class="p">(</span><span class="nv">mandatoryKeywords</span><span class="p">:</span> <span class="p">[</span><span class="s">"width"</span><span class="p">,</span> <span class="s">"height"</span><span class="p">])</span>
-        <span class="nv">method</span><span class="p">:</span> <span class="kt">Cell</span><span class="o">.</span><span class="n">setup</span><span class="p">)</span>
+try cellClass.defineMethod(&quot;initialize&quot;,
+        argsSpec: RbMethodArgsSpec(mandatoryKeywords: [&quot;width&quot;, &quot;height&quot;])
+        method: Cell.setup)
 
-<span class="k">try</span> <span class="n">cellClass</span><span class="o">.</span><span class="nf">defineMethod</span><span class="p">(</span><span class="s">"content"</span><span class="p">,</span>
-        <span class="nv">argsSpec</span><span class="p">:</span> <span class="kt">RbMethodArgsSpec</span><span class="p">(</span><span class="nv">requiresBlock</span><span class="p">:</span> <span class="kc">true</span><span class="p">),</span>
-        <span class="nv">method</span><span class="p">:</span> <span class="kt">Cell</span><span class="o">.</span><span class="n">getContent</span><span class="p">)</span>
+try cellClass.defineMethod(&quot;content&quot;,
+        argsSpec: RbMethodArgsSpec(requiresBlock: true),
+        method: Cell.getContent)
 </code></pre>
-
 <p>&hellip;called from Ruby:</p>
-<pre class="highlight ruby"><code><span class="n">cell</span> <span class="o">=</span> <span class="no">Cell</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">width: </span><span class="mi">200</span><span class="p">,</span> <span class="ss">height: </span><span class="mi">100</span><span class="p">)</span>
-<span class="n">cell</span><span class="p">.</span><span class="nf">content</span> <span class="p">{</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span> <span class="n">prettyprint</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="p">}</span>
-</code></pre>
-<h2 id='how-to' class='heading'>How to &hellip;</h2>
+<pre><code class="language-ruby">cell = Cell.new(width: 200, height: 100)
+cell.content { |c| prettyprint(c) }
+</code></pre><h2 id='how-to' class='j2-anchor heading'><span data-anchor-id=how-to>How to &hellip;</span></h2>
 
 <p>A few Ruby-ish tasks.  Lots of these are more long-winded in Swift.  The idea
 here though is not to let you write Ruby using Swift: use Ruby to do that!  But
 rather to provide a layer that lets you bridge between Ruby and Swift code,
 which will sometimes require driving the Ruby code in these ways.</p>
-<h3 id='exchange-swift-types' class='heading'>Exchange Swift types</h3>
+<h3 id='exchange-swift-types' class='j2-anchor heading'><span data-anchor-id=exchange-swift-types>Exchange Swift types</span></h3>
 
-<p>RubyBridge provides extensions to most Swift types so you can initialize
+<p>RubyGateway provides extensions to most Swift types so you can initialize
 <code><a href="Classes/RbObject.html">RbObject</a></code>s with them and vice versa, or use them directly as arguments to
-<code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSAJGtKF">RbObjectAccess.call(...)</a></code> and friends.  Supported types are:</p>
+<code><a href="Classes/RbObjectAccess.html#s11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSAJGtKF">RbObjectAccess.call(...)</a></code> and friends.  Supported types are:</p>
 
 <ul>
 <li><code><a href="https://developer.apple.com/documentation/swift/bool/">Bool</a></code></li>
@@ -348,191 +364,171 @@ which will sometimes require driving the Ruby code in these ways.</p>
 <li>Range types with supported bound types - <code><a href="https://developer.apple.com/documentation/swift/range/">Range</a></code>, <code><a href="https://developer.apple.com/documentation/swift/closedrange/">ClosedRange</a></code></li>
 </ul>
 
-<p>See <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC7convert2toxxm_tKAA0cD11ConvertibleRzlF">RbObject.convert(to:)</a></code> as a throwing alternative to optional initializers.</p>
-<h3 id='exchange-code-nil-code-with-ruby' class='heading'>Exchange <code>nil</code> with Ruby</h3>
+<p>See <code><a href="Classes/RbObject.html#s11RubyGateway8RbObjectC7convert2toxxm_tKAA0cD11ConvertibleRzlF">RbObject.convert(to:)</a></code> as a throwing alternative to optional initializers.</p>
+<h3 id='exchange-code-nil-code-with-ruby' class='j2-anchor heading'><span data-anchor-id=exchange-code-nil-code-with-ruby>Exchange <code>nil</code> with Ruby</span></h3>
 
-<p>The static <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC03nilD0ACvpZ">RbObject.nilObject</a></code> represents Ruby <code>nil</code> and can be passed to Ruby
+<p>The static <code><a href="Classes/RbObject.html#s11RubyGateway8RbObjectC03nilD0ACvpZ">RbObject.nilObject</a></code> represents Ruby <code>nil</code> and can be passed to Ruby
 methods as a parameter or used in data structures.  As a short-hand you can use
-literal Swift <code>nil</code> with APIs like <code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSAJGtKF">RbObjectAccess.call(_:args:kwArgs:)</a></code>.</p>
+literal Swift <code>nil</code> with APIs like <code><a href="Classes/RbObjectAccess.html#s11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSAJGtKF">RbObjectAccess.call(_:args:kwArgs:)</a></code>.</p>
 
 <p>When Ruby returns <code>nil</code> to Swift it always comes through as an <code><a href="Classes/RbObject.html">RbObject</a></code>.  You
-can compare this directly to <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC03nilD0ACvpZ">RbObject.nilObject</a></code> or use <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC5isNilSbvp">RbObject.isNil</a></code> to
+can compare this directly to <code><a href="Classes/RbObject.html#s11RubyGateway8RbObjectC03nilD0ACvpZ">RbObject.nilObject</a></code> or use <code><a href="Classes/RbObject.html#s11RubyGateway8RbObjectC5isNilSbvp">RbObject.isNil</a></code> to
 test it.</p>
 
 <p>If you want to include Ruby <code>nil</code> in a heterogenous array use this kind of
 syntax:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">arr</span><span class="p">:</span> <span class="kt">RbObject</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s">"three"</span><span class="p">,</span> <span class="o">.</span><span class="n">nilObject</span><span class="p">]</span>
-</code></pre>
-<h3 id='deal-with-ruby-arrays' class='heading'>Deal with Ruby arrays</h3>
+<pre><code class="language-swift">let arr: RbObject = [1, 2.0, &quot;three&quot;, .nilObject]
+</code></pre><h3 id='deal-with-ruby-arrays' class='j2-anchor heading'><span data-anchor-id=deal-with-ruby-arrays>Deal with Ruby arrays</span></h3>
 
 <p>There are a few approaches to make use of Ruby arrays depending on your goal.</p>
 
 <ol>
 <li>Convert the whole array to Swift using an initializer.  This eagerly converts
 all the elements to Swift too and gives you an independent Swift array.</li>
-<li>Use Ruby Array methods via <code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSAJGtKF">RbObjectAccess.call(...)</a></code>.  Doing more work in
+<li>Use Ruby Array methods via <code><a href="Classes/RbObjectAccess.html#s11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSAJGtKF">RbObjectAccess.call(...)</a></code>.  Doing more work in
 the Ruby domain can reduce the number of elements that need to be converted
 to Swift types.</li>
-<li>Use Swift collection methods via <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC10collectionAA0cD10CollectionVvp">RbObject.collection</a></code>.  This gives access
+<li>Use Swift collection methods via <code><a href="Classes/RbObject.html#s11RubyGateway8RbObjectC10collectionAA0cD10CollectionVvp">RbObject.collection</a></code>.  This gives access
 to the Swift collection APIs.  It&rsquo;s more efficient that approach #1 if you
 can avoid converting all the array elements and looks prettier if you are
 aiming to mutate the array because the mutations happen in-place.</li>
 </ol>
-<h3 id='pass-a-symbol-as-an-argument' class='heading'>Pass a symbol as an argument</h3>
+<h3 id='pass-a-symbol-as-an-argument' class='j2-anchor heading'><span data-anchor-id=pass-a-symbol-as-an-argument>Pass a symbol as an argument</span></h3>
 
 <p>Use <code><a href="Structs/RbSymbol.html">RbSymbol</a></code>.  Ruby:</p>
-<pre class="highlight ruby"><code><span class="n">res</span> <span class="o">=</span> <span class="n">obj</span><span class="p">.</span><span class="nf">meth</span><span class="p">(</span><span class="ss">:value</span><span class="p">)</span>
+<pre><code class="language-ruby">res = obj.meth(:value)
 </code></pre>
-
 <p>RubyGateway:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">res</span> <span class="o">=</span> <span class="k">try</span> <span class="n">obj</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"meth"</span><span class="p">,</span> <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt">RbSymbol</span><span class="p">(</span><span class="s">"value"</span><span class="p">)])</span>
-</code></pre>
-<h3 id='pass-a-method-as-a-block' class='heading'>Pass a method as a block</h3>
+<pre><code class="language-swift">let res = try obj.call(&quot;meth&quot;, args: [RbSymbol(&quot;value&quot;)])
+</code></pre><h3 id='pass-a-method-as-a-block' class='j2-anchor heading'><span data-anchor-id=pass-a-method-as-a-block>Pass a method as a block</span></h3>
 
 <p>Use <code><a href="Structs/RbProc.html">RbProc</a></code> and <code><a href="Structs/RbSymbol.html">RbSymbol</a></code>.  Ruby:</p>
-<pre class="highlight ruby"><code><span class="n">res</span> <span class="o">=</span> <span class="n">arr</span><span class="p">.</span><span class="nf">each</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:downcase</span><span class="p">)</span>
+<pre><code class="language-ruby">res = arr.each(&amp;:downcase)
 </code></pre>
-
 <p>RubyGateway:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">res</span> <span class="o">=</span> <span class="k">try</span> <span class="n">arr</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"each"</span><span class="p">,</span> <span class="nv">block</span><span class="p">:</span> <span class="kt">RbProc</span><span class="p">(</span><span class="nv">object</span><span class="p">:</span> <span class="kt">RbSymbol</span><span class="p">(</span><span class="s">"downcase"</span><span class="p">)))</span>
-</code></pre>
-<h3 id='pass-swift-code-as-a-block' class='heading'>Pass Swift code as a block</h3>
+<pre><code class="language-swift">let res = try arr.call(&quot;each&quot;, block: RbProc(object: RbSymbol(&quot;downcase&quot;)))
+</code></pre><h3 id='pass-swift-code-as-a-block' class='j2-anchor heading'><span data-anchor-id=pass-swift-code-as-a-block>Pass Swift code as a block</span></h3>
 
-<p>Use an <code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSAJGtKF">RbObjectAccess.call(...)</a></code> variant with a <code>blockCall</code> trailing-closure
+<p>Use an <code><a href="Classes/RbObjectAccess.html#s11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSAJGtKF">RbObjectAccess.call(...)</a></code> variant with a <code>blockCall</code> trailing-closure
 argument.  Ruby:</p>
-<pre class="highlight ruby"><code><span class="n">obj</span><span class="p">.</span><span class="nf">meth</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="nb">puts</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">}</span>
+<pre><code class="language-ruby">obj.meth { |x| puts(x) }
 </code></pre>
-
 <p>RubyGateway:</p>
-<pre class="highlight swift"><code><span class="k">try</span> <span class="n">obj</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"meth"</span><span class="p">)</span> <span class="p">{</span> <span class="n">args</span> <span class="k">in</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="k">return</span> <span class="o">.</span><span class="n">nilObject</span>
-<span class="p">}</span>
+<pre><code class="language-swift">try obj.call(&quot;meth&quot;) { args in
+    print(args[0])
+    return .nilObject
+}
 </code></pre>
-
 <p>If the method causes the Ruby object to capture the block as a proc then you
 have to tell RubyGateway:</p>
-<pre class="highlight swift"><code><span class="k">try</span> <span class="n">obj</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"meth"</span><span class="p">,</span> <span class="nv">blockRetention</span><span class="p">:</span> <span class="o">.</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">args</span> <span class="k">in</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="k">return</span> <span class="o">.</span><span class="n">nilObject</span>
-<span class="p">}</span>
-</code></pre>
-<h3 id='use-39-break-39-in-a-swift-block' class='heading'>Use &lsquo;break&rsquo; in a Swift block</h3>
+<pre><code class="language-swift">try obj.call(&quot;meth&quot;, blockRetention: .self) { args in
+    print(args[0])
+    return .nilObject
+}
+</code></pre><h3 id='use-39-break-39-in-a-swift-block' class='j2-anchor heading'><span data-anchor-id=use-39-break-39-in-a-swift-block>Use &lsquo;break&rsquo; in a Swift block</span></h3>
 
 <p>Throw an <code><a href="Structs/RbBreak.html">RbBreak</a></code>.  Ruby:</p>
-<pre class="highlight ruby"><code><span class="n">result</span> <span class="o">=</span> <span class="n">array</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">item</span><span class="o">|</span>
-   <span class="k">break</span> <span class="n">item</span> <span class="k">if</span> <span class="n">f</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-<span class="k">end</span>
+<pre><code class="language-ruby">result = array.each do |item|
+   break item if f(item)
+end
 </code></pre>
-
 <p>RubyGateway:</p>
-<pre class="highlight swift"><code><span class="n">result</span> <span class="o">=</span> <span class="k">try</span> <span class="n">array</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"each"</span><span class="p">)</span> <span class="p">{</span> <span class="n">args</span> <span class="k">in</span>
-    <span class="k">if</span> <span class="nf">f</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">{</span>
-        <span class="k">throw</span> <span class="kt">RbBreak</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="o">.</span><span class="n">nilObject</span>
-<span class="p">}</span>
-</code></pre>
-<h3 id='use-39-return-39-in-a-swift-block' class='heading'>Use &lsquo;return&rsquo; in a Swift block</h3>
+<pre><code class="language-swift">result = try array.call(&quot;each&quot;) { args in
+    if f(args[0]) {
+        throw RbBreak(with: args[0])
+    }
+    return .nilObject
+}
+</code></pre><h3 id='use-39-return-39-in-a-swift-block' class='j2-anchor heading'><span data-anchor-id=use-39-return-39-in-a-swift-block>Use &lsquo;return&rsquo; in a Swift block</span></h3>
 
 <p>Can&rsquo;t do it - missing from the Ruby API.  Would probably have just been
 confusing anyway.</p>
-<h3 id='create-a-proc-with-swift-code' class='heading'>Create a Proc with Swift code</h3>
+<h3 id='create-a-proc-with-swift-code' class='j2-anchor heading'><span data-anchor-id=create-a-proc-with-swift-code>Create a Proc with Swift code</span></h3>
 
-<p>Use <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC9blockCallA2CSayACGKc_tcfc">RbObject.init(blockCall:)</a></code>.  Ruby:</p>
-<pre class="highlight ruby"><code><span class="n">myProc</span> <span class="o">=</span> <span class="nb">proc</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="p">}</span>
+<p>Use <code><a href="Classes/RbObject.html#s11RubyGateway8RbObjectC9blockCallA2CSayACGKc_tcfc">RbObject.init(blockCall:)</a></code>.  Ruby:</p>
+<pre><code class="language-ruby">myProc = proc { |a, b| a + b }
 </code></pre>
-
 <p>RubyGateway:</p>
-<pre class="highlight swift"><code><span class="n">myProc</span> <span class="o">=</span> <span class="kt">RbObject</span><span class="p">()</span> <span class="p">{</span> <span class="n">args</span> <span class="k">in</span>
-    <span class="k">return</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="p">}</span>
+<pre><code class="language-swift">myProc = RbObject() { args in
+    return args[0] + args[1]
+}
 </code></pre>
-
 <p>You must not let the <code><a href="Classes/RbObject.html">RbObject</a></code> expire while Ruby is holding on to the proc
 object or the program will crash.  For example if you pass <code>myProc</code> to a
 method of a Ruby object that captures the proc for later use, then you must
 not let that Swift value go out of scope until the Ruby object has died or
 otherwise guarantees never to invoke the proc.</p>
-<h3 id='create-a-lambda-with-swift-code' class='heading'>Create a lambda with Swift code</h3>
+<h3 id='create-a-lambda-with-swift-code' class='j2-anchor heading'><span data-anchor-id=create-a-lambda-with-swift-code>Create a lambda with Swift code</span></h3>
 
 <p>You can&rsquo;t: there&rsquo;s not much value and the API doesn&rsquo;t provide the argument
 policing.  If you really need to then this kind of thing should get you
 started:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">myLambda</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"lambda"</span><span class="p">,</span> <span class="nv">blockRetention</span><span class="p">:</span> <span class="o">.</span><span class="n">returned</span><span class="p">)</span> <span class="p">{</span> <span class="n">args</span> <span class="k">in</span>
-                   <span class="nf">print</span><span class="p">(</span><span class="s">"I got </span><span class="se">\(</span><span class="n">args</span><span class="o">.</span><span class="n">count</span><span class="se">)</span><span class="s"> args!"</span><span class="p">)</span>
-                   <span class="k">return</span> <span class="o">.</span><span class="n">nilObject</span>
-               <span class="p">}</span>
-</code></pre>
-<h3 id='access-class-variables' class='heading'>Access class variables</h3>
+<pre><code class="language-swift">let myLambda = try Ruby.call(&quot;lambda&quot;, blockRetention: .returned) { args in
+                   print(&quot;I got \(args.count) args!&quot;)
+                   return .nilObject
+               }
+</code></pre><h3 id='access-class-variables' class='j2-anchor heading'><span data-anchor-id=access-class-variables>Access class variables</span></h3>
 
-<p>Use <code><a href="Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC11getClassVaryAA0cD0CSSKF">RbObjectAccess.getClassVar(_:)</a></code> <strong>on the class</strong>: RubyGateway goes like the
+<p>Use <code><a href="Classes/RbObjectAccess.html#s11RubyGateway14RbObjectAccessC11getClassVaryAA0cD0CSSKF">RbObjectAccess.getClassVar(_:)</a></code> <strong>on the class</strong>: RubyGateway goes like the
 Ruby API not Ruby as written.  Ruby:</p>
-<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">MyClass</span>
-  <span class="vc">@@count</span> <span class="o">=</span> <span class="mi">0</span>
-  <span class="k">def</span> <span class="nf">initialize</span>
-    <span class="vc">@@count</span> <span class="o">+=</span> <span class="mi">1</span>
-  <span class="k">end</span>
-<span class="k">end</span>
+<pre><code class="language-ruby">class MyClass
+  @@count = 0
+  def initialize
+    @@count += 1
+  end
+end
 </code></pre>
-
 <p>RubyGateway:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">myClass</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">getClass</span><span class="p">(</span><span class="s">"MyClass"</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">count</span> <span class="o">=</span> <span class="k">try</span> <span class="n">myClass</span><span class="o">.</span><span class="nf">getClassVar</span><span class="p">(</span><span class="s">"@@count"</span><span class="p">)</span>
-</code></pre>
-<h3 id='implement-ruby-global-variables-in-swift' class='heading'>Implement Ruby global variables in Swift</h3>
+<pre><code class="language-swift">let myClass = try Ruby.getClass(&quot;MyClass&quot;)
+let count = try myClass.getClassVar(&quot;@@count&quot;)
+</code></pre><h3 id='implement-ruby-global-variables-in-swift' class='j2-anchor heading'><span data-anchor-id=implement-ruby-global-variables-in-swift>Implement Ruby global variables in Swift</span></h3>
 
-<p>See <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C15defineGlobalVar_3get3setySS_xycyxKctKAA0C17ObjectConvertibleRzlF">RbGateway.defineGlobalVar(_:get:set:)</a></code>.  For example:</p>
-<pre class="highlight swift"><code><span class="k">var</span> <span class="nv">currentEpoch</span><span class="p">:</span> <span class="kt">Int</span>
+<p>See <code><a href="Classes/RbGateway.html#s11RubyGateway02RbB0C15defineGlobalVar_3get3setySS_xycyxKctKAA0C17ObjectConvertibleRzlF">RbGateway.defineGlobalVar(_:get:set:)</a></code>.  For example:</p>
+<pre><code class="language-swift">var currentEpoch: Int
 
-<span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineGlobalVar</span><span class="p">(</span><span class="s">"$epoch"</span><span class="p">,</span>
-                     <span class="nv">get</span><span class="p">:</span> <span class="p">{</span> <span class="n">currentEpoch</span> <span class="p">},</span>
-                     <span class="nv">set</span><span class="p">:</span> <span class="p">{</span> <span class="nf">notifyNewEpoch</span><span class="p">(</span><span class="nv">$0</span><span class="p">)})</span>
-</code></pre>
-<h3 id='define-and-implement-methods-in-swift' class='heading'>Define and implement methods in Swift</h3>
+Ruby.defineGlobalVar(&quot;$epoch&quot;,
+                     get: { currentEpoch },
+                     set: { notifyNewEpoch($0)})
+</code></pre><h3 id='define-and-implement-methods-in-swift' class='j2-anchor heading'><span data-anchor-id=define-and-implement-methods-in-swift>Define and implement methods in Swift</span></h3>
 
 <p>Global functions are defined using
-<code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C20defineGlobalFunction_8argsSpec4bodyySS_AA0c10MethodArgsH0VAA0C6ObjectCAJ_AA0cJ0VtKctKF">RbGateway.defineGlobalFunction(_:argsSpec:body:)</a></code>; methods are defined
-using <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC12defineMethod_8argsSpec4bodyySS_AA0cf4ArgsH0VA2C_AA0cF0VtKctKF">RbObject.defineMethod(_:argsSpec:body:)</a></code>; and singleton methods are
-defined using <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC21defineSingletonMethod_8argsSpec4bodyySS_AA0cg4ArgsI0VA2C_AA0cG0VtKctKF">RbObject.defineSingletonMethod(_:argsSpec:body:)</a></code>.  These
+<code><a href="Classes/RbGateway.html#s11RubyGateway02RbB0C20defineGlobalFunction_8argsSpec4bodyySS_AA0c10MethodArgsH0VAA0C6ObjectCAJ_AA0cJ0VtKctKF">RbGateway.defineGlobalFunction(_:argsSpec:body:)</a></code>; methods are defined
+using <code><a href="Classes/RbObject.html#s11RubyGateway8RbObjectC12defineMethod_8argsSpec4bodyySS_AA0cf4ArgsH0VA2C_AA0cF0VtKctKF">RbObject.defineMethod(_:argsSpec:body:)</a></code>; and singleton methods are
+defined using <code><a href="Classes/RbObject.html#s11RubyGateway8RbObjectC21defineSingletonMethod_8argsSpec4bodyySS_AA0cg4ArgsI0VA2C_AA0cG0VtKctKF">RbObject.defineSingletonMethod(_:argsSpec:body:)</a></code>.  These
 all follow the same pattern.</p>
 
 <p>The <code><a href="Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a></code> is how you set the signature for the function: how many
 arguments of what kinds, which ones have default values, which have keywords,
 and so on.  For example, this defines a function to Ruby called <code>log</code> that
 requires one argument and passes its string representation onwards;</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">logArgsSpec</span> <span class="o">=</span> <span class="kt">RbMethodArgsSpec</span><span class="p">(</span><span class="nv">leadingMandatoryCount</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
-<span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineGlobalFunction</span><span class="p">(</span><span class="s">"log"</span><span class="p">,</span>
-                              <span class="nv">argsSpec</span><span class="p">:</span> <span class="n">logArgsSpec</span><span class="p">)</span> <span class="p">{</span> <span class="n">_</span><span class="p">,</span> <span class="n">method</span> <span class="k">in</span>
-    <span class="kt">Logger</span><span class="o">.</span><span class="nf">log</span><span class="p">(</span><span class="nv">message</span><span class="p">:</span> <span class="kt">String</span><span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">mandatory</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-    <span class="k">return</span> <span class="o">.</span><span class="n">nilObject</span>
-<span class="p">}</span>
+<pre><code class="language-swift">let logArgsSpec = RbMethodArgsSpec(leadingMandatoryCount: 1)
+try Ruby.defineGlobalFunction(&quot;log&quot;,
+                              argsSpec: logArgsSpec) { _, method in
+    Logger.log(message: String(method.args.mandatory[0]))
+    return .nilObject
+}
 </code></pre>
-
 <p>Call from Ruby:</p>
-<pre class="highlight ruby"><code><span class="n">log</span><span class="p">(</span><span class="n">object_to_log</span><span class="p">)</span>
+<pre><code class="language-ruby">log(object_to_log)
 </code></pre>
-
 <p>A more complicated version taking keyword parameters including an optional
 priority:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">log2ArgsSpec</span> <span class="o">=</span> <span class="kt">RbMethodArgsSpec</span><span class="p">(</span><span class="nv">mandatoryKeywords</span><span class="p">:</span> <span class="p">[</span><span class="s">"message"</span><span class="p">],</span>
-                                    <span class="nv">optionalKeywordValues</span><span class="p">:</span> <span class="p">[</span><span class="s">"priority"</span> <span class="p">:</span> <span class="mi">0</span> <span class="p">])</span>
-<span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineGlobalFunction</span><span class="p">(</span><span class="s">"log2"</span><span class="p">,</span>
-                              <span class="nv">argsSpec</span><span class="p">:</span> <span class="n">log2ArgsSpec</span><span class="p">)</span> <span class="p">{</span> <span class="n">_</span><span class="p">,</span> <span class="n">method</span> <span class="k">in</span>
-    <span class="kt">Logger</span><span class="o">.</span><span class="nf">log</span><span class="p">(</span><span class="nv">message</span><span class="p">:</span> <span class="kt">String</span><span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">keyword</span><span class="p">[</span><span class="s">"message"</span><span class="p">]</span><span class="o">!</span><span class="p">),</span>
-               <span class="nv">priority</span><span class="p">:</span> <span class="kt">Int</span><span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">keyword</span><span class="p">[</span><span class="s">"priority"</span><span class="p">]</span><span class="o">!</span><span class="p">))</span>
-    <span class="k">return</span> <span class="o">.</span><span class="n">nilObject</span>
-<span class="p">}</span>
+<pre><code class="language-swift">let log2ArgsSpec = RbMethodArgsSpec(mandatoryKeywords: [&quot;message&quot;],
+                                    optionalKeywordValues: [&quot;priority&quot; : 0 ])
+try Ruby.defineGlobalFunction(&quot;log2&quot;,
+                              argsSpec: log2ArgsSpec) { _, method in
+    Logger.log(message: String(method.args.keyword[&quot;message&quot;]!),
+               priority: Int(method.args.keyword[&quot;priority&quot;]!))
+    return .nilObject
+}
 </code></pre>
-
 <p>RubyGateway validates arguments and fills defaults before invoking the Swift
 callback so guarantees all keywords have values.</p>
 
 <p>Call from Ruby:</p>
-<pre class="highlight ruby"><code><span class="n">log2</span><span class="p">(</span><span class="ss">message: </span><span class="n">object_to_log</span><span class="p">)</span>
-<span class="n">log2</span><span class="p">(</span><span class="ss">message: </span><span class="n">object_to_log</span><span class="p">,</span> <span class="ss">priority: </span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<h3 id='use-blocks-from-swift-methods' class='heading'>Use blocks from Swift methods</h3>
+<pre><code class="language-ruby">log2(message: object_to_log)
+log2(message: object_to_log, priority: 2)
+</code></pre><h3 id='use-blocks-from-swift-methods' class='j2-anchor heading'><span data-anchor-id=use-blocks-from-swift-methods>Use blocks from Swift methods</span></h3>
 
 <p>The <code><a href="Structs/RbMethod.html">RbMethod</a></code> passed to your method callback provides access to the method&rsquo;s
 block.  The best way to invoke it is with an unguarded <code>try</code>, and let any
@@ -540,124 +536,119 @@ thrown errors propagate back to Swift.  This ensures that the control flow will
 work properly should Ruby do <code>return</code> or <code>next</code> inside the block.</p>
 
 <p>For example:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">log3ArgsSpec</span> <span class="o">=</span> <span class="kt">RbMethodArgsSpec</span><span class="p">(</span><span class="nv">requiresBlock</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
-<span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineGlobalFunction</span><span class="p">(</span><span class="s">"log3"</span><span class="p">,</span>
-                              <span class="nv">argsSpec</span><span class="p">:</span> <span class="n">log3ArgsSpec</span><span class="p">)</span> <span class="p">{</span> <span class="n">_</span><span class="p">,</span> <span class="n">method</span> <span class="k">in</span>
-    <span class="k">let</span> <span class="nv">logContent</span> <span class="o">=</span> <span class="k">try</span> <span class="n">method</span><span class="o">.</span><span class="nf">yieldBlock</span><span class="p">()</span>
-    <span class="kt">Logger</span><span class="o">.</span><span class="nf">log</span><span class="p">(</span><span class="nv">message</span><span class="p">:</span> <span class="n">logContent</span><span class="p">)</span>
-    <span class="k">return</span> <span class="o">.</span><span class="n">nilObject</span>
-<span class="p">}</span>
+<pre><code class="language-swift">let log3ArgsSpec = RbMethodArgsSpec(requiresBlock: true)
+try Ruby.defineGlobalFunction(&quot;log3&quot;,
+                              argsSpec: log3ArgsSpec) { _, method in
+    let logContent = try method.yieldBlock()
+    Logger.log(message: logContent)
+    return .nilObject
+}
 </code></pre>
-
 <p>If you need to handle exceptions from the <code>yield</code>, perhaps to do your own
 cleanup or take some kind of special action, then pay attention to whether the
-error is <code><a href="Enums/RbError.html#/s:11RubyGateway7RbErrorO8rubyJumpyACs5Int32VcACmF">RbError.rubyJump(_:)</a></code> or <code><a href="Enums/RbError.html#/s:11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(_:)</a></code>: for the former,
+error is <code><a href="Enums/RbError.html#s11RubyGateway7RbErrorO8rubyJumpyACs5Int32VcACmF">RbError.rubyJump(_:)</a></code> or <code><a href="Enums/RbError.html#s11RubyGateway7RbErrorO13rubyExceptionyAcA0cF0VcACmF">RbError.rubyException(_:)</a></code>: for the former,
 you can do your own cleanup but must rethrow the error and must not call into
 Ruby as part of the cleanup.</p>
-<h3 id='define-new-modules-in-swift' class='heading'>Define new modules in Swift</h3>
+<h3 id='define-new-modules-in-swift' class='j2-anchor heading'><span data-anchor-id=define-new-modules-in-swift>Define new modules in Swift</span></h3>
 
-<p>Use <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C12defineModule_5underAA0C6ObjectCSS_AGSgtKF">RbGateway.defineModule(_:under:)</a></code> to define a new module.</p>
+<p>Use <code><a href="Classes/RbGateway.html#s11RubyGateway02RbB0C12defineModule_5underAA0C6ObjectCSS_AGSgtKF">RbGateway.defineModule(_:under:)</a></code> to define a new module.</p>
 
 <p>For example:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">outerModule</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineModule</span><span class="p">(</span><span class="s">"MySystem"</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">innerModule</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineModule</span><span class="p">(</span><span class="s">"SubsystemA"</span><span class="p">,</span> <span class="nv">under</span><span class="p">:</span> <span class="n">outerModule</span><span class="p">)</span>
+<pre><code class="language-swift">let outerModule = try Ruby.defineModule(&quot;MySystem&quot;)
+let innerModule = try Ruby.defineModule(&quot;SubsystemA&quot;, under: outerModule)
 
-<span class="k">try</span> <span class="n">innerModule</span><span class="o">.</span><span class="nf">defineSingletonMethod</span><span class="p">(</span><span class="s">"activate"</span><span class="p">)</span> <span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
+try innerModule.defineSingletonMethod(&quot;activate&quot;) { ... }
 </code></pre>
-
 <p>&hellip;is equivalent to, in Ruby:</p>
-<pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">MySystem</span>
-  <span class="k">module</span> <span class="nn">SubsystemA</span>
-    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">activate</span>
-      <span class="o">...</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre>
-<h3 id='define-new-classes-in-swift' class='heading'>Define new classes in Swift</h3>
+<pre><code class="language-ruby">module MySystem
+  module SubsystemA
+    def self.activate
+      ...
+    end
+  end
+end
+</code></pre><h3 id='define-new-classes-in-swift' class='j2-anchor heading'><span data-anchor-id=define-new-classes-in-swift>Define new classes in Swift</span></h3>
 
 <p>There are two different ways of doing this.  The first way is with
-<code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C11defineClass_6parent5underAA0C6ObjectCSS_AHSgAItKF">RbGateway.defineClass(_:parent:under:)</a></code> which works just like the module
-example above, except it also supports <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC12defineMethod_8argsSpec4bodyySS_AA0cf4ArgsH0VA2C_AA0cF0VtKctKF">RbObject.defineMethod(_:argsSpec:body:)</a></code>
+<code><a href="Classes/RbGateway.html#s11RubyGateway02RbB0C11defineClass_6parent5underAA0C6ObjectCSS_AHSgAItKF">RbGateway.defineClass(_:parent:under:)</a></code> which works just like the module
+example above, except it also supports <code><a href="Classes/RbObject.html#s11RubyGateway8RbObjectC12defineMethod_8argsSpec4bodyySS_AA0cf4ArgsH0VA2C_AA0cF0VtKctKF">RbObject.defineMethod(_:argsSpec:body:)</a></code>
 to define methods.</p>
 
 <p>The other way is to bind a Swift class to the Ruby class.  A new instance
 of the Swift class is associated with each instance of the Ruby class, and
 Ruby methods are implemented by methods of the bound Swift class.</p>
 
-<p>These classes are created with <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C11defineClass_5under11initializerAA0C6ObjectCSS_AHSgxyctKRlzClF">RbGateway.defineClass(_:under:initializer:)</a></code>
-and have methods defined with <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC12defineMethod_8argsSpec6methodySS_AA0cf4ArgsH0Vq_AA0cF0VKcxctKRlzCAA0cD11ConvertibleR_r0_lF">RbObject.defineMethod(_:argsSpec:method:)</a></code>.</p>
+<p>These classes are created with <code><a href="Classes/RbGateway.html#s11RubyGateway02RbB0C11defineClass_5under11initializerAA0C6ObjectCSS_AHSgxyctKRlzClF">RbGateway.defineClass(_:under:initializer:)</a></code>
+and have methods defined with <code><a href="Classes/RbObject.html#s11RubyGateway8RbObjectC12defineMethod_8argsSpec6methodySS_AA0cf4ArgsH0Vq_AA0cF0VKcxctKRlzCAA0cD11ConvertibleR_r0_lF">RbObject.defineMethod(_:argsSpec:method:)</a></code>.</p>
 
 <p>RubyGateway holds a strong reference to the object returned by the <code>initializer</code>
 parameter throughout the life of the Ruby object, releasing it only when the
 Ruby object is garbage-collected.</p>
 
 <p>For example:</p>
-<pre class="highlight swift"><code><span class="c1">// Must be a class, cannot be a struct.</span>
-<span class="kd">class</span> <span class="kt">Invader</span> <span class="p">{</span>
-    <span class="kd">private</span> <span class="k">var</span> <span class="nv">name</span> <span class="o">=</span> <span class="s">""</span>
+<pre><code class="language-swift">// Must be a class, cannot be a struct.
+class Invader {
+    private var name = &quot;&quot;
 
-    <span class="c1">// Called during Ruby object allocation</span>
-    <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
-    <span class="p">}</span>
+    // Called during Ruby object allocation
+    init() {
+    }
 
-    <span class="c1">// Explicitly bound `initialize` called during Ruby `new`.</span>
-    <span class="kd">func</span> <span class="nf">initialize</span><span class="p">(</span><span class="nv">rbMethod</span><span class="p">:</span> <span class="kt">RbMethod</span><span class="p">)</span> <span class="k">throws</span> <span class="p">{</span>
-        <span class="n">name</span> <span class="o">=</span> <span class="k">try</span> <span class="n">rbMethod</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">mandatory</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="nf">convert</span><span class="p">()</span>
-    <span class="p">}</span>
+    // Explicitly bound `initialize` called during Ruby `new`.
+    func initialize(rbMethod: RbMethod) throws {
+        name = try rbMethod.args.mandatory[0].convert()
+    }
 
-    <span class="c1">// Bound methods can return any type conforming to `RbObjectConvertible`</span>
-    <span class="kd">func</span> <span class="nf">name</span><span class="p">(</span><span class="nv">rbMethod</span><span class="p">:</span> <span class="kt">RbMethod</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">name</span>
-    <span class="p">}</span>
+    // Bound methods can return any type conforming to `RbObjectConvertible`
+    func name(rbMethod: RbMethod) throws -&gt; String {
+        return name
+    }
 
-    <span class="c1">// Bound methods can return `RbObject` to return various</span>
-    <span class="c1">// Ruby types.  They also support blocks and any other variations</span>
-    <span class="c1">// of Ruby argument passing.</span>
-    <span class="kd">func</span> <span class="nf">listStats</span><span class="p">(</span><span class="nv">rbMethod</span><span class="p">:</span> <span class="kt">RbMethod</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">RbObject</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="n">rbMethod</span><span class="o">.</span><span class="n">isBlockGiven</span> <span class="p">{</span>
-            <span class="k">try</span> <span class="n">rbMethod</span><span class="o">.</span><span class="nf">yieldBlock</span><span class="p">(</span><span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="s">"Health"</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
-            <span class="k">try</span> <span class="n">rbMethod</span><span class="o">.</span><span class="nf">yieldBlock</span><span class="p">(</span><span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="s">"Shield"</span><span class="p">,</span> <span class="mi">25</span><span class="p">])</span>
-            <span class="k">return</span> <span class="o">.</span><span class="n">nilObject</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="p">[</span><span class="s">"Health"</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="s">"Shield"</span><span class="p">,</span> <span class="mi">25</span><span class="p">]</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+    // Bound methods can return `RbObject` to return various
+    // Ruby types.  They also support blocks and any other variations
+    // of Ruby argument passing.
+    func listStats(rbMethod: RbMethod) throws -&gt; RbObject {
+        if rbMethod.isBlockGiven {
+            try rbMethod.yieldBlock(args: [&quot;Health&quot;, 100])
+            try rbMethod.yieldBlock(args: [&quot;Shield&quot;, 25])
+            return .nilObject
+        } else {
+            return [&quot;Health&quot;, 100, &quot;Shield&quot;, 25]
+        }
+    }
 
-    <span class="c1">// Bound methods can be 'Void' in Swift; RubyGateway inserts</span>
-    <span class="c1">// the equivalent of 'return self' to Ruby.</span>
-    <span class="kd">func</span> <span class="nf">fire</span><span class="p">(</span><span class="nv">rbMethod</span><span class="p">:</span> <span class="kt">RbMethod</span><span class="p">)</span> <span class="k">throws</span> <span class="p">{</span>
-        <span class="o">...</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+    // Bound methods can be &#39;Void&#39; in Swift; RubyGateway inserts
+    // the equivalent of &#39;return self&#39; to Ruby.
+    func fire(rbMethod: RbMethod) throws {
+        ...
+    }
+}
 
-<span class="k">let</span> <span class="nv">invaderClass</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Ruby</span><span class="o">.</span><span class="nf">defineClass</span><span class="p">(</span><span class="s">"Invader"</span><span class="p">,</span> <span class="nv">initializer</span><span class="p">:</span> <span class="kt">Invader</span><span class="o">.</span><span class="kd">init</span><span class="p">)</span>
-<span class="k">try</span> <span class="n">invaderClass</span><span class="o">.</span><span class="nf">defineMethod</span><span class="p">(</span><span class="s">"initialize"</span><span class="p">,</span>
-                              <span class="nv">argsSpec</span><span class="p">:</span> <span class="o">.</span><span class="nf">basic</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
-                              <span class="nv">method</span><span class="p">:</span> <span class="kt">Invader</span><span class="o">.</span><span class="n">initialize</span><span class="p">)</span>
-<span class="k">try</span> <span class="n">invaderClass</span><span class="o">.</span><span class="nf">defineMethod</span><span class="p">(</span><span class="s">"name"</span><span class="p">,</span> <span class="nv">method</span><span class="p">:</span> <span class="kt">Invader</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-<span class="k">try</span> <span class="n">invaderClass</span><span class="o">.</span><span class="nf">defineMethod</span><span class="p">(</span><span class="s">"list_stats"</span><span class="p">,</span> <span class="nv">method</span><span class="p">:</span> <span class="kt">Invader</span><span class="o">.</span><span class="n">listStats</span><span class="p">)</span>
-<span class="k">try</span> <span class="n">invaderClass</span><span class="o">.</span><span class="nf">defineMethod</span><span class="p">(</span><span class="s">"fire, method: Invader.fire)
-</span></code></pre>
-
-<p>Use from Ruby:</p>
-<pre class="highlight ruby"><code><span class="n">invader</span> <span class="o">=</span> <span class="no">Invader</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"Miles"</span><span class="p">)</span>
-<span class="n">invader</span><span class="p">.</span><span class="nf">list_stats</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="p">,</span> <span class="n">score</span><span class="o">|</span> <span class="k">in</span>
-  <span class="o">...</span>
-<span class="k">end</span>
-<span class="n">invader</span><span class="p">.</span><span class="nf">fire</span>
+let invaderClass = try Ruby.defineClass(&quot;Invader&quot;, initializer: Invader.init)
+try invaderClass.defineMethod(&quot;initialize&quot;,
+                              argsSpec: .basic(1),
+                              method: Invader.initialize)
+try invaderClass.defineMethod(&quot;name&quot;, method: Invader.name)
+try invaderClass.defineMethod(&quot;list_stats&quot;, method: Invader.listStats)
+try invaderClass.defineMethod(&quot;fire, method: Invader.fire)
 </code></pre>
-<h3 id='run-finalizers-before-process-exit' class='heading'>Run finalizers before process exit</h3>
+<p>Use from Ruby:</p>
+<pre><code class="language-ruby">invader = Invader.new(&quot;Miles&quot;)
+invader.list_stats do |name, score| in
+  ...
+end
+invader.fire
+</code></pre><h3 id='run-finalizers-before-process-exit' class='j2-anchor heading'><span data-anchor-id=run-finalizers-before-process-exit>Run finalizers before process exit</span></h3>
 
 <p>If you want to stop using Ruby and get on with something else, and
-never come back to Ruby in the process, use <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C7cleanups5Int32VyF">RbGateway.cleanup()</a></code>.</p>
-<h3 id='work-with-ruby-complex-numbers' class='heading'>Work with Ruby complex numbers</h3>
+never come back to Ruby in the process, use <code><a href="Classes/RbGateway.html#s11RubyGateway02RbB0C7cleanups5Int32VyF">RbGateway.cleanup()</a></code>.</p>
+<h3 id='work-with-ruby-complex-numbers' class='j2-anchor heading'><span data-anchor-id=work-with-ruby-complex-numbers>Work with Ruby complex numbers</span></h3>
 
 <p>See <code><a href="Structs/RbComplex.html">RbComplex</a></code> for a thin wrapper to Ruby&rsquo;s <code>Complex</code> type.</p>
-<h3 id='work-with-ruby-rational-numbers' class='heading'>Work with Ruby rational numbers</h3>
+<h3 id='work-with-ruby-rational-numbers' class='j2-anchor heading'><span data-anchor-id=work-with-ruby-rational-numbers>Work with Ruby rational numbers</span></h3>
 
 <p>See <code><a href="Structs/RbRational.html">RbRational</a></code> for a thin wrapper to Ruby&rsquo;s <code>Rational</code> type.</p>
-<h2 id='error-handling' class='heading'>Error Handling</h2>
+<h2 id='error-handling' class='j2-anchor heading'><span data-anchor-id=error-handling>Error Handling</span></h2>
 
 <p>RubyGateway is very explicit about failure points.  Any Ruby method call can
 raise an exception instead of terminating normally and this is reflected in the
@@ -671,32 +662,31 @@ Swift.  I feel it does not make sense for a subsystem like this to decide how to
 handle errors, so RubyGateway propagates all errors (<a href="#caveats-and-gotchas">except when it doesn&rsquo;t</a>).</p>
 
 <p>And <code>try!</code> is always available for quick don&rsquo;t-care-about-errors environments.</p>
-<h3 id='errors-exceptions' class='heading'>Errors + Exceptions</h3>
+<h3 id='errors-exceptions' class='j2-anchor heading'><span data-anchor-id=errors-exceptions>Errors + Exceptions</span></h3>
 
 <p>All errors thrown are <code><a href="Enums/RbError.html">RbError</a></code> which is an enum of various interface errors
 detected by RubyGateway and one case <code>RbError.rubyException</code> that covers all
 Ruby exceptions.</p>
 
 <p>RubyGateway remembers the last few <code><a href="Enums/RbError.html">RbError</a></code>s that were generated and stores
-them in the publicly available <code><a href="Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code>.</p>
-<h3 id='code-nil-code-failures' class='heading'><code>nil</code> failures</h3>
+them in the publicly available <code><a href="Enums/RbError.html#s11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code>.</p>
+<h3 id='code-nil-code-failures' class='j2-anchor heading'><span data-anchor-id=code-nil-code-failures><code>nil</code> failures</span></h3>
 
 <p>Converting Ruby values to Swift types works differently: it happens using
-failable initializers such as <code><a href="Extensions/String.html#/s:SS11RubyGatewayEySSSgAA8RbObjectCcfc">String.init(_:)</a></code>.  These can fail for a variety
+failable initializers such as <code><a href="Extensions/String.html#sSS11RubyGatewayEySSSgAA8RbObjectCcfc">String.init(_:)</a></code>.  These can fail for a variety
 of reasons.  When they do, RubyGateway still internally generates an <code><a href="Enums/RbError.html">RbError</a></code>
-and stores a copy in <code><a href="Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> even though it is not thrown.  This
+and stores a copy in <code><a href="Enums/RbError.html#s11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> even though it is not thrown.  This
 means you can diagnose why a conversion failed:</p>
-<pre class="highlight swift"><code><span class="k">guard</span> <span class="k">let</span> <span class="nv">score</span> <span class="o">=</span> <span class="kt">Float</span><span class="p">(</span><span class="n">scoreObj</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="nf">print</span><span class="p">(</span><span class="s">"Failed to get score back from Ruby: </span><span class="se">\(</span><span class="kt">RbError</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">mostRecent</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
-    <span class="k">return</span>
-<span class="p">}</span>
-</code></pre>
-<h3 id='failable-adapter' class='heading'>Failable Adapter</h3>
+<pre><code class="language-swift">guard let score = Float(scoreObj) else {
+    print(&quot;Failed to get score back from Ruby: \(RbError.history.mostRecent)&quot;)
+    return
+}
+</code></pre><h3 id='failable-adapter' class='j2-anchor heading'><span data-anchor-id=failable-adapter>Failable Adapter</span></h3>
 
 <p><code><a href="Structs/RbFailableAccess.html">RbFailableAccess</a></code> is a non-throwing adapter for <code><a href="Classes/RbObject.html">RbObject</a></code> and <code><a href="Classes/RbGateway.html">RbGateway</a></code> that
 returns <code>nil</code> when there is an error.  All it does is <code>try?</code> the
 corresponding throwing method, meaning that the details of the failure are
-available in <code><a href="Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code>.</p>
+available in <code><a href="Enums/RbError.html#s11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code>.</p>
 
 <p>This is a steal of rough approach (the name is my fault) from the Python DML
 sandbox with an eye to adding direct member lookup/callable to RubyGateway &ndash;
@@ -704,21 +694,21 @@ Swift subscripts can&rsquo;t throw.</p>
 
 <p>I&rsquo;m not sure this is better than just writing <code>try?</code> which at least makes it
 very difficult for readers to ignore the possibility of errors.</p>
-<h2 id='concurrency' class='heading'>Concurrency</h2>
+<h2 id='concurrency' class='j2-anchor heading'><span data-anchor-id=concurrency>Concurrency</span></h2>
 
-<p>RubyBridge inherits Ruby&rsquo;s threading model.  This means you can only use
-RubyBridge APIs on the first/main thread and any other threads created by Ruby.</p>
+<p>RubyGateway inherits Ruby&rsquo;s threading model.  This means you can only use
+RubyGateway APIs on the first/main thread and any other threads created by Ruby.</p>
 
 <p><code><a href="Enums/RbThread.html">RbThread</a></code> provides some static helpers for creating Ruby threads and
 relinquishing the GVL: consult the internet for further guidance.</p>
-<h2 id='caveats-and-gotchas' class='heading'>Caveats and Gotchas</h2>
-<h3 id='crashiness' class='heading'>Crashiness</h3>
+<h2 id='caveats-and-gotchas' class='j2-anchor heading'><span data-anchor-id=caveats-and-gotchas>Caveats and Gotchas</span></h2>
+<h3 id='crashiness' class='j2-anchor heading'><span data-anchor-id=crashiness>Crashiness</span></h3>
 
 <p>Certain <code><a href="Classes/RbObject.html">RbObject</a></code> methods forward to Ruby calls and crash (<code>fatalError()</code>)
 if Ruby fails / the object doesn&rsquo;t support the method.  It&rsquo;s up to you to be
 sure the Ruby objects you&rsquo;re dealing with are of the right type.  See
 <code><a href="Classes/RbObject.html">RbObject</a></code> for more information on which these methods are.</p>
-<h3 id='swift-closure-retention' class='heading'>Swift closure retention</h3>
+<h3 id='swift-closure-retention' class='j2-anchor heading'><span data-anchor-id=swift-closure-retention>Swift closure retention</span></h3>
 
 <p>If you pass a Swift closure to a method as a block/proc/lambda that is used
 by Ruby after that method finishes &ndash; ie. <em>not</em> the normal <code>#each</code>-type use &ndash;
@@ -727,7 +717,7 @@ then you need to understand <code><a href="Enums/RbBlockRetention.html">RbBlockR
 <p>The reason for all this is that calling Swift code from Ruby requires an
 intermediate Swift object, and RubyGateway needs to tie the lifetime of that
 Swift object to something else in the Swift world.</p>
-<h3 id='block-arity' class='heading'>Block arity</h3>
+<h3 id='block-arity' class='j2-anchor heading'><span data-anchor-id=block-arity>Block arity</span></h3>
 
 <p>The Ruby runtime cannot tell the arity (number of expected arguments) of
 blocks created by the Ruby C API / RubyGateway &ndash; <code>Proc#arity</code> always comes
@@ -736,18 +726,18 @@ the arity of its block will not work as expected.</p>
 
 <p>Ruby&rsquo;s <code>Hash#each</code> suffers from this: instead of getting the key and value
 passed separately you get one parameter, a two-element array of key and value.</p>
-<h3 id='ruby-code-safety' class='heading'>Ruby code safety</h3>
+<h3 id='ruby-code-safety' class='j2-anchor heading'><span data-anchor-id=ruby-code-safety>Ruby code safety</span></h3>
 
 <p>RubyGateway puts no restriction on what Ruby code can do: it can access the
 filesystem, exit the process, and has complete access to the process&rsquo;s memory.</p>
 
 <p>Ruby has historically had a <code>$SAFE</code> feature that did some amount of sandboxing.
 This has been slowly removed over the years and what remains is a debugging
-feature that can be enabled via <code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C11taintChecksSbvp">RbGateway.taintChecks</a></code>.</p>
+feature that can be enabled via <code><a href="Classes/RbGateway.html#s11RubyGateway02RbB0C11taintChecksSbvp">RbGateway.taintChecks</a></code>.</p>
 
 <p>Dealing with actively hostile Ruby code is best done with a separate process
 or container; several examples on github.</p>
-<h2 id='using-the-cruby-api' class='heading'>Using the CRuby API</h2>
+<h2 id='using-the-cruby-api' class='j2-anchor heading'><span data-anchor-id=using-the-cruby-api>Using the CRuby API</span></h2>
 
 <p>The <a href="https://github.com/johnfairh/CRuby">CRuby</a> package provides access to as
 much of the <code>libruby</code> API as makes it through the importer.  You can use this
@@ -755,14 +745,14 @@ in conjunction with RubyGateway to access more of the API than RubyGateway itsel
 provides.</p>
 
 <p>Each <code><a href="Classes/RbObject.html">RbObject</a></code> wraps one <code><a href="https://developer.apple.com/documentation/coremedia/cmattachmentbearerattachments/value/">VALUE</a></code> keeping it safe from garbage collection.  You
-can access that <code><a href="https://developer.apple.com/documentation/coremedia/cmattachmentbearerattachments/value/">VALUE</a></code> using <code><a href="Classes/RbObject.html#/s:11RubyGateway8RbObjectC04withA5Value4callxxSuKXE_tKlF">RbObject.withRubyValue(call:)</a></code>.</p>
+can access that <code><a href="https://developer.apple.com/documentation/coremedia/cmattachmentbearerattachments/value/">VALUE</a></code> using <code><a href="Classes/RbObject.html#s11RubyGateway8RbObjectC04withA5Value4callxxSuKXE_tKlF">RbObject.withRubyValue(call:)</a></code>.</p>
 
 <p>RubyGateway caches intern&#39;ed Ruby strings - you can access the cache using
-<code><a href="Classes/RbGateway.html#/s:11RubyGateway02RbB0C5getID3forSuSS_tKF">RbGateway.getID(for:)</a></code>.</p>
+<code><a href="Classes/RbGateway.html#s11RubyGateway02RbB0C5getID3forSuSS_tKF">RbGateway.getID(for:)</a></code>.</p>
 
 <p>Note that when you call the Ruby API and Ruby raises an exception, the process
 immediately crashes unless you are running inside <code>rb_protect()</code> or equivalent.</p>
-<h3 id='garbage-collection' class='heading'>Garbage collection</h3>
+<h3 id='garbage-collection' class='j2-anchor heading'><span data-anchor-id=garbage-collection>Garbage collection</span></h3>
 
 <p>The main risk using the <code>libruby</code> API is that GC happens too early on objects
 you are trying to work with.</p>
@@ -793,7 +783,7 @@ rules about where the init function is called.</p>
 not obliged to do.  In C the <code>RB_GC_GUARD()</code> macro forces its hand &ndash; a similar
 thing should work in Swift but I haven&rsquo;t managed to find a situation where the
 Swift compiler does <em>not</em> put it on the stack so can&rsquo;t test it.</p>
-<h3 id='references' class='heading'>References</h3>
+<h3 id='references' class='j2-anchor heading'><span data-anchor-id=references>References</span></h3>
 
 <ul>
 <li><a href="http://silverhammermba.github.io/emberb/">Ruby C API Guide</a> - great guide to
@@ -808,12 +798,42 @@ interesting overview of GC pre + @ 2.2.</li>
         </section>
 
 
-      </article>
-    </div>
-    <section class="footer">
-      <p>Distributed under the MIT license.  Maintained by <a class="link" href="mailto:johnfairh@gmail.com" target="_blank" rel="external">John Fairhurst</a>.</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.0</a>-<a class="link" href="https://github.com/johnfairh/jazzy" target="_blank" rel="external">bebop</a>, originally a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
-    </section>
+        </article>
+      </main>
+
+      <!-- aux nav -->
+
+      <div class="col-xl d-none d-xl-block j2-aux-nav" id="aux-nav-column">
+        <div class="j2-aux-nav-wrapper">
+          <h6 class="j2-inline-heading">Topics</h6>
+          <nav aria-label="page">
+            <ul class="j2-aux-group">
+              <li><a href="#">Declaration</a></li>
+            </ul>
+          </nav>
+          <h6 class="j2-inline-heading">Actions</h6>
+          <ul class="j2-aux-group">
+            <li><a class="j2-aux-action" id="action-search" href="#" role="button" aria-keyshortcuts="/">Search (/)</a></li>
+            <li><a class="j2-aux-action" id="action-collapse" href="#" role="button" aria-keyshortcuts="a">
+              <span id="action-collapse-expand">Open all (a)</span>
+              <span id="action-collapse-collapse" class="d-none">Close all (a)</span>
+            </a></li>
+          </ul>
+        </div>
+      </div>
+
+    </div> <!-- end row -->
+
+    <footer class="row">
+      <div class="col j2-footer small pt-2">
+        <p><p>Distributed under the MIT license.  Maintained by <a class="link" href="mailto:johnfairh@gmail.com" target="_blank" rel="external">John Fairhurst</a>.</p></p>
+        <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>-<a class="link" href="https://github.com/johnfairh/jazzy" target="_blank" rel="external">bebop</a>, originally a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.  Theme from <a href="https://github.com/johnfairh/J2">J2</a>.</p>
+      </div>
+    </footer>
+  </div> <!-- container -->
+
+  <script src="js/dependencies.min.js"></script>
+  <script src="js/fw2020.js"></script>
   </body>
-</div>
+
 </html>

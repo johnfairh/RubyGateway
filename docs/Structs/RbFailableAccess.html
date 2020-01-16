@@ -1,1682 +1,1513 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <title>RbFailableAccess Structure Reference</title>
-    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
-    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
-    <script src="../js/jquery.min.js" defer></script>
-    <script src="../js/jazzy.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+    <link rel="stylesheet" href="../css/fw2020.css">
     
-    <script src="../js/lunr.min.js" defer></script>
-    <script src="../js/typeahead.jquery.js" defer></script>
-    <script src="../js/jazzy.search.js" defer></script>
+    <title>RbFailableAccess Structure Reference</title>
+    
   </head>
-  <body>
+  <body data-root-path="./../">
 
-    <a name="//apple_ref/swift/Struct/RbFailableAccess" class="dashAnchor"></a>
-
-    <a title="RbFailableAccess Structure Reference"></a>
-
-    <header class="header">
-      <p class="header-col header-col--primary">
-        <a class="header-link" href="../index.html">
-          RubyGateway 3.2.0 Docs
-        </a>
-         (100% documented)
-      </p>
-    
-      <p class="header-col--secondary">
-        <form role="search" action="../search.json">
-          <input type="text" placeholder="Search documentation" data-typeahead>
+  <header class="j2-header">
+  <div class="navbar navbar-expand navbar-dark j2-titlebar">
+    <a class="sr-only-focusable sr-only font-weight-slightly-bold pr-2" href="#main-content">Skip to main content</a>
+    <a class="nav-item nav-link pl-0 pt-1 pr-2 d-md-none" id="nav-toggle-button" role="button" aria-controls="nav-column" aria-expanded="false" aria-label="Toggle navigation" href="#">
+      <span class="navbar-toggler-icon"></span>
+    </a>
+  
+    <div style="align-items-baseline">
+      <div class="navbar-brand mr-1 font-weight-slightly-bold">
+        <a href="../index.html">RubyGateway 3.2.0 Docs</a>
+      </div>
+      <span class="navbar-text j2-coverage font-weight-slightly-bold small d-none d-lg-inline-block mr-2">(100% documented)</span>
+    </div>
+  
+    <div class="navbar-nav ml-auto justify-content-end flex-fill">
+  
+      <form class="form-inline d-none d-md-flex" role="search">
+        <input class="form-control form-control-sm w-100" type="search" placeHolder="Search" aria-label="Search" aria-keyshortcuts="/" data-search-format="span">
+      </form>
+  
+      <a class="nav-item nav-link d-none d-sm-inline" rel="external" href="https://github.com/johnfairh/RubyGateway">
+        <svg class="j2-title-svg" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 16 16"><title>Open on GitHub</title><path fill="currentcolor" fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+        </svg>
+      </a>
+  
+    </div>
+  </div>
+  
+  <!-- narrow-style searchbar -->
+  
+  <div class="container-fluid j2-titlebar d-md-none">
+    <div class="row">
+      <div class="col">
+        <form class="pb-2">
+          <input class="form-control form-control-sm" type="search" placeHolder="Search" aria-label="Search" aria-keyshortcuts="/" data-search-format="div">
         </form>
-      </p>
-    
-        <p class="header-col header-col--secondary">
-          <a class="header-link" href="https://github.com/johnfairh/RubyGateway">
-            <img class="header-icon" src="../img/gh.png"/>
-            View on GitHub
-          </a>
-        </p>
-    
-    </header>
+      </div>
+    </div>
+  </div>
 
-    <p class="breadcrumbs">
-      <a class="breadcrumb" href="../index.html">RubyGateway Reference</a>
-      <img class="carat" src="../img/carat.png" />
-      RbFailableAccess Structure Reference
-    </p>
+  <!-- breadcrumb bar, jazzy doesn't really support -->
 
-    <div class="content-wrapper">
-      <nav class="navigation">
-        <ul class="nav-groups">
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Guides.html">Guides</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../user-guide.html">User Guide</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../todo.html">TODO</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Main%20APIs.html">Main APIs</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/RbGateway.html">RbGateway</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/RbGateway/Verbosity.html">– Verbosity</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/RbObject.html">RbObject</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/RbObjectAccess.html">RbObjectAccess</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/RbObjectCollection.html">RbObjectCollection</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Swift%20Method%20APIs.html">Swift Method APIs</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Swift%20Method%20APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Swift%20Method%20APIs.html#/s:11RubyGateway21RbBoundMethodCallbacka">RbBoundMethodCallback</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Swift%20Method%20APIs.html#/s:11RubyGateway25RbBoundMethodVoidCallbacka">RbBoundMethodVoidCallback</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/RbMethod.html">RbMethod</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/RbMethodArgs.html">RbMethodArgs</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Other%20APIs.html">Other APIs</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Other%20APIs.html#/s:11RubyGateway15RbBlockCallbacka">RbBlockCallback</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Enums/RbBlockRetention.html">RbBlockRetention</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/RbBreak.html">RbBreak</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/RbProc.html">RbProc</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/RbSymbol.html">RbSymbol</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Enums/RbThread.html">RbThread</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Enums/RbThread/UnblockingFunc.html">– UnblockingFunc</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Enums/RbType.html">RbType</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Error%20Handling.html">Error Handling</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Enums/RbError.html">RbError</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Enums/RbError/History.html">– History</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/RbException.html">RbException</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/RbFailableAccess.html">RbFailableAccess</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Swift%20Interop.html">Swift Interop</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/String.html">String</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/Bool.html">Bool</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/UInt.html">UInt</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/UInt64.html">UInt64</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/UInt32.html">UInt32</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/UInt16.html">UInt16</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/UInt8.html">UInt8</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/Int.html">Int</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/Int64.html">Int64</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/Int32.html">Int32</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/Int16.html">Int16</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/Int8.html">Int8</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/Double.html">Double</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/Float.html">Float</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/Array.html">Array</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/ArraySlice.html">ArraySlice</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/Dictionary.html">Dictionary</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/Set.html">Set</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/Range.html">Range</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/ClosedRange.html">ClosedRange</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/RbComplex.html">RbComplex</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/RbRational.html">RbRational</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-      <article class="main-content">
+  <nav aria-label="breadcrumb" class="small">
+    <ol class="breadcrumb j2-breadcrumb">
+      <li class="breadcrumb-item"><a href="../index.html">RubyGateway Reference</a></li>
+      <li class="breadcrumb-item" aria-current="page">RbFailableAccess Structure Reference</li>
+    </ol>
+  </nav>
 
-        <section class="section">
-          <div class="section-content top-matter">
-            <h1>RbFailableAccess</h1>
-              <div class="declaration">
-                <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RbFailableAccess</span></code></pre>
+  </header>
 
-                </div>
-              </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-auto d-none d-md-flex flex-column j2-nav" id="nav-column">
+        <nav aria-label="swift" class="j2-swift">
+          <ul class="j2-nav-list">
+            <li class="j2-nav-group">
+              <a class="j2-nav-item" href="../Guides.html">Guides</a>
+              <ul class="j2-nav-sublist">
+                <li>
+                  <a class="j2-nav-item" href="../user-guide.html">User Guide</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../todo.html">TODO</a>
+                </li>
+              </ul>
+            </li>
+            <li class="j2-nav-group">
+              <a class="j2-nav-item" href="../Main%20APIs.html">Main APIs</a>
+              <ul class="j2-nav-sublist">
+                <li>
+                  <a class="j2-nav-item" href="../Classes/RbGateway.html">RbGateway</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Classes/RbGateway/Verbosity.html">– Verbosity</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Classes/RbObject.html">RbObject</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Classes/RbObjectAccess.html">RbObjectAccess</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Structs/RbObjectCollection.html">RbObjectCollection</a>
+                </li>
+              </ul>
+            </li>
+            <li class="j2-nav-group">
+              <a class="j2-nav-item" href="../Swift%20Method%20APIs.html">Swift Method APIs</a>
+              <ul class="j2-nav-sublist">
+                <li>
+                  <a class="j2-nav-item" href="../Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Swift%20Method%20APIs.html#s11RubyGateway16RbMethodCallbacka">RbMethodCallback</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Swift%20Method%20APIs.html#s11RubyGateway21RbBoundMethodCallbacka">RbBoundMethodCallback</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Swift%20Method%20APIs.html#s11RubyGateway25RbBoundMethodVoidCallbacka">RbBoundMethodVoidCallback</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Structs/RbMethod.html">RbMethod</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Structs/RbMethodArgs.html">RbMethodArgs</a>
+                </li>
+              </ul>
+            </li>
+            <li class="j2-nav-group">
+              <a class="j2-nav-item" href="../Other%20APIs.html">Other APIs</a>
+              <ul class="j2-nav-sublist">
+                <li>
+                  <a class="j2-nav-item" href="../Other%20APIs.html#s11RubyGateway15RbBlockCallbacka">RbBlockCallback</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Enums/RbBlockRetention.html">RbBlockRetention</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Structs/RbBreak.html">RbBreak</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Structs/RbProc.html">RbProc</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Structs/RbSymbol.html">RbSymbol</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Enums/RbThread.html">RbThread</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Enums/RbThread/UnblockingFunc.html">– UnblockingFunc</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Enums/RbType.html">RbType</a>
+                </li>
+              </ul>
+            </li>
+            <li class="j2-nav-group">
+              <a class="j2-nav-item" href="../Error%20Handling.html">Error Handling</a>
+              <ul class="j2-nav-sublist">
+                <li>
+                  <a class="j2-nav-item" href="../Enums/RbError.html">RbError</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Enums/RbError/History.html">– History</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Structs/RbException.html">RbException</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Structs/RbFailableAccess.html">RbFailableAccess</a>
+                </li>
+              </ul>
+            </li>
+            <li class="j2-nav-group">
+              <a class="j2-nav-item" href="../Swift%20Interop.html">Swift Interop</a>
+              <ul class="j2-nav-sublist">
+                <li>
+                  <a class="j2-nav-item" href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Extensions/String.html">String</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Extensions/Bool.html">Bool</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Extensions/UInt.html">UInt</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Extensions/UInt64.html">UInt64</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Extensions/UInt32.html">UInt32</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Extensions/UInt16.html">UInt16</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Extensions/UInt8.html">UInt8</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Extensions/Int.html">Int</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Extensions/Int64.html">Int64</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Extensions/Int32.html">Int32</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Extensions/Int16.html">Int16</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Extensions/Int8.html">Int8</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Extensions/Double.html">Double</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Extensions/Float.html">Float</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Extensions/Array.html">Array</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Extensions/ArraySlice.html">ArraySlice</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Extensions/Dictionary.html">Dictionary</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Extensions/Set.html">Set</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Extensions/Range.html">Range</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Extensions/ClosedRange.html">ClosedRange</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Structs/RbComplex.html">RbComplex</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="../Structs/RbRational.html">RbRational</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <main class="col col-xl-8 j2-article px-lg-4 px-xl-5" id="article-column">
+        <article class="j2-article-wrapper" id="main-content">
+
+        <!-- todo top of article.... -->
+
+        <section>
+          <header>
+            <h1 class="j2-anchor">
+              <span>RbFailableAccess</span>
+            </h1>
+          </header>
+          <div class="j2-callout j2-callout-declaration">
+            <div class="j2-callout-title" role="heading" aria-level="5">Swift?</div>
+            <pre><code class="language-swift">public struct RbFailableAccess</code></pre>
+          </div>
+
+          <div class="clearfix">
             <p>A way to call Ruby methods and so on with a different error-handling style
 to the try/catch approach of <code><a href="../Classes/RbObjectAccess.html">RbObjectAccess</a></code>: the methods return <code>nil</code> in failure
 cases instead of throwing errors.  Get hold of this <em>failable</em> interface using
 <code>RbObject.failable</code> or <code>RbGateway.failable</code>:</p>
-<pre class="highlight swift"><code><span class="k">if</span> <span class="k">let</span> <span class="nv">classObj</span> <span class="o">=</span> <span class="kt">Ruby</span><span class="o">.</span><span class="n">failable</span><span class="o">.</span><span class="nf">getClass</span><span class="p">(</span><span class="s">"Mod::Service"</span><span class="p">),</span>
-   <span class="k">let</span> <span class="nv">instance</span> <span class="o">=</span> <span class="n">classObj</span><span class="o">.</span><span class="n">failable</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"new"</span><span class="p">),</span>
-   <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">failable</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"summary"</span><span class="p">)</span> <span class="p">{</span>
-   <span class="nf">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-<span class="p">}</span>
+<pre><code class="language-swift">if let classObj = Ruby.failable.getClass(&quot;Mod::Service&quot;),
+   let instance = classObj.failable.call(&quot;new&quot;),
+   let result = instance.failable.get(&quot;summary&quot;) {
+   print(result)
+}
 </code></pre>
-
 <p>This interface makes it easier to ignore errors especially on setters where
 there is often no apparent need to check the result.  This may be construed
 as a feature; I&rsquo;m not really convinced it pulls its weight over <code>try?</code>.</p>
 
 <p>If any methods in this interface do return <code>nil</code> then an <code><a href="../Enums/RbError.html">RbError</a></code> has been raised
 and suppressed.  You can access the most recent <code><a href="../Enums/RbError.html">RbError</a></code>s whether suppressed or not
-via <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code>.</p>
+via <code><a href="../Enums/RbError.html#s11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code>.</p>
 
           </div>
         </section>
 
-        <section class="section">
-          <div class="section-content">
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Method%20Call"></a>
-                <a name="//apple_ref/swift/Section/Method Call" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/Method%20Call"></a>
-                  <h3 class="section-name"><p>Method Call</p>
-</h3>
-                </div>
+        <hr/>
+        <section>
+          <h1 class="sr-only">Topics</h1>
+          <section>
+            <a name="//apple_ref/cpp/Section/Method Call" class="dashAnchor"></a>
+            <h3 class="j2-anchor">
+              <span>Method Call
+</span>
+            </h3>
+            <section id="s11RubyGateway16RbFailableAccessV4call_4args6kwArgsAA0C6ObjectCSgSS_SayAA0cJ11Convertible_pSgGs13KeyValuePairsVySSAKGtF" class="j2-item">
+              <a name="//apple_ref/cpp/Method/call(_:args:kwArgs:)" class="dashAnchor"></a>
+              <h4 class="sr-only">call(_:args:kwArgs:)</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_s11RubyGateway16RbFailableAccessV4call_4args6kwArgsAA0C6ObjectCSgSS_SayAA0cJ11Convertible_pSgGs13KeyValuePairsVySSAKGtF" role="button" aria-expanded="false" aria-controls="_s11RubyGateway16RbFailableAccessV4call_4args6kwArgsAA0C6ObjectCSgSS_SayAA0cJ11Convertible_pSgGs13KeyValuePairsVySSAKGtF"><code>call(_:args:kwArgs:)</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_s11RubyGateway16RbFailableAccessV4call_4args6kwArgsAA0C6ObjectCSgSS_SayAA0cJ11Convertible_pSgGs13KeyValuePairsVySSAKGtF">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      <p>Call a method of a Ruby object.</p>
+
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#s11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSAJGtKF">RbObjectAccess.call(_:args:kwArgs:)</a></code>.
+See <code><a href="../Enums/RbError.html#s11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
+
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">public func call(_ method: <a href="https://developer.apple.com/documentation/swift/string/">String</a>,
+                 args: [<a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>?] = [],
+                 kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs/">KeyValuePairs</a>&lt;<a href="https://developer.apple.com/documentation/swift/string/">String</a>, <a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>?&gt; = [:]) -&gt; <a href="../Classes/RbObject.html">RbObject</a>?</code></pre>
+                    </div>
+                    <h5>Parameters</h5>
+                    <table class="j2-param-table">
+                      <tbody>
+                       <tr>
+                         <td>
+                           <code>
+                           method
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>The name of the method to call.</p>
+                           </div>
+                         </td>
+                       </tr>
+                       <tr>
+                         <td>
+                           <code>
+                           args
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>The positional arguments to the method, none by default.</p>
+                           </div>
+                         </td>
+                       </tr>
+                       <tr>
+                         <td>
+                           <code>
+                           kwArgs
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>The keyword arguments to the method, none by default.</p>
+                           </div>
+                         </td>
+                       </tr>
+                      </tbody>
+                    </table>
+                    <h5>Return Value</h5>
+                    <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the result of the method, or <code>nil</code> if an error occurred.</p>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L58-L62">Show on GitHub</a></span>
+                    </nav>
+                  </div>
+                <div>
               </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway16RbFailableAccessV4call_4args6kwArgsAA0C6ObjectCSgSS_SayAA0cJ11Convertible_pSgGs13KeyValuePairsVySSAKGtF"></a>
-                    <a name="//apple_ref/swift/Method/call(_:args:kwArgs:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV4call_4args6kwArgsAA0C6ObjectCSgSS_SayAA0cJ11Convertible_pSgGs13KeyValuePairsVySSAKGtF">call(_:args:kwArgs:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Call a method of a Ruby object.</p>
+            </section>
+            <section id="s11RubyGateway16RbFailableAccessV4call_4args6kwArgs14blockRetention0J4CallAA0C6ObjectCSgSS_SayAA0cM11Convertible_pSgGs13KeyValuePairsVySSAMGAA0c5BlockK0OAJSayAJGKctF" class="j2-item">
+              <a name="//apple_ref/cpp/Method/call(_:args:kwArgs:blockRetention:blockCall:)" class="dashAnchor"></a>
+              <h4 class="sr-only">call(_:args:kwArgs:blockRetention:blockCall:)</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_s11RubyGateway16RbFailableAccessV4call_4args6kwArgs14blockRetention0J4CallAA0C6ObjectCSgSS_SayAA0cM11Convertible_pSgGs13KeyValuePairsVySSAMGAA0c5BlockK0OAJSayAJGKctF" role="button" aria-expanded="false" aria-controls="_s11RubyGateway16RbFailableAccessV4call_4args6kwArgs14blockRetention0J4CallAA0C6ObjectCSgSS_SayAA0cM11Convertible_pSgGs13KeyValuePairsVySSAMGAA0c5BlockK0OAJSayAJGKctF"><code>call(_:args:kwArgs:blockRetention:blockCall:)</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_s11RubyGateway16RbFailableAccessV4call_4args6kwArgs14blockRetention0J4CallAA0C6ObjectCSgSS_SayAA0cM11Convertible_pSgGs13KeyValuePairsVySSAMGAA0c5BlockK0OAJSayAJGKctF">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      <p>Call a method of a Ruby object passing Swift code as a block.</p>
 
-<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgsAA0cD0CSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSAJGtKF">RbObjectAccess.call(_:args:kwArgs:)</a></code>.
-See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#s11RubyGateway14RbObjectAccessC4call_4args6kwArgs14blockRetention0J4CallAA0cD0CSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSALGAA0c5BlockK0OAJSayAJGKctKF">RbObjectAccess.call(_:args:kwArgs:blockRetention:blockCall:)</a></code>.
+See <code><a href="../Enums/RbError.html#s11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
 
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">call</span><span class="p">(</span><span class="n">_</span> <span class="nv">method</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span>
-                 <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?]</span> <span class="o">=</span> <span class="p">[],</span>
-                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/keyvaluepairs/">KeyValuePairs</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:])</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>method</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The name of the method to call.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>args</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The positional arguments to the method, none by default.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>kwArgs</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The keyword arguments to the method, none by default.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the result of the method, or <code>nil</code> if an error occurred.</p>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L58-L62">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway16RbFailableAccessV4call_4args6kwArgs14blockRetention0J4CallAA0C6ObjectCSgSS_SayAA0cM11Convertible_pSgGs13KeyValuePairsVySSAMGAA0c5BlockK0OAJSayAJGKctF"></a>
-                    <a name="//apple_ref/swift/Method/call(_:args:kwArgs:blockRetention:blockCall:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV4call_4args6kwArgs14blockRetention0J4CallAA0C6ObjectCSgSS_SayAA0cM11Convertible_pSgGs13KeyValuePairsVySSAMGAA0c5BlockK0OAJSayAJGKctF">call(_:args:kwArgs:blockRetention:blockCall:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Call a method of a Ruby object passing Swift code as a block.</p>
-
-<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgs14blockRetention0J4CallAA0cD0CSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSALGAA0c5BlockK0OAJSayAJGKctKF">RbObjectAccess.call(_:args:kwArgs:blockRetention:blockCall:)</a></code>.
-See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">call</span><span class="p">(</span><span class="n">_</span> <span class="nv">method</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span>
-                 <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?]</span> <span class="o">=</span> <span class="p">[],</span>
-                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/keyvaluepairs/">KeyValuePairs</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:],</span>
-                 <span class="nv">blockRetention</span><span class="p">:</span> <span class="kt"><a href="../Enums/RbBlockRetention.html">RbBlockRetention</a></span> <span class="o">=</span> <span class="o">.</span><span class="k">none</span><span class="p">,</span>
-                 <span class="nv">blockCall</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Other%20APIs.html#/s:11RubyGateway15RbBlockCallbacka">RbBlockCallback</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>method</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The name of the method to call.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>args</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The positional arguments to the method, none by default.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>kwArgs</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The keyword arguments to the method, none by default.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>blockRetention</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Should the <code>blockCall</code> closure be retained for
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">public func call(_ method: <a href="https://developer.apple.com/documentation/swift/string/">String</a>,
+                 args: [<a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>?] = [],
+                 kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs/">KeyValuePairs</a>&lt;<a href="https://developer.apple.com/documentation/swift/string/">String</a>, <a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>?&gt; = [:],
+                 blockRetention: <a href="../Enums/RbBlockRetention.html">RbBlockRetention</a> = .none,
+                 blockCall: @escaping <a href="../Other%20APIs.html#s11RubyGateway15RbBlockCallbacka">RbBlockCallback</a>) -&gt; <a href="../Classes/RbObject.html">RbObject</a>?</code></pre>
+                    </div>
+                    <h5>Parameters</h5>
+                    <table class="j2-param-table">
+                      <tbody>
+                       <tr>
+                         <td>
+                           <code>
+                           method
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>The name of the method to call.</p>
+                           </div>
+                         </td>
+                       </tr>
+                       <tr>
+                         <td>
+                           <code>
+                           args
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>The positional arguments to the method, none by default.</p>
+                           </div>
+                         </td>
+                       </tr>
+                       <tr>
+                         <td>
+                           <code>
+                           kwArgs
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>The keyword arguments to the method, none by default.</p>
+                           </div>
+                         </td>
+                       </tr>
+                       <tr>
+                         <td>
+                           <code>
+                           blockRetention
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>Should the <code>blockCall</code> closure be retained for
         longer than this call?  Default <code>.none</code>.  See <code><a href="../Enums/RbBlockRetention.html">RbBlockRetention</a></code>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>blockCall</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Swift code to pass as a block to the method.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the result of the method, or <code>nil</code> if an error occurred.</p>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L76-L82">Show on GitHub</a>
-                      </div>
-                    </section>
+                           </div>
+                         </td>
+                       </tr>
+                       <tr>
+                         <td>
+                           <code>
+                           blockCall
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>Swift code to pass as a block to the method.</p>
+                           </div>
+                         </td>
+                       </tr>
+                      </tbody>
+                    </table>
+                    <h5>Return Value</h5>
+                    <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the result of the method, or <code>nil</code> if an error occurred.</p>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L76-L82">Show on GitHub</a></span>
+                    </nav>
                   </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway16RbFailableAccessV4call_4args6kwArgs5blockAA0C6ObjectCSgSS_SayAA0cK11Convertible_pSgGs13KeyValuePairsVySSALGAaK_ptF"></a>
-                    <a name="//apple_ref/swift/Method/call(_:args:kwArgs:block:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV4call_4args6kwArgs5blockAA0C6ObjectCSgSS_SayAA0cK11Convertible_pSgGs13KeyValuePairsVySSALGAaK_ptF">call(_:args:kwArgs:block:)</a>
-                    </code>
+                <div>
+              </div>
+            </section>
+            <section id="s11RubyGateway16RbFailableAccessV4call_4args6kwArgs5blockAA0C6ObjectCSgSS_SayAA0cK11Convertible_pSgGs13KeyValuePairsVySSALGAaK_ptF" class="j2-item">
+              <a name="//apple_ref/cpp/Method/call(_:args:kwArgs:block:)" class="dashAnchor"></a>
+              <h4 class="sr-only">call(_:args:kwArgs:block:)</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_s11RubyGateway16RbFailableAccessV4call_4args6kwArgs5blockAA0C6ObjectCSgSS_SayAA0cK11Convertible_pSgGs13KeyValuePairsVySSALGAaK_ptF" role="button" aria-expanded="false" aria-controls="_s11RubyGateway16RbFailableAccessV4call_4args6kwArgs5blockAA0C6ObjectCSgSS_SayAA0cK11Convertible_pSgGs13KeyValuePairsVySSALGAaK_ptF"><code>call(_:args:kwArgs:block:)</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_s11RubyGateway16RbFailableAccessV4call_4args6kwArgs5blockAA0C6ObjectCSgSS_SayAA0cK11Convertible_pSgGs13KeyValuePairsVySSALGAaK_ptF">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      <p>Call a method of a Ruby object passing a Ruby Proc as a block.</p>
+
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#s11RubyGateway14RbObjectAccessC4call_4args6kwArgs5blockAA0cD0CSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSAKGAaJ_ptKF">RbObjectAccess.call(_:args:kwArgs:block:)</a></code>.
+See <code><a href="../Enums/RbError.html#s11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
+
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">public func call(_ method: <a href="https://developer.apple.com/documentation/swift/string/">String</a>,
+                 args: [<a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>?] = [],
+                 kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs/">KeyValuePairs</a>&lt;<a href="https://developer.apple.com/documentation/swift/string/">String</a>, <a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>?&gt; = [:],
+                 block: <a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>) -&gt; <a href="../Classes/RbObject.html">RbObject</a>?</code></pre>
+                    </div>
+                    <h5>Parameters</h5>
+                    <table class="j2-param-table">
+                      <tbody>
+                       <tr>
+                         <td>
+                           <code>
+                           method
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>The name of the method to call.</p>
+                           </div>
+                         </td>
+                       </tr>
+                       <tr>
+                         <td>
+                           <code>
+                           args
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>The positional arguments to the method, none by default.</p>
+                           </div>
+                         </td>
+                       </tr>
+                       <tr>
+                         <td>
+                           <code>
+                           kwArgs
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>The keyword arguments to the method, none by default.</p>
+                           </div>
+                         </td>
+                       </tr>
+                       <tr>
+                         <td>
+                           <code>
+                           block
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>A Ruby proc to pass as a block to the method.</p>
+                           </div>
+                         </td>
+                       </tr>
+                      </tbody>
+                    </table>
+                    <h5>Return Value</h5>
+                    <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the result of the method, or <code>nil</code> if an error occurred.</p>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L94-L99">Show on GitHub</a></span>
+                    </nav>
                   </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Call a method of a Ruby object passing a Ruby Proc as a block.</p>
+                <div>
+              </div>
+            </section>
+            <section id="s11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgsAA0C6ObjectCSgAA0cK11Convertible_p_SayAaK_pSgGs13KeyValuePairsVySSALGtF" class="j2-item">
+              <a name="//apple_ref/cpp/Method/call(symbol:args:kwArgs:)" class="dashAnchor"></a>
+              <h4 class="sr-only">call(symbol:args:kwArgs:)</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_s11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgsAA0C6ObjectCSgAA0cK11Convertible_p_SayAaK_pSgGs13KeyValuePairsVySSALGtF" role="button" aria-expanded="false" aria-controls="_s11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgsAA0C6ObjectCSgAA0cK11Convertible_p_SayAaK_pSgGs13KeyValuePairsVySSALGtF"><code>call(symbol:args:kwArgs:)</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_s11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgsAA0C6ObjectCSgAA0cK11Convertible_p_SayAaK_pSgGs13KeyValuePairsVySSALGtF">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      <p>Call a method of a Ruby object using a symbol.</p>
 
-<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call_4args6kwArgs5blockAA0cD0CSS_SayAA0cD11Convertible_pSgGs13KeyValuePairsVySSAKGAaJ_ptKF">RbObjectAccess.call(_:args:kwArgs:block:)</a></code>.
-See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#s11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgsAA0cD0CAA0cD11Convertible_p_SayAaJ_pSgGs13KeyValuePairsVySSAKGtKF">RbObjectAccess.call(symbol:args:kwArgs:)</a></code>.
+See <code><a href="../Enums/RbError.html#s11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
 
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">call</span><span class="p">(</span><span class="n">_</span> <span class="nv">method</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span>
-                 <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?]</span> <span class="o">=</span> <span class="p">[],</span>
-                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/keyvaluepairs/">KeyValuePairs</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:],</span>
-                 <span class="nv">block</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>method</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The name of the method to call.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>args</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The positional arguments to the method, none by default.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>kwArgs</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The keyword arguments to the method, none by default.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>block</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A Ruby proc to pass as a block to the method.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the result of the method, or <code>nil</code> if an error occurred.</p>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L94-L99">Show on GitHub</a>
-                      </div>
-                    </section>
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">@discardable<a href="https://developer.apple.com/documentation/avfoundation/avassetimagegenerator/result/">Result</a>
+public func call(symbol: <a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>,
+                 args: [<a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>?] = [],
+                 kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs/">KeyValuePairs</a>&lt;<a href="https://developer.apple.com/documentation/swift/string/">String</a>, <a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>?&gt; = [:]) -&gt; <a href="../Classes/RbObject.html">RbObject</a>?</code></pre>
+                    </div>
+                    <h5>Parameters</h5>
+                    <table class="j2-param-table">
+                      <tbody>
+                       <tr>
+                         <td>
+                           <code>
+                           symbol
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>A symbol for the method to call.</p>
+                           </div>
+                         </td>
+                       </tr>
+                       <tr>
+                         <td>
+                           <code>
+                           args
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>The positional arguments to the method, none by default.</p>
+                           </div>
+                         </td>
+                       </tr>
+                       <tr>
+                         <td>
+                           <code>
+                           kwArgs
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>The keyword arguments to the method, none by default.</p>
+                           </div>
+                         </td>
+                       </tr>
+                      </tbody>
+                    </table>
+                    <h5>Return Value</h5>
+                    <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the result of the method, or <code>nil</code> if an error occurred.</p>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L111-L115">Show on GitHub</a></span>
+                    </nav>
                   </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgsAA0C6ObjectCSgAA0cK11Convertible_p_SayAaK_pSgGs13KeyValuePairsVySSALGtF"></a>
-                    <a name="//apple_ref/swift/Method/call(symbol:args:kwArgs:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgsAA0C6ObjectCSgAA0cK11Convertible_p_SayAaK_pSgGs13KeyValuePairsVySSALGtF">call(symbol:args:kwArgs:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Call a method of a Ruby object using a symbol.</p>
+                <div>
+              </div>
+            </section>
+            <section id="s11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgs14blockRetention0K4CallAA0C6ObjectCSgAA0cN11Convertible_p_SayAaM_pSgGs13KeyValuePairsVySSANGAA0c5BlockL0OAKSayAKGKctF" class="j2-item">
+              <a name="//apple_ref/cpp/Method/call(symbol:args:kwArgs:blockRetention:blockCall:)" class="dashAnchor"></a>
+              <h4 class="sr-only">call(symbol:args:kwArgs:blockRetention:blockCall:)</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_s11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgs14blockRetention0K4CallAA0C6ObjectCSgAA0cN11Convertible_p_SayAaM_pSgGs13KeyValuePairsVySSANGAA0c5BlockL0OAKSayAKGKctF" role="button" aria-expanded="false" aria-controls="_s11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgs14blockRetention0K4CallAA0C6ObjectCSgAA0cN11Convertible_p_SayAaM_pSgGs13KeyValuePairsVySSANGAA0c5BlockL0OAKSayAKGKctF"><code>call(symbol:args:kwArgs:blockRetention:blockCall:)</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_s11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgs14blockRetention0K4CallAA0C6ObjectCSgAA0cN11Convertible_p_SayAaM_pSgGs13KeyValuePairsVySSANGAA0c5BlockL0OAKSayAKGKctF">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      <p>Call a method of a Ruby object using a symbol passing Swift code as a block.</p>
 
-<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgsAA0cD0CAA0cD11Convertible_p_SayAaJ_pSgGs13KeyValuePairsVySSAKGtKF">RbObjectAccess.call(symbol:args:kwArgs:)</a></code>.
-See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#s11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgs14blockRetention0K4CallAA0cD0CAA0cD11Convertible_p_SayAaL_pSgGs13KeyValuePairsVySSAMGAA0c5BlockL0OAKSayAKGKctKF">RbObjectAccess.call(symbol:args:kwArgs:blockRetention:blockCall:)</a></code>.
+See <code><a href="../Enums/RbError.html#s11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
 
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">call</span><span class="p">(</span><span class="nv">symbol</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">,</span>
-                 <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?]</span> <span class="o">=</span> <span class="p">[],</span>
-                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/keyvaluepairs/">KeyValuePairs</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:])</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>symbol</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A symbol for the method to call.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>args</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The positional arguments to the method, none by default.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>kwArgs</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The keyword arguments to the method, none by default.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the result of the method, or <code>nil</code> if an error occurred.</p>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L111-L115">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgs14blockRetention0K4CallAA0C6ObjectCSgAA0cN11Convertible_p_SayAaM_pSgGs13KeyValuePairsVySSANGAA0c5BlockL0OAKSayAKGKctF"></a>
-                    <a name="//apple_ref/swift/Method/call(symbol:args:kwArgs:blockRetention:blockCall:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgs14blockRetention0K4CallAA0C6ObjectCSgAA0cN11Convertible_p_SayAaM_pSgGs13KeyValuePairsVySSANGAA0c5BlockL0OAKSayAKGKctF">call(symbol:args:kwArgs:blockRetention:blockCall:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Call a method of a Ruby object using a symbol passing Swift code as a block.</p>
-
-<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgs14blockRetention0K4CallAA0cD0CAA0cD11Convertible_p_SayAaL_pSgGs13KeyValuePairsVySSAMGAA0c5BlockL0OAKSayAKGKctKF">RbObjectAccess.call(symbol:args:kwArgs:blockRetention:blockCall:)</a></code>.
-See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">call</span><span class="p">(</span><span class="nv">symbol</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">,</span>
-                 <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?]</span> <span class="o">=</span> <span class="p">[],</span>
-                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/keyvaluepairs/">KeyValuePairs</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:],</span>
-                 <span class="nv">blockRetention</span><span class="p">:</span> <span class="kt"><a href="../Enums/RbBlockRetention.html">RbBlockRetention</a></span> <span class="o">=</span> <span class="o">.</span><span class="k">none</span><span class="p">,</span>
-                 <span class="nv">blockCall</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Other%20APIs.html#/s:11RubyGateway15RbBlockCallbacka">RbBlockCallback</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>symbol</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A symbol for the method to call.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>args</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The positional arguments to the method, none by default.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>kwArgs</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The keyword arguments to the method, none by default.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>blockRetention</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Should the <code>blockCall</code> closure be retained for
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">@discardable<a href="https://developer.apple.com/documentation/avfoundation/avassetimagegenerator/result/">Result</a>
+public func call(symbol: <a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>,
+                 args: [<a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>?] = [],
+                 kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs/">KeyValuePairs</a>&lt;<a href="https://developer.apple.com/documentation/swift/string/">String</a>, <a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>?&gt; = [:],
+                 blockRetention: <a href="../Enums/RbBlockRetention.html">RbBlockRetention</a> = .none,
+                 blockCall: @escaping <a href="../Other%20APIs.html#s11RubyGateway15RbBlockCallbacka">RbBlockCallback</a>) -&gt; <a href="../Classes/RbObject.html">RbObject</a>?</code></pre>
+                    </div>
+                    <h5>Parameters</h5>
+                    <table class="j2-param-table">
+                      <tbody>
+                       <tr>
+                         <td>
+                           <code>
+                           symbol
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>A symbol for the method to call.</p>
+                           </div>
+                         </td>
+                       </tr>
+                       <tr>
+                         <td>
+                           <code>
+                           args
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>The positional arguments to the method, none by default.</p>
+                           </div>
+                         </td>
+                       </tr>
+                       <tr>
+                         <td>
+                           <code>
+                           kwArgs
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>The keyword arguments to the method, none by default.</p>
+                           </div>
+                         </td>
+                       </tr>
+                       <tr>
+                         <td>
+                           <code>
+                           blockRetention
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>Should the <code>blockCall</code> closure be retained for
         longer than this call?  Default <code>.none</code>.  See <code><a href="../Enums/RbBlockRetention.html">RbBlockRetention</a></code>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>blockCall</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Swift code to pass as a block to the method.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the result of the method, or <code>nil</code> if an error occurred.</p>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L130-L136">Show on GitHub</a>
-                      </div>
-                    </section>
+                           </div>
+                         </td>
+                       </tr>
+                       <tr>
+                         <td>
+                           <code>
+                           blockCall
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>Swift code to pass as a block to the method.</p>
+                           </div>
+                         </td>
+                       </tr>
+                      </tbody>
+                    </table>
+                    <h5>Return Value</h5>
+                    <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the result of the method, or <code>nil</code> if an error occurred.</p>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L130-L136">Show on GitHub</a></span>
+                    </nav>
                   </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgs5blockAA0C6ObjectCSgAA0cL11Convertible_p_SayAaL_pSgGs13KeyValuePairsVySSAMGAaL_ptF"></a>
-                    <a name="//apple_ref/swift/Method/call(symbol:args:kwArgs:block:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgs5blockAA0C6ObjectCSgAA0cL11Convertible_p_SayAaL_pSgGs13KeyValuePairsVySSAMGAaL_ptF">call(symbol:args:kwArgs:block:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Call a method of a Ruby object using a symbol passing a Ruby Proc as a block.</p>
-
-<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgs5blockAA0cD0CAA0cD11Convertible_p_SayAaK_pSgGs13KeyValuePairsVySSALGAaK_ptKF">RbObjectAccess.call(symbol:args:kwArgs:block:)</a></code>.
-See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">call</span><span class="p">(</span><span class="nv">symbol</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">,</span>
-                 <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?]</span> <span class="o">=</span> <span class="p">[],</span>
-                 <span class="nv">kwArgs</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/keyvaluepairs/">KeyValuePairs</a></span><span class="o">&lt;</span><span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[:],</span>
-                 <span class="nv">block</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>symbol</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A symbol for the method to call.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>args</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The positional arguments to the method, none by default.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>kwArgs</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The keyword arguments to the method, none by default.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>block</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A Ruby proc to pass as a block to the method.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the result of the method, or <code>nil</code> if an error occurred.</p>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L149-L154">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Attributes"></a>
-                <a name="//apple_ref/swift/Section/Attributes" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/Attributes"></a>
-                  <h3 class="section-name"><p>Attributes</p>
-</h3>
-                </div>
+                <div>
               </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway16RbFailableAccessV12getAttributeyAA0C6ObjectCSgSSF"></a>
-                    <a name="//apple_ref/swift/Method/getAttribute(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV12getAttributeyAA0C6ObjectCSgSSF">getAttribute(_:)</a>
-                    </code>
+            </section>
+            <section id="s11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgs5blockAA0C6ObjectCSgAA0cL11Convertible_p_SayAaL_pSgGs13KeyValuePairsVySSAMGAaL_ptF" class="j2-item">
+              <a name="//apple_ref/cpp/Method/call(symbol:args:kwArgs:block:)" class="dashAnchor"></a>
+              <h4 class="sr-only">call(symbol:args:kwArgs:block:)</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_s11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgs5blockAA0C6ObjectCSgAA0cL11Convertible_p_SayAaL_pSgGs13KeyValuePairsVySSAMGAaL_ptF" role="button" aria-expanded="false" aria-controls="_s11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgs5blockAA0C6ObjectCSgAA0cL11Convertible_p_SayAaL_pSgGs13KeyValuePairsVySSAMGAaL_ptF"><code>call(symbol:args:kwArgs:block:)</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_s11RubyGateway16RbFailableAccessV4call6symbol4args6kwArgs5blockAA0C6ObjectCSgAA0cL11Convertible_p_SayAaL_pSgGs13KeyValuePairsVySSAMGAaL_ptF">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      <p>Call a method of a Ruby object using a symbol passing a Ruby Proc as a block.</p>
+
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#s11RubyGateway14RbObjectAccessC4call6symbol4args6kwArgs5blockAA0cD0CAA0cD11Convertible_p_SayAaK_pSgGs13KeyValuePairsVySSALGAaK_ptKF">RbObjectAccess.call(symbol:args:kwArgs:block:)</a></code>.
+See <code><a href="../Enums/RbError.html#s11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
+
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">@discardable<a href="https://developer.apple.com/documentation/avfoundation/avassetimagegenerator/result/">Result</a>
+public func call(symbol: <a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>,
+                 args: [<a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>?] = [],
+                 kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs/">KeyValuePairs</a>&lt;<a href="https://developer.apple.com/documentation/swift/string/">String</a>, <a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>?&gt; = [:],
+                 block: <a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>) -&gt; <a href="../Classes/RbObject.html">RbObject</a>?</code></pre>
+                    </div>
+                    <h5>Parameters</h5>
+                    <table class="j2-param-table">
+                      <tbody>
+                       <tr>
+                         <td>
+                           <code>
+                           symbol
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>A symbol for the method to call.</p>
+                           </div>
+                         </td>
+                       </tr>
+                       <tr>
+                         <td>
+                           <code>
+                           args
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>The positional arguments to the method, none by default.</p>
+                           </div>
+                         </td>
+                       </tr>
+                       <tr>
+                         <td>
+                           <code>
+                           kwArgs
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>The keyword arguments to the method, none by default.</p>
+                           </div>
+                         </td>
+                       </tr>
+                       <tr>
+                         <td>
+                           <code>
+                           block
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>A Ruby proc to pass as a block to the method.</p>
+                           </div>
+                         </td>
+                       </tr>
+                      </tbody>
+                    </table>
+                    <h5>Return Value</h5>
+                    <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the result of the method, or <code>nil</code> if an error occurred.</p>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L149-L154">Show on GitHub</a></span>
+                    </nav>
                   </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Get an attribute of a Ruby object.</p>
-
-<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC12getAttributeyAA0cD0CSSKF">RbObjectAccess.getAttribute(_:)</a></code>.
-See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getAttribute</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>name</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The attribute to access.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>The value of the attribute, or <code>nil</code> if an error occurred.</p>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L167-L169">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway16RbFailableAccessV12setAttribute_8newValueAA0C6ObjectCSgSS_AA0cJ11Convertible_pSgtF"></a>
-                    <a name="//apple_ref/swift/Method/setAttribute(_:newValue:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV12setAttribute_8newValueAA0C6ObjectCSgSS_AA0cJ11Convertible_pSgtF">setAttribute(_:newValue:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Set an attribute of a Ruby object.</p>
-
-<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC12setAttribute_8newValueAA0cD0CSS_AA0cD11Convertible_pSgtKF">RbObjectAccess.setAttribute(_:newValue:)</a></code>.
-See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setAttribute</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="nv">newValue</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>name</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The attribute to set.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>newValue</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The new value for the attribute.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>The value set to the attribute, or <code>nil</code> if an error occurred.</p>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L179-L181">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Constants"></a>
-                <a name="//apple_ref/swift/Section/Constants" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/Constants"></a>
-                  <h3 class="section-name"><p>Constants</p>
-</h3>
-                </div>
+                <div>
               </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway16RbFailableAccessV11getConstantyAA0C6ObjectCSgSSF"></a>
-                    <a name="//apple_ref/swift/Method/getConstant(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV11getConstantyAA0C6ObjectCSgSSF">getConstant(_:)</a>
-                    </code>
+            </section>
+          </section>
+          <section>
+            <a name="//apple_ref/cpp/Section/Attributes" class="dashAnchor"></a>
+            <h3 class="j2-anchor">
+              <span>Attributes
+</span>
+            </h3>
+            <section id="s11RubyGateway16RbFailableAccessV12getAttributeyAA0C6ObjectCSgSSF" class="j2-item">
+              <a name="//apple_ref/cpp/Method/getAttribute(_:)" class="dashAnchor"></a>
+              <h4 class="sr-only">getAttribute(_:)</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_s11RubyGateway16RbFailableAccessV12getAttributeyAA0C6ObjectCSgSSF" role="button" aria-expanded="false" aria-controls="_s11RubyGateway16RbFailableAccessV12getAttributeyAA0C6ObjectCSgSSF"><code>getAttribute(_:)</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_s11RubyGateway16RbFailableAccessV12getAttributeyAA0C6ObjectCSgSSF">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      <p>Get an attribute of a Ruby object.</p>
+
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#s11RubyGateway14RbObjectAccessC12getAttributeyAA0cD0CSSKF">RbObjectAccess.getAttribute(_:)</a></code>.
+See <code><a href="../Enums/RbError.html#s11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
+
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">public func get<a href="https://developer.apple.com/documentation/appkit/nsaccessibility/attribute/">Attribute</a>(_ name: <a href="https://developer.apple.com/documentation/swift/string/">String</a>) -&gt; <a href="../Classes/RbObject.html">RbObject</a>?</code></pre>
+                    </div>
+                    <h5>Parameters</h5>
+                    <table class="j2-param-table">
+                      <tbody>
+                       <tr>
+                         <td>
+                           <code>
+                           name
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>The attribute to access.</p>
+                           </div>
+                         </td>
+                       </tr>
+                      </tbody>
+                    </table>
+                    <h5>Return Value</h5>
+                    <p>The value of the attribute, or <code>nil</code> if an error occurred.</p>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L167-L169">Show on GitHub</a></span>
+                    </nav>
                   </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Get an <code><a href="../Classes/RbObject.html">RbObject</a></code> that represents a Ruby constant.</p>
-
-<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC11getConstantyAA0cD0CSSKF">RbObjectAccess.getConstant(_:)</a></code>.
-See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getConstant</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>name</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The name of the constant to look up.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the constant or <code>nil</code> if an error occurred.</p>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L194-L196">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway16RbFailableAccessV8getClassyAA0C6ObjectCSgSSF"></a>
-                    <a name="//apple_ref/swift/Method/getClass(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV8getClassyAA0C6ObjectCSgSSF">getClass(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Get an <code><a href="../Classes/RbObject.html">RbObject</a></code> that represents a Ruby class.</p>
-
-<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC8getClassyAA0cD0CSSKF">RbObjectAccess.getClass(_:)</a></code>.
-See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getClass</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>name</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The name of the class to look up.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the class or <code>nil</code> if an error occurred.</p>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L205-L207">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway16RbFailableAccessV11setConstant_8newValueAA0C6ObjectCSgSS_AA0cJ11Convertible_pSgtF"></a>
-                    <a name="//apple_ref/swift/Method/setConstant(_:newValue:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV11setConstant_8newValueAA0C6ObjectCSgSS_AA0cJ11Convertible_pSgtF">setConstant(_:newValue:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Bind an object to a constant name.</p>
-
-<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC11setConstant_8newValueAA0cD0CSS_AA0cD11Convertible_pSgtKF">RbObjectAccess.setConstant(_:newValue:)</a></code>.
-See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">setConstant</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="nv">newValue</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>name</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The name of the constant to create or replace.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>newValue</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The value for the constant.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>The value set for the constant or <code>nil</code> if an error occurred.</p>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L218-L220">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Instance%20Variables"></a>
-                <a name="//apple_ref/swift/Section/Instance Variables" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/Instance%20Variables"></a>
-                  <h3 class="section-name"><p>Instance Variables</p>
-</h3>
-                </div>
+                <div>
               </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway16RbFailableAccessV14getInstanceVaryAA0C6ObjectCSgSSF"></a>
-                    <a name="//apple_ref/swift/Method/getInstanceVar(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV14getInstanceVaryAA0C6ObjectCSgSSF">getInstanceVar(_:)</a>
-                    </code>
+            </section>
+            <section id="s11RubyGateway16RbFailableAccessV12setAttribute_8newValueAA0C6ObjectCSgSS_AA0cJ11Convertible_pSgtF" class="j2-item">
+              <a name="//apple_ref/cpp/Method/setAttribute(_:newValue:)" class="dashAnchor"></a>
+              <h4 class="sr-only">setAttribute(_:newValue:)</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_s11RubyGateway16RbFailableAccessV12setAttribute_8newValueAA0C6ObjectCSgSS_AA0cJ11Convertible_pSgtF" role="button" aria-expanded="false" aria-controls="_s11RubyGateway16RbFailableAccessV12setAttribute_8newValueAA0C6ObjectCSgSS_AA0cJ11Convertible_pSgtF"><code>setAttribute(_:newValue:)</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_s11RubyGateway16RbFailableAccessV12setAttribute_8newValueAA0C6ObjectCSgSS_AA0cJ11Convertible_pSgtF">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      <p>Set an attribute of a Ruby object.</p>
+
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#s11RubyGateway14RbObjectAccessC12setAttribute_8newValueAA0cD0CSS_AA0cD11Convertible_pSgtKF">RbObjectAccess.setAttribute(_:newValue:)</a></code>.
+See <code><a href="../Enums/RbError.html#s11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
+
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">public func set<a href="https://developer.apple.com/documentation/appkit/nsaccessibility/attribute/">Attribute</a>(_ name: <a href="https://developer.apple.com/documentation/swift/string/">String</a>, new<a href="https://developer.apple.com/documentation/coremedia/cmattachmentbearerattachments/value/">Value</a>: <a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>?) -&gt; <a href="../Classes/RbObject.html">RbObject</a>?</code></pre>
+                    </div>
+                    <h5>Parameters</h5>
+                    <table class="j2-param-table">
+                      <tbody>
+                       <tr>
+                         <td>
+                           <code>
+                           name
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>The attribute to set.</p>
+                           </div>
+                         </td>
+                       </tr>
+                       <tr>
+                         <td>
+                           <code>
+                           newValue
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>The new value for the attribute.</p>
+                           </div>
+                         </td>
+                       </tr>
+                      </tbody>
+                    </table>
+                    <h5>Return Value</h5>
+                    <p>The value set to the attribute, or <code>nil</code> if an error occurred.</p>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L179-L181">Show on GitHub</a></span>
+                    </nav>
                   </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Get the value of a Ruby instance variable.</p>
-
-<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC14getInstanceVaryAA0cD0CSSKF">RbObjectAccess.getInstanceVar(_:)</a></code>.
-See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getInstanceVar</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>name</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Name of the IVar.  Must begin with a single <code>@</code>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>Value of the IVar, or <code>nil</code> if an error occurred.</p>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L233-L235">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway16RbFailableAccessV14setInstanceVar_8newValueAA0C6ObjectCSgSS_AA0cK11Convertible_pSgtF"></a>
-                    <a name="//apple_ref/swift/Method/setInstanceVar(_:newValue:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV14setInstanceVar_8newValueAA0C6ObjectCSgSS_AA0cK11Convertible_pSgtF">setInstanceVar(_:newValue:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Set a Ruby instance variable.</p>
-
-<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC14setInstanceVar_8newValueAA0cD0CSS_AA0cD11Convertible_pSgtKF">RbObjectAccess.setInstanceVar(_:newValue:)</a></code>.
-See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">setInstanceVar</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="nv">newValue</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>name</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Name of the IVar.  Must begin with a single <code>@</code>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>newValue</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The new value for the IVar.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>The value that was set, or nil if an error occurred.</p>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L246-L248">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Class%20Variables"></a>
-                <a name="//apple_ref/swift/Section/Class Variables" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/Class%20Variables"></a>
-                  <h3 class="section-name"><p>Class Variables</p>
-</h3>
-                </div>
+                <div>
               </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway16RbFailableAccessV11getClassVaryAA0C6ObjectCSgSSF"></a>
-                    <a name="//apple_ref/swift/Method/getClassVar(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV11getClassVaryAA0C6ObjectCSgSSF">getClassVar(_:)</a>
-                    </code>
+            </section>
+          </section>
+          <section>
+            <a name="//apple_ref/cpp/Section/Constants" class="dashAnchor"></a>
+            <h3 class="j2-anchor">
+              <span>Constants
+</span>
+            </h3>
+            <section id="s11RubyGateway16RbFailableAccessV11getConstantyAA0C6ObjectCSgSSF" class="j2-item">
+              <a name="//apple_ref/cpp/Method/getConstant(_:)" class="dashAnchor"></a>
+              <h4 class="sr-only">getConstant(_:)</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_s11RubyGateway16RbFailableAccessV11getConstantyAA0C6ObjectCSgSSF" role="button" aria-expanded="false" aria-controls="_s11RubyGateway16RbFailableAccessV11getConstantyAA0C6ObjectCSgSSF"><code>getConstant(_:)</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_s11RubyGateway16RbFailableAccessV11getConstantyAA0C6ObjectCSgSSF">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      <p>Get an <code><a href="../Classes/RbObject.html">RbObject</a></code> that represents a Ruby constant.</p>
+
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#s11RubyGateway14RbObjectAccessC11getConstantyAA0cD0CSSKF">RbObjectAccess.getConstant(_:)</a></code>.
+See <code><a href="../Enums/RbError.html#s11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
+
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">public func getConstant(_ name: <a href="https://developer.apple.com/documentation/swift/string/">String</a>) -&gt; <a href="../Classes/RbObject.html">RbObject</a>?</code></pre>
+                    </div>
+                    <h5>Parameters</h5>
+                    <table class="j2-param-table">
+                      <tbody>
+                       <tr>
+                         <td>
+                           <code>
+                           name
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>The name of the constant to look up.</p>
+                           </div>
+                         </td>
+                       </tr>
+                      </tbody>
+                    </table>
+                    <h5>Return Value</h5>
+                    <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the constant or <code>nil</code> if an error occurred.</p>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L194-L196">Show on GitHub</a></span>
+                    </nav>
                   </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Get the value of a Ruby class variable.</p>
+                <div>
+              </div>
+            </section>
+            <section id="s11RubyGateway16RbFailableAccessV8getClassyAA0C6ObjectCSgSSF" class="j2-item">
+              <a name="//apple_ref/cpp/Method/getClass(_:)" class="dashAnchor"></a>
+              <h4 class="sr-only">getClass(_:)</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_s11RubyGateway16RbFailableAccessV8getClassyAA0C6ObjectCSgSSF" role="button" aria-expanded="false" aria-controls="_s11RubyGateway16RbFailableAccessV8getClassyAA0C6ObjectCSgSSF"><code>getClass(_:)</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_s11RubyGateway16RbFailableAccessV8getClassyAA0C6ObjectCSgSSF">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      <p>Get an <code><a href="../Classes/RbObject.html">RbObject</a></code> that represents a Ruby class.</p>
+
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#s11RubyGateway14RbObjectAccessC8getClassyAA0cD0CSSKF">RbObjectAccess.getClass(_:)</a></code>.
+See <code><a href="../Enums/RbError.html#s11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
+
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">public func getClass(_ name: <a href="https://developer.apple.com/documentation/swift/string/">String</a>) -&gt; <a href="../Classes/RbObject.html">RbObject</a>?</code></pre>
+                    </div>
+                    <h5>Parameters</h5>
+                    <table class="j2-param-table">
+                      <tbody>
+                       <tr>
+                         <td>
+                           <code>
+                           name
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>The name of the class to look up.</p>
+                           </div>
+                         </td>
+                       </tr>
+                      </tbody>
+                    </table>
+                    <h5>Return Value</h5>
+                    <p>An <code><a href="../Classes/RbObject.html">RbObject</a></code> for the class or <code>nil</code> if an error occurred.</p>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L205-L207">Show on GitHub</a></span>
+                    </nav>
+                  </div>
+                <div>
+              </div>
+            </section>
+            <section id="s11RubyGateway16RbFailableAccessV11setConstant_8newValueAA0C6ObjectCSgSS_AA0cJ11Convertible_pSgtF" class="j2-item">
+              <a name="//apple_ref/cpp/Method/setConstant(_:newValue:)" class="dashAnchor"></a>
+              <h4 class="sr-only">setConstant(_:newValue:)</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_s11RubyGateway16RbFailableAccessV11setConstant_8newValueAA0C6ObjectCSgSS_AA0cJ11Convertible_pSgtF" role="button" aria-expanded="false" aria-controls="_s11RubyGateway16RbFailableAccessV11setConstant_8newValueAA0C6ObjectCSgSS_AA0cJ11Convertible_pSgtF"><code>setConstant(_:newValue:)</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_s11RubyGateway16RbFailableAccessV11setConstant_8newValueAA0C6ObjectCSgSS_AA0cJ11Convertible_pSgtF">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      <p>Bind an object to a constant name.</p>
+
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#s11RubyGateway14RbObjectAccessC11setConstant_8newValueAA0cD0CSS_AA0cD11Convertible_pSgtKF">RbObjectAccess.setConstant(_:newValue:)</a></code>.
+See <code><a href="../Enums/RbError.html#s11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
+
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">@discardable<a href="https://developer.apple.com/documentation/avfoundation/avassetimagegenerator/result/">Result</a>
+public func setConstant(_ name: <a href="https://developer.apple.com/documentation/swift/string/">String</a>, new<a href="https://developer.apple.com/documentation/coremedia/cmattachmentbearerattachments/value/">Value</a>: <a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>?) -&gt; <a href="../Classes/RbObject.html">RbObject</a>?</code></pre>
+                    </div>
+                    <h5>Parameters</h5>
+                    <table class="j2-param-table">
+                      <tbody>
+                       <tr>
+                         <td>
+                           <code>
+                           name
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>The name of the constant to create or replace.</p>
+                           </div>
+                         </td>
+                       </tr>
+                       <tr>
+                         <td>
+                           <code>
+                           newValue
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>The value for the constant.</p>
+                           </div>
+                         </td>
+                       </tr>
+                      </tbody>
+                    </table>
+                    <h5>Return Value</h5>
+                    <p>The value set for the constant or <code>nil</code> if an error occurred.</p>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L218-L220">Show on GitHub</a></span>
+                    </nav>
+                  </div>
+                <div>
+              </div>
+            </section>
+          </section>
+          <section>
+            <a name="//apple_ref/cpp/Section/Instance Variables" class="dashAnchor"></a>
+            <h3 class="j2-anchor">
+              <span>Instance Variables
+</span>
+            </h3>
+            <section id="s11RubyGateway16RbFailableAccessV14getInstanceVaryAA0C6ObjectCSgSSF" class="j2-item">
+              <a name="//apple_ref/cpp/Method/getInstanceVar(_:)" class="dashAnchor"></a>
+              <h4 class="sr-only">getInstanceVar(_:)</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_s11RubyGateway16RbFailableAccessV14getInstanceVaryAA0C6ObjectCSgSSF" role="button" aria-expanded="false" aria-controls="_s11RubyGateway16RbFailableAccessV14getInstanceVaryAA0C6ObjectCSgSSF"><code>getInstanceVar(_:)</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_s11RubyGateway16RbFailableAccessV14getInstanceVaryAA0C6ObjectCSgSSF">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      <p>Get the value of a Ruby instance variable.</p>
+
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#s11RubyGateway14RbObjectAccessC14getInstanceVaryAA0cD0CSSKF">RbObjectAccess.getInstanceVar(_:)</a></code>.
+See <code><a href="../Enums/RbError.html#s11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
+
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">public func getInstanceVar(_ name: <a href="https://developer.apple.com/documentation/swift/string/">String</a>) -&gt; <a href="../Classes/RbObject.html">RbObject</a>?</code></pre>
+                    </div>
+                    <h5>Parameters</h5>
+                    <table class="j2-param-table">
+                      <tbody>
+                       <tr>
+                         <td>
+                           <code>
+                           name
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>Name of the IVar.  Must begin with a single <code>@</code>.</p>
+                           </div>
+                         </td>
+                       </tr>
+                      </tbody>
+                    </table>
+                    <h5>Return Value</h5>
+                    <p>Value of the IVar, or <code>nil</code> if an error occurred.</p>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L233-L235">Show on GitHub</a></span>
+                    </nav>
+                  </div>
+                <div>
+              </div>
+            </section>
+            <section id="s11RubyGateway16RbFailableAccessV14setInstanceVar_8newValueAA0C6ObjectCSgSS_AA0cK11Convertible_pSgtF" class="j2-item">
+              <a name="//apple_ref/cpp/Method/setInstanceVar(_:newValue:)" class="dashAnchor"></a>
+              <h4 class="sr-only">setInstanceVar(_:newValue:)</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_s11RubyGateway16RbFailableAccessV14setInstanceVar_8newValueAA0C6ObjectCSgSS_AA0cK11Convertible_pSgtF" role="button" aria-expanded="false" aria-controls="_s11RubyGateway16RbFailableAccessV14setInstanceVar_8newValueAA0C6ObjectCSgSS_AA0cK11Convertible_pSgtF"><code>setInstanceVar(_:newValue:)</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_s11RubyGateway16RbFailableAccessV14setInstanceVar_8newValueAA0C6ObjectCSgSS_AA0cK11Convertible_pSgtF">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      <p>Set a Ruby instance variable.</p>
+
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#s11RubyGateway14RbObjectAccessC14setInstanceVar_8newValueAA0cD0CSS_AA0cD11Convertible_pSgtKF">RbObjectAccess.setInstanceVar(_:newValue:)</a></code>.
+See <code><a href="../Enums/RbError.html#s11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
+
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">@discardable<a href="https://developer.apple.com/documentation/avfoundation/avassetimagegenerator/result/">Result</a>
+public func setInstanceVar(_ name: <a href="https://developer.apple.com/documentation/swift/string/">String</a>, new<a href="https://developer.apple.com/documentation/coremedia/cmattachmentbearerattachments/value/">Value</a>: <a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>?) -&gt; <a href="../Classes/RbObject.html">RbObject</a>?</code></pre>
+                    </div>
+                    <h5>Parameters</h5>
+                    <table class="j2-param-table">
+                      <tbody>
+                       <tr>
+                         <td>
+                           <code>
+                           name
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>Name of the IVar.  Must begin with a single <code>@</code>.</p>
+                           </div>
+                         </td>
+                       </tr>
+                       <tr>
+                         <td>
+                           <code>
+                           newValue
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>The new value for the IVar.</p>
+                           </div>
+                         </td>
+                       </tr>
+                      </tbody>
+                    </table>
+                    <h5>Return Value</h5>
+                    <p>The value that was set, or nil if an error occurred.</p>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L246-L248">Show on GitHub</a></span>
+                    </nav>
+                  </div>
+                <div>
+              </div>
+            </section>
+          </section>
+          <section>
+            <a name="//apple_ref/cpp/Section/Class Variables" class="dashAnchor"></a>
+            <h3 class="j2-anchor">
+              <span>Class Variables
+</span>
+            </h3>
+            <section id="s11RubyGateway16RbFailableAccessV11getClassVaryAA0C6ObjectCSgSSF" class="j2-item">
+              <a name="//apple_ref/cpp/Method/getClassVar(_:)" class="dashAnchor"></a>
+              <h4 class="sr-only">getClassVar(_:)</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_s11RubyGateway16RbFailableAccessV11getClassVaryAA0C6ObjectCSgSSF" role="button" aria-expanded="false" aria-controls="_s11RubyGateway16RbFailableAccessV11getClassVaryAA0C6ObjectCSgSSF"><code>getClassVar(_:)</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_s11RubyGateway16RbFailableAccessV11getClassVaryAA0C6ObjectCSgSSF">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      <p>Get the value of a Ruby class variable.</p>
 
 <p>Must be called on an <code><a href="../Classes/RbObject.html">RbObject</a></code> for a class, or <code><a href="../Classes/RbGateway.html">RbGateway</a></code>.</p>
 
-<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC11getClassVaryAA0cD0CSSKF">RbObjectAccess.getClassVar(_:)</a></code>.
-See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#s11RubyGateway14RbObjectAccessC11getClassVaryAA0cD0CSSKF">RbObjectAccess.getClassVar(_:)</a></code>.
+See <code><a href="../Enums/RbError.html#s11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
 
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getClassVar</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>name</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Name of the CVar.  Must begin with <code>@@</code>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>Value of the CVar, or <code>nil</code> if an error occurred.</p>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L263-L265">Show on GitHub</a>
-                      </div>
-                    </section>
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">public func getClassVar(_ name: <a href="https://developer.apple.com/documentation/swift/string/">String</a>) -&gt; <a href="../Classes/RbObject.html">RbObject</a>?</code></pre>
+                    </div>
+                    <h5>Parameters</h5>
+                    <table class="j2-param-table">
+                      <tbody>
+                       <tr>
+                         <td>
+                           <code>
+                           name
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>Name of the CVar.  Must begin with <code>@@</code>.</p>
+                           </div>
+                         </td>
+                       </tr>
+                      </tbody>
+                    </table>
+                    <h5>Return Value</h5>
+                    <p>Value of the CVar, or <code>nil</code> if an error occurred.</p>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L263-L265">Show on GitHub</a></span>
+                    </nav>
                   </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway16RbFailableAccessV11setClassVar_8newValueAA0C6ObjectCSgSS_AA0cK11Convertible_pSgtF"></a>
-                    <a name="//apple_ref/swift/Method/setClassVar(_:newValue:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV11setClassVar_8newValueAA0C6ObjectCSgSS_AA0cK11Convertible_pSgtF">setClassVar(_:newValue:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Set or create a Ruby class variable.</p>
+                <div>
+              </div>
+            </section>
+            <section id="s11RubyGateway16RbFailableAccessV11setClassVar_8newValueAA0C6ObjectCSgSS_AA0cK11Convertible_pSgtF" class="j2-item">
+              <a name="//apple_ref/cpp/Method/setClassVar(_:newValue:)" class="dashAnchor"></a>
+              <h4 class="sr-only">setClassVar(_:newValue:)</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_s11RubyGateway16RbFailableAccessV11setClassVar_8newValueAA0C6ObjectCSgSS_AA0cK11Convertible_pSgtF" role="button" aria-expanded="false" aria-controls="_s11RubyGateway16RbFailableAccessV11setClassVar_8newValueAA0C6ObjectCSgSS_AA0cK11Convertible_pSgtF"><code>setClassVar(_:newValue:)</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_s11RubyGateway16RbFailableAccessV11setClassVar_8newValueAA0C6ObjectCSgSS_AA0cK11Convertible_pSgtF">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      <p>Set or create a Ruby class variable.</p>
 
 <p>Must be called on an <code><a href="../Classes/RbObject.html">RbObject</a></code> for a class, or <code><a href="../Classes/RbGateway.html">RbGateway</a></code>.</p>
 
-<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC11setClassVar_8newValueAA0cD0CSS_AA0cD11Convertible_pSgtKF">RbObjectAccess.setClassVar(_:newValue:)</a></code>.
-See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#s11RubyGateway14RbObjectAccessC11setClassVar_8newValueAA0cD0CSS_AA0cD11Convertible_pSgtKF">RbObjectAccess.setClassVar(_:newValue:)</a></code>.
+See <code><a href="../Enums/RbError.html#s11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
 
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">setClassVar</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="nv">newValue</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>name</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Name of the CVar.  Must begin with <code>@@</code>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>newValue</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The new value for the CVar.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>The value that was set, or <code>nil</code> if an error occurred.</p>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L278-L280">Show on GitHub</a>
-                      </div>
-                    </section>
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">@discardable<a href="https://developer.apple.com/documentation/avfoundation/avassetimagegenerator/result/">Result</a>
+public func setClassVar(_ name: <a href="https://developer.apple.com/documentation/swift/string/">String</a>, new<a href="https://developer.apple.com/documentation/coremedia/cmattachmentbearerattachments/value/">Value</a>: <a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>?) -&gt; <a href="../Classes/RbObject.html">RbObject</a>?</code></pre>
+                    </div>
+                    <h5>Parameters</h5>
+                    <table class="j2-param-table">
+                      <tbody>
+                       <tr>
+                         <td>
+                           <code>
+                           name
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>Name of the CVar.  Must begin with <code>@@</code>.</p>
+                           </div>
+                         </td>
+                       </tr>
+                       <tr>
+                         <td>
+                           <code>
+                           newValue
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>The new value for the CVar.</p>
+                           </div>
+                         </td>
+                       </tr>
+                      </tbody>
+                    </table>
+                    <h5>Return Value</h5>
+                    <p>The value that was set, or <code>nil</code> if an error occurred.</p>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L278-L280">Show on GitHub</a></span>
+                    </nav>
                   </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Global%20Variables"></a>
-                <a name="//apple_ref/swift/Section/Global Variables" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/Global%20Variables"></a>
-                  <h3 class="section-name"><p>Global Variables</p>
-</h3>
-                </div>
+                <div>
               </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway16RbFailableAccessV12getGlobalVaryAA0C6ObjectCSgSSF"></a>
-                    <a name="//apple_ref/swift/Method/getGlobalVar(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV12getGlobalVaryAA0C6ObjectCSgSSF">getGlobalVar(_:)</a>
-                    </code>
+            </section>
+          </section>
+          <section>
+            <a name="//apple_ref/cpp/Section/Global Variables" class="dashAnchor"></a>
+            <h3 class="j2-anchor">
+              <span>Global Variables
+</span>
+            </h3>
+            <section id="s11RubyGateway16RbFailableAccessV12getGlobalVaryAA0C6ObjectCSgSSF" class="j2-item">
+              <a name="//apple_ref/cpp/Method/getGlobalVar(_:)" class="dashAnchor"></a>
+              <h4 class="sr-only">getGlobalVar(_:)</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_s11RubyGateway16RbFailableAccessV12getGlobalVaryAA0C6ObjectCSgSSF" role="button" aria-expanded="false" aria-controls="_s11RubyGateway16RbFailableAccessV12getGlobalVaryAA0C6ObjectCSgSSF"><code>getGlobalVar(_:)</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_s11RubyGateway16RbFailableAccessV12getGlobalVaryAA0C6ObjectCSgSSF">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      <p>Get the value of a Ruby global variable.</p>
+
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#s11RubyGateway14RbObjectAccessC12getGlobalVaryAA0cD0CSSKF">RbObjectAccess.getGlobalVar(_:)</a></code>.
+See <code><a href="../Enums/RbError.html#s11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
+
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">public func getGlobalVar(_ name: <a href="https://developer.apple.com/documentation/swift/string/">String</a>) -&gt; <a href="../Classes/RbObject.html">RbObject</a>?</code></pre>
+                    </div>
+                    <h5>Parameters</h5>
+                    <table class="j2-param-table">
+                      <tbody>
+                       <tr>
+                         <td>
+                           <code>
+                           name
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>Name of the global variable.  Must begin with <code>$</code>.</p>
+                           </div>
+                         </td>
+                       </tr>
+                      </tbody>
+                    </table>
+                    <h5>Return Value</h5>
+                    <p>Value of the variable, or <code>nil</code> if an error occurred.</p>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L293-L295">Show on GitHub</a></span>
+                    </nav>
                   </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Get the value of a Ruby global variable.</p>
-
-<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC12getGlobalVaryAA0cD0CSSKF">RbObjectAccess.getGlobalVar(_:)</a></code>.
-See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getGlobalVar</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>name</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Name of the global variable.  Must begin with <code>$</code>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>Value of the variable, or <code>nil</code> if an error occurred.</p>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L293-L295">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway16RbFailableAccessV12setGlobalVar_8newValueAA0C6ObjectCSgSS_AA0cK11Convertible_pSgtF"></a>
-                    <a name="//apple_ref/swift/Method/setGlobalVar(_:newValue:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV12setGlobalVar_8newValueAA0C6ObjectCSgSS_AA0cK11Convertible_pSgtF">setGlobalVar(_:newValue:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Set a Ruby global variable.</p>
-
-<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC12setGlobalVar_8newValueAA0cD0CSS_AA0cD11Convertible_pSgtKF">RbObjectAccess.setGlobalVar(_:newValue:)</a></code>.
-See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">setGlobalVar</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">,</span> <span class="nv">newValue</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>name</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Name of the global variable.  Must begin with <code>$</code>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>newValue</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The new value for the variable.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>The value that was set, or <code>nil</code> if an error occurred.</p>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L306-L308">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Polymorphic%20Getter"></a>
-                <a name="//apple_ref/swift/Section/Polymorphic Getter" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/Polymorphic%20Getter"></a>
-                  <h3 class="section-name"><p>Polymorphic Getter</p>
-</h3>
-                </div>
+                <div>
               </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway16RbFailableAccessV3getyAA0C6ObjectCSgSSF"></a>
-                    <a name="//apple_ref/swift/Method/get(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway16RbFailableAccessV3getyAA0C6ObjectCSgSSF">get(_:)</a>
-                    </code>
+            </section>
+            <section id="s11RubyGateway16RbFailableAccessV12setGlobalVar_8newValueAA0C6ObjectCSgSS_AA0cK11Convertible_pSgtF" class="j2-item">
+              <a name="//apple_ref/cpp/Method/setGlobalVar(_:newValue:)" class="dashAnchor"></a>
+              <h4 class="sr-only">setGlobalVar(_:newValue:)</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_s11RubyGateway16RbFailableAccessV12setGlobalVar_8newValueAA0C6ObjectCSgSS_AA0cK11Convertible_pSgtF" role="button" aria-expanded="false" aria-controls="_s11RubyGateway16RbFailableAccessV12setGlobalVar_8newValueAA0C6ObjectCSgSS_AA0cK11Convertible_pSgtF"><code>setGlobalVar(_:newValue:)</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_s11RubyGateway16RbFailableAccessV12setGlobalVar_8newValueAA0C6ObjectCSgSS_AA0cK11Convertible_pSgtF">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      <p>Set a Ruby global variable.</p>
+
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#s11RubyGateway14RbObjectAccessC12setGlobalVar_8newValueAA0cD0CSS_AA0cD11Convertible_pSgtKF">RbObjectAccess.setGlobalVar(_:newValue:)</a></code>.
+See <code><a href="../Enums/RbError.html#s11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
+
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">@discardable<a href="https://developer.apple.com/documentation/avfoundation/avassetimagegenerator/result/">Result</a>
+public func setGlobalVar(_ name: <a href="https://developer.apple.com/documentation/swift/string/">String</a>, new<a href="https://developer.apple.com/documentation/coremedia/cmattachmentbearerattachments/value/">Value</a>: <a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>?) -&gt; <a href="../Classes/RbObject.html">RbObject</a>?</code></pre>
+                    </div>
+                    <h5>Parameters</h5>
+                    <table class="j2-param-table">
+                      <tbody>
+                       <tr>
+                         <td>
+                           <code>
+                           name
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>Name of the global variable.  Must begin with <code>$</code>.</p>
+                           </div>
+                         </td>
+                       </tr>
+                       <tr>
+                         <td>
+                           <code>
+                           newValue
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>The new value for the variable.</p>
+                           </div>
+                         </td>
+                       </tr>
+                      </tbody>
+                    </table>
+                    <h5>Return Value</h5>
+                    <p>The value that was set, or <code>nil</code> if an error occurred.</p>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L306-L308">Show on GitHub</a></span>
+                    </nav>
                   </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Get some kind of Ruby object based on the <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> parameter.</p>
+                <div>
+              </div>
+            </section>
+          </section>
+          <section>
+            <a name="//apple_ref/cpp/Section/Polymorphic Getter" class="dashAnchor"></a>
+            <h3 class="j2-anchor">
+              <span>Polymorphic Getter
+</span>
+            </h3>
+            <section id="s11RubyGateway16RbFailableAccessV3getyAA0C6ObjectCSgSSF" class="j2-item">
+              <a name="//apple_ref/cpp/Method/get(_:)" class="dashAnchor"></a>
+              <h4 class="sr-only">get(_:)</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_s11RubyGateway16RbFailableAccessV3getyAA0C6ObjectCSgSSF" role="button" aria-expanded="false" aria-controls="_s11RubyGateway16RbFailableAccessV3getyAA0C6ObjectCSgSSF"><code>get(_:)</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_s11RubyGateway16RbFailableAccessV3getyAA0C6ObjectCSgSSF">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      <p>Get some kind of Ruby object based on the <code><a href="https://developer.apple.com/documentation/appkit/nsappearance/name/">name</a></code> parameter.</p>
 
-<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#/s:11RubyGateway14RbObjectAccessC3getyAA0cD0CSSKF">RbObjectAccess.get(_:)</a></code>.
-See <code><a href="../Enums/RbError.html#/s:11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
+<p>This is a non-throwing version of <code><a href="../Classes/RbObjectAccess.html#s11RubyGateway14RbObjectAccessC3getyAA0cD0CSSKF">RbObjectAccess.get(_:)</a></code>.
+See <code><a href="../Enums/RbError.html#s11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to retrieve error details.</p>
 
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">get</span><span class="p">(</span><span class="n">_</span> <span class="nv">name</span><span class="p">:</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RbObject.html">RbObject</a></span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>name</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Name of method / IVar / attribute / CVar / GVar / constant to access.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>Retrieved object, or <code>nil</code> if an error occurred.</p>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L322-L324">Show on GitHub</a>
-                      </div>
-                    </section>
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">@discardable<a href="https://developer.apple.com/documentation/avfoundation/avassetimagegenerator/result/">Result</a>
+public func get(_ name: <a href="https://developer.apple.com/documentation/swift/string/">String</a>) -&gt; <a href="../Classes/RbObject.html">RbObject</a>?</code></pre>
+                    </div>
+                    <h5>Parameters</h5>
+                    <table class="j2-param-table">
+                      <tbody>
+                       <tr>
+                         <td>
+                           <code>
+                           name
+                           </code>
+                         </td>
+                         <td>
+                           <div>
+                             <p>Name of method / IVar / attribute / CVar / GVar / constant to access.</p>
+                           </div>
+                         </td>
+                       </tr>
+                      </tbody>
+                    </table>
+                    <h5>Return Value</h5>
+                    <p>Retrieved object, or <code>nil</code> if an error occurred.</p>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L322-L324">Show on GitHub</a></span>
+                    </nav>
                   </div>
-                </li>
-              </ul>
-            </div>
-          </div>
+                <div>
+              </div>
+            </section>
+          </section>
         </section>
 
-      </article>
-    </div>
-    <section class="footer">
-      <p>Distributed under the MIT license.  Maintained by <a class="link" href="mailto:johnfairh@gmail.com" target="_blank" rel="external">John Fairhurst</a>.</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.0</a>-<a class="link" href="https://github.com/johnfairh/jazzy" target="_blank" rel="external">bebop</a>, originally a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
-    </section>
+        </article>
+      </main>
+
+      <!-- aux nav -->
+
+      <div class="col-xl d-none d-xl-block j2-aux-nav" id="aux-nav-column">
+        <div class="j2-aux-nav-wrapper">
+          <h6 class="j2-inline-heading">Topics</h6>
+          <nav aria-label="page">
+            <ul class="j2-aux-group">
+              <li><a href="#">Declaration</a></li>
+            </ul>
+          </nav>
+          <h6 class="j2-inline-heading">Actions</h6>
+          <ul class="j2-aux-group">
+            <li><a class="j2-aux-action" id="action-search" href="#" role="button" aria-keyshortcuts="/">Search (/)</a></li>
+            <li><a class="j2-aux-action" id="action-collapse" href="#" role="button" aria-keyshortcuts="a">
+              <span id="action-collapse-expand">Open all (a)</span>
+              <span id="action-collapse-collapse" class="d-none">Close all (a)</span>
+            </a></li>
+          </ul>
+        </div>
+      </div>
+
+    </div> <!-- end row -->
+
+    <footer class="row">
+      <div class="col j2-footer small pt-2">
+        <p><p>Distributed under the MIT license.  Maintained by <a class="link" href="mailto:johnfairh@gmail.com" target="_blank" rel="external">John Fairhurst</a>.</p></p>
+        <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>-<a class="link" href="https://github.com/johnfairh/jazzy" target="_blank" rel="external">bebop</a>, originally a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.  Theme from <a href="https://github.com/johnfairh/J2">J2</a>.</p>
+      </div>
+    </footer>
+  </div> <!-- container -->
+
+  <script src="../js/dependencies.min.js"></script>
+  <script src="../js/fw2020.js"></script>
   </body>
-</div>
+
 </html>

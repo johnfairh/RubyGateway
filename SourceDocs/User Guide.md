@@ -108,7 +108,7 @@ which will sometimes require driving the Ruby code in these ways.
 
 ### Exchange Swift types
 
-RubyBridge provides extensions to most Swift types so you can initialize
+RubyGateway provides extensions to most Swift types so you can initialize
 `RbObject`s with them and vice versa, or use them directly as arguments to
 `RbObjectAccess.call(...)` and friends.  Supported types are:
 * `Bool`
@@ -515,8 +515,8 @@ very difficult for readers to ignore the possibility of errors.
 
 ## Concurrency
 
-RubyBridge inherits Ruby's threading model.  This means you can only use
-RubyBridge APIs on the first/main thread and any other threads created by Ruby.
+RubyGateway inherits Ruby's threading model.  This means you can only use
+RubyGateway APIs on the first/main thread and any other threads created by Ruby.
 
 `RbThread` provides some static helpers for creating Ruby threads and
 relinquishing the GVL: consult the internet for further guidance.

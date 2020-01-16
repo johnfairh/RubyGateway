@@ -1,842 +1,778 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <title>Swift Interop  Reference</title>
-    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
-    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
     <meta charset="utf-8">
-    <script src="js/jquery.min.js" defer></script>
-    <script src="js/jazzy.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+    <link rel="stylesheet" href="css/fw2020.css">
     
-    <script src="js/lunr.min.js" defer></script>
-    <script src="js/typeahead.jquery.js" defer></script>
-    <script src="js/jazzy.search.js" defer></script>
+    <title>Swift Interop  Reference</title>
+    
   </head>
-  <body>
+  <body data-root-path="./">
 
-    <a name="//apple_ref/swift/Section/Swift Interop" class="dashAnchor"></a>
-
-    <a title="Swift Interop  Reference"></a>
-
-    <header class="header">
-      <p class="header-col header-col--primary">
-        <a class="header-link" href="index.html">
-          RubyGateway 3.2.0 Docs
-        </a>
-         (100% documented)
-      </p>
-    
-      <p class="header-col--secondary">
-        <form role="search" action="search.json">
-          <input type="text" placeholder="Search documentation" data-typeahead>
+  <header class="j2-header">
+  <div class="navbar navbar-expand navbar-dark j2-titlebar">
+    <a class="sr-only-focusable sr-only font-weight-slightly-bold pr-2" href="#main-content">Skip to main content</a>
+    <a class="nav-item nav-link pl-0 pt-1 pr-2 d-md-none" id="nav-toggle-button" role="button" aria-controls="nav-column" aria-expanded="false" aria-label="Toggle navigation" href="#">
+      <span class="navbar-toggler-icon"></span>
+    </a>
+  
+    <div style="align-items-baseline">
+      <div class="navbar-brand mr-1 font-weight-slightly-bold">
+        <a href="index.html">RubyGateway 3.2.0 Docs</a>
+      </div>
+      <span class="navbar-text j2-coverage font-weight-slightly-bold small d-none d-lg-inline-block mr-2">(100% documented)</span>
+    </div>
+  
+    <div class="navbar-nav ml-auto justify-content-end flex-fill">
+  
+      <form class="form-inline d-none d-md-flex" role="search">
+        <input class="form-control form-control-sm w-100" type="search" placeHolder="Search" aria-label="Search" aria-keyshortcuts="/" data-search-format="span">
+      </form>
+  
+      <a class="nav-item nav-link d-none d-sm-inline" rel="external" href="https://github.com/johnfairh/RubyGateway">
+        <svg class="j2-title-svg" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 16 16"><title>Open on GitHub</title><path fill="currentcolor" fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+        </svg>
+      </a>
+  
+    </div>
+  </div>
+  
+  <!-- narrow-style searchbar -->
+  
+  <div class="container-fluid j2-titlebar d-md-none">
+    <div class="row">
+      <div class="col">
+        <form class="pb-2">
+          <input class="form-control form-control-sm" type="search" placeHolder="Search" aria-label="Search" aria-keyshortcuts="/" data-search-format="div">
         </form>
-      </p>
-    
-        <p class="header-col header-col--secondary">
-          <a class="header-link" href="https://github.com/johnfairh/RubyGateway">
-            <img class="header-icon" src="img/gh.png"/>
-            View on GitHub
-          </a>
-        </p>
-    
-    </header>
+      </div>
+    </div>
+  </div>
 
-    <p class="breadcrumbs">
-      <a class="breadcrumb" href="index.html">RubyGateway Reference</a>
-      <img class="carat" src="img/carat.png" />
-      Swift Interop  Reference
-    </p>
+  <!-- breadcrumb bar, jazzy doesn't really support -->
 
-    <div class="content-wrapper">
-      <nav class="navigation">
-        <ul class="nav-groups">
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Guides.html">Guides</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="user-guide.html">User Guide</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="todo.html">TODO</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Main%20APIs.html">Main APIs</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/RbGateway.html">RbGateway</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/RbGateway/Verbosity.html">– Verbosity</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/RbObject.html">RbObject</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/RbObjectAccess.html">RbObjectAccess</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/RbObjectCollection.html">RbObjectCollection</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Swift%20Method%20APIs.html">Swift Method APIs</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Swift%20Method%20APIs.html#/s:11RubyGateway16RbMethodCallbacka">RbMethodCallback</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Swift%20Method%20APIs.html#/s:11RubyGateway21RbBoundMethodCallbacka">RbBoundMethodCallback</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Swift%20Method%20APIs.html#/s:11RubyGateway25RbBoundMethodVoidCallbacka">RbBoundMethodVoidCallback</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/RbMethod.html">RbMethod</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/RbMethodArgs.html">RbMethodArgs</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Other%20APIs.html">Other APIs</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Other%20APIs.html#/s:11RubyGateway15RbBlockCallbacka">RbBlockCallback</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/RbBlockRetention.html">RbBlockRetention</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/RbBreak.html">RbBreak</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/RbProc.html">RbProc</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/RbSymbol.html">RbSymbol</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/RbThread.html">RbThread</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/RbThread/UnblockingFunc.html">– UnblockingFunc</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/RbType.html">RbType</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Error%20Handling.html">Error Handling</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/RbError.html">RbError</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/RbError/History.html">– History</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/RbException.html">RbException</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/RbFailableAccess.html">RbFailableAccess</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Swift%20Interop.html">Swift Interop</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/String.html">String</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/Bool.html">Bool</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/UInt.html">UInt</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/UInt64.html">UInt64</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/UInt32.html">UInt32</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/UInt16.html">UInt16</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/UInt8.html">UInt8</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/Int.html">Int</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/Int64.html">Int64</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/Int32.html">Int32</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/Int16.html">Int16</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/Int8.html">Int8</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/Double.html">Double</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/Float.html">Float</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/Array.html">Array</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/ArraySlice.html">ArraySlice</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/Dictionary.html">Dictionary</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/Set.html">Set</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/Range.html">Range</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/ClosedRange.html">ClosedRange</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/RbComplex.html">RbComplex</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/RbRational.html">RbRational</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-      <article class="main-content">
+  <nav aria-label="breadcrumb" class="small">
+    <ol class="breadcrumb j2-breadcrumb">
+      <li class="breadcrumb-item"><a href="index.html">RubyGateway Reference</a></li>
+      <li class="breadcrumb-item" aria-current="page">Swift Interop  Reference</li>
+    </ol>
+  </nav>
 
-        <section class="section">
-          <div class="section-content top-matter">
-            <h1>Swift Interop</h1>
+  </header>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-auto d-none d-md-flex flex-column j2-nav" id="nav-column">
+        <nav aria-label="swift" class="j2-swift">
+          <ul class="j2-nav-list">
+            <li class="j2-nav-group">
+              <a class="j2-nav-item" href="Guides.html">Guides</a>
+              <ul class="j2-nav-sublist">
+                <li>
+                  <a class="j2-nav-item" href="user-guide.html">User Guide</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="todo.html">TODO</a>
+                </li>
+              </ul>
+            </li>
+            <li class="j2-nav-group">
+              <a class="j2-nav-item" href="Main%20APIs.html">Main APIs</a>
+              <ul class="j2-nav-sublist">
+                <li>
+                  <a class="j2-nav-item" href="Classes/RbGateway.html">RbGateway</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Classes/RbGateway/Verbosity.html">– Verbosity</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Classes/RbObject.html">RbObject</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Classes/RbObjectAccess.html">RbObjectAccess</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Structs/RbObjectCollection.html">RbObjectCollection</a>
+                </li>
+              </ul>
+            </li>
+            <li class="j2-nav-group">
+              <a class="j2-nav-item" href="Swift%20Method%20APIs.html">Swift Method APIs</a>
+              <ul class="j2-nav-sublist">
+                <li>
+                  <a class="j2-nav-item" href="Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Swift%20Method%20APIs.html#s11RubyGateway16RbMethodCallbacka">RbMethodCallback</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Swift%20Method%20APIs.html#s11RubyGateway21RbBoundMethodCallbacka">RbBoundMethodCallback</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Swift%20Method%20APIs.html#s11RubyGateway25RbBoundMethodVoidCallbacka">RbBoundMethodVoidCallback</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Structs/RbMethod.html">RbMethod</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Structs/RbMethodArgs.html">RbMethodArgs</a>
+                </li>
+              </ul>
+            </li>
+            <li class="j2-nav-group">
+              <a class="j2-nav-item" href="Other%20APIs.html">Other APIs</a>
+              <ul class="j2-nav-sublist">
+                <li>
+                  <a class="j2-nav-item" href="Other%20APIs.html#s11RubyGateway15RbBlockCallbacka">RbBlockCallback</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Enums/RbBlockRetention.html">RbBlockRetention</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Structs/RbBreak.html">RbBreak</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Structs/RbProc.html">RbProc</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Structs/RbSymbol.html">RbSymbol</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Enums/RbThread.html">RbThread</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Enums/RbThread/UnblockingFunc.html">– UnblockingFunc</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Enums/RbType.html">RbType</a>
+                </li>
+              </ul>
+            </li>
+            <li class="j2-nav-group">
+              <a class="j2-nav-item" href="Error%20Handling.html">Error Handling</a>
+              <ul class="j2-nav-sublist">
+                <li>
+                  <a class="j2-nav-item" href="Enums/RbError.html">RbError</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Enums/RbError/History.html">– History</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Structs/RbException.html">RbException</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Structs/RbFailableAccess.html">RbFailableAccess</a>
+                </li>
+              </ul>
+            </li>
+            <li class="j2-nav-group">
+              <a class="j2-nav-item" href="Swift%20Interop.html">Swift Interop</a>
+              <ul class="j2-nav-sublist">
+                <li>
+                  <a class="j2-nav-item" href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/String.html">String</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/Bool.html">Bool</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/UInt.html">UInt</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/UInt64.html">UInt64</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/UInt32.html">UInt32</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/UInt16.html">UInt16</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/UInt8.html">UInt8</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/Int.html">Int</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/Int64.html">Int64</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/Int32.html">Int32</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/Int16.html">Int16</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/Int8.html">Int8</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/Double.html">Double</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/Float.html">Float</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/Array.html">Array</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/ArraySlice.html">ArraySlice</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/Dictionary.html">Dictionary</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/Set.html">Set</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/Range.html">Range</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Extensions/ClosedRange.html">ClosedRange</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Structs/RbComplex.html">RbComplex</a>
+                </li>
+                <li>
+                  <a class="j2-nav-item" href="Structs/RbRational.html">RbRational</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <main class="col col-xl-8 j2-article px-lg-4 px-xl-5" id="article-column">
+        <article class="j2-article-wrapper" id="main-content">
+
+        <!-- todo top of article.... -->
+
+        <section>
+          <header>
+            <h1 class="j2-anchor">
+              <span>Swift Interop</span>
+            </h1>
+          </header>
+
+          <div class="clearfix">
             <p>These types and extensions are used to convert Swift datatypes to Ruby and vice versa.</p>
 
           </div>
         </section>
 
-        <section class="section">
-          <div class="section-content">
-            <div class="task-group">
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway19RbObjectConvertibleP"></a>
-                    <a name="//apple_ref/swift/Protocol/RbObjectConvertible" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway19RbObjectConvertibleP">RbObjectConvertible</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Protocol adopted by types that can be converted to and from <code><a href="Classes/RbObject.html">RbObject</a></code>s.</p>
+        <hr/>
+        <section>
+          <h1 class="sr-only">Topics</h1>
+          <section>
+            <section id="s11RubyGateway19RbObjectConvertibleP" class="j2-item">
+              <a name="//apple_ref/cpp/Protocol/RbObjectConvertible" class="dashAnchor"></a>
+              <h4 class="sr-only">RbObjectConvertible</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_s11RubyGateway19RbObjectConvertibleP" role="button" aria-expanded="false" aria-controls="_s11RubyGateway19RbObjectConvertibleP"><code>RbObjectConvertible</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_s11RubyGateway19RbObjectConvertibleP">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      <p>Protocol adopted by types that can be converted to and from <code><a href="Classes/RbObject.html">RbObject</a></code>s.</p>
 
-                        <a href="Protocols/RbObjectConvertible.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">RbObjectConvertible</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L16-L29">Show on GitHub</a>
-                      </div>
-                    </section>
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">public protocol RbObjectConvertible</code></pre>
+                    </div>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="Protocols/RbObjectConvertible.html">Show members</a></span>
+                      <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L16-L29">Show on GitHub</a></span>
+                    </nav>
                   </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:SS"></a>
-                    <a name="//apple_ref/swift/Extension/String" class="dashAnchor"></a>
-                    <a class="token" href="#/s:SS">String</a>
-                    </code>
+                <div>
+              </div>
+            </section>
+            <section id="sSS" class="j2-item">
+              <a name="//apple_ref/cpp/Extension/String" class="dashAnchor"></a>
+              <h4 class="sr-only">String</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_sSS" role="button" aria-expanded="false" aria-controls="_sSS"><code>String</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_sSS">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">extension <a href="https://developer.apple.com/documentation/swift/string/">String</a>: <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code></pre>
+                    </div>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="Extensions/String.html">Show members</a></span>
+                    </nav>
                   </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                        <a href="Extensions/String.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/string/">String</a></span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
+                <div>
+              </div>
+            </section>
+            <section id="sSb" class="j2-item">
+              <a name="//apple_ref/cpp/Extension/Bool" class="dashAnchor"></a>
+              <h4 class="sr-only">Bool</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_sSb" role="button" aria-expanded="false" aria-controls="_sSb"><code>Bool</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_sSb">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">extension <a href="https://developer.apple.com/documentation/swift/bool/">Bool</a>: <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code></pre>
+                    </div>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="Extensions/Bool.html">Show members</a></span>
+                    </nav>
                   </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:Sb"></a>
-                    <a name="//apple_ref/swift/Extension/Bool" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Sb">Bool</a>
-                    </code>
+                <div>
+              </div>
+            </section>
+            <section id="sSu" class="j2-item">
+              <a name="//apple_ref/cpp/Extension/UInt" class="dashAnchor"></a>
+              <h4 class="sr-only">UInt</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_sSu" role="button" aria-expanded="false" aria-controls="_sSu"><code>UInt</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_sSu">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">extension <a href="https://developer.apple.com/documentation/swift/uint/">UInt</a>: <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code></pre>
+                    </div>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="Extensions/UInt.html">Show members</a></span>
+                    </nav>
                   </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                        <a href="Extensions/Bool.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/bool/">Bool</a></span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
+                <div>
+              </div>
+            </section>
+            <section id="ss6UInt64V" class="j2-item">
+              <a name="//apple_ref/cpp/Extension/UInt64" class="dashAnchor"></a>
+              <h4 class="sr-only">UInt64</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_ss6UInt64V" role="button" aria-expanded="false" aria-controls="_ss6UInt64V"><code>UInt64</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_ss6UInt64V">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">extension <a href="https://developer.apple.com/documentation/swift/uint64/">UInt64</a>: <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code></pre>
+                    </div>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="Extensions/UInt64.html">Show members</a></span>
+                    </nav>
                   </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:Su"></a>
-                    <a name="//apple_ref/swift/Extension/UInt" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Su">UInt</a>
-                    </code>
+                <div>
+              </div>
+            </section>
+            <section id="ss6UInt32V" class="j2-item">
+              <a name="//apple_ref/cpp/Extension/UInt32" class="dashAnchor"></a>
+              <h4 class="sr-only">UInt32</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_ss6UInt32V" role="button" aria-expanded="false" aria-controls="_ss6UInt32V"><code>UInt32</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_ss6UInt32V">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">extension <a href="https://developer.apple.com/documentation/swift/uint32/">UInt32</a>: <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code></pre>
+                    </div>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="Extensions/UInt32.html">Show members</a></span>
+                    </nav>
                   </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                        <a href="Extensions/UInt.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/uint/">UInt</a></span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
+                <div>
+              </div>
+            </section>
+            <section id="ss6UInt16V" class="j2-item">
+              <a name="//apple_ref/cpp/Extension/UInt16" class="dashAnchor"></a>
+              <h4 class="sr-only">UInt16</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_ss6UInt16V" role="button" aria-expanded="false" aria-controls="_ss6UInt16V"><code>UInt16</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_ss6UInt16V">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">extension <a href="https://developer.apple.com/documentation/swift/uint16/">UInt16</a>: <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code></pre>
+                    </div>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="Extensions/UInt16.html">Show members</a></span>
+                    </nav>
                   </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:s6UInt64V"></a>
-                    <a name="//apple_ref/swift/Extension/UInt64" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s6UInt64V">UInt64</a>
-                    </code>
+                <div>
+              </div>
+            </section>
+            <section id="ss5UInt8V" class="j2-item">
+              <a name="//apple_ref/cpp/Extension/UInt8" class="dashAnchor"></a>
+              <h4 class="sr-only">UInt8</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_ss5UInt8V" role="button" aria-expanded="false" aria-controls="_ss5UInt8V"><code>UInt8</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_ss5UInt8V">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">extension <a href="https://developer.apple.com/documentation/swift/uint8/">UInt8</a>: <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code></pre>
+                    </div>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="Extensions/UInt8.html">Show members</a></span>
+                    </nav>
                   </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                        <a href="Extensions/UInt64.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/uint64/">UInt64</a></span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
+                <div>
+              </div>
+            </section>
+            <section id="sSi" class="j2-item">
+              <a name="//apple_ref/cpp/Extension/Int" class="dashAnchor"></a>
+              <h4 class="sr-only">Int</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_sSi" role="button" aria-expanded="false" aria-controls="_sSi"><code>Int</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_sSi">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">extension <a href="https://developer.apple.com/documentation/swift/int/">Int</a>: <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code></pre>
+                    </div>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="Extensions/Int.html">Show members</a></span>
+                    </nav>
                   </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:s6UInt32V"></a>
-                    <a name="//apple_ref/swift/Extension/UInt32" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s6UInt32V">UInt32</a>
-                    </code>
+                <div>
+              </div>
+            </section>
+            <section id="ss5Int64V" class="j2-item">
+              <a name="//apple_ref/cpp/Extension/Int64" class="dashAnchor"></a>
+              <h4 class="sr-only">Int64</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_ss5Int64V" role="button" aria-expanded="false" aria-controls="_ss5Int64V"><code>Int64</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_ss5Int64V">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">extension <a href="https://developer.apple.com/documentation/swift/int64/">Int64</a>: <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code></pre>
+                    </div>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="Extensions/Int64.html">Show members</a></span>
+                    </nav>
                   </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                        <a href="Extensions/UInt32.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/uint32/">UInt32</a></span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
+                <div>
+              </div>
+            </section>
+            <section id="ss5Int32V" class="j2-item">
+              <a name="//apple_ref/cpp/Extension/Int32" class="dashAnchor"></a>
+              <h4 class="sr-only">Int32</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_ss5Int32V" role="button" aria-expanded="false" aria-controls="_ss5Int32V"><code>Int32</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_ss5Int32V">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">extension <a href="https://developer.apple.com/documentation/swift/int32/">Int32</a>: <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code></pre>
+                    </div>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="Extensions/Int32.html">Show members</a></span>
+                    </nav>
                   </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:s6UInt16V"></a>
-                    <a name="//apple_ref/swift/Extension/UInt16" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s6UInt16V">UInt16</a>
-                    </code>
+                <div>
+              </div>
+            </section>
+            <section id="ss5Int16V" class="j2-item">
+              <a name="//apple_ref/cpp/Extension/Int16" class="dashAnchor"></a>
+              <h4 class="sr-only">Int16</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_ss5Int16V" role="button" aria-expanded="false" aria-controls="_ss5Int16V"><code>Int16</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_ss5Int16V">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">extension <a href="https://developer.apple.com/documentation/swift/int16/">Int16</a>: <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code></pre>
+                    </div>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="Extensions/Int16.html">Show members</a></span>
+                    </nav>
                   </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                        <a href="Extensions/UInt16.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/uint16/">UInt16</a></span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
+                <div>
+              </div>
+            </section>
+            <section id="ss4Int8V" class="j2-item">
+              <a name="//apple_ref/cpp/Extension/Int8" class="dashAnchor"></a>
+              <h4 class="sr-only">Int8</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_ss4Int8V" role="button" aria-expanded="false" aria-controls="_ss4Int8V"><code>Int8</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_ss4Int8V">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">extension <a href="https://developer.apple.com/documentation/swift/int8/">Int8</a>: <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code></pre>
+                    </div>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="Extensions/Int8.html">Show members</a></span>
+                    </nav>
                   </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:s5UInt8V"></a>
-                    <a name="//apple_ref/swift/Extension/UInt8" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s5UInt8V">UInt8</a>
-                    </code>
+                <div>
+              </div>
+            </section>
+            <section id="sSd" class="j2-item">
+              <a name="//apple_ref/cpp/Extension/Double" class="dashAnchor"></a>
+              <h4 class="sr-only">Double</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_sSd" role="button" aria-expanded="false" aria-controls="_sSd"><code>Double</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_sSd">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">extension <a href="https://developer.apple.com/documentation/swift/double/">Double</a>: <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code></pre>
+                    </div>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="Extensions/Double.html">Show members</a></span>
+                    </nav>
                   </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                        <a href="Extensions/UInt8.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/uint8/">UInt8</a></span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
+                <div>
+              </div>
+            </section>
+            <section id="sSf" class="j2-item">
+              <a name="//apple_ref/cpp/Extension/Float" class="dashAnchor"></a>
+              <h4 class="sr-only">Float</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_sSf" role="button" aria-expanded="false" aria-controls="_sSf"><code>Float</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_sSf">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">extension <a href="https://developer.apple.com/documentation/swift/float/">Float</a>: <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code></pre>
+                    </div>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="Extensions/Float.html">Show members</a></span>
+                    </nav>
                   </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:Si"></a>
-                    <a name="//apple_ref/swift/Extension/Int" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Si">Int</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                        <a href="Extensions/Int.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/int/">Int</a></span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:s5Int64V"></a>
-                    <a name="//apple_ref/swift/Extension/Int64" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s5Int64V">Int64</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                        <a href="Extensions/Int64.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/int64/">Int64</a></span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:s5Int32V"></a>
-                    <a name="//apple_ref/swift/Extension/Int32" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s5Int32V">Int32</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                        <a href="Extensions/Int32.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/int32/">Int32</a></span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:s5Int16V"></a>
-                    <a name="//apple_ref/swift/Extension/Int16" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s5Int16V">Int16</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                        <a href="Extensions/Int16.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/int16/">Int16</a></span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:s4Int8V"></a>
-                    <a name="//apple_ref/swift/Extension/Int8" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s4Int8V">Int8</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                        <a href="Extensions/Int8.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/int8/">Int8</a></span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:Sd"></a>
-                    <a name="//apple_ref/swift/Extension/Double" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Sd">Double</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                        <a href="Extensions/Double.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/double/">Double</a></span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:Sf"></a>
-                    <a name="//apple_ref/swift/Extension/Float" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Sf">Float</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                        <a href="Extensions/Float.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/float/">Float</a></span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:Sa"></a>
-                    <a name="//apple_ref/swift/Extension/Array" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Sa">Array</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>These methods are available only when the array <code><a href="https://developer.apple.com/documentation/swiftui/path/element/">Element</a></code> type conforms
+                <div>
+              </div>
+            </section>
+            <section id="sSa" class="j2-item">
+              <a name="//apple_ref/cpp/Extension/Array" class="dashAnchor"></a>
+              <h4 class="sr-only">Array</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_sSa" role="button" aria-expanded="false" aria-controls="_sSa"><code>Array</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_sSa">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      <p>These methods are available only when the array <code><a href="https://developer.apple.com/documentation/swiftui/path/element/">Element</a></code> type conforms
 to <code><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code>.</p>
 
-                        <a href="Extensions/Array.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/array/">Array</a></span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span> <span class="k">where</span> <span class="kt"><a href="https://developer.apple.com/documentation/swiftui/path/element/">Element</a></span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">extension <a href="https://developer.apple.com/documentation/swift/array/">Array</a>: <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a> where <a href="https://developer.apple.com/documentation/swiftui/path/element/">Element</a>: <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code></pre>
+                    </div>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="Extensions/Array.html">Show members</a></span>
+                    </nav>
                   </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:s10ArraySliceV"></a>
-                    <a name="//apple_ref/swift/Extension/ArraySlice" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s10ArraySliceV">ArraySlice</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>These methods are available only when the array slice <code><a href="https://developer.apple.com/documentation/swiftui/path/element/">Element</a></code> type
+                <div>
+              </div>
+            </section>
+            <section id="ss10ArraySliceV" class="j2-item">
+              <a name="//apple_ref/cpp/Extension/ArraySlice" class="dashAnchor"></a>
+              <h4 class="sr-only">ArraySlice</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_ss10ArraySliceV" role="button" aria-expanded="false" aria-controls="_ss10ArraySliceV"><code>ArraySlice</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_ss10ArraySliceV">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      <p>These methods are available only when the array slice <code><a href="https://developer.apple.com/documentation/swiftui/path/element/">Element</a></code> type
 conforms to <code><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code>.</p>
 
-                        <a href="Extensions/ArraySlice.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/arrayslice/">ArraySlice</a></span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span> <span class="k">where</span> <span class="kt"><a href="https://developer.apple.com/documentation/swiftui/path/element/">Element</a></span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">extension <a href="https://developer.apple.com/documentation/swift/arrayslice/">ArraySlice</a>: <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a> where <a href="https://developer.apple.com/documentation/swiftui/path/element/">Element</a>: <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code></pre>
+                    </div>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="Extensions/ArraySlice.html">Show members</a></span>
+                    </nav>
                   </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:SD"></a>
-                    <a name="//apple_ref/swift/Extension/Dictionary" class="dashAnchor"></a>
-                    <a class="token" href="#/s:SD">Dictionary</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>These methods are available only when both the dictionary <code><a href="https://developer.apple.com/documentation/appkit/nsviewanimation/key/">Key</a></code> <em>and</em> <code><a href="https://developer.apple.com/documentation/coremedia/cmattachmentbearerattachments/value/">Value</a></code>
+                <div>
+              </div>
+            </section>
+            <section id="sSD" class="j2-item">
+              <a name="//apple_ref/cpp/Extension/Dictionary" class="dashAnchor"></a>
+              <h4 class="sr-only">Dictionary</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_sSD" role="button" aria-expanded="false" aria-controls="_sSD"><code>Dictionary</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_sSD">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      <p>These methods are available only when both the dictionary <code><a href="https://developer.apple.com/documentation/appkit/nsviewanimation/key/">Key</a></code> <em>and</em> <code><a href="https://developer.apple.com/documentation/coremedia/cmattachmentbearerattachments/value/">Value</a></code>
 types conform to <code><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code>.</p>
 
-                        <a href="Extensions/Dictionary.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/dictionary/">Dictionary</a></span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span> <span class="k">where</span> <span class="kt"><a href="https://developer.apple.com/documentation/appkit/nsviewanimation/key/">Key</a></span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span><span class="p">,</span> <span class="kt"><a href="https://developer.apple.com/documentation/coremedia/cmattachmentbearerattachments/value/">Value</a></span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">extension <a href="https://developer.apple.com/documentation/swift/dictionary/">Dictionary</a>: <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a> where <a href="https://developer.apple.com/documentation/appkit/nsviewanimation/key/">Key</a>: <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a>, <a href="https://developer.apple.com/documentation/coremedia/cmattachmentbearerattachments/value/">Value</a>: <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code></pre>
+                    </div>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="Extensions/Dictionary.html">Show members</a></span>
+                    </nav>
                   </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:Sh"></a>
-                    <a name="//apple_ref/swift/Extension/Set" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Sh">Set</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>These methods are available only when the set <code><a href="https://developer.apple.com/documentation/swiftui/path/element/">Element</a></code> type conforms
+                <div>
+              </div>
+            </section>
+            <section id="sSh" class="j2-item">
+              <a name="//apple_ref/cpp/Extension/Set" class="dashAnchor"></a>
+              <h4 class="sr-only">Set</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_sSh" role="button" aria-expanded="false" aria-controls="_sSh"><code>Set</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_sSh">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      <p>These methods are available only when the set <code><a href="https://developer.apple.com/documentation/swiftui/path/element/">Element</a></code> type conforms
 to <code><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code>.</p>
 
-                        <a href="Extensions/Set.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/set/">Set</a></span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span> <span class="k">where</span> <span class="kt"><a href="https://developer.apple.com/documentation/swiftui/path/element/">Element</a></span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">extension <a href="https://developer.apple.com/documentation/swift/set/">Set</a>: <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a> where <a href="https://developer.apple.com/documentation/swiftui/path/element/">Element</a>: <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code></pre>
+                    </div>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="Extensions/Set.html">Show members</a></span>
+                    </nav>
                   </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:Sn"></a>
-                    <a name="//apple_ref/swift/Extension/Range" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Sn">Range</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>These methods are available only when the range <code>Bound</code> type conforms to
+                <div>
+              </div>
+            </section>
+            <section id="sSn" class="j2-item">
+              <a name="//apple_ref/cpp/Extension/Range" class="dashAnchor"></a>
+              <h4 class="sr-only">Range</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_sSn" role="button" aria-expanded="false" aria-controls="_sSn"><code>Range</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_sSn">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      <p>These methods are available only when the range <code>Bound</code> type conforms to
 <code><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code>.</p>
 
-                        <a href="Extensions/Range.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/range/">Range</a></span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span> <span class="k">where</span> <span class="kt">Bound</span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">extension <a href="https://developer.apple.com/documentation/swift/range/">Range</a>: <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a> where Bound: <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code></pre>
+                    </div>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="Extensions/Range.html">Show members</a></span>
+                    </nav>
                   </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:SN"></a>
-                    <a name="//apple_ref/swift/Extension/ClosedRange" class="dashAnchor"></a>
-                    <a class="token" href="#/s:SN">ClosedRange</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>These methods are available only when the range <code>Bound</code> type conforms to
+                <div>
+              </div>
+            </section>
+            <section id="sSN" class="j2-item">
+              <a name="//apple_ref/cpp/Extension/ClosedRange" class="dashAnchor"></a>
+              <h4 class="sr-only">ClosedRange</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_sSN" role="button" aria-expanded="false" aria-controls="_sSN"><code>ClosedRange</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_sSN">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      <p>These methods are available only when the range <code>Bound</code> type conforms to
 <code><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code>.</p>
 
-                        <a href="Extensions/ClosedRange.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="https://developer.apple.com/documentation/swift/closedrange/">ClosedRange</a></span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span> <span class="k">where</span> <span class="kt">Bound</span><span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">extension <a href="https://developer.apple.com/documentation/swift/closedrange/">ClosedRange</a>: <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a> where Bound: <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code></pre>
+                    </div>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="Extensions/ClosedRange.html">Show members</a></span>
+                    </nav>
                   </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway9RbComplexV"></a>
-                    <a name="//apple_ref/swift/Struct/RbComplex" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway9RbComplexV">RbComplex</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A simple interface to Ruby&rsquo;s complex number support.</p>
+                <div>
+              </div>
+            </section>
+            <section id="s11RubyGateway9RbComplexV" class="j2-item">
+              <a name="//apple_ref/cpp/Struct/RbComplex" class="dashAnchor"></a>
+              <h4 class="sr-only">RbComplex</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_s11RubyGateway9RbComplexV" role="button" aria-expanded="false" aria-controls="_s11RubyGateway9RbComplexV"><code>RbComplex</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_s11RubyGateway9RbComplexV">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      <p>A simple interface to Ruby&rsquo;s complex number support.</p>
 
 <p>This is not a Swift complex number library.  It could be used
 as an interface between one such and Ruby.</p>
@@ -844,36 +780,30 @@ as an interface between one such and Ruby.</p>
 <p>Ruby always represents complex numbers internally using rectangular coordinates
 so this type does not offer any direct support for polar coordinates.</p>
 
-                        <a href="Structs/RbComplex.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RbComplex</span> <span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
-
-                        </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbComplex.swift#L16-L71">Show on GitHub</a>
-                      </div>
-                    </section>
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">public struct RbComplex : <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code></pre>
+                    </div>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="Structs/RbComplex.html">Show members</a></span>
+                      <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbComplex.swift#L16-L71">Show on GitHub</a></span>
+                    </nav>
                   </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11RubyGateway10RbRationalV"></a>
-                    <a name="//apple_ref/swift/Struct/RbRational" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11RubyGateway10RbRationalV">RbRational</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A simple interface to Ruby&rsquo;s rational number support.</p>
+                <div>
+              </div>
+            </section>
+            <section id="s11RubyGateway10RbRationalV" class="j2-item">
+              <a name="//apple_ref/cpp/Struct/RbRational" class="dashAnchor"></a>
+              <h4 class="sr-only">RbRational</h4>
+              <a class="j2-item-title" data-toggle="collapse" href="#_s11RubyGateway10RbRationalV" role="button" aria-expanded="false" aria-controls="_s11RubyGateway10RbRationalV"><code>RbRational</code></a>
+              <div class="collapse j2-item-popopen-wrapper" id="_s11RubyGateway10RbRationalV">
+                <div class="j2-item-popopen">
+                  <div class="j2-item-popopen-pointer" role="none"></div>
+                  <div class="j2-item-popopen-body">
+                    <div class="clearfix">
+                      <p>A simple interface to Ruby&rsquo;s rational number support.</p>
 
 <p>This is not a Swift rational number library.  It could be used
 as an interface between one such and Ruby.</p>
@@ -881,42 +811,67 @@ as an interface between one such and Ruby.</p>
 <p>Ruby represents rational numbers internally as a positive or negative
 integer numerator and a positive integer denominator.  Instances of this
 <code>RbRational</code> type converted from Ruby objects follow these rules; instances
-produced by Swift code using the <code><a href="Structs/RbRational.html#/s:11RubyGateway10RbRationalV9numerator11denominatorACSd_Sdtcfc">RbRational.init(numerator:denominator:)</a></code>
+produced by Swift code using the <code><a href="Structs/RbRational.html#s11RubyGateway10RbRationalV9numerator11denominatorACSd_Sdtcfc">RbRational.init(numerator:denominator:)</a></code>
 method may not.</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">myRat</span> <span class="o">=</span> <span class="kt">RbRational</span><span class="p">(</span><span class="nv">numerator</span><span class="p">:</span> <span class="n">myFractionTop</span><span class="p">,</span> <span class="nv">denominator</span><span class="p">:</span> <span class="n">myFractionBot</span><span class="p">)</span>
+<pre><code class="language-swift">let myRat = RbRational(numerator: myFractionTop, denominator: myFractionBot)
 
-<span class="k">let</span> <span class="nv">resultObj</span> <span class="o">=</span> <span class="n">myRubyService</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s">"addFinalSample"</span><span class="p">,</span> <span class="nv">args</span><span class="p">:</span> <span class="p">[</span><span class="n">myRat</span><span class="p">])</span>
+let resultObj = myRubyService.call(&quot;addFinalSample&quot;, args: [myRat])
 
-<span class="k">let</span> <span class="nv">myRatResult</span> <span class="o">=</span> <span class="kt">RbRational</span><span class="p">(</span><span class="n">resultObj</span><span class="p">)</span>
+let myRatResult = RbRational(resultObj)
 </code></pre>
-
-                        <a href="Structs/RbRational.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RbRational</span> <span class="p">:</span> <span class="kt"><a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></span></code></pre>
-
-                        </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbRational.swift#L26-L86">Show on GitHub</a>
-                      </div>
-                    </section>
+                    </div>
+                    <h5>Declaration</h5>
+                    <div class="j2-item-declaration">
+                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+                    <pre><code class="language-swift">public struct RbRational : <a href="Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code></pre>
+                    </div>
+                    <nav class="j2-item-nav" aria-label="item details">
+                      <span class="j2-item-nav-item"><a href="Structs/RbRational.html">Show members</a></span>
+                      <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbRational.swift#L26-L86">Show on GitHub</a></span>
+                    </nav>
                   </div>
-                </li>
-              </ul>
-            </div>
-          </div>
+                <div>
+              </div>
+            </section>
+          </section>
         </section>
 
-      </article>
-    </div>
-    <section class="footer">
-      <p>Distributed under the MIT license.  Maintained by <a class="link" href="mailto:johnfairh@gmail.com" target="_blank" rel="external">John Fairhurst</a>.</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.0</a>-<a class="link" href="https://github.com/johnfairh/jazzy" target="_blank" rel="external">bebop</a>, originally a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
-    </section>
+        </article>
+      </main>
+
+      <!-- aux nav -->
+
+      <div class="col-xl d-none d-xl-block j2-aux-nav" id="aux-nav-column">
+        <div class="j2-aux-nav-wrapper">
+          <h6 class="j2-inline-heading">Topics</h6>
+          <nav aria-label="page">
+            <ul class="j2-aux-group">
+              <li><a href="#">Declaration</a></li>
+            </ul>
+          </nav>
+          <h6 class="j2-inline-heading">Actions</h6>
+          <ul class="j2-aux-group">
+            <li><a class="j2-aux-action" id="action-search" href="#" role="button" aria-keyshortcuts="/">Search (/)</a></li>
+            <li><a class="j2-aux-action" id="action-collapse" href="#" role="button" aria-keyshortcuts="a">
+              <span id="action-collapse-expand">Open all (a)</span>
+              <span id="action-collapse-collapse" class="d-none">Close all (a)</span>
+            </a></li>
+          </ul>
+        </div>
+      </div>
+
+    </div> <!-- end row -->
+
+    <footer class="row">
+      <div class="col j2-footer small pt-2">
+        <p><p>Distributed under the MIT license.  Maintained by <a class="link" href="mailto:johnfairh@gmail.com" target="_blank" rel="external">John Fairhurst</a>.</p></p>
+        <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>-<a class="link" href="https://github.com/johnfairh/jazzy" target="_blank" rel="external">bebop</a>, originally a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.  Theme from <a href="https://github.com/johnfairh/J2">J2</a>.</p>
+      </div>
+    </footer>
+  </div> <!-- container -->
+
+  <script src="js/dependencies.min.js"></script>
+  <script src="js/fw2020.js"></script>
   </body>
-</div>
+
 </html>
