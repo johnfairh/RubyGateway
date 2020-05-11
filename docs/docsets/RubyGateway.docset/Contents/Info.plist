@@ -3,7 +3,7 @@
 <plist version="1.0">
   <dict>
     <key>CFBundleIdentifier</key>
-      <string>com.jazzy.rubygateway</string>
+      <string>com.bebop.rubygateway</string>
     <key>CFBundleName</key>
       <string>RubyGateway</string>
     <key>DocSetPlatformFamily</key>
@@ -16,5 +16,8 @@
       <true/>
     <key>DashDocSetFamily</key>
       <string>dashtoc</string>
+    
+    <key>DashDocSetFallbackURL</key>
+   <string>https://johnfairh.github.io/RubyGateway/</string>
   </dict>
 </plist>

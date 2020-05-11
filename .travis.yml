@@ -1,12 +1,12 @@
 language: objective-c
-osx_image: xcode11.2
+osx_image: xcode11.4
 before_install:
     - gem install rouge
     - gem install wikipedia-client
 script:
     - swift package update
     - swift package edit CRuby
-    - Packages/CRuby/cfg-cruby --mode rvm --name ruby-2.6.4
+    - Packages/CRuby/cfg-cruby --mode rvm --name ruby-2.6.6
     - cat Packages/CRuby/CRuby.pc
     - sed -ie 's/-lgmp//' Packages/CRuby/CRuby.pc
     - export PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH
