@@ -6,367 +6,932 @@
  
     <link rel="stylesheet" href="../css/fw2020.css">
     
-    <title>Double Extension Reference</title>
+    
+   <title>Double - RubyGateway 3.2.0 docs</title>
     
   </head>
-  <body data-root-path="./../">
+  <body class="j2-swift " data-root-path="./../" data-doc-path="extensions/double.html" data-assets-path="../">
+
+  <!-- messages for search -->
+  <div hidden>
+    <span id="text-loading">Loading index...</span>
+    <span id="text-failed">Failed to load index</span>
+    <span id="text-notfound">No matches</span>
+  </div>
 
   <header class="j2-header">
   <div class="navbar navbar-expand navbar-dark j2-titlebar">
-    <a class="sr-only-focusable sr-only font-weight-slightly-bold pr-2" href="#main-content">Skip to main content</a>
-    <a class="nav-item nav-link pl-0 pt-1 pr-2 d-md-none" id="nav-toggle-button" role="button" aria-controls="nav-column" aria-expanded="false" aria-label="Toggle navigation" href="#">
-      <span class="navbar-toggler-icon"></span>
-    </a>
-  
-    <div style="align-items-baseline">
-      <div class="navbar-brand mr-1 font-weight-slightly-bold">
-        <a href="../index.html">RubyGateway 3.2.0 Docs</a>
-      </div>
-      <span class="navbar-text j2-coverage font-weight-slightly-bold small d-none d-lg-inline-block mr-2">(100% documented)</span>
+  <a class="sr-only-focusable sr-only font-weight-slightly-bold pr-2" href="#main-content">Skip to main content</a>
+  <a class="nav-item nav-link pl-0 pt-1 pr-2 d-md-none" id="nav-toggle-button" role="button" aria-controls="nav-column" aria-expanded="false" aria-label="Toggle navigation" href="#">
+    <span class="navbar-toggler-icon"></span>
+  </a>
+
+  <div style="align-items-baseline">
+    <div class="navbar-brand mr-1 font-weight-slightly-bold">
+      
+      <a href="../index.html">
+      
+      RubyGateway 3.2.0 docs</a>
     </div>
-  
-    <div class="navbar-nav ml-auto justify-content-end flex-fill">
-  
-      <form class="form-inline d-none d-md-flex" role="search">
-        <input class="form-control form-control-sm w-100" type="search" placeHolder="Search" aria-label="Search" aria-keyshortcuts="/" data-search-format="span">
-      </form>
-  
-      <a class="nav-item nav-link d-none d-sm-inline" rel="external" href="https://github.com/johnfairh/RubyGateway">
-        <svg class="j2-title-svg" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 16 16"><title>Open on GitHub</title><path fill="currentcolor" fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
-        </svg>
-      </a>
-  
-    </div>
-  </div>
-  
-  <!-- narrow-style searchbar -->
-  
-  <div class="container-fluid j2-titlebar d-md-none">
-    <div class="row">
-      <div class="col">
-        <form class="pb-2">
-          <input class="form-control form-control-sm" type="search" placeHolder="Search" aria-label="Search" aria-keyshortcuts="/" data-search-format="div">
-        </form>
-      </div>
-    </div>
+    
+    <span class="navbar-text j2-coverage font-weight-slightly-bold small d-none d-lg-inline-block mr-2">(100% documented)</span>
+    
   </div>
 
-  <!-- breadcrumb bar, jazzy doesn't really support -->
+  <div class="navbar-nav ml-auto justify-content-end flex-fill">
+
+    
+    <form class="form-inline d-none d-md-flex" role="search">
+      <input class="form-control form-control-sm w-100" type="search" placeHolder="Search" aria-label="Search" aria-keyshortcuts="/" data-search-format="span">
+    </form>
+    
+
+    
+
+    
+    <a class="nav-item nav-link d-none d-sm-inline" rel="external" href="https://github.com/johnfairh/RubyGateway">
+      <svg class="j2-title-svg" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 16 16"><title>Open on GitHub</title><path fill="currentcolor" fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+      </svg>
+    </a>
+    
+    
+    
+    
+
+    
+      <a class="nav-item nav-link d-none d-sm-inline" rel="alternate" href="dash-feed://https%3A%2F%2Fjohnfairh%2Egithub%2Eio%2FRubyGateway%2Fdocsets%2FRubyGateway%2Exml">
+      <svg class="j2-title-svg" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 700 670">
+        <title>Open in Dash</title>
+        <path fill="currentcolor" d="m0 0 132.58 160.54h130.76v0.0312c63.501 0.196 140.87-6.9887 193.12 10.227 26.125 8.6076 43.475 19.899 57.578 40.781 14.103 20.882 26.733 55.737 25.781 118.52-0.8784 57.953-16.7 88.91-38.672 112.89-21.972 23.98-54.208 41.154-90.703 51.953-28.462 8.4219-55.314 10.153-80.547 11.953v-266.25h-160v419.92l71.328 7.8125s103.75 12.802 214.61-20c55.429-16.401 115.46-45.078 163.28-97.266 47.816-52.187 79.327-127.83 80.703-218.59 1.3028-85.935-16.743-156.6-53.125-210.47-36.382-53.871-89.369-86.47-140.16-103.2-50.787-16.733-101.87-18.272-145.08-18.504-43.211-0.2316-78.502 0.0768-97.578 0.0176v2e-3h-131.31z"/>
+      </svg>
+    </a>
+    
+
+    
+
+  </div>
+</div>
+
+<!-- narrow-style searchbar -->
+
+
+<div class="container-fluid j2-titlebar d-md-none">
+  <div class="row">
+    <div class="col">
+      <form class="pb-2">
+        <input class="form-control form-control-sm" type="search" placeHolder="Search" aria-label="Search" aria-keyshortcuts="/" data-search-format="div">
+      </form>
+    </div>
+  </div>
+</div>
+
 
   <nav aria-label="breadcrumb" class="small">
-    <ol class="breadcrumb j2-breadcrumb">
-      <li class="breadcrumb-item"><a href="../index.html">RubyGateway Reference</a></li>
-      <li class="breadcrumb-item" aria-current="page">Double Extension Reference</li>
+  
+  
+    <ol class="breadcrumb j2-breadcrumb j2-swift">
+      <li class="breadcrumb-item"><a href="../index.html">RubyGateway</a></li>
+      
+        
+          <li class="breadcrumb-item"><a href="../swift-interop.html?swift">Swift Interop</a></li>
+        
+        
+      
+        
+        
+          <li class="breadcrumb-item" aria-current="page">Swift.Double</li>
+        
+      
     </ol>
-  </nav>
+  
+</nav>
 
   </header>
 
   <div class="container-fluid">
     <div class="row">
       <div class="col-auto d-none d-md-flex flex-column j2-nav" id="nav-column">
-        <nav aria-label="swift" class="j2-swift">
-          <ul class="j2-nav-list">
-            <li class="j2-nav-group">
-              <a class="j2-nav-item" href="../Guides.html">Guides</a>
-              <ul class="j2-nav-sublist">
-                <li>
-                  <a class="j2-nav-item" href="../user-guide.html">User Guide</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../todo.html">TODO</a>
-                </li>
-              </ul>
-            </li>
-            <li class="j2-nav-group">
-              <a class="j2-nav-item" href="../Main%20APIs.html">Main APIs</a>
-              <ul class="j2-nav-sublist">
-                <li>
-                  <a class="j2-nav-item" href="../Classes/RbGateway.html">RbGateway</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Classes/RbGateway/Verbosity.html">– Verbosity</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Classes/RbObject.html">RbObject</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Classes/RbObjectAccess.html">RbObjectAccess</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Structs/RbObjectCollection.html">RbObjectCollection</a>
-                </li>
-              </ul>
-            </li>
-            <li class="j2-nav-group">
-              <a class="j2-nav-item" href="../Swift%20Method%20APIs.html">Swift Method APIs</a>
-              <ul class="j2-nav-sublist">
-                <li>
-                  <a class="j2-nav-item" href="../Structs/RbMethodArgsSpec.html">RbMethodArgsSpec</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Swift%20Method%20APIs.html#s11RubyGateway16RbMethodCallbacka">RbMethodCallback</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Swift%20Method%20APIs.html#s11RubyGateway21RbBoundMethodCallbacka">RbBoundMethodCallback</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Swift%20Method%20APIs.html#s11RubyGateway25RbBoundMethodVoidCallbacka">RbBoundMethodVoidCallback</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Structs/RbMethod.html">RbMethod</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Structs/RbMethodArgs.html">RbMethodArgs</a>
-                </li>
-              </ul>
-            </li>
-            <li class="j2-nav-group">
-              <a class="j2-nav-item" href="../Other%20APIs.html">Other APIs</a>
-              <ul class="j2-nav-sublist">
-                <li>
-                  <a class="j2-nav-item" href="../Other%20APIs.html#s11RubyGateway15RbBlockCallbacka">RbBlockCallback</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Enums/RbBlockRetention.html">RbBlockRetention</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Structs/RbBreak.html">RbBreak</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Structs/RbProc.html">RbProc</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Structs/RbSymbol.html">RbSymbol</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Enums/RbThread.html">RbThread</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Enums/RbThread/UnblockingFunc.html">– UnblockingFunc</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Enums/RbType.html">RbType</a>
-                </li>
-              </ul>
-            </li>
-            <li class="j2-nav-group">
-              <a class="j2-nav-item" href="../Error%20Handling.html">Error Handling</a>
-              <ul class="j2-nav-sublist">
-                <li>
-                  <a class="j2-nav-item" href="../Enums/RbError.html">RbError</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Enums/RbError/History.html">– History</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Structs/RbException.html">RbException</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Structs/RbFailableAccess.html">RbFailableAccess</a>
-                </li>
-              </ul>
-            </li>
-            <li class="j2-nav-group">
-              <a class="j2-nav-item" href="../Swift%20Interop.html">Swift Interop</a>
-              <ul class="j2-nav-sublist">
-                <li>
-                  <a class="j2-nav-item" href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Extensions/String.html">String</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Extensions/Bool.html">Bool</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Extensions/UInt.html">UInt</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Extensions/UInt64.html">UInt64</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Extensions/UInt32.html">UInt32</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Extensions/UInt16.html">UInt16</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Extensions/UInt8.html">UInt8</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Extensions/Int.html">Int</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Extensions/Int64.html">Int64</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Extensions/Int32.html">Int32</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Extensions/Int16.html">Int16</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Extensions/Int8.html">Int8</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Extensions/Double.html">Double</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Extensions/Float.html">Float</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Extensions/Array.html">Array</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Extensions/ArraySlice.html">ArraySlice</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Extensions/Dictionary.html">Dictionary</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Extensions/Set.html">Set</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Extensions/Range.html">Range</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Extensions/ClosedRange.html">ClosedRange</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Structs/RbComplex.html">RbComplex</a>
-                </li>
-                <li>
-                  <a class="j2-nav-item" href="../Structs/RbRational.html">RbRational</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-      </div>
+  
+    <nav aria-label="Swift" class="j2-swift">
+    <ul class="j2-nav-list">
+      
+      <li class="j2-nav-group">
+        
+
+  <a class="j2-nav-item" href="../guides.html?swift">Guides</a>
+
+
+  <ul class="j2-nav-sublist">
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../guides/user-guide.html?swift">User Guide</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../guides/todo.html?swift">TODO</a>
+
+
+
+  </li>
+  
+</ul>
+
+
+
+      </li>
+      
+      <li class="j2-nav-group">
+        
+
+  <a class="j2-nav-item" href="../main-apis.html?swift">Main APIs</a>
+
+
+  <ul class="j2-nav-sublist">
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbgateway1.html?swift">RbGateway</a>
+
+
+  <ul class="j2-nav-sublist">
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbgateway1/verbosity.html?swift">Verbosity</a>
+
+
+
+  </li>
+  
+</ul>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbobject13.html?swift">RbObject</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbobjectaccess1.html?swift">RbObjectAccess</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbobjectcollection.html?swift">RbObjectCollection</a>
+
+
+
+  </li>
+  
+</ul>
+
+
+
+      </li>
+      
+      <li class="j2-nav-group">
+        
+
+  <a class="j2-nav-item" href="../swift-method-apis.html?swift">Swift Method APIs</a>
+
+
+  <ul class="j2-nav-sublist">
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbmethodargsspec.html?swift">RbMethodArgsSpec</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../swift-method-apis.html?swift#rbmethodcallback">RbMethodCallback</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../swift-method-apis.html?swift#rbboundmethodcallback">RbBoundMethodCallback</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../swift-method-apis.html?swift#rbboundmethodvoidcallback">RbBoundMethodVoidCallback</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbmethod.html?swift">RbMethod</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbmethodargs.html?swift">RbMethodArgs</a>
+
+
+
+  </li>
+  
+</ul>
+
+
+
+      </li>
+      
+      <li class="j2-nav-group">
+        
+
+  <a class="j2-nav-item" href="../other-apis.html?swift">Other APIs</a>
+
+
+  <ul class="j2-nav-sublist">
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../other-apis.html?swift#rbblockcallback">RbBlockCallback</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbblockretention.html?swift">RbBlockRetention</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbbreak.html?swift">RbBreak</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbproc.html?swift">RbProc</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbsymbol.html?swift">RbSymbol</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbthread.html?swift">RbThread</a>
+
+
+  <ul class="j2-nav-sublist">
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbthread/unblockingfunc.html?swift">UnblockingFunc</a>
+
+
+
+  </li>
+  
+</ul>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbtype.html?swift">RbType</a>
+
+
+
+  </li>
+  
+</ul>
+
+
+
+      </li>
+      
+      <li class="j2-nav-group">
+        
+
+  <a class="j2-nav-item" href="../error-handling.html?swift">Error Handling</a>
+
+
+  <ul class="j2-nav-sublist">
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rberror.html?swift">RbError</a>
+
+
+  <ul class="j2-nav-sublist">
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rberror/history.html?swift">History</a>
+
+
+
+  </li>
+  
+</ul>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbexception.html?swift">RbException</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbfailableaccess.html?swift">RbFailableAccess</a>
+
+
+
+  </li>
+  
+</ul>
+
+
+
+      </li>
+      
+      <li class="j2-nav-group">
+        
+
+  <a class="j2-nav-item" href="../swift-interop.html?swift">Swift Interop</a>
+
+
+  <ul class="j2-nav-sublist">
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/string.html?swift">String</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/bool.html?swift">Bool</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/uint.html?swift">UInt</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/uint64.html?swift">UInt64</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/uint32.html?swift">UInt32</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/uint16.html?swift">UInt16</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/uint8.html?swift">UInt8</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/int.html?swift">Int</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/int64.html?swift">Int64</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/int32.html?swift">Int32</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/int16.html?swift">Int16</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/int8.html?swift">Int8</a>
+
+
+
+  </li>
+  
+  <li>
+    
+  <a class="j2-nav-item active" href="#" aria-current="page">Double</a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/float.html?swift">Float</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/array.html?swift">Array</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/arrayslice.html?swift">ArraySlice</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/dictionary.html?swift">Dictionary</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/set.html?swift">Set</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/range.html?swift">Range</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/closedrange.html?swift">ClosedRange</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbcomplex.html?swift">RbComplex</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbrational.html?swift">RbRational</a>
+
+
+
+  </li>
+  
+</ul>
+
+
+
+      </li>
+      
+    </ul>
+  </nav>
+  
+</div>
+
       <main class="col col-xl-8 j2-article px-lg-4 px-xl-5" id="article-column">
         <article class="j2-article-wrapper" id="main-content">
 
-        <!-- todo top of article.... -->
-
         <section>
+          
           <header>
             <h1 class="j2-anchor">
+              
+              
               <span>Double</span>
+              
             </h1>
           </header>
-          <div class="j2-callout j2-callout-declaration">
-            <div class="j2-callout-title" role="heading" aria-level="5">Swift?</div>
-            <pre><code class="language-swift">extension <a href="https://developer.apple.com/documentation/swift/double/">Double</a>: <a href="../Protocols/RbObjectConvertible.html">RbObjectConvertible</a></code></pre>
+          
+          
+          
+          <div class="j2-callout  j2-callout-declaration">
+            
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">extension <a href="https://developer.apple.com/documentation/swift/double?language=swift">Double</a>: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a></code></pre>
+  </div>
+
+
+
           </div>
 
           <div class="clearfix">
             
+  
+
+
+            
+
+
+<p>A double-precision, floating-point value type.</p>
+
+
+
+
+            
+
+
           </div>
+          
+          
+          <nav aria-label="item details" class="j2-main-item-nav">
+            <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L240-L269">Show on GitHub</a>
+          </nav>
+          
+          
         </section>
 
-        <hr/>
-        <section>
-          <h1 class="sr-only">Topics</h1>
-          <section>
-            <section id="sSd11RubyGatewayEySdSgAA8RbObjectCcfc" class="j2-item">
-              <a name="//apple_ref/cpp/Method/init(_:)" class="dashAnchor"></a>
-              <h4 class="sr-only">init(_:)</h4>
-              <a class="j2-item-title" data-toggle="collapse" href="#_sSd11RubyGatewayEySdSgAA8RbObjectCcfc" role="button" aria-expanded="false" aria-controls="_sSd11RubyGatewayEySdSgAA8RbObjectCcfc"><code>init(_:)</code></a>
-              <div class="collapse j2-item-popopen-wrapper" id="_sSd11RubyGatewayEySdSgAA8RbObjectCcfc">
-                <div class="j2-item-popopen">
-                  <div class="j2-item-popopen-pointer" role="none"></div>
-                  <div class="j2-item-popopen-body">
-                    <div class="clearfix">
-                      <p>Try to get a <code><a href="https://developer.apple.com/documentation/swift/double/">Double</a></code> floating-point representation of an <code><a href="../Classes/RbObject.html">RbObject</a></code>.</p>
+        
+<div class="j2-swift">
+<hr/>
+<section>
+  <h1 class="sr-only">Topics</h1>
+  
+  <section class="j2-swift">
+  
+  
+  
+  
+  
+    <section id="init_9" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Constructor/init%3F(RbObject)" class="dashAnchor j2-item-dash-anchor" data-item-id="init_9"></a>
+    <h4 class="sr-only">init?(RbObject)</h4>
+    
+    
+    <a class="j2-item-title" href="#_init_9" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_init_9"><code>
+        <span class="j2-swift">init<span class="j2-item-secondary">?(RbObject)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_init_9">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
 
+
+              
+
+
+<p>Try to get a <a href="../extensions/double.html?swift"><code>Double</code></a> floating-point representation of an <a href="../types/rbobject13.html?swift"><code>RbObject</code></a>.</p>
 <p>It fails if the Ruby value:</p>
-
 <ol>
 <li>Is numeric and does not fit into the Swift type; or</li>
 <li>Cannot be made into a suitable numeric via <code>to_f</code>.</li>
 </ol>
-
-<p>See <code><a href="../Enums/RbError.html#s11RubyGateway7RbErrorO7historyAC7HistoryVvpZ">RbError.history</a></code> to find out why a conversion failed.</p>
-
+<p>See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code></a> to find out why a conversion failed.</p>
 <p>Flavors of NaN are not preserved across the Ruby&lt;-&gt;Swift interface.</p>
 
-                    </div>
-                    <h5>Declaration</h5>
-                    <div class="j2-item-declaration">
-                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
-                    <pre><code class="language-swift">public init?(_ object: <a href="../Classes/RbObject.html">RbObject</a>)</code></pre>
-                    </div>
-                    <nav class="j2-item-nav" aria-label="item details">
-                      <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L250-L260">Show on GitHub</a></span>
-                    </nav>
-                  </div>
-                <div>
-              </div>
-            </section>
-            <section id="sSd11RubyGatewayE10rubyObjectAA02RbD0Cvp" class="j2-item">
-              <a name="//apple_ref/cpp/Property/rubyObject" class="dashAnchor"></a>
-              <h4 class="sr-only">rubyObject</h4>
-              <a class="j2-item-title" data-toggle="collapse" href="#_sSd11RubyGatewayE10rubyObjectAA02RbD0Cvp" role="button" aria-expanded="false" aria-controls="_sSd11RubyGatewayE10rubyObjectAA02RbD0Cvp"><code>rubyObject</code></a>
-              <div class="collapse j2-item-popopen-wrapper" id="_sSd11RubyGatewayE10rubyObjectAA02RbD0Cvp">
-                <div class="j2-item-popopen">
-                  <div class="j2-item-popopen-pointer" role="none"></div>
-                  <div class="j2-item-popopen-body">
-                    <div class="clearfix">
-                      <p>A Ruby object for the number.</p>
 
-                    </div>
-                    <h5>Declaration</h5>
-                    <div class="j2-item-declaration">
-                    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
-                    <pre><code class="language-swift">public var rubyObject: <a href="../Classes/RbObject.html">RbObject</a> { get }</code></pre>
-                    </div>
-                    <nav class="j2-item-nav" aria-label="item details">
-                      <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L263-L268">Show on GitHub</a></span>
-                    </nav>
-                  </div>
-                <div>
-              </div>
-            </section>
-          </section>
-        </section>
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public init?(_ object: <a href="../types/rbobject13.html?swift">RbObject</a>)</code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L250-L260">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="rubyobject7" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Property/var%20rubyObject%3A%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="rubyobject7"></a>
+    <h4 class="sr-only">var rubyObject: RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_rubyobject7" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rubyobject7"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">var </span>rubyObject<span class="j2-item-secondary">: RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_rubyobject7">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>A Ruby object for the number.</p>
+
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public var rubyObject: <a href="../types/rbobject13.html?swift">RbObject</a> { get }</code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L263-L268">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+</section>
+
+  
+</section>
+</div>
+
+
+
+        
+        <div class="flex-grow-1"></div>
+        <nav aria-label="paging" class="j2-pagination pb-3 pt-2">
+  <div id="pagination-prev" class="flex-fill">
+  
+    <a class="j2-swift" href="../extensions/int8.html?swift" aria-keyshortcuts="p">
+  <span aria-hidden="true">&laquo; </span>Int8
+</a>
+
+    <a class="j2-objc j2-secondary" href="../extensions/int8.html?swift" aria-keyshortcuts="p">
+  <span aria-hidden="true">&laquo; </span>Int8
+</a>
+
+  
+  
+  </div>
+  <div id="pagination-next" class="flex-fill text-right">
+  
+    <a class="j2-swift" href="../extensions/float.html?swift" aria-keyshortcuts="n">
+  Float<span aria-hidden="true"> &raquo;</span>
+</a>
+
+    <a class="j2-objc j2-secondary" href="../extensions/float.html?swift" aria-keyshortcuts="n">
+  Float<span aria-hidden="true"> &raquo;</span>
+</a>
+
+  
+  
+  </div>
+</nav>
+
+        
 
         </article>
       </main>
 
-      <!-- aux nav -->
-
       <div class="col-xl d-none d-xl-block j2-aux-nav" id="aux-nav-column">
-        <div class="j2-aux-nav-wrapper">
-          <h6 class="j2-inline-heading">Topics</h6>
-          <nav aria-label="page">
-            <ul class="j2-aux-group">
-              <li><a href="#">Declaration</a></li>
-            </ul>
-          </nav>
-          <h6 class="j2-inline-heading">Actions</h6>
-          <ul class="j2-aux-group">
-            <li><a class="j2-aux-action" id="action-search" href="#" role="button" aria-keyshortcuts="/">Search (/)</a></li>
-            <li><a class="j2-aux-action" id="action-collapse" href="#" role="button" aria-keyshortcuts="a">
-              <span id="action-collapse-expand">Open all (a)</span>
-              <span id="action-collapse-collapse" class="d-none">Close all (a)</span>
-            </a></li>
-          </ul>
-        </div>
-      </div>
+  <div class="j2-aux-nav-wrapper">
+    
+    <div class="j2-swift">
+    <h6 class="j2-inline-heading">Topics</h6>
+    <nav aria-label="page">
+      <ul class="j2-aux-group">
+        
+        <li><a href="#">Declaration</a></li>
+        
+      </ul>
+    </nav>
+    </div>
+    
+    
+    <h6 class="j2-inline-heading">Actions</h6>
+    <ul class="j2-aux-group">
+      
+      <li><a class="j2-aux-action" id="action-search" href="#" role="button" aria-keyshortcuts="/">Search (/)</a></li>
+      
+      
+      
+      <li><a class="j2-aux-action" id="action-collapse" href="#" role="button" aria-keyshortcuts="a">
+          <span id="action-collapse-expand">Open all (a)</span>
+          <span id="action-collapse-collapse" class="d-none">Close all (a)</span>
+      </a></li>
+      
+      
+      
+    </ul>
+    
+  </div>
+</div>
+
 
     </div> <!-- end row -->
 
     <footer class="row">
-      <div class="col j2-footer small pt-2">
-        <p><p>Distributed under the MIT license.  Maintained by <a class="link" href="mailto:johnfairh@gmail.com" target="_blank" rel="external">John Fairhurst</a>.</p></p>
-        <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>-<a class="link" href="https://github.com/johnfairh/jazzy" target="_blank" rel="external">bebop</a>, originally a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.  Theme from <a href="https://github.com/johnfairh/J2">J2</a>.</p>
-      </div>
-    </footer>
+  <div class="col j2-footer small pt-2">
+    <p><p>Distributed under the MIT license.  Maintained by <a href="mailto:johnfairh@gmail.com">John Fairhurst</a>.</p></p>
+    
+    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external">Bebop v1.0</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫</a>.</p>
+    
+  </div>
+</footer>
+
   </div> <!-- container -->
 
   <script src="../js/dependencies.min.js"></script>
+  
   <script src="../js/fw2020.js"></script>
   </body>
-
 </html>

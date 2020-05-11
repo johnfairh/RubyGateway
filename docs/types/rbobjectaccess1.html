@@ -1,0 +1,2678 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+    <link rel="stylesheet" href="../css/fw2020.css">
+    
+    
+   <title>RbObjectAccess - RubyGateway 3.2.0 docs</title>
+    
+  </head>
+  <body class="j2-swift " data-root-path="./../" data-doc-path="types/rbobjectaccess1.html" data-assets-path="../">
+
+  <!-- messages for search -->
+  <div hidden>
+    <span id="text-loading">Loading index...</span>
+    <span id="text-failed">Failed to load index</span>
+    <span id="text-notfound">No matches</span>
+  </div>
+
+  <header class="j2-header">
+  <div class="navbar navbar-expand navbar-dark j2-titlebar">
+  <a class="sr-only-focusable sr-only font-weight-slightly-bold pr-2" href="#main-content">Skip to main content</a>
+  <a class="nav-item nav-link pl-0 pt-1 pr-2 d-md-none" id="nav-toggle-button" role="button" aria-controls="nav-column" aria-expanded="false" aria-label="Toggle navigation" href="#">
+    <span class="navbar-toggler-icon"></span>
+  </a>
+
+  <div style="align-items-baseline">
+    <div class="navbar-brand mr-1 font-weight-slightly-bold">
+      
+      <a href="../index.html">
+      
+      RubyGateway 3.2.0 docs</a>
+    </div>
+    
+    <span class="navbar-text j2-coverage font-weight-slightly-bold small d-none d-lg-inline-block mr-2">(100% documented)</span>
+    
+  </div>
+
+  <div class="navbar-nav ml-auto justify-content-end flex-fill">
+
+    
+    <form class="form-inline d-none d-md-flex" role="search">
+      <input class="form-control form-control-sm w-100" type="search" placeHolder="Search" aria-label="Search" aria-keyshortcuts="/" data-search-format="span">
+    </form>
+    
+
+    
+
+    
+    <a class="nav-item nav-link d-none d-sm-inline" rel="external" href="https://github.com/johnfairh/RubyGateway">
+      <svg class="j2-title-svg" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 16 16"><title>Open on GitHub</title><path fill="currentcolor" fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+      </svg>
+    </a>
+    
+    
+    
+    
+
+    
+      <a class="nav-item nav-link d-none d-sm-inline" rel="alternate" href="dash-feed://https%3A%2F%2Fjohnfairh%2Egithub%2Eio%2FRubyGateway%2Fdocsets%2FRubyGateway%2Exml">
+      <svg class="j2-title-svg" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 700 670">
+        <title>Open in Dash</title>
+        <path fill="currentcolor" d="m0 0 132.58 160.54h130.76v0.0312c63.501 0.196 140.87-6.9887 193.12 10.227 26.125 8.6076 43.475 19.899 57.578 40.781 14.103 20.882 26.733 55.737 25.781 118.52-0.8784 57.953-16.7 88.91-38.672 112.89-21.972 23.98-54.208 41.154-90.703 51.953-28.462 8.4219-55.314 10.153-80.547 11.953v-266.25h-160v419.92l71.328 7.8125s103.75 12.802 214.61-20c55.429-16.401 115.46-45.078 163.28-97.266 47.816-52.187 79.327-127.83 80.703-218.59 1.3028-85.935-16.743-156.6-53.125-210.47-36.382-53.871-89.369-86.47-140.16-103.2-50.787-16.733-101.87-18.272-145.08-18.504-43.211-0.2316-78.502 0.0768-97.578 0.0176v2e-3h-131.31z"/>
+      </svg>
+    </a>
+    
+
+    
+
+  </div>
+</div>
+
+<!-- narrow-style searchbar -->
+
+
+<div class="container-fluid j2-titlebar d-md-none">
+  <div class="row">
+    <div class="col">
+      <form class="pb-2">
+        <input class="form-control form-control-sm" type="search" placeHolder="Search" aria-label="Search" aria-keyshortcuts="/" data-search-format="div">
+      </form>
+    </div>
+  </div>
+</div>
+
+
+  <nav aria-label="breadcrumb" class="small">
+  
+  
+    <ol class="breadcrumb j2-breadcrumb j2-swift">
+      <li class="breadcrumb-item"><a href="../index.html">RubyGateway</a></li>
+      
+        
+          <li class="breadcrumb-item"><a href="../main-apis.html?swift">Main APIs</a></li>
+        
+        
+      
+        
+        
+          <li class="breadcrumb-item" aria-current="page">RbObjectAccess</li>
+        
+      
+    </ol>
+  
+</nav>
+
+  </header>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-auto d-none d-md-flex flex-column j2-nav" id="nav-column">
+  
+    <nav aria-label="Swift" class="j2-swift">
+    <ul class="j2-nav-list">
+      
+      <li class="j2-nav-group">
+        
+
+  <a class="j2-nav-item" href="../guides.html?swift">Guides</a>
+
+
+  <ul class="j2-nav-sublist">
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../guides/user-guide.html?swift">User Guide</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../guides/todo.html?swift">TODO</a>
+
+
+
+  </li>
+  
+</ul>
+
+
+
+      </li>
+      
+      <li class="j2-nav-group">
+        
+
+  <a class="j2-nav-item" href="../main-apis.html?swift">Main APIs</a>
+
+
+  <ul class="j2-nav-sublist">
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbgateway1.html?swift">RbGateway</a>
+
+
+  <ul class="j2-nav-sublist">
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbgateway1/verbosity.html?swift">Verbosity</a>
+
+
+
+  </li>
+  
+</ul>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbobject13.html?swift">RbObject</a>
+
+
+
+  </li>
+  
+  <li>
+    
+  <a class="j2-nav-item active" href="#" aria-current="page">RbObjectAccess</a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbobjectcollection.html?swift">RbObjectCollection</a>
+
+
+
+  </li>
+  
+</ul>
+
+
+
+      </li>
+      
+      <li class="j2-nav-group">
+        
+
+  <a class="j2-nav-item" href="../swift-method-apis.html?swift">Swift Method APIs</a>
+
+
+  <ul class="j2-nav-sublist">
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbmethodargsspec.html?swift">RbMethodArgsSpec</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../swift-method-apis.html?swift#rbmethodcallback">RbMethodCallback</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../swift-method-apis.html?swift#rbboundmethodcallback">RbBoundMethodCallback</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../swift-method-apis.html?swift#rbboundmethodvoidcallback">RbBoundMethodVoidCallback</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbmethod.html?swift">RbMethod</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbmethodargs.html?swift">RbMethodArgs</a>
+
+
+
+  </li>
+  
+</ul>
+
+
+
+      </li>
+      
+      <li class="j2-nav-group">
+        
+
+  <a class="j2-nav-item" href="../other-apis.html?swift">Other APIs</a>
+
+
+  <ul class="j2-nav-sublist">
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../other-apis.html?swift#rbblockcallback">RbBlockCallback</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbblockretention.html?swift">RbBlockRetention</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbbreak.html?swift">RbBreak</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbproc.html?swift">RbProc</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbsymbol.html?swift">RbSymbol</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbthread.html?swift">RbThread</a>
+
+
+  <ul class="j2-nav-sublist">
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbthread/unblockingfunc.html?swift">UnblockingFunc</a>
+
+
+
+  </li>
+  
+</ul>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbtype.html?swift">RbType</a>
+
+
+
+  </li>
+  
+</ul>
+
+
+
+      </li>
+      
+      <li class="j2-nav-group">
+        
+
+  <a class="j2-nav-item" href="../error-handling.html?swift">Error Handling</a>
+
+
+  <ul class="j2-nav-sublist">
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rberror.html?swift">RbError</a>
+
+
+  <ul class="j2-nav-sublist">
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rberror/history.html?swift">History</a>
+
+
+
+  </li>
+  
+</ul>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbexception.html?swift">RbException</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbfailableaccess.html?swift">RbFailableAccess</a>
+
+
+
+  </li>
+  
+</ul>
+
+
+
+      </li>
+      
+      <li class="j2-nav-group">
+        
+
+  <a class="j2-nav-item" href="../swift-interop.html?swift">Swift Interop</a>
+
+
+  <ul class="j2-nav-sublist">
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/string.html?swift">String</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/bool.html?swift">Bool</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/uint.html?swift">UInt</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/uint64.html?swift">UInt64</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/uint32.html?swift">UInt32</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/uint16.html?swift">UInt16</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/uint8.html?swift">UInt8</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/int.html?swift">Int</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/int64.html?swift">Int64</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/int32.html?swift">Int32</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/int16.html?swift">Int16</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/int8.html?swift">Int8</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/double.html?swift">Double</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/float.html?swift">Float</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/array.html?swift">Array</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/arrayslice.html?swift">ArraySlice</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/dictionary.html?swift">Dictionary</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/set.html?swift">Set</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/range.html?swift">Range</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/closedrange.html?swift">ClosedRange</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbcomplex.html?swift">RbComplex</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbrational.html?swift">RbRational</a>
+
+
+
+  </li>
+  
+</ul>
+
+
+
+      </li>
+      
+    </ul>
+  </nav>
+  
+</div>
+
+      <main class="col col-xl-8 j2-article px-lg-4 px-xl-5" id="article-column">
+        <article class="j2-article-wrapper" id="main-content">
+
+        <section>
+          
+          <header>
+            <h1 class="j2-anchor">
+              
+              
+              <span>RbObjectAccess</span>
+              
+            </h1>
+          </header>
+          
+          
+          
+          <div class="j2-callout  j2-callout-declaration">
+            
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public class RbObjectAccess</code></pre>
+  </div>
+
+
+
+          </div>
+
+          <div class="clearfix">
+            
+  
+
+
+            
+
+
+<p>Provides services to manipulate a Ruby object:</p>
+<ul>
+<li>Call methods;</li>
+<li>Access properties and instance variables;</li>
+<li>Access class variables;</li>
+<li>Access global variables;</li>
+<li>Find constants, classes, and modules.</li>
+</ul>
+<p>The class is abstract.  You use it via <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> and the global <code>Ruby</code> instance
+of <a href="../types/rbgateway1.html?swift"><code>RbGateway</code></a>.</p>
+<p>By default all methods throw <a href="../types/rberror.html?swift"><code>RbError</code></a>s if anything goes wrong including
+when Ruby raises an exception.  Use the <a href="../types/rbobjectaccess1.html?swift#failable"><code>RbObjectAccess.failable</code></a> adapter to
+access an alternative API that returns <code>nil</code> on errors instead.  You can still
+see any Ruby exceptions via <a href="../types/rberror.html?swift#history1"><code>RbError.history</code></a>.</p>
+<h2 class="j2-anchor j2-heading heading" id="calling-methods">
+<span data-anchor-id="calling-methods">
+Calling methods
+</span></h2>
+<p>Ruby has a few different ways to call methods that are reflected in the
+various Swift methods here and their types.  The degrees of freedom are:</p>
+<ol>
+<li>Call method by name or by symbol;</li>
+<li>Pass positional and/or keyword arguments;</li>
+<li>Optionally pass a block that can be expressed as a Swift function or
+a Ruby Proc.</li>
+<li>Method can either raise an exception or return a value.</li>
+</ol>
+<p>From the simple:</p>
+<pre><code class="language-swift">try! obj.call(&quot;myMethod&quot;)
+</code></pre>
+<p>…to more baroque:</p>
+<pre><code class="language-swift">do {
+    let result =
+         try obj.call(symbol: myMethodSymbol,
+                      args: [1, &quot;3.5&quot;, myHash],
+                      kwArgs: [(&quot;mode&quot;, RbSymbol(&quot;debug&quot;)]) { blockArgs in
+                          blockArgs.forEach {
+                              process($0)
+                          }
+                          return .nilObject
+                      }
+} catch RbError.rubyException(let exn) {
+    handleErrors(error)
+} catch {
+    ...
+}
+</code></pre>
+
+
+
+            
+
+
+          </div>
+          
+          
+          <nav aria-label="item details" class="j2-main-item-nav">
+            <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L58-L122">Show on GitHub</a>
+          </nav>
+          
+          
+        </section>
+
+        
+<div class="j2-swift">
+<hr/>
+<section>
+  <h1 class="sr-only">Topics</h1>
+  
+  <section class="j2-swift">
+  
+  <a name="//apple_ref/cpp/Section/Instance%20Variables" class="dashAnchor"></a>
+  <h3 class="j2-anchor" id="tpc-instance-variables">
+    <span data-anchor-id="tpc-instance-variables">Instance Variables</span>
+  </h3>
+  
+  
+  
+  
+  
+    <section id="getinstancevar_2" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20getInstanceVar(String)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="getinstancevar_2"></a>
+    <h4 class="sr-only">func getInstanceVar(String) -&gt; RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_getinstancevar_2" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_getinstancevar_2"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>getInstanceVar<span class="j2-item-secondary">(String) -&gt; RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_getinstancevar_2">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Get the value of a Ruby instance variable.  Creates a new one with a <code>nil</code> value
+if it doesn’t exist yet.</p>
+<p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
+<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> looks wrong.
+<a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if Ruby has a problem.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public func getInstanceVar(_ name: <a href="../extensions/string.html?swift">String</a>) throws -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>name</code></td>
+        <td><p>Name of IVar to get.  Must begin with a single ‘@’.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+  <h5>Return Value</h5>
+  <p>Value of the IVar or Ruby <code>nil</code> if it has not been assigned yet.</p>
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L95-L101">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="setinstancevar_newvalue2" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20setInstanceVar(String,%20newValue%3A%20RbObjectConvertible%3F)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="setinstancevar_newvalue2"></a>
+    <h4 class="sr-only">func setInstanceVar(String, newValue: RbObjectConvertible?) -&gt; RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_setinstancevar_newvalue2" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_setinstancevar_newvalue2"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>setInstanceVar<span class="j2-item-secondary">(String, </span>newValue<span class="j2-item-secondary">: RbObjectConvertible?) -&gt; RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_setinstancevar_newvalue2">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Set a Ruby instance variable.  Creates a new one if it doesn’t exist yet.</p>
+<p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
+<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> looks wrong.
+<a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if Ruby has a problem.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">@discardableResult
+public func setInstanceVar(_ name: <a href="../extensions/string.html?swift">String</a>, newValue: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?)
+    throws -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>name</code></td>
+        <td><p>Name of Ivar to set.  Must begin with a single ‘@’.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>newValue</code></td>
+        <td><p>New value to set.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+  <h5>Return Value</h5>
+  <p>The value that was set.</p>
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L113-L121">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+</section>
+
+  
+  <section class="j2-swift">
+  
+  <a name="//apple_ref/cpp/Section/Failable%20Access" class="dashAnchor"></a>
+  <h3 class="j2-anchor" id="tpc-failable-access">
+    <span data-anchor-id="tpc-failable-access">Failable Access</span>
+  </h3>
+  
+  
+  
+  
+  
+    <section id="failable" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Property/var%20failable%3A%20RbFailableAccess" class="dashAnchor j2-item-dash-anchor" data-item-id="failable"></a>
+    <h4 class="sr-only">var failable: RbFailableAccess</h4>
+    
+    
+    <a class="j2-item-title" href="#_failable" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_failable"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">var </span>failable<span class="j2-item-secondary">: RbFailableAccess</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_failable">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Get a version of this API that returns <code>nil</code> instead of throwing errors.
+See <a href="../types/rbfailableaccess.html?swift"><code>RbFailableAccess</code></a>.</p>
+
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public var failable: <a href="../types/rbfailableaccess.html?swift">RbFailableAccess</a> { get }</code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbFailableAccess.swift#L41-L43">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+</section>
+
+  
+  <section class="j2-swift">
+  
+  <a name="//apple_ref/cpp/Section/Constants" class="dashAnchor"></a>
+  <h3 class="j2-anchor" id="tpc-constants">
+    <span data-anchor-id="tpc-constants">Constants</span>
+  </h3>
+  
+  
+  
+  
+  
+    <section id="getconstant_1" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20getConstant(String)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="getconstant_1"></a>
+    <h4 class="sr-only">func getConstant(String) -&gt; RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_getconstant_1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_getconstant_1"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>getConstant<span class="j2-item-secondary">(String) -&gt; RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_getconstant_1">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Get an <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> that represents a Ruby constant.</p>
+<p>In Ruby constants include things that users think of as constants like
+<code>Math::PI</code>, classes, and modules.  You can use this routine with
+any kind of constant, but see <a href="../types/rbobjectaccess1.html?swift#getclass_1"><code>getClass(...)</code></a> for a little more sugar.</p>
+<pre><code class="language-swift">let rubyPi = Ruby.getConstant(&quot;Math::PI&quot;)
+let crumbs = rubyPi - Double.pi
+</code></pre>
+<p>This is a dynamic call into Ruby that can cause calls to <code>const_missing</code>
+and autoloading.</p>
+<p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
+<p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if the constant cannot be found.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public func getConstant(_ name: <a href="../extensions/string.html?swift">String</a>) throws -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>name</code></td>
+        <td><p>The name of the constant to look up.  Can contain ‘::’ sequences
+to drill down through nested classes and modules.</p>
+<p>If you call this method on an <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> then <code>name</code> is resolved like Ruby does,
+looking up the inheritance chain if there is no local match.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+  <h5>Return Value</h5>
+  <p>An <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> for the constant.</p>
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L149-L170">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="setconstant_newvalue1" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20setConstant(String,%20newValue%3A%20RbObjectConvertible%3F)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="setconstant_newvalue1"></a>
+    <h4 class="sr-only">func setConstant(String, newValue: RbObjectConvertible?) -&gt; RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_setconstant_newvalue1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_setconstant_newvalue1"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>setConstant<span class="j2-item-secondary">(String, </span>newValue<span class="j2-item-secondary">: RbObjectConvertible?) -&gt; RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_setconstant_newvalue1">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Bind an object to a constant name.</p>
+<p>Use this to add value-constants to the class/module name hierarchy.  For example:</p>
+<pre><code class="language-swift">let defaultInvader = RbObject(ofClass: &quot;Invader&quot;, kwArgs: [&quot;name&quot; : &quot;Zaltor&quot;])
+try Ruby.setConstant(&quot;Game::Invaders::DEFAULT&quot;, defaultInvader)
+</code></pre>
+<p>To define new classes and modules, use <a href="../types/rbgateway1.html?swift#defineclass_underinitializer"><code>RbGateway.defineClass(...)</code></a> and
+<a href="../types/rbgateway1.html?swift#definemodule_under"><code>RbGateway.defineModule(...)</code></a> instead of this method.</p>
+<p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
+<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> looks wrong.
+<code>rubyException(_:)</code> if there is a Ruby exception.
+<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(_:)</code></a> if the current object is not a class or module.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">@discardableResult
+public func setConstant(_ name: <a href="../extensions/string.html?swift">String</a>, newValue: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?) throws
+    -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>name</code></td>
+        <td><p>The name of the constant to create or replace.  Can contain ‘::’ sequences
+to drill down through nested classes and modules.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>newValue</code></td>
+        <td><p>The value for the constant.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+  <h5>Return Value</h5>
+  <p>The value set for the constant.</p>
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L193-L220">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="getclass_1" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20getClass(String)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="getclass_1"></a>
+    <h4 class="sr-only">func getClass(String) -&gt; RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_getclass_1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_getclass_1"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>getClass<span class="j2-item-secondary">(String) -&gt; RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_getclass_1">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Get an <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> that represents a Ruby class.</p>
+<p>This is a dynamic call into Ruby that can cause calls to <code>const_missing</code>
+and autoloading.</p>
+<p>One way of creating an instance of a class:</p>
+<pre><code class="language-swift">let myClass = try Ruby.getClass(&quot;MyModule::MyClass&quot;)
+let myObj = try myClass.call(&quot;new&quot;)
+</code></pre>
+<p>Although it is easier to write:</p>
+<pre><code class="language-swift">let myObj = try RbObject(ofClass: &quot;MyModule::MyClass&quot;)
+</code></pre>
+<p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
+<p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if the constant cannot be found.
+<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(_:)</code></a> if the constant is found but is not a class.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public func getClass(_ name: <a href="../extensions/string.html?swift">String</a>) throws -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>name</code></td>
+        <td><p>The name of the class to look up.  Can contain ‘::’ sequences
+to drill down through nested classes and modules.</p>
+<p>If you call this method on an <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> then <code>name</code> is resolved like Ruby does,
+looking up the inheritance chain if there is no match.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+  <h5>Return Value</h5>
+  <p>An <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> for the class.</p>
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L248-L252">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+</section>
+
+  
+  <section class="j2-swift">
+  
+  <a name="//apple_ref/cpp/Section/Method%20Call" class="dashAnchor"></a>
+  <h3 class="j2-anchor" id="tpc-method-call">
+    <span data-anchor-id="tpc-method-call">Method Call</span>
+  </h3>
+  
+  
+  
+  
+  
+    <section id="call_argskwargs1" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20call(String,%20args%3A%20%5BRbObjectConvertible%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20RbObjectConvertible%3F%3E)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="call_argskwargs1"></a>
+    <h4 class="sr-only">func call(String, args: [RbObjectConvertible?], kwArgs: KeyValuePairs&lt;String, RbObjectConvertible?&gt;) -&gt; RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_call_argskwargs1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_call_argskwargs1"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>call<span class="j2-item-secondary">(String, </span>args<span class="j2-item-secondary">: [RbObjectConvertible?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, RbObjectConvertible?&gt;) -&gt; RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_call_argskwargs1">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Call a Ruby object method.</p>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
+<p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if there is a Ruby exception.
+<a href="../types/rberror.html?swift#duplicatekwarg_"><code>RbError.duplicateKwArg(_:)</code></a> if there are duplicate keywords in <code>kwArgs</code>.</p>
+</div>
+<p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">@discardableResult
+public func call(
+    _ methodName: <a href="../extensions/string.html?swift">String</a>,
+    args: [<a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?] = [],
+    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?&gt; = [:]
+) throws -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>methodName</code></td>
+        <td><p>The name of the method to call.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>args</code></td>
+        <td><p>The positional arguments to the method.  None by default.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>kwArgs</code></td>
+        <td><p>The keyword arguments to the method.  None by default.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+  <h5>Return Value</h5>
+  <p>The result of calling the method.</p>
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L269-L275">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="call_argskwargsblockretentionblockcall1" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20call(String,%20args%3A%20%5BRbObjectConvertible%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20RbObjectConvertible%3F%3E,%20blockRetention%3A%20RbBlockRetention,%20blockCall%3A%20RbBlockCallback)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="call_argskwargsblockretentionblockcall1"></a>
+    <h4 class="sr-only">func call(String, args: [RbObjectConvertible?], kwArgs: KeyValuePairs&lt;String, RbObjectConvertible?&gt;, blockRetention: RbBlockRetention, blockCall: RbBlockCallback) -&gt; RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_call_argskwargsblockretentionblockcall1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_call_argskwargsblockretentionblockcall1"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>call<span class="j2-item-secondary">(String, </span>args<span class="j2-item-secondary">: [RbObjectConvertible?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, RbObjectConvertible?&gt;, </span>blockRetention<span class="j2-item-secondary">: RbBlockRetention, </span>blockCall<span class="j2-item-secondary">: RbBlockCallback) -&gt; RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_call_argskwargsblockretentionblockcall1">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Call a Ruby object method passing Swift code as a block.</p>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
+<p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if there is a Ruby exception.
+<a href="../types/rberror.html?swift#duplicatekwarg_"><code>RbError.duplicateKwArg(_:)</code></a> if there are duplicate keywords in <code>kwArgs</code>.</p>
+</div>
+<p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">@discardableResult
+public func call(
+    _ methodName: <a href="../extensions/string.html?swift">String</a>,
+    args: [<a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?] = [],
+    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?&gt; = [:],
+    blockRetention: <a href="../types/rbblockretention.html?swift">RbBlockRetention</a> = .none,
+    blockCall: @escaping <a href="../other-apis.html?swift#rbblockcallback">RbBlockCallback</a>
+) throws -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>methodName</code></td>
+        <td><p>The name of the method to call.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>args</code></td>
+        <td><p>The positional arguments to the method.  None by default.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>kwArgs</code></td>
+        <td><p>The keyword arguments to the method.  None by default.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>blockRetention</code></td>
+        <td><p>Should the <code>blockCall</code> closure be retained for
+longer than this call?  Default <code>.none</code>.  See <a href="../types/rbblockretention.html?swift"><code>RbBlockRetention</code></a>.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>blockCall</code></td>
+        <td><p>Swift code to pass as a block to the method.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+  <h5>Return Value</h5>
+  <p>The result of calling the method.</p>
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L291-L302">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="call_argskwargsblock1" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20call(String,%20args%3A%20%5BRbObjectConvertible%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20RbObjectConvertible%3F%3E,%20block%3A%20RbObjectConvertible)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="call_argskwargsblock1"></a>
+    <h4 class="sr-only">func call(String, args: [RbObjectConvertible?], kwArgs: KeyValuePairs&lt;String, RbObjectConvertible?&gt;, block: RbObjectConvertible) -&gt; RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_call_argskwargsblock1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_call_argskwargsblock1"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>call<span class="j2-item-secondary">(String, </span>args<span class="j2-item-secondary">: [RbObjectConvertible?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, RbObjectConvertible?&gt;, </span>block<span class="j2-item-secondary">: RbObjectConvertible) -&gt; RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_call_argskwargsblock1">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Call a Ruby object method passing a Ruby Proc as a block.</p>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
+<p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if there is a Ruby exception.
+<a href="../types/rberror.html?swift#duplicatekwarg_"><code>RbError.duplicateKwArg(_:)</code></a> if there are duplicate keywords in <code>kwArgs</code>.
+<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(_:)</code></a> if <code>block</code> does not convert to a Proc.</p>
+</div>
+<p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">@discardableResult
+public func call(
+    _ methodName: <a href="../extensions/string.html?swift">String</a>,
+    args: [<a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?] = [],
+    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?&gt; = [:],
+    block: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>
+) throws -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>methodName</code></td>
+        <td><p>The name of the method to call.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>args</code></td>
+        <td><p>The positional arguments to the method.  None by default.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>kwArgs</code></td>
+        <td><p>The keyword arguments to the method.  None by default.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>block</code></td>
+        <td><p>A Ruby proc to pass as a block to the method.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+  <h5>Return Value</h5>
+  <p>The result of calling the method.</p>
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L317-L324">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="callsymbolargskwargs1" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20call(symbol%3A%20RbObjectConvertible,%20args%3A%20%5BRbObjectConvertible%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20RbObjectConvertible%3F%3E)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="callsymbolargskwargs1"></a>
+    <h4 class="sr-only">func call(symbol: RbObjectConvertible, args: [RbObjectConvertible?], kwArgs: KeyValuePairs&lt;String, RbObjectConvertible?&gt;) -&gt; RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_callsymbolargskwargs1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_callsymbolargskwargs1"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>call<span class="j2-item-secondary">(</span>symbol<span class="j2-item-secondary">: RbObjectConvertible, </span>args<span class="j2-item-secondary">: [RbObjectConvertible?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, RbObjectConvertible?&gt;) -&gt; RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_callsymbolargskwargs1">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Call a Ruby object method using a symbol.</p>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
+<p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if there is a Ruby exception.
+<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(_:)</code></a> if <code>symbol</code> is not a symbol.
+<a href="../types/rberror.html?swift#duplicatekwarg_"><code>RbError.duplicateKwArg(_:)</code></a> if there are duplicate keywords in <code>kwArgs</code>.</p>
+</div>
+<p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">@discardableResult
+public func call(
+    symbol: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>,
+    args: [<a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?] = [],
+    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?&gt; = [:]
+) throws -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>symbol</code></td>
+        <td><p>The symbol for the name of the method to call.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>args</code></td>
+        <td><p>The positional arguments to the method.  None by default.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>kwArgs</code></td>
+        <td><p>The keyword arguments to the method.  None by default.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+  <h5>Return Value</h5>
+  <p>The result of calling the method.</p>
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L338-L345">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="callsymbolargskwargsblockretentionblockcall1" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20call(symbol%3A%20RbObjectConvertible,%20args%3A%20%5BRbObjectConvertible%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20RbObjectConvertible%3F%3E,%20blockRetention%3A%20RbBlockRetention,%20blockCall%3A%20RbBlockCallback)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="callsymbolargskwargsblockretentionblockcall1"></a>
+    <h4 class="sr-only">func call(symbol: RbObjectConvertible, args: [RbObjectConvertible?], kwArgs: KeyValuePairs&lt;String, RbObjectConvertible?&gt;, blockRetention: RbBlockRetention, blockCall: RbBlockCallback) -&gt; RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_callsymbolargskwargsblockretentionblockcall1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_callsymbolargskwargsblockretentionblockcall1"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>call<span class="j2-item-secondary">(</span>symbol<span class="j2-item-secondary">: RbObjectConvertible, </span>args<span class="j2-item-secondary">: [RbObjectConvertible?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, RbObjectConvertible?&gt;, </span>blockRetention<span class="j2-item-secondary">: RbBlockRetention, </span>blockCall<span class="j2-item-secondary">: RbBlockCallback) -&gt; RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_callsymbolargskwargsblockretentionblockcall1">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Call a Ruby object method using a symbol passing Swift code as a block.</p>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
+<p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if there is a Ruby exception.
+<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(_:)</code></a> if <code>symbol</code> is not a symbol.
+<a href="../types/rberror.html?swift#duplicatekwarg_"><code>RbError.duplicateKwArg(_:)</code></a> if there are duplicate keywords in <code>kwArgs</code>.</p>
+</div>
+<p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">@discardableResult
+public func call(
+    symbol: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>,
+    args: [<a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?] = [],
+    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?&gt; = [:],
+    blockRetention: <a href="../types/rbblockretention.html?swift">RbBlockRetention</a> = .none,
+    blockCall: @escaping <a href="../other-apis.html?swift#rbblockcallback">RbBlockCallback</a>
+) throws -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>symbol</code></td>
+        <td><p>The symbol for the name of the method to call.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>args</code></td>
+        <td><p>The positional arguments to the method.  None by default.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>kwArgs</code></td>
+        <td><p>The keyword arguments to the method.  None by default.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>blockRetention</code></td>
+        <td><p>Should the <code>blockCall</code> closure be retained for
+longer than this call?  Default <code>.none</code>.  See <a href="../types/rbblockretention.html?swift"><code>RbBlockRetention</code></a>.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>blockCall</code></td>
+        <td><p>Swift code to pass as a block to the method.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+  <h5>Return Value</h5>
+  <p>The result of calling the method.</p>
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L362-L371">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="callsymbolargskwargsblock1" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20call(symbol%3A%20RbObjectConvertible,%20args%3A%20%5BRbObjectConvertible%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20RbObjectConvertible%3F%3E,%20block%3A%20RbObjectConvertible)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="callsymbolargskwargsblock1"></a>
+    <h4 class="sr-only">func call(symbol: RbObjectConvertible, args: [RbObjectConvertible?], kwArgs: KeyValuePairs&lt;String, RbObjectConvertible?&gt;, block: RbObjectConvertible) -&gt; RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_callsymbolargskwargsblock1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_callsymbolargskwargsblock1"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>call<span class="j2-item-secondary">(</span>symbol<span class="j2-item-secondary">: RbObjectConvertible, </span>args<span class="j2-item-secondary">: [RbObjectConvertible?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, RbObjectConvertible?&gt;, </span>block<span class="j2-item-secondary">: RbObjectConvertible) -&gt; RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_callsymbolargskwargsblock1">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Call a Ruby object method using a symbol passing a Ruby Proc as a block.</p>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
+<p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if there is a Ruby exception.
+<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(_:)</code></a> if <code>symbol</code> is not a symbol.
+<a href="../types/rberror.html?swift#duplicatekwarg_"><code>RbError.duplicateKwArg(_:)</code></a> if there are duplicate keywords in <code>kwArgs</code>.
+<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(_:)</code></a> if <code>block</code> does not convert to a Proc.</p>
+</div>
+<p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">@discardableResult
+public func call(
+    symbol: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>,
+    args: [<a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?] = [],
+    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?&gt; = [:],
+    block: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>
+) throws -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>symbol</code></td>
+        <td><p>The symbol for the name of the method to call.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>args</code></td>
+        <td><p>The positional arguments to the method.  None by default.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>kwArgs</code></td>
+        <td><p>The keyword arguments to the method.  None by default.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>block</code></td>
+        <td><p>A Ruby proc to pass as a block to the method.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+  <h5>Return Value</h5>
+  <p>The result of calling the method.</p>
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L387-L395">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+</section>
+
+  
+  <section class="j2-swift">
+  
+  <a name="//apple_ref/cpp/Section/Attributes" class="dashAnchor"></a>
+  <h3 class="j2-anchor" id="tpc-attributes">
+    <span data-anchor-id="tpc-attributes">Attributes</span>
+  </h3>
+  
+  
+  
+  
+  
+    <section id="getattribute_1" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20getAttribute(String)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="getattribute_1"></a>
+    <h4 class="sr-only">func getAttribute(String) -&gt; RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_getattribute_1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_getattribute_1"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>getAttribute<span class="j2-item-secondary">(String) -&gt; RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_getattribute_1">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Get an attribute of a Ruby object.</p>
+<p>Attributes are declared with <code>:attr_accessor</code> and so on – this routine is a
+simple wrapper around <a href="../types/rbobjectaccess1.html?swift#callsymbolargskwargsblock1"><code>call(...)</code></a> for symmetry with <a href="../types/rbobjectaccess1.html?swift#setattribute_newvalue1"><code>setAttribute(...)</code></a>.</p>
+<p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
+<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> looks wrong.
+<a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if Ruby has a problem, probably means
+<code>attribute</code> doesn’t exist.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public func getAttribute(_ name: <a href="../extensions/string.html?swift">String</a>) throws -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>name</code></td>
+        <td><p>The name of the attribute to get.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+  <h5>Return Value</h5>
+  <p>The value of the attribute.</p>
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L493-L496">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="setattribute_newvalue1" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20setAttribute(String,%20newValue%3A%20RbObjectConvertible%3F)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="setattribute_newvalue1"></a>
+    <h4 class="sr-only">func setAttribute(String, newValue: RbObjectConvertible?) -&gt; RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_setattribute_newvalue1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_setattribute_newvalue1"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>setAttribute<span class="j2-item-secondary">(String, </span>newValue<span class="j2-item-secondary">: RbObjectConvertible?) -&gt; RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_setattribute_newvalue1">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Set an attribute of a Ruby object.</p>
+<p>Attributes are declared with <code>:attr_accessor</code> and so on – this routine is a
+wrapper around a call to the <code>attrname=</code> method.</p>
+<p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
+<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> looks wrong.
+<a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if Ruby has a problem, probably means
+<code>attribute</code> doesn’t exist.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">@discardableResult
+public func setAttribute(_ name: <a href="../extensions/string.html?swift">String</a>, newValue: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?) throws
+    -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>name</code></td>
+        <td><p>The name of the attribute to set.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>value</code></td>
+        <td><p>The new value of the attribute.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+  <h5>Return Value</h5>
+  <p>Whatever the attribute setter returns, typically the new value.</p>
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L512-L515">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+</section>
+
+  
+  <section class="j2-swift">
+  
+  <a name="//apple_ref/cpp/Section/Class%20Variables" class="dashAnchor"></a>
+  <h3 class="j2-anchor" id="tpc-class-variables">
+    <span data-anchor-id="tpc-class-variables">Class Variables</span>
+  </h3>
+  
+  
+  
+  
+  
+    <section id="getclassvar_1" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20getClassVar(String)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="getclassvar_1"></a>
+    <h4 class="sr-only">func getClassVar(String) -&gt; RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_getclassvar_1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_getclassvar_1"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>getClassVar<span class="j2-item-secondary">(String) -&gt; RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_getclassvar_1">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Get the value of a Ruby class variable that has already been written.</p>
+<p>Must be called on an <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> for a class, or <a href="../types/rbgateway1.html?swift"><code>RbGateway</code></a>.  <strong>Note</strong> this
+is different from Ruby as-written where you write <code>@@fred</code> in an object
+context to get a CVar on the object’s class.</p>
+<p>The behavior of accessing a non-existent CVar is not consistent with IVars
+or GVars.  This is how Ruby works; one more reason to avoid CVars.</p>
+<p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
+<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> looks wrong.
+<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(_:)</code></a> if the object is not a class.
+<a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if Ruby has a problem – in particular,
+if the CVar does not exist.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public func getClassVar(_ name: <a href="../extensions/string.html?swift">String</a>) throws -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>name</code></td>
+        <td><p>Name of CVar to get.  Must begin with ‘@@’.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+  <h5>Return Value</h5>
+  <p>The value of the CVar.</p>
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L546-L556">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="setclassvar_newvalue1" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20setClassVar(String,%20newValue%3A%20RbObjectConvertible%3F)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="setclassvar_newvalue1"></a>
+    <h4 class="sr-only">func setClassVar(String, newValue: RbObjectConvertible?) -&gt; RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_setclassvar_newvalue1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_setclassvar_newvalue1"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>setClassVar<span class="j2-item-secondary">(String, </span>newValue<span class="j2-item-secondary">: RbObjectConvertible?) -&gt; RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_setclassvar_newvalue1">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Set a Ruby class variable.  Creates a new one if it doesn’t exist yet.</p>
+<p>Must be called on an <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> for a class, or <a href="../types/rbgateway1.html?swift"><code>RbGateway</code></a>.  <strong>Note</strong> this
+is different from Ruby as-written where you write <code>@@fred = thing</code> in an
+object context to set a CVar on the object’s class.</p>
+<p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
+<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> looks wrong.
+<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(_:)</code></a> if the object is not a class.
+<a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if Ruby has a problem.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">@discardableResult
+public func setClassVar(_ name: <a href="../extensions/string.html?swift">String</a>, newValue: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?) throws
+    -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>name</code></td>
+        <td><p>Name of the CVar to set.  Must begin with ‘@@’.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>newValue</code></td>
+        <td><p>The new value to set.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+  <h5>Return Value</h5>
+  <p>The value that was set.</p>
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L573-L583">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+</section>
+
+  
+  <section class="j2-swift">
+  
+  <a name="//apple_ref/cpp/Section/Global%20Variables" class="dashAnchor"></a>
+  <h3 class="j2-anchor" id="tpc-global-variables">
+    <span data-anchor-id="tpc-global-variables">Global Variables</span>
+  </h3>
+  
+  
+  
+  
+  
+    <section id="getglobalvar_1" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20getGlobalVar(String)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="getglobalvar_1"></a>
+    <h4 class="sr-only">func getGlobalVar(String) -&gt; RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_getglobalvar_1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_getglobalvar_1"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>getGlobalVar<span class="j2-item-secondary">(String) -&gt; RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_getglobalvar_1">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Get the value of a Ruby global variable.</p>
+<p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
+<p><a href="../types/rberror.html?swift"><code>RbError</code></a> if <code>name</code> looks wrong.</p>
+</div>
+<p>(This method is present in this class meaning you can call it on any
+<a href="../types/rbobject13.html?swift"><code>RbObject</code></a> as well as <a href="../types/rbgateway1.html?swift"><code>RbGateway</code></a> without any difference in effect.  This is
+purely convenience to put all these getter/setter pairs in the same place and
+make construction of <a href="../types/rbfailableaccess.html?swift"><code>RbFailableAccess</code></a> a bit easier.  Best practice probably
+to avoid calling the <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> version.)</p>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public func getGlobalVar(_ name: <a href="../extensions/string.html?swift">String</a>) throws -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>name</code></td>
+        <td><p>Name of global variable to get.  Must begin with ‘$’.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+  <h5>Return Value</h5>
+  <p>Value of the variable, or Ruby nil if not set before.</p>
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L602-L607">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="setglobalvar_newvalue1" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20setGlobalVar(String,%20newValue%3A%20RbObjectConvertible%3F)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="setglobalvar_newvalue1"></a>
+    <h4 class="sr-only">func setGlobalVar(String, newValue: RbObjectConvertible?) -&gt; RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_setglobalvar_newvalue1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_setglobalvar_newvalue1"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>setGlobalVar<span class="j2-item-secondary">(String, </span>newValue<span class="j2-item-secondary">: RbObjectConvertible?) -&gt; RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_setglobalvar_newvalue1">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Set a Ruby global variable.  Creates a new one if it doesn’t exist yet.</p>
+<p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
+<p><a href="../types/rberror.html?swift"><code>RbError</code></a> if <code>name</code> looks wrong.</p>
+</div>
+<p>(This method is present in this class meaning you can call it on any
+<a href="../types/rbobject13.html?swift"><code>RbObject</code></a> as well as <a href="../types/rbgateway1.html?swift"><code>RbGateway</code></a> without any difference in effect.  This is
+purely convenience to put all these getter/setter pairs in the same place and
+make construction of <a href="../types/rbfailableaccess.html?swift"><code>RbFailableAccess</code></a> a bit easier.  Best practice probably
+to avoid calling the <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> version.)</p>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">@discardableResult
+public func setGlobalVar(_ name: <a href="../extensions/string.html?swift">String</a>, newValue: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?) throws
+    -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>name</code></td>
+        <td><p>Name of global variable to set.  Must begin with ‘$’.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>newValue</code></td>
+        <td><p>New value to set.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+  <h5>Return Value</h5>
+  <p>The value that was set.</p>
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L624-L633">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+</section>
+
+  
+  <section class="j2-swift">
+  
+  <a name="//apple_ref/cpp/Section/Polymorphic%20Getter" class="dashAnchor"></a>
+  <h3 class="j2-anchor" id="tpc-polymorphic-getter">
+    <span data-anchor-id="tpc-polymorphic-getter">Polymorphic Getter</span>
+  </h3>
+  
+  
+  
+  
+  
+    <section id="get_1" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20get(String)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="get_1"></a>
+    <h4 class="sr-only">func get(String) -&gt; RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_get_1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_get_1"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>get<span class="j2-item-secondary">(String) -&gt; RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_get_1">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Get some kind of Ruby object based on the <code>name</code> parameter:</p>
+<ul>
+<li>If <code>name</code> starts with a capital letter then access a constant under this object;</li>
+<li>If <code>name</code> starts with ‘@’ or ‘@@’ then access an IVar/CVar for a class object;</li>
+<li>If <code>name</code> starts with ‘$’ then access a global variable;</li>
+<li>Otherwise call a zero-args method.</li>
+</ul>
+<p>This is a convenience helper to let you access Ruby structures without
+worrying about precisely what they are.</p>
+<p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
+<p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if Ruby has a problem.
+<a href="../types/rberror.html?swift"><code>RbError</code></a> of some other kind if <code>name</code> looks wrong in some way.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">@discardableResult
+public func get(_ name: <a href="../extensions/string.html?swift">String</a>) throws -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>name</code></td>
+        <td><p>Name of thing to access.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+  <h5>Return Value</h5>
+  <p>The accessed thing .</p>
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObjectAccess.swift#L655-L666">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+</section>
+
+  
+</section>
+</div>
+
+
+
+        
+        <div class="flex-grow-1"></div>
+        <nav aria-label="paging" class="j2-pagination pb-3 pt-2">
+  <div id="pagination-prev" class="flex-fill">
+  
+    <a class="j2-swift" href="../types/rbobject13.html?swift" aria-keyshortcuts="p">
+  <span aria-hidden="true">&laquo; </span>RbObject
+</a>
+
+    <a class="j2-objc j2-secondary" href="../types/rbobject13.html?swift" aria-keyshortcuts="p">
+  <span aria-hidden="true">&laquo; </span>RbObject
+</a>
+
+  
+  
+  </div>
+  <div id="pagination-next" class="flex-fill text-right">
+  
+    <a class="j2-swift" href="../types/rbobjectcollection.html?swift" aria-keyshortcuts="n">
+  RbObjectCollection<span aria-hidden="true"> &raquo;</span>
+</a>
+
+    <a class="j2-objc j2-secondary" href="../types/rbobjectcollection.html?swift" aria-keyshortcuts="n">
+  RbObjectCollection<span aria-hidden="true"> &raquo;</span>
+</a>
+
+  
+  
+  </div>
+</nav>
+
+        
+
+        </article>
+      </main>
+
+      <div class="col-xl d-none d-xl-block j2-aux-nav" id="aux-nav-column">
+  <div class="j2-aux-nav-wrapper">
+    
+    <div class="j2-swift">
+    <h6 class="j2-inline-heading">Topics</h6>
+    <nav aria-label="page">
+      <ul class="j2-aux-group">
+        
+        <li><a href="#">Declaration</a></li>
+        
+        <li><a href="#tpc-instance-variables">Instance Variables</a></li>
+        
+        <li><a href="#tpc-failable-access">Failable Access</a></li>
+        
+        <li><a href="#tpc-constants">Constants</a></li>
+        
+        <li><a href="#tpc-method-call">Method Call</a></li>
+        
+        <li><a href="#tpc-attributes">Attributes</a></li>
+        
+        <li><a href="#tpc-class-variables">Class Variables</a></li>
+        
+        <li><a href="#tpc-global-variables">Global Variables</a></li>
+        
+        <li><a href="#tpc-polymorphic-getter">Polymorphic Getter</a></li>
+        
+      </ul>
+    </nav>
+    </div>
+    
+    
+    <h6 class="j2-inline-heading">Actions</h6>
+    <ul class="j2-aux-group">
+      
+      <li><a class="j2-aux-action" id="action-search" href="#" role="button" aria-keyshortcuts="/">Search (/)</a></li>
+      
+      
+      
+      <li><a class="j2-aux-action" id="action-collapse" href="#" role="button" aria-keyshortcuts="a">
+          <span id="action-collapse-expand">Open all (a)</span>
+          <span id="action-collapse-collapse" class="d-none">Close all (a)</span>
+      </a></li>
+      
+      
+      
+    </ul>
+    
+  </div>
+</div>
+
+
+    </div> <!-- end row -->
+
+    <footer class="row">
+  <div class="col j2-footer small pt-2">
+    <p><p>Distributed under the MIT license.  Maintained by <a href="mailto:johnfairh@gmail.com">John Fairhurst</a>.</p></p>
+    
+    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external">Bebop v1.0</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫</a>.</p>
+    
+  </div>
+</footer>
+
+  </div> <!-- container -->
+
+  <script src="../js/dependencies.min.js"></script>
+  
+  <script src="../js/fw2020.js"></script>
+  </body>
+</html>

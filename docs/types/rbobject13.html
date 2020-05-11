@@ -1,0 +1,4453 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+    <link rel="stylesheet" href="../css/fw2020.css">
+    
+    
+   <title>RbObject - RubyGateway 3.2.0 docs</title>
+    
+  </head>
+  <body class="j2-swift " data-root-path="./../" data-doc-path="types/rbobject13.html" data-assets-path="../">
+
+  <!-- messages for search -->
+  <div hidden>
+    <span id="text-loading">Loading index...</span>
+    <span id="text-failed">Failed to load index</span>
+    <span id="text-notfound">No matches</span>
+  </div>
+
+  <header class="j2-header">
+  <div class="navbar navbar-expand navbar-dark j2-titlebar">
+  <a class="sr-only-focusable sr-only font-weight-slightly-bold pr-2" href="#main-content">Skip to main content</a>
+  <a class="nav-item nav-link pl-0 pt-1 pr-2 d-md-none" id="nav-toggle-button" role="button" aria-controls="nav-column" aria-expanded="false" aria-label="Toggle navigation" href="#">
+    <span class="navbar-toggler-icon"></span>
+  </a>
+
+  <div style="align-items-baseline">
+    <div class="navbar-brand mr-1 font-weight-slightly-bold">
+      
+      <a href="../index.html">
+      
+      RubyGateway 3.2.0 docs</a>
+    </div>
+    
+    <span class="navbar-text j2-coverage font-weight-slightly-bold small d-none d-lg-inline-block mr-2">(100% documented)</span>
+    
+  </div>
+
+  <div class="navbar-nav ml-auto justify-content-end flex-fill">
+
+    
+    <form class="form-inline d-none d-md-flex" role="search">
+      <input class="form-control form-control-sm w-100" type="search" placeHolder="Search" aria-label="Search" aria-keyshortcuts="/" data-search-format="span">
+    </form>
+    
+
+    
+
+    
+    <a class="nav-item nav-link d-none d-sm-inline" rel="external" href="https://github.com/johnfairh/RubyGateway">
+      <svg class="j2-title-svg" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 16 16"><title>Open on GitHub</title><path fill="currentcolor" fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+      </svg>
+    </a>
+    
+    
+    
+    
+
+    
+      <a class="nav-item nav-link d-none d-sm-inline" rel="alternate" href="dash-feed://https%3A%2F%2Fjohnfairh%2Egithub%2Eio%2FRubyGateway%2Fdocsets%2FRubyGateway%2Exml">
+      <svg class="j2-title-svg" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 700 670">
+        <title>Open in Dash</title>
+        <path fill="currentcolor" d="m0 0 132.58 160.54h130.76v0.0312c63.501 0.196 140.87-6.9887 193.12 10.227 26.125 8.6076 43.475 19.899 57.578 40.781 14.103 20.882 26.733 55.737 25.781 118.52-0.8784 57.953-16.7 88.91-38.672 112.89-21.972 23.98-54.208 41.154-90.703 51.953-28.462 8.4219-55.314 10.153-80.547 11.953v-266.25h-160v419.92l71.328 7.8125s103.75 12.802 214.61-20c55.429-16.401 115.46-45.078 163.28-97.266 47.816-52.187 79.327-127.83 80.703-218.59 1.3028-85.935-16.743-156.6-53.125-210.47-36.382-53.871-89.369-86.47-140.16-103.2-50.787-16.733-101.87-18.272-145.08-18.504-43.211-0.2316-78.502 0.0768-97.578 0.0176v2e-3h-131.31z"/>
+      </svg>
+    </a>
+    
+
+    
+
+  </div>
+</div>
+
+<!-- narrow-style searchbar -->
+
+
+<div class="container-fluid j2-titlebar d-md-none">
+  <div class="row">
+    <div class="col">
+      <form class="pb-2">
+        <input class="form-control form-control-sm" type="search" placeHolder="Search" aria-label="Search" aria-keyshortcuts="/" data-search-format="div">
+      </form>
+    </div>
+  </div>
+</div>
+
+
+  <nav aria-label="breadcrumb" class="small">
+  
+  
+    <ol class="breadcrumb j2-breadcrumb j2-swift">
+      <li class="breadcrumb-item"><a href="../index.html">RubyGateway</a></li>
+      
+        
+          <li class="breadcrumb-item"><a href="../main-apis.html?swift">Main APIs</a></li>
+        
+        
+      
+        
+        
+          <li class="breadcrumb-item" aria-current="page">RbObject</li>
+        
+      
+    </ol>
+  
+</nav>
+
+  </header>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-auto d-none d-md-flex flex-column j2-nav" id="nav-column">
+  
+    <nav aria-label="Swift" class="j2-swift">
+    <ul class="j2-nav-list">
+      
+      <li class="j2-nav-group">
+        
+
+  <a class="j2-nav-item" href="../guides.html?swift">Guides</a>
+
+
+  <ul class="j2-nav-sublist">
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../guides/user-guide.html?swift">User Guide</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../guides/todo.html?swift">TODO</a>
+
+
+
+  </li>
+  
+</ul>
+
+
+
+      </li>
+      
+      <li class="j2-nav-group">
+        
+
+  <a class="j2-nav-item" href="../main-apis.html?swift">Main APIs</a>
+
+
+  <ul class="j2-nav-sublist">
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbgateway1.html?swift">RbGateway</a>
+
+
+  <ul class="j2-nav-sublist">
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbgateway1/verbosity.html?swift">Verbosity</a>
+
+
+
+  </li>
+  
+</ul>
+
+
+
+  </li>
+  
+  <li>
+    
+  <a class="j2-nav-item active" href="#" aria-current="page">RbObject</a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbobjectaccess1.html?swift">RbObjectAccess</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbobjectcollection.html?swift">RbObjectCollection</a>
+
+
+
+  </li>
+  
+</ul>
+
+
+
+      </li>
+      
+      <li class="j2-nav-group">
+        
+
+  <a class="j2-nav-item" href="../swift-method-apis.html?swift">Swift Method APIs</a>
+
+
+  <ul class="j2-nav-sublist">
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbmethodargsspec.html?swift">RbMethodArgsSpec</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../swift-method-apis.html?swift#rbmethodcallback">RbMethodCallback</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../swift-method-apis.html?swift#rbboundmethodcallback">RbBoundMethodCallback</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../swift-method-apis.html?swift#rbboundmethodvoidcallback">RbBoundMethodVoidCallback</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbmethod.html?swift">RbMethod</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbmethodargs.html?swift">RbMethodArgs</a>
+
+
+
+  </li>
+  
+</ul>
+
+
+
+      </li>
+      
+      <li class="j2-nav-group">
+        
+
+  <a class="j2-nav-item" href="../other-apis.html?swift">Other APIs</a>
+
+
+  <ul class="j2-nav-sublist">
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../other-apis.html?swift#rbblockcallback">RbBlockCallback</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbblockretention.html?swift">RbBlockRetention</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbbreak.html?swift">RbBreak</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbproc.html?swift">RbProc</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbsymbol.html?swift">RbSymbol</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbthread.html?swift">RbThread</a>
+
+
+  <ul class="j2-nav-sublist">
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbthread/unblockingfunc.html?swift">UnblockingFunc</a>
+
+
+
+  </li>
+  
+</ul>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbtype.html?swift">RbType</a>
+
+
+
+  </li>
+  
+</ul>
+
+
+
+      </li>
+      
+      <li class="j2-nav-group">
+        
+
+  <a class="j2-nav-item" href="../error-handling.html?swift">Error Handling</a>
+
+
+  <ul class="j2-nav-sublist">
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rberror.html?swift">RbError</a>
+
+
+  <ul class="j2-nav-sublist">
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rberror/history.html?swift">History</a>
+
+
+
+  </li>
+  
+</ul>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbexception.html?swift">RbException</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbfailableaccess.html?swift">RbFailableAccess</a>
+
+
+
+  </li>
+  
+</ul>
+
+
+
+      </li>
+      
+      <li class="j2-nav-group">
+        
+
+  <a class="j2-nav-item" href="../swift-interop.html?swift">Swift Interop</a>
+
+
+  <ul class="j2-nav-sublist">
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/string.html?swift">String</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/bool.html?swift">Bool</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/uint.html?swift">UInt</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/uint64.html?swift">UInt64</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/uint32.html?swift">UInt32</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/uint16.html?swift">UInt16</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/uint8.html?swift">UInt8</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/int.html?swift">Int</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/int64.html?swift">Int64</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/int32.html?swift">Int32</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/int16.html?swift">Int16</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/int8.html?swift">Int8</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/double.html?swift">Double</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/float.html?swift">Float</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/array.html?swift">Array</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/arrayslice.html?swift">ArraySlice</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/dictionary.html?swift">Dictionary</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/set.html?swift">Set</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/range.html?swift">Range</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../extensions/closedrange.html?swift">ClosedRange</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbcomplex.html?swift">RbComplex</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../types/rbrational.html?swift">RbRational</a>
+
+
+
+  </li>
+  
+</ul>
+
+
+
+      </li>
+      
+    </ul>
+  </nav>
+  
+</div>
+
+      <main class="col col-xl-8 j2-article px-lg-4 px-xl-5" id="article-column">
+        <article class="j2-article-wrapper" id="main-content">
+
+        <section>
+          
+          <header>
+            <h1 class="j2-anchor">
+              
+              
+              <span>RbObject</span>
+              
+            </h1>
+          </header>
+          
+          
+          
+          <div class="j2-callout  j2-callout-declaration">
+            
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public final class RbObject: <a href="../types/rbobjectaccess1.html?swift">RbObjectAccess</a>
+
+extension RbObject: <a href="https://developer.apple.com/documentation/swift/customstringconvertible?language=swift">CustomStringConvertible</a>,
+    <a href="https://developer.apple.com/documentation/swift/customdebugstringconvertible?language=swift">CustomDebugStringConvertible</a>,
+    <a href="https://developer.apple.com/documentation/swift/customplaygrounddisplayconvertible?language=swift">CustomPlaygroundDisplayConvertible</a>
+
+extension RbObject: <a href="https://developer.apple.com/documentation/swift/expressiblebyarrayliteral?language=swift">ExpressibleByArrayLiteral</a>
+
+extension RbObject: <a href="https://developer.apple.com/documentation/swift/expressiblebybooleanliteral?language=swift">ExpressibleByBooleanLiteral</a>
+
+extension RbObject: <a href="https://developer.apple.com/documentation/swift/expressiblebydictionaryliteral?language=swift">ExpressibleByDictionaryLiteral</a>
+
+extension RbObject: <a href="https://developer.apple.com/documentation/swift/expressiblebyfloatliteral?language=swift">ExpressibleByFloatLiteral</a>
+
+extension RbObject: <a href="https://developer.apple.com/documentation/swift/expressiblebyintegerliteral?language=swift">ExpressibleByIntegerLiteral</a>
+
+extension RbObject: <a href="https://developer.apple.com/documentation/swift/expressiblebystringliteral?language=swift">ExpressibleByStringLiteral</a>
+
+extension RbObject: <a href="https://developer.apple.com/documentation/swift/hashable?language=swift">Hashable</a>, <a href="https://developer.apple.com/documentation/swift/equatable?language=swift">Equatable</a>, <a href="https://developer.apple.com/documentation/swift/comparable?language=swift">Comparable</a>
+
+extension RbObject: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>
+
+extension RbObject: <a href="https://developer.apple.com/documentation/swift/signednumeric?language=swift">SignedNumeric</a></code></pre>
+  </div>
+
+
+
+          </div>
+
+          <div class="clearfix">
+            
+  
+
+
+            
+
+
+<p>A Ruby object.</p>
+<p>All Ruby objects whatever their type or class are represented using this
+Swift type.</p>
+<p>Use <a href="../types/rbobject13.html?swift#initofclassargskwargs"><code>RbObject.init(ofClass:args:kwArgs:)</code></a> to create a new Ruby object of
+some class:</p>
+<pre><code class="language-swift">let myObj = RbObject(ofClass: &quot;MyModule::MyClass&quot;, args: [&quot;arg1&quot;, 25.3])
+</code></pre>
+<p>See <a href="../types/rbobjectaccess1.html?swift"><code>RbObjectAccess</code></a> for ways to call methods, access properties, and find
+constants from an <code>RbObject</code>:</p>
+<pre><code class="language-swift">try myObj.set(&quot;name&quot;, &quot;fred&quot;)  // explicit property set
+
+let results = try myObj.call(&quot;process&quot;, args: [&quot;arg1&quot;, 100])
+
+let answer = try myObj.call(&quot;pose&quot;, kwArgs: [&quot;questionNumber&quot;: 40])
+</code></pre>
+<p>See <a href="../types/rbgateway1.html?swift"><code>RbGateway</code></a> and its global instance <code>Ruby</code> for access to the Ruby ‘top self’
+object to get started finding constants or calling global functions.</p>
+<h2 class="j2-anchor j2-heading heading" id="converting-to-and-from-swift-types">
+<span data-anchor-id="converting-to-and-from-swift-types">
+Converting to and from Swift types
+</span></h2>
+<p>Convert <code>RbObject</code>s to Swift types using failable initializers or the throwing
+<code>convert</code> methods:</p>
+<pre><code class="language-swift">let height = Double(myObj)
+let allHeights = Array&lt;Double&gt;(myObj)
+let heightDb = Dictionary&lt;String, Double&gt;(myObj)
+
+let width = try myObj.convert(to: Double.self)
+model.field = try myObj.convert()
+</code></pre>
+<p>Check <a href="../types/rberror.html?swift#history1"><code>RbError.history</code></a> to see the cause of failed initializations.</p>
+<p>In the reverse direction, Swift types convert implicitly to <code>RbObject</code>
+when passed as arguments via the <a href="../types/rbobjectconvertible.html?swift"><code>RbObjectConvertible</code></a> protocol.</p>
+<h2 class="j2-anchor j2-heading heading" id="collection-protocols">
+<span data-anchor-id="collection-protocols">
+Collection protocols
+</span></h2>
+<p>The conversion example above converts the entire Ruby array to an independent
+Swift array.  An alternative is to use <a href="../types/rbobject13.html?swift#collection"><code>RbObject.collection</code></a> which provides
+a dynamic view onto the Ruby array that supports many Swift collection protocols
+so you can update a Ruby array like:</p>
+<pre><code class="language-swift">myArrayObj.collection.sort(4..&lt;8)
+</code></pre>
+<h2 class="j2-anchor j2-heading heading" id="standard-library-conformances">
+<span data-anchor-id="standard-library-conformances">
+Standard library conformances
+</span></h2>
+<p><code>RbObject</code> conforms to <a href="https://developer.apple.com/documentation/swift/hashable?language=swift" class="j2-swift"><code>Hashable</code></a>, <a href="https://developer.apple.com/documentation/swift/equatable?language=swift" class="j2-swift"><code>Equatable</code></a>, and <a href="https://developer.apple.com/documentation/swift/comparable?language=swift" class="j2-swift"><code>Comparable</code></a> protocols by
+forwarding to the corresponding Ruby methods.  Beware though that it is easy
+to trigger Ruby errors here that currently cause RubyGateway to crash.  For
+example this is poison:</p>
+<pre><code class="language-swift">RbObject(3) &lt; RbObject(&quot;barney&quot;)
+</code></pre>
+<p>Future releases may add more control over what happens here.</p>
+<h2 class="j2-anchor j2-heading heading" id="arithmetic-operators">
+<span data-anchor-id="arithmetic-operators">
+Arithmetic operators
+</span></h2>
+<p><code>RbObject</code> conforms to the <a href="https://developer.apple.com/documentation/swift/signednumeric?language=swift" class="j2-swift"><code>SignedNumeric</code></a> protocol by forwarding the regular
+arithmetic operators to the corresponding Ruby methods.  This means you can
+write <code>let a = b + c</code> where all are <code>RbObject</code>s and get a valid value for <code>a</code>
+provided <code>b</code> and <code>c</code> are any of the Ruby numeric values or any Ruby class that
+happens to support those operators.</p>
+<p>Again you must take ensure that your Ruby objects support these operators or
+the program will crash.</p>
+<h2 class="j2-anchor j2-heading heading" id="defining-methods">
+<span data-anchor-id="defining-methods">
+Defining methods
+</span></h2>
+<p>Use <a href="../types/rbobject13.html?swift#definemethod_argsspecmethod1"><code>RbObject.defineMethod(...)</code></a> and <a href="../types/rbobject13.html?swift#definesingletonmethod_argsspecbody"><code>RbObject.defineSingletonMethod(...)</code></a> to
+add methods implemented in Swift to an object or class.  Use
+<a href="../types/rbgateway1.html?swift#defineclass_parentunder"><code>RbGateway.defineClass(_:parent:under:)</code></a> to define entirely new classes.</p>
+
+
+
+            
+
+
+          </div>
+          
+          
+          <nav aria-label="item details" class="j2-main-item-nav">
+            <a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L88-L187">Show on GitHub</a>
+          </nav>
+          
+          
+        </section>
+
+        
+<div class="j2-swift">
+<hr/>
+<section>
+  <h1 class="sr-only">Topics</h1>
+  
+  <section class="j2-swift">
+  
+  
+  
+  
+  
+    <section id="initrubyvalue" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Constructor/init(rubyValue%3A%20VALUE)" class="dashAnchor j2-item-dash-anchor" data-item-id="initrubyvalue"></a>
+    <h4 class="sr-only">init(rubyValue: VALUE)</h4>
+    
+    
+    <a class="j2-item-title" href="#_initrubyvalue" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_initrubyvalue"><code>
+        <span class="j2-swift">init<span class="j2-item-secondary">(</span>rubyValue<span class="j2-item-secondary">: VALUE)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_initrubyvalue">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Wrap up a Ruby object using the its <code>VALUE</code> API handle.</p>
+<p>The Ruby object is kept safe from garbage collection until
+the Swift object is deallocated.</p>
+<p>This initializer is public to allow use with other parts
+of the Ruby API.  It is not normally needed.</p>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public init(rubyValue: VALUE)</code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L98-L101">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="init_26" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Constructor/init(RbObject)" class="dashAnchor j2-item-dash-anchor" data-item-id="init_26"></a>
+    <h4 class="sr-only">init(RbObject)</h4>
+    
+    
+    <a class="j2-item-title" href="#_init_26" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_init_26"><code>
+        <span class="j2-swift">init<span class="j2-item-secondary">(RbObject)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_init_26">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Create another Swift reference to an existing <a href="../types/rbobject13.html?swift"><code>RbObject</code></a>.</p>
+<p>The underlying Ruby object will not be garbage-collected until
+both <a href="../types/rbobject13.html?swift"><code>RbObject</code></a>s have been deallocated.</p>
+<p>There is still just one Ruby object in the system.  To create
+a separate Ruby object do:</p>
+<pre><code class="language-swift">let myClone = myObject.call(&quot;clone&quot;)
+</code></pre>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public init(_ value: <a href="../types/rbobject13.html?swift">RbObject</a>)</code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L113-L117">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="withrubyvaluecall" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20withRubyValue%3CT%3E(call%3A%20(VALUE)%20-%3E%20T)%20-%3E%20T" class="dashAnchor j2-item-dash-anchor" data-item-id="withrubyvaluecall"></a>
+    <h4 class="sr-only">func withRubyValue&lt;T&gt;(call: (VALUE) -&gt; T) -&gt; T</h4>
+    
+    
+    <a class="j2-item-title" href="#_withrubyvaluecall" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_withrubyvaluecall"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>withRubyValue<span class="j2-item-secondary">&lt;T&gt;(</span>call<span class="j2-item-secondary">: (VALUE) -&gt; T) -&gt; T</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_withrubyvaluecall">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Safely access the <code>VALUE</code> object handle for use with the Ruby C API.</p>
+<p>There is no direct access to the <code>VALUE</code> to prevent accidental use
+outside the corresponding <a href="../types/rbobject13.html?swift"><code>RbObject</code></a>’s lifetime.</p>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">@discardableResult
+public func withRubyValue&lt;T&gt;(call: (VALUE) throws -&gt; T) rethrows -&gt; T</code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>call</code></td>
+        <td><p>The closure to pass the object’s <code>VALUE</code> on to.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L137-L139">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="rubytype" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Property/var%20rubyType%3A%20RbType" class="dashAnchor j2-item-dash-anchor" data-item-id="rubytype"></a>
+    <h4 class="sr-only">var rubyType: RbType</h4>
+    
+    
+    <a class="j2-item-title" href="#_rubytype" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rubytype"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">var </span>rubyType<span class="j2-item-secondary">: RbType</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_rubytype">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>The Ruby type of this object.  This is a fairly unfriendly enum but
+might be useful for debugging.</p>
+
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public var rubyType: <a href="../types/rbtype.html?swift">RbType</a> { get }</code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L143-L145">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="istruthy" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Property/var%20isTruthy%3A%20Bool" class="dashAnchor j2-item-dash-anchor" data-item-id="istruthy"></a>
+    <h4 class="sr-only">var isTruthy: Bool</h4>
+    
+    
+    <a class="j2-item-title" href="#_istruthy" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_istruthy"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">var </span>isTruthy<span class="j2-item-secondary">: Bool</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_istruthy">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Is the Ruby object truthy?</p>
+
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public var isTruthy: <a href="../extensions/bool.html?swift">Bool</a> { get }</code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L148-L150">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="isnil" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Property/var%20isNil%3A%20Bool" class="dashAnchor j2-item-dash-anchor" data-item-id="isnil"></a>
+    <h4 class="sr-only">var isNil: Bool</h4>
+    
+    
+    <a class="j2-item-title" href="#_isnil" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_isnil"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">var </span>isNil<span class="j2-item-secondary">: Bool</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_isnil">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Is the Ruby object <code>nil</code>?</p>
+<p>If you have Swift <code>nil</code> – that is, you don’t have <code>.some(RbObject)</code> –
+then Ruby failed – there was probably an exception.  Check <a href="../types/rberror.html?swift#history1"><code>RbError.history</code></a>
+for a list of recent exceptions.</p>
+<p>If you’ve got Ruby <code>nil</code> – that is, you’ve got <code>RbObject.isNil</code> – then
+Ruby worked but the call evaluated to [Ruby] <code>nil</code>.</p>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public var isNil: <a href="../extensions/bool.html?swift">Bool</a> { get }</code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L160-L162">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="nilobject" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Variable/static%20var%20nilObject%3A%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="nilobject"></a>
+    <h4 class="sr-only">static var nilObject: RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_nilobject" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_nilobject"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">static var </span>nilObject<span class="j2-item-secondary">: RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_nilobject">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>An <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> that means <code>nil</code> to Ruby.</p>
+
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public static let nilObject: <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L165">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="collection" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Property/var%20collection%3A%20RbObjectCollection" class="dashAnchor j2-item-dash-anchor" data-item-id="collection"></a>
+    <h4 class="sr-only">var collection: RbObjectCollection</h4>
+    
+    
+    <a class="j2-item-title" href="#_collection" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_collection"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">var </span>collection<span class="j2-item-secondary">: RbObjectCollection</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_collection">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>A view onto the Ruby object using Swift collection APIs.</p>
+<p>Intended for use with Ruby arrays, but any object will work provided
+it implements <code>[]</code>, <code>[]=</code>, and <code>length</code> like Array.</p>
+<p>This property has a setter to permit syntax like:</p>
+<pre><code class="language-swift">myObj.collection[3..&lt;12].sort()
+</code></pre>
+<p>The only thing that can be assigned is the object’s corresponding
+<a href="../types/rbobjectcollection.html?swift"><code>RbObjectCollection</code></a> – assigning anything else will trap.  Use
+<a href="../types/rbobjectcollection.html?swift#rubyobject24"><code>RbObjectCollection.rubyObject</code></a> to obtain a collection’s underlying Ruby array.</p>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public var collection: <a href="../types/rbobjectcollection.html?swift">RbObjectCollection</a> { get set }</code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L179-L186">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+</section>
+
+  
+  <section class="j2-swift">
+  
+  <a name="//apple_ref/cpp/Section/Retrieving%20a%20bound%20Swift%20object" class="dashAnchor"></a>
+  <h3 class="j2-anchor" id="tpc-retrieving-a-bound-swift-object">
+    <span data-anchor-id="tpc-retrieving-a-bound-swift-object">Retrieving a bound Swift object</span>
+  </h3>
+  
+  
+  
+  
+  
+    <section id="getboundobjecttype" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20getBoundObject%3CT%3E(type%3A%20T.Type)%20-%3E%20T" class="dashAnchor j2-item-dash-anchor" data-item-id="getboundobjecttype"></a>
+    <h4 class="sr-only">func getBoundObject&lt;T&gt;(type: T.Type) -&gt; T</h4>
+    
+    
+    <a class="j2-item-title" href="#_getboundobjecttype" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_getboundobjecttype"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>getBoundObject<span class="j2-item-secondary">&lt;T&gt;(</span>type<span class="j2-item-secondary">: T.Type) -&gt; T</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_getboundobjecttype">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Retrieve the Swift object bound to this Ruby object.</p>
+<p>This is for use on Ruby objects created from classes defined with
+<a href="../types/rbgateway1.html?swift#defineclass_underinitializer"><code>RbGateway.defineClass(_:under:initializer:)</code></a> to retrieve the bound
+object.</p>
+<p>This function performs an unsafe cast to the type you specify so be
+sure to get it right.</p>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">Throws</div>
+<p><a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if the object doesn’t have a bound Swift
+class.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public func getBoundObject&lt;T&gt;(type: T.Type) throws -&gt; T where T: <a href="https://developer.apple.com/documentation/swift/anyobject?language=swift">AnyObject</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>type</code></td>
+        <td><p>The type of the bound object</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+  <h5>Return Value</h5>
+  <p>The bound object</p>
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbClass.swift#L94-L100">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+</section>
+
+  
+  <section class="j2-swift">
+  
+  <a name="//apple_ref/cpp/Section/Importing%20Modules" class="dashAnchor"></a>
+  <h3 class="j2-anchor" id="tpc-importing-modules">
+    <span data-anchor-id="tpc-importing-modules">Importing Modules</span>
+  </h3>
+  
+  
+  
+  
+  
+    <section id="includemodule" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20include(module%3A%20RbObject)" class="dashAnchor j2-item-dash-anchor" data-item-id="includemodule"></a>
+    <h4 class="sr-only">func include(module: RbObject)</h4>
+    
+    
+    <a class="j2-item-title" href="#_includemodule" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_includemodule"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>include<span class="j2-item-secondary">(</span>module<span class="j2-item-secondary">: RbObject)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_includemodule">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Add methods from a module to a class such that methods from the class
+override any that match in the module.</p>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">Throws</div>
+<p><a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if this object is not a class or if <code>module</code>
+is not a module.  <a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(...)</code></a> if Ruby is unhappy,
+for example if the operation creates a circular dependency.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public func include(module: <a href="../types/rbobject13.html?swift">RbObject</a>) throws</code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>module</code></td>
+        <td><p>Module whose methods are to be added.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbClass.swift#L233-L237">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="prependmodule" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20prepend(module%3A%20RbObject)" class="dashAnchor j2-item-dash-anchor" data-item-id="prependmodule"></a>
+    <h4 class="sr-only">func prepend(module: RbObject)</h4>
+    
+    
+    <a class="j2-item-title" href="#_prependmodule" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_prependmodule"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>prepend<span class="j2-item-secondary">(</span>module<span class="j2-item-secondary">: RbObject)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_prependmodule">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Add methods from a module to a class such that methods from the module
+override any that match in the class.</p>
+<p>See <code>Module#prepend</code> for a better explanation.</p>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">Throws</div>
+<p><a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if this object is not a class or if <code>module</code>
+is not a module.  <a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(...)</code></a> if Ruby is unhappy,
+for example if the operation creates a circular dependency.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public func prepend(module: <a href="../types/rbobject13.html?swift">RbObject</a>) throws</code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>module</code></td>
+        <td><p>Module whose methods are to be added.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbClass.swift#L248-L252">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="extendmodule" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20extend(module%3A%20RbObject)" class="dashAnchor j2-item-dash-anchor" data-item-id="extendmodule"></a>
+    <h4 class="sr-only">func extend(module: RbObject)</h4>
+    
+    
+    <a class="j2-item-title" href="#_extendmodule" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_extendmodule"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>extend<span class="j2-item-secondary">(</span>module<span class="j2-item-secondary">: RbObject)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_extendmodule">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Add methods from a module to the singleton class of this object.</p>
+<p>See <code>Module#extend</code> for a better explanation.</p>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">Throws</div>
+<p><a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if <code>module</code> is not a module.
+<a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(...)</code></a> if Ruby is unhappy,
+for example if the operation creates a circular dependency.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public func extend(module: <a href="../types/rbobject13.html?swift">RbObject</a>) throws</code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>module</code></td>
+        <td><p>Module whose methods are to be added.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbClass.swift#L262-L265">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+</section>
+
+  
+  <section class="j2-swift">
+  
+  <a name="//apple_ref/cpp/Section/RbObjectConvertible" class="dashAnchor"></a>
+  <h3 class="j2-anchor" id="tpc-rbobjectconvertible">
+    <span data-anchor-id="tpc-rbobjectconvertible">RbObjectConvertible</span>
+  </h3>
+  
+  
+  
+  
+  
+    <section id="init_4" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Constructor/init(RbObjectConvertible)" class="dashAnchor j2-item-dash-anchor" data-item-id="init_4"></a>
+    <h4 class="sr-only">init(RbObjectConvertible)</h4>
+    
+    
+    <a class="j2-item-title" href="#_init_4" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_init_4"><code>
+        <span class="j2-swift">init<span class="j2-item-secondary">(RbObjectConvertible)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_init_4">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Create an <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> from a Swift type.</p>
+<p>RubyGateway conforms most of the Swift standard library types
+to <a href="../types/rbobjectconvertible.html?swift"><code>RbObjectConvertible</code></a>.</p>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public convenience init(_ value: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)</code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L38-L40">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="convert" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20convert%3CT%3E()%20-%3E%20T" class="dashAnchor j2-item-dash-anchor" data-item-id="convert"></a>
+    <h4 class="sr-only">func convert&lt;T&gt;() -&gt; T</h4>
+    
+    
+    <a class="j2-item-title" href="#_convert" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_convert"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>convert<span class="j2-item-secondary">&lt;T&gt;() -&gt; T</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_convert">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Convert an RbObject to some Swift type.</p>
+<p>This is a convenience wrapper around optional conversion for cases where
+the Swift type can be inferred.  See <a href="../types/rbobject13.html?swift#convertto"><code>convert(to:)</code></a> to explicitly specify
+the desired type.</p>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
+<p><a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if the conversion fails.  There may be a more
+detailed exception inside <a href="../types/rberror.html?swift#history1"><code>RbError.history</code></a>.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public func convert&lt;T&gt;() throws -&gt; T where T: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L66-L71">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="convertto" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20convert%3CT%3E(to%3A%20T.Type)%20-%3E%20T" class="dashAnchor j2-item-dash-anchor" data-item-id="convertto"></a>
+    <h4 class="sr-only">func convert&lt;T&gt;(to: T.Type) -&gt; T</h4>
+    
+    
+    <a class="j2-item-title" href="#_convertto" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_convertto"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>convert<span class="j2-item-secondary">&lt;T&gt;(</span>to<span class="j2-item-secondary">: T.Type) -&gt; T</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_convertto">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Convert an RbObject to some Swift type.</p>
+<p>This is a convenience wrapper around optional conversion.  See <a href="../types/rbobject13.html?swift#convert"><code>convert()</code></a>
+for when the desired type can be inferred by the compiler.</p>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
+<p><a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if the conversion fails.  There may be a more
+detailed exception inside <a href="../types/rberror.html?swift#history1"><code>RbError.history</code></a>.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public func convert&lt;T&gt;(to type: T.Type) throws -&gt; T where T: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L80-L85">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+</section>
+
+  
+  <section class="j2-swift">
+  
+  <a name="//apple_ref/cpp/Section/StringLiteral" class="dashAnchor"></a>
+  <h3 class="j2-anchor" id="tpc-stringliteral">
+    <span data-anchor-id="tpc-stringliteral">StringLiteral</span>
+  </h3>
+  
+  
+  
+  
+  
+    <section id="initstringliteral" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Constructor/init(stringLiteral%3A%20String)" class="dashAnchor j2-item-dash-anchor" data-item-id="initstringliteral"></a>
+    <h4 class="sr-only">init(stringLiteral: String)</h4>
+    
+    
+    <a class="j2-item-title" href="#_initstringliteral" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_initstringliteral"><code>
+        <span class="j2-swift">init<span class="j2-item-secondary">(</span>stringLiteral<span class="j2-item-secondary">: String)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_initstringliteral">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Creates an <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> from a string literal.</p>
+
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public convenience init(stringLiteral value: <a href="../extensions/string.html?swift">String</a>)</code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L128-L130">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+</section>
+
+  
+  <section class="j2-swift">
+  
+  <a name="//apple_ref/cpp/Section/BooleanLiteral" class="dashAnchor"></a>
+  <h3 class="j2-anchor" id="tpc-booleanliteral">
+    <span data-anchor-id="tpc-booleanliteral">BooleanLiteral</span>
+  </h3>
+  
+  
+  
+  
+  
+    <section id="initbooleanliteral" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Constructor/init(booleanLiteral%3A%20Bool)" class="dashAnchor j2-item-dash-anchor" data-item-id="initbooleanliteral"></a>
+    <h4 class="sr-only">init(booleanLiteral: Bool)</h4>
+    
+    
+    <a class="j2-item-title" href="#_initbooleanliteral" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_initbooleanliteral"><code>
+        <span class="j2-swift">init<span class="j2-item-secondary">(</span>booleanLiteral<span class="j2-item-secondary">: Bool)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_initbooleanliteral">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Creates an <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> from a boolean literal.</p>
+
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public convenience init(booleanLiteral value: <a href="../extensions/bool.html?swift">Bool</a>)</code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L157-L159">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+</section>
+
+  
+  <section class="j2-swift">
+  
+  <a name="//apple_ref/cpp/Section/IntegerLiteral" class="dashAnchor"></a>
+  <h3 class="j2-anchor" id="tpc-integerliteral">
+    <span data-anchor-id="tpc-integerliteral">IntegerLiteral</span>
+  </h3>
+  
+  
+  
+  
+  
+    <section id="initintegerliteral" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Constructor/init(integerLiteral%3A%20Int)" class="dashAnchor j2-item-dash-anchor" data-item-id="initintegerliteral"></a>
+    <h4 class="sr-only">init(integerLiteral: Int)</h4>
+    
+    
+    <a class="j2-item-title" href="#_initintegerliteral" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_initintegerliteral"><code>
+        <span class="j2-swift">init<span class="j2-item-secondary">(</span>integerLiteral<span class="j2-item-secondary">: Int)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_initintegerliteral">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Creates an <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> from an integer literal.</p>
+
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public convenience init(integerLiteral value: <a href="../extensions/int.html?swift">Int</a>)</code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L233-L235">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+</section>
+
+  
+  <section class="j2-swift">
+  
+  <a name="//apple_ref/cpp/Section/FloatLiteral" class="dashAnchor"></a>
+  <h3 class="j2-anchor" id="tpc-floatliteral">
+    <span data-anchor-id="tpc-floatliteral">FloatLiteral</span>
+  </h3>
+  
+  
+  
+  
+  
+    <section id="initfloatliteral" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Constructor/init(floatLiteral%3A%20Double)" class="dashAnchor j2-item-dash-anchor" data-item-id="initfloatliteral"></a>
+    <h4 class="sr-only">init(floatLiteral: Double)</h4>
+    
+    
+    <a class="j2-item-title" href="#_initfloatliteral" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_initfloatliteral"><code>
+        <span class="j2-swift">init<span class="j2-item-secondary">(</span>floatLiteral<span class="j2-item-secondary">: Double)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_initfloatliteral">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Creates an <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> from a floating-point literal.</p>
+
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public convenience init(floatLiteral value: <a href="../extensions/double.html?swift">Double</a>)</code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L275-L277">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+</section>
+
+  
+  <section class="j2-swift">
+  
+  <a name="//apple_ref/cpp/Section/ArrayLiteral" class="dashAnchor"></a>
+  <h3 class="j2-anchor" id="tpc-arrayliteral">
+    <span data-anchor-id="tpc-arrayliteral">ArrayLiteral</span>
+  </h3>
+  
+  
+  
+  
+  
+    <section id="initarrayliteral" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Constructor/init(arrayLiteral%3A%20RbObject...)" class="dashAnchor j2-item-dash-anchor" data-item-id="initarrayliteral"></a>
+    <h4 class="sr-only">init(arrayLiteral: RbObject...)</h4>
+    
+    
+    <a class="j2-item-title" href="#_initarrayliteral" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_initarrayliteral"><code>
+        <span class="j2-swift">init<span class="j2-item-secondary">(</span>arrayLiteral<span class="j2-item-secondary">: RbObject...)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_initarrayliteral">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Creates an <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> from an array literal.</p>
+<p>Although the element type here is <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> you can write things like:</p>
+<pre><code class="language-swift">let obj: RbObject = [1, 2, 3]
+</code></pre>
+<p>… because of <a href="../types/rbobject13.html?swift"><code>RbObject</code></a>’s <a href="https://developer.apple.com/documentation/swift/expressiblebyintegerliteral?language=swift" class="j2-swift"><code>ExpressibleByIntegerLiteral</code></a> conformance
+that gets applied recursively.</p>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public convenience init(arrayLiteral value: RbObject...)</code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L359-L361">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+</section>
+
+  
+  <section class="j2-swift">
+  
+  <a name="//apple_ref/cpp/Section/DictionaryLiteral" class="dashAnchor"></a>
+  <h3 class="j2-anchor" id="tpc-dictionaryliteral">
+    <span data-anchor-id="tpc-dictionaryliteral">DictionaryLiteral</span>
+  </h3>
+  
+  
+  
+  
+  
+    <section id="initdictionaryliteral" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Constructor/init(dictionaryLiteral%3A%20(RbObject,%20RbObject)...)" class="dashAnchor j2-item-dash-anchor" data-item-id="initdictionaryliteral"></a>
+    <h4 class="sr-only">init(dictionaryLiteral: (RbObject, RbObject)...)</h4>
+    
+    
+    <a class="j2-item-title" href="#_initdictionaryliteral" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_initdictionaryliteral"><code>
+        <span class="j2-swift">init<span class="j2-item-secondary">(</span>dictionaryLiteral<span class="j2-item-secondary">: (RbObject, RbObject)...)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_initdictionaryliteral">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Creates an <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> from a dictionary literal.</p>
+<p>Although the key and value types here are <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> you can write things like:</p>
+<pre><code class="language-swift">let obj: RbObject = [1: &quot;fish&quot;, 2: &quot;bucket&quot;, 3: &quot;wife&quot;, 4: &quot;goat&quot;]
+</code></pre>
+<p>… because of <a href="../types/rbobject13.html?swift"><code>RbObject</code></a>’s <code>ExpressibleByXxxLiteral</code> conformance
+that gets applied recursively.</p>
+<p>Like a regular <a href="../extensions/dictionary.html?swift"><code>Dictionary</code></a> there must be no duplicate keys in the <code>elements</code>.</p>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public convenience init(dictionaryLiteral elements: (<a href="../types/rbobject13.html?swift">RbObject</a>, <a href="../types/rbobject13.html?swift">RbObject</a>)...)</code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbConversions.swift#L452-L454">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+</section>
+
+  
+  <section class="j2-swift">
+  
+  <a name="//apple_ref/cpp/Section/Defining%20Methods" class="dashAnchor"></a>
+  <h3 class="j2-anchor" id="tpc-defining-methods">
+    <span data-anchor-id="tpc-defining-methods">Defining Methods</span>
+  </h3>
+  
+  
+  
+  
+  
+    <section id="definemethod_argsspecbody" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20defineMethod(String,%20argsSpec%3A%20RbMethodArgsSpec,%20body%3A%20RbMethodCallback)" class="dashAnchor j2-item-dash-anchor" data-item-id="definemethod_argsspecbody"></a>
+    <h4 class="sr-only">func defineMethod(String, argsSpec: RbMethodArgsSpec, body: RbMethodCallback)</h4>
+    
+    
+    <a class="j2-item-title" href="#_definemethod_argsspecbody" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_definemethod_argsspecbody"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>defineMethod<span class="j2-item-secondary">(String, </span>argsSpec<span class="j2-item-secondary">: RbMethodArgsSpec, </span>body<span class="j2-item-secondary">: RbMethodCallback)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_definemethod_argsspecbody">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Add or replace a method in all instances of the Ruby class.</p>
+<p>The <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> must be for a Ruby class or module.  The method is
+immediately available to all instances of the class.</p>
+<p>You can define the class yourself using <a href="../types/rbgateway1.html?swift#defineclass_parentunder"><code>RbGateway.defineClass(_:parent:under:)</code></a>
+or get hold of an existing class from the global <code>Ruby</code> object, for example:</p>
+<pre><code class="language-swift">let clazz = try Ruby.get(&quot;Array&quot;)
+try clazz.defineMethod(name: &quot;sum&quot;) { rbSelf, _ in
+  rbSelf.collection.reduce(0, +)
+}
+</code></pre>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">Throws</div>
+<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> is bad.
+<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if the object is neither a class nor a module.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public func defineMethod(
+    _ name: <a href="../extensions/string.html?swift">String</a>,
+    argsSpec: <a href="../types/rbmethodargsspec.html?swift">RbMethodArgsSpec</a> = <a href="../types/rbmethodargsspec.html?swift">RbMethodArgsSpec</a>(),
+    body: @escaping <a href="../swift-method-apis.html?swift#rbmethodcallback">RbMethodCallback</a>) throws</code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>name</code></td>
+        <td><p>The method name.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>argsSpec</code></td>
+        <td><p>A description of the arguments required by the method.
+The default for this parameter specifies a function that
+does not take any arguments.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>body</code></td>
+        <td><p>The Swift code to run when the method is called.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L615-L620">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="definemethod_argsspecmethod" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20defineMethod%3CSwiftPeer,%20Return%3E(String,%20argsSpec%3A%20RbMethodArgsSpec,%20method%3A%20RbBoundMethodCallback%3CSwiftPeer,%20Return%3E)" class="dashAnchor j2-item-dash-anchor" data-item-id="definemethod_argsspecmethod"></a>
+    <h4 class="sr-only">func defineMethod&lt;SwiftPeer, Return&gt;(String, argsSpec: RbMethodArgsSpec, method: RbBoundMethodCallback&lt;SwiftPeer, Return&gt;)</h4>
+    
+    
+    <a class="j2-item-title" href="#_definemethod_argsspecmethod" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_definemethod_argsspecmethod"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>defineMethod<span class="j2-item-secondary">&lt;SwiftPeer, Return&gt;(String, </span>argsSpec<span class="j2-item-secondary">: RbMethodArgsSpec, </span>method<span class="j2-item-secondary">: RbBoundMethodCallback&lt;SwiftPeer, Return&gt;)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_definemethod_argsspecmethod">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Add or replace a method in all instances of the Ruby class.</p>
+<p>This version is for methods that have a value to return.</p>
+<p>The object must be a Ruby class defined using
+<a href="../types/rbgateway1.html?swift#defineclass_underinitializer"><code>RbGateway.defineClass(_:under:initializer:)</code></a> sharing the same type for
+<code>SwiftPeer</code>.  For example:</p>
+<pre><code class="language-swift">class InvaderModel {
+    init() { ... }
+    func fire(rbMethod: RbMethod) throws -&gt; Bool { ... }
+}
+
+let invaderClass = try Ruby.defineClass(&quot;Invader&quot;, initializer: InvaderModel.init)
+try invaderClass.defineMethod(&quot;fire&quot;, method: Invader.fire)
+</code></pre>
+<p>There are unsafe casts involved here so you must be sure to get the types
+right.</p>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">Throws</div>
+<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> is bad.
+<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if the object is not a class.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public func defineMethod&lt;SwiftPeer: <a href="https://developer.apple.com/documentation/swift/anyobject?language=swift">AnyObject</a>, Return: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>&gt;(
+    _ name: <a href="../extensions/string.html?swift">String</a>,
+    argsSpec: <a href="../types/rbmethodargsspec.html?swift">RbMethodArgsSpec</a> = <a href="../types/rbmethodargsspec.html?swift">RbMethodArgsSpec</a>(),
+    method: @escaping <a href="../swift-method-apis.html?swift#rbboundmethodcallback">RbBoundMethodCallback</a>&lt;SwiftPeer, Return&gt;) throws</code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>name</code></td>
+        <td><p>The method name.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>argsSpec</code></td>
+        <td><p>A description of the arguments required by the method.
+The default for this parameter specifies a function that
+does not take any arguments.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>method</code></td>
+        <td><p>The Swift method to call to fulfill the Ruby method.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L650-L660">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="definemethod_argsspecmethod1" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20defineMethod%3CSwiftPeer%3E(String,%20argsSpec%3A%20RbMethodArgsSpec,%20method%3A%20RbBoundMethodVoidCallback%3CSwiftPeer%3E)" class="dashAnchor j2-item-dash-anchor" data-item-id="definemethod_argsspecmethod1"></a>
+    <h4 class="sr-only">func defineMethod&lt;SwiftPeer&gt;(String, argsSpec: RbMethodArgsSpec, method: RbBoundMethodVoidCallback&lt;SwiftPeer&gt;)</h4>
+    
+    
+    <a class="j2-item-title" href="#_definemethod_argsspecmethod1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_definemethod_argsspecmethod1"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>defineMethod<span class="j2-item-secondary">&lt;SwiftPeer&gt;(String, </span>argsSpec<span class="j2-item-secondary">: RbMethodArgsSpec, </span>method<span class="j2-item-secondary">: RbBoundMethodVoidCallback&lt;SwiftPeer&gt;)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_definemethod_argsspecmethod1">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Add or replace a method in all instances of the Ruby class.</p>
+<p>This version is for methods that have no return value.  In Ruby
+all methods return values so RubyBridge substitutes the object itself.</p>
+<p>The object must be a Ruby class defined using
+<a href="../types/rbgateway1.html?swift#defineclass_underinitializer"><code>RbGateway.defineClass(_:under:initializer:)</code></a> sharing the same type for
+<code>SwiftPeer</code>.  For example:</p>
+<pre><code class="language-swift">class InvaderModel {
+    init() { ... }
+    func initialize(rbMethod: RbMethod) throws -&gt; Void { ... }
+}
+
+let invaderClass = try Ruby.defineClass(&quot;Invader&quot;, initializer: InvaderModel.init)
+try invaderClass.defineMethod(&quot;initialize&quot;,
+                              argsSpec: .basic(1),
+                              method: InvaderModel.initialize)
+</code></pre>
+<p>There are unsafe casts involved here so you must be sure to get the types
+right.</p>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">Throws</div>
+<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> is bad.
+<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if the object is not a class.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public func defineMethod&lt;SwiftPeer: <a href="https://developer.apple.com/documentation/swift/anyobject?language=swift">AnyObject</a>&gt;(
+    _ name: <a href="../extensions/string.html?swift">String</a>,
+    argsSpec: <a href="../types/rbmethodargsspec.html?swift">RbMethodArgsSpec</a> = <a href="../types/rbmethodargsspec.html?swift">RbMethodArgsSpec</a>(),
+    method: @escaping <a href="../swift-method-apis.html?swift#rbboundmethodvoidcallback">RbBoundMethodVoidCallback</a>&lt;SwiftPeer&gt;) throws</code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>name</code></td>
+        <td><p>The method name.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>argsSpec</code></td>
+        <td><p>A description of the arguments required by the method.
+The default for this parameter specifies a function that
+does not take any arguments.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>method</code></td>
+        <td><p>The Swift method to call to fulfill the Ruby method.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L693-L703">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="definesingletonmethod_argsspecbody" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20defineSingletonMethod(String,%20argsSpec%3A%20RbMethodArgsSpec,%20body%3A%20RbMethodCallback)" class="dashAnchor j2-item-dash-anchor" data-item-id="definesingletonmethod_argsspecbody"></a>
+    <h4 class="sr-only">func defineSingletonMethod(String, argsSpec: RbMethodArgsSpec, body: RbMethodCallback)</h4>
+    
+    
+    <a class="j2-item-title" href="#_definesingletonmethod_argsspecbody" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_definesingletonmethod_argsspecbody"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>defineSingletonMethod<span class="j2-item-secondary">(String, </span>argsSpec<span class="j2-item-secondary">: RbMethodArgsSpec, </span>body<span class="j2-item-secondary">: RbMethodCallback)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_definesingletonmethod_argsspecbody">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Add or replace a method in the Ruby object’s singleton class.</p>
+<p>In practice this means: if the <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> is a class then this adds a class method.
+Otherwise, if the <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> is a ‘normal’ instance object then it adds a method
+valid just for this instance.</p>
+<div class="j2-callout j2-callout-throws aside aside-throws">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">Throws</div>
+<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> is bad.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public func defineSingletonMethod(
+    _ name: <a href="../extensions/string.html?swift">String</a>,
+    argsSpec: <a href="../types/rbmethodargsspec.html?swift">RbMethodArgsSpec</a> = <a href="../types/rbmethodargsspec.html?swift">RbMethodArgsSpec</a>(),
+    body: @escaping <a href="../swift-method-apis.html?swift#rbmethodcallback">RbMethodCallback</a>) throws</code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>name</code></td>
+        <td><p>The method name.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>argsSpec</code></td>
+        <td><p>A description of the arguments required by the method.
+The default for this parameter specifies a function that
+does not take any arguments.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>body</code></td>
+        <td><p>The Swift code to run when the method is called.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbMethod.swift#L718-L722">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+</section>
+
+  
+  <section class="j2-swift">
+  
+  <a name="//apple_ref/cpp/Section/Useful%20Initializers" class="dashAnchor"></a>
+  <h3 class="j2-anchor" id="tpc-useful-initializers">
+    <span data-anchor-id="tpc-useful-initializers">Useful Initializers</span>
+  </h3>
+  
+  
+  
+  
+  
+    <section id="initofclassargskwargs" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Constructor/init%3F(ofClass%3A%20String,%20args%3A%20%5BRbObjectConvertible%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20RbObjectConvertible%3F%3E)" class="dashAnchor j2-item-dash-anchor" data-item-id="initofclassargskwargs"></a>
+    <h4 class="sr-only">init?(ofClass: String, args: [RbObjectConvertible?], kwArgs: KeyValuePairs&lt;String, RbObjectConvertible?&gt;)</h4>
+    
+    
+    <a class="j2-item-title" href="#_initofclassargskwargs" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_initofclassargskwargs"><code>
+        <span class="j2-swift">init<span class="j2-item-secondary">?(</span>ofClass<span class="j2-item-secondary">: String, </span>args<span class="j2-item-secondary">: [RbObjectConvertible?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, RbObjectConvertible?&gt;)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_initofclassargskwargs">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Create an instance of a given Ruby class.</p>
+<p>Fails (returns <code>nil</code>) if anything goes wrong along the way - check <a href="../types/rberror.html?swift#history1"><code>RbError.history</code></a> to
+find out what failed.</p>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public convenience init?(
+    ofClass className: <a href="../extensions/string.html?swift">String</a>,
+    args: [<a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?] = [],
+    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?&gt; = [:])</code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>ofClass</code></td>
+        <td><p>Name of the class to instantiate.  Can contain <code>::</code> to drill
+down into module/etc. scope.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>args</code></td>
+        <td><p>positional arguments to pass to <code>new</code> call for the object.  Default none.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>kwArgs</code></td>
+        <td><p>keyword arguments to pass to the <code>new</code> call for the object.  Default none.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L245-L252">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="initofclassargskwargsretainblockblockcall" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Constructor/init%3F(ofClass%3A%20String,%20args%3A%20%5BRbObjectConvertible%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20RbObjectConvertible%3F%3E,%20retainBlock%3A%20Bool,%20blockCall%3A%20RbBlockCallback)" class="dashAnchor j2-item-dash-anchor" data-item-id="initofclassargskwargsretainblockblockcall"></a>
+    <h4 class="sr-only">init?(ofClass: String, args: [RbObjectConvertible?], kwArgs: KeyValuePairs&lt;String, RbObjectConvertible?&gt;, retainBlock: Bool, blockCall: RbBlockCallback)</h4>
+    
+    
+    <a class="j2-item-title" href="#_initofclassargskwargsretainblockblockcall" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_initofclassargskwargsretainblockblockcall"><code>
+        <span class="j2-swift">init<span class="j2-item-secondary">?(</span>ofClass<span class="j2-item-secondary">: String, </span>args<span class="j2-item-secondary">: [RbObjectConvertible?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, RbObjectConvertible?&gt;, </span>retainBlock<span class="j2-item-secondary">: Bool, </span>blockCall<span class="j2-item-secondary">: RbBlockCallback)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_initofclassargskwargsretainblockblockcall">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Create an instance of a given Ruby class passing a Swift closure as a block.</p>
+<p>Fails (returns <code>nil</code>) if anything goes wrong along the way - check <a href="../types/rberror.html?swift#history1"><code>RbError.history</code></a> to
+find out what failed.</p>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public convenience init?(
+    ofClass className: <a href="../extensions/string.html?swift">String</a>,
+    args: [<a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?] = [],
+    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?&gt; = [:],
+    retainBlock: <a href="../extensions/bool.html?swift">Bool</a> = false,
+    blockCall: @escaping <a href="../other-apis.html?swift#rbblockcallback">RbBlockCallback</a>)</code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>ofClass</code></td>
+        <td><p>Name of the class to instantiate.  Can contain <code>::</code> to drill
+down into module/etc. scope.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>args</code></td>
+        <td><p>positional arguments to pass to <code>new</code> call for the object.  Default none.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>kwArgs</code></td>
+        <td><p>keyword arguments to pass to the <code>new</code> call for the object.  Default none.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>retainBlock</code></td>
+        <td><p>Should <code>blockCall</code> be retained by the object?  Default <code>false</code>.  Set
+<code>true</code> if Ruby uses the block after this call.  For example creating a Proc object
+using <code>Proc#new</code>.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>blockCall</code></td>
+        <td><p>Swift code to pass as a block to the method.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L267-L280">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="initblockcall" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Constructor/init(blockCall%3A%20RbBlockCallback)" class="dashAnchor j2-item-dash-anchor" data-item-id="initblockcall"></a>
+    <h4 class="sr-only">init(blockCall: RbBlockCallback)</h4>
+    
+    
+    <a class="j2-item-title" href="#_initblockcall" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_initblockcall"><code>
+        <span class="j2-swift">init<span class="j2-item-secondary">(</span>blockCall<span class="j2-item-secondary">: RbBlockCallback)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_initblockcall">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Create a Ruby Proc object from a Swift closure.</p>
+<div class="j2-callout j2-callout-warning aside aside-warning">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">warning</div>
+<p>You must not allow this <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> to be deallocated before Ruby has
+finished with the block, or the process will crash when Ruby calls it.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public convenience init(blockCall: @escaping <a href="../other-apis.html?swift#rbblockcallback">RbBlockCallback</a>)</code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>blockCall</code></td>
+        <td><p>The callback for the proc.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L287-L293">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+</section>
+
+  
+  <section class="j2-swift">
+  
+  <a name="//apple_ref/cpp/Section/String%20Convertible" class="dashAnchor"></a>
+  <h3 class="j2-anchor" id="tpc-string-convertible">
+    <span data-anchor-id="tpc-string-convertible">String Convertible</span>
+  </h3>
+  
+  
+  
+  
+  
+    <section id="description2" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Property/var%20description%3A%20String" class="dashAnchor j2-item-dash-anchor" data-item-id="description2"></a>
+    <h4 class="sr-only">var description: String</h4>
+    
+    
+    <a class="j2-item-title" href="#_description2" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_description2"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">var </span>description<span class="j2-item-secondary">: String</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_description2">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>A string representation of the Ruby object.</p>
+<p>This is the same as <a href="https://developer.apple.com/documentation/swift/string?language=swift" class="j2-swift"><code>String(rbObject)</code></a> which is approximately <code>Kernel#String</code>.</p>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public var description: <a href="../extensions/string.html?swift">String</a> { get }</code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L304-L309">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="debugdescription" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Property/var%20debugDescription%3A%20String" class="dashAnchor j2-item-dash-anchor" data-item-id="debugdescription"></a>
+    <h4 class="sr-only">var debugDescription: String</h4>
+    
+    
+    <a class="j2-item-title" href="#_debugdescription" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_debugdescription"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">var </span>debugDescription<span class="j2-item-secondary">: String</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_debugdescription">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>A developer-appropriate string representation of the Ruby object.</p>
+<p>This is the result of <code>inspect</code> with a fallback to <a href="../types/rbobject13.html?swift#description2"><code>description</code></a>.</p>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public var debugDescription: <a href="../extensions/string.html?swift">String</a> { get }</code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L314-L322">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="playgrounddescription" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Property/var%20playgroundDescription%3A%20Any" class="dashAnchor j2-item-dash-anchor" data-item-id="playgrounddescription"></a>
+    <h4 class="sr-only">var playgroundDescription: Any</h4>
+    
+    
+    <a class="j2-item-title" href="#_playgrounddescription" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_playgrounddescription"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">var </span>playgroundDescription<span class="j2-item-secondary">: Any</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_playgrounddescription">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>The text from <a href="../types/rbobject13.html?swift#description2"><code>description</code></a>.</p>
+
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public var playgroundDescription: Any { get }</code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L325-L327">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+</section>
+
+  
+  <section class="j2-swift">
+  
+  <a name="//apple_ref/cpp/Section/Standard%20Library%20Conformances" class="dashAnchor"></a>
+  <h3 class="j2-anchor" id="tpc-standard-library-conformances">
+    <span data-anchor-id="tpc-standard-library-conformances">Standard Library Conformances</span>
+  </h3>
+  
+  
+  
+  
+  
+    <section id="hashinto1" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20hash(into%3A%20inout%20Hasher)" class="dashAnchor j2-item-dash-anchor" data-item-id="hashinto1"></a>
+    <h4 class="sr-only">func hash(into: inout Hasher)</h4>
+    
+    
+    <a class="j2-item-title" href="#_hashinto1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_hashinto1"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>hash<span class="j2-item-secondary">(</span>into<span class="j2-item-secondary">: inout Hasher)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_hashinto1">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>The hash value for the Ruby object.</p>
+<p>Calls the Ruby <code>hash</code> method.</p>
+<div class="j2-callout j2-callout-note aside aside-note">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">note</div>
+<p>Crashes the process (<code>fatalError</code>) if the object does not support <code>hash</code>
+or if the <code>hash</code> call returns something that can’t be converted to <a href="../extensions/int.html?swift"><code>Int</code></a>.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public func hash(into hasher: inout <a href="https://developer.apple.com/documentation/swift/hasher?language=swift">Hasher</a>)</code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L338-L354">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="rbobject-rbobject" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Function/static%20func%20==(lhs%3A%20RbObject,%20rhs%3A%20RbObject)%20-%3E%20Bool" class="dashAnchor j2-item-dash-anchor" data-item-id="rbobject-rbobject"></a>
+    <h4 class="sr-only">static func ==(lhs: RbObject, rhs: RbObject) -&gt; Bool</h4>
+    
+    
+    <a class="j2-item-title" href="#_rbobject-rbobject" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbobject-rbobject"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">static func </span>==<span class="j2-item-secondary">(</span>lhs<span class="j2-item-secondary">: RbObject, </span>rhs<span class="j2-item-secondary">: RbObject) -&gt; Bool</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_rbobject-rbobject">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Returns a Boolean value indicating whether two values are equal.</p>
+<p>Calls the Ruby <code>==</code> method of the <code>lhs</code> passing <code>rhs</code> as the parameter.</p>
+<div class="j2-callout j2-callout-note aside aside-note">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">note</div>
+<p>Crashes the process (<code>fatalError</code>) if the call to <code>==</code> goes wrong.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public static func == (lhs: <a href="../types/rbobject13.html?swift">RbObject</a>, rhs: <a href="../types/rbobject13.html?swift">RbObject</a>) -&gt; <a href="../extensions/bool.html?swift">Bool</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+  <h5>Return Value</h5>
+  <p>Whether the objects are the same under <code>==</code>.</p>
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L361-L371">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="rbobject-rbobject1" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Function/static%20func%20%3C(lhs%3A%20RbObject,%20rhs%3A%20RbObject)%20-%3E%20Bool" class="dashAnchor j2-item-dash-anchor" data-item-id="rbobject-rbobject1"></a>
+    <h4 class="sr-only">static func &lt;(lhs: RbObject, rhs: RbObject) -&gt; Bool</h4>
+    
+    
+    <a class="j2-item-title" href="#_rbobject-rbobject1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbobject-rbobject1"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">static func </span>&lt;<span class="j2-item-secondary">(</span>lhs<span class="j2-item-secondary">: RbObject, </span>rhs<span class="j2-item-secondary">: RbObject) -&gt; Bool</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_rbobject-rbobject1">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Returns a Boolean value indicating whether the value of the first
+argument is less than that of the second argument.</p>
+<p>Calls the Ruby <code>&lt;</code> method of <code>lhs</code> passing <code>rhs</code> as the parameter.</p>
+<div class="j2-callout j2-callout-note aside aside-note">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">note</div>
+<p>Crashes the process (<code>fatalError</code>) if the call to <code>&lt;</code> goes wrong.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public static func &lt; (lhs: <a href="../types/rbobject13.html?swift">RbObject</a>, rhs: <a href="../types/rbobject13.html?swift">RbObject</a>) -&gt; <a href="../extensions/bool.html?swift">Bool</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbObject.swift#L378-L386">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+</section>
+
+  
+  <section class="j2-swift">
+  
+  <a name="//apple_ref/cpp/Section/SignedNumeric" class="dashAnchor"></a>
+  <h3 class="j2-anchor" id="tpc-signednumeric">
+    <span data-anchor-id="tpc-signednumeric">SignedNumeric</span>
+  </h3>
+  
+  
+  
+  
+  
+    <section id="initexactly" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Constructor/init%3CT%3E(exactly%3A%20T)" class="dashAnchor j2-item-dash-anchor" data-item-id="initexactly"></a>
+    <h4 class="sr-only">init&lt;T&gt;(exactly: T)</h4>
+    
+    
+    <a class="j2-item-title" href="#_initexactly" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_initexactly"><code>
+        <span class="j2-swift">init<span class="j2-item-secondary">&lt;T&gt;(</span>exactly<span class="j2-item-secondary">: T)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_initexactly">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Create a Ruby object from some type conforming to <a href="https://developer.apple.com/documentation/swift/binaryinteger?language=swift" class="j2-swift"><code>BinaryInteger</code></a></p>
+
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public convenience init&lt;T&gt;(exactly value: T) where T: <a href="https://developer.apple.com/documentation/swift/binaryinteger?language=swift">BinaryInteger</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbOperators.swift#L23-L25">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="rbobject-rbobject2" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Function/static%20func%20-(lhs%3A%20RbObject,%20rhs%3A%20RbObject)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="rbobject-rbobject2"></a>
+    <h4 class="sr-only">static func -(lhs: RbObject, rhs: RbObject) -&gt; RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_rbobject-rbobject2" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbobject-rbobject2"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">static func </span>-<span class="j2-item-secondary">(</span>lhs<span class="j2-item-secondary">: RbObject, </span>rhs<span class="j2-item-secondary">: RbObject) -&gt; RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_rbobject-rbobject2">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Subtraction operator for <a href="../types/rbobject13.html?swift"><code>RbObject</code></a>s.</p>
+<div class="j2-callout j2-callout-note aside aside-note">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">note</div>
+<p>Calls Ruby <code>-</code> method.  Crashes the process (<code>fatalError</code>)
+if the objects do not support subtraction.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public static func - (lhs: <a href="../types/rbobject13.html?swift">RbObject</a>, rhs: <a href="../types/rbobject13.html?swift">RbObject</a>) -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbOperators.swift#L34-L40">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="rbobject-rbobject3" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Function/static%20func%20+(lhs%3A%20RbObject,%20rhs%3A%20RbObject)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="rbobject-rbobject3"></a>
+    <h4 class="sr-only">static func +(lhs: RbObject, rhs: RbObject) -&gt; RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_rbobject-rbobject3" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbobject-rbobject3"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">static func </span>+<span class="j2-item-secondary">(</span>lhs<span class="j2-item-secondary">: RbObject, </span>rhs<span class="j2-item-secondary">: RbObject) -&gt; RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_rbobject-rbobject3">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Addition operator for <a href="../types/rbobject13.html?swift"><code>RbObject</code></a>s.</p>
+<div class="j2-callout j2-callout-note aside aside-note">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">note</div>
+<p>Calls Ruby <code>+</code> method.  Crashes the process (<code>fatalError</code>)
+if the objects do not support addition.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public static func + (lhs: <a href="../types/rbobject13.html?swift">RbObject</a>, rhs: <a href="../types/rbobject13.html?swift">RbObject</a>) -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbOperators.swift#L46-L52">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="rbobject-rbobject4" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Function/static%20func%20*(lhs%3A%20RbObject,%20rhs%3A%20RbObject)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="rbobject-rbobject4"></a>
+    <h4 class="sr-only">static func *(lhs: RbObject, rhs: RbObject) -&gt; RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_rbobject-rbobject4" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbobject-rbobject4"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">static func </span>*<span class="j2-item-secondary">(</span>lhs<span class="j2-item-secondary">: RbObject, </span>rhs<span class="j2-item-secondary">: RbObject) -&gt; RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_rbobject-rbobject4">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Multiplication operator for <a href="../types/rbobject13.html?swift"><code>RbObject</code></a>s.</p>
+<div class="j2-callout j2-callout-note aside aside-note">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">note</div>
+<p>Calls Ruby <code>*</code> method.  Crashes the process (<code>fatalError</code>)
+if the objects do not support multiplication.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public static func * (lhs: <a href="../types/rbobject13.html?swift">RbObject</a>, rhs: <a href="../types/rbobject13.html?swift">RbObject</a>) -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbOperators.swift#L58-L64">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="rbobject-rbobject5" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Function/static%20func%20/(lhs:%20RbObject,%20rhs:%20RbObject)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="rbobject-rbobject5"></a>
+    <h4 class="sr-only">static func /(lhs: RbObject, rhs: RbObject) -&gt; RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_rbobject-rbobject5" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbobject-rbobject5"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">static func </span>/<span class="j2-item-secondary">(</span>lhs<span class="j2-item-secondary">: RbObject, </span>rhs<span class="j2-item-secondary">: RbObject) -&gt; RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_rbobject-rbobject5">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Division operator for <a href="../types/rbobject13.html?swift"><code>RbObject</code></a>s.</p>
+<div class="j2-callout j2-callout-note aside aside-note">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">note</div>
+<p>Calls Ruby <code>/</code> method.  Crashes the process (<code>fatalError</code>)
+if the objects do not support division.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public static func / (lhs: <a href="../types/rbobject13.html?swift">RbObject</a>, rhs: <a href="../types/rbobject13.html?swift">RbObject</a>) -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbOperators.swift#L70-L76">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="rbobject-rbobject6" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Function/static%20func%20%25(lhs%3A%20RbObject,%20rhs%3A%20RbObject)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="rbobject-rbobject6"></a>
+    <h4 class="sr-only">static func %(lhs: RbObject, rhs: RbObject) -&gt; RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_rbobject-rbobject6" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbobject-rbobject6"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">static func </span>%<span class="j2-item-secondary">(</span>lhs<span class="j2-item-secondary">: RbObject, </span>rhs<span class="j2-item-secondary">: RbObject) -&gt; RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_rbobject-rbobject6">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Remainder operator for <a href="../types/rbobject13.html?swift"><code>RbObject</code></a>s.</p>
+<div class="j2-callout j2-callout-note aside aside-note">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">note</div>
+<p>Calls Ruby <a href="https://developer.apple.com/documentation/agl/agl?language=swift" class="j2-swift"><code>%</code></a><a href="https://developer.apple.com/documentation/agl/agl?language=objc" class="j2-objc j2-secondary"><code>%</code></a> method.  Crashes the process (<code>fatalError</code>)
+if the objects do not support remaindering.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public static func % (lhs: <a href="../types/rbobject13.html?swift">RbObject</a>, rhs: <a href="../types/rbobject13.html?swift">RbObject</a>) -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbOperators.swift#L82-L88">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="rbobject18" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Function/static%20func%20+=(lhs%3A%20inout%20RbObject,%20rhs%3A%20RbObject)" class="dashAnchor j2-item-dash-anchor" data-item-id="rbobject18"></a>
+    <h4 class="sr-only">static func +=(lhs: inout RbObject, rhs: RbObject)</h4>
+    
+    
+    <a class="j2-item-title" href="#_rbobject18" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbobject18"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">static func </span>+=<span class="j2-item-secondary">(</span>lhs<span class="j2-item-secondary">: inout RbObject, </span>rhs<span class="j2-item-secondary">: RbObject)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_rbobject18">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Addition-assignment operator for <a href="../types/rbobject13.html?swift"><code>RbObject</code></a>s.</p>
+
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public static func += (lhs: inout <a href="../types/rbobject13.html?swift">RbObject</a>, rhs: <a href="../types/rbobject13.html?swift">RbObject</a>)</code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbOperators.swift#L93-L95">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="rbobject19" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Function/static%20func%20-=(lhs%3A%20inout%20RbObject,%20rhs%3A%20RbObject)" class="dashAnchor j2-item-dash-anchor" data-item-id="rbobject19"></a>
+    <h4 class="sr-only">static func -=(lhs: inout RbObject, rhs: RbObject)</h4>
+    
+    
+    <a class="j2-item-title" href="#_rbobject19" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbobject19"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">static func </span>-=<span class="j2-item-secondary">(</span>lhs<span class="j2-item-secondary">: inout RbObject, </span>rhs<span class="j2-item-secondary">: RbObject)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_rbobject19">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Subtraction-assignment operator for <a href="../types/rbobject13.html?swift"><code>RbObject</code></a>s.</p>
+
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public static func -= (lhs: inout <a href="../types/rbobject13.html?swift">RbObject</a>, rhs: <a href="../types/rbobject13.html?swift">RbObject</a>)</code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbOperators.swift#L98-L100">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="rbobject20" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Function/static%20func%20*=(lhs%3A%20inout%20RbObject,%20rhs%3A%20RbObject)" class="dashAnchor j2-item-dash-anchor" data-item-id="rbobject20"></a>
+    <h4 class="sr-only">static func *=(lhs: inout RbObject, rhs: RbObject)</h4>
+    
+    
+    <a class="j2-item-title" href="#_rbobject20" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbobject20"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">static func </span>*=<span class="j2-item-secondary">(</span>lhs<span class="j2-item-secondary">: inout RbObject, </span>rhs<span class="j2-item-secondary">: RbObject)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_rbobject20">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Multiplication-assignment operator for <a href="../types/rbobject13.html?swift"><code>RbObject</code></a>s.</p>
+
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public static func *= (lhs: inout <a href="../types/rbobject13.html?swift">RbObject</a>, rhs: <a href="../types/rbobject13.html?swift">RbObject</a>)</code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbOperators.swift#L103-L105">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="rbobject21" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Function/static%20func%20/=(lhs:%20inout%20RbObject,%20rhs:%20RbObject)" class="dashAnchor j2-item-dash-anchor" data-item-id="rbobject21"></a>
+    <h4 class="sr-only">static func /=(lhs: inout RbObject, rhs: RbObject)</h4>
+    
+    
+    <a class="j2-item-title" href="#_rbobject21" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbobject21"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">static func </span>/=<span class="j2-item-secondary">(</span>lhs<span class="j2-item-secondary">: inout RbObject, </span>rhs<span class="j2-item-secondary">: RbObject)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_rbobject21">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Division-assignment operator for <a href="../types/rbobject13.html?swift"><code>RbObject</code></a>s.</p>
+
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public static func /= (lhs: inout <a href="../types/rbobject13.html?swift">RbObject</a>, rhs: <a href="../types/rbobject13.html?swift">RbObject</a>)</code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbOperators.swift#L108-L110">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="rbobject22" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Function/static%20func%20%25=(lhs%3A%20inout%20RbObject,%20rhs%3A%20RbObject)" class="dashAnchor j2-item-dash-anchor" data-item-id="rbobject22"></a>
+    <h4 class="sr-only">static func %=(lhs: inout RbObject, rhs: RbObject)</h4>
+    
+    
+    <a class="j2-item-title" href="#_rbobject22" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbobject22"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">static func </span>%=<span class="j2-item-secondary">(</span>lhs<span class="j2-item-secondary">: inout RbObject, </span>rhs<span class="j2-item-secondary">: RbObject)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_rbobject22">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Remainder-assignment operator for <a href="../types/rbobject13.html?swift"><code>RbObject</code></a>s.</p>
+
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public static func %= (lhs: inout <a href="../types/rbobject13.html?swift">RbObject</a>, rhs: <a href="../types/rbobject13.html?swift">RbObject</a>)</code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbOperators.swift#L113-L115">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="magnitude1" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Property/var%20magnitude%3A%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="magnitude1"></a>
+    <h4 class="sr-only">var magnitude: RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_magnitude1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_magnitude1"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">var </span>magnitude<span class="j2-item-secondary">: RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_magnitude1">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>The magnitude of the value.</p>
+<div class="j2-callout j2-callout-note aside aside-note">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">note</div>
+<p>Calls Ruby <code>magnitude</code> method.  Crashes the process (<code>fatalError</code>)
+if the object does not support magnitude.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public var magnitude: <a href="../types/rbobject13.html?swift">RbObject</a> { get }</code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbOperators.swift#L121-L127">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="rbobject23" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Function/static%20func%20-(operand%3A%20RbObject)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="rbobject23"></a>
+    <h4 class="sr-only">static func -(operand: RbObject) -&gt; RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_rbobject23" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbobject23"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">static func </span>-<span class="j2-item-secondary">(</span>operand<span class="j2-item-secondary">: RbObject) -&gt; RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_rbobject23">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>The negated version of the value.</p>
+<div class="j2-callout j2-callout-note aside aside-note">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">note</div>
+<p>Calls Ruby unary - method.  Crashes the process (<code>fatalError</code>)
+if the object does not support this.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public prefix static func - (operand: <a href="../types/rbobject13.html?swift">RbObject</a>) -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbOperators.swift#L133-L139">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="rbobject24" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Function/static%20func%20+(operand%3A%20RbObject)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="rbobject24"></a>
+    <h4 class="sr-only">static func +(operand: RbObject) -&gt; RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_rbobject24" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbobject24"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">static func </span>+<span class="j2-item-secondary">(</span>operand<span class="j2-item-secondary">: RbObject) -&gt; RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_rbobject24">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Unary plus operator.</p>
+<div class="j2-callout j2-callout-note aside aside-note">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">note</div>
+<p>Calls Ruby unary + method.  Crashes the process (<code>fatalError</code>)
+if the object does not support this.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public prefix static func + (operand: <a href="../types/rbobject13.html?swift">RbObject</a>) -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbOperators.swift#L145-L151">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+</section>
+
+  
+  <section class="j2-swift">
+  
+  <a name="//apple_ref/cpp/Section/Subscript" class="dashAnchor"></a>
+  <h3 class="j2-anchor" id="tpc-subscript">
+    <span data-anchor-id="tpc-subscript">Subscript</span>
+  </h3>
+  
+  
+  
+  
+  
+    <section id="subscript_1" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/subscript(args%3A%20RbObjectConvertible...)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="subscript_1"></a>
+    <h4 class="sr-only">subscript(args: RbObjectConvertible...) -&gt; RbObject</h4>
+    
+    
+    <a class="j2-item-title" href="#_subscript_1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_subscript_1"><code>
+        <span class="j2-swift">subscript<span class="j2-item-secondary">(</span>args<span class="j2-item-secondary">: RbObjectConvertible...) -&gt; RbObject</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_subscript_1">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Subscript operator, supports both get + set.</p>
+<p>Although you can use <a href="../types/rbobjectconvertible.html?swift"><code>RbObjectConvertible</code></a>s as the subscript arguments,
+the value assigned in the setter has to be an <a href="../types/rbobject13.html?swift"><code>RbObject</code></a>.  So this doesn’t
+work:</p>
+<pre><code class="language-swift">try myObj[1, &quot;fish&quot;, myThirdParamObj] = 4
+</code></pre>
+<p>…instead you have to do:</p>
+<pre><code class="language-swift">try myObj[1, &quot;fish&quot;, myThirdParamObj] = RbObject(4)
+</code></pre>
+<div class="j2-callout j2-callout-note aside aside-note">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">note</div>
+<p>Calls Ruby <code>[]</code> and <code>[]=</code> methods.  Crashes the process (<code>fatalError</code>)
+if anything goes wrong - Swift can’t throw from subscripts yet.</p>
+</div>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public subscript(args: RbObjectConvertible...) -&gt; <a href="../types/rbobject13.html?swift">RbObject</a> { get set }</code></pre>
+  </div>
+
+
+
+            </div>
+            
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbOperators.swift#L172-L188">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      <div>
+    </div>
+    
+  </section>
+  
+  
+</section>
+
+  
+</section>
+</div>
+
+
+
+        
+        <div class="flex-grow-1"></div>
+        <nav aria-label="paging" class="j2-pagination pb-3 pt-2">
+  <div id="pagination-prev" class="flex-fill">
+  
+    <a class="j2-swift" href="../types/rbgateway1/verbosity.html?swift" aria-keyshortcuts="p">
+  <span aria-hidden="true">&laquo; </span>Verbosity
+</a>
+
+    <a class="j2-objc j2-secondary" href="../types/rbgateway1/verbosity.html?swift" aria-keyshortcuts="p">
+  <span aria-hidden="true">&laquo; </span>Verbosity
+</a>
+
+  
+  
+  </div>
+  <div id="pagination-next" class="flex-fill text-right">
+  
+    <a class="j2-swift" href="../types/rbobjectaccess1.html?swift" aria-keyshortcuts="n">
+  RbObjectAccess<span aria-hidden="true"> &raquo;</span>
+</a>
+
+    <a class="j2-objc j2-secondary" href="../types/rbobjectaccess1.html?swift" aria-keyshortcuts="n">
+  RbObjectAccess<span aria-hidden="true"> &raquo;</span>
+</a>
+
+  
+  
+  </div>
+</nav>
+
+        
+
+        </article>
+      </main>
+
+      <div class="col-xl d-none d-xl-block j2-aux-nav" id="aux-nav-column">
+  <div class="j2-aux-nav-wrapper">
+    
+    <div class="j2-swift">
+    <h6 class="j2-inline-heading">Topics</h6>
+    <nav aria-label="page">
+      <ul class="j2-aux-group">
+        
+        <li><a href="#">Declaration</a></li>
+        
+        <li><a href="#tpc-retrieving-a-bound-swift-object">Retrieving a bound Swift object</a></li>
+        
+        <li><a href="#tpc-importing-modules">Importing Modules</a></li>
+        
+        <li><a href="#tpc-rbobjectconvertible">RbObjectConvertible</a></li>
+        
+        <li><a href="#tpc-stringliteral">StringLiteral</a></li>
+        
+        <li><a href="#tpc-booleanliteral">BooleanLiteral</a></li>
+        
+        <li><a href="#tpc-integerliteral">IntegerLiteral</a></li>
+        
+        <li><a href="#tpc-floatliteral">FloatLiteral</a></li>
+        
+        <li><a href="#tpc-arrayliteral">ArrayLiteral</a></li>
+        
+        <li><a href="#tpc-dictionaryliteral">DictionaryLiteral</a></li>
+        
+        <li><a href="#tpc-defining-methods">Defining Methods</a></li>
+        
+        <li><a href="#tpc-useful-initializers">Useful Initializers</a></li>
+        
+        <li><a href="#tpc-string-convertible">String Convertible</a></li>
+        
+        <li><a href="#tpc-standard-library-conformances">Standard Library Conformances</a></li>
+        
+        <li><a href="#tpc-signednumeric">SignedNumeric</a></li>
+        
+        <li><a href="#tpc-subscript">Subscript</a></li>
+        
+      </ul>
+    </nav>
+    </div>
+    
+    
+    <h6 class="j2-inline-heading">Actions</h6>
+    <ul class="j2-aux-group">
+      
+      <li><a class="j2-aux-action" id="action-search" href="#" role="button" aria-keyshortcuts="/">Search (/)</a></li>
+      
+      
+      
+      <li><a class="j2-aux-action" id="action-collapse" href="#" role="button" aria-keyshortcuts="a">
+          <span id="action-collapse-expand">Open all (a)</span>
+          <span id="action-collapse-collapse" class="d-none">Close all (a)</span>
+      </a></li>
+      
+      
+      
+    </ul>
+    
+  </div>
+</div>
+
+
+    </div> <!-- end row -->
+
+    <footer class="row">
+  <div class="col j2-footer small pt-2">
+    <p><p>Distributed under the MIT license.  Maintained by <a href="mailto:johnfairh@gmail.com">John Fairhurst</a>.</p></p>
+    
+    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external">Bebop v1.0</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫</a>.</p>
+    
+  </div>
+</footer>
+
+  </div> <!-- container -->
+
+  <script src="../js/dependencies.min.js"></script>
+  
+  <script src="../js/fw2020.js"></script>
+  </body>
+</html>

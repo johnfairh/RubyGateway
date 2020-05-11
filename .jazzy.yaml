@@ -11,9 +11,10 @@ xcodebuild_arguments:
     - "-target"
     - "RubyGateway"
 sdk: macosx
-theme: fullwidth
+theme: fw2020
 documentation: SourceDocs/*md
-custom_category_marks: false
+topic_style: source-order-defs
+deployment_url: https://johnfairh.github.io/RubyGateway/
 
 custom_categories:
     - name: Guides
