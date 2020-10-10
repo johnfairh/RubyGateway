@@ -1,0 +1,6 @@
+{
+  "modules" : [
+    "RubyGateway"
+  ],
+  "version" : "1.0"
+}

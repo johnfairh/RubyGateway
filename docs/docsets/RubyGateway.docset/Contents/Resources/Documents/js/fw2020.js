@@ -1,10 +1,10 @@
 /*!
- * J2 FW2020 theme
- * Copyright 2019-2020 J2 Authors
- * Licensed under MIT (https://github.com/johnfairh/J2/blob/master/LICENSE)
+ * Bebop FW2020 theme
+ * Copyright 2019-2020 Bebop Authors
+ * Licensed under MIT (https://github.com/johnfairh/Bebop/blob/master/LICENSE)
  */
 
-/* global $ Prism anchors lunr */
+/* global $ Prism anchors lunr katex */
 
 'use strict'
 
@@ -34,6 +34,19 @@ Prism.plugins.customClass.map((className, language) => {
  */
 Prism.plugins.autoloader.languages_path = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/'
 
+/*
+ * KaTeX rendering
+ */
+if ('katex' in window) {
+  $($('.math').each((_, element) => {
+    katex.render(element.textContent, element, {
+      displayMode: $(element).hasClass('m-block'),
+      throwOnError: false,
+      trust: true
+    })
+  }))
+}
+
 //
 // Narrow-mode nav collapse
 //
@@ -51,6 +64,9 @@ const navControl = {
       return false
     })
 
+    $(window).on('hashchange', () => this.pickBestActive())
+    this.pickBestActive()
+
     this.scrollToCurrent()
   },
 
@@ -61,6 +77,25 @@ const navControl = {
     if (activeNavItem) {
       activeNavItem.scrollIntoViewIfNeeded()
     }
+  },
+
+  // If there are nav entries for items on the page then
+  // highlight them as current when we go there.
+  pickBestActive () {
+    this.pickBestActiveForId($(':target').attr('id') || '')
+  },
+
+  pickBestActiveForId (id) {
+    for (const lang of ['swift', 'objc']) {
+      const $currentActive = $(`.j2-${lang} .j2-nav-item.active`)
+      const $bestActive = $(`.j2-${lang} .j2-nav-list [href='#${id}']`)
+      if ($bestActive[0] && $currentActive[0] !== $bestActive[0]) {
+        $currentActive.removeClass('active')
+        $currentActive.removeAttr('aria-current')
+        $bestActive.addClass('active')
+        $bestActive.attr('aria-current', 'page')
+      }
+    }
   }
 }
 
@@ -68,6 +103,8 @@ const navControl = {
 // Language-switching controls
 //
 const langControl = {
+  // Global disable
+  alwaysDisabled: false,
 
   // Sync body style from URL for initial layout
   setup () {
@@ -86,6 +123,10 @@ const langControl = {
     this.langMenu = $('#language-menu')
     this.langSwift = $('#language-menu-swift')
     this.langObjC = $('#language-menu-objc')
+
+    if (this.langMenu.length === 0) {
+      this.alwaysDisabled = true
+    }
 
     this.updateChrome()
 
@@ -122,6 +163,8 @@ const langControl = {
 
   // Flip current on keypress/click
   toggle () {
+    if (this.alwaysDisabled) { return }
+
     $body.toggleClass('j2-swift j2-objc')
     const lang = this.updateChrome()
     const currentHash = window.location.hash
@@ -136,6 +179,8 @@ const langControl = {
 const collapseControl = {
   // Global disable
   alwaysDisabled: false,
+  // Count of collapses
+  collapseCount: 0,
   // State of global collapse
   allCollapsed: false,
   // Distinguish user-uncollapse from global
@@ -158,10 +203,18 @@ const collapseControl = {
 
   // Helper to uncollapse at the current anchor
   ensureUncollapsed () {
-    const $el = $(window.location.hash)
+    const $el = $(':target')
+    let collapseId
     if ($el.hasClass('j2-item')) {
-      const $collapse = $('#_' + $el.attr('id'))
-      $collapse.collapse('show')
+      collapseId = $el.attr('id')
+    } else if ($el.is('.dashAnchor.j2-item-dash-anchor')) {
+      collapseId = $el.data('item-id')
+    }
+    if (collapseId) {
+      const $collapse = $('#_' + collapseId)
+      if ($collapse) {
+        $collapse.collapse('show')
+      }
     }
   },
 
@@ -181,7 +234,8 @@ const collapseControl = {
       return
     }
 
-    // Default collapse toggle state (from a body style?)
+    // Initial collapse toggle state
+    this.collapseCount = $('.collapse').length
     this.allCollapsed = $('.collapse.show').length === 0
 
     this.actionCollapseSpan = $('#action-collapse-collapse')
@@ -205,7 +259,20 @@ const collapseControl = {
       if (this.toggling) return
       const title = $(e.target).attr('id')
       window.history.replaceState({}, document.title, '#' + title.substr(1))
+      navControl.pickBestActiveForId(title.substr(1))
     })
+
+    // If the user manually opens or closes everything then
+    // toggle the button to make it do the opposite.
+    $('.j2-item-popopen-wrapper')
+      .on('shown.bs.collapse hidden.bs.collapse', (e) => {
+        const actualUncollapsed = $('.collapse.show').length
+        if (((actualUncollapsed === this.collapseCount) && this.allCollapsed) ||
+            (actualUncollapsed === 0 && !this.allCollapsed)) {
+          this.allCollapsed = !this.allCollapsed
+          this.updateChrome()
+        }
+      })
 
     $('#action-collapse').click(() => { this.toggle(); return false })
 
@@ -322,7 +389,7 @@ const searchControl = {
     this.failedMessage = $('#text-failed').text()
     this.notFoundMessage = $('#text-notfound').text()
 
-    const $typeaheads = $('input')
+    const $typeaheads = $('[type=search]')
 
     $typeaheads.each((_, entry) => {
       const searchEntryFormat = entry.dataset.searchFormat
@@ -356,6 +423,33 @@ const searchControl = {
 }
 
 //
+// Translation jumping
+//
+const translationControl = {
+  // Register click handler, set active when dom ready
+  ready () {
+    const $menuItems = $('.j2-translation')
+    $menuItems.click((e) => {
+      const tagPath = e.target.dataset.languageTagPath
+      const pathToAssets = $body.data('assets-path')
+      const docPath = $body.data('doc-path')
+      const search = window.location.search
+      const hash = window.location.hash
+      const newHref = pathToAssets + tagPath + docPath + search + hash
+      window.location = newHref
+      return false
+    })
+
+    const pageLangTag = $('html').attr('lang')
+    $menuItems.each((_, item) => {
+      if (item.dataset.languageTag === pageLangTag) {
+        $(item).attr('aria-current', true)
+      }
+    })
+  }
+}
+
+//
 // Keypress handler
 //
 const keysControl = {
@@ -378,7 +472,16 @@ const keysControl = {
         case 'a': collapseControl.toggle(); break
         case 'l': langControl.toggle(); break
         case 'd': $('#size-debug').toggleClass('d-flex d-none'); break
+        case 'n': this.paginationLink('next'); break
+        case 'p': this.paginationLink('prev'); break
       }
+    }
+  },
+
+  paginationLink (label) {
+    const $linkElement = $(`#pagination-${label} a`).filter(':visible')
+    if ($linkElement) {
+      window.location = $linkElement.attr('href')
     }
   }
 }
@@ -410,4 +513,7 @@ $(function () {
 
   // Typeahead
   searchControl.ready()
+
+  // Translation menu
+  translationControl.ready()
 })

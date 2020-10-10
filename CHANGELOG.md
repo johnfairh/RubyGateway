@@ -1,16 +1,8 @@
-## Master
-
-#### Breaking
-
-* None
-
-#### Enhancements
-
-* None
+## 3.2.1 - 11th May 2020
 
 #### Bug Fixes
 
-* None
+* Fix warnings and tests for Swift 5.2/Xcode 11.4.
 
 ## 3.2.0 - 11th December 2019
 
