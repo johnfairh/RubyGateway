@@ -85,6 +85,8 @@ import RubyGatewayHelpers
 /// Use `RbObject.defineMethod(...)` and `RbObject.defineSingletonMethod(...)` to
 /// add methods implemented in Swift to an object or class.  Use
 /// `RbGateway.defineClass(_:parent:under:)` to define entirely new classes.
+@dynamicMemberLookup
+@dynamicCallable
 public final class RbObject: RbObjectAccess {
     internal let valueBox: UnsafeMutablePointer<Rbg_value>
 
@@ -382,6 +384,51 @@ extension RbObject: Hashable, Equatable, Comparable {
         } catch {
             // once more could just say 'false' here...
             fatalError("Calling '<' on \(lhs) with \(rhs) failed: \(error)")
+        }
+    }
+}
+
+// MARK: - Dynamic member lookup and callable
+public extension RbObject {
+
+    subscript(dynamicMember memberName: String) -> RbObject! {
+        get {
+            if let member = try? get(memberName) {
+                return member
+            } else {
+                // Maybe it's a method
+                if let _ = try? memberName.checkRubyMethodName() {
+                        return try? call("method", args: [memberName])
+                } else {
+                    return nil
+                }
+            }
+        }
+        set {
+            if let _ = try? setAttribute(memberName, newValue: newValue) { return }
+            if let _ = try? setInstanceVar(memberName, newValue: newValue) { return }
+        }
+    }
+
+    @discardableResult
+    func dynamicallyCall(withArguments arguments: [RbObjectConvertible]) -> RbObject! {
+        switch rubyType {
+        case .T_CLASS:
+            do {
+                let newInstance = try call("new", args: arguments)
+                return newInstance.isNil ? nil : newInstance
+            } catch {
+                preconditionFailure("Couldn't create new instance of class")
+            }
+        case .T_DATA:
+            do {
+                let result = try call("call", args: arguments)
+                return result.isNil ? nil : result
+            } catch {
+                preconditionFailure("Ruby type was T_DATA but not a method reference. Couldn't call method.")
+            }
+        default:
+            return nil
         }
     }
 }

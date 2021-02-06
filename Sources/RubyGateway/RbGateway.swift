@@ -59,6 +59,7 @@ import RubyGatewayHelpers
 /// to define new classes and modules.  Then add methods using `RbObject.defineMethod(...)`
 /// and `RbObject.defineSingletonMethod(...)`.
 ///
+@dynamicMemberLookup
 public final class RbGateway: RbObjectAccess {
 
     /// The VM - not initialized until `setup()` is called.
@@ -355,6 +356,13 @@ extension RbGateway {
                 rbg_load_protect(rubyValue, wrap ? 1 : 0, &tag)
             }
         }
+    }
+}
+
+// MARK: - Dynamic member lookup
+public extension RbGateway {
+    subscript(dynamicMember member: String) -> RbObject! {
+        try? `get`(member)
     }
 }
 
