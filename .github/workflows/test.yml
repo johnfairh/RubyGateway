@@ -1,0 +1,22 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  macos:
+    name: macOS 11 
+    runs-on: macos-11.0
+    steps:
+      - uses: actions/checkout@v2
+      - name: Ruby
+        run: |
+          gem install rouge
+          gem install wikipedia-client
+      - name: Tests
+        run: swift test 
