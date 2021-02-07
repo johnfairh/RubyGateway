@@ -59,13 +59,4 @@ class TestCollection: XCTestCase {
         let coll = RbObjectCollection(repeating: RbObject(el), count: count)
         XCTAssertEqual(Array(repeating: el, count: count), Array<String>(coll.rubyObject))
     }
-
-    static var allTests = [
-        ("testSequence", testSequence),
-        ("testMutable", testMutable),
-        ("testRangeReplace", testRangeReplace),
-        ("testRangeReplaceMore", testRangeReplaceMore),
-        ("testRangeReplaceLess", testRangeReplaceLess),
-        ("testConstructivist", testConstructivist)
-    ]
 }

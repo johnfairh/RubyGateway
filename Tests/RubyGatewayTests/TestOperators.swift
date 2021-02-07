@@ -88,10 +88,4 @@ class TestOperators: XCTestCase {
             XCTAssertEqual("\(val1) \(val2) = \(val3)", String(try inst.getInstanceVar("@subscript_set")))
         }
     }
-
-    static var allTests = [
-        ("testBasicIntegers", testBasicIntegers),
-        ("testMutating", testMutating),
-        ("testSubscript", testSubscript)
-    ]
 }

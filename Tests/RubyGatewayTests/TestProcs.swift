@@ -235,18 +235,4 @@ class TestProcs: XCTestCase {
             }
         }
     }
-
-    static var allTests = [
-        ("testManualProc", testManualProc),
-        ("testCall", testCall),
-        ("testNotProc", testNotProc),
-        ("testProcConversion", testProcConversion),
-        ("testRubyObjectProc", testRubyObjectProc),
-        ("testRubyObjectProcFail", testRubyObjectProcFail),
-        ("testProcRubyException", testProcRubyException),
-        ("testProcRubyException2", testProcRubyException2),
-        ("testProcWeirdException", testProcWeirdException),
-        ("testProcBreak", testProcBreak),
-        ("testLambda", testLambda)
-    ]
 }

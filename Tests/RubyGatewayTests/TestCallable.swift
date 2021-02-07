@@ -234,23 +234,4 @@ class TestCallable: XCTestCase {
             try obj.call("expectsNil", args: [nil])
         }
     }
-
-    static var allTests = [
-        ("testCallGlobal", testCallGlobal),
-        ("testCallGlobalFailure", testCallGlobalFailure),
-        ("testAttribute", testAttribute),
-        ("testVoidCall", testVoidCall),
-        ("testInvalidCall", testInvalidCall),
-        ("testMultiArgCall", testMultiArgCall),
-        ("testMissingArgCall", testMissingArgCall),
-        ("testGetChaining", testGetChaining),
-        ("testKwArgs", testKwArgs),
-        ("testDupKwArgs", testDupKwArgs),
-        ("testCallViaSymbol", testCallViaSymbol),
-        ("testCallViaSymbolNotSymbol", testCallViaSymbolNotSymbol),
-        ("testCallWithBlock", testCallWithBlock),
-        ("testCallWithProcBlock", testCallWithProcBlock),
-        ("testStoredSwiftBlock", testStoredSwiftBlock),
-        ("testNilValue", testNilValue)
-    ]
 }

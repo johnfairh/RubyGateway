@@ -73,10 +73,4 @@ class TestDemo: XCTestCase {
             try yearGroup.call("report")
         }
     }
-
-    static var allTests = [
-        ("testRouge", testRouge),
-        ("testWikipedia", testWikipedia),
-        ("testDemo", testDemo)
-    ]
 }

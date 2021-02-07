@@ -106,15 +106,4 @@ class TestMiscObjTypes: XCTestCase {
             }
         }
     }
-
-    static var allTests = [
-        ("testNilConstants", testNilConstants),
-        ("testNilLiteralPromotion", testNilLiteralPromotion),
-        ("testBoolRoundTrip", testBoolRoundTrip),
-        ("testFailedBoolConversion", testFailedBoolConversion),
-        ("testBoolLiteralPromotion", testBoolLiteralPromotion),
-        ("testSymbols", testSymbols),
-        ("testHashableSymbols", testHashableSymbols),
-        ("testBadCoerce", testBadCoerce)
-    ]
 }

@@ -85,13 +85,4 @@ class TestRanges: XCTestCase {
             }
         }
     }
-
-    static var allTests = [
-        ("testRoundTrip", testRoundTrip),
-        ("testRoundTripClosed", testRoundTripClosed),
-        ("testRoundTripCountable", testRoundTripCountable),
-        ("testRoundTripCountableClosed", testRoundTripCountableClosed),
-        ("testRangeTypes", testRangeTypes),
-        ("testBadRange", testBadRange)
-    ]
 }

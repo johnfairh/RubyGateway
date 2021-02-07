@@ -138,16 +138,4 @@ class TestConstants: XCTestCase {
             XCTFail("Created constant inside non-class object")
         }
     }
-
-    static var allTests = [
-        ("testConstantAccess", testConstantAccess),
-        ("testConstantName", testConstantName),
-        ("testNestedConstantAccess", testNestedConstantAccess),
-        ("testPopupConstantAccess", testPopupConstantAccess),
-        ("testFailedConstantAccess", testFailedConstantAccess),
-        ("testNotAClass", testNotAClass),
-        ("testSetTop", testSetTop),
-        ("testSetNested", testSetNested),
-        ("testSetErrors", testSetErrors)
-    ]
 }

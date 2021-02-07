@@ -61,11 +61,4 @@ class TestSets: XCTestCase {
         let rubySet = RbObject(set)
         XCTAssertTrue(rubySet.isNil)
     }
-
-    static var allTests = [
-        ("testRoundTrip", testRoundTrip),
-        ("testElementConversion", testElementConversion),
-        ("testAmbiguousElements", testAmbiguousElements),
-        ("testAmbiguousRubyConversion", testAmbiguousRubyConversion)
-    ]
 }

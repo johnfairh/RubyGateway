@@ -77,14 +77,4 @@ class TestStrings: XCTestCase {
         let obj: RbObject = "test string"
         XCTAssertEqual("test string", String(obj))
     }
-
-    static var allTests = [
-        ("testEmpty", testEmpty),
-        ("testAscii", testAscii),
-        ("testUtf8", testUtf8),
-        ("testUtf8WithNulls", testUtf8WithNulls),
-        ("testFailedStringConversion", testFailedStringConversion),
-        ("testConversion", testConversion),
-        ("testLiteralPromotion", testLiteralPromotion)
-    ]
 }

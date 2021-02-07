@@ -65,11 +65,4 @@ class TestRational: XCTestCase {
 
         XCTAssertEqual(ratObj1, ratObj2)
     }
-
-    static var allTests = [
-        ("testRoundTrip", testRoundTrip),
-        ("testConversion", testConversion),
-        ("testUnconvertible", testUnconvertible),
-        ("testSwiftInput", testSwiftInput),
-    ]
 }
