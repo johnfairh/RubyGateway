@@ -115,14 +115,4 @@ class TestDictionaries: XCTestCase {
         let rbDict = RbObject(dict)
         XCTAssertTrue(rbDict.isNil)
     }
-
-    static var allTests = [
-        ("testRoundTrip", testRoundTrip),
-        ("testSwiftTypeConversion", testSwiftTypeConversion),
-        ("testDuplicateKey", testDuplicateKey),
-        ("testLiteral", testLiteral),
-        ("testNoConversion", testNoConversion),
-        ("testNilConversion", testNilConversion),
-        ("testDupRubyConversion", testDupRubyConversion)
-    ]
 }

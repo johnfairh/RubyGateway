@@ -296,17 +296,4 @@ class TestClassDef: XCTestCase {
             XCTAssertEqual(true, res)
         }
     }
-
-    static var allTests = [
-        ("testSimpleClass", testSimpleClass),
-        ("testBadClassDef", testBadClassDef),
-        ("testSimpleModule", testSimpleModule),
-        ("testNestedDefs", testNestedDefs),
-        ("testModuleInjection", testModuleInjection),
-        ("testBoundSwiftClass", testBoundSwiftClass),
-        ("testSpecialCases", testSpecialCases),
-        ("testNestedBound", testNestedBound),
-        ("testBoundMethods", testBoundMethods),
-        ("testDemoCode", testDemoCode)
-    ]
 }

@@ -18,5 +18,12 @@ jobs:
         run: |
           gem install rouge
           gem install wikipedia-client
+          ruby --version
       - name: Tests
-        run: swift test 
+        run: swift test --enable-test-discovery --enable-code-coverage
+      - name: Coverage
+        run: |
+          xcrun llvm-cov export -format lcov .build/debug/RubyGatewayPackageTests.xctest/Contents/MacOS/RubyGatewayPackageTests -instr-profile .build/debug/codecov/default.profdata -ignore-filename-regex "(Test|checkouts)" > coverage.lcov
+          bash <(curl -s https://codecov.io/bash) -f coverage.lcov
+
+

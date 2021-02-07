@@ -247,18 +247,4 @@ class TestObjMethods: XCTestCase {
             }
         }
     }
-
-    static var allTests = [
-        ("testSimple", testSimple),
-        ("testInterfaceErrors", testInterfaceErrors),
-        ("testModule", testModule),
-        ("testSelf", testSelf),
-        ("testInherited", testInherited),
-        ("testOverridden", testOverridden),
-        ("testArraySum", testArraySum),
-        ("testSingletonClass", testSingleton),
-        ("testSingletonInstance", testSingletonInstance),
-        ("testSingletonDerived", testSingletonDerived),
-        ("testCallSuper", testCallSuper)
-    ]
 }

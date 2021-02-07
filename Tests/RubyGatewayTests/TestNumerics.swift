@@ -301,26 +301,4 @@ class TestNumerics: XCTestCase {
         XCTAssertEqual(22, swVal1)
         XCTAssertEqual(4.14441, swVal2)
     }
-
-    static var allTests = [
-        ("testFixnumRoundtrip", testFixnumRoundtrip),
-        ("testIntNumRoundtrip", testIntNumRoundtrip),
-        ("testUIntNumRoundtrip", testUIntNumRoundtrip),
-        ("testUIntNegativeUnconvertible", testUIntNegativeUnconvertible),
-        ("testInt8NumRoundtrip", testInt8NumRoundtrip),
-        ("testUInt8NumRoundtrip", testUInt8NumRoundtrip),
-        ("testInt16NumRoundtrip", testInt16NumRoundtrip),
-        ("testUInt16NumRoundtrip", testUInt16NumRoundtrip),
-        ("testInt32NumRoundtrip", testInt32NumRoundtrip),
-        ("testUInt32NumRoundtrip", testUInt32NumRoundtrip),
-        ("testInt64NumRoundtrip", testInt64NumRoundtrip),
-        ("testUInt64NumRoundtrip", testUInt64NumRoundtrip),
-        ("testDoubleRoundtrip", testDoubleRoundtrip),
-        ("testFloatRoundtrip", testFloatRoundtrip),
-        ("testIntegerTooBig", testIntegerTooBig),
-        ("testIntegerObjToNegative", testIntegerObjToNegative),
-        ("testNoCustomFloatConversion", testNoCustomFloatConversion),
-        ("testStringToNum", testStringToNum),
-        ("testLiterals", testLiterals)
-    ]
 }

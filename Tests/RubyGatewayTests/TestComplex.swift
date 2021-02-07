@@ -48,10 +48,4 @@ class TestComplex: XCTestCase {
             return
         }
     }
-
-    static var allTests = [
-        ("testRoundTrip", testRoundTrip),
-        ("testConversion", testConversion),
-        ("testUnconvertible", testUnconvertible)
-    ]
 }

@@ -582,28 +582,4 @@ class TestMethods: XCTestCase {
             XCTAssertEqual(3, Logger.logCount)
         }
     }
-
-    static var allTests = [
-        ("testFixedArgsRoundTrip", testFixedArgsRoundTrip),
-        ("testVarArgsRoundTrip", testVarArgsRoundTrip),
-        ("testArgcMismatch", testArgcMismatch),
-        ("testGoodBlock", testGoodBlock),
-        ("testErrorNoBlock", testErrorNoBlock),
-        ("testManualBlock", testManualBlock),
-        ("testBlockArgs", testBlockArgs),
-        ("testBlockBreakReturn", testBlockBreakReturn),
-        ("testMandatoryArgCount", testMandatoryArgCount),
-        ("testOptionalArgs", testOptionalArgs),
-        ("testSplatArgs", testSplatArgs),
-        ("testSplatMandatoryArgError", testSplatMandatoryArgError),
-        ("testAllPositionalArgTypes", testAllPositionalArgTypes),
-        ("testSimpleMandatoryKeywordArg", testSimpleMandatoryKeywordArg),
-        ("testErrorMandatoryKeywordArg", testErrorMandatoryKeywordArg),
-        ("testOptionalKeywordArgs", testOptionalKeywordArgs),
-        ("testNilKeywordArgs", testNilKeywordArgs),
-        ("testRubyCompatibility", testRubyCompatibility),
-        ("testBadArgsHash", testBadArgsHash),
-        ("testImmutableDefaultArgs", testImmutableDefaultArgs),
-        ("testUserGuideFunctionExamples", testUserGuideFunctionExamples)
-    ]
 }

@@ -128,15 +128,4 @@ class TestArrays: XCTestCase {
             return
         }
     }
-
-    static var allTests = [
-        ("testRoundTripInt", testRoundTripInt),
-        ("testRoundTripString", testRoundTripString),
-        ("testRoundTripNested", testRoundTripNested),
-        ("testRubyInterop", testRubyInterop),
-        ("testMixedArrays", testMixedArrays),
-        ("testArrayLiteral", testArrayLiteral),
-        ("testNoArrayConversion", testNoArrayConversion),
-        ("testSlice", testSlice)
-    ]
 }

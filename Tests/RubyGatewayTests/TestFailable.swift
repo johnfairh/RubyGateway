@@ -216,14 +216,4 @@ class TestFailable: XCTestCase {
         }
         XCTAssertEqual(newVal, String(reRead))
     }
-
-    static var allTests = [
-        ("testConstants", testConstants),
-        ("testCallAttrs", testCallAttrs),
-        ("testBlockCalls", testBlockCalls),
-        ("testBlockProcCalls", testBlockProcCalls),
-        ("testIvars", testIvars),
-        ("testCvars", testCvars),
-        ("testGlobals", testGlobals)
-    ]
 }

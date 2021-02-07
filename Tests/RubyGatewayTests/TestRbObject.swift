@@ -186,6 +186,12 @@ class TestRbObject: XCTestCase {
     func testObjectGc() {
         var initialMTCount: Int = -1
 
+        func createObject(name: String, expectedCount: Int) throws {
+            let o = RbObject(ofClass: name)! // POINT #1
+            XCTAssertEqual(expectedCount, try getMethodsTestHeapCount())
+            print("Hey Swift, please don't optimize away \(o)")
+        }
+
         doErrorFree {
             try Ruby.require(filename: Helpers.fixturePath("methods.rb"))
             try runGC()
@@ -196,13 +202,9 @@ class TestRbObject: XCTestCase {
             try runGC()
 
             do {
-                let o = RbObject(ofClass: "MethodsTest")! // POINT #1
+                try createObject(name: "MethodsTest", expectedCount: initialMTCount + 1)
 
-                XCTAssertEqual(initialMTCount + 1, try getMethodsTestHeapCount())
-                print("Hey Swift, please don't optimize away \(o)")
-
-                let object = RbObject(ofClass: "String")!
-                print("This object is to wipe the stack of refs to 'o's VALUE: \(object)")
+                try createObject(name: "String", expectedCount: initialMTCount + 1)
             }
         }
 
@@ -243,18 +245,4 @@ class TestRbObject: XCTestCase {
             XCTAssertEqual(initialMTCount, try getMethodsTestHeapCount())
         }
     }
-
-    static var allTests = [
-        ("testSimple", testSimple),
-        ("testCopy", testCopy),
-        ("testConversions", testConversions),
-        ("testInspect", testInspect),
-        ("testNewInstance", testNewInstance),
-        ("testSymbols", testSymbols),
-        ("testHashing", testHashing),
-        ("testComparable", testComparable),
-        ("testAssociatedObjects", testAssociatedObjects),
-        ("testOptionalConformance", testOptionalConformance),
-        ("testObjectGc", testObjectGc)
-    ]
 }

@@ -137,13 +137,4 @@ class TestErrors: XCTestCase {
             testRubyStackOverflow()
         }
     }
-
-    static var allTests = [
-        ("testErrorHistory", testErrorHistory),
-        ("testErrorPrinting", testErrorPrinting),
-        ("testErrorHistoryLen", testErrorHistoryLen),
-        ("testRubyException", testRubyException),
-        ("testRubyStackOverflow", testRubyStackOverflow),
-        ("testRubyExit", testRubyExit)
-    ]
 }

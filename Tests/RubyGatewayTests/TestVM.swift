@@ -279,22 +279,4 @@ class TestVM: XCTestCase {
             XCTAssertEqual(argv2, Array<String>(rubyArgv))
         }
     }
-
-    static var allTests = [
-        ("testInit", testInit),
-        ("testEndToEnd", testEndToEnd),
-        ("testSecondInit", testSecondInit),
-        ("testRequire", testRequire),
-        ("testLoad", testLoad),
-        ("testLoadFailBadPath", testLoadFailBadPath),
-        ("testLoadFailException", testLoadFailException),
-        ("testDebug", testDebug),
-        ("testVerbose", testVerbose),
-        ("testScriptName", testScriptName),
-        ("testSafeMode", testSafeMode),
-        ("testVersion", testVersion),
-        ("testSetupFailures", testSetupFailures),
-        ("testCleanedUpFailure", testCleanedUpFailure),
-        ("testArgv", testArgv)
-    ]
 }

@@ -92,11 +92,4 @@ class TestGlobalVars: XCTestCase {
             }
         }
     }
-
-    static var allTests = [
-        ("testVirtualNative", testVirtualNative),
-        ("testVirtualObj", testVirtualObj),
-        ("testReadonly", testReadonly),
-        ("testSwiftException", testSwiftException)
-    ]
 }

@@ -64,9 +64,4 @@ import RubyGateway
 //            XCTAssertEqual(.nilObject, obj.property)
 //        }
 //    }
-//
-//    static var allTests = [
-//        ("testDynamicMemberLookupRead", testDynamicMemberLookupRead),
-//        ("testDynamicMemberLookupWrite", testDynamicMemberLookupWrite),
-//    ]
 //}

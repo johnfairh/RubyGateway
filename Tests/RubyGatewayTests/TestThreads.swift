@@ -121,11 +121,4 @@ class TestThreads: XCTestCase {
             XCTAssertTrue(slept)
         }
     }
-
-    static var allTests = [
-        ("testCreateThread", testCreateThread),
-        ("testThreadCanDropGvl", testThreadCanDropGvl),
-        ("testThreadCanBeInterruptedWithoutGvl", testThreadCanBeInterruptedWithoutGvl),
-        ("testThreadCanBeInterruptedWithoutGvlManually", testThreadCanBeInterruptedWithoutGvlManually)
-    ]
 }
