@@ -478,7 +478,7 @@ And `try!` is always available for quick don't-care-about-errors environments.
 ### Errors + Exceptions
 
 All errors thrown are `RbError` which is an enum of various interface errors
-detected by RubyGateway and one case `RbError.rubyException` that covers all
+detected by RubyGateway and one case `RbError.rubyException(_:)` that covers all
 Ruby exceptions.
 
 RubyGateway remembers the last few `RbError`s that were generated and stores
