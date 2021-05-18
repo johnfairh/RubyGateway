@@ -43,19 +43,19 @@ jobs:
           ruby --version
           which ruby
           ls -l /opt/hostedtoolcache/Ruby
-          ls -l /opt/hostedtoolcache/Ruby/2.7.2
-          ls -l /opt/hostedtoolcache/Ruby/2.7.2/x64
-          ls -l /opt/hostedtoolcache/Ruby/2.7.2/x64/lib
+          ls -l /opt/hostedtoolcache/Ruby/2.7.3
+          ls -l /opt/hostedtoolcache/Ruby/2.7.3/x64
+          ls -l /opt/hostedtoolcache/Ruby/2.7.3/x64/lib
       - name: CRuby
         run: |
           swift package update 
           swift package edit CRuby
-          Packages/CRuby/cfg-cruby --mode custom --path /opt/hostedtoolcache/Ruby/2.7.2/x64
+          Packages/CRuby/cfg-cruby --mode custom --path /opt/hostedtoolcache/Ruby/2.7.3/x64
           cat Packages/CRuby/CRuby.pc
           cat Packages/CRuby/module.modulemap
           cat Packages/CRuby/ruby_headers.h
       - name: Tests
         run: |
           export PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH
-          export LD_LIBRARY_PATH=/opt/hostedtoolcache/Ruby/2.7.2/x64/lib:$LD_LIBRARY_PATH
+          export LD_LIBRARY_PATH=/opt/hostedtoolcache/Ruby/2.7.3/x64/lib:$LD_LIBRARY_PATH
           swift test
