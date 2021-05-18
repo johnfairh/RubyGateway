@@ -123,7 +123,6 @@
 		024923462031EDE000E3AAF4 /* RbVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbVM.swift; sourceTree = "<group>"; };
 		0249234920334ADE00E3AAF4 /* RbError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbError.swift; sourceTree = "<group>"; };
 		0249234C20335ADB00E3AAF4 /* TestVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVM.swift; sourceTree = "<group>"; };
-		0249234E20335B3D00E3AAF4 /* LinuxMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LinuxMain.swift; path = Tests/LinuxMain.swift; sourceTree = "<group>"; };
 		0249235020335C0D00E3AAF4 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		024923532034AA3E00E3AAF4 /* backwards.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = backwards.rb; sourceTree = "<group>"; };
 		02571723203C984C001E3C43 /* nesting.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = nesting.rb; sourceTree = "<group>"; };
@@ -229,7 +228,6 @@
 		OBJ_12 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				0249234E20335B3D00E3AAF4 /* LinuxMain.swift */,
 				OBJ_13 /* RubyGatewayTests */,
 			);
 			name = Tests;

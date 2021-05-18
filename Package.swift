@@ -1,4 +1,4 @@
-// swift-tools-version:5.1.0
+// swift-tools-version:5.4.0
 
 //  Package.swift
 //  RubyGateway
@@ -20,12 +20,13 @@ let package = Package(
     targets: [
         .target(
             name: "RubyGateway",
-            dependencies: ["RubyGatewayHelpers"]),
+            dependencies: ["RubyGatewayHelpers", "CRuby"]),
         .target(
             name: "RubyGatewayHelpers",
             dependencies: []),
         .testTarget(
             name: "RubyGatewayTests",
-            dependencies: ["RubyGateway"]),
+            dependencies: ["RubyGateway"],
+            exclude: ["Fixtures"])
     ]
 )
