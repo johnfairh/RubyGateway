@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/fw2020.css">
     
     
-   <title>RbMethod - RubyGateway 3.2.0 docs</title>
+   <title>RbMethod - RubyGateway 4.0.0 docs</title>
     
   </head>
   <body class="j2-swift " data-root-path="./../" data-doc-path="types/rbmethod.html" data-assets-path="../">
@@ -31,7 +31,7 @@
       
       <a href="../index.html">
       
-      RubyGateway 3.2.0 docs</a>
+      RubyGateway 4.0.0 docs</a>
     </div>
     
     <span class="navbar-text j2-coverage font-weight-slightly-bold small d-none d-lg-inline-block mr-2">(100% documented)</span>
@@ -695,6 +695,7 @@ instances and passes them to method callbacks.</p>
             
 
 
+
           </div>
           
           
@@ -759,6 +760,7 @@ instances and passes them to method callbacks.</p>
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -816,6 +818,7 @@ instances and passes them to method callbacks.</p>
 
             </div>
             
+
 
 
           
@@ -877,6 +880,7 @@ instances and passes them to method callbacks.</p>
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -934,6 +938,7 @@ instances and passes them to method callbacks.</p>
 
             </div>
             
+
 
 
           
@@ -995,6 +1000,7 @@ instances and passes them to method callbacks.</p>
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -1037,13 +1043,6 @@ instances and passes them to method callbacks.</p>
 <p>Invoke the method’s block and get the result.</p>
 <p>If the method was not passed a block then a Ruby exception
 is raised.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if the block raises an exception.</p>
-<p><a href="../types/rberror.html?swift#rubyjump_"><code>RbError.rubyJump(_:)</code></a> if the block does <code>return</code> or <code>break</code>.
-You should not attempt to handle <code>rubyJump</code> errors: rethrow them
-back to Ruby as soon as possible.</p>
-</div>
 
 
 
@@ -1072,6 +1071,13 @@ public func yieldBlock(args: [<a href="../types/rbobjectconvertible.html?swift">
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if the block raises an exception.</p>
+<p><a href="../types/rberror.html?swift#rubyjump_"><code>RbError.rubyJump(_:)</code></a> if the block does <code>return</code> or <code>break</code>.
+You should not attempt to handle <code>rubyJump</code> errors: rethrow them
+back to Ruby as soon as possible.</p>
 
 
   <h5>Return Value</h5>
@@ -1120,10 +1126,6 @@ public func yieldBlock(args: [<a href="../types/rbobjectconvertible.html?swift">
 <p>Get the method’s block as a Ruby <code>Proc</code>.</p>
 <p>If you want to just call the block then use <a href="../types/rbmethod.html?swift#yieldblockargs"><code>yieldBlock(args:)</code></a>.  Use this method
 to store the block or do things to it.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if the method does not have a block.</p>
-</div>
 
 
 
@@ -1140,6 +1142,10 @@ to store the block or do things to it.</p>
 
             </div>
             
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if the method does not have a block.</p>
+
 
   <h5>Return Value</h5>
   <p>An <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> for a <code>Proc</code> object wrapping the passed block.</p>
@@ -1190,11 +1196,6 @@ There is no RubyBridge equivalent to Ruby’s ‘raw super’ keyword, you must
 always explicitly specify the arguments to pass on.</p>
 <p>If there is no matching superclass method to call then Ruby raises a
 <code>NoMethodError</code> that is thrown as an <a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a>.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">Throws</div>
-<p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if there is a Ruby exception.
-<a href="../types/rberror.html?swift#duplicatekwarg_"><code>RbError.duplicateKwArg(_:)</code></a> if there are duplicate keywords in <code>kwArgs</code>.</p>
-</div>
 
 
 
@@ -1230,6 +1231,11 @@ always explicitly specify the arguments to pass on.</p>
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if there is a Ruby exception.
+<a href="../types/rberror.html?swift#duplicatekwarg_"><code>RbError.duplicateKwArg(_:)</code></a> if there are duplicate keywords in <code>kwArgs</code>.</p>
 
 
   <h5>Return Value</h5>
@@ -1336,7 +1342,7 @@ always explicitly specify the arguments to pass on.</p>
   <div class="col j2-footer small pt-2">
     <p><p>Distributed under the MIT license.  Maintained by <a href="mailto:johnfairh@gmail.com">John Fairhurst</a>.</p></p>
     
-    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external">Bebop v1.0</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫</a>.</p>
+    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external">Bebop v1.6.0</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫</a>.</p>
     
   </div>
 </footer>

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/fw2020.css">
     
     
-   <title>RbObjectAccess - RubyGateway 3.2.0 docs</title>
+   <title>RbObjectAccess - RubyGateway 4.0.0 docs</title>
     
   </head>
   <body class="j2-swift " data-root-path="./../" data-doc-path="types/rbobjectaccess1.html" data-assets-path="../">
@@ -31,7 +31,7 @@
       
       <a href="../index.html">
       
-      RubyGateway 3.2.0 docs</a>
+      RubyGateway 4.0.0 docs</a>
     </div>
     
     <span class="navbar-text j2-coverage font-weight-slightly-bold small d-none d-lg-inline-block mr-2">(100% documented)</span>
@@ -739,6 +739,7 @@ a Ruby Proc.</li>
             
 
 
+
           </div>
           
           
@@ -791,11 +792,6 @@ a Ruby Proc.</li>
 <p>Get the value of a Ruby instance variable.  Creates a new one with a <code>nil</code> value
 if it doesn’t exist yet.</p>
 <p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> looks wrong.
-<a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if Ruby has a problem.</p>
-</div>
 
 
 
@@ -823,6 +819,11 @@ if it doesn’t exist yet.</p>
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> looks wrong.
+<a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if Ruby has a problem.</p>
 
 
   <h5>Return Value</h5>
@@ -870,11 +871,6 @@ if it doesn’t exist yet.</p>
 
 <p>Set a Ruby instance variable.  Creates a new one if it doesn’t exist yet.</p>
 <p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> looks wrong.
-<a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if Ruby has a problem.</p>
-</div>
 
 
 
@@ -909,6 +905,11 @@ public func setInstanceVar(_ name: <a href="../extensions/string.html?swift">Str
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> looks wrong.
+<a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if Ruby has a problem.</p>
 
 
   <h5>Return Value</h5>
@@ -987,6 +988,7 @@ See <a href="../types/rbfailableaccess.html?swift"><code>RbFailableAccess</code>
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -1048,10 +1050,6 @@ let crumbs = rubyPi - Double.pi
 <p>This is a dynamic call into Ruby that can cause calls to <code>const_missing</code>
 and autoloading.</p>
 <p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if the constant cannot be found.</p>
-</div>
 
 
 
@@ -1082,6 +1080,10 @@ looking up the inheritance chain if there is no local match.</p></td>
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if the constant cannot be found.</p>
 
 
   <h5>Return Value</h5>
@@ -1135,12 +1137,6 @@ try Ruby.setConstant(&quot;Game::Invaders::DEFAULT&quot;, defaultInvader)
 <p>To define new classes and modules, use <a href="../types/rbgateway1.html?swift#defineclass_underinitializer"><code>RbGateway.defineClass(...)</code></a> and
 <a href="../types/rbgateway1.html?swift#definemodule_under"><code>RbGateway.defineModule(...)</code></a> instead of this method.</p>
 <p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> looks wrong.
-<code>rubyException(_:)</code> if there is a Ruby exception.
-<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(_:)</code></a> if the current object is not a class or module.</p>
-</div>
 
 
 
@@ -1176,6 +1172,12 @@ to drill down through nested classes and modules.</p></td>
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> looks wrong.
+<code>rubyException(_:)</code> if there is a Ruby exception.
+<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(_:)</code></a> if the current object is not a class or module.</p>
 
 
   <h5>Return Value</h5>
@@ -1232,11 +1234,6 @@ let myObj = try myClass.call(&quot;new&quot;)
 <pre><code class="language-swift">let myObj = try RbObject(ofClass: &quot;MyModule::MyClass&quot;)
 </code></pre>
 <p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if the constant cannot be found.
-<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(_:)</code></a> if the constant is found but is not a class.</p>
-</div>
 
 
 
@@ -1267,6 +1264,11 @@ looking up the inheritance chain if there is no match.</p></td>
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if the constant cannot be found.
+<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(_:)</code></a> if the constant is found but is not a class.</p>
 
 
   <h5>Return Value</h5>
@@ -1325,11 +1327,6 @@ looking up the inheritance chain if there is no match.</p></td>
 
 
 <p>Call a Ruby object method.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if there is a Ruby exception.
-<a href="../types/rberror.html?swift#duplicatekwarg_"><code>RbError.duplicateKwArg(_:)</code></a> if there are duplicate keywords in <code>kwArgs</code>.</p>
-</div>
 <p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
 
 
@@ -1373,6 +1370,11 @@ public func call(
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if there is a Ruby exception.
+<a href="../types/rberror.html?swift#duplicatekwarg_"><code>RbError.duplicateKwArg(_:)</code></a> if there are duplicate keywords in <code>kwArgs</code>.</p>
 
 
   <h5>Return Value</h5>
@@ -1419,11 +1421,6 @@ public func call(
 
 
 <p>Call a Ruby object method passing Swift code as a block.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if there is a Ruby exception.
-<a href="../types/rberror.html?swift#duplicatekwarg_"><code>RbError.duplicateKwArg(_:)</code></a> if there are duplicate keywords in <code>kwArgs</code>.</p>
-</div>
 <p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
 
 
@@ -1480,6 +1477,11 @@ longer than this call?  Default <code>.none</code>.  See <a href="../types/rbblo
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if there is a Ruby exception.
+<a href="../types/rberror.html?swift#duplicatekwarg_"><code>RbError.duplicateKwArg(_:)</code></a> if there are duplicate keywords in <code>kwArgs</code>.</p>
 
 
   <h5>Return Value</h5>
@@ -1526,12 +1528,6 @@ longer than this call?  Default <code>.none</code>.  See <a href="../types/rbblo
 
 
 <p>Call a Ruby object method passing a Ruby Proc as a block.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if there is a Ruby exception.
-<a href="../types/rberror.html?swift#duplicatekwarg_"><code>RbError.duplicateKwArg(_:)</code></a> if there are duplicate keywords in <code>kwArgs</code>.
-<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(_:)</code></a> if <code>block</code> does not convert to a Proc.</p>
-</div>
 <p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
 
 
@@ -1583,6 +1579,12 @@ public func call(
   </table>
 
 
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if there is a Ruby exception.
+<a href="../types/rberror.html?swift#duplicatekwarg_"><code>RbError.duplicateKwArg(_:)</code></a> if there are duplicate keywords in <code>kwArgs</code>.
+<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(_:)</code></a> if <code>block</code> does not convert to a Proc.</p>
+
+
   <h5>Return Value</h5>
   <p>The result of calling the method.</p>
 
@@ -1627,12 +1629,6 @@ public func call(
 
 
 <p>Call a Ruby object method using a symbol.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if there is a Ruby exception.
-<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(_:)</code></a> if <code>symbol</code> is not a symbol.
-<a href="../types/rberror.html?swift#duplicatekwarg_"><code>RbError.duplicateKwArg(_:)</code></a> if there are duplicate keywords in <code>kwArgs</code>.</p>
-</div>
 <p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
 
 
@@ -1676,6 +1672,12 @@ public func call(
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if there is a Ruby exception.
+<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(_:)</code></a> if <code>symbol</code> is not a symbol.
+<a href="../types/rberror.html?swift#duplicatekwarg_"><code>RbError.duplicateKwArg(_:)</code></a> if there are duplicate keywords in <code>kwArgs</code>.</p>
 
 
   <h5>Return Value</h5>
@@ -1722,12 +1724,6 @@ public func call(
 
 
 <p>Call a Ruby object method using a symbol passing Swift code as a block.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if there is a Ruby exception.
-<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(_:)</code></a> if <code>symbol</code> is not a symbol.
-<a href="../types/rberror.html?swift#duplicatekwarg_"><code>RbError.duplicateKwArg(_:)</code></a> if there are duplicate keywords in <code>kwArgs</code>.</p>
-</div>
 <p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
 
 
@@ -1786,6 +1782,12 @@ longer than this call?  Default <code>.none</code>.  See <a href="../types/rbblo
   </table>
 
 
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if there is a Ruby exception.
+<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(_:)</code></a> if <code>symbol</code> is not a symbol.
+<a href="../types/rberror.html?swift#duplicatekwarg_"><code>RbError.duplicateKwArg(_:)</code></a> if there are duplicate keywords in <code>kwArgs</code>.</p>
+
+
   <h5>Return Value</h5>
   <p>The result of calling the method.</p>
 
@@ -1830,13 +1832,6 @@ longer than this call?  Default <code>.none</code>.  See <a href="../types/rbblo
 
 
 <p>Call a Ruby object method using a symbol passing a Ruby Proc as a block.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if there is a Ruby exception.
-<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(_:)</code></a> if <code>symbol</code> is not a symbol.
-<a href="../types/rberror.html?swift#duplicatekwarg_"><code>RbError.duplicateKwArg(_:)</code></a> if there are duplicate keywords in <code>kwArgs</code>.
-<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(_:)</code></a> if <code>block</code> does not convert to a Proc.</p>
-</div>
 <p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
 
 
@@ -1886,6 +1881,13 @@ public func call(
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if there is a Ruby exception.
+<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(_:)</code></a> if <code>symbol</code> is not a symbol.
+<a href="../types/rberror.html?swift#duplicatekwarg_"><code>RbError.duplicateKwArg(_:)</code></a> if there are duplicate keywords in <code>kwArgs</code>.
+<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(_:)</code></a> if <code>block</code> does not convert to a Proc.</p>
 
 
   <h5>Return Value</h5>
@@ -1947,12 +1949,6 @@ public func call(
 <p>Attributes are declared with <code>:attr_accessor</code> and so on – this routine is a
 simple wrapper around <a href="../types/rbobjectaccess1.html?swift#callsymbolargskwargsblock1"><code>call(...)</code></a> for symmetry with <a href="../types/rbobjectaccess1.html?swift#setattribute_newvalue1"><code>setAttribute(...)</code></a>.</p>
 <p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> looks wrong.
-<a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if Ruby has a problem, probably means
-<code>attribute</code> doesn’t exist.</p>
-</div>
 
 
 
@@ -1980,6 +1976,12 @@ simple wrapper around <a href="../types/rbobjectaccess1.html?swift#callsymbolarg
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> looks wrong.
+<a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if Ruby has a problem, probably means
+<code>attribute</code> doesn’t exist.</p>
 
 
   <h5>Return Value</h5>
@@ -2029,12 +2031,6 @@ simple wrapper around <a href="../types/rbobjectaccess1.html?swift#callsymbolarg
 <p>Attributes are declared with <code>:attr_accessor</code> and so on – this routine is a
 wrapper around a call to the <code>attrname=</code> method.</p>
 <p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> looks wrong.
-<a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if Ruby has a problem, probably means
-<code>attribute</code> doesn’t exist.</p>
-</div>
 
 
 
@@ -2069,6 +2065,12 @@ public func setAttribute(_ name: <a href="../extensions/string.html?swift">Strin
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> looks wrong.
+<a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if Ruby has a problem, probably means
+<code>attribute</code> doesn’t exist.</p>
 
 
   <h5>Return Value</h5>
@@ -2133,13 +2135,6 @@ context to get a CVar on the object’s class.</p>
 <p>The behavior of accessing a non-existent CVar is not consistent with IVars
 or GVars.  This is how Ruby works; one more reason to avoid CVars.</p>
 <p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> looks wrong.
-<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(_:)</code></a> if the object is not a class.
-<a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if Ruby has a problem – in particular,
-if the CVar does not exist.</p>
-</div>
 
 
 
@@ -2167,6 +2162,13 @@ if the CVar does not exist.</p>
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> looks wrong.
+<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(_:)</code></a> if the object is not a class.
+<a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if Ruby has a problem – in particular,
+if the CVar does not exist.</p>
 
 
   <h5>Return Value</h5>
@@ -2217,12 +2219,6 @@ if the CVar does not exist.</p>
 is different from Ruby as-written where you write <code>@@fred = thing</code> in an
 object context to set a CVar on the object’s class.</p>
 <p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> looks wrong.
-<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(_:)</code></a> if the object is not a class.
-<a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if Ruby has a problem.</p>
-</div>
 
 
 
@@ -2257,6 +2253,12 @@ public func setClassVar(_ name: <a href="../extensions/string.html?swift">String
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> looks wrong.
+<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(_:)</code></a> if the object is not a class.
+<a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if Ruby has a problem.</p>
 
 
   <h5>Return Value</h5>
@@ -2316,10 +2318,6 @@ public func setClassVar(_ name: <a href="../extensions/string.html?swift">String
 
 <p>Get the value of a Ruby global variable.</p>
 <p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift"><code>RbError</code></a> if <code>name</code> looks wrong.</p>
-</div>
 <p>(This method is present in this class meaning you can call it on any
 <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> as well as <a href="../types/rbgateway1.html?swift"><code>RbGateway</code></a> without any difference in effect.  This is
 purely convenience to put all these getter/setter pairs in the same place and
@@ -2352,6 +2350,10 @@ to avoid calling the <a href="../types/rbobject13.html?swift"><code>RbObject</co
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift"><code>RbError</code></a> if <code>name</code> looks wrong.</p>
 
 
   <h5>Return Value</h5>
@@ -2399,10 +2401,6 @@ to avoid calling the <a href="../types/rbobject13.html?swift"><code>RbObject</co
 
 <p>Set a Ruby global variable.  Creates a new one if it doesn’t exist yet.</p>
 <p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift"><code>RbError</code></a> if <code>name</code> looks wrong.</p>
-</div>
 <p>(This method is present in this class meaning you can call it on any
 <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> as well as <a href="../types/rbgateway1.html?swift"><code>RbGateway</code></a> without any difference in effect.  This is
 purely convenience to put all these getter/setter pairs in the same place and
@@ -2442,6 +2440,10 @@ public func setGlobalVar(_ name: <a href="../extensions/string.html?swift">Strin
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift"><code>RbError</code></a> if <code>name</code> looks wrong.</p>
 
 
   <h5>Return Value</h5>
@@ -2509,11 +2511,6 @@ public func setGlobalVar(_ name: <a href="../extensions/string.html?swift">Strin
 <p>This is a convenience helper to let you access Ruby structures without
 worrying about precisely what they are.</p>
 <p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>failable</code></a>.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if Ruby has a problem.
-<a href="../types/rberror.html?swift"><code>RbError</code></a> of some other kind if <code>name</code> looks wrong in some way.</p>
-</div>
 
 
 
@@ -2542,6 +2539,11 @@ public func get(_ name: <a href="../extensions/string.html?swift">String</a>) th
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if Ruby has a problem.
+<a href="../types/rberror.html?swift"><code>RbError</code></a> of some other kind if <code>name</code> looks wrong in some way.</p>
 
 
   <h5>Return Value</h5>
@@ -2664,7 +2666,7 @@ public func get(_ name: <a href="../extensions/string.html?swift">String</a>) th
   <div class="col j2-footer small pt-2">
     <p><p>Distributed under the MIT license.  Maintained by <a href="mailto:johnfairh@gmail.com">John Fairhurst</a>.</p></p>
     
-    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external">Bebop v1.0</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫</a>.</p>
+    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external">Bebop v1.6.0</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫</a>.</p>
     
   </div>
 </footer>

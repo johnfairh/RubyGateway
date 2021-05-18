@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/fw2020.css">
     
     
-   <title>User Guide - RubyGateway 3.2.0 docs</title>
+   <title>User Guide - RubyGateway 4.0.0 docs</title>
     
   </head>
   <body class="j2-swift " data-root-path="./../" data-doc-path="guides/user-guide.html" data-assets-path="../">
@@ -31,7 +31,7 @@
       
       <a href="../index.html">
       
-      RubyGateway 3.2.0 docs</a>
+      RubyGateway 4.0.0 docs</a>
     </div>
     
     <span class="navbar-text j2-coverage font-weight-slightly-bold small d-none d-lg-inline-block mr-2">(100% documented)</span>
@@ -777,15 +777,15 @@ Exchange Swift types
 <p>See <a href="../types/rbobject13.html?swift#convertto"><code>RbObject.convert(to:)</code></a> as a throwing alternative to optional initializers.</p>
 <h3 class="j2-anchor j2-heading heading" id="exchange-nil-with-ruby">
 <span data-anchor-id="exchange-nil-with-ruby">
-Exchange <a href="https://developer.apple.com/documentation/objectivec/nil?language=objc" class="j2-objc"><code>nil</code></a> with Ruby
+Exchange <code>nil</code> with Ruby
 </span></h3>
-<p>The static <a href="../types/rbobject13.html?swift#nilobject"><code>RbObject.nilObject</code></a> represents Ruby <a href="https://developer.apple.com/documentation/objectivec/nil?language=objc" class="j2-objc"><code>nil</code></a> and can be passed to Ruby
+<p>The static <a href="../types/rbobject13.html?swift#nilobject"><code>RbObject.nilObject</code></a> represents Ruby <code>nil</code> and can be passed to Ruby
 methods as a parameter or used in data structures.  As a short-hand you can use
-literal Swift <a href="https://developer.apple.com/documentation/objectivec/nil?language=objc" class="j2-objc"><code>nil</code></a> with APIs like <a href="../types/rbobjectaccess1.html?swift#call_argskwargs1"><code>RbObjectAccess.call(_:args:kwArgs:)</code></a>.</p>
-<p>When Ruby returns <a href="https://developer.apple.com/documentation/objectivec/nil?language=objc" class="j2-objc"><code>nil</code></a> to Swift it always comes through as an <a href="../types/rbobject13.html?swift"><code>RbObject</code></a>.  You
+literal Swift <code>nil</code> with APIs like <a href="../types/rbobjectaccess1.html?swift#call_argskwargs1"><code>RbObjectAccess.call(_:args:kwArgs:)</code></a>.</p>
+<p>When Ruby returns <code>nil</code> to Swift it always comes through as an <a href="../types/rbobject13.html?swift"><code>RbObject</code></a>.  You
 can compare this directly to <a href="../types/rbobject13.html?swift#nilobject"><code>RbObject.nilObject</code></a> or use <a href="../types/rbobject13.html?swift#isnil"><code>RbObject.isNil</code></a> to
 test it.</p>
-<p>If you want to include Ruby <a href="https://developer.apple.com/documentation/objectivec/nil?language=objc" class="j2-objc"><code>nil</code></a> in a heterogenous array use this kind of
+<p>If you want to include Ruby <code>nil</code> in a heterogenous array use this kind of
 syntax:</p>
 <pre><code class="language-swift">let arr: RbObject = [1, 2.0, &quot;three&quot;, .nilObject]
 </code></pre>
@@ -937,7 +937,7 @@ defined using <a href="../types/rbobject13.html?swift#definesingletonmethod_args
 all follow the same pattern.</p>
 <p>The <a href="../types/rbmethodargsspec.html?swift"><code>RbMethodArgsSpec</code></a> is how you set the signature for the function: how many
 arguments of what kinds, which ones have default values, which have keywords,
-and so on.  For example, this defines a function to Ruby called <a href="https://developer.apple.com/documentation/simd/log?language=objc" class="j2-objc"><code>log</code></a> that
+and so on.  For example, this defines a function to Ruby called <code>log</code> that
 requires one argument and passes its string representation onwards;</p>
 <pre><code class="language-swift">let logArgsSpec = RbMethodArgsSpec(leadingMandatoryCount: 1)
 try Ruby.defineGlobalFunction(&quot;log&quot;,
@@ -1088,7 +1088,7 @@ never come back to Ruby in the process, use <a href="../types/rbgateway1.html?sw
 <span data-anchor-id="work-with-ruby-complex-numbers">
 Work with Ruby complex numbers
 </span></h3>
-<p>See <a href="../types/rbcomplex.html?swift"><code>RbComplex</code></a> for a thin wrapper to Ruby’s <a href="https://developer.apple.com/documentation/kernel/complex?language=objc" class="j2-objc"><code>Complex</code></a> type.</p>
+<p>See <a href="../types/rbcomplex.html?swift"><code>RbComplex</code></a> for a thin wrapper to Ruby’s <code>Complex</code> type.</p>
 <h3 class="j2-anchor j2-heading heading" id="work-with-ruby-rational-numbers">
 <span data-anchor-id="work-with-ruby-rational-numbers">
 Work with Ruby rational numbers
@@ -1114,13 +1114,13 @@ handle errors, so RubyGateway propagates all errors ([except when it doesn’t]
 Errors + Exceptions
 </span></h3>
 <p>All errors thrown are <a href="../types/rberror.html?swift"><code>RbError</code></a> which is an enum of various interface errors
-detected by RubyGateway and one case <code>RbError.rubyException</code> that covers all
+detected by RubyGateway and one case <a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> that covers all
 Ruby exceptions.</p>
 <p>RubyGateway remembers the last few <a href="../types/rberror.html?swift"><code>RbError</code></a>s that were generated and stores
 them in the publicly available <a href="../types/rberror.html?swift#history1"><code>RbError.history</code></a>.</p>
 <h3 class="j2-anchor j2-heading heading" id="nil-failures">
 <span data-anchor-id="nil-failures">
-<a href="https://developer.apple.com/documentation/objectivec/nil?language=objc" class="j2-objc"><code>nil</code></a> failures
+<code>nil</code> failures
 </span></h3>
 <p>Converting Ruby values to Swift types works differently: it happens using
 failable initializers such as <a href="../extensions/string.html?swift#init_5"><code>String.init(_:)</code></a>.  These can fail for a variety
@@ -1137,7 +1137,7 @@ means you can diagnose why a conversion failed:</p>
 Failable Adapter
 </span></h3>
 <p><a href="../types/rbfailableaccess.html?swift"><code>RbFailableAccess</code></a> is a non-throwing adapter for <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> and <a href="../types/rbgateway1.html?swift"><code>RbGateway</code></a> that
-returns <a href="https://developer.apple.com/documentation/objectivec/nil?language=objc" class="j2-objc"><code>nil</code></a> when there is an error.  All it does is <code>try?</code> the
+returns <code>nil</code> when there is an error.  All it does is <code>try?</code> the
 corresponding throwing method, meaning that the details of the failure are
 available in <a href="../types/rberror.html?swift#history1"><code>RbError.history</code></a>.</p>
 <p>This is a steal of rough approach (the name is my fault) from the Python DML
@@ -1336,7 +1336,7 @@ interesting overview of GC pre + @ 2.2.</li>
   <div class="col j2-footer small pt-2">
     <p><p>Distributed under the MIT license.  Maintained by <a href="mailto:johnfairh@gmail.com">John Fairhurst</a>.</p></p>
     
-    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external">Bebop v1.0</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫</a>.</p>
+    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external">Bebop v1.6.0</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫</a>.</p>
     
   </div>
 </footer>

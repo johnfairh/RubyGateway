@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/fw2020.css">
     
     
-   <title>RbGateway - RubyGateway 3.2.0 docs</title>
+   <title>RbGateway - RubyGateway 4.0.0 docs</title>
     
   </head>
   <body class="j2-swift " data-root-path="./../" data-doc-path="types/rbgateway1.html" data-assets-path="../">
@@ -31,7 +31,7 @@
       
       <a href="../index.html">
       
-      RubyGateway 3.2.0 docs</a>
+      RubyGateway 4.0.0 docs</a>
     </div>
     
     <span class="navbar-text j2-coverage font-weight-slightly-bold small d-none d-lg-inline-block mr-2">(100% documented)</span>
@@ -739,6 +739,7 @@ and <a href="../types/rbobject13.html?swift#definesingletonmethod_argsspecbody">
             
 
 
+
           </div>
           
           
@@ -806,6 +807,7 @@ be re-setup.</p>
             </div>
             
 
+
   <h5>Return Value</h5>
   <p>0 if the cleanup went fine, otherwise some error code from Ruby.</p>
 
@@ -852,11 +854,6 @@ be re-setup.</p>
 <p>Get an <code>ID</code> ready to call a method, for example.</p>
 <p>This is public to permit interop with <code>CRuby</code>.  It is not
 needed for regular RubyGateway use.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if Ruby raises an exception.  This
-probably means the <code>ID</code> space is full, which is fairly unlikely.</p>
-</div>
 
 
 
@@ -884,6 +881,11 @@ probably means the <code>ID</code> space is full, which is fairly unlikely.</p>
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if Ruby raises an exception.  This
+probably means the <code>ID</code> space is full, which is fairly unlikely.</p>
 
 
   <h5>Return Value</h5>
@@ -954,6 +956,7 @@ custom types.  It is not required for regular RubyGateway use.</p>
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -1009,11 +1012,6 @@ custom types.  It is not required for regular RubyGateway use.</p>
 value if it doesn’t exist yet.</p>
 <p>This is like doing <code>@f</code> at the top level of a Ruby script.</p>
 <p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>RbObjectAccess.failable</code></a>.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> looks wrong.
-<a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if Ruby has a problem.</p>
-</div>
 
 
 
@@ -1041,6 +1039,11 @@ value if it doesn’t exist yet.</p>
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> looks wrong.
+<a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if Ruby has a problem.</p>
 
 
   <h5>Return Value</h5>
@@ -1089,11 +1092,6 @@ value if it doesn’t exist yet.</p>
 <p>Set a top-level instance variable.  Creates a new one if it doesn’t exist yet.</p>
 <p>This is like doing <code>@f = 3</code> at the top level of a Ruby script.</p>
 <p>For a version that does not throw, see <a href="../types/rbobjectaccess1.html?swift#failable"><code>RbObjectAccess.failable</code></a>.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> looks wrong.
-<a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if Ruby has a problem.</p>
-</div>
 
 
 
@@ -1129,6 +1127,11 @@ public override func setInstanceVar(
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> looks wrong.
+<a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a> if Ruby has a problem.</p>
 
 
   <h5>Return Value</h5>
@@ -1187,13 +1190,7 @@ public override func setInstanceVar(
 
 
 <p>Define a new, empty, Ruby class.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">Throws</div>
-<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> is bad.  <a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if
-<code>parent</code> is provided but is not a class, or if <code>under</code> is neither class nor
-module. <a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(...)</code></a> if Ruby is unhappy with the definition,
-for example when the class already exists with a different parent.</p>
-</div>
+
 
 
 
@@ -1236,6 +1233,13 @@ default is <code>nil</code> which means the class is at the top level.</p></td>
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> is bad.  <a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if
+<code>parent</code> is provided but is not a class, or if <code>under</code> is neither class nor
+module. <a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(...)</code></a> if Ruby is unhappy with the definition,
+for example when the class already exists with a different parent.</p>
 
 
   <h5>Return Value</h5>
@@ -1282,7 +1286,7 @@ default is <code>nil</code> which means the class is at the top level.</p></td>
 
 
 <p>Define a new, empty, Ruby class associated with a Swift class.</p>
-<p>The Ruby class inherits from the Ruby <a href="https://developer.apple.com/documentation/foundation/data?language=swift" class="j2-swift"><code>Data</code></a> class.</p>
+<p>The Ruby class inherits from the Ruby <a href="https://developer.apple.com/documentation/foundation/data?language=swift" class="j2-swift"><code>Data</code></a><a href="https://developer.apple.com/documentation/foundation/data?language=objc" class="j2-objc j2-secondary"><code>Data</code></a> class.</p>
 <p>When any new instance of the Ruby class is created, the <code>initializer</code> closure
 is called to get hold of an instance of the bound Swift class.  Typically this closure
 is an initializer for the Swift class.  A strong reference is held to the Swift object
@@ -1293,13 +1297,6 @@ to <code>new</code> then you need to do that separately with one of the
 <a href="../types/rbobject13.html?swift#definemethod_argsspecmethod1"><code>RbObject.defineMethod(_:argsSpec:method:)</code></a> methods.</p>
 <p>Ruby methods defined with <a href="../types/rbobject13.html?swift#definemethod_argsspecmethod1"><code>RbObject.defineMethod(_:argsSpec:method:)</code></a> can be bound
 directly to methods of the <code>SwiftPeer</code> class.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">Throws</div>
-<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> is bad.  <a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if
-<code>parent</code> is provided but is not a class, or if <code>under</code> is neither class nor
-module. <a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(...)</code></a> if Ruby is unhappy with the definition,
-for example when the class already exists with a different parent.</p>
-</div>
 
 
 
@@ -1344,6 +1341,13 @@ instance.</p></td>
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> is bad.  <a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if
+<code>parent</code> is provided but is not a class, or if <code>under</code> is neither class nor
+module. <a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(...)</code></a> if Ruby is unhappy with the definition,
+for example when the class already exists with a different parent.</p>
 
 
   <h5>Return Value</h5>
@@ -1394,13 +1398,6 @@ instance.</p></td>
 <pre><code class="language-swift">let mathModule = try Ruby.get(&quot;Math&quot;)
 let advancedMathModule = try Ruby.defineModule(name: &quot;Advanced&quot;, under: mathModule)
 </code></pre>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">Throws</div>
-<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> is bad.  <a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a>
-if <code>under</code> is neither class nor module.  <a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(...)</code></a> if
-Ruby is unhappy with the definition, for example when a non-module constant
-already exists with this name.</p>
-</div>
 
 
 
@@ -1435,6 +1432,13 @@ public func defineModule(_ name: <a href="../extensions/string.html?swift">Strin
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> is bad.  <a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a>
+if <code>under</code> is neither class nor module.  <a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(...)</code></a> if
+Ruby is unhappy with the definition, for example when a non-module constant
+already exists with this name.</p>
 
 
   <h5>Return Value</h5>
@@ -1512,6 +1516,7 @@ public func defineModule(_ name: <a href="../extensions/string.html?swift">Strin
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -1569,6 +1574,7 @@ public func defineModule(_ name: <a href="../extensions/string.html?swift">Strin
 
             </div>
             
+
 
 
           
@@ -1637,6 +1643,7 @@ public func defineModule(_ name: <a href="../extensions/string.html?swift">Strin
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -1694,6 +1701,7 @@ public func defineModule(_ name: <a href="../extensions/string.html?swift">Strin
 
             </div>
             
+
 
 
           
@@ -1776,6 +1784,7 @@ feature.  See Ruby#14250.</li>
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -1833,6 +1842,7 @@ feature.  See Ruby#14250.</li>
 
             </div>
             
+
 
 
           
@@ -1894,6 +1904,7 @@ feature.  See Ruby#14250.</li>
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -1953,6 +1964,7 @@ feature.  See Ruby#14250.</li>
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -1994,10 +2006,6 @@ feature.  See Ruby#14250.</li>
 
 <p>Set the program arguments for the Ruby VM.</p>
 <p>Updates the <code>ARGV</code> constant.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p>Various <a href="../types/rberror.html?swift"><code>RbError</code></a>s if the arguments can’t be set.</p>
-</div>
 
 
 
@@ -2025,6 +2033,10 @@ feature.  See Ruby#14250.</li>
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p>Various <a href="../types/rberror.html?swift"><code>RbError</code></a>s if the arguments can’t be set.</p>
 
 
 
@@ -2080,10 +2092,6 @@ feature.  See Ruby#14250.</li>
 
 
 <p>Evaluate some Ruby and return the result.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift"><code>RbError</code></a> if something goes wrong.</p>
-</div>
 <div class="j2-callout j2-callout-note aside aside-note">
 <div class="j2-callout-title aside-title" role="heading" aria-level="6">note</div>
 <p>This is a lower level than <code>Kernel#eval</code> and less flexible - if you
@@ -2118,6 +2126,10 @@ public func eval(ruby: <a href="../extensions/string.html?swift">String</a>) thr
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift"><code>RbError</code></a> if something goes wrong.</p>
 
 
   <h5>Return Value</h5>
@@ -2166,11 +2178,7 @@ public func eval(ruby: <a href="../extensions/string.html?swift">String</a>) thr
 <p>Load a Ruby file once-only.  See <code>Kernel#require</code>, but note this
 method is dispatched dynamically so it will invoke any replacements of
 <code>require</code>.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift"><code>RbError</code></a> if something goes wrong.  This usually means that Ruby
-couldn’t find the file.</p>
-</div>
+
 
 
 
@@ -2199,6 +2207,11 @@ public func require(filename: <a href="../extensions/string.html?swift">String</
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift"><code>RbError</code></a> if something goes wrong.  This usually means that Ruby
+couldn’t find the file.</p>
 
 
   <h5>Return Value</h5>
@@ -2245,10 +2258,7 @@ public func require(filename: <a href="../extensions/string.html?swift">String</
 
 
 <p>See Ruby <code>Kernel#load</code>. Load a file, reloads if already loaded.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift"><code>RbError</code></a> if something goes wrong.</p>
-</div>
+
 
 
 
@@ -2282,6 +2292,10 @@ instead of the current program.  See <code>Kernel#load</code>.</p></td>
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift"><code>RbError</code></a> if something goes wrong.</p>
 
 
 
@@ -2339,11 +2353,6 @@ instead of the current program.  See <code>Kernel#load</code>.</p></td>
 <p>Create a readonly Ruby global variable implemented by Swift code.</p>
 <p>If your global variable is not a simple Swift value type then use <a href="../types/rbobject13.html?swift"><code>RbObject</code></a>
 as the closure return type.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> is bad; some other kind of error if Ruby is
-not working.</p>
-</div>
 
 
 
@@ -2379,6 +2388,11 @@ variable with this name is overwritten.</p></td>
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> is bad; some other kind of error if Ruby is
+not working.</p>
 
 
 
@@ -2427,11 +2441,6 @@ not permit getters to raise exceptions.</p>
 <p>If your global variable is not a simple Swift value type then use <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> as the
 closure return/argument type; you can manually throw an <a href="../types/rbexception.html?swift"><code>RbException</code></a> from the setter
 if the provided Ruby value is the wrong shape.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> is bad; some other kind of error if Ruby is
-not working.</p>
-</div>
 
 
 
@@ -2473,6 +2482,11 @@ variable with this name is overwritten.</p></td>
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> is bad; some other kind of error if Ruby is
+not working.</p>
 
 
 
@@ -2534,11 +2548,6 @@ RubyBridge validates the arguments according to <code>argsSpec</code> before inv
 this callback.</p>
 <p>The first parameter to the <code>body</code> callback is best ignored: it is the Ruby
 internal object that is used to implement so-called “global functions”.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> is bad.</p>
-<p>Some other kind of <a href="../types/rberror.html?swift"><code>RbError</code></a> if Ruby is not working.</p>
-</div>
 
 
 
@@ -2581,6 +2590,11 @@ take any arguments.</p></td>
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> is bad.</p>
+<p>Some other kind of <a href="../types/rberror.html?swift"><code>RbError</code></a> if Ruby is not working.</p>
 
 
 
@@ -2696,7 +2710,7 @@ take any arguments.</p></td>
   <div class="col j2-footer small pt-2">
     <p><p>Distributed under the MIT license.  Maintained by <a href="mailto:johnfairh@gmail.com">John Fairhurst</a>.</p></p>
     
-    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external">Bebop v1.0</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫</a>.</p>
+    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external">Bebop v1.6.0</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫</a>.</p>
     
   </div>
 </footer>

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/fw2020.css">
     
     
-   <title>RbObjectCollection - RubyGateway 3.2.0 docs</title>
+   <title>RbObjectCollection - RubyGateway 4.0.0 docs</title>
     
   </head>
   <body class="j2-swift " data-root-path="./../" data-doc-path="types/rbobjectcollection.html" data-assets-path="../">
@@ -31,7 +31,7 @@
       
       <a href="../index.html">
       
-      RubyGateway 3.2.0 docs</a>
+      RubyGateway 4.0.0 docs</a>
     </div>
     
     <span class="navbar-text j2-coverage font-weight-slightly-bold small d-none d-lg-inline-block mr-2">(100% documented)</span>
@@ -706,6 +706,7 @@ namespace.</p>
             
 
 
+
           </div>
           
           
@@ -770,6 +771,7 @@ namespace.</p>
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -827,6 +829,7 @@ namespace.</p>
 
             </div>
             
+
 
 
           
@@ -900,6 +903,7 @@ namespace.</p>
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -940,7 +944,7 @@ namespace.</p>
 
 
 <p>The position of the first element in a nonempty collection.</p>
-
+<p>If the collection is empty, <code>startIndex</code> is equal to <a href="../types/rbobjectcollection.html?swift#endindex"><code>endIndex</code></a>.</p>
 
 
 
@@ -957,6 +961,7 @@ namespace.</p>
 
             </div>
             
+
 
 
           
@@ -999,7 +1004,15 @@ namespace.</p>
 
 
 <p>The collection’s “past the end” position—that is, the position one greater than the last valid subscript argument.</p>
+<p>When you need a range that includes the last element of a collection, use the half-open range operator (<code>&lt;</code>) with <code>endIndex</code>. The <code>&lt;</code> operator creates a range that doesn’t include the upper bound, so it’s always safe to use with <code>endIndex</code>. For example:</p>
+<pre><code class="language-swift">let numbers = [10, 20, 30, 40, 50]
+if let index = numbers.firstIndex(of: 30) {
+    print(numbers[index ..&lt; numbers.endIndex])
+}
+// Prints &quot;[30, 40, 50]&quot;
 
+</code></pre>
+<p>If the collection is empty, <code>endIndex</code> is equal to <a href="../types/rbobjectcollection.html?swift#startindex"><code>startIndex</code></a>.</p>
 
 
 
@@ -1016,6 +1029,7 @@ namespace.</p>
 
             </div>
             
+
 
 
           
@@ -1058,7 +1072,18 @@ namespace.</p>
 
 
 <p>Accesses the element at the specified position.</p>
+<p>For example, you can replace an element of an array by using its subscript.</p>
+<pre><code class="language-swift">var streets = [&quot;Adams&quot;, &quot;Bryant&quot;, &quot;Channing&quot;, &quot;Douglas&quot;, &quot;Evarts&quot;]
+streets[1] = &quot;Butler&quot;
+print(streets[1])
+// Prints &quot;Butler&quot;
 
+</code></pre>
+<p>You can subscript a collection with any valid index other than the collection’s end index. The end index refers to the position one past the last element of a collection, so it doesn’t correspond with an element.</p>
+<div class="j2-callout j2-callout-complexity aside aside-complexity">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">complexity</div>
+<p>O(1)</p>
+</div>
 
 
 
@@ -1086,6 +1111,7 @@ namespace.</p>
       
     </tbody>
   </table>
+
 
 
 
@@ -1129,7 +1155,7 @@ namespace.</p>
 
 
 <p>Returns the position immediately after the given index.</p>
-
+<p>The successor of an index must be well defined. For an index <code>i</code> into a collection <code>c</code>, calling <code>c.index(after: i)</code> returns the same index every time.</p>
 
 
 
@@ -1157,6 +1183,7 @@ namespace.</p>
       
     </tbody>
   </table>
+
 
 
   <h5>Return Value</h5>
@@ -1203,7 +1230,21 @@ namespace.</p>
 
 
 <p>Replaces the specified subrange of elements with the given collection.</p>
+<p>This method has the effect of removing the specified range of elements from the collection and inserting the new elements at the same location. The number of new elements need not match the number of elements being removed.</p>
+<p>In this example, three elements in the middle of an array of integers are replaced by the five elements of a <code>&gt;</code> instance.</p>
+<pre><code class="language-swift"> var nums = [10, 20, 30, 40, 50]
+ nums.replaceSubrange(1...3, with: repeatElement(1, count: 5))
+ print(nums)
+ // Prints &quot;[10, 1, 1, 1, 1, 1, 50]&quot;
 
+</code></pre>
+<p>If you pass a zero-length range as the <code>subrange</code> parameter, this method inserts the elements of <code>newElements</code> at <code>subrange.startIndex</code>. Calling the <code>insert(contentsOf:at:)</code> method instead is preferred.</p>
+<p>Likewise, if you pass a zero-length collection as the <code>newElements</code> parameter, this method removes the elements in the given subrange without replacement. Calling the <code>removeSubrange(_:)</code> method instead is preferred.</p>
+<p>Calling this method may invalidate any existing indices for use with this collection.</p>
+<div class="j2-callout j2-callout-complexity aside aside-complexity">
+<div class="j2-callout-title aside-title" role="heading" aria-level="6">complexity</div>
+<p>O(<em>n</em> + <em>m</em>), where <em>n</em> is length of this collection and <em>m</em> is the length of <code>newElements</code>. If the call to this method simply appends the contents of <code>newElements</code> to the collection, this method is equivalent to <code>append(contentsOf:)</code>.</p>
+</div>
 
 
 
@@ -1238,6 +1279,7 @@ where C: <a href="https://developer.apple.com/documentation/swift/collection?lan
       
     </tbody>
   </table>
+
 
 
 
@@ -1343,7 +1385,7 @@ where C: <a href="https://developer.apple.com/documentation/swift/collection?lan
   <div class="col j2-footer small pt-2">
     <p><p>Distributed under the MIT license.  Maintained by <a href="mailto:johnfairh@gmail.com">John Fairhurst</a>.</p></p>
     
-    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external">Bebop v1.0</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫</a>.</p>
+    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external">Bebop v1.6.0</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫</a>.</p>
     
   </div>
 </footer>

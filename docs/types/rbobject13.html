@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/fw2020.css">
     
     
-   <title>RbObject - RubyGateway 3.2.0 docs</title>
+   <title>RbObject - RubyGateway 4.0.0 docs</title>
     
   </head>
   <body class="j2-swift " data-root-path="./../" data-doc-path="types/rbobject13.html" data-assets-path="../">
@@ -31,7 +31,7 @@
       
       <a href="../index.html">
       
-      RubyGateway 3.2.0 docs</a>
+      RubyGateway 4.0.0 docs</a>
     </div>
     
     <span class="navbar-text j2-coverage font-weight-slightly-bold small d-none d-lg-inline-block mr-2">(100% documented)</span>
@@ -755,7 +755,7 @@ so you can update a Ruby array like:</p>
 <span data-anchor-id="standard-library-conformances">
 Standard library conformances
 </span></h2>
-<p><code>RbObject</code> conforms to <a href="https://developer.apple.com/documentation/swift/hashable?language=swift" class="j2-swift"><code>Hashable</code></a>, <a href="https://developer.apple.com/documentation/swift/equatable?language=swift" class="j2-swift"><code>Equatable</code></a>, and <a href="https://developer.apple.com/documentation/swift/comparable?language=swift" class="j2-swift"><code>Comparable</code></a> protocols by
+<p><code>RbObject</code> conforms to <a href="https://developer.apple.com/documentation/swift/hashable?language=swift" class="j2-swift"><code>Hashable</code></a><a href="https://developer.apple.com/documentation/swift/hashable?language=objc" class="j2-objc j2-secondary"><code>Hashable</code></a>, <a href="https://developer.apple.com/documentation/swift/equatable?language=swift" class="j2-swift"><code>Equatable</code></a><a href="https://developer.apple.com/documentation/swift/equatable?language=objc" class="j2-objc j2-secondary"><code>Equatable</code></a>, and <a href="https://developer.apple.com/documentation/swift/comparable?language=swift" class="j2-swift"><code>Comparable</code></a><a href="https://developer.apple.com/documentation/swift/comparable?language=objc" class="j2-objc j2-secondary"><code>Comparable</code></a> protocols by
 forwarding to the corresponding Ruby methods.  Beware though that it is easy
 to trigger Ruby errors here that currently cause RubyGateway to crash.  For
 example this is poison:</p>
@@ -766,7 +766,7 @@ example this is poison:</p>
 <span data-anchor-id="arithmetic-operators">
 Arithmetic operators
 </span></h2>
-<p><code>RbObject</code> conforms to the <a href="https://developer.apple.com/documentation/swift/signednumeric?language=swift" class="j2-swift"><code>SignedNumeric</code></a> protocol by forwarding the regular
+<p><code>RbObject</code> conforms to the <a href="https://developer.apple.com/documentation/swift/signednumeric?language=swift" class="j2-swift"><code>SignedNumeric</code></a><a href="https://developer.apple.com/documentation/swift/signednumeric?language=objc" class="j2-objc j2-secondary"><code>SignedNumeric</code></a> protocol by forwarding the regular
 arithmetic operators to the corresponding Ruby methods.  This means you can
 write <code>let a = b + c</code> where all are <code>RbObject</code>s and get a valid value for <code>a</code>
 provided <code>b</code> and <code>c</code> are any of the Ruby numeric values or any Ruby class that
@@ -784,6 +784,7 @@ add methods implemented in Swift to an object or class.  Use
 
 
             
+
 
 
           </div>
@@ -853,6 +854,7 @@ of the Ruby API.  It is not normally needed.</p>
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -915,6 +917,7 @@ a separate Ruby object do:</p>
 
             </div>
             
+
 
 
           
@@ -990,6 +993,7 @@ public func withRubyValue&lt;T&gt;(call: (VALUE) throws -&gt; T) rethrows -&gt; 
 
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -1050,6 +1054,7 @@ might be useful for debugging.</p>
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -1107,6 +1112,7 @@ might be useful for debugging.</p>
 
             </div>
             
+
 
 
           
@@ -1172,6 +1178,7 @@ Ruby worked but the call evaluated to [Ruby] <code>nil</code>.</p>
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -1229,6 +1236,7 @@ Ruby worked but the call evaluated to [Ruby] <code>nil</code>.</p>
 
             </div>
             
+
 
 
           
@@ -1297,6 +1305,7 @@ it implements <code>[]</code>, <code>[]=</code>, and <code>length</code> like Ar
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -1354,11 +1363,6 @@ it implements <code>[]</code>, <code>[]=</code>, and <code>length</code> like Ar
 object.</p>
 <p>This function performs an unsafe cast to the type you specify so be
 sure to get it right.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">Throws</div>
-<p><a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if the object doesn’t have a bound Swift
-class.</p>
-</div>
 
 
 
@@ -1386,6 +1390,11 @@ class.</p>
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if the object doesn’t have a bound Swift
+class.</p>
 
 
   <h5>Return Value</h5>
@@ -1445,12 +1454,7 @@ class.</p>
 
 <p>Add methods from a module to a class such that methods from the class
 override any that match in the module.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">Throws</div>
-<p><a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if this object is not a class or if <code>module</code>
-is not a module.  <a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(...)</code></a> if Ruby is unhappy,
-for example if the operation creates a circular dependency.</p>
-</div>
+
 
 
 
@@ -1478,6 +1482,12 @@ for example if the operation creates a circular dependency.</p>
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if this object is not a class or if <code>module</code>
+is not a module.  <a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(...)</code></a> if Ruby is unhappy,
+for example if the operation creates a circular dependency.</p>
 
 
 
@@ -1523,12 +1533,6 @@ for example if the operation creates a circular dependency.</p>
 <p>Add methods from a module to a class such that methods from the module
 override any that match in the class.</p>
 <p>See <code>Module#prepend</code> for a better explanation.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">Throws</div>
-<p><a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if this object is not a class or if <code>module</code>
-is not a module.  <a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(...)</code></a> if Ruby is unhappy,
-for example if the operation creates a circular dependency.</p>
-</div>
 
 
 
@@ -1556,6 +1560,12 @@ for example if the operation creates a circular dependency.</p>
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if this object is not a class or if <code>module</code>
+is not a module.  <a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(...)</code></a> if Ruby is unhappy,
+for example if the operation creates a circular dependency.</p>
 
 
 
@@ -1600,12 +1610,6 @@ for example if the operation creates a circular dependency.</p>
 
 <p>Add methods from a module to the singleton class of this object.</p>
 <p>See <code>Module#extend</code> for a better explanation.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">Throws</div>
-<p><a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if <code>module</code> is not a module.
-<a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(...)</code></a> if Ruby is unhappy,
-for example if the operation creates a circular dependency.</p>
-</div>
 
 
 
@@ -1633,6 +1637,12 @@ for example if the operation creates a circular dependency.</p>
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if <code>module</code> is not a module.
+<a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(...)</code></a> if Ruby is unhappy,
+for example if the operation creates a circular dependency.</p>
 
 
 
@@ -1708,6 +1718,7 @@ to <a href="../types/rbobjectconvertible.html?swift"><code>RbObjectConvertible</
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -1751,11 +1762,6 @@ to <a href="../types/rbobjectconvertible.html?swift"><code>RbObjectConvertible</
 <p>This is a convenience wrapper around optional conversion for cases where
 the Swift type can be inferred.  See <a href="../types/rbobject13.html?swift#convertto"><code>convert(to:)</code></a> to explicitly specify
 the desired type.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if the conversion fails.  There may be a more
-detailed exception inside <a href="../types/rberror.html?swift#history1"><code>RbError.history</code></a>.</p>
-</div>
 
 
 
@@ -1772,6 +1778,11 @@ detailed exception inside <a href="../types/rberror.html?swift#history1"><code>R
 
             </div>
             
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if the conversion fails.  There may be a more
+detailed exception inside <a href="../types/rberror.html?swift#history1"><code>RbError.history</code></a>.</p>
+
 
 
           
@@ -1816,11 +1827,6 @@ detailed exception inside <a href="../types/rberror.html?swift#history1"><code>R
 <p>Convert an RbObject to some Swift type.</p>
 <p>This is a convenience wrapper around optional conversion.  See <a href="../types/rbobject13.html?swift#convert"><code>convert()</code></a>
 for when the desired type can be inferred by the compiler.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">throws</div>
-<p><a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if the conversion fails.  There may be a more
-detailed exception inside <a href="../types/rberror.html?swift#history1"><code>RbError.history</code></a>.</p>
-</div>
 
 
 
@@ -1837,6 +1843,11 @@ detailed exception inside <a href="../types/rberror.html?swift#history1"><code>R
 
             </div>
             
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if the conversion fails.  There may be a more
+detailed exception inside <a href="../types/rberror.html?swift#history1"><code>RbError.history</code></a>.</p>
+
 
 
           
@@ -1910,6 +1921,7 @@ detailed exception inside <a href="../types/rberror.html?swift#history1"><code>R
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -1979,6 +1991,7 @@ detailed exception inside <a href="../types/rberror.html?swift#history1"><code>R
 
             </div>
             
+
 
 
           
@@ -2052,6 +2065,7 @@ detailed exception inside <a href="../types/rberror.html?swift#history1"><code>R
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -2123,6 +2137,7 @@ detailed exception inside <a href="../types/rberror.html?swift#history1"><code>R
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -2178,7 +2193,7 @@ detailed exception inside <a href="../types/rberror.html?swift#history1"><code>R
 <p>Although the element type here is <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> you can write things like:</p>
 <pre><code class="language-swift">let obj: RbObject = [1, 2, 3]
 </code></pre>
-<p>… because of <a href="../types/rbobject13.html?swift"><code>RbObject</code></a>’s <a href="https://developer.apple.com/documentation/swift/expressiblebyintegerliteral?language=swift" class="j2-swift"><code>ExpressibleByIntegerLiteral</code></a> conformance
+<p>… because of <a href="../types/rbobject13.html?swift"><code>RbObject</code></a>’s <a href="https://developer.apple.com/documentation/swift/expressiblebyintegerliteral?language=swift" class="j2-swift"><code>ExpressibleByIntegerLiteral</code></a><a href="https://developer.apple.com/documentation/swift/expressiblebyintegerliteral?language=objc" class="j2-objc j2-secondary"><code>ExpressibleByIntegerLiteral</code></a> conformance
 that gets applied recursively.</p>
 
 
@@ -2196,6 +2211,7 @@ that gets applied recursively.</p>
 
             </div>
             
+
 
 
           
@@ -2274,6 +2290,7 @@ that gets applied recursively.</p>
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -2335,11 +2352,6 @@ try clazz.defineMethod(name: &quot;sum&quot;) { rbSelf, _ in
   rbSelf.collection.reduce(0, +)
 }
 </code></pre>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">Throws</div>
-<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> is bad.
-<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if the object is neither a class nor a module.</p>
-</div>
 
 
 
@@ -2382,6 +2394,11 @@ does not take any arguments.</p></td>
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> is bad.
+<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if the object is neither a class nor a module.</p>
 
 
 
@@ -2439,11 +2456,6 @@ try invaderClass.defineMethod(&quot;fire&quot;, method: Invader.fire)
 </code></pre>
 <p>There are unsafe casts involved here so you must be sure to get the types
 right.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">Throws</div>
-<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> is bad.
-<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if the object is not a class.</p>
-</div>
 
 
 
@@ -2486,6 +2498,11 @@ does not take any arguments.</p></td>
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> is bad.
+<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if the object is not a class.</p>
 
 
 
@@ -2546,11 +2563,6 @@ try invaderClass.defineMethod(&quot;initialize&quot;,
 </code></pre>
 <p>There are unsafe casts involved here so you must be sure to get the types
 right.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">Throws</div>
-<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> is bad.
-<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if the object is not a class.</p>
-</div>
 
 
 
@@ -2593,6 +2605,11 @@ does not take any arguments.</p></td>
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> is bad.
+<a href="../types/rberror.html?swift#badtype_"><code>RbError.badType(...)</code></a> if the object is not a class.</p>
 
 
 
@@ -2639,10 +2656,6 @@ does not take any arguments.</p></td>
 <p>In practice this means: if the <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> is a class then this adds a class method.
 Otherwise, if the <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> is a ‘normal’ instance object then it adds a method
 valid just for this instance.</p>
-<div class="j2-callout j2-callout-throws aside aside-throws">
-<div class="j2-callout-title aside-title" role="heading" aria-level="6">Throws</div>
-<p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> is bad.</p>
-</div>
 
 
 
@@ -2685,6 +2698,10 @@ does not take any arguments.</p></td>
       
     </tbody>
   </table>
+
+
+  <h5>Throws</h5>
+  <p><a href="../types/rberror.html?swift#badidentifiertypeid"><code>RbError.badIdentifier(type:id:)</code></a> if <code>name</code> is bad.</p>
 
 
 
@@ -2783,6 +2800,7 @@ down into module/etc. scope.</p></td>
       
     </tbody>
   </table>
+
 
 
 
@@ -2886,6 +2904,7 @@ using <code>Proc#new</code>.</p></td>
 
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -2961,6 +2980,7 @@ finished with the block, or the process will crash when Ruby calls it.</p>
 
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -3013,7 +3033,7 @@ finished with the block, or the process will crash when Ruby calls it.</p>
 
 
 <p>A string representation of the Ruby object.</p>
-<p>This is the same as <a href="https://developer.apple.com/documentation/swift/string?language=swift" class="j2-swift"><code>String(rbObject)</code></a> which is approximately <code>Kernel#String</code>.</p>
+<p>This is the same as <code>String(rbObject)</code> which is approximately <code>Kernel#String</code>.</p>
 
 
 
@@ -3030,6 +3050,7 @@ finished with the block, or the process will crash when Ruby calls it.</p>
 
             </div>
             
+
 
 
           
@@ -3091,6 +3112,7 @@ finished with the block, or the process will crash when Ruby calls it.</p>
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -3148,6 +3170,7 @@ finished with the block, or the process will crash when Ruby calls it.</p>
 
             </div>
             
+
 
 
           
@@ -3226,6 +3249,7 @@ or if the <code>hash</code> call returns something that can’t be converted to 
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -3287,6 +3311,7 @@ or if the <code>hash</code> call returns something that can’t be converted to 
 
             </div>
             
+
 
   <h5>Return Value</h5>
   <p>Whether the objects are the same under <code>==</code>.</p>
@@ -3356,6 +3381,7 @@ argument is less than that of the second argument.</p>
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -3407,7 +3433,7 @@ argument is less than that of the second argument.</p>
               
 
 
-<p>Create a Ruby object from some type conforming to <a href="https://developer.apple.com/documentation/swift/binaryinteger?language=swift" class="j2-swift"><code>BinaryInteger</code></a></p>
+<p>Create a Ruby object from some type conforming to <a href="https://developer.apple.com/documentation/swift/binaryinteger?language=swift" class="j2-swift"><code>BinaryInteger</code></a><a href="https://developer.apple.com/documentation/swift/binaryinteger?language=objc" class="j2-objc j2-secondary"><code>BinaryInteger</code></a></p>
 
 
 
@@ -3425,6 +3451,7 @@ argument is less than that of the second argument.</p>
 
             </div>
             
+
 
 
           
@@ -3490,6 +3517,7 @@ if the objects do not support subtraction.</p>
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -3551,6 +3579,7 @@ if the objects do not support addition.</p>
 
             </div>
             
+
 
 
           
@@ -3616,6 +3645,7 @@ if the objects do not support multiplication.</p>
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -3679,6 +3709,7 @@ if the objects do not support division.</p>
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -3721,7 +3752,7 @@ if the objects do not support division.</p>
 <p>Remainder operator for <a href="../types/rbobject13.html?swift"><code>RbObject</code></a>s.</p>
 <div class="j2-callout j2-callout-note aside aside-note">
 <div class="j2-callout-title aside-title" role="heading" aria-level="6">note</div>
-<p>Calls Ruby <a href="https://developer.apple.com/documentation/agl/agl?language=swift" class="j2-swift"><code>%</code></a><a href="https://developer.apple.com/documentation/agl/agl?language=objc" class="j2-objc j2-secondary"><code>%</code></a> method.  Crashes the process (<code>fatalError</code>)
+<p>Calls Ruby <code>%</code> method.  Crashes the process (<code>fatalError</code>)
 if the objects do not support remaindering.</p>
 </div>
 
@@ -3740,6 +3771,7 @@ if the objects do not support remaindering.</p>
 
             </div>
             
+
 
 
           
@@ -3801,6 +3833,7 @@ if the objects do not support remaindering.</p>
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -3858,6 +3891,7 @@ if the objects do not support remaindering.</p>
 
             </div>
             
+
 
 
           
@@ -3919,6 +3953,7 @@ if the objects do not support remaindering.</p>
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -3978,6 +4013,7 @@ if the objects do not support remaindering.</p>
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -4035,6 +4071,7 @@ if the objects do not support remaindering.</p>
 
             </div>
             
+
 
 
           
@@ -4100,6 +4137,7 @@ if the object does not support magnitude.</p>
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -4163,6 +4201,7 @@ if the object does not support this.</p>
             
 
 
+
           
 
           <nav class="j2-item-nav" aria-label="item details">
@@ -4224,6 +4263,7 @@ if the object does not support this.</p>
 
             </div>
             
+
 
 
           
@@ -4307,6 +4347,7 @@ if anything goes wrong - Swift can’t throw from subscripts yet.</p>
 
             </div>
             
+
 
 
           
@@ -4439,7 +4480,7 @@ if anything goes wrong - Swift can’t throw from subscripts yet.</p>
   <div class="col j2-footer small pt-2">
     <p><p>Distributed under the MIT license.  Maintained by <a href="mailto:johnfairh@gmail.com">John Fairhurst</a>.</p></p>
     
-    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external">Bebop v1.0</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫</a>.</p>
+    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external">Bebop v1.6.0</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫</a>.</p>
     
   </div>
 </footer>

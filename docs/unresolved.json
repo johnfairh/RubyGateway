@@ -1,0 +1,642 @@
+[
+  {
+    "context" : "none",
+    "name" : "#each"
+  },
+  {
+    "context" : "init(_:)",
+    "name" : "#to_c"
+  },
+  {
+    "context" : "init(_:)",
+    "name" : "#to_r"
+  },
+  {
+    "context" : "debug",
+    "name" : "$-d"
+  },
+  {
+    "context" : "verbose",
+    "name" : "$-v"
+  },
+  {
+    "context" : "scriptName",
+    "name" : "$0"
+  },
+  {
+    "context" : "debug",
+    "name" : "$DEBUG"
+  },
+  {
+    "context" : "scriptName",
+    "name" : "$PROGRAM_NAME"
+  },
+  {
+    "context" : "RbGateway",
+    "name" : "$RUBYLIB"
+  },
+  {
+    "context" : "User Guide",
+    "name" : "$SAFE"
+  },
+  {
+    "context" : "verbose",
+    "name" : "$VERBOSE"
+  },
+  {
+    "context" : "setGlobalVar(_:newValue:)",
+    "name" : "$"
+  },
+  {
+    "context" : "%(RbObject, RbObject)",
+    "name" : "%"
+  },
+  {
+    "context" : "*(RbObject, RbObject)",
+    "name" : "*"
+  },
+  {
+    "context" : "+(RbObject, RbObject)",
+    "name" : "+"
+  },
+  {
+    "context" : "-(RbObject, RbObject)",
+    "name" : "-"
+  },
+  {
+    "context" : "\/(RbObject, RbObject)",
+    "name" : "\/"
+  },
+  {
+    "context" : "init(ofClass:args:kwArgs:retainBlock:blockCall:)",
+    "name" : "::"
+  },
+  {
+    "context" : "setAttribute(_:newValue:)",
+    "name" : ":attr_accessor"
+  },
+  {
+    "context" : "RbSymbol",
+    "name" : ":name"
+  },
+  {
+    "context" : "endIndex",
+    "name" : "<"
+  },
+  {
+    "context" : "==(RbObject, RbObject)",
+    "name" : "=="
+  },
+  {
+    "context" : "replaceSubrange(_:with:)",
+    "name" : ">"
+  },
+  {
+    "context" : "setClassVar(_:newValue:)",
+    "name" : "@fred = thing"
+  },
+  {
+    "context" : "getClassVar(_:)",
+    "name" : "@fred"
+  },
+  {
+    "context" : "setClassVar(_:newValue:)",
+    "name" : "@"
+  },
+  {
+    "context" : "setArguments(_:)",
+    "name" : "ARGV"
+  },
+  {
+    "context" : "playgroundDescription",
+    "name" : "Any"
+  },
+  {
+    "context" : "init(_:)",
+    "name" : "Bound"
+  },
+  {
+    "context" : "replaceSubrange(_:with:)",
+    "name" : "C.Element"
+  },
+  {
+    "context" : "getID(for:)",
+    "name" : "CRuby"
+  },
+  {
+    "context" : "rubyObject",
+    "name" : "Complex"
+  },
+  {
+    "context" : "cleanup()",
+    "name" : "END{}"
+  },
+  {
+    "context" : "rubyObject",
+    "name" : "Element"
+  },
+  {
+    "context" : "RbException",
+    "name" : "Exception"
+  },
+  {
+    "context" : "init(dictionaryLiteral:)",
+    "name" : "ExpressibleByXxxLiteral"
+  },
+  {
+    "context" : "User Guide",
+    "name" : "Hash#each"
+  },
+  {
+    "context" : "getID(for:)",
+    "name" : "ID"
+  },
+  {
+    "context" : "init(_:)",
+    "name" : "Kernel#Array"
+  },
+  {
+    "context" : "init(_:)",
+    "name" : "Kernel#Hash"
+  },
+  {
+    "context" : "init(_:)",
+    "name" : "Kernel#String"
+  },
+  {
+    "context" : "eval(ruby:)",
+    "name" : "Kernel#eval"
+  },
+  {
+    "context" : "load(filename:wrap:)",
+    "name" : "Kernel#load"
+  },
+  {
+    "context" : "init(message:)",
+    "name" : "Kernel#raise"
+  },
+  {
+    "context" : "require(filename:)",
+    "name" : "Kernel#require"
+  },
+  {
+    "context" : "Verbosity",
+    "name" : "Kernel#warn"
+  },
+  {
+    "context" : "cleanup()",
+    "name" : "Kernel.#at_exit"
+  },
+  {
+    "context" : "rubyObject",
+    "name" : "Key"
+  },
+  {
+    "context" : "Other APIs",
+    "name" : "Main APIs"
+  },
+  {
+    "context" : "defineModule(_:under:)",
+    "name" : "Math::Advanced"
+  },
+  {
+    "context" : "getConstant(_:)",
+    "name" : "Math::PI"
+  },
+  {
+    "context" : "extend(module:)",
+    "name" : "Module#extend"
+  },
+  {
+    "context" : "prepend(module:)",
+    "name" : "Module#prepend"
+  },
+  {
+    "context" : "callSuper(args:kwArgs:)",
+    "name" : "NoMethodError"
+  },
+  {
+    "context" : "defineClass(_:parent:under:)",
+    "name" : "Object"
+  },
+  {
+    "context" : "User Guide",
+    "name" : "Proc#arity"
+  },
+  {
+    "context" : "returned",
+    "name" : "Proc#new"
+  },
+  {
+    "context" : "captureBlock()",
+    "name" : "Proc"
+  },
+  {
+    "context" : "User Guide",
+    "name" : "RB_GC_GUARD()"
+  },
+  {
+    "context" : "io",
+    "name" : "RUBY_UBF_IO"
+  },
+  {
+    "context" : "User Guide",
+    "name" : "Rational"
+  },
+  {
+    "context" : "RbBlockRetention",
+    "name" : "RbBlockContext.from(raw:)"
+  },
+  {
+    "context" : "eval(ruby:)",
+    "name" : "RbGateway.call(\"eval\")"
+  },
+  {
+    "context" : "RbFailableAccess",
+    "name" : "RbGateway.failable"
+  },
+  {
+    "context" : "RbMethodArgsSpec",
+    "name" : "RbMethodArgsSpec(supportsSplat: true)"
+  },
+  {
+    "context" : "init(arrayLiteral:)",
+    "name" : "RbObject..."
+  },
+  {
+    "context" : "RbFailableAccess",
+    "name" : "RbObject.failable"
+  },
+  {
+    "context" : "isNil",
+    "name" : "RbObject.isNil"
+  },
+  {
+    "context" : "subscript(_:)",
+    "name" : "RbObjectConvertible..."
+  },
+  {
+    "context" : "RbObjectAccess",
+    "name" : "Ruby"
+  },
+  {
+    "context" : "init(message:)",
+    "name" : "RuntimeError"
+  },
+  {
+    "context" : "io",
+    "name" : "SIGVTALRM"
+  },
+  {
+    "context" : "description",
+    "name" : "String(rbObject)"
+  },
+  {
+    "context" : "convert(to:)",
+    "name" : "T.Type"
+  },
+  {
+    "context" : "User Guide",
+    "name" : "TestRbObject.testStackGc()"
+  },
+  {
+    "context" : "create(callback:)",
+    "name" : "Thread"
+  },
+  {
+    "context" : "withRubyValue(call:)",
+    "name" : "VALUE"
+  },
+  {
+    "context" : "Dictionary",
+    "name" : "Value"
+  },
+  {
+    "context" : "RbObjectCollection",
+    "name" : "[]="
+  },
+  {
+    "context" : "RbObjectCollection",
+    "name" : "[]"
+  },
+  {
+    "context" : "RbObject",
+    "name" : "a"
+  },
+  {
+    "context" : "replaceSubrange(_:with:)",
+    "name" : "append(contentsOf:)"
+  },
+  {
+    "context" : "RbMethodArgsSpec",
+    "name" : "args"
+  },
+  {
+    "context" : "defineGlobalFunction(_:argsSpec:body:)",
+    "name" : "argsSpec"
+  },
+  {
+    "context" : "setAttribute(_:newValue:)",
+    "name" : "attribute"
+  },
+  {
+    "context" : "setAttribute(_:newValue:)",
+    "name" : "attrname="
+  },
+  {
+    "context" : "RbObject",
+    "name" : "b"
+  },
+  {
+    "context" : "call(symbol:args:kwArgs:blockRetention:blockCall:)",
+    "name" : "blockCall"
+  },
+  {
+    "context" : "call(symbol:args:kwArgs:block:)",
+    "name" : "block"
+  },
+  {
+    "context" : "defineGlobalFunction(_:argsSpec:body:)",
+    "name" : "body"
+  },
+  {
+    "context" : "rubyJump(_:)",
+    "name" : "break"
+  },
+  {
+    "context" : "index(after:)",
+    "name" : "c.index(after: i)"
+  },
+  {
+    "context" : "User Guide",
+    "name" : "call"
+  },
+  {
+    "context" : "UnblockingFunc",
+    "name" : "callWithoutGvl"
+  },
+  {
+    "context" : "callWithGvl(callback:)",
+    "name" : "callback"
+  },
+  {
+    "context" : "index(after:)",
+    "name" : "c"
+  },
+  {
+    "context" : "getClass(_:)",
+    "name" : "const_missing"
+  },
+  {
+    "context" : "RbObject",
+    "name" : "convert"
+  },
+  {
+    "context" : "init(dictionaryLiteral:)",
+    "name" : "elements"
+  },
+  {
+    "context" : "setInstanceVar(_:newValue:)",
+    "name" : "f = 3"
+  },
+  {
+    "context" : "Bool",
+    "name" : "false"
+  },
+  {
+    "context" : "User Guide",
+    "name" : "fatalError()"
+  },
+  {
+    "context" : "subscript(_:)",
+    "name" : "fatalError"
+  },
+  {
+    "context" : "getInstanceVar(_:)",
+    "name" : "f"
+  },
+  {
+    "context" : "hash(into:)",
+    "name" : "hash"
+  },
+  {
+    "context" : "index(after:)",
+    "name" : "i"
+  },
+  {
+    "context" : "defineClass(_:under:initializer:)",
+    "name" : "initialize"
+  },
+  {
+    "context" : "defineClass(_:under:initializer:)",
+    "name" : "initializer"
+  },
+  {
+    "context" : "replaceSubrange(_:with:)",
+    "name" : "insert(contentsOf:at:)"
+  },
+  {
+    "context" : "debugDescription",
+    "name" : "inspect"
+  },
+  {
+    "context" : "duplicateKwArg(_:)",
+    "name" : "kwArgs"
+  },
+  {
+    "context" : "RbObjectCollection",
+    "name" : "length"
+  },
+  {
+    "context" : "RbObject",
+    "name" : "let a = b + c"
+  },
+  {
+    "context" : "<(RbObject, RbObject)",
+    "name" : "lhs"
+  },
+  {
+    "context" : "RbGateway",
+    "name" : "lib\/ruby"
+  },
+  {
+    "context" : "RbGateway",
+    "name" : "libruby"
+  },
+  {
+    "context" : "User Guide",
+    "name" : "log"
+  },
+  {
+    "context" : "RbMethodArgsSpec",
+    "name" : "method.args.splatted"
+  },
+  {
+    "context" : "extend(module:)",
+    "name" : "module"
+  },
+  {
+    "context" : "User Guide",
+    "name" : "myProc"
+  },
+  {
+    "context" : "get(_:)",
+    "name" : "name"
+  },
+  {
+    "context" : "replaceSubrange(_:with:)",
+    "name" : "newElements"
+  },
+  {
+    "context" : "init(ofClass:args:kwArgs:retainBlock:blockCall:)",
+    "name" : "new"
+  },
+  {
+    "context" : "User Guide",
+    "name" : "next"
+  },
+  {
+    "context" : "init(_:)",
+    "name" : "nil"
+  },
+  {
+    "context" : "defineClass(_:under:initializer:)",
+    "name" : "parent"
+  },
+  {
+    "context" : "subscript(_:)",
+    "name" : "position"
+  },
+  {
+    "context" : "RbBlockCallback",
+    "name" : "raise"
+  },
+  {
+    "context" : "eval(ruby:)",
+    "name" : "rb_eval_string_wrap()"
+  },
+  {
+    "context" : "User Guide",
+    "name" : "rb_protect()"
+  },
+  {
+    "context" : "replaceSubrange(_:with:)",
+    "name" : "removeSubrange(_:)"
+  },
+  {
+    "context" : "softSetup()",
+    "name" : "require()"
+  },
+  {
+    "context" : "require(filename:)",
+    "name" : "require"
+  },
+  {
+    "context" : "rubyJump(_:)",
+    "name" : "return"
+  },
+  {
+    "context" : "<(RbObject, RbObject)",
+    "name" : "rhs"
+  },
+  {
+    "context" : "setConstant(_:newValue:)",
+    "name" : "rubyException(_:)"
+  },
+  {
+    "context" : "yieldBlock(args:)",
+    "name" : "rubyJump"
+  },
+  {
+    "context" : "softSetup()",
+    "name" : "send()"
+  },
+  {
+    "context" : "setInstanceVar(_:newValue:)",
+    "name" : ""
+  },
+  {
+    "context" : "replaceSubrange(_:with:)",
+    "name" : "subrange.startIndex"
+  },
+  {
+    "context" : "replaceSubrange(_:with:)",
+    "name" : "subrange"
+  },
+  {
+    "context" : "call(symbol:args:kwArgs:block:)",
+    "name" : "symbol"
+  },
+  {
+    "context" : "init(_:)",
+    "name" : "to_a"
+  },
+  {
+    "context" : "init(_:)",
+    "name" : "to_ary"
+  },
+  {
+    "context" : "init(_:)",
+    "name" : "to_f"
+  },
+  {
+    "context" : "init(_:)",
+    "name" : "to_hash"
+  },
+  {
+    "context" : "init(_:)",
+    "name" : "to_h"
+  },
+  {
+    "context" : "init(_:)",
+    "name" : "to_i"
+  },
+  {
+    "context" : "init(_:)",
+    "name" : "to_int"
+  },
+  {
+    "context" : "init(_:)",
+    "name" : "to_proc"
+  },
+  {
+    "context" : "init(_:)",
+    "name" : "to_set"
+  },
+  {
+    "context" : "init(_:)",
+    "name" : "to_s"
+  },
+  {
+    "context" : "init(_:)",
+    "name" : "to_str"
+  },
+  {
+    "context" : "Bool",
+    "name" : "true"
+  },
+  {
+    "context" : "User Guide",
+    "name" : "try!"
+  },
+  {
+    "context" : "RbFailableAccess",
+    "name" : "try?"
+  },
+  {
+    "context" : "User Guide",
+    "name" : "try"
+  },
+  {
+    "context" : "defineModule(_:under:)",
+    "name" : "under"
+  },
+  {
+    "context" : "User Guide",
+    "name" : "withExtendedLifetime(_:_:)"
+  },
+  {
+    "context" : "User Guide",
+    "name" : "yield"
+  }
+]
