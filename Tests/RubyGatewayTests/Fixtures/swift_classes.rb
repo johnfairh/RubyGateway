@@ -96,6 +96,7 @@ def test_bound1
   i1 = PeerMethods.new
   v1 = i1.fingerprint
   raise "Bad fingerprint" unless v1 == "FINGERPRINT"
+  i1 = 1
 end
 
 # Swift:
