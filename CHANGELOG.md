@@ -1,3 +1,10 @@
+## 4.0.0 - 18th May 2021
+
+#### Breaking
+
+* Require minimum Swift 5.4 / Xcode 12.5
+* Require minimum Ruby 2.6
+
 ## 3.2.1 - 11th May 2020
 
 #### Bug Fixes
