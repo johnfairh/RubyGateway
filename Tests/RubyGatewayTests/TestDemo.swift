@@ -26,20 +26,6 @@ class TestDemo: XCTestCase {
         }
     }
 
-    func testWikipedia() {
-        guard let _ = try? Ruby.require(filename: "wikipedia") else {
-            return
-        }
-
-        doErrorFree {
-            let page = try Ruby.get("Wikipedia").call("find", args: ["Swift"])
-
-            try XCTAssertEqual("Swift", String(page.get("title")))
-
-            try XCTAssertTrue(String(page.get("summary"))!.contains("Apodidae"))
-        }
-    }
-
     func testDemo() {
         doErrorFree {
             try Ruby.require(filename: Helpers.fixturePath("demo.rb"))

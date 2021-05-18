@@ -123,10 +123,13 @@ class TestClassDef: XCTestCase {
     // Bound Swift classes
 
     class MyBoundClass {
+
         static var initCount = 0
         static var deinitCount = 0
+        static var generation = 0
 
         static func resetCounts() {
+            print("resetCounts")
             initCount = 0
             deinitCount = 0
         }
@@ -139,12 +142,21 @@ class TestClassDef: XCTestCase {
             return RbObject(fingerprint)
         }
 
+        var generation: Int
+
         init() {
+            generation = MyBoundClass.generation
             MyBoundClass.initCount += 1
+            print("init, initCount=\(MyBoundClass.initCount) deinitCount=\(MyBoundClass.deinitCount)")
         }
         
         deinit {
-            MyBoundClass.deinitCount += 1
+            if generation == MyBoundClass.generation {
+                MyBoundClass.deinitCount += 1
+                print("deinit, initCount=\(MyBoundClass.initCount) deinitCount=\(MyBoundClass.deinitCount)")
+            } else {
+                print("Drop deinit, wrong generation")
+            }
         }
     }
 
@@ -152,6 +164,7 @@ class TestClassDef: XCTestCase {
     func testBoundSwiftClass() {
         doErrorFree {
             try runGC()
+            MyBoundClass.generation += 1
             MyBoundClass.resetCounts()
         }
 
@@ -237,6 +250,7 @@ class TestClassDef: XCTestCase {
     // Bound methods
     func testBoundMethods() {
         doErrorFree {
+            MyBoundClass.generation += 1
             let myClass = try Ruby.defineClass("PeerMethods", initializer: MyBoundClass.init)
             try myClass.defineMethod("fingerprint", method: MyBoundClass.getFingerprint)
 
