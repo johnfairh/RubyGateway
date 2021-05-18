@@ -129,6 +129,7 @@ class TestClassDef: XCTestCase {
         static func resetCounts() {
             initCount = 0
             deinitCount = 0
+            print("initCount=\(initCount) deinitCount=\(deinitCount)")
         }
 
         static var fingerprintValue = "FINGERPRINT"
@@ -141,10 +142,12 @@ class TestClassDef: XCTestCase {
 
         init() {
             MyBoundClass.initCount += 1
+            print("init, initCount=\(MyBoundClass.initCount) deinitCount=\(MyBoundClass.deinitCount)")
         }
         
         deinit {
             MyBoundClass.deinitCount += 1
+            print("deinit, initCount=\(MyBoundClass.initCount) deinitCount=\(MyBoundClass.deinitCount)")
         }
     }
 
