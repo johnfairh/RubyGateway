@@ -142,9 +142,9 @@ typedef struct {
 static VALUE rbg_obj2ulong(VALUE v);
 
 static VALUE rbg_block_pvoid_callback(VALUE yieldedArg, VALUE callbackArg,
-                                      int argc, VALUE *argv, VALUE blockArg);
+                                      int argc, const VALUE *argv, VALUE blockArg);
 static VALUE rbg_block_value_callback(VALUE yieldedArg, VALUE callbackArg,
-                                      int argc, VALUE *argv, VALUE blockArg);
+                                      int argc, const VALUE *argv, VALUE blockArg);
 static VALUE rbg_scan_arg_hash(VALUE last_arg,
                                int * _Nonnull is_hash,
                                int * _Nonnull is_opts);
@@ -624,7 +624,7 @@ static VALUE rbg_handle_return_value(Rbg_return_value * _Nonnull rv);
 static VALUE rbg_block_pvoid_callback(VALUE yieldedArg,
                                       VALUE callbackArg,
                                       int argc,
-                                      VALUE *argv,
+                                      const VALUE *argv,
                                       VALUE blockArg)
 {
     Rbg_return_value return_value = { 0 };
@@ -637,7 +637,7 @@ static VALUE rbg_block_pvoid_callback(VALUE yieldedArg,
 static VALUE rbg_block_value_callback(VALUE yieldedArg,
                                       VALUE callbackArg,
                                       int argc,
-                                      VALUE *argv,
+                                      const VALUE *argv,
                                       VALUE blockArg)
 {
     Rbg_return_value return_value = { 0 };
@@ -689,8 +689,13 @@ void rbg_register_gvar_callbacks(Rbg_gvar_get_call get,
     rbg_gvar_set_call = set;
 }
 
+// The prototypes here got formalized in Ruby 2.7.
+// Prior to that the API used undefined arguments C wildness.
+// We use the 2.7 format that satisfies the actual compiler there
+// and is mindlessly accepted in earlier releases.
+
 // Callback from Ruby to implement getter for virtual RbObjects
-static VALUE rbg_gvar_virtual_getter(ID id, void *data, struct rb_global_variable *g)
+static VALUE rbg_gvar_virtual_getter(ID id, VALUE *data)
 {
     return rbg_gvar_get_call(id);
 }
@@ -698,8 +703,7 @@ static VALUE rbg_gvar_virtual_getter(ID id, void *data, struct rb_global_variabl
 // Callback from Ruby to implement setter for virtual RbObjects
 static void rbg_gvar_virtual_setter(VALUE newValue,
                                     ID id,
-                                    void *data,
-                                    struct rb_global_variable *g)
+                                    VALUE *data)
 {
     Rbg_return_value rv = { 0 };
     rbg_gvar_set_call(id, newValue, &rv);
