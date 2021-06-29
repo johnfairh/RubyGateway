@@ -52,8 +52,8 @@ jobs:
           swift package edit CRuby
           Packages/CRuby/cfg-cruby --mode custom --path /opt/hostedtoolcache/Ruby/2.7.3/x64
           cat Packages/CRuby/CRuby.pc
-          cat Packages/CRuby/module.modulemap
-          cat Packages/CRuby/ruby_headers.h
+          cat Packages/CRuby/Sources/CRuby/module.modulemap
+          cat Packages/CRuby/Sources/CRuby/ruby_headers.h
       - name: Tests
         run: |
           export PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH

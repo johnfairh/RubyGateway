@@ -10,6 +10,11 @@
 #import <stdbool.h>
 #import <stdint.h>
 
+// Clang 13 doesn't like Ruby 2.X header files
+#if !defined(__has_warning) || __has_warning("-Wcompound-token-split-by-macro")
+#pragma clang diagnostic ignored "-Wcompound-token-split-by-macro"
+#endif
+
 // Fixups for Ruby < 2.3
 
 #ifndef RB_NUM2LONG
