@@ -15,7 +15,7 @@ let package = Package(
             targets: ["RubyGateway", "RubyGatewayHelpers"])
     ],
     dependencies: [
-        .package(url: "https://github.com/johnfairh/CRuby", from: "1.0.1"),
+        .package(url: "https://github.com/johnfairh/CRuby", from: "2.0.0"),
     ],
     targets: [
         .target(
@@ -23,7 +23,7 @@ let package = Package(
             dependencies: ["RubyGatewayHelpers", "CRuby"]),
         .target(
             name: "RubyGatewayHelpers",
-            dependencies: []),
+            dependencies: ["CRuby"]),
         .testTarget(
             name: "RubyGatewayTests",
             dependencies: ["RubyGateway"],
