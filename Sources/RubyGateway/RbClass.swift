@@ -170,7 +170,8 @@ extension RbGateway {
                     under: RbObject? = nil,
                     initializer: @escaping () -> SwiftPeer) throws -> RbObject {
         try setup()
-        let classObj = try defineClass(name, parent: RbObject(rubyValue: rb_cData), under: under)
+        // XXX change from cData to cObject OK for pre-ruby 3?
+        let classObj = try defineClass(name, parent: RbObject(rubyValue: rb_cObject), under: under)
 
         RbClassBinding.register(name: String(classObj)!, initializer: initializer)
         classObj.withRubyValue { rbg_bind_class($0) }
@@ -212,11 +213,11 @@ extension RbGateway {
 extension RbObject {
     func checkIsBoundClass() throws {
         try checkIsClass()
-        let ancestors = try call("ancestors")
-        let hasData = ancestors.collection.contains { String($0)! == "Data" }
-        guard hasData else {
-            throw RbError.badType("Class \(self) does not inherit from Data, not bound to Swift type")
-        }
+//        let ancestors = try call("ancestors")
+//        let hasData = ancestors.collection.contains { String($0)! == "Data" }
+//        guard hasData else {
+//            throw RbError.badType("Class \(self) does not inherit from Data, not bound to Swift type")
+//        }
     }
 }
 

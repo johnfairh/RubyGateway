@@ -164,21 +164,21 @@ class TestVM: XCTestCase {
     }
 
     /// $SAFE
-    func testSafeMode() {
-        XCTAssertFalse(Ruby.taintChecks)
-        XCTAssertEqual(0, Int(try Ruby.getGlobalVar("$SAFE")))
-        Ruby.taintChecks = true
-        XCTAssertTrue(Ruby.taintChecks)
-        XCTAssertEqual(1, Int(try Ruby.getGlobalVar("$SAFE")))
-        Ruby.taintChecks = false
-        let (mj, mn, _) = Ruby.apiVersion
-        if mj > 2 || mn > 5 {
-            XCTAssertFalse(Ruby.taintChecks)
-            XCTAssertEqual(0, Int(try Ruby.getGlobalVar("$SAFE")))
-        } else {
-            XCTAssertTrue(Ruby.taintChecks)
-        }
-    }
+//    func testSafeMode() {
+//        XCTAssertFalse(Ruby.taintChecks)
+//        XCTAssertEqual(0, Int(try Ruby.getGlobalVar("$SAFE")))
+//        Ruby.taintChecks = true
+//        XCTAssertTrue(Ruby.taintChecks)
+//        XCTAssertEqual(1, Int(try Ruby.getGlobalVar("$SAFE")))
+//        Ruby.taintChecks = false
+//        let (mj, mn, _) = Ruby.apiVersion
+//        if mj > 2 || mn > 5 {
+//            XCTAssertFalse(Ruby.taintChecks)
+//            XCTAssertEqual(0, Int(try Ruby.getGlobalVar("$SAFE")))
+//        } else {
+//            XCTAssertTrue(Ruby.taintChecks)
+//        }
+//    }
 
     /// Version
     func testVersion() {
@@ -225,9 +225,9 @@ class TestVM: XCTestCase {
         XCTAssertFalse(Ruby.debug)
 
         // SAFE fail-safe
-        XCTAssertFalse(Ruby.taintChecks)
-        Ruby.taintChecks = true // swallowed
-        XCTAssertFalse(Ruby.taintChecks)
+//        XCTAssertFalse(Ruby.taintChecks)
+//        Ruby.taintChecks = true // swallowed
+//        XCTAssertFalse(Ruby.taintChecks)
 
         // type construction fails out safely
         let strObj: RbObject = "test"

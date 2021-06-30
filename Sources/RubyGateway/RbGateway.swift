@@ -262,18 +262,18 @@ extension RbGateway {
     /// * This feature is likely to disappear entirely.  Its current incarnation
     ///   should be regarded as a debugging feature rather than a security
     ///   feature.  See Ruby#14250.
-    public var taintChecks: Bool {
-        get {
-            let level = softSetup() ? rb_safe_level() : 0
-            return level > 0
-        }
-        set {
-            if softSetup() {
-                // will not raise on legal values
-                rb_set_safe_level(newValue ? 1 : 0)
-            }
-        }
-    }
+//    public var taintChecks: Bool {
+//        get {
+//            let level = softSetup() ? rb_safe_level() : 0
+//            return level > 0
+//        }
+//        set {
+//            if softSetup() {
+//                // will not raise on legal values
+//                rb_set_safe_level(newValue ? 1 : 0)
+//            }
+//        }
+//    }
 
     /// The component major/minor/teeny version numbers of Ruby being used.
     public var apiVersion: (Int32, Int32, Int32) {

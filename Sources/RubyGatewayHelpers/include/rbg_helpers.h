@@ -191,13 +191,18 @@ ID rbg_create_virtual_gvar(const char * _Nonnull name, int readonly);
 const char * _Nonnull rbg_ruby_version(void);
 const char * _Nonnull rbg_ruby_description(void);
 
-/// Cross Ruby version support
-unsigned long rbg_fix2ulong(VALUE v);
-long          rbg_fix2long(VALUE v);
-
 /// Horrible casts rejected by importer
 typedef void rbg_unblock_function_t(void * _Nullable);
 rbg_unblock_function_t * _Nonnull rbg_RUBY_UBF_IO(void);
+
+/// Ruby 3 incompatible changes from Swift's point of view
+int rbg_type(VALUE v);
+int rbg_qfalse(void);
+int rbg_qtrue(void);
+int rbg_qnil(void);
+int rbg_qundef(void);
+int rbg_RB_TEST(VALUE v);
+int rbg_RB_NIL_P(VALUE v);
 
 /// Rbg_value - keep a VALUE safe so it does not get GC'ed
 typedef struct  {
