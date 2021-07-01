@@ -161,7 +161,7 @@ static VALUE rb_yield_values_kw(int argc, const VALUE *argv, int kw_splat)
 
 static VALUE rb_proc_call_with_block_kw(VALUE self, int argc, const VALUE *argv, VALUE passed_procval, int kw_splat)
 {
-    return rb_proc_call_with_block(self, argc, argv, passed_procval, kw_splat);
+    return rb_proc_call_with_block(self, argc, argv, passed_procval);
 }
 
 int rb_keyword_given_p(void)
@@ -170,8 +170,10 @@ int rb_keyword_given_p(void)
 }
 
 #else
+ #if RUBY_API_VERSION_MAJOR > 2
 RBIMPL_STATIC_ASSERT(rbg_r2_compat1, RB_NO_KEYWORDS == 0);
 RBIMPL_STATIC_ASSERT(rbg_r2_compat2, RB_PASS_KEYWORDS == 1);
+ #endif
 #endif
 
 /// Callback made by Ruby from `rb_protect` -- OK to raise exceptions from here.
