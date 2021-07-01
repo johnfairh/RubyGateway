@@ -187,7 +187,7 @@ class TestVM: XCTestCase {
         let (mj, mn, _) = Ruby.apiVersion
 
         XCTAssertTrue(description.contains(version))
-        XCTAssertEqual(2, mj)
+        XCTAssertTrue([2,3].contains(mj))
         XCTAssertTrue(version.starts(with: "\(mj).\(mn)"))
     }
 

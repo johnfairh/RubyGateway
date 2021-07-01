@@ -167,7 +167,7 @@ class TestCallable: XCTestCase {
         doErrorFree {
             let expectedRes = "answer"
 
-            let res = try obj.call("yielder") { args in
+            let res = try obj.call("yielder", kwArgs: ["value": 22]) { args in
                 XCTAssertEqual(2, args.count)
                 XCTAssertEqual(22, Int(args[0]))
                 XCTAssertEqual("fish", String(args[1]))
@@ -176,7 +176,7 @@ class TestCallable: XCTestCase {
             XCTAssertEqual(expectedRes, String(res))
 
             // sym version
-            let res2 = try obj.call(symbol: RbSymbol("yielder")) { args in
+            let res2 = try obj.call(symbol: RbSymbol("yielder"), kwArgs: ["value": 22]) { args in
                 XCTAssertEqual(2, args.count)
                 XCTAssertEqual(22, Int(args[0]))
                 XCTAssertEqual("fish", String(args[1]))
@@ -198,12 +198,24 @@ class TestCallable: XCTestCase {
                 XCTAssertEqual("fish", String(args[1]))
                 return RbObject(expectedRes)
             }
-            let res = try obj.call("yielder", block: proc)
+            let res = try obj.call("yielder2", block: proc)
             XCTAssertEqual(expectedRes, String(res))
 
             // sym version
-            let res2 = try obj.call(symbol: RbSymbol("yielder"), block: proc)
+            let res2 = try obj.call(symbol: RbSymbol("yielder2"), block: proc)
             XCTAssertEqual(expectedRes, String(res2))
+        }
+    }
+
+    // yield kw args to a proc block
+    func testCallWithProcBlockKwArgs() {
+        let obj = getNewMethodTest()
+
+        doErrorFree {
+            let expectedRes = 22
+            let proc = try Ruby.eval(ruby: "Proc.new { |a:| a }")
+            let res = try obj.call("yielder3", args: [expectedRes], block: proc)
+            XCTAssertEqual(expectedRes, Int(res))
         }
     }
 

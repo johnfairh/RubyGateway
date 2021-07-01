@@ -412,8 +412,9 @@ extension RbObjectAccess {
 
         // Decode arguments
         var argObjects = args.map { $0.rubyObject }
+        let hasKwArgs = kwArgs.count > 0
 
-        if kwArgs.count > 0 {
+        if hasKwArgs {
             try argObjects.append(RbObjectAccess.buildKwArgsHash(from: kwArgs))
         }
 
@@ -423,6 +424,7 @@ extension RbObjectAccess {
                 let (context, value) =
                     try RbBlock.doBlockCall(value: getValue(), methodId: id,
                                             argValues: argValues,
+                                            hasKwArgs: hasKwArgs,
                                             blockCall: blockCall)
 
                 let retObject = RbObject(rubyValue: value)
@@ -437,11 +439,15 @@ extension RbObjectAccess {
                 return RbObject(rubyValue: try blockObj.withRubyValue { blockValue in
                     try RbBlock.doBlockCall(value: getValue(), methodId: id,
                                             argValues: argValues,
+                                            hasKwArgs: hasKwArgs,
                                             block: blockValue)
                 })
             }
             return RbObject(rubyValue: try RbVM.doProtect { tag in
-                rbg_funcallv_protect(getValue(), id, Int32(argValues.count), argValues, &tag)
+                rbg_funcallv_protect(getValue(), id,
+                                     Int32(argValues.count), argValues,
+                                     hasKwArgs ? 1 : 0,
+                                     &tag)
             })
         }
     }

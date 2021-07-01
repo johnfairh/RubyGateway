@@ -50,9 +50,19 @@ class MethodsTest
         @stored_block.call()
     end
 
-    def yielder
+    def yielder(value:)
         raise "No block given" unless block_given?
+        yield(value, "fish")
+    end
+
+    def yielder2
+        raise "No block given 2" unless block_given?
         yield(22, "fish")
+    end
+
+    def yielder3(value)
+        raise "No block given 3" unless block_given?
+        yield a: value
     end
 
     def [](a, b)

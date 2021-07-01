@@ -210,6 +210,21 @@ class TestMethods: XCTestCase {
         }
     }
 
+    // kwargs to block
+    func testYieldKwArgsToBlock() {
+        doErrorFree {
+            try Ruby.require(filename: Helpers.fixturePath("swift_methods.rb"))
+
+            try Ruby.defineGlobalFunction("swift_calls_block_kw", argsSpec: .basic(1)) { _, method in
+                try method.needsBlock()
+                return try method.yieldBlock(kwArgs: ["kwa": method.args.mandatory[0]])
+            }
+
+            let result = try Ruby.call("ruby_should_return_89")
+            XCTAssertEqual(89, Int(result))
+        }
+    }
+
     // break / return / next from block
     func testBlockBreakReturn() {
         doErrorFree {

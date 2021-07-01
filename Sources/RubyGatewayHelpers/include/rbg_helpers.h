@@ -42,12 +42,12 @@ VALUE rbg_inspect_protect(VALUE value, int * _Nonnull status);
 
 /// Safely call `rb_funcallv` and report exception status.
 VALUE rbg_funcallv_protect(VALUE value, ID id,
-                           int argc, const VALUE * _Nonnull argv,
+                           int argc, const VALUE * _Nonnull argv, int kwArgs,
                            int * _Nonnull status);
 
 /// Safely call `rb_yield_values2` and report exception status.
 VALUE rbg_yield_values(int argc,
-                       const VALUE * _Nonnull argv,
+                       const VALUE * _Nonnull argv, int kwArgs,
                        int * _Nonnull status);
 
 /// Things a Swift callback can ask Ruby to do
@@ -96,7 +96,7 @@ void rbg_register_value_block_proc_callback(Rbg_value_block_call _Nonnull);
 /// block handler with the given context as the block.
 /// And report exception status.
 VALUE rbg_block_call_pvoid_protect(VALUE value, ID id,
-                                   int argc, const VALUE * _Nonnull argv,
+                                   int argc, const VALUE * _Nonnull argv, int kwArgs,
                                    void * _Nonnull context,
                                    int * _Nonnull status);
 
@@ -104,7 +104,7 @@ VALUE rbg_block_call_pvoid_protect(VALUE value, ID id,
 /// block handler with the given context as the block.
 /// And report exception status.
 VALUE rbg_block_call_value_protect(VALUE value, ID id,
-                                   int argc, const VALUE * _Nonnull argv,
+                                   int argc, const VALUE * _Nonnull argv, int kwArgs,
                                    VALUE context,
                                    int * _Nonnull status);
 
@@ -171,7 +171,7 @@ void rbg_inject_module_protect(VALUE into, VALUE module,
                                Rbg_inject_type type,
                                int * _Nonnull status);
 
-VALUE rbg_call_super_protect(int argc, const VALUE * _Nonnull argv,
+VALUE rbg_call_super_protect(int argc, const VALUE * _Nonnull argv, int kwArgs,
                              int * _Nonnull status);
 
 /// Callback into Swift code for gvar access

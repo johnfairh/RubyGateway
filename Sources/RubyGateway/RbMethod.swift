@@ -226,13 +226,14 @@ public struct RbMethod {
     ///     You should not attempt to handle `rubyJump` errors: rethrow them
     ///     back to Ruby as soon as possible.
     @discardableResult
-    public func yieldBlock(args: [RbObjectConvertible?] = []) throws -> RbObject {
-        let argObjects = args.map { $0.rubyObject }
-        return try argObjects.withRubyValues { argValues in
+    public func yieldBlock(args: [RbObjectConvertible?] = [],
+                           kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:]) throws -> RbObject {
+        let rubyArgs = try RbObjectAccess.flattenArgs(args: args, kwArgs: kwArgs)
+        return RbObject(rubyValue: try rubyArgs.withRubyValues { argValues in
             try RbVM.doProtect { tag in
-                RbObject(rubyValue: rbg_yield_values(Int32(argValues.count), argValues, &tag))
+                rbg_yield_values(Int32(argValues.count), argValues, kwArgs.isEmpty ? 0: 1, &tag)
             }
-        }
+        })
     }
 
     /// Get the method's block as a Ruby `Proc`.
@@ -266,7 +267,9 @@ public struct RbMethod {
         let rubyArgs = try RbObjectAccess.flattenArgs(args: args, kwArgs: kwArgs)
         return RbObject(rubyValue: try rubyArgs.withRubyValues { rubyValues in
             try RbVM.doProtect { tag in
-                rbg_call_super_protect(Int32(rubyValues.count), rubyValues, &tag)
+                rbg_call_super_protect(Int32(rubyValues.count), rubyValues,
+                                       kwArgs.isEmpty ? 0 : 1,
+                                       &tag)
             }
         })
     }
