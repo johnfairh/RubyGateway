@@ -61,6 +61,12 @@ maintaining the files.
 
 Everything is just about OK.
 
+## Ruby 3 notes
+
+* The Ruby3 Xcode project has include paths and compiler flag settings for Ruby 3.
+* It assumes ~/.rbenv
+* Need to configure the CRuby submodule too for that same rbenv
+
 ## Releasing
 
 * Update docs if needed, separate commit.
