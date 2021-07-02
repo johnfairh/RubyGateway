@@ -172,6 +172,10 @@ For macOS, if you are happy to use the system Ruby then you just need to include
 the RubyGateway framework as a dependency.  If you are building on Linux or want
 to use a different Ruby then you also need to configure CRuby.
 
+If you are using Ruby 3 then you need to set the `-fdeclspec` Clang flag, either
+on the Swift PM command line (`swift build -Xcc -fdeclspec`) or in Xcode's
+_Other Swift Flags_ settings.
+
 ### Getting the framework
 
 Carthage for macOS:
@@ -181,7 +185,7 @@ github "johnfairh/RubyGateway"
 
 Swift package manager for macOS or Linux:
 ```
-.package(url: "https://github.com/johnfairh/RubyGateway", from: "4.0.0")
+.package(url: "https://github.com/johnfairh/RubyGateway", from: "5.0.0")
 ```
 
 CocoaPods for macOS:

@@ -238,6 +238,9 @@ method of a Ruby object that captures the proc for later use, then you must
 not let that Swift value go out of scope until the Ruby object has died or
 otherwise guarantees never to invoke the proc.
 
+You can't write a Proc that accepts arguments more sophisticated than purely
+positional: this is your author's fault and may be addressed in future.
+
 ### Create a lambda with Swift code
 
 You can't: there's not much value and the API doesn't provide the argument
@@ -556,8 +559,7 @@ RubyGateway puts no restriction on what Ruby code can do: it can access the
 filesystem, exit the process, and has complete access to the process's memory.
 
 Ruby has historically had a `$SAFE` feature that did some amount of sandboxing.
-This has been slowly removed over the years and what remains is a debugging
-feature that can be enabled via `RbGateway.taintChecks`.
+This was gradually deprecated over the years and removed entirely in Ruby 3.0.
 
 Dealing with actively hostile Ruby code is best done with a separate process
 or container; several examples on github.

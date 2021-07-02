@@ -4,7 +4,7 @@
 
 #### Enhancements
 
-* Support Ruby 3 - check README notes on `-fdeclspec`
+* Support Ruby 3 - check README notes on `-fdeclspec`, see CI for an example
 * Support building cleanly with Xcode 13
 * Add `kwArgs` parameter to `RbMethod.yieldBlock(...)`
 
