@@ -4,8 +4,8 @@
 //
 //  Distributed under the MIT license, see LICENSE
 //
-import CRuby
-import RubyGatewayHelpers
+@_implementationOnly import CRuby
+@_implementationOnly import RubyGatewayHelpers
 
 /// An error raised by the RubyGateway module.  Ruby exceptions
 /// generate `RbError.rubyException(_:)`, unusual Ruby flow control

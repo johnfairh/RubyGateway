@@ -4,9 +4,8 @@
 //
 //  Distributed under the MIT license, see LICENSE
 //
-
-import CRuby
-import RubyGatewayHelpers
+@_implementationOnly import CRuby
+@_implementationOnly import RubyGatewayHelpers
 
 // Stuff to deal with implementing Ruby methods in Swift and handling calls
 // from Ruby into Swift.
@@ -104,15 +103,17 @@ private func rbmethod_callback(symbol: VALUE,
 /// We can't have one callback per method because longjmp, so have to
 /// decode what is meant by reverse engineering the method dispatch.
 /// :nodoc:
-extension Rbg_method_id: Hashable {
-    public static func == (lhs: Rbg_method_id, rhs: Rbg_method_id) -> Bool {
-        return (lhs.method == rhs.method) &&
-               (lhs.target == rhs.target)
+private struct RbMethodId: Hashable {
+    let mid: Rbg_method_id
+
+    public static func == (lhs: RbMethodId, rhs: RbMethodId) -> Bool {
+        return (lhs.mid.method == rhs.mid.method) &&
+               (lhs.mid.target == rhs.mid.target)
     }
 
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(method)
-        hasher.combine(target)
+        hasher.combine(mid.method)
+        hasher.combine(mid.target)
     }
 }
 
@@ -143,11 +144,11 @@ private struct RbMethodDispatch {
     }()
 
     /// List of all method callbacks
-    private static var callbacks: [Rbg_method_id : RbMethodExec] = [:]
+    private static var callbacks: [RbMethodId : RbMethodExec] = [:]
 
     /// Try to find a callback matching the class/method-name pair.
     static func findCallback(symbol: VALUE, target: VALUE, firstTarget: VALUE) -> RbMethodExec? {
-        let mid = Rbg_method_id(method: symbol, target: target)
+        let mid = RbMethodId(mid: Rbg_method_id(method: symbol, target: target))
         guard let callback = callbacks[mid] else {
             return nil
         }
@@ -169,14 +170,14 @@ private struct RbMethodDispatch {
 
     static func defineGlobalFunction(name: String, argsSpec: RbMethodArgsSpec, body: @escaping RbMethodCallback) {
         let _ = initOnce
-        let mid = rbg_define_global_function(name)
+        let mid = RbMethodId(mid: rbg_define_global_function(name))
         callbacks[mid] = RbMethodExec(argsSpec: argsSpec, callback: body)
     }
 
     static func defineMethod(value: VALUE, name: String, argsSpec: RbMethodArgsSpec, body: @escaping RbMethodCallback, singleton: Bool) {
         let _ = initOnce
         let cfn = singleton ? rbg_define_singleton_method : rbg_define_method
-        let mid = cfn(value, name)
+        let mid = RbMethodId(mid: cfn(value, name))
 
         callbacks[mid] = RbMethodExec(argsSpec: argsSpec, callback: body)
     }

@@ -5,8 +5,8 @@
 //  Distributed under the MIT license, see LICENSE
 //  Portions of this file derived from Ruby and distributed under terms of its license.
 
-import CRuby
-import RubyGatewayHelpers
+@_implementationOnly import CRuby
+@_implementationOnly import RubyGatewayHelpers
 
 //
 // Various useful stuff from ruby.h that didn't make it through the Clang importer.
