@@ -4,8 +4,7 @@
 //
 //  Distributed under the MIT license, see LICENSE
 //
-
-import CRuby
+@_implementationOnly import CRuby
 
 /// Represent a Ruby symbol.
 ///

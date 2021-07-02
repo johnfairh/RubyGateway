@@ -4,9 +4,8 @@
 //
 //  Distributed under the MIT license, see LICENSE
 //
-
-import RubyGatewayHelpers
-import CRuby
+@_implementationOnly import CRuby
+@_implementationOnly import RubyGatewayHelpers
 
 //
 // Support for binding Swift objects to Ruby objects.

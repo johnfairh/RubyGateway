@@ -4,9 +4,8 @@
 //
 //  Distributed under the MIT license, see LICENSE
 //
-
-import CRuby
-import RubyGatewayHelpers
+@_implementationOnly import CRuby
+@_implementationOnly import RubyGatewayHelpers
 
 // Some simple thunking code to wrap up rb_gvar_* code.
 //

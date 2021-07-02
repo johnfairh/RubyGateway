@@ -4,8 +4,8 @@
 //
 //  Distributed under the MIT license, see LICENSE
 
-import CRuby
-import RubyGatewayHelpers
+@_implementationOnly import CRuby
+@_implementationOnly import RubyGatewayHelpers
 
 /// This class handles the setup and cleanup lifecycle events for the Ruby VM as well
 /// as storing data associated with the Ruby runtime.

@@ -4,8 +4,8 @@
 //
 //  Distributed under the MIT license, see LICENSE
 //
-import CRuby
-import RubyGatewayHelpers
+@_implementationOnly import CRuby
+@_implementationOnly import RubyGatewayHelpers
 
 /// A Ruby object.
 ///
@@ -87,6 +87,9 @@ import RubyGatewayHelpers
 /// `RbGateway.defineClass(_:parent:under:)` to define entirely new classes.
 public final class RbObject: RbObjectAccess {
     internal let valueBox: UnsafeMutablePointer<Rbg_value>
+
+    /// Convenience typealias to avoid exposing all of CRuby :nodoc:
+    public typealias VALUE = UInt
 
     /// Wrap up a Ruby object using the its `VALUE` API handle.
     ///

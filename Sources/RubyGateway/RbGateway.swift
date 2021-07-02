@@ -4,9 +4,8 @@
 //
 //  Distributed under the MIT license, see LICENSE
 //
-
-import CRuby
-import RubyGatewayHelpers
+@_implementationOnly import CRuby
+@_implementationOnly import RubyGatewayHelpers
 
 /// Provides top-level Ruby services: information about the Ruby VM, evaluate
 /// expressions, access various kinds of Ruby objects, and define new Ruby
@@ -101,7 +100,7 @@ public final class RbGateway: RbObjectAccess {
     /// - returns: The corresponding ID.
     /// - throws: `RbError.rubyException(_:)` if Ruby raises an exception.  This
     ///   probably means the `ID` space is full, which is fairly unlikely.
-    public func getID(for name: String) throws -> ID {
+    public func getID(for name: String) throws -> RbObject.VALUE {
         return try RbGateway.vm.getID(for: name)
     }
 

@@ -4,9 +4,8 @@
 //
 //  Distributed under the MIT license, see LICENSE
 //
-
-import CRuby
-import RubyGatewayHelpers
+@_implementationOnly import CRuby
+@_implementationOnly import RubyGatewayHelpers
 
 //
 // This file deals with Ruby blocks.  It gets a bit complicated.

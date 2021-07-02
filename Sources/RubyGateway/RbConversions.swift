@@ -7,10 +7,9 @@
 //  Chris Lattner's Python DML playground provided invaluable guidance
 //  through the tangle of conversion directions and functions.
 //
-
-import CRuby
+@_implementationOnly import CRuby
+@_implementationOnly import RubyGatewayHelpers
 import Foundation
-import RubyGatewayHelpers
 
 /// Protocol adopted by types that can be converted to and from `RbObject`s.
 public protocol RbObjectConvertible {

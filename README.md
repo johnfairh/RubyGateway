@@ -201,10 +201,8 @@ includes it as submodule so you do not install or require it separately.
 
 By default it points to the macOS system Ruby.  Follow the [CRuby usage
 instructions](https://github.com/johnfairh/CRuby#usage) to change
-this.  For example on Linux using [Brightbox Ruby](https://www.brightbox.com/docs/ruby/ubuntu/)
-2.5:
+this.  For example on Ubuntu 18 using `rbenv` Ruby 3:
 ```shell
-sudo apt-get install ruby2.5 ruby2.5-dev pkg-config
 mkdir MyProject && cd MyProject
 swift package init --type executable
 vi Package.swift
@@ -213,8 +211,8 @@ vi Package.swift
 echo "import RubyGateway; print(Ruby.versionDescription)" > Sources/MyProject/main.swift
 swift package update
 swift package edit CRuby
-Packages/CRuby/cfg-cruby --mode pkg-config --name ruby-2.5
-PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH swift run
+Packages/CRuby/cfg-cruby --mode rbenv --name 3.0.0
+PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH swift run -Xcc -fdeclspec
 ```
 
 ## Contributions
