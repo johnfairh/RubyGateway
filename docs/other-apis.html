@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/fw2020.css">
     
     
-   <title>Other APIs - RubyGateway 4.0.0 docs</title>
+   <title>Other APIs - RubyGateway 5.1.0 docs</title>
     
   </head>
   <body class="j2-swift " data-root-path="./" data-doc-path="other-apis.html" data-assets-path="">
@@ -21,27 +21,26 @@
 
   <header class="j2-header">
   <div class="navbar navbar-expand navbar-dark j2-titlebar">
-  <a class="sr-only-focusable sr-only font-weight-slightly-bold pr-2" href="#main-content">Skip to main content</a>
-  <a class="nav-item nav-link pl-0 pt-1 pr-2 d-md-none" id="nav-toggle-button" role="button" aria-controls="nav-column" aria-expanded="false" aria-label="Toggle navigation" href="#">
+  <div class="container-fluid ps-0 pe-0">
+  <a class="visually-hidden-focusable visually-hidden fw-slightly-bold pe-2" href="#main-content">Skip to main content</a>
+  <a class="nav-item nav-link ps-0 pt-1 pe-2 d-md-none" id="nav-toggle-button" role="button" aria-controls="nav-column" aria-expanded="false" aria-label="Toggle navigation" href="#">
     <span class="navbar-toggler-icon"></span>
   </a>
 
-  <div style="align-items-baseline">
-    <div class="navbar-brand mr-1 font-weight-slightly-bold">
-      
-      <a href="index.html">
-      
-      RubyGateway 4.0.0 docs</a>
-    </div>
+  <div class="navbar-brand me-1 fw-slightly-bold">
     
-    <span class="navbar-text j2-coverage font-weight-slightly-bold small d-none d-lg-inline-block mr-2">(100% documented)</span>
+    <a href="index.html">
     
+    RubyGateway 5.1.0 docs</a>
   </div>
+  
+  <span class="navbar-text j2-coverage fw-slightly-bold small d-none d-lg-inline-block me-2">(100% documented)</span>
+  
 
-  <div class="navbar-nav ml-auto justify-content-end flex-fill">
+  <div class="navbar-nav ms-auto justify-content-end flex-fill">
 
     
-    <form class="form-inline d-none d-md-flex" role="search">
+    <form class="d-none d-md-block my-auto pe-1" role="search">
       <input class="form-control form-control-sm w-100" type="search" placeHolder="Search" aria-label="Search" aria-keyshortcuts="/" data-search-format="span">
     </form>
     
@@ -69,6 +68,7 @@
 
     
 
+  </div>
   </div>
 </div>
 
@@ -670,7 +670,7 @@
 <div class="j2-swift j2-always">
 <hr/>
 <section>
-  <h1 class="sr-only">Topics</h1>
+  <h1 class="visually-hidden">Topics</h1>
   
   <section class="j2-swift j2-always">
   
@@ -680,10 +680,10 @@
   
     <section id="rbblockcallback" class="j2-item j2-swift j2-always">
     <a name="//apple_ref/cpp/Alias/typealias%20RbBlockCallback" class="dashAnchor j2-item-dash-anchor" data-item-id="rbblockcallback"></a>
-    <h4 class="sr-only">typealias RbBlockCallback</h4>
+    <h4 class="visually-hidden">typealias RbBlockCallback</h4>
     
     
-    <a class="j2-item-title" href="#_rbblockcallback" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbblockcallback"><code>
+    <a class="j2-item-title" href="#_rbblockcallback" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbblockcallback"><code>
         <span class="j2-swift j2-always"><span class="j2-item-secondary">typealias </span>RbBlockCallback</span>
         
       </code></a>
@@ -703,6 +703,8 @@
 <p>The type of a block implemented in Swift.</p>
 <p>The parameter is an array of arguments passed to the block.  If the
 block has just one argument then this is still an array.</p>
+<p>The interface doesn’t support other types of argument, for example keyword or
+optional.</p>
 <p>Blocks always return a value.  You can use <a href="types/rbobject13.html?swift#nilobject"><code>RbObject.nilObject</code></a> if
 you have nothing useful to return.</p>
 <p>Blocks can throw errors:</p>
@@ -739,7 +741,7 @@ exception and raise it.</li>
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbBlockCall.swift#L58">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbBlockCall.swift#L60">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -753,10 +755,10 @@ exception and raise it.</li>
   
     <section id="rbblockretention" class="j2-item j2-swift j2-always">
     <a name="//apple_ref/cpp/enum/enum%20RbBlockRetention" class="dashAnchor j2-item-dash-anchor" data-item-id="rbblockretention"></a>
-    <h4 class="sr-only">enum RbBlockRetention</h4>
+    <h4 class="visually-hidden">enum RbBlockRetention</h4>
     
     
-    <a class="j2-item-title" href="#_rbblockretention" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbblockretention"><code>
+    <a class="j2-item-title" href="#_rbblockretention" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbblockretention"><code>
         <span class="j2-swift j2-always"><span class="j2-item-secondary">enum </span>RbBlockRetention</span>
         
       </code></a>
@@ -811,7 +813,7 @@ Ruby retains the block for use later.  This causes a hard crash in
             </span>
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbBlockCall.swift#L69-L83">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbBlockCall.swift#L71-L85">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -825,10 +827,10 @@ Ruby retains the block for use later.  This causes a hard crash in
   
     <section id="rbbreak" class="j2-item j2-swift j2-always">
     <a name="//apple_ref/cpp/Struct/struct%20RbBreak" class="dashAnchor j2-item-dash-anchor" data-item-id="rbbreak"></a>
-    <h4 class="sr-only">struct RbBreak</h4>
+    <h4 class="visually-hidden">struct RbBreak</h4>
     
     
-    <a class="j2-item-title" href="#_rbbreak" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbbreak"><code>
+    <a class="j2-item-title" href="#_rbbreak" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbbreak"><code>
         <span class="j2-swift j2-always"><span class="j2-item-secondary">struct </span>RbBreak</span>
         
       </code></a>
@@ -900,10 +902,10 @@ result to a Ruby block-based iteration like the Ruby <code>break</code> keyword.
   
     <section id="rbproc" class="j2-item j2-swift j2-always">
     <a name="//apple_ref/cpp/Struct/struct%20RbProc" class="dashAnchor j2-item-dash-anchor" data-item-id="rbproc"></a>
-    <h4 class="sr-only">struct RbProc</h4>
+    <h4 class="visually-hidden">struct RbProc</h4>
     
     
-    <a class="j2-item-title" href="#_rbproc" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbproc"><code>
+    <a class="j2-item-title" href="#_rbproc" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbproc"><code>
         <span class="j2-swift j2-always"><span class="j2-item-secondary">struct </span>RbProc</span>
         
       </code></a>
@@ -963,7 +965,7 @@ no need for either <code>RbProc</code> or <a href="types/rbobject13.html?swift">
             </span>
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbProc.swift#L28-L56">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbProc.swift#L27-L55">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -977,10 +979,10 @@ no need for either <code>RbProc</code> or <a href="types/rbobject13.html?swift">
   
     <section id="rbsymbol" class="j2-item j2-swift j2-always">
     <a name="//apple_ref/cpp/Struct/struct%20RbSymbol" class="dashAnchor j2-item-dash-anchor" data-item-id="rbsymbol"></a>
-    <h4 class="sr-only">struct RbSymbol</h4>
+    <h4 class="visually-hidden">struct RbSymbol</h4>
     
     
-    <a class="j2-item-title" href="#_rbsymbol" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbsymbol"><code>
+    <a class="j2-item-title" href="#_rbsymbol" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbsymbol"><code>
         <span class="j2-swift j2-always"><span class="j2-item-secondary">struct </span>RbSymbol</span>
         
       </code></a>
@@ -1037,7 +1039,7 @@ extension RbSymbol: <a href="https://developer.apple.com/documentation/swift/cus
             </span>
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbSymbol.swift#L21-L45">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbSymbol.swift#L20-L44">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -1051,10 +1053,10 @@ extension RbSymbol: <a href="https://developer.apple.com/documentation/swift/cus
   
     <section id="rbthread" class="j2-item j2-swift j2-always">
     <a name="//apple_ref/cpp/enum/enum%20RbThread" class="dashAnchor j2-item-dash-anchor" data-item-id="rbthread"></a>
-    <h4 class="sr-only">enum RbThread</h4>
+    <h4 class="visually-hidden">enum RbThread</h4>
     
     
-    <a class="j2-item-title" href="#_rbthread" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbthread"><code>
+    <a class="j2-item-title" href="#_rbthread" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbthread"><code>
         <span class="j2-swift j2-always"><span class="j2-item-secondary">enum </span>RbThread</span>
         
       </code></a>
@@ -1114,7 +1116,7 @@ that is allowed to call Ruby using <a href="types/rbthread.html?swift#callwithgv
             </span>
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbThread.swift#L59-L154">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/RbThread.swift#L58-L153">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -1128,10 +1130,10 @@ that is allowed to call Ruby using <a href="types/rbthread.html?swift#callwithgv
   
     <section id="rbtype" class="j2-item j2-swift j2-always">
     <a name="//apple_ref/cpp/enum/enum%20RbType" class="dashAnchor j2-item-dash-anchor" data-item-id="rbtype"></a>
-    <h4 class="sr-only">enum RbType</h4>
+    <h4 class="visually-hidden">enum RbType</h4>
     
     
-    <a class="j2-item-title" href="#_rbtype" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbtype"><code>
+    <a class="j2-item-title" href="#_rbtype" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_rbtype"><code>
         <span class="j2-swift j2-always"><span class="j2-item-secondary">enum </span>RbType</span>
         
       </code></a>
@@ -1181,7 +1183,7 @@ that is allowed to call Ruby using <a href="types/rbthread.html?swift#callwithgv
             </span>
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/CRubyMacros.swift#L74-L130">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/master/Sources/RubyGateway/CRubyMacros.swift#L52-L110">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -1215,7 +1217,7 @@ that is allowed to call Ruby using <a href="types/rbthread.html?swift#callwithgv
   
   
   </div>
-  <div id="pagination-next" class="flex-fill text-right">
+  <div id="pagination-next" class="flex-fill text-end">
   
     <a class="j2-swift" href="types/rbblockretention.html?swift" aria-keyshortcuts="n">
   RbBlockRetention<span aria-hidden="true"> &raquo;</span>
@@ -1265,7 +1267,7 @@ that is allowed to call Ruby using <a href="types/rbthread.html?swift#callwithgv
   <div class="col j2-footer small pt-2">
     <p><p>Distributed under the MIT license.  Maintained by <a href="mailto:johnfairh@gmail.com">John Fairhurst</a>.</p></p>
     
-    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external">Bebop v1.6.0</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫</a>.</p>
+    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external">Bebop v1.7.0</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫</a>.</p>
     
   </div>
 </footer>

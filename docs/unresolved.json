@@ -64,6 +64,10 @@
     "name" : "-"
   },
   {
+    "context" : "index",
+    "name" : "-fdeclspec"
+  },
+  {
     "context" : "\/(RbObject, RbObject)",
     "name" : "\/"
   },
@@ -93,14 +97,26 @@
   },
   {
     "context" : "setClassVar(_:newValue:)",
-    "name" : "@fred = thing"
+    "name" : "@@fred = thing"
   },
   {
     "context" : "getClassVar(_:)",
-    "name" : "@fred"
+    "name" : "@@fred"
   },
   {
     "context" : "setClassVar(_:newValue:)",
+    "name" : "@@"
+  },
+  {
+    "context" : "setInstanceVar(_:newValue:)",
+    "name" : "@f = 3"
+  },
+  {
+    "context" : "getInstanceVar(_:)",
+    "name" : "@f"
+  },
+  {
+    "context" : "setInstanceVar(_:newValue:)",
     "name" : "@"
   },
   {
@@ -264,6 +280,10 @@
     "name" : "RbObject..."
   },
   {
+    "context" : "getID(for:)",
+    "name" : "RbObject.VALUE"
+  },
+  {
     "context" : "RbFailableAccess",
     "name" : "RbObject.failable"
   },
@@ -396,10 +416,6 @@
     "name" : "elements"
   },
   {
-    "context" : "setInstanceVar(_:newValue:)",
-    "name" : "f = 3"
-  },
-  {
     "context" : "Bool",
     "name" : "false"
   },
@@ -410,10 +426,6 @@
   {
     "context" : "subscript(_:)",
     "name" : "fatalError"
-  },
-  {
-    "context" : "getInstanceVar(_:)",
-    "name" : "f"
   },
   {
     "context" : "hash(into:)",
@@ -520,6 +532,10 @@
     "name" : "rb_protect()"
   },
   {
+    "context" : "index",
+    "name" : "rbenv"
+  },
+  {
     "context" : "replaceSubrange(_:with:)",
     "name" : "removeSubrange(_:)"
   },
@@ -544,16 +560,12 @@
     "name" : "rubyException(_:)"
   },
   {
-    "context" : "yieldBlock(args:)",
+    "context" : "yieldBlock(args:kwArgs:)",
     "name" : "rubyJump"
   },
   {
     "context" : "softSetup()",
     "name" : "send()"
-  },
-  {
-    "context" : "setInstanceVar(_:newValue:)",
-    "name" : ""
   },
   {
     "context" : "replaceSubrange(_:with:)",
@@ -562,6 +574,10 @@
   {
     "context" : "replaceSubrange(_:with:)",
     "name" : "subrange"
+  },
+  {
+    "context" : "index",
+    "name" : "swift build -Xcc -fdeclspec"
   },
   {
     "context" : "call(symbol:args:kwArgs:block:)",

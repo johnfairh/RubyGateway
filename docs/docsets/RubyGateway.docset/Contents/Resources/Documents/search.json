@@ -633,11 +633,6 @@
     "name" : "softSetup()",
     "parent_name" : "RbGateway"
   },
-  "types\/rbgateway1.html?swift#taintchecks" : {
-    "abstract" : "Whether taint checks are enabled.",
-    "name" : "taintChecks",
-    "parent_name" : "RbGateway"
-  },
   "types\/rbgateway1.html?swift#verbose" : {
     "abstract" : "Verbose mode for Ruby code, sets $VERBOSE \/ $-v.",
     "name" : "verbose",
@@ -712,9 +707,9 @@
     "name" : "rubySelf",
     "parent_name" : "RbMethod"
   },
-  "types\/rbmethod.html?swift#yieldblockargs" : {
+  "types\/rbmethod.html?swift#yieldblockargskwargs" : {
     "abstract" : "Invoke the method’s block and get the result.",
-    "name" : "yieldBlock(args:)",
+    "name" : "yieldBlock(args:kwArgs:)",
     "parent_name" : "RbMethod"
   },
   "types\/rbmethodargs.html?swift" : {
@@ -1399,6 +1394,11 @@
   "types\/rbtype.html?swift#t_module" : {
     "abstract" : "RUBY_T_MODULE",
     "name" : "T_MODULE",
+    "parent_name" : "RbType"
+  },
+  "types\/rbtype.html?swift#t_moved" : {
+    "abstract" : "RUBY_T_MOVED",
+    "name" : "T_MOVED",
     "parent_name" : "RbType"
   },
   "types\/rbtype.html?swift#t_nil" : {

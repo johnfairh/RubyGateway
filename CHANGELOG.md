@@ -1,6 +1,10 @@
+## 5.1.0 - 2nd July 2021
+
 #### Breaking
 
 * Removed `RbGateway.taintChecks` -- `$SAFE` removed in Ruby 3
+* Internal modules `CRuby` and `RubyGatewayHelpers` are now imported as
+  `@_implementationOnly`
 
 #### Enhancements
 

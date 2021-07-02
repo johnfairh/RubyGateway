@@ -239,7 +239,7 @@ public struct RbMethod {
 
     /// Get the method's block as a Ruby `Proc`.
     ///
-    /// If you want to just call the block then use `yieldBlock(args:)`.  Use this method
+    /// If you want to just call the block then use `yieldBlock(args:kwArgs:)`.  Use this method
     /// to store the block or do things to it.
     ///
     /// - returns: An `RbObject` for a `Proc` object wrapping the passed block.

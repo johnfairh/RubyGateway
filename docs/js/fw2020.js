@@ -32,7 +32,7 @@ Prism.plugins.customClass.map((className, language) => {
 /*
  * Prism customization for autoloading missing languages.
  */
-Prism.plugins.autoloader.languages_path = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/'
+Prism.plugins.autoloader.languages_path = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/'
 
 /*
  * KaTeX rendering
@@ -328,7 +328,8 @@ const searchControl = {
   },
 
   notFoundTemplate () {
-    const msg = this.jsonFetchFailed ? this.failedMessage
+    const msg = this.jsonFetchFailed
+      ? this.failedMessage
       : (this.searchData ? this.notFoundMessage : this.loadingMessage)
     return this.dropdownHtml(`<i>${msg || 'Not found'}</i>`, '', 'span')
   },
