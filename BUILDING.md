@@ -67,6 +67,11 @@ Everything is just about OK.
 * It assumes ~/.rbenv
 * Need to configure the CRuby submodule too for that same rbenv
 
+Spell to get Swift docs for CRuby if Xcode can't do it:
+```shell
+jazzy --min-acl private --module CRuby --swift-build-tool symbolgraph --build-tool-arguments -I,/Users/johnf/.rbenv/versions/3.0.0/include/ruby-3.0.0/x86_64-darwin20,-I,/Users/johnf/.rbenv/versions/3.0.0/include/ruby-3.0.0,-I,$(pwd),-Xcc,-fdeclspec
+```
+
 ## Releasing
 
 * Update docs if needed, separate commit.
