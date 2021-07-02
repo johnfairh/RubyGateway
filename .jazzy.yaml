@@ -5,7 +5,7 @@ module_version: 5.1.0
 copyright: Distributed under the MIT license.  Maintained by [John Fairhurst](mailto:johnfairh@gmail.com).
 readme: README.md
 github_url: https://github.com/johnfairh/RubyGateway
-github_file_prefix: https://github.com/johnfairh/RubyGateway/tree/master
+github_file_prefix: https://github.com/johnfairh/RubyGateway/tree/main
 clean: true
 products:
   - docs
