@@ -7,6 +7,7 @@
 
 import CRuby
 @testable /* various macros */ import RubyGateway
+import RubyGatewayHelpers
 import XCTest
 
 /// Misc data type tests
@@ -17,13 +18,13 @@ class TestMiscObjTypes: XCTestCase {
         let falseVal = Qfalse
         let trueVal = Qtrue
 
-        XCTAssertTrue(RB_NIL_P(nilVal))
-        XCTAssertFalse(RB_NIL_P(falseVal))
-        XCTAssertFalse(RB_NIL_P(trueVal))
+        XCTAssertTrue(rbg_RB_NIL_P(nilVal) != 0)
+        XCTAssertFalse(rbg_RB_NIL_P(falseVal) != 0)
+        XCTAssertFalse(rbg_RB_NIL_P(trueVal) != 0)
 
-        XCTAssertFalse(RB_TEST(nilVal))
-        XCTAssertFalse(RB_TEST(falseVal))
-        XCTAssertTrue(RB_TEST(trueVal))
+        XCTAssertFalse(rbg_RB_TEST(nilVal) != 0)
+        XCTAssertFalse(rbg_RB_TEST(falseVal) != 0)
+        XCTAssertTrue(rbg_RB_TEST(trueVal) != 0)
 
         XCTAssertEqual(.T_NIL, TYPE(nilVal))
         XCTAssertEqual(.T_FALSE, TYPE(falseVal))

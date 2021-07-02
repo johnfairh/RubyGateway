@@ -133,7 +133,18 @@ class TestVars: XCTestCase {
 
             try XCTAssertEqual(value, Double(Ruby.getClassVar(varName)))
             try XCTAssertEqual(value, Double(Ruby.get(varName)))
-            try XCTAssertEqual(value, Double(Ruby.eval(ruby: varName)))
+
+            do {
+                let interactiveRead = try Ruby.eval(ruby: varName)
+                if Ruby.apiVersion.0 >= 3 {
+                    XCTFail("Managed interactive access to class variable from toplevel")
+                }
+                XCTAssertEqual(value, Double(interactiveRead))
+            } catch {
+                if Ruby.apiVersion.0 < 3 {
+                    XCTFail("Couldn't access class variable: \(error)")
+                }
+            }
         }
     }
 

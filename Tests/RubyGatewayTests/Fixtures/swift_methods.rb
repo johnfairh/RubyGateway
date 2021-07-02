@@ -15,6 +15,10 @@
 # def swift_returns_block
 #    yield
 # end
+#
+# def swift_calls_block_kw(value)
+#   yield(kwa: value)
+# end
 
 def ruby_should_return_100
     swift_calls_block { 42 }
@@ -52,6 +56,10 @@ def ruby_should_return_4
        redo if rv < 4
    }
    rv
+end
+
+def ruby_should_return_89
+    swift_calls_block_kw(88) { |arg = 1, kwa:| arg + kwa }
 end
 
 # Keyword args from Ruby to Swift

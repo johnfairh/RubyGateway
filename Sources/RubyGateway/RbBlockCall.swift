@@ -43,6 +43,9 @@ import RubyGatewayHelpers
 /// The parameter is an array of arguments passed to the block.  If the
 /// block has just one argument then this is still an array.
 ///
+/// The interface doesn't support other types of argument, for example keyword or
+/// optional.
+///
 /// Blocks always return a value.  You can use `RbObject.nilObject` if
 /// you have nothing useful to return.
 ///
@@ -156,6 +159,7 @@ internal enum RbBlock {
     internal static func doBlockCall(value: VALUE,
                                      methodId: ID,
                                      argValues: [VALUE],
+                                     hasKwArgs: Bool,
                                      blockCall: @escaping RbBlockCallback) throws -> (AnyObject, VALUE) {
         let _ = initOnce
         let context = RbBlockContext(blockCall)
@@ -163,6 +167,7 @@ internal enum RbBlock {
             try RbVM.doProtect { tag in
                 rbg_block_call_pvoid_protect(value, methodId,
                                              Int32(argValues.count), argValues,
+                                             hasKwArgs ? 1 : 0,
                                              rawContext, &tag)
             }
         })
@@ -172,11 +177,13 @@ internal enum RbBlock {
     internal static func doBlockCall(value: VALUE,
                                      methodId: ID,
                                      argValues: [VALUE],
+                                     hasKwArgs: Bool,
                                      block: VALUE) throws -> VALUE {
         let _ = initOnce
         return try RbVM.doProtect { tag in
             rbg_block_call_value_protect(value, methodId,
                                          Int32(argValues.count), argValues,
+                                         hasKwArgs ? 1 : 0,
                                          block, &tag)
         }
     }

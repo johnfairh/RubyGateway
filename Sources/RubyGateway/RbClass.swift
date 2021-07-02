@@ -170,7 +170,10 @@ extension RbGateway {
                     under: RbObject? = nil,
                     initializer: @escaping () -> SwiftPeer) throws -> RbObject {
         try setup()
-        let classObj = try defineClass(name, parent: RbObject(rubyValue: rb_cData), under: under)
+        // Ruby 3 deprecates rb_cData in favour of rb_cObject - appears to be OK to
+        // use that in Ruby 2.x also: we always set a custom init in `rbg_bind_class`.
+        let classObj = try defineClass(name, parent: RbObject(rubyValue: rb_cObject), under: under)
+        try classObj.markBoundClass()
 
         RbClassBinding.register(name: String(classObj)!, initializer: initializer)
         classObj.withRubyValue { rbg_bind_class($0) }
@@ -209,13 +212,20 @@ extension RbGateway {
     }
 }
 
+// A weak attempt at catching usage errors
+
 extension RbObject {
+    private var markerName: String { "RUBYGATEWAY_BOUND_CLASS" }
+
+    fileprivate func markBoundClass() throws {
+        try setConstant(markerName, newValue: true)
+    }
+
     func checkIsBoundClass() throws {
         try checkIsClass()
-        let ancestors = try call("ancestors")
-        let hasData = ancestors.collection.contains { String($0)! == "Data" }
-        guard hasData else {
-            throw RbError.badType("Class \(self) does not inherit from Data, not bound to Swift type")
+        guard let isBound = try? getConstant(markerName),
+              isBound.isTruthy else {
+            throw RbError.badType("Class \(self) is not bound to a Swift type")
         }
     }
 }

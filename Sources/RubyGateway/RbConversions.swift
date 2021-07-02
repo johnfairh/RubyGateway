@@ -102,8 +102,8 @@ extension String: RbObjectConvertible {
                 }
             }
 
-            let rubyLength = RSTRING_LEN(stringVal)
-            let rubyPtr = RSTRING_PTR(stringVal)
+            let rubyLength = rbg_RSTRING_LEN(stringVal)
+            let rubyPtr = rbg_RSTRING_PTR(stringVal)
             let rubyData = Data(bytes: rubyPtr, count: rubyLength)
 
             self.init(data: rubyData, encoding: .utf8)

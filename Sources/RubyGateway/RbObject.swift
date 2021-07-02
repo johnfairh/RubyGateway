@@ -146,7 +146,7 @@ public final class RbObject: RbObjectAccess {
 
     /// Is the Ruby object truthy?
     public var isTruthy: Bool {
-        return RB_TEST(rubyValue)
+        return rbg_RB_TEST(rubyValue) != 0
     }
 
     /// Is the Ruby object `nil`?
@@ -158,7 +158,7 @@ public final class RbObject: RbObjectAccess {
     /// If you've got Ruby `nil` -- that is, you've got `RbObject.isNil` -- then
     /// Ruby worked but the call evaluated to [Ruby] `nil`.
     public var isNil: Bool {
-        return RB_NIL_P(rubyValue)
+        return rbg_RB_NIL_P(rubyValue) != 0
     }
 
     /// An `RbObject` that means `nil` to Ruby.

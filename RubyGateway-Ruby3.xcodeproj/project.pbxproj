@@ -590,10 +590,12 @@
 				HEADER_SEARCH_PATHS = (
 					"${SRCROOT}/CRuby/Sources/CRuby",
 					"${SRCROOT}/Sources/RubyGatewayHelpers/include",
+					"$(HOME)/.rbenv/versions/3.0.0/include/ruby-3.0.0",
+					"$(HOME)/.rbenv/versions/3.0.0/include/ruby-3.0.0/x86_64-darwin20",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_CFLAGS = "";
+				OTHER_CFLAGS = "-fdeclspec";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -644,10 +646,12 @@
 				HEADER_SEARCH_PATHS = (
 					"${SRCROOT}/CRuby/Sources/CRuby",
 					"${SRCROOT}/Sources/RubyGatewayHelpers/include",
+					"$(HOME)/.rbenv/versions/3.0.0/include/ruby-3.0.0",
+					"$(HOME)/.rbenv/versions/3.0.0/include/ruby-3.0.0/x86_64-darwin20",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_CFLAGS = "";
+				OTHER_CFLAGS = "-fdeclspec";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -710,10 +714,15 @@
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(HOME)/.rbenv/versions/3.0.0/include/ruby-3.0.0/x86_64-darwin20",
+					"$(HOME)/.rbenv/versions/3.0.0/include/ruby-3.0.0",
+				);
 				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGatewayTests_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(HOME)/.rbenv/versions/3.0.0/lib";
 				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fdeclspec";
 				PRODUCT_NAME = RubyGatewayTests;
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = RubyGatewayTests;
@@ -775,10 +784,15 @@
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(HOME)/.rbenv/versions/3.0.0/include/ruby-3.0.0/x86_64-darwin20",
+					"$(HOME)/.rbenv/versions/3.0.0/include/ruby-3.0.0",
+				);
 				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGatewayTests_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(HOME)/.rbenv/versions/3.0.0/lib";
 				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fdeclspec";
 				PRODUCT_NAME = RubyGatewayTests;
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = RubyGatewayTests;
@@ -795,11 +809,17 @@
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
-				HEADER_SEARCH_PATHS = "${SRCROOT}/CRuby/Sources/CRuby";
+				HEADER_SEARCH_PATHS = (
+					"${SRCROOT}/CRuby/Sources/CRuby",
+					"$(HOME)/.rbenv/versions/3.0.0/include/ruby-3.0.0",
+					"$(HOME)/.rbenv/versions/3.0.0/include/ruby-3.0.0/x86_64-darwin20",
+				);
 				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGateway_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(HOME)/.rbenv/versions/3.0.0/lib";
+				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fdeclspec";
 				PRODUCT_BUNDLE_IDENTIFIER = RubyGateway;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -821,11 +841,17 @@
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
-				HEADER_SEARCH_PATHS = "${SRCROOT}/CRuby/Sources/CRuby";
+				HEADER_SEARCH_PATHS = (
+					"${SRCROOT}/CRuby/Sources/CRuby",
+					"$(HOME)/.rbenv/versions/3.0.0/include/ruby-3.0.0",
+					"$(HOME)/.rbenv/versions/3.0.0/include/ruby-3.0.0/x86_64-darwin20",
+				);
 				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGateway_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(HOME)/.rbenv/versions/3.0.0/lib";
+				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fdeclspec";
 				PRODUCT_BUNDLE_IDENTIFIER = RubyGateway;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";

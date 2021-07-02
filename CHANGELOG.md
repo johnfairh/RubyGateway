@@ -1,3 +1,13 @@
+#### Breaking
+
+* Removed `RbGateway.taintChecks` -- `$SAFE` removed in Ruby 3
+
+#### Enhancements
+
+* Support Ruby 3 - check README notes on `-fdeclspec`, see CI for an example
+* Support building cleanly with Xcode 13
+* Add `kwArgs` parameter to `RbMethod.yieldBlock(...)`
+
 ## 4.0.0 - 18th May 2021
 
 #### Breaking

@@ -35,38 +35,16 @@ func DBL2NUM(_ dbl: Double) -> VALUE { return rb_float_new(dbl) }
 
 // MARK: - Useful VALUE constants and macros
 
-let Qfalse: VALUE = VALUE(RUBY_Qfalse.rawValue)
-let Qtrue: VALUE = VALUE(RUBY_Qtrue.rawValue)
-let Qnil: VALUE = VALUE(RUBY_Qnil.rawValue)
-let Qundef: VALUE = VALUE(RUBY_Qundef.rawValue)
-
-/// Is a `VALUE` truthy?
-func RB_TEST(_ v: VALUE) -> Bool {
-    return !((v & VALUE(~Qnil)) == 0)
-}
-
-/// Is a `VALUE` equal to `nil`?  You probably want `!RB_TEST()` instead.
-func RB_NIL_P(_ v: VALUE) -> Bool {
-    return !(v != Qnil)
-}
-
-// MARK: - String utilities
-
-/// Number of bytes in the string.
-func RSTRING_LEN(_ str: VALUE) -> Int {
-    return rbg_RSTRING_LEN(str)
-}
-
-/// Address of the string byte buffer.
-func RSTRING_PTR(_ str: VALUE) -> UnsafePointer<Int8> {
-    return rbg_RSTRING_PTR(str)
-}
+let Qfalse: VALUE = VALUE(rbg_qfalse())
+let Qtrue: VALUE = VALUE(rbg_qtrue())
+let Qnil: VALUE = VALUE(rbg_qnil())
+let Qundef: VALUE = VALUE(rbg_qundef())
 
 // MARK: - More enum-y `VALUE` type enum
 
 // Swift-friendly value type.  Constants duplicated from Ruby headers,
-// can't see how not to.  Is low-risk but is going to require review
-// annually to spot things like the 2.3 renumbering.
+// can't see how not to.  Ruby 3 moves to an actual enum that Swift managers
+// to import so eventually this will go away.
 
 /// The type of a Ruby VALUE as wrapped by `RbObject`.
 ///
@@ -127,56 +105,15 @@ public enum RbType: Int32 {
     case T_ICLASS   = 0x1c
     /// RUBY_T_ZOMBIE
     case T_ZOMBIE   = 0x1d
+    /// RUBY_T_MOVED
+    case T_MOVED    = 0x1e
 }
 
 func TYPE(_ x: VALUE) -> RbType {
-    var rbType = rb_type(x)
-    let (major, minor, _) = ruby_api_version
-    if major == 2 && minor < 3 {
-        switch rbType {
-        case 0x1b: rbType = RbType.T_UNDEF.rawValue
-        case 0x1c: rbType = RbType.T_NODE.rawValue
-        case 0x1d: rbType = RbType.T_ICLASS.rawValue
-        case 0x1e: rbType = RbType.T_ZOMBIE.rawValue
-        default: break
-        }
-    }
-    return RbType(rawValue: rbType) ?? .T_UNDEF
+    RbType(rawValue: rbg_type(x)) ?? .T_UNDEF
 }
 
 // MARK: - Garbage collection helpers
 
 //#define RB_OBJ_WB_UNPROTECT(x)      rb_obj_wb_unprotect(x, __FILE__, __LINE__)
 //#define RB_OBJ_WRITE(a, slot, b)       rb_obj_write((VALUE)(a), (VALUE *)(slot),(VALUE)(b), __FILE__, __LINE__)
-
-// MARK: - Low-level FIXNUM manipulation
-
-/// The signed-integer type of the same width as `VALUE`
-internal typealias SIGNED_VALUE = Int
-
-let RUBY_FIXNUM_MAX = SIGNED_VALUE.max >> 1
-let RUBY_FIXNUM_MIN = SIGNED_VALUE.min >> 1
-
-func RB_LONG2FIX(_ i: Int) -> VALUE {
-    return (VALUE(bitPattern: i) << 1) | VALUE(RUBY_FIXNUM_FLAG.rawValue)
-}
-
-func RB_FIX2LONG(_ v: VALUE) -> Int {
-    return rbg_fix2long(v)
-}
-
-func RB_FIX2ULONG(_ v: VALUE) -> UInt {
-    return rbg_fix2ulong(v)
-}
-
-func RB_POSFIXABLE(_ f: SIGNED_VALUE) -> Bool {
-    return f < RUBY_FIXNUM_MAX + 1
-}
-
-func RB_NEGFIXABLE(_ f: SIGNED_VALUE) -> Bool {
-    return f >= RUBY_FIXNUM_MIN
-}
-
-func RB_FIXABLE(_ f: SIGNED_VALUE) -> Bool {
-    return RB_POSFIXABLE(f) && RB_NEGFIXABLE(f)
-}

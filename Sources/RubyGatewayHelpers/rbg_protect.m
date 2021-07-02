@@ -15,24 +15,6 @@
 #pragma clang diagnostic ignored "-Wcompound-token-split-by-macro"
 #endif
 
-// Fixups for Ruby < 2.3
-
-#ifndef RB_NUM2LONG
-#define RB_NUM2LONG NUM2LONG
-#endif
-
-#ifndef RB_FIX2LONG
-#define RB_FIX2LONG FIX2LONG
-#endif
-
-#ifndef RB_FIX2ULONG
-#define RB_FIX2ULONG FIX2ULONG
-#endif
-
-#ifndef RUBY_FL_USER1
-#define RUBY_FL_USER1 FL_USER1
-#endif
-
 //
 // # Thunks for Exception Handling
 //
@@ -120,6 +102,7 @@ typedef struct {
     const char   *name;
     int           argc;
     const VALUE  *argv;
+    int           kwArgs;
     double        toDoubleResult;
     void         *blockContext;
     VALUE         blockArg;
@@ -149,6 +132,50 @@ static VALUE rbg_scan_arg_hash(VALUE last_arg,
                                int * _Nonnull is_hash,
                                int * _Nonnull is_opts);
 
+// Ruby 3 _kw wrappers
+
+#if RUBY_API_VERSION_MAJOR < 3 && RUBY_API_VERSION_MINOR < 7
+
+#define RB_NO_KEYWORDS 0
+#define RB_PASS_KEYWORDS 1
+
+static VALUE rb_funcallv_kw(VALUE recv, ID mid, int argc, const VALUE *argv, int kw_splat)
+{
+    return rb_funcallv(recv, mid, argc, argv);
+}
+
+static VALUE rb_block_call_kw(VALUE obj, ID mid, int argc, const VALUE * argv, rb_block_call_func_t bl_proc, VALUE data2, int kw_splat)
+{
+    return rb_block_call(obj, mid, argc, argv, bl_proc, data2);
+}
+
+static VALUE rb_call_super_kw(int argc, const VALUE * argv, int kw_splat)
+{
+    return rb_call_super(argc, argv);
+}
+
+static VALUE rb_yield_values_kw(int argc, const VALUE *argv, int kw_splat)
+{
+    return rb_yield_values2(argc, argv);
+}
+
+static VALUE rb_proc_call_with_block_kw(VALUE self, int argc, const VALUE *argv, VALUE passed_procval, int kw_splat)
+{
+    return rb_proc_call_with_block(self, argc, argv, passed_procval);
+}
+
+int rb_keyword_given_p(void)
+{
+    return 0;
+}
+
+#else
+ #if RUBY_API_VERSION_MAJOR > 2
+RBIMPL_STATIC_ASSERT(rbg_r2_compat1, RB_NO_KEYWORDS == 0);
+RBIMPL_STATIC_ASSERT(rbg_r2_compat2, RB_PASS_KEYWORDS == 1);
+ #endif
+#endif
+
 /// Callback made by Ruby from `rb_protect` -- OK to raise exceptions from here.
 static VALUE rbg_protect_thunk(VALUE value)
 {
@@ -173,15 +200,17 @@ static VALUE rbg_protect_thunk(VALUE value)
         rb_const_set(d->value, d->id, d->constant);
         break;
     case RBG_JOB_FUNCALLV:
-        rc = rb_funcallv(d->value, d->id, d->argc, d->argv);
+        rc = rb_funcallv_kw(d->value, d->id, d->argc, d->argv, d->kwArgs);
         break;
     case RBG_JOB_BLOCK_CALL_PVOID:
-        rc = rb_block_call(d->value, d->id, d->argc, d->argv,
-                           rbg_block_pvoid_callback, (VALUE) d->blockContext);
+        rc = rb_block_call_kw(d->value, d->id, d->argc, d->argv,
+                              rbg_block_pvoid_callback, (VALUE) d->blockContext,
+                              d->kwArgs);
         break;
     case RBG_JOB_BLOCK_CALL_VALUE:
-        rc = rb_block_call(d->value, d->id, d->argc, d->argv,
-                           rbg_block_value_callback, (VALUE) d->blockContext);
+        rc = rb_block_call_kw(d->value, d->id, d->argc, d->argv,
+                              rbg_block_value_callback, (VALUE) d->blockContext,
+                              d->kwArgs);
         break;
     case RBG_JOB_CVAR_GET:
         rc = rb_cvar_get(d->value, d->id);
@@ -196,10 +225,10 @@ static VALUE rbg_protect_thunk(VALUE value)
         d->toDoubleResult = NUM2DBL(rb_Float(d->value));
         break;
     case RBG_JOB_PROC_CALL:
-        rc = rb_proc_call_with_block(d->value, d->argc, d->argv, d->blockArg);
+        rc = rb_proc_call_with_block_kw(d->value, d->argc, d->argv, d->blockArg, d->kwArgs);
         break;
     case RBG_JOB_YIELD:
-        rc = rb_yield_values2(d->argc, d->argv);
+        rc = rb_yield_values_kw(d->argc, d->argv, d->kwArgs);
         break;
     case RBG_JOB_ERR_ARITY:
         rb_error_arity(d->argc, d->arityMin, d->arityMax);
@@ -236,7 +265,7 @@ static VALUE rbg_protect_thunk(VALUE value)
         }
         break;
     case RBG_JOB_CALL_SUPER:
-        rc = rb_call_super(d->argc, d->argv);
+        rc = rb_call_super_kw(d->argc, d->argv, d->kwArgs);
         break;
     }
     return rc;
@@ -294,43 +323,43 @@ VALUE rbg_inspect_protect(VALUE value, int * _Nonnull status)
 
 // rb_funcallv - run arbitrary code
 VALUE rbg_funcallv_protect(VALUE value, ID id,
-                           int argc, const VALUE * _Nonnull argv,
+                           int argc, const VALUE * _Nonnull argv, int kwArgs,
                            int * _Nonnull status)
 {
     Rbg_protect_data data = { .job = RBG_JOB_FUNCALLV, .value = value, .id = id,
-                              .argc = argc, .argv = argv };
+                              .argc = argc, .argv = argv, .kwArgs = kwArgs };
     return rbg_protect(&data, status);
 }
 
 // rb_yield - run arbitrary code
 VALUE rbg_yield_values(int argc,
-                       const VALUE * _Nonnull argv,
+                       const VALUE * _Nonnull argv, int kwArgs,
                        int * _Nonnull status)
 {
-    Rbg_protect_data data = { .job = RBG_JOB_YIELD, .argc = argc, .argv = argv };
+    Rbg_protect_data data = { .job = RBG_JOB_YIELD, .argc = argc, .argv = argv, .kwArgs = kwArgs };
     return rbg_protect(&data, status);
 }
 
 // rb_block_call - run two lots of arbitrary code
 VALUE rbg_block_call_pvoid_protect(VALUE value, ID id,
-                                   int argc, const VALUE * _Nonnull argv,
+                                   int argc, const VALUE * _Nonnull argv, int kwArgs,
                                    void * _Nonnull context,
                                    int * _Nonnull status)
 {
     Rbg_protect_data data = { .job = RBG_JOB_BLOCK_CALL_PVOID, .value = value, .id = id,
-                              .argc = argc, .argv = argv,
+                              .argc = argc, .argv = argv, .kwArgs = kwArgs,
                               .blockContext = context };
     return rbg_protect(&data, status);
 }
 
 // rb_block_call - run two lots of arbitrary code
 VALUE rbg_block_call_value_protect(VALUE value, ID id,
-                                   int argc, const VALUE * _Nonnull argv,
+                                   int argc, const VALUE * _Nonnull argv, int kwArgs,
                                    VALUE context,
                                    int * _Nonnull status)
 {
     Rbg_protect_data data = { .job = RBG_JOB_BLOCK_CALL_VALUE, .value = value, .id = id,
-                              .argc = argc, .argv = argv,
+                              .argc = argc, .argv = argv, .kwArgs = kwArgs,
                               .blockContext = (void *) context };
     return rbg_protect(&data, status);
 }
@@ -426,7 +455,8 @@ VALUE rbg_proc_call_with_block_protect(VALUE value,
                                        int * _Nonnull status)
 {
     Rbg_protect_data data = { .job = RBG_JOB_PROC_CALL, .value = value,
-        .argc = argc, .argv = argv, .blockArg = blockArg };
+        .argc = argc, .argv = argv, .kwArgs = rb_keyword_given_p(),
+        .blockArg = blockArg };
     return rbg_protect(&data, status);
 }
 
@@ -570,11 +600,11 @@ void rbg_inject_module_protect(VALUE into, VALUE module,
     (void) rbg_protect(&data, status);
 }
 
-VALUE rbg_call_super_protect(int argc, const VALUE * _Nonnull argv,
+VALUE rbg_call_super_protect(int argc, const VALUE * _Nonnull argv, int kwArgs,
                              int * _Nonnull status)
 {
     Rbg_protect_data data = { .job = RBG_JOB_CALL_SUPER,
-        .argc = argc, .argv = argv };
+        .argc = argc, .argv = argv, .kwArgs = kwArgs };
     return rbg_protect(&data, status);
 }
 
