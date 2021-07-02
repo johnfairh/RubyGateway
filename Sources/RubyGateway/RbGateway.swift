@@ -246,35 +246,6 @@ extension RbGateway {
         }
     }
 
-    /// Whether taint checks are enabled.
-    ///
-    /// This is `true` for a safe level of 1, and `false` for a safe level
-    /// of 0.  Changing it from `false` to `true` has no effect on Ruby 2.5
-    /// and earlier.
-    ///
-    /// ### History
-    /// * In Ruby master, the safe level is VM-wide and can be changed at will.
-    ///   In earlier Ruby it was per-thread and could not be decreased.
-    /// * Safe levels 2 and 3 were removed in Ruby 2.3.
-    /// * Safe level 4 was removed in Ruby 2.1.
-    ///
-    /// ### Forward-looking analysis
-    /// * This feature is likely to disappear entirely.  Its current incarnation
-    ///   should be regarded as a debugging feature rather than a security
-    ///   feature.  See Ruby#14250.
-//    public var taintChecks: Bool {
-//        get {
-//            let level = softSetup() ? rb_safe_level() : 0
-//            return level > 0
-//        }
-//        set {
-//            if softSetup() {
-//                // will not raise on legal values
-//                rb_set_safe_level(newValue ? 1 : 0)
-//            }
-//        }
-//    }
-
     /// The component major/minor/teeny version numbers of Ruby being used.
     public var apiVersion: (Int32, Int32, Int32) {
         return ruby_api_version

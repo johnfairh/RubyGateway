@@ -163,23 +163,6 @@ class TestVM: XCTestCase {
         XCTAssertEqual(testTitle, Ruby.scriptName)
     }
 
-    /// $SAFE
-//    func testSafeMode() {
-//        XCTAssertFalse(Ruby.taintChecks)
-//        XCTAssertEqual(0, Int(try Ruby.getGlobalVar("$SAFE")))
-//        Ruby.taintChecks = true
-//        XCTAssertTrue(Ruby.taintChecks)
-//        XCTAssertEqual(1, Int(try Ruby.getGlobalVar("$SAFE")))
-//        Ruby.taintChecks = false
-//        let (mj, mn, _) = Ruby.apiVersion
-//        if mj > 2 || mn > 5 {
-//            XCTAssertFalse(Ruby.taintChecks)
-//            XCTAssertEqual(0, Int(try Ruby.getGlobalVar("$SAFE")))
-//        } else {
-//            XCTAssertTrue(Ruby.taintChecks)
-//        }
-//    }
-
     /// Version
     func testVersion() {
         let version = Ruby.version
