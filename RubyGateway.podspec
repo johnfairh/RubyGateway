@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "RubyGateway"
-  s.version      = "4.0.0"
+  s.version      = "5.1.0"
   s.authors      = { "John Fairhurst" => "johnfairh@gmail.com" }
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.homepage     = "https://github.com/johnfairh/RubyGateway"
@@ -25,8 +25,9 @@ Pod::Spec.new do |s|
   s.swift_version = "5"
   s.frameworks  = "Foundation"
   s.preserve_path = 'CRuby/*', 'RubyGatewayHelpers/*'
-  s.pod_target_xcconfig = { 'SWIFT_INCLUDE_PATHS' => '"${PODS_ROOT}/RubyGateway/CRuby" "${PODS_ROOT}/RubyGateway/RubyGatewayHelpers"',
-                            'HEADER_SEARCH_PATHS' => '"${PODS_ROOT}/RubyGateway/CRuby"' }
+  s.pod_target_xcconfig = { 'SWIFT_INCLUDE_PATHS' => '"${PODS_ROOT}/RubyGateway/CRuby/Sources/CRuby" "${PODS_ROOT}/RubyGateway/RubyGatewayHelpers"',
+                            'HEADER_SEARCH_PATHS' => '"${PODS_ROOT}/RubyGateway/CRuby/Sources/CRuby"',
+                            'OTHER_SWIFT_FLAGS' => '"-Xcc" "-fdeclspec"' }
   s.prepare_command = <<-ECMD
                         mkdir RubyGatewayHelpers
                         echo 'module RubyGatewayHelpers [system] {}' > RubyGatewayHelpers/module.modulemap
