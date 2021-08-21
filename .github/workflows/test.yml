@@ -24,10 +24,9 @@ jobs:
         run: |
           gem install rouge
           ruby --version
-          ruby -e "require 'rouge'"
-          gem env
           ruby -e 'puts RbConfig::TOPDIR'
           ruby -e 'puts RbConfig::CONFIG'
+          gem env
       - name: CRuby
         run: |
           swift package update 
@@ -70,7 +69,9 @@ jobs:
           gem install rouge
           ruby --version
           which ruby
-          echo "import RubyGateway" | rougify highlight -l swift -f html
+          ruby -e 'puts RbConfig::TOPDIR'
+          ruby -e 'puts RbConfig::CONFIG'
+          gem env
           ls -l /opt/hostedtoolcache/Ruby
           ls -l /opt/hostedtoolcache/Ruby/${{ matrix.rby.full }}
           ls -l /opt/hostedtoolcache/Ruby/${{ matrix.rby.full }}/x64
