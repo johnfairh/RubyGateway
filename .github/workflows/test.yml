@@ -23,8 +23,8 @@ jobs:
       - name: Ruby
         run: |
           gem install rouge
-          gem install wikipedia-client
           ruby --version
+          echo "import RubyGateway" | rougify highlight -l swift -f html
       - name: Tests
         run: swift test --enable-code-coverage
       - name: Coverage
@@ -41,11 +41,11 @@ jobs:
       matrix:
         rby:
           - short: '2.6'
-            full: '2.6.7'
+            full: '2.6.8'
           - short: '2.7'
-            full: '2.7.3'
+            full: '2.7.4'
           - short: '3.0'
-            full: '3.0.1'
+            full: '3.0.2'
             extra_args: '-Xcc -fdeclspec'
     steps:
       - uses: actions/checkout@v2
@@ -55,9 +55,9 @@ jobs:
       - name: Ruby
         run: |
           gem install rouge
-          gem install wikipedia-client
           ruby --version
           which ruby
+          echo "import RubyGateway" | rougify highlight -l swift -f html
           ls -l /opt/hostedtoolcache/Ruby
           ls -l /opt/hostedtoolcache/Ruby/${{ matrix.rby.full }}
           ls -l /opt/hostedtoolcache/Ruby/${{ matrix.rby.full }}/x64
