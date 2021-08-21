@@ -22,9 +22,11 @@ jobs:
       - uses: actions/checkout@v2
       - name: Ruby
         run: |
-          gem install rouge
+          gem install -V rouge
           ruby --version
           echo "import RubyGateway" | rougify highlight -l swift -f html
+          ruby -e "require 'rouge'"
+          gem env
       - name: Tests
         run: swift test --enable-code-coverage
       - name: Coverage
