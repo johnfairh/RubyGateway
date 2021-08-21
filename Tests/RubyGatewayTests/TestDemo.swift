@@ -8,15 +8,12 @@
 import XCTest
 import RubyGateway
 
-/// Some higher-level demos - skipped if gems are missing
+/// Some higher-level demos - fail if gems are missing
 class TestDemo: XCTestCase {
 
-    func testRouge() {
-        guard let _ = try? Ruby.require(filename: "rouge") else {
-            return
-        }
-
+    func testRouge() throws {
         doErrorFree {
+            try Ruby.require(filename: "rouge")
             // Careful to avoid String methods that are unimplemented on Linux....
             let swiftText = try String(contentsOfFile: URL(fileURLWithPath: #file).path, encoding: .utf8)
 

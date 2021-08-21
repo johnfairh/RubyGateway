@@ -23,10 +23,22 @@ jobs:
       - name: Ruby
         run: |
           gem install rouge
-          gem install wikipedia-client
           ruby --version
+          ruby -e 'puts RbConfig::TOPDIR'
+          ruby -e 'puts RbConfig::CONFIG'
+          gem env
+      - name: CRuby
+        run: |
+          swift package update 
+          swift package edit CRuby
+          Packages/CRuby/cfg-cruby --mode custom --path /usr/local/opt/ruby@2.7
+          cat Packages/CRuby/CRuby.pc
+          cat Packages/CRuby/Sources/CRuby/module.modulemap
+          cat Packages/CRuby/Sources/CRuby/ruby_headers.h
       - name: Tests
-        run: swift test --enable-code-coverage
+        run: |
+          export PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH
+          swift test --enable-code-coverage
       - name: Coverage
         if: matrix.xcode == '12.5.1'
         run: |
@@ -41,11 +53,11 @@ jobs:
       matrix:
         rby:
           - short: '2.6'
-            full: '2.6.7'
+            full: '2.6.8'
           - short: '2.7'
-            full: '2.7.3'
+            full: '2.7.4'
           - short: '3.0'
-            full: '3.0.1'
+            full: '3.0.2'
             extra_args: '-Xcc -fdeclspec'
     steps:
       - uses: actions/checkout@v2
@@ -55,9 +67,11 @@ jobs:
       - name: Ruby
         run: |
           gem install rouge
-          gem install wikipedia-client
           ruby --version
           which ruby
+          ruby -e 'puts RbConfig::TOPDIR'
+          ruby -e 'puts RbConfig::CONFIG'
+          gem env
           ls -l /opt/hostedtoolcache/Ruby
           ls -l /opt/hostedtoolcache/Ruby/${{ matrix.rby.full }}
           ls -l /opt/hostedtoolcache/Ruby/${{ matrix.rby.full }}/x64
