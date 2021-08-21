@@ -22,13 +22,24 @@ jobs:
       - uses: actions/checkout@v2
       - name: Ruby
         run: |
-          gem install -V rouge
+          gem install rouge
           ruby --version
-          echo "import RubyGateway" | rougify highlight -l swift -f html
           ruby -e "require 'rouge'"
           gem env
+          ruby -e 'puts RbConfig::TOPDIR'
+          ruby -e 'puts RbConfig::CONFIG'
+      - name: CRuby
+        run: |
+          swift package update 
+          swift package edit CRuby
+          Packages/CRuby/cfg-cruby --mode custom --path /usr/local/opt/ruby@2.7
+          cat Packages/CRuby/CRuby.pc
+          cat Packages/CRuby/Sources/CRuby/module.modulemap
+          cat Packages/CRuby/Sources/CRuby/ruby_headers.h
       - name: Tests
-        run: swift test --enable-code-coverage
+        run: |
+          export PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH
+          swift test --enable-code-coverage
       - name: Coverage
         if: matrix.xcode == '12.5.1'
         run: |
