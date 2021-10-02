@@ -121,8 +121,8 @@ final class RbVM {
         let arg1 = strdup("RubyGateway")
         let arg2 = strdup("-e ")
         defer {
-            free(arg1)
-            free(arg2)
+            arg1.map { free($0) }
+            arg2.map { free($0) }
         }
         var argv = [arg1, arg2]
         let node = ruby_options(Int32(argv.count), &argv)
