@@ -1,3 +1,10 @@
+## 5.2.0 - 2nd October 2021
+
+#### Enhancements
+
+* Support building cleanly with Xcode13 GA.  
+  [Karim Alweheshy](https://github.com/karimalweheshy)
+
 ## 5.1.0 - 2nd July 2021
 
 #### Breaking

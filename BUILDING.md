@@ -74,8 +74,8 @@ jazzy --min-acl private --module CRuby --swift-build-tool symbolgraph --build-to
 
 ## Releasing
 
+* Update podspec, changelog, .jazzy.yaml, TODO, README, LICENSE if year changed.
 * Update docs if needed, separate commit.
-* Update podspec, changelog, TODO, README, LICENSE if year changed.
 * Commit + tag + push with `--tags`.  Check CI.
 * `pod spec lint` -- *not* `pod lib lint`
   * `pod cache clean 'RubyGateway' --all` if you mess up the tag + have to repush it
