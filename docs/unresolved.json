@@ -416,10 +416,6 @@
     "name" : "elements"
   },
   {
-    "context" : "Bool",
-    "name" : "false"
-  },
-  {
     "context" : "User Guide",
     "name" : "fatalError()"
   },
@@ -506,10 +502,6 @@
   {
     "context" : "User Guide",
     "name" : "next"
-  },
-  {
-    "context" : "init(_:)",
-    "name" : "nil"
   },
   {
     "context" : "defineClass(_:under:initializer:)",
@@ -626,10 +618,6 @@
   {
     "context" : "init(_:)",
     "name" : "to_str"
-  },
-  {
-    "context" : "Bool",
-    "name" : "true"
   },
   {
     "context" : "User Guide",
