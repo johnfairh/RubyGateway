@@ -39,11 +39,16 @@ jobs:
         run: |
           export PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH
           swift test --enable-code-coverage
-      - name: Coverage
-        if: matrix.xcode == '12.5.1'
+      - name: Coverage generation
+        if: matrix.xcode == '13.0'
         run: |
           xcrun llvm-cov export -format lcov .build/debug/RubyGatewayPackageTests.xctest/Contents/MacOS/RubyGatewayPackageTests -instr-profile .build/debug/codecov/default.profdata -ignore-filename-regex "(Test|checkouts)" > coverage.lcov
-          bash <(curl -s https://codecov.io/bash) -f coverage.lcov
+      - name: Coverage upload
+        if: matrix.xcode == '13.0'
+        uses: codecov/codecov-action@v2
+        with:
+          files: ./coverage.lcov
+          verbose: true
 
   linux:
     name: ubuntu latest
