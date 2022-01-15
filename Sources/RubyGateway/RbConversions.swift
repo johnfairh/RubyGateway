@@ -95,20 +95,44 @@ extension String: RbObjectConvertible {
     /// See `RbError.history` to find out why a conversion failed.
     public init?(_ object: RbObject) {
         do {
-            let stringVal = try object.withRubyValue { objValue in
-                try RbVM.doProtect { tag in
-                    rbg_String_protect(objValue, &tag)
-                }
+            guard let string = try Self.rubyToString(object) else {
+                return nil
             }
-
-            let rubyLength = rbg_RSTRING_LEN(stringVal)
-            let rubyPtr = rbg_RSTRING_PTR(stringVal)
-            let rubyData = Data(bytes: rubyPtr, count: rubyLength)
-
-            self.init(data: rubyData, encoding: .utf8)
+            self = string
         } catch {
-            return nil
+            // Workaround for odd Ruby 3.1 issue:
+            //
+            // In Ruby 3.1, calling `to_s` on a `NameError` from this environment
+            // causes an exception: "TypeError: wrong argument type nil (expected method)"
+            // ...which is a bit baffling.  It works fine in IRB.
+            //
+            // Pragmatically going to ignore the root cause here, just catch the
+            // situation and retrieve the actual text -- this `original_message` method
+            // is from `DidYouMean::Correctable` which suspiciously overrides the `to_s`
+            // that doesn't work.
+            guard let originalMessage = try? object.call("original_message"),
+                  let messageText = try? Self.rubyToString(originalMessage) else {
+                return nil
+            }
+            self = messageText
         }
+    }
+
+    /// Internal helper to do the Ruby conversion.
+    /// Throws an error if the Ruby `to_s` throws an error.
+    /// Returns `nil` if the Ruby string data can't be interpreted as UTF-8.
+    private static func rubyToString(_ object: RbObject) throws -> String? {
+        let stringVal = try object.withRubyValue { objValue in
+            try RbVM.doProtect { tag in
+                rbg_String_protect(objValue, &tag)
+            }
+        }
+
+        let rubyLength = rbg_RSTRING_LEN(stringVal)
+        let rubyPtr = rbg_RSTRING_PTR(stringVal)
+        let rubyData = Data(bytes: rubyPtr, count: rubyLength)
+
+        return String(data: rubyData, encoding: .utf8)
     }
 
     /// A Ruby object for the string.
