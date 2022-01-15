@@ -58,11 +58,11 @@ jobs:
       matrix:
         rby:
           - short: '2.6'
-            full: '2.6.8'
+            full: '2.6.9'
           - short: '2.7'
-            full: '2.7.4'
+            full: '2.7.5'
           - short: '3.0'
-            full: '3.0.2'
+            full: '3.0.3'
             extra_args: '-Xcc -fdeclspec'
           - short: '3.1'
             full: '3.1.0'
