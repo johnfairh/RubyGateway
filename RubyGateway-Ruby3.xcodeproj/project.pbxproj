@@ -430,7 +430,7 @@
 					};
 				};
 			};
-			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "RubyGateway" */;
+			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "RubyGateway-Ruby3" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -590,8 +590,8 @@
 				HEADER_SEARCH_PATHS = (
 					"${SRCROOT}/CRuby/Sources/CRuby",
 					"${SRCROOT}/Sources/RubyGatewayHelpers/include",
-					"$(HOME)/.rbenv/versions/3.0.0/include/ruby-3.0.0",
-					"$(HOME)/.rbenv/versions/3.0.0/include/ruby-3.0.0/x86_64-darwin20",
+					"$(HOME)/.rbenv/versions/3.1.0/include/ruby-3.1.0",
+					"$(HOME)/.rbenv/versions/3.1.0/include/ruby-3.1.0/x86_64-darwin21",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -646,8 +646,8 @@
 				HEADER_SEARCH_PATHS = (
 					"${SRCROOT}/CRuby/Sources/CRuby",
 					"${SRCROOT}/Sources/RubyGatewayHelpers/include",
-					"$(HOME)/.rbenv/versions/3.0.0/include/ruby-3.0.0",
-					"$(HOME)/.rbenv/versions/3.0.0/include/ruby-3.0.0/x86_64-darwin20",
+					"$(HOME)/.rbenv/versions/3.1.0/include/ruby-3.1.0",
+					"$(HOME)/.rbenv/versions/3.1.0/include/ruby-3.1.0/x86_64-darwin21",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -715,12 +715,12 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = (
-					"$(HOME)/.rbenv/versions/3.0.0/include/ruby-3.0.0/x86_64-darwin20",
-					"$(HOME)/.rbenv/versions/3.0.0/include/ruby-3.0.0",
+					"$(HOME)/.rbenv/versions/3.1.0/include/ruby-3.1.0/x86_64-darwin21",
+					"$(HOME)/.rbenv/versions/3.1.0/include/ruby-3.1.0",
 				);
 				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGatewayTests_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(HOME)/.rbenv/versions/3.0.0/lib";
+				LIBRARY_SEARCH_PATHS = "$(HOME)/.rbenv/versions/3.1.0/lib";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fdeclspec";
 				PRODUCT_NAME = RubyGatewayTests;
@@ -785,12 +785,12 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = (
-					"$(HOME)/.rbenv/versions/3.0.0/include/ruby-3.0.0/x86_64-darwin20",
-					"$(HOME)/.rbenv/versions/3.0.0/include/ruby-3.0.0",
+					"$(HOME)/.rbenv/versions/3.1.0/include/ruby-3.1.0/x86_64-darwin21",
+					"$(HOME)/.rbenv/versions/3.1.0/include/ruby-3.1.0",
 				);
 				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGatewayTests_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(HOME)/.rbenv/versions/3.0.0/lib";
+				LIBRARY_SEARCH_PATHS = "$(HOME)/.rbenv/versions/3.1.0/lib";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fdeclspec";
 				PRODUCT_NAME = RubyGatewayTests;
@@ -811,12 +811,12 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					"${SRCROOT}/CRuby/Sources/CRuby",
-					"$(HOME)/.rbenv/versions/3.0.0/include/ruby-3.0.0",
-					"$(HOME)/.rbenv/versions/3.0.0/include/ruby-3.0.0/x86_64-darwin20",
+					"$(HOME)/.rbenv/versions/3.1.0/include/ruby-3.1.0",
+					"$(HOME)/.rbenv/versions/3.1.0/include/ruby-3.1.0/x86_64-darwin21",
 				);
 				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGateway_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(HOME)/.rbenv/versions/3.0.0/lib";
+				LIBRARY_SEARCH_PATHS = "$(HOME)/.rbenv/versions/3.1.0/lib";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fdeclspec";
@@ -843,12 +843,12 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					"${SRCROOT}/CRuby/Sources/CRuby",
-					"$(HOME)/.rbenv/versions/3.0.0/include/ruby-3.0.0",
-					"$(HOME)/.rbenv/versions/3.0.0/include/ruby-3.0.0/x86_64-darwin20",
+					"$(HOME)/.rbenv/versions/3.1.0/include/ruby-3.1.0",
+					"$(HOME)/.rbenv/versions/3.1.0/include/ruby-3.1.0/x86_64-darwin21",
 				);
 				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGateway_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(HOME)/.rbenv/versions/3.0.0/lib";
+				LIBRARY_SEARCH_PATHS = "$(HOME)/.rbenv/versions/3.1.0/lib";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fdeclspec";
@@ -874,7 +874,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_2 /* Build configuration list for PBXProject "RubyGateway" */ = {
+		OBJ_2 /* Build configuration list for PBXProject "RubyGateway-Ruby3" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				OBJ_3 /* Debug */,

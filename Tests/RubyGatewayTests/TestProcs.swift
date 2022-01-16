@@ -138,6 +138,8 @@ class TestProcs: XCTestCase {
                 XCTFail("Managed to survive call to throwing proc")
             } catch RbError.rubyException(let exn) {
                 // catch the NoMethodError
+                print("exn.description: \(exn.description)")
+                print("exn: \(exn)")
                 XCTAssertTrue(exn.description.contains(badString))
             }
         }
