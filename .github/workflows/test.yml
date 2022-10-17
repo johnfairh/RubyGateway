@@ -10,12 +10,12 @@ on:
 
 jobs:
   macos:
-    name: macOS 11 Xcode
-    runs-on: macos-11
+    name: macOS 12 Xcode
+    runs-on: macos-12
     strategy:
       fail-fast: false
       matrix:
-        xcode: ['12.5.1', '13.2']
+        xcode: ['13.1', '14.1']
     env:
       DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
     steps:
@@ -31,20 +31,20 @@ jobs:
         run: |
           swift package update 
           swift package edit CRuby
-          Packages/CRuby/cfg-cruby --mode custom --path /usr/local/opt/ruby@2.7
+          Packages/CRuby/cfg-cruby --mode custom --path /usr/local/opt/ruby@3.0
           cat Packages/CRuby/CRuby.pc
           cat Packages/CRuby/Sources/CRuby/module.modulemap
           cat Packages/CRuby/Sources/CRuby/ruby_headers.h
       - name: Tests
         run: |
           export PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH
-          swift test --enable-code-coverage
+          swift test --enable-code-coverage -Xcc -fdeclspec
       - name: Coverage generation
-        if: matrix.xcode == '13.2'
+        if: matrix.xcode == '14.1'
         run: |
           xcrun llvm-cov export -format lcov .build/debug/RubyGatewayPackageTests.xctest/Contents/MacOS/RubyGatewayPackageTests -instr-profile .build/debug/codecov/default.profdata -ignore-filename-regex "(Test|checkouts)" > coverage.lcov
       - name: Coverage upload
-        if: matrix.xcode == '13.2'
+        if: matrix.xcode == '14.1'
         uses: codecov/codecov-action@v2
         with:
           files: ./coverage.lcov
@@ -57,15 +57,13 @@ jobs:
       fail-fast: false
       matrix:
         rby:
-          - short: '2.6'
-            full: '2.6.9'
           - short: '2.7'
-            full: '2.7.5'
+            full: '2.7.6'
           - short: '3.0'
-            full: '3.0.3'
+            full: '3.0.4'
             extra_args: '-Xcc -fdeclspec'
           - short: '3.1'
-            full: '3.1.0'
+            full: '3.1.2'
             extra_args: '-Xcc -fdeclspec'
     steps:
       - uses: actions/checkout@v2
