@@ -10,12 +10,12 @@ on:
 
 jobs:
   macos:
-    name: macOS 11 Xcode
-    runs-on: macos-11
+    name: macOS 12 Xcode
+    runs-on: macos-12
     strategy:
       fail-fast: false
       matrix:
-        xcode: ['12.5.1', '13.2']
+        xcode: ['13.1', '14.1']
     env:
       DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
     steps:
@@ -40,11 +40,11 @@ jobs:
           export PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH
           swift test --enable-code-coverage
       - name: Coverage generation
-        if: matrix.xcode == '13.2'
+        if: matrix.xcode == '14.1'
         run: |
           xcrun llvm-cov export -format lcov .build/debug/RubyGatewayPackageTests.xctest/Contents/MacOS/RubyGatewayPackageTests -instr-profile .build/debug/codecov/default.profdata -ignore-filename-regex "(Test|checkouts)" > coverage.lcov
       - name: Coverage upload
-        if: matrix.xcode == '13.2'
+        if: matrix.xcode == '14.1'
         uses: codecov/codecov-action@v2
         with:
           files: ./coverage.lcov
