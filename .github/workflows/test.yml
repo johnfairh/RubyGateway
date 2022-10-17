@@ -57,15 +57,13 @@ jobs:
       fail-fast: false
       matrix:
         rby:
-          - short: '2.6'
-            full: '2.6.9'
           - short: '2.7'
-            full: '2.7.5'
+            full: '2.7.6'
           - short: '3.0'
-            full: '3.0.3'
+            full: '3.0.4'
             extra_args: '-Xcc -fdeclspec'
           - short: '3.1'
-            full: '3.1.0'
+            full: '3.1.2'
             extra_args: '-Xcc -fdeclspec'
     steps:
       - uses: actions/checkout@v2
