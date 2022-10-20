@@ -1,3 +1,9 @@
+## 5.3.0 - 20th October 2022
+
+#### Enhancements
+
+* Support Ruby 3.1
+
 ## 5.2.0 - 2nd October 2021
 
 #### Enhancements
