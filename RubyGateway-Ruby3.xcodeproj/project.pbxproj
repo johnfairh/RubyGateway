@@ -591,8 +591,8 @@
 				HEADER_SEARCH_PATHS = (
 					"${SRCROOT}/CRuby/Sources/CRuby",
 					"${SRCROOT}/Sources/RubyGatewayHelpers/include",
-					"$(HOME)/.rbenv/versions/3.1.0/include/ruby-3.1.0",
-					"$(HOME)/.rbenv/versions/3.1.0/include/ruby-3.1.0/x86_64-darwin21",
+					"$(HOME)/.rbenv/versions/3.2.0/include/ruby-3.2.0",
+					"$(HOME)/.rbenv/versions/3.2.0/include/ruby-3.2.0/x86_64-darwin22",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -648,8 +648,8 @@
 				HEADER_SEARCH_PATHS = (
 					"${SRCROOT}/CRuby/Sources/CRuby",
 					"${SRCROOT}/Sources/RubyGatewayHelpers/include",
-					"$(HOME)/.rbenv/versions/3.1.0/include/ruby-3.1.0",
-					"$(HOME)/.rbenv/versions/3.1.0/include/ruby-3.1.0/x86_64-darwin21",
+					"$(HOME)/.rbenv/versions/3.2.0/include/ruby-3.2.0",
+					"$(HOME)/.rbenv/versions/3.2.0/include/ruby-3.2.0/x86_64-darwin22",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -719,12 +719,12 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = (
-					"$(HOME)/.rbenv/versions/3.1.0/include/ruby-3.1.0/x86_64-darwin21",
-					"$(HOME)/.rbenv/versions/3.1.0/include/ruby-3.1.0",
+					"$(HOME)/.rbenv/versions/3.2.0/include/ruby-3.2.0/x86_64-darwin22",
+					"$(HOME)/.rbenv/versions/3.2.0/include/ruby-3.2.0",
 				);
 				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGatewayTests_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(HOME)/.rbenv/versions/3.1.0/lib";
+				LIBRARY_SEARCH_PATHS = "$(HOME)/.rbenv/versions/3.2.0/lib";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fdeclspec";
 				PRODUCT_NAME = RubyGatewayTests;
@@ -791,12 +791,12 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = (
-					"$(HOME)/.rbenv/versions/3.1.0/include/ruby-3.1.0/x86_64-darwin21",
-					"$(HOME)/.rbenv/versions/3.1.0/include/ruby-3.1.0",
+					"$(HOME)/.rbenv/versions/3.2.0/include/ruby-3.2.0/x86_64-darwin22",
+					"$(HOME)/.rbenv/versions/3.2.0/include/ruby-3.2.0",
 				);
 				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGatewayTests_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(HOME)/.rbenv/versions/3.1.0/lib";
+				LIBRARY_SEARCH_PATHS = "$(HOME)/.rbenv/versions/3.2.0/lib";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fdeclspec";
 				PRODUCT_NAME = RubyGatewayTests;
@@ -818,12 +818,12 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					"${SRCROOT}/CRuby/Sources/CRuby",
-					"$(HOME)/.rbenv/versions/3.1.0/include/ruby-3.1.0",
-					"$(HOME)/.rbenv/versions/3.1.0/include/ruby-3.1.0/x86_64-darwin21",
+					"$(HOME)/.rbenv/versions/3.2.0/include/ruby-3.2.0",
+					"$(HOME)/.rbenv/versions/3.2.0/include/ruby-3.2.0/x86_64-darwin22",
 				);
 				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGateway_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(HOME)/.rbenv/versions/3.1.0/lib";
+				LIBRARY_SEARCH_PATHS = "$(HOME)/.rbenv/versions/3.2.0/lib";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fdeclspec";
@@ -851,12 +851,12 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					"${SRCROOT}/CRuby/Sources/CRuby",
-					"$(HOME)/.rbenv/versions/3.1.0/include/ruby-3.1.0",
-					"$(HOME)/.rbenv/versions/3.1.0/include/ruby-3.1.0/x86_64-darwin21",
+					"$(HOME)/.rbenv/versions/3.2.0/include/ruby-3.2.0",
+					"$(HOME)/.rbenv/versions/3.2.0/include/ruby-3.2.0/x86_64-darwin22",
 				);
 				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGateway_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(HOME)/.rbenv/versions/3.1.0/lib";
+				LIBRARY_SEARCH_PATHS = "$(HOME)/.rbenv/versions/3.2.0/lib";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fdeclspec";

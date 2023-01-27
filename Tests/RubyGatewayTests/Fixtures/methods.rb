@@ -17,7 +17,7 @@ class MethodsTest
         unless aString.class == String
             raise "Not a string: #{aString.class}"
         end
-        unless aInt.class == Fixnum
+        unless aInt.class == Integer
             raise "Not a fixnum integer: #{aInt.class}"
         end
         unless aFloat.class == Float
