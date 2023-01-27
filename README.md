@@ -166,6 +166,10 @@ log(object2_to_log, priority: 2)
     is installed.
   * RubyGateway requires 'original' MRI/CRuby Ruby - no JRuby/Rubinius/etc.
 
+There's something wrong with the Ruby 3 Xcode project since Ruby 3.2: running
+tests in Xcode shows all kinds of weird errors that look like a linking problem 
+that is not present run normally in SPM.
+
 ## Installation
 
 For macOS, if you are happy to use the system Ruby then you just need to include
