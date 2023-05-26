@@ -221,7 +221,7 @@ PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH swift run -Xcc -fdeclspec
 
 ## Contributions
 
-Welcome: open an issue / johnfairh@gmail.com / @johnfairh
+Welcome: open an issue / johnfairh@gmail.com / @johnfairh@mastodon.social
 
 ## License
 
