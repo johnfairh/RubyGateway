@@ -159,7 +159,7 @@ log(object2_to_log, priority: 2)
 ## Requirements
 
 * Swift 5.4 or later, from swift.org or Xcode 12.5+
-* macOS (tested on 12.6) or Linux (tested on Ubuntu Bionic/18.04 on x86_64) with Clang 6.
+* macOS (tested on 14.1) or Linux (tested on Ubuntu Bionic/18.04 on x86_64) with Clang 6.
 * Ruby 2.6 or later including development files:
   * For macOS, these come with Xcode.
   * For Linux you may need to install a -dev package depending on how your Ruby
@@ -189,7 +189,7 @@ github "johnfairh/RubyGateway"
 
 Swift package manager for macOS or Linux:
 ```
-.package(url: "https://github.com/johnfairh/RubyGateway", from: "5.4.0")
+.package(url: "https://github.com/johnfairh/RubyGateway", from: "5.5.0")
 ```
 
 CocoaPods for macOS:
