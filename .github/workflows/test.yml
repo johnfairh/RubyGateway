@@ -31,7 +31,7 @@ jobs:
         run: |
           swift package update 
           swift package edit CRuby
-          Packages/CRuby/cfg-cruby --mode custom --path /usr/local/opt/ruby@3.0
+          Packages/CRuby/cfg-cruby --mode custom --path `ruby -e 'puts RbConfig::TOPDIR'`
           cat Packages/CRuby/CRuby.pc
           cat Packages/CRuby/Sources/CRuby/module.modulemap
           cat Packages/CRuby/Sources/CRuby/ruby_headers.h
@@ -64,7 +64,7 @@ jobs:
             full: '3.1.4'
             extra_args: '-Xcc -fdeclspec'
           - short: '3.2'
-            full: '3.2.2'
+            full: '3.2.3'
             extra_args: '-Xcc -fdeclspec'
           - short: '3.3'
             full: '3.3.0'
