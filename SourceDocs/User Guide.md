@@ -244,14 +244,18 @@ positional: this is your author's fault and may be addressed in future.
 ### Create a lambda with Swift code
 
 You can't: there's not much value and the API doesn't provide the argument
-policing.  If you really need to then this kind of thing should get you
-started:
+policing.
+
+Previous versions of this document suggested this workaround:
 ```swift
 let myLambda = try Ruby.call("lambda", blockRetention: .returned) { args in
                    print("I got \(args.count) args!")
                    return .nilObject
                }
 ```
+
+...but this was wrong-headed, never returned an actual lambda, and does not
+work at all from Ruby 3.3.  See [Ruby #19777](https://bugs.ruby-lang.org/issues/19777).
 
 ### Access class variables
 

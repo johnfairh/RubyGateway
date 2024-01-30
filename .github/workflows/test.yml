@@ -11,11 +11,11 @@ on:
 jobs:
   macos:
     name: macOS Xcode Toolchain
-    runs-on: macos-13
+    runs-on: macos-14
     strategy:
       fail-fast: false
       matrix:
-        xcode: ['15.0']
+        xcode: ['15.2']
     env:
       DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
     steps:
@@ -31,7 +31,7 @@ jobs:
         run: |
           swift package update 
           swift package edit CRuby
-          Packages/CRuby/cfg-cruby --mode custom --path /usr/local/opt/ruby@3.0
+          Packages/CRuby/cfg-cruby --mode custom --path `ruby -e 'puts RbConfig::TOPDIR'`
           cat Packages/CRuby/CRuby.pc
           cat Packages/CRuby/Sources/CRuby/module.modulemap
           cat Packages/CRuby/Sources/CRuby/ruby_headers.h
@@ -56,15 +56,13 @@ jobs:
       matrix:
         rby:
           - short: '2.7'
-            full: '2.7.8'
           - short: '3.0'
-            full: '3.0.6'
             extra_args: '-Xcc -fdeclspec'
           - short: '3.1'
-            full: '3.1.4'
             extra_args: '-Xcc -fdeclspec'
           - short: '3.2'
-            full: '3.2.2'
+            extra_args: '-Xcc -fdeclspec'
+          - short: '3.3'
             extra_args: '-Xcc -fdeclspec'
     steps:
       - uses: actions/checkout@v2
@@ -76,23 +74,21 @@ jobs:
           gem install rouge
           ruby --version
           which ruby
+          echo "RB_PREFIX=$(ruby -e 'puts RbConfig::TOPDIR')" >> $GITHUB_ENV
           ruby -e 'puts RbConfig::TOPDIR'
           ruby -e 'puts RbConfig::CONFIG'
           gem env
           ls -l /opt/hostedtoolcache/Ruby
-          ls -l /opt/hostedtoolcache/Ruby/${{ matrix.rby.full }}
-          ls -l /opt/hostedtoolcache/Ruby/${{ matrix.rby.full }}/x64
-          ls -l /opt/hostedtoolcache/Ruby/${{ matrix.rby.full }}/x64/lib
       - name: CRuby
         run: |
           swift package update 
           swift package edit CRuby
-          Packages/CRuby/cfg-cruby --mode custom --path /opt/hostedtoolcache/Ruby/${{ matrix.rby.full }}/x64
+          Packages/CRuby/cfg-cruby --mode custom --path ${RB_PREFIX}
           cat Packages/CRuby/CRuby.pc
           cat Packages/CRuby/Sources/CRuby/module.modulemap
           cat Packages/CRuby/Sources/CRuby/ruby_headers.h
       - name: Tests
         run: |
           export PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH
-          export LD_LIBRARY_PATH=/opt/hostedtoolcache/Ruby/${{ matrix.rby.full }}/x64/lib:$LD_LIBRARY_PATH
+          export LD_LIBRARY_PATH=${RB_PREFIX}/lib:$LD_LIBRARY_PATH
           swift test ${{ matrix.rby.extra_args }}

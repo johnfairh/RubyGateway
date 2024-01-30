@@ -219,7 +219,18 @@ class TestProcs: XCTestCase {
     }
 
     // Lambda experiments
-    func testLambda() {
+    func skip_testLambda() {
+        /* Fails in Ruby 3.3 with exception "Kernal.lambda requires literal block".
+           See Ruby 19777.
+
+           Turns out this has *never* created a lambda -- we end up calling
+           `rb_block_call_kw()` which makes a `Proc` out of the block before invoking
+           the method, basically `lambda(Proc.new { ...})` which ends up returning
+           (on earlier Rubies) that internal `Proc` such that `it.lambda?` is F.
+
+           So you can't actually create a lambda using the C API.  There is enough
+           stuff to expose something special for it in theory.
+         */
         doErrorFree {
             let lambda = try Ruby.call("lambda", blockRetention: .returned) { args in
                 if args.count != 2 {
