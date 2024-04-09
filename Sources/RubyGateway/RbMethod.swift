@@ -139,11 +139,12 @@ private struct RbMethodExec {
 
 private struct RbMethodDispatch {
     /// One-time init to register the callbacks
-    private static var initOnce: Void = {
+    private static let initOnce: Void = {
         rbg_register_method_callback(rbmethod_callback)
     }()
 
     /// List of all method callbacks
+    // XXX needs abstracting and locking
     private static var callbacks: [RbMethodId : RbMethodExec] = [:]
 
     /// Try to find a callback matching the class/method-name pair.

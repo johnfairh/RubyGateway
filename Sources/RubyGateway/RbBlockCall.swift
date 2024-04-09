@@ -4,7 +4,6 @@
 //
 //  Distributed under the MIT license, see LICENSE
 //
-@_implementationOnly import CRuby
 @_implementationOnly import RubyGatewayHelpers
 
 //
@@ -149,7 +148,7 @@ private func rbproc_value_block_callback(context: VALUE,
 /// Enum for namespace
 internal enum RbBlock {
     /// One-time init to register the callbacks
-    private static var initOnce: Void = {
+    private static let initOnce: Void = {
         rbg_register_pvoid_block_proc_callback(rbproc_pvoid_block_callback)
         rbg_register_value_block_proc_callback(rbproc_value_block_callback)
     }()

@@ -4,7 +4,7 @@
 //
 //  Distributed under the MIT license, see LICENSE
 
-@_implementationOnly import CRuby
+@preconcurrency @_implementationOnly import CRuby
 @_implementationOnly import RubyGatewayHelpers
 
 /// This class handles the setup and cleanup lifecycle events for the Ruby VM as well
@@ -12,8 +12,7 @@
 ///
 /// There can only be one of these for a process which is enforced by this class not
 /// being public + `RbGateway` holding the only instance.
-final class RbVM {
-
+final class RbVM : @unchecked Sendable {
     /// State of Ruby lifecycle
     private enum State {
         /// Never tried
@@ -46,7 +45,7 @@ final class RbVM {
     /// Returning means Ruby is working; throwing something means it is not.
     /// - returns: `true` on the actual setup, `false` subsequently.
     func setup() throws -> Bool {
-        return try lock.locked {
+        try lock.locked {
             switch state {
             case .setupError(let error):
                 throw error
@@ -74,7 +73,7 @@ final class RbVM {
     /// - returns: 0 if all is well, otherwise some error code.
     @discardableResult
     func cleanup() -> Int32 {
-        return lock.locked {
+        lock.locked {
             guard case .setup = state else {
                 return 0;
             }
@@ -92,7 +91,7 @@ final class RbVM {
 
     /// Has Ruby ever been set up in this process?
     private var setupEver: Bool {
-        return rb_mKernel != 0
+        rb_mKernel != 0
     }
 
     /// Initialize the Ruby VM for this process.  The VM resources are freed up by `RbVM.cleanup()`
@@ -164,7 +163,7 @@ final class RbVM {
     /// - throws: `RbException` if Ruby raises -- probably means the `ID` space
     ///   is full, which is fairly unlikely.
     func getID(for name: String) throws -> ID {
-        return try lock.locked {
+        try lock.locked {
             if let rbId = idCache[name] {
                 return rbId
             }

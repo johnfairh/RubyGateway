@@ -4,7 +4,6 @@
 //
 //  Distributed under the MIT license, see LICENSE
 //
-@_implementationOnly import CRuby
 @_implementationOnly import RubyGatewayHelpers
 
 /// A Ruby Proc.
