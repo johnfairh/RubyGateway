@@ -11,21 +11,26 @@ import Foundation
 
 class TestThreads: XCTestCase {
 
+    final class Wrp: @unchecked Sendable {
+        var threadHasRun: Bool
+        init() { threadHasRun = false }
+    }
+
     // Check Ruby threads + GVL works as expected
     func testCreateThread() {
         doErrorFree {
-            var threadHasRun = false // optimistic concurrency control....
+            let threadHasRun = Wrp()
             let threadObj = RbThread.create {
                 XCTAssertTrue(RbThread.isRubyThread())
-                XCTAssertFalse(threadHasRun)
+                XCTAssertFalse(threadHasRun.threadHasRun)
                 let obj: RbObject = [1,2,3]
                 print("Other thread ending: \(obj)")
-                threadHasRun = true
+                threadHasRun.threadHasRun = true
             }
             XCTAssertTrue(RbThread.isRubyThread())
             if let threadObj = threadObj {
                 try threadObj.call("join")
-                XCTAssertTrue(threadHasRun)
+                XCTAssertTrue(threadHasRun.threadHasRun)
             } else {
                 XCTFail("Couldn't create thread object")
             }
@@ -35,9 +40,9 @@ class TestThreads: XCTestCase {
     // Check Ruby-created thread can drop GVL
     func testThreadCanDropGvl() {
         doErrorFree {
-            var threadHasRun = false // optimistic concurrency control....
+            let threadHasRun = Wrp()
             let threadObj = RbThread.create {
-                XCTAssertFalse(threadHasRun)
+                XCTAssertFalse(threadHasRun.threadHasRun)
                 let obj: RbObject = [1, 2, 3]
                 print("Other thread giving up GVL: \(obj)")
 
@@ -52,33 +57,44 @@ class TestThreads: XCTestCase {
 
                 print("Back in with GVL")
 
-                threadHasRun = true
+                threadHasRun.threadHasRun = true
             }
             if let threadObj = threadObj {
                 try threadObj.call("join")
-                XCTAssertTrue(threadHasRun)
+                XCTAssertTrue(threadHasRun.threadHasRun)
             } else {
                 XCTFail("Couldn't create thread object")
             }
         }
     }
 
+    final class Wrp2: @unchecked Sendable {
+        var sleeping: Bool
+        var slept: Bool
+        var pid: pthread_t?
+
+        init() {
+            sleeping = false
+            slept = false
+            pid = nil
+        }
+    }
+
     // Check interrupt works outwith GVL using UBF_IO
     func testThreadCanBeInterruptedWithoutGvl() {
         doErrorFree {
-            var sleeping = false
-            var slept = false
+            let wrp = Wrp2()
 
             let threadObj = RbThread.create(callback: {
                 RbThread.callWithoutGvl(unblocking: .io) {
-                    sleeping = true
+                    wrp.sleeping = true
                     let sleepRc = sleep(100)
                     XCTAssertNotEqual(0, sleepRc)  // means sleep(3) interrupted
-                    slept = true
+                    wrp.slept = true
                 }
             })!
 
-            while !sleeping {
+            while !wrp.sleeping {
                 try Ruby.call("sleep", args: [0.2])
             }
 
@@ -87,29 +103,27 @@ class TestThreads: XCTestCase {
 
             try threadObj.call("join")
 
-            XCTAssertTrue(slept)
+            XCTAssertTrue(wrp.slept)
         }
     }
 
     // Check interrupt works outwith GVL doing it manually
     func testThreadCanBeInterruptedWithoutGvlManually() {
         doErrorFree {
-            var slept = false
-            var sleeping = false
-            var pid: pthread_t? = nil
+            let wrp = Wrp2()
 
             let threadObj = RbThread.create(callback: {
-                RbThread.callWithoutGvl(unblocking: .custom({ pthread_kill(pid!, SIGVTALRM) }),
+                RbThread.callWithoutGvl(unblocking: .custom({ pthread_kill(wrp.pid!, SIGVTALRM) }),
                                         callback: {
-                    pid = pthread_self()
-                    sleeping = true
+                    wrp.pid = pthread_self()
+                    wrp.sleeping = true
                     let sleepRc = sleep(100)
                     XCTAssertNotEqual(0, sleepRc)  // means sleep(3) interrupted
-                    slept = true
+                    wrp.slept = true
                 })
             })!
 
-            while !sleeping {
+            while !wrp.sleeping {
                 try Ruby.call("sleep", args: [0.2])
             }
 
@@ -118,7 +132,7 @@ class TestThreads: XCTestCase {
 
             try threadObj.call("join")
 
-            XCTAssertTrue(slept)
+            XCTAssertTrue(wrp.slept)
         }
     }
 }

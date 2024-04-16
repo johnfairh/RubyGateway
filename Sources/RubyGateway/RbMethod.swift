@@ -139,12 +139,12 @@ private struct RbMethodExec {
 
 private struct RbMethodDispatch {
     /// One-time init to register the callbacks
-    private static var initOnce: Void = {
+    private static let initOnce: Void = {
         rbg_register_method_callback(rbmethod_callback)
     }()
 
     /// List of all method callbacks
-    private static var callbacks: [RbMethodId : RbMethodExec] = [:]
+    private static let callbacks = LockedDictionary<RbMethodId, RbMethodExec>()
 
     /// Try to find a callback matching the class/method-name pair.
     static func findCallback(symbol: VALUE, target: VALUE, firstTarget: VALUE) -> RbMethodExec? {

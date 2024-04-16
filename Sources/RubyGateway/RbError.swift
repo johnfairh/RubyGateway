@@ -4,7 +4,7 @@
 //
 //  Distributed under the MIT license, see LICENSE
 //
-@_implementationOnly import CRuby
+@preconcurrency @_implementationOnly import CRuby
 @_implementationOnly import RubyGatewayHelpers
 
 /// An error raised by the RubyGateway module.  Ruby exceptions
@@ -65,7 +65,7 @@ public enum RbError: Error {
     /// adapter that suppresses throwing.
     ///
     /// Methods are thread-safe.
-    public struct History {
+    public final class History: @unchecked Sendable {
         /// The error history.
         ///
         /// The oldest error recorded is at index 0; the most recent is at the
@@ -78,11 +78,11 @@ public enum RbError: Error {
 
         /// The most recent error encountered by RubyGateway.
         public var mostRecent: RbError? {
-            return lock.locked { errors.last } // I guess...
+            lock.locked { errors.last } // I guess...
         }
 
         /// Clear the error history.
-        public mutating func clear() {
+        public func clear() {
             lock.locked {
                 errors = []
             }
@@ -92,7 +92,7 @@ public enum RbError: Error {
         private let MAX_RECENT_ERRORS = 12
 
         /// Record an `RbError`
-        mutating func record(error: RbError) {
+        func record(error: RbError) {
             lock.locked {
                 errors.append(error)
                 if errors.count > MAX_RECENT_ERRORS {
@@ -102,7 +102,7 @@ public enum RbError: Error {
         }
 
         /// Record an `RbException`
-        mutating func record(exception: RbException) {
+        func record(exception: RbException) {
             record(error: .rubyException(exception))
         }
     }
@@ -114,7 +114,7 @@ public enum RbError: Error {
     }
 
     /// A short history of errors thrown by RubyGateway
-    public static var history = History()
+    public static let history = History()
 }
 
 // MARK: - CustomStringConvertible

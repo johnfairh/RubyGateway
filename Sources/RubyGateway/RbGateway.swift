@@ -4,7 +4,7 @@
 //
 //  Distributed under the MIT license, see LICENSE
 //
-@_implementationOnly import CRuby
+@preconcurrency @_implementationOnly import CRuby
 @_implementationOnly import RubyGatewayHelpers
 
 /// Provides top-level Ruby services: information about the Ruby VM, evaluate
@@ -58,7 +58,7 @@
 /// to define new classes and modules.  Then add methods using `RbObject.defineMethod(...)`
 /// and `RbObject.defineSingletonMethod(...)`.
 ///
-public final class RbGateway: RbObjectAccess {
+public final class RbGateway: RbObjectAccess, @unchecked Sendable {
 
     /// The VM - not initialized until `setup()` is called.
     static let vm = RbVM()
@@ -88,7 +88,7 @@ public final class RbGateway: RbObjectAccess {
     ///
     /// - returns: 0 if the cleanup went fine, otherwise some error code from Ruby.
     public func cleanup() -> Int32 {
-        return RbGateway.vm.cleanup()
+        RbGateway.vm.cleanup()
     }
 
     /// Get an `ID` ready to call a method, for example.
@@ -101,7 +101,7 @@ public final class RbGateway: RbObjectAccess {
     /// - throws: `RbError.rubyException(_:)` if Ruby raises an exception.  This
     ///   probably means the `ID` space is full, which is fairly unlikely.
     public func getID(for name: String) throws -> RbObject.VALUE {
-        return try RbGateway.vm.getID(for: name)
+        try RbGateway.vm.getID(for: name)
     }
 
     /// Attempt to initialize Ruby but swallow any error.
@@ -247,19 +247,19 @@ extension RbGateway {
 
     /// The component major/minor/teeny version numbers of Ruby being used.
     public var apiVersion: (Int32, Int32, Int32) {
-        return ruby_api_version
+        ruby_api_version
     }
 
     /// The version number triple of Ruby being used, for example *2.5.0*.
     public var version: String {
-        return String(cString: rbg_ruby_version())
+        String(cString: rbg_ruby_version())
     }
 
     /// The full version string for the Ruby being used.
     ///
     /// For example *ruby 2.5.0p0 (2017-12-25 revision 61468) [x86_64-darwin17]*.
     public var versionDescription: String {
-        return String(cString: rbg_ruby_description())
+        String(cString: rbg_ruby_description())
     }
 
     /// Set the program arguments for the Ruby VM.

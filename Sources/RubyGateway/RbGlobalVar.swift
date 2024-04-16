@@ -4,7 +4,6 @@
 //
 //  Distributed under the MIT license, see LICENSE
 //
-@_implementationOnly import CRuby
 @_implementationOnly import RubyGatewayHelpers
 
 // Some simple thunking code to wrap up rb_gvar_* code.
@@ -27,7 +26,7 @@ private func rbobject_gvar_set_callback(id: ID,
 private enum RbGlobalVar {
 
     /// One-time init to register the callbacks
-    private static var initOnce: Void = {
+    private static let initOnce: Void = {
         rbg_register_gvar_callbacks(rbobject_gvar_get_callback,
                                     rbobject_gvar_set_callback)
     }()
@@ -38,7 +37,7 @@ private enum RbGlobalVar {
         let set: ((RbObject) throws -> Void)?
     }
 
-    private static var contexts: [ID: Context] = [:]
+    private static let contexts = LockedDictionary<ID, Context>()
 
     /// Create thunks to 
     static func create<T: RbObjectConvertible>(name: String,
@@ -48,14 +47,15 @@ private enum RbGlobalVar {
         let id = rbg_create_virtual_gvar(name, set == nil ? 1 : 0)
         let getter = { get().rubyObject }
         if let set = set {
-            contexts[id] = Context(get: getter,
-                                   set: { newRbObject in
-                                          guard let typed = T(newRbObject) else {
-                                              throw RbException(message: "Bad type of \(newRbObject) expected \(T.self)")
-                                          }
-                                          try set(typed)
-                                        }
-                                  )
+            contexts[id] =
+                    Context(get: getter,
+                            set: { newRbObject in
+                                    guard let typed = T(newRbObject) else {
+                                        throw RbException(message: "Bad type of \(newRbObject) expected \(T.self)")
+                                    }
+                                    try set(typed)
+                                }
+                            )
         }
         else {
             contexts[id] = Context(get: getter, set: nil)

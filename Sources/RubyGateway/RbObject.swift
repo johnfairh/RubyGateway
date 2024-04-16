@@ -85,7 +85,7 @@
 /// Use `RbObject.defineMethod(...)` and `RbObject.defineSingletonMethod(...)` to
 /// add methods implemented in Swift to an object or class.  Use
 /// `RbGateway.defineClass(_:parent:under:)` to define entirely new classes.
-public final class RbObject: RbObjectAccess {
+public final class RbObject: RbObjectAccess, @unchecked Sendable {
     internal let valueBox: UnsafeMutablePointer<Rbg_value>
 
     /// Convenience typealias to avoid exposing all of CRuby :nodoc:
@@ -128,7 +128,7 @@ public final class RbObject: RbObjectAccess {
     /// too hard to use safely outside of the instance!
     /// Use `withRubyValue(...)` instead.
     fileprivate var rubyValue: VALUE {
-        return valueBox.pointee.value
+        valueBox.pointee.value
     }
 
     /// Safely access the `VALUE` object handle for use with the Ruby C API.
@@ -138,18 +138,18 @@ public final class RbObject: RbObjectAccess {
     /// - parameter call: The closure to pass the object's `VALUE` on to.
     @discardableResult
     public func withRubyValue<T>(call: (VALUE) throws -> T) rethrows -> T {
-        return try call(rubyValue)
+        try call(rubyValue)
     }
 
     /// The Ruby type of this object.  This is a fairly unfriendly enum but
     /// might be useful for debugging.
     public var rubyType: RbType {
-        return TYPE(rubyValue)
+        TYPE(rubyValue)
     }
 
     /// Is the Ruby object truthy?
     public var isTruthy: Bool {
-        return rbg_RB_TEST(rubyValue) != 0
+        rbg_RB_TEST(rubyValue) != 0
     }
 
     /// Is the Ruby object `nil`?
@@ -161,7 +161,7 @@ public final class RbObject: RbObjectAccess {
     /// If you've got Ruby `nil` -- that is, you've got `RbObject.isNil` -- then
     /// Ruby worked but the call evaluated to [Ruby] `nil`.
     public var isNil: Bool {
-        return rbg_RB_NIL_P(rubyValue) != 0
+        rbg_RB_NIL_P(rubyValue) != 0
     }
 
     /// An `RbObject` that means `nil` to Ruby.
@@ -181,7 +181,7 @@ public final class RbObject: RbObjectAccess {
     /// `RbObjectCollection.rubyObject` to obtain a collection's underlying Ruby array.
     public var collection: RbObjectCollection {
         get {
-            return RbObjectCollection(self)
+            RbObjectCollection(self)
         }
         set {
             precondition(rubyValue == newValue.rubyObject.rubyValue)
@@ -396,7 +396,7 @@ extension Array where Element == RbObject {
     /// Prevents Swift from dealloc'ing the objects for the duration of the call.
     /// - parameter call: Closure to pass the `VALUE`s on to.
     internal func withRubyValues<T>(call: ([VALUE]) throws -> T) rethrows -> T {
-        return try call(map { $0.rubyValue })
+        try call(map { $0.rubyValue })
     }
 }
 

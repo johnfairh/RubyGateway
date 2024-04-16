@@ -523,7 +523,20 @@ very difficult for readers to ignore the possibility of errors.
 ## Concurrency
 
 RubyGateway inherits Ruby's threading model.  This means you can only use
-RubyGateway APIs on the first/main thread and any other threads created by Ruby.
+RubyGateway APIs on the first thread from which you use a RubyGateway API, and
+then any other threads created by Ruby.
+
+Outside of the very first time, it's not possible to call Ruby on a random
+thread created either directly by your program or by the Swift concurrency /
+Dispatch runtime.
+
+A reasonable pattern is to call `RbGateway.setup()` during system startup on
+the Swift `@MainActor` and then treat Ruby calls as requiring isolation to
+that actor.  If you take calls _from_ Ruby on Ruby-created threads, and
+servicing these requires access to your Swift concurrency executors, then you
+have to start a `Task` to do this, blocking & then resuming the (Ruby) thread
+while that work happens.  You have to be really careful with the GVL here to
+avoid deadlocks or worse.
 
 `RbThread` provides some static helpers for creating Ruby threads and
 relinquishing the GVL: consult the internet for further guidance.

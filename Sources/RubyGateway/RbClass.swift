@@ -4,7 +4,7 @@
 //
 //  Distributed under the MIT license, see LICENSE
 //
-@_implementationOnly import CRuby
+@preconcurrency @_implementationOnly import CRuby
 @_implementationOnly import RubyGatewayHelpers
 
 //
@@ -49,11 +49,11 @@ private func rbbinding_free(className: UnsafePointer<Int8>, instance: UnsafeMuta
 internal enum RbClassBinding {
 
     /// One-time init to register the callbacks
-    private static var initOnce: Void = {
+    private static let initOnce: Void = {
         rbg_register_object_binding_callbacks(rbbinding_alloc, rbbinding_free)
     }()
 
-    private static var bindings = [String : RbBoundClassProtocol]()
+    private static let bindings = LockedDictionary<String, any RbBoundClassProtocol>()
 
     fileprivate static func register<T: AnyObject>(name: String, initializer: @escaping () -> T) {
         let _ = initOnce

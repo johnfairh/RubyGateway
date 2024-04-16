@@ -1,4 +1,4 @@
-// swift-tools-version:5.4.0
+// swift-tools-version:5.9
 
 //  Package.swift
 //  RubyGateway
@@ -20,7 +20,12 @@ let package = Package(
     targets: [
         .target(
             name: "RubyGateway",
-            dependencies: ["RubyGatewayHelpers", "CRuby"]),
+            dependencies: ["RubyGatewayHelpers", "CRuby"],
+            swiftSettings: [
+                .enableExperimentalFeature("AccessLevelOnImport"),
+                .enableExperimentalFeature("StrictConcurrency")
+            ]
+        ),
         .target(
             name: "RubyGatewayHelpers",
             dependencies: ["CRuby"]),

@@ -24,7 +24,7 @@ internal final class RbThreadContext {
 
     /// Retrieve an `RbThreadContext` from its `void *` representation
     static func from(raw: UnsafeMutableRawPointer) -> RbThreadContext {
-        return Unmanaged<RbThreadContext>.fromOpaque(raw).takeUnretainedValue()
+        Unmanaged<RbThreadContext>.fromOpaque(raw).takeUnretainedValue()
     }
 }
 
@@ -66,8 +66,8 @@ public enum RbThread {
     /// - parameter callback: Callback to make on the new thread
     /// - returns: The Ruby `Thread` object, or `nil` if there was a problem.
     ///            See `RbError.history` for details of any error.
-    public static func create(callback: @escaping () -> Void) -> RbObject? {
-        return RbObject(ofClass: "Thread", retainBlock: true) { args in
+    public static func create(callback: @Sendable @escaping () -> Void) -> RbObject? {
+        RbObject(ofClass: "Thread", retainBlock: true) { args in
             callback()
             return .nilObject
         }
@@ -78,7 +78,7 @@ public enum RbThread {
     /// - returns: `true` if this is the main thread or another created by Ruby
     ///            where it's OK to call Ruby functions.
     public static func isRubyThread() -> Bool {
-        return ruby_native_thread_p() != 0
+        ruby_native_thread_p() != 0
     }
 
     /// From a Ruby thread, run some non-Ruby code without the GVL.
