@@ -30,7 +30,7 @@ public struct RbSymbol: RbObjectConvertible, Hashable {
     /// Always fails - no use for this, just use the `RbObject`.
     /// :nodoc:
     public init?(_ value: RbObject) {
-        return nil
+        nil
     }
 
     /// A Ruby object for the symbol
@@ -48,6 +48,6 @@ public struct RbSymbol: RbObjectConvertible, Hashable {
 extension RbSymbol: CustomStringConvertible {
     /// A textual representation of the `RbSymbol`
     public var description: String {
-        return "RbSymbol(\(name))"
+        "RbSymbol(\(name))"
     }
 }

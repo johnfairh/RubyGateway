@@ -109,13 +109,13 @@ public class RbObjectAccess {
     /// - throws: `RbError.badIdentifier(type:id:)` if `name` looks wrong.
     ///           `RbError.rubyException(_:)` if Ruby has a problem.
     @discardableResult
-    public func setInstanceVar(_ name: String, newValue: RbObjectConvertible?) throws -> RbObject {
+    public func setInstanceVar(_ name: String, newValue: (any RbObjectConvertible)?) throws -> RbObject {
         try Ruby.setup()
         try name.checkRubyInstanceVarName()
         let id = try Ruby.getID(for: name)
 
         return RbObject(rubyValue: newValue.rubyObject.withRubyValue { newRubyValue in
-            return rb_ivar_set(getValue(), id, newRubyValue)
+            rb_ivar_set(getValue(), id, newRubyValue)
         })
     }
 }
@@ -189,7 +189,7 @@ extension RbObjectAccess {
     ///           `rubyException(_:)` if there is a Ruby exception.
     ///           `RbError.badType(_:)` if the current object is not a class or module.
     @discardableResult
-    public func setConstant(_ name: String, newValue: RbObjectConvertible?) throws -> RbObject {
+    public func setConstant(_ name: String, newValue: (any RbObjectConvertible)?) throws -> RbObject {
         try Ruby.setup()
         try name.checkRubyConstantPath()
 
@@ -266,8 +266,8 @@ extension RbObjectAccess {
     /// For a version that does not throw, see `failable`.
     @discardableResult
     public func call(_ methodName: String,
-                     args: [RbObjectConvertible?] = [],
-                     kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:]) throws -> RbObject {
+                     args: [(any RbObjectConvertible)?] = [],
+                     kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:]) throws -> RbObject {
         try Ruby.setup()
         let methodId = try Ruby.getID(for: methodName)
         return try doCall(id: methodId, args: args, kwArgs: kwArgs)
@@ -288,8 +288,8 @@ extension RbObjectAccess {
     /// For a version that does not throw, see `failable`.
     @discardableResult
     public func call(_ methodName: String,
-                     args: [RbObjectConvertible?] = [],
-                     kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:],
+                     args: [(any RbObjectConvertible)?] = [],
+                     kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:],
                      blockRetention: RbBlockRetention = .none,
                      blockCall: @escaping RbBlockCallback) throws -> RbObject {
         try Ruby.setup()
@@ -314,9 +314,9 @@ extension RbObjectAccess {
     /// For a version that does not throw, see `failable`.
     @discardableResult
     public func call(_ methodName: String,
-                     args: [RbObjectConvertible?] = [],
-                     kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:],
-                     block: RbObjectConvertible) throws -> RbObject {
+                     args: [(any RbObjectConvertible)?] = [],
+                     kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:],
+                     block: any RbObjectConvertible) throws -> RbObject {
         try Ruby.setup()
         let methodId = try Ruby.getID(for: methodName)
         return try doCall(id: methodId, args: args, kwArgs: kwArgs, block: block)
@@ -334,9 +334,9 @@ extension RbObjectAccess {
     ///
     /// For a version that does not throw, see `failable`.
     @discardableResult
-    public func call(symbol: RbObjectConvertible,
-                     args: [RbObjectConvertible?] = [],
-                     kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:]) throws -> RbObject {
+    public func call(symbol: any RbObjectConvertible,
+                     args: [(any RbObjectConvertible)?] = [],
+                     kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:]) throws -> RbObject {
         try Ruby.setup()
         return try symbol.rubyObject.withSymbolId { methodId in
             try doCall(id: methodId, args: args, kwArgs: kwArgs)
@@ -358,9 +358,9 @@ extension RbObjectAccess {
     ///
     /// For a version that does not throw, see `failable`.
     @discardableResult
-    public func call(symbol: RbObjectConvertible,
-                     args: [RbObjectConvertible?] = [],
-                     kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:],
+    public func call(symbol: any RbObjectConvertible,
+                     args: [(any RbObjectConvertible)?] = [],
+                     kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:],
                      blockRetention: RbBlockRetention = .none,
                      blockCall: @escaping RbBlockCallback) throws -> RbObject {
         try Ruby.setup()
@@ -383,10 +383,10 @@ extension RbObjectAccess {
     ///
     /// For a version that does not throw, see `failable`.
     @discardableResult
-    public func call(symbol: RbObjectConvertible,
-                     args: [RbObjectConvertible?] = [],
-                     kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:],
-                     block: RbObjectConvertible) throws -> RbObject {
+    public func call(symbol: any RbObjectConvertible,
+                     args: [(any RbObjectConvertible)?] = [],
+                     kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:],
+                     block: any RbObjectConvertible) throws -> RbObject {
         try Ruby.setup()
         return try symbol.rubyObject.withSymbolId { methodId in
             try doCall(id: methodId, args: args, kwArgs: kwArgs, block: block)
@@ -395,10 +395,10 @@ extension RbObjectAccess {
 
     /// Backend to method-call / message-send.
     private func doCall(id: ID, 
-                        args: [RbObjectConvertible?],
-                        kwArgs: KeyValuePairs<String, RbObjectConvertible?>,
+                        args: [(any RbObjectConvertible)?],
+                        kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?>,
                         blockRetention: RbBlockRetention = .none,
-                        block: RbObjectConvertible? = nil,
+                        block: (any RbObjectConvertible)? = nil,
                         blockCall: RbBlockCallback? = nil) throws -> RbObject {
         // Sort out unlikely block errors
         let blockObj: RbObject?
@@ -452,9 +452,8 @@ extension RbObjectAccess {
     }
 
     /// Helper to massage Swift-format args ready for the API
-    internal static func flattenArgs(args: [RbObjectConvertible?],
-                                     kwArgs: KeyValuePairs<String, RbObjectConvertible?>) throws -> [RbObject] {
-
+    internal static func flattenArgs(args: [(any RbObjectConvertible)?],
+                                     kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?>) throws -> [RbObject] {
         var argObjects = args.map { $0.rubyObject }
 
         if kwArgs.count > 0 {
@@ -464,7 +463,7 @@ extension RbObjectAccess {
     }
 
     /// Build a keyword args hash.  The keys are Symbols of the keywords.
-    private static func buildKwArgsHash(from kwArgs: KeyValuePairs<String, RbObjectConvertible?>) throws -> RbObject {
+    private static func buildKwArgsHash(from kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?>) throws -> RbObject {
         let hashValue = rb_hash_new()
         try kwArgs.forEach { (key, value) in
             try RbSymbol(key).rubyObject.withRubyValue { symValue in
@@ -514,7 +513,7 @@ extension RbObjectAccess {
     ///           `RbError.rubyException(_:)` if Ruby has a problem, probably means
     ///           `attribute` doesn't exist.
     @discardableResult
-    public func setAttribute(_ name: String, newValue: RbObjectConvertible?) throws -> RbObject {
+    public func setAttribute(_ name: String, newValue: (any RbObjectConvertible)?) throws -> RbObject {
         try name.checkRubyMethodName()
         return try call("\(name)=", args: [newValue])
     }
@@ -575,7 +574,7 @@ extension RbObjectAccess {
     ///           `RbError.badType(_:)` if the object is not a class.
     ///           `RbError.rubyException(_:)` if Ruby has a problem.
     @discardableResult
-    public func setClassVar(_ name: String, newValue: RbObjectConvertible?) throws -> RbObject {
+    public func setClassVar(_ name: String, newValue: (any RbObjectConvertible)?) throws -> RbObject {
         try Ruby.setup()
         try name.checkRubyClassVarName()
         try hasClassVars()
@@ -626,7 +625,7 @@ extension RbObjectAccess {
     /// make construction of `RbFailableAccess` a bit easier.  Best practice probably
     /// to avoid calling the `RbObject` version.)
     @discardableResult
-    public func setGlobalVar(_ name: String, newValue: RbObjectConvertible?) throws -> RbObject {
+    public func setGlobalVar(_ name: String, newValue: (any RbObjectConvertible)?) throws -> RbObject {
         try Ruby.setup()
         try name.checkRubyGlobalVarName()
 

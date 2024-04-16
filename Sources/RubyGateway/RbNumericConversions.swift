@@ -30,7 +30,7 @@ extension UInt64: RbObjectConvertible {
 
     /// A Ruby object for the number.
     public var rubyObject: RbObject {
-        return UInt(self).rubyObject
+        UInt(self).rubyObject
     }
 }
 
@@ -54,7 +54,7 @@ extension UInt32: RbObjectConvertible {
 
     /// A Ruby object for the number.
     public var rubyObject: RbObject {
-        return UInt(self).rubyObject
+        UInt(self).rubyObject
     }
 }
 
@@ -78,7 +78,7 @@ extension UInt16: RbObjectConvertible {
 
     /// A Ruby object for the number.
     public var rubyObject: RbObject {
-        return UInt(self).rubyObject
+        UInt(self).rubyObject
     }
 }
 
@@ -102,7 +102,7 @@ extension UInt8: RbObjectConvertible {
 
     /// A Ruby object for the number.
     public var rubyObject: RbObject {
-        return UInt(self).rubyObject
+        UInt(self).rubyObject
     }
 }
 
@@ -127,7 +127,7 @@ extension Int64: RbObjectConvertible {
 
     /// A Ruby object for the number.
     public var rubyObject: RbObject {
-        return Int(self).rubyObject
+        Int(self).rubyObject
     }
 }
 
@@ -150,7 +150,7 @@ extension Int32: RbObjectConvertible {
 
     /// A Ruby object for the number.
     public var rubyObject: RbObject {
-        return Int(self).rubyObject
+        Int(self).rubyObject
     }
 }
 
@@ -173,7 +173,7 @@ extension Int16: RbObjectConvertible {
 
     /// A Ruby object for the number.
     public var rubyObject: RbObject {
-        return Int(self).rubyObject
+        Int(self).rubyObject
     }
 }
 
@@ -196,7 +196,7 @@ extension Int8: RbObjectConvertible {
 
     /// A Ruby object for the number.
     public var rubyObject: RbObject {
-        return Int(self).rubyObject
+        Int(self).rubyObject
     }
 }
 
@@ -226,6 +226,6 @@ extension Float: RbObjectConvertible {
 
     /// A Ruby object for the number.
     public var rubyObject: RbObject {
-        return Double(self).rubyObject
+        Double(self).rubyObject
     }
 }

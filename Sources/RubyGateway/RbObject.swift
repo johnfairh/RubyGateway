@@ -246,8 +246,8 @@ extension RbObject {
     /// - parameter args: positional arguments to pass to `new` call for the object.  Default none.
     /// - parameter kwArgs: keyword arguments to pass to the `new` call for the object.  Default none.
     public convenience init?(ofClass className: String,
-                             args: [RbObjectConvertible?] = [],
-                             kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:]) {
+                             args: [(any RbObjectConvertible)?] = [],
+                             kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:]) {
         guard let obj = try? Ruby.get(className).call("new", args: args, kwArgs: kwArgs) else {
             return nil
         }
@@ -268,8 +268,8 @@ extension RbObject {
     ///             using `Proc#new`.
     /// - parameter blockCall: Swift code to pass as a block to the method.
     public convenience init?(ofClass className: String,
-                             args: [RbObjectConvertible?] = [],
-                             kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:],
+                             args: [(any RbObjectConvertible)?] = [],
+                             kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:],
                              retainBlock: Bool = false,
                              blockCall: @escaping RbBlockCallback) {
         let retention: RbBlockRetention = retainBlock ? .returned : .none
@@ -326,7 +326,7 @@ extension RbObject: CustomStringConvertible,
 
     /// The text from `description`.
     public var playgroundDescription: Any {
-        return description
+        description
     }
 }
 

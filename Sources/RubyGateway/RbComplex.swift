@@ -52,7 +52,7 @@ public struct RbComplex: RbObjectConvertible {
     /// ```swift
     /// let compl = RbComplex("1+2.3i")
     /// ```
-    public init?(_ value: RbObjectConvertible) {
+    public init?(_ value: any RbObjectConvertible) {
         self.init(value.rubyObject)
     }
 

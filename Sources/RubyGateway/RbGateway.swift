@@ -159,7 +159,7 @@ public final class RbGateway: RbObjectAccess, @unchecked Sendable {
     /// - throws: `RbError.badIdentifier(type:id:)` if `name` looks wrong.
     ///           `RbError.rubyException(_:)` if Ruby has a problem.
     @discardableResult
-    public override func setInstanceVar(_ name: String, newValue: RbObjectConvertible?) throws -> RbObject {
+    public override func setInstanceVar(_ name: String, newValue: (any RbObjectConvertible)?) throws -> RbObject {
         try setup()
         try name.checkRubyInstanceVarName()
 
@@ -309,7 +309,7 @@ extension RbGateway {
     public func require(filename: String) throws -> Bool {
         // Have to use eval so that gems work - rubygems/kernel_require.rb replaces
         // `Kernel#require` so it can do the gem thing, so `rb_require` is no good.
-        return try eval(ruby: "require '\(filename)'").isTruthy
+        try eval(ruby: "require '\(filename)'").isTruthy
     }
 
     /// See Ruby `Kernel#load`. Load a file, reloads if already loaded.

@@ -39,7 +39,7 @@ extension RbObjectAccess {
     /// Get a version of this API that returns `nil` instead of throwing errors.
     /// See `RbFailableAccess`.
     public var failable: RbFailableAccess {
-        return RbFailableAccess(access: self)
+        RbFailableAccess(access: self)
     }
 }
 
@@ -56,9 +56,9 @@ extension RbFailableAccess {
     /// - parameter kwArgs: The keyword arguments to the method, none by default.
     /// - returns: An `RbObject` for the result of the method, or `nil` if an error occurred.
     public func call(_ method: String,
-                     args: [RbObjectConvertible?] = [],
-                     kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:]) -> RbObject? {
-        return try? access.call(method, args: args, kwArgs: kwArgs)
+                     args: [(any RbObjectConvertible)?] = [],
+                     kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:]) -> RbObject? {
+        try? access.call(method, args: args, kwArgs: kwArgs)
     }
 
     /// Call a method of a Ruby object passing Swift code as a block.
@@ -74,11 +74,11 @@ extension RbFailableAccess {
     /// - parameter blockCall: Swift code to pass as a block to the method.
     /// - returns: An `RbObject` for the result of the method, or `nil` if an error occurred.
     public func call(_ method: String,
-                     args: [RbObjectConvertible?] = [],
-                     kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:],
+                     args: [(any RbObjectConvertible)?] = [],
+                     kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:],
                      blockRetention: RbBlockRetention = .none,
                      blockCall: @escaping RbBlockCallback) -> RbObject? {
-        return try? access.call(method, args: args, kwArgs: kwArgs, blockRetention: blockRetention, blockCall: blockCall)
+        try? access.call(method, args: args, kwArgs: kwArgs, blockRetention: blockRetention, blockCall: blockCall)
     }
 
     /// Call a method of a Ruby object passing a Ruby Proc as a block.
@@ -92,10 +92,10 @@ extension RbFailableAccess {
     /// - parameter block: A Ruby proc to pass as a block to the method.
     /// - returns: An `RbObject` for the result of the method, or `nil` if an error occurred.
     public func call(_ method: String,
-                     args: [RbObjectConvertible?] = [],
-                     kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:],
-                     block: RbObjectConvertible) -> RbObject? {
-        return try? access.call(method, args: args, kwArgs: kwArgs, block: block)
+                     args: [(any RbObjectConvertible)?] = [],
+                     kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:],
+                     block: any RbObjectConvertible) -> RbObject? {
+        try? access.call(method, args: args, kwArgs: kwArgs, block: block)
     }
 
     /// Call a method of a Ruby object using a symbol.
@@ -108,10 +108,10 @@ extension RbFailableAccess {
     /// - parameter kwArgs: The keyword arguments to the method, none by default.
     /// - returns: An `RbObject` for the result of the method, or `nil` if an error occurred.
     @discardableResult
-    public func call(symbol: RbObjectConvertible,
-                     args: [RbObjectConvertible?] = [],
-                     kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:]) -> RbObject? {
-        return try? access.call(symbol: symbol, args: args, kwArgs: kwArgs)
+    public func call(symbol: any RbObjectConvertible,
+                     args: [(any RbObjectConvertible)?] = [],
+                     kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:]) -> RbObject? {
+        try? access.call(symbol: symbol, args: args, kwArgs: kwArgs)
     }
 
     /// Call a method of a Ruby object using a symbol passing Swift code as a block.
@@ -127,12 +127,12 @@ extension RbFailableAccess {
     /// - parameter blockCall: Swift code to pass as a block to the method.
     /// - returns: An `RbObject` for the result of the method, or `nil` if an error occurred.
     @discardableResult
-    public func call(symbol: RbObjectConvertible,
-                     args: [RbObjectConvertible?] = [],
-                     kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:],
+    public func call(symbol: any RbObjectConvertible,
+                     args: [(any RbObjectConvertible)?] = [],
+                     kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:],
                      blockRetention: RbBlockRetention = .none,
                      blockCall: @escaping RbBlockCallback) -> RbObject? {
-        return try? access.call(symbol: symbol, args: args, kwArgs: kwArgs, blockRetention: blockRetention, blockCall: blockCall)
+        try? access.call(symbol: symbol, args: args, kwArgs: kwArgs, blockRetention: blockRetention, blockCall: blockCall)
     }
 
     /// Call a method of a Ruby object using a symbol passing a Ruby Proc as a block.
@@ -146,11 +146,11 @@ extension RbFailableAccess {
     /// - parameter block: A Ruby proc to pass as a block to the method.
     /// - returns: An `RbObject` for the result of the method, or `nil` if an error occurred.
     @discardableResult
-    public func call(symbol: RbObjectConvertible,
-                     args: [RbObjectConvertible?] = [],
-                     kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:],
-                     block: RbObjectConvertible) -> RbObject? {
-        return try? access.call(symbol: symbol, args: args, kwArgs: kwArgs, block: block)
+    public func call(symbol: any RbObjectConvertible,
+                     args: [(any RbObjectConvertible)?] = [],
+                     kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:],
+                     block: any RbObjectConvertible) -> RbObject? {
+        try? access.call(symbol: symbol, args: args, kwArgs: kwArgs, block: block)
     }
 }
 
@@ -165,7 +165,7 @@ extension RbFailableAccess {
     /// - parameter name: The attribute to access.
     /// - returns: The value of the attribute, or `nil` if an error occurred.
     public func getAttribute(_ name: String) -> RbObject? {
-        return try? access.getAttribute(name)
+        try? access.getAttribute(name)
     }
 
     /// Set an attribute of a Ruby object.
@@ -176,8 +176,8 @@ extension RbFailableAccess {
     /// - parameter name: The attribute to set.
     /// - parameter newValue: The new value for the attribute.
     /// - returns: The value set to the attribute, or `nil` if an error occurred.
-    public func setAttribute(_ name: String, newValue: RbObjectConvertible?) -> RbObject? {
-        return try? access.setAttribute(name, newValue: newValue)
+    public func setAttribute(_ name: String, newValue: (any RbObjectConvertible)?) -> RbObject? {
+        try? access.setAttribute(name, newValue: newValue)
     }
 }
 
@@ -192,7 +192,7 @@ extension RbFailableAccess {
     /// - parameter name: The name of the constant to look up.
     /// - returns: An `RbObject` for the constant or `nil` if an error occurred.
     public func getConstant(_ name: String) -> RbObject? {
-        return try? access.getConstant(name)
+        try? access.getConstant(name)
     }
 
     /// Get an `RbObject` that represents a Ruby class.
@@ -203,7 +203,7 @@ extension RbFailableAccess {
     /// - parameter name: The name of the class to look up.
     /// - returns: An `RbObject` for the class or `nil` if an error occurred.
     public func getClass(_ name: String) -> RbObject? {
-        return try? access.getClass(name)
+        try? access.getClass(name)
     }
 
     /// Bind an object to a constant name.
@@ -215,8 +215,8 @@ extension RbFailableAccess {
     /// - parameter newValue: The value for the constant.
     /// - returns: The value set for the constant or `nil` if an error occurred.
     @discardableResult
-    public func setConstant(_ name: String, newValue: RbObjectConvertible?) -> RbObject? {
-        return try? access.setConstant(name, newValue: newValue)
+    public func setConstant(_ name: String, newValue: (any RbObjectConvertible)?) -> RbObject? {
+        try? access.setConstant(name, newValue: newValue)
     }
 }
 
@@ -231,7 +231,7 @@ extension RbFailableAccess {
     /// - parameter name: Name of the IVar.  Must begin with a single `@`.
     /// - returns: Value of the IVar, or `nil` if an error occurred.
     public func getInstanceVar(_ name: String) -> RbObject? {
-        return try? access.getInstanceVar(name)
+        try? access.getInstanceVar(name)
     }
 
     /// Set a Ruby instance variable.
@@ -243,8 +243,8 @@ extension RbFailableAccess {
     /// - parameter newValue: The new value for the IVar.
     /// - returns: The value that was set, or nil if an error occurred.
     @discardableResult
-    public func setInstanceVar(_ name: String, newValue: RbObjectConvertible?) -> RbObject? {
-        return try? access.setInstanceVar(name, newValue: newValue)
+    public func setInstanceVar(_ name: String, newValue: (any RbObjectConvertible)?) -> RbObject? {
+        try? access.setInstanceVar(name, newValue: newValue)
     }
 }
 
@@ -261,7 +261,7 @@ extension RbFailableAccess {
     /// - parameter name: Name of the CVar.  Must begin with `@@`.
     /// - returns: Value of the CVar, or `nil` if an error occurred.
     public func getClassVar(_ name: String) -> RbObject? {
-        return try? access.getClassVar(name)
+        try? access.getClassVar(name)
     }
 
     /// Set or create a Ruby class variable.
@@ -275,8 +275,8 @@ extension RbFailableAccess {
     /// - parameter newValue: The new value for the CVar.
     /// - returns: The value that was set, or `nil` if an error occurred.
     @discardableResult
-    public func setClassVar(_ name: String, newValue: RbObjectConvertible?) -> RbObject? {
-        return try? access.setClassVar(name, newValue: newValue)
+    public func setClassVar(_ name: String, newValue: (any RbObjectConvertible)?) -> RbObject? {
+        try? access.setClassVar(name, newValue: newValue)
     }
 }
 
@@ -291,7 +291,7 @@ extension RbFailableAccess {
     /// - parameter name: Name of the global variable.  Must begin with `$`.
     /// - returns: Value of the variable, or `nil` if an error occurred.
     public func getGlobalVar(_ name: String) -> RbObject? {
-        return try? access.getGlobalVar(name)
+        try? access.getGlobalVar(name)
     }
 
     /// Set a Ruby global variable.
@@ -303,8 +303,8 @@ extension RbFailableAccess {
     /// - parameter newValue: The new value for the variable.
     /// - returns: The value that was set, or `nil` if an error occurred.
     @discardableResult
-    public func setGlobalVar(_ name: String, newValue: RbObjectConvertible?) -> RbObject? {
-        return try? access.setGlobalVar(name, newValue: newValue)
+    public func setGlobalVar(_ name: String, newValue: (any RbObjectConvertible)?) -> RbObject? {
+        try? access.setGlobalVar(name, newValue: newValue)
     }
 }
 
@@ -320,6 +320,6 @@ extension RbFailableAccess {
     /// - returns: Retrieved object, or `nil` if an error occurred.
     @discardableResult
     public func get(_ name: String) -> RbObject? {
-        return try? access.get(name)
+        try? access.get(name)
     }
 }

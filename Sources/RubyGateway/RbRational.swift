@@ -68,7 +68,7 @@ public struct RbRational: RbObjectConvertible {
     /// ```swift
     /// let rat = RbRational(0.3)
     /// ```
-    public init?(_ value: RbObjectConvertible) {
+    public init?(_ value: any RbObjectConvertible) {
         self.init(value.rubyObject)
     }
 

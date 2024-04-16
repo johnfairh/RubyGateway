@@ -12,7 +12,6 @@ internal import RubyGatewayHelpers
 /// generates `RbError.rubyJump(_:)`, and the other cases correspond
 /// to error conditions encountered by the Swift software.
 public enum RbError: Error {
-
     // MARK: - Cases
 
     /// The Ruby VM could not be set up.
@@ -124,19 +123,19 @@ extension RbError: CustomStringConvertible {
     public var description: String {
         switch self {
         case let .setup(msg):
-            return "Can't set up Ruby: \(msg)"
+            "Can't set up Ruby: \(msg)"
         case let .badType(msg):
-            return "Object has bad type: \(msg)"
+            "Object has bad type: \(msg)"
         case let .badParameter(msg):
-            return "Parameter has bad value: \(msg)"
+            "Parameter has bad value: \(msg)"
         case let .badIdentifier(type, id):
-            return "Bad Ruby identifier: '\(id)' does not look like \(type) name."
+            "Bad Ruby identifier: '\(id)' does not look like \(type) name."
         case let .duplicateKwArg(key):
-            return "Duplicate keyword arg \(key) on call()."
+            "Duplicate keyword arg \(key) on call()."
         case let .rubyException(exn):
-            return "Ruby exception: \(exn)"
+            "Ruby exception: \(exn)"
         case let .rubyJump(tag):
-            return "Ruby jump flow control: \(tag)"
+            "Ruby jump flow control: \(tag)"
         }
     }
 }
@@ -162,7 +161,7 @@ public struct RbBreak: Error {
     ///
     /// - parameter object: the value to give as the result of the iteration.
     ///                     Default `nil` equivalent to raw `break` in Ruby.
-    public init(with object: RbObjectConvertible? = nil) {
+    public init(with object: (any RbObjectConvertible)? = nil) {
         self.object = object?.rubyObject
     }
 }

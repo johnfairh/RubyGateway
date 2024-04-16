@@ -107,8 +107,8 @@ private struct RbMethodId: Hashable {
     let mid: Rbg_method_id
 
     public static func == (lhs: RbMethodId, rhs: RbMethodId) -> Bool {
-        return (lhs.mid.method == rhs.mid.method) &&
-               (lhs.mid.target == rhs.mid.target)
+        (lhs.mid.method == rhs.mid.method) &&
+            (lhs.mid.target == rhs.mid.target)
     }
 
     public func hash(into hasher: inout Hasher) {
@@ -123,7 +123,7 @@ private struct RbMethodExec {
     let argsSpec: RbMethodArgsSpec
 
     /// The Swift implementation of the method.
-    var callback: RbMethodCallback
+    let callback: RbMethodCallback
 
     /// Validate the given args against the spec and if good,
     /// invoke the user function.
@@ -205,7 +205,7 @@ public struct RbMethod {
 
     /// Has the method been passed a block?
     public var isBlockGiven: Bool {
-        return rb_block_given_p() != 0
+        rb_block_given_p() != 0
     }
 
     /// Raise an exception if the method has not been passed a block.
@@ -227,8 +227,8 @@ public struct RbMethod {
     ///     You should not attempt to handle `rubyJump` errors: rethrow them
     ///     back to Ruby as soon as possible.
     @discardableResult
-    public func yieldBlock(args: [RbObjectConvertible?] = [],
-                           kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:]) throws -> RbObject {
+    public func yieldBlock(args: [(any RbObjectConvertible)?] = [],
+                           kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:]) throws -> RbObject {
         let rubyArgs = try RbObjectAccess.flattenArgs(args: args, kwArgs: kwArgs)
         return RbObject(rubyValue: try rubyArgs.withRubyValues { argValues in
             try RbVM.doProtect { tag in
@@ -263,8 +263,8 @@ public struct RbMethod {
     /// - Returns: The value returned by the superclass method.
     /// - Throws: `RbError.rubyException(_:)` if there is a Ruby exception.
     ///           `RbError.duplicateKwArg(_:)` if there are duplicate keywords in `kwArgs`.
-    public func callSuper(args: [RbObjectConvertible?] = [],
-                          kwArgs: KeyValuePairs<String, RbObjectConvertible?> = [:]) throws -> RbObject {
+    public func callSuper(args: [(any RbObjectConvertible)?] = [],
+                          kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:]) throws -> RbObject {
         let rubyArgs = try RbObjectAccess.flattenArgs(args: args, kwArgs: kwArgs)
         return RbObject(rubyValue: try rubyArgs.withRubyValues { rubyValues in
             try RbVM.doProtect { tag in
@@ -324,7 +324,7 @@ public struct RbMethodArgsSpec {
     public let optionalValues: [() -> RbObject]
     /// The number of optional positional arguments.
     public var optionalCount: Int {
-        return optionalValues.count
+        optionalValues.count
     }
     /// Does the method support variable-length splatted arguments?
     public let supportsSplat: Bool
@@ -332,7 +332,7 @@ public struct RbMethodArgsSpec {
     public let trailingMandatoryCount: Int
     /// The number of all mandatory positional arguments.
     public var totalMandatoryCount: Int {
-        return leadingMandatoryCount + trailingMandatoryCount
+        leadingMandatoryCount + trailingMandatoryCount
     }
     /// Names of mandatory keyword arguments.
     public let mandatoryKeywords: Set<String>
@@ -340,7 +340,7 @@ public struct RbMethodArgsSpec {
     public let optionalKeywordValues: [String : () -> RbObject]
     /// Does the method support keyword arguments?
     public var supportsKeywords: Bool {
-        return mandatoryKeywords.count > 0 || optionalKeywordValues.count > 0
+        mandatoryKeywords.count > 0 || optionalKeywordValues.count > 0
     }
     /// Does the method require a block?
     public let requiresBlock: Bool
@@ -373,11 +373,11 @@ public struct RbMethodArgsSpec {
     ///   - requiresBlock: Whether the method requires a block, `false` by default.  If this is
     ///     `true` then the method may or may not be called with a block.
     public init(leadingMandatoryCount: Int = 0,
-                optionalValues: [RbObjectConvertible?] = [],
+                optionalValues: [(any RbObjectConvertible)?] = [],
                 supportsSplat: Bool = false,
                 trailingMandatoryCount: Int = 0,
                 mandatoryKeywords: Set<String> = [],
-                optionalKeywordValues: [String: RbObjectConvertible?] = [:],
+                optionalKeywordValues: [String: (any RbObjectConvertible)?] = [:],
                 requiresBlock: Bool = false) {
         self.leadingMandatoryCount = leadingMandatoryCount
         self.optionalValues = optionalValues.map { val in { val.rubyObject } }
@@ -399,7 +399,7 @@ public struct RbMethodArgsSpec {
     /// - parameter count: the number of arguments not including any block that the
     ///                    method must be passed.
     public static func basic(_ count: Int) -> RbMethodArgsSpec {
-        return RbMethodArgsSpec(leadingMandatoryCount: count)
+        RbMethodArgsSpec(leadingMandatoryCount: count)
     }
 
     /// Decode the arguments passed to a function and make them available.

@@ -42,7 +42,7 @@ public struct RbObjectCollection: RandomAccessCollection,
     }
 
     public var startIndex: Int {
-        return 0
+        0
     }
 
     public var endIndex: Int {
@@ -55,7 +55,7 @@ public struct RbObjectCollection: RandomAccessCollection,
 
     public subscript(index: Int) -> RbObject {
         get {
-            return rubyObject[index]
+            rubyObject[index]
         }
         set {
             rubyObject[index] = newValue

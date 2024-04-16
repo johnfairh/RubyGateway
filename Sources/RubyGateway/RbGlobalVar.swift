@@ -14,7 +14,7 @@ internal import RubyGatewayHelpers
 // MARK: Callbacks from C code (rbg_value.m)
 
 private func rbobject_gvar_get_callback(id: ID) -> VALUE {
-    return RbGlobalVar.get(id: id)
+    RbGlobalVar.get(id: id)
 }
 
 private func rbobject_gvar_set_callback(id: ID,

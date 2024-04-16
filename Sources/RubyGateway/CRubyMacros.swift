@@ -25,13 +25,13 @@ internal import RubyGatewayHelpers
 
 // From platform to NUM -- BIGNUM or FIXNUM depending on size.
 
-func RB_LONG2NUM(_ x: Int) -> VALUE      { return rb_long2num_inline(x) }
-func RB_ULONG2NUM(_ x: UInt) -> VALUE    { return rb_ulong2num_inline(x) }
+func RB_LONG2NUM(_ x: Int) -> VALUE      { rb_long2num_inline(x) }
+func RB_ULONG2NUM(_ x: UInt) -> VALUE    { rb_ulong2num_inline(x) }
 
 // MARK: - Floating point conversions
 
 // From platform to NUM -- FLONUM or CLASS(FLOAT) depending
-func DBL2NUM(_ dbl: Double) -> VALUE { return rb_float_new(dbl) }
+func DBL2NUM(_ dbl: Double) -> VALUE { rb_float_new(dbl) }
 
 // MARK: - Useful VALUE constants and macros
 

@@ -107,7 +107,7 @@ private class RbBlockContext {
         // A EXC_BAD_ACCESS here usually means the blockRetention has been
         // set wrongly - at any rate, the `RbProcContext` has been deallocated
         // while Ruby was still using it.
-        return Unmanaged<RbBlockContext>.fromOpaque(raw).takeUnretainedValue()
+        Unmanaged<RbBlockContext>.fromOpaque(raw).takeUnretainedValue()
     }
 }
 

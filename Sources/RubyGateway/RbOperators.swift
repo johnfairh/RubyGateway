@@ -169,7 +169,7 @@ extension RbObject {
     ///
     /// - note: Calls Ruby `[]` and `[]=` methods.  Crashes the process (`fatalError`)
     ///         if anything goes wrong - Swift can't throw from subscripts yet.
-    public subscript(args: RbObjectConvertible...) -> RbObject {
+    public subscript(args: any RbObjectConvertible...) -> RbObject {
         get {
             do {
                 return try call("[]", args: args)

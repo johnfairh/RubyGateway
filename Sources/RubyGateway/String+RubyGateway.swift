@@ -52,7 +52,7 @@ extension String {
 
     /// Does the string look like a Ruby global variable name?
     var isRubyGlobalVarName: Bool {
-        return starts(with: "$")
+        starts(with: "$")
     }
 
     /// Throw if the string does not look like a global variable name.
@@ -62,7 +62,7 @@ extension String {
 
     /// Does the string look like a Ruby instance variable name?
     var isRubyInstanceVarName: Bool {
-        return starts(with: "@") && !isRubyClassVarName
+        starts(with: "@") && !isRubyClassVarName
     }
 
     /// Throw if the string does not look like an instance var name.
@@ -72,7 +72,7 @@ extension String {
 
     /// Does the string look like a Ruby class variable name?
     var isRubyClassVarName: Bool {
-        return starts(with: "@@")
+        starts(with: "@@")
     }
 
     /// Throw if the string does not look like a class var name.
@@ -82,7 +82,7 @@ extension String {
 
     /// Does the string look like a Ruby method name?
     var isRubyMethodName: Bool {
-        return !isRubyConstantName && !isRubyGlobalVarName && !isRubyInstanceVarName && !isRubyClassVarName
+        !isRubyConstantName && !isRubyGlobalVarName && !isRubyInstanceVarName && !isRubyClassVarName
     }
 
     /// Throw if the string does not look like a method name.

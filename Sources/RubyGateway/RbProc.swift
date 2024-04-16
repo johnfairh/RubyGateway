@@ -24,10 +24,10 @@ internal import RubyGatewayHelpers
 /// `RbObjectAccess.call(_:args:kwArgs:blockRetention:blockCall:)` directly,
 /// no need for either `RbProc` or `RbObject`.
 public struct RbProc: RbObjectConvertible {
-    private let sourceObject: RbObjectConvertible
+    private let sourceObject: any RbObjectConvertible
 
     /// Initialize from something that can be turned into a Ruby object.
-    public init(object: RbObjectConvertible) {
+    public init(object: any RbObjectConvertible) {
         sourceObject = object
     }
 

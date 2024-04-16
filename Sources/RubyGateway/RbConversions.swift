@@ -34,7 +34,7 @@ extension RbObject {
     ///
     /// RubyGateway conforms most of the Swift standard library types
     /// to `RbObjectConvertible`.
-    public convenience init(_ value: RbObjectConvertible) {
+    public convenience init(_ value: any RbObjectConvertible) {
         self.init(value.rubyObject)
     }
 }
@@ -44,7 +44,7 @@ extension RbObject: RbObjectConvertible {
     /// Returns `self`, the `RbObject`.
     ///
     /// :nodoc:
-    public var rubyObject: RbObject { return self }
+    public var rubyObject: RbObject { self }
     // Quick sanity check here: RbObject is a ref type so this `return self` is OK,
     // it returns a second ref-counted ptr to the single `RbObj` which has a single
     // `Rbb_val`.  There is no aliasing of `Rbb_val` ownership.
@@ -169,7 +169,7 @@ extension Bool: RbObjectConvertible {
 
     /// A Ruby object for the boolean value.
     public var rubyObject: RbObject {
-        return RbObject(rubyValue: self ? Qtrue : Qfalse)
+        RbObject(rubyValue: self ? Qtrue : Qfalse)
     }
 }
 
@@ -352,7 +352,7 @@ extension Array: RbObjectConvertible where Element: RbObjectConvertible {
 extension ArraySlice: RbObjectConvertible where Element: RbObjectConvertible {
     /// No sense in converting :nodoc:
     public init?(_ value: RbObject) {
-        return nil
+        nil
     }
 
     /// Create a Ruby array object for this `ArraySlice`.  All the sliceness
@@ -489,8 +489,8 @@ extension Optional: RbObjectConvertible where Wrapped == RbObjectConvertible {
 
     public var rubyObject: RbObject {
         switch self {
-        case .some(let w): return w.rubyObject
-        case .none: return .nilObject
+        case .some(let w): w.rubyObject
+        case .none: .nilObject
         }
     }
 }
@@ -517,7 +517,7 @@ private func decodeRange<T>(_ object: RbObject, halfOpen: Bool) -> (T, T)? where
 
 /// Helper to create a Ruby Range from Swift types.
 private func makeRange<T>(lower: T, upper: T, halfOpen: Bool) -> RbObject where T: RbObjectConvertible {
-    return RbObject(ofClass: "Range", args: [lower, upper, halfOpen]) ?? .nilObject
+    RbObject(ofClass: "Range", args: [lower, upper, halfOpen]) ?? .nilObject
 }
 
 // One day Swift will catch up with C++ and let me write this as a single generic...
@@ -538,7 +538,7 @@ extension Range: RbObjectConvertible where Bound: RbObjectConvertible {
 
     /// A Ruby object for the range.
     public var rubyObject: RbObject {
-        return makeRange(lower: lowerBound, upper: upperBound, halfOpen: true)
+        makeRange(lower: lowerBound, upper: upperBound, halfOpen: true)
     }
 }
 
@@ -560,7 +560,7 @@ extension ClosedRange: RbObjectConvertible where Bound: RbObjectConvertible {
 
     /// A Ruby object for the range.
     public var rubyObject: RbObject {
-        return makeRange(lower: lowerBound, upper: upperBound, halfOpen: false)
+        makeRange(lower: lowerBound, upper: upperBound, halfOpen: false)
     }
 }
 

@@ -50,11 +50,13 @@ struct Helpers {
     /// that the test runner will treat that as a separate process.)
 
     /// Ruby files etc.
-    private static let fixturesDir: String = {  URL(fileURLWithPath: #file).deletingLastPathComponent().path + "/Fixtures" }()
+    private static let fixturesDir: String = {
+        URL(fileURLWithPath: #file).deletingLastPathComponent().path + "/Fixtures"
+    }()
 
     /// Get full path to fixture with name
     static func fixturePath(_ name: String) -> String {
-        return "\(fixturesDir)/\(name)"
+        "\(fixturesDir)/\(name)"
     }
 
     /// A weird Swift type that has distinct Swift instances
@@ -67,11 +69,11 @@ struct Helpers {
         }
 
         init?(_ value: RbObject) {
-            return nil
+            nil
         }
 
         var rubyObject: RbObject {
-            return RbObject(42)
+            RbObject(42)
         }
     }
 }

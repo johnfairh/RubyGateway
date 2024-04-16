@@ -20,7 +20,7 @@ private protocol RbBoundClassProtocol {
 }
 
 private struct RbBoundClass<T: AnyObject> : RbBoundClassProtocol {
-    var initializer: () -> T
+    let initializer: () -> T
 
     func createInstance() -> UnsafeMutableRawPointer {
         let instance = initializer()
