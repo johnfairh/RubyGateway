@@ -4,7 +4,7 @@
 //
 //  Distributed under the MIT license, see LICENSE
 //
-@_implementationOnly import RubyGatewayHelpers
+internal import RubyGatewayHelpers
 
 //
 // This file deals with Ruby blocks.  It gets a bit complicated.

@@ -4,8 +4,8 @@
 //
 //  Distributed under the MIT license, see LICENSE
 //
-@preconcurrency @_implementationOnly import CRuby
-@_implementationOnly import RubyGatewayHelpers
+@preconcurrency internal import CRuby
+internal import RubyGatewayHelpers
 
 //
 // Support for binding Swift objects to Ruby objects.

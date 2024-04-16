@@ -4,8 +4,8 @@
 //
 //  Distributed under the MIT license, see LICENSE
 //
-@_implementationOnly import CRuby
-@_implementationOnly import RubyGatewayHelpers
+internal import CRuby
+internal import RubyGatewayHelpers
 
 // Stuff to deal with implementing Ruby methods in Swift and handling calls
 // from Ruby into Swift.

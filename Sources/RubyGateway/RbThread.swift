@@ -4,8 +4,8 @@
 //
 //  Distributed under the MIT license, see LICENSE
 //
-@_implementationOnly import CRuby
-@_implementationOnly import RubyGatewayHelpers
+internal import CRuby
+internal import RubyGatewayHelpers
 
 /// Context passed to thread callbacks wrapping up a Swift closure.
 internal final class RbThreadContext {

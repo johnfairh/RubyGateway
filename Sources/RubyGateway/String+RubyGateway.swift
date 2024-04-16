@@ -8,7 +8,7 @@
 // method, rather than anything that relies on them being completely
 // correct - see true story in `rb_enc_symname_type()`.
 
-@_implementationOnly import CRuby
+internal import CRuby
 
 extension String {
     /// Helper to test type and throw if wrong

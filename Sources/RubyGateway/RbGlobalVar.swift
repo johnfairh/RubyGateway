@@ -4,7 +4,7 @@
 //
 //  Distributed under the MIT license, see LICENSE
 //
-@_implementationOnly import RubyGatewayHelpers
+internal import RubyGatewayHelpers
 
 // Some simple thunking code to wrap up rb_gvar_* code.
 //
