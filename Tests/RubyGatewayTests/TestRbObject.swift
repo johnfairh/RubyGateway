@@ -123,7 +123,7 @@ class TestRbObject: XCTestCase {
     }
 
     // assoc objects
-    static var testObjDeinitCount = 0
+    static nonisolated(unsafe) var testObjDeinitCount = 0
 
     class TestObj {
         private let name: String

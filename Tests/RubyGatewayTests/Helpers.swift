@@ -50,7 +50,7 @@ struct Helpers {
     /// that the test runner will treat that as a separate process.)
 
     /// Ruby files etc.
-    private static var fixturesDir: String = {  URL(fileURLWithPath: #file).deletingLastPathComponent().path + "/Fixtures" }()
+    private static let fixturesDir: String = {  URL(fileURLWithPath: #file).deletingLastPathComponent().path + "/Fixtures" }()
 
     /// Get full path to fixture with name
     static func fixturePath(_ name: String) -> String {

@@ -124,9 +124,9 @@ class TestClassDef: XCTestCase {
 
     class MyBoundClass {
 
-        static var initCount = 0
-        static var deinitCount = 0
-        static var generation = 0
+        static nonisolated(unsafe) var initCount = 0
+        static nonisolated(unsafe) var deinitCount = 0
+        static nonisolated(unsafe) var generation = 0
 
         static func resetCounts() {
             print("resetCounts")
@@ -134,7 +134,7 @@ class TestClassDef: XCTestCase {
             deinitCount = 0
         }
 
-        static var fingerprintValue = "FINGERPRINT"
+        static let fingerprintValue = "FINGERPRINT"
 
         var fingerprint = MyBoundClass.fingerprintValue
 
