@@ -37,13 +37,7 @@ private enum RbGlobalVar {
         let set: ((RbObject) throws -> Void)?
     }
 
-    private final class Contexts: @unchecked Sendable {
-        var contexts: [ID: Context]
-        init() { contexts = [:] }
-    }
-
-    // XXX this needs a lock
-    private static let contexts = Contexts()
+    private static let contexts = LockedDictionary<ID, Context>()
 
     /// Create thunks to 
     static func create<T: RbObjectConvertible>(name: String,
@@ -53,23 +47,23 @@ private enum RbGlobalVar {
         let id = rbg_create_virtual_gvar(name, set == nil ? 1 : 0)
         let getter = { get().rubyObject }
         if let set = set {
-            contexts.contexts[id] =
-                           Context(get: getter,
-                                   set: { newRbObject in
-                                          guard let typed = T(newRbObject) else {
-                                              throw RbException(message: "Bad type of \(newRbObject) expected \(T.self)")
-                                          }
-                                          try set(typed)
-                                        }
-                                  )
+            contexts[id] =
+                    Context(get: getter,
+                            set: { newRbObject in
+                                    guard let typed = T(newRbObject) else {
+                                        throw RbException(message: "Bad type of \(newRbObject) expected \(T.self)")
+                                    }
+                                    try set(typed)
+                                }
+                            )
         }
         else {
-            contexts.contexts[id] = Context(get: getter, set: nil)
+            contexts[id] = Context(get: getter, set: nil)
         }
     }
 
     fileprivate static func get(id: ID) -> VALUE {
-        if let context = contexts.contexts[id] {
+        if let context = contexts[id] {
             let object = context.get()
             return object.withRubyValue { $0 }
         }
@@ -77,7 +71,7 @@ private enum RbGlobalVar {
     }
 
     fileprivate static func set(id: ID, newValue: VALUE, returnValue: UnsafeMutablePointer<Rbg_return_value>) {
-        if let context = contexts.contexts[id],
+        if let context = contexts[id],
             let setter = context.set {
             returnValue.setFrom {
                 try setter(RbObject(rubyValue: newValue))

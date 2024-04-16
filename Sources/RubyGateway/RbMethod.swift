@@ -144,8 +144,7 @@ private struct RbMethodDispatch {
     }()
 
     /// List of all method callbacks
-    // XXX needs abstracting and locking
-    private static var callbacks: [RbMethodId : RbMethodExec] = [:]
+    private static let callbacks = LockedDictionary<RbMethodId, RbMethodExec>()
 
     /// Try to find a callback matching the class/method-name pair.
     static func findCallback(symbol: VALUE, target: VALUE, firstTarget: VALUE) -> RbMethodExec? {

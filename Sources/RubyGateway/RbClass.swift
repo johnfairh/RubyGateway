@@ -53,8 +53,7 @@ internal enum RbClassBinding {
         rbg_register_object_binding_callbacks(rbbinding_alloc, rbbinding_free)
     }()
 
-    // XXX needs a lock
-    private static var bindings = [String : RbBoundClassProtocol]()
+    private static let bindings = LockedDictionary<String, any RbBoundClassProtocol>()
 
     fileprivate static func register<T: AnyObject>(name: String, initializer: @escaping () -> T) {
         let _ = initOnce
