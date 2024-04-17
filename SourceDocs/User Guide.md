@@ -597,6 +597,16 @@ RubyGateway caches intern'ed Ruby strings - you can access the cache using
 Note that when you call the Ruby API and Ruby raises an exception, the process
 immediately crashes unless you are running inside `rb_protect()` or equivalent.
 
+## Swift Concurrency
+
+Sendable annotations and checking are mostly complete.  The parts remaining are
+* `RbBlockCallback` - Swift doesn't understand @Sendable typealiases.
+* `RbMethodCallback` and related - Swift doesn't understand Sendable method
+  references.
+
+Despite the lack of `Sendable` requirement on these closure types they should
+be treated as such if you are using Ruby across multiple threads.
+
 ### Garbage collection
 
 The main risk using the `libruby` API is that GC happens too early on objects

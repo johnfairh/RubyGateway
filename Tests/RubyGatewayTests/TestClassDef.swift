@@ -86,7 +86,7 @@ class TestClassDef: XCTestCase {
 
             let parentClass = try Ruby.get("MyParentClass")
             let myClass = try Ruby.defineClass("MyClass", parent: parentClass, under: innerMod)
-            var called = false
+            nonisolated(unsafe) var called = false
             try myClass.defineMethod("value") { _, _ in
                 called = true
                 return RbObject(100)
@@ -122,7 +122,7 @@ class TestClassDef: XCTestCase {
 
     // Bound Swift classes
 
-    class MyBoundClass {
+    class MyBoundClass: @unchecked Sendable {
 
         static nonisolated(unsafe) var initCount = 0
         static nonisolated(unsafe) var deinitCount = 0
@@ -139,7 +139,7 @@ class TestClassDef: XCTestCase {
         var fingerprint = MyBoundClass.fingerprintValue
 
         func getFingerprint(method: RbMethod) throws -> RbObject {
-            return RbObject(fingerprint)
+            RbObject(fingerprint)
         }
 
         var generation: Int

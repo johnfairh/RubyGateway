@@ -18,8 +18,7 @@ class TestObjMethods: XCTestCase {
         doErrorFree {
             try Ruby.require(filename: Helpers.fixturePath("swift_obj_methods.rb"))
 
-
-            var callCount = 0
+            nonisolated(unsafe) var callCount = 0
 
             let clazz = try Ruby.get("EmptyClass")
 
@@ -68,7 +67,7 @@ class TestObjMethods: XCTestCase {
         doErrorFree {
             try Ruby.require(filename: Helpers.fixturePath("swift_obj_methods.rb"))
 
-            var called = false
+            nonisolated(unsafe) var called = false
 
             let module = try Ruby.get("EmptyModule")
             XCTAssertEqual(RbType.T_MODULE, module.rubyType)
@@ -88,7 +87,7 @@ class TestObjMethods: XCTestCase {
         doErrorFree {
             try Ruby.require(filename: Helpers.fixturePath("swift_obj_methods.rb"))
 
-            var callCount = 0
+            nonisolated(unsafe) var callCount = 0
 
             let clazz = try Ruby.get("IdentifiedClass")
             try clazz.defineMethod("doubleId") { rbSelf, method in
@@ -107,7 +106,7 @@ class TestObjMethods: XCTestCase {
         doErrorFree {
             try Ruby.require(filename: Helpers.fixturePath("swift_obj_methods.rb"))
 
-            var callCount = 0
+            nonisolated(unsafe) var callCount = 0
 
             let clazz = try Ruby.get("BaseClass")
             try clazz.defineMethod("getValue") { rbSelf, method in
@@ -125,7 +124,7 @@ class TestObjMethods: XCTestCase {
         doErrorFree {
             try Ruby.require(filename: Helpers.fixturePath("swift_obj_methods.rb"))
 
-            var callCount = 0
+            nonisolated(unsafe) var callCount = 0
 
             let clazz = try Ruby.get("OverriddenClass")
             try clazz.defineMethod("getValue") { rbSelf, method in
@@ -158,7 +157,7 @@ class TestObjMethods: XCTestCase {
     func testSingleton() {
         doErrorFree {
             let module = try Ruby.get("Math")
-            var called = false
+            nonisolated(unsafe) var called = false
             try module.defineSingletonMethod("double", argsSpec: .basic(1)) { _, method in
                 called = true
                 return method.args.mandatory[0] * 2
@@ -207,7 +206,7 @@ class TestObjMethods: XCTestCase {
         doErrorFree {
             try Ruby.require(filename: Helpers.fixturePath("swift_obj_methods.rb"))
 
-            var called = false
+            nonisolated(unsafe) var called = false
 
             let clazz = try Ruby.get("SingBase")
             try clazz.defineSingletonMethod("value2") { rbSelf, _ in

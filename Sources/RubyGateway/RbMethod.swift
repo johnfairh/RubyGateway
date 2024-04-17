@@ -31,6 +31,9 @@ internal import RubyGatewayHelpers
 // dynamic dispatch order.  So we can search this property looking for a match.
 // OK - not THAT bad!
 
+// XXX these guys all ought to be Sendable, but Swift is broken wrt Sendable and
+// XXX method references....
+
 /// The function signature for a Ruby method implemented as a Swift free function
 /// or closure.
 ///
@@ -59,7 +62,7 @@ public typealias RbMethodCallback = (RbObject, RbMethod) throws -> RbObject
 /// You can throw an `RbException` to raise a Ruby exception instead of returning
 /// normally from the method.  Throwing another type gets wrapped up in an
 /// `RbException` and raised as a Ruby runtime exception.
-public typealias RbBoundMethodCallback<SwiftPeer: AnyObject, Return: RbObjectConvertible> =
+public typealias RbBoundMethodCallback<SwiftPeer: AnyObject, Return: RbObjectConvertible & Sendable> =
     (SwiftPeer) -> (RbMethod) throws -> Return
 
 /// The function signature for a Ruby method implemented as a Swift method of
@@ -189,7 +192,7 @@ private struct RbMethodDispatch {
 ///
 /// You do not create instances of this type: instead, RubyGateway creates
 /// instances and passes them to method callbacks.
-public struct RbMethod {
+public struct RbMethod: Sendable {
     /// The object against which the method has been invoked.
     public let rubySelf: RbObject
     /// The arguments passed to the method, decoded according to the method's `RbMethodArgsSpec`.
@@ -288,7 +291,7 @@ extension Array {
 /// The various types of argument passed to a Ruby method implemented in Swift.
 ///
 /// Available via `RbMethod.args` when the method is invoked.
-public struct RbMethodArgs {
+public struct RbMethodArgs: Sendable {
     /// The mandatory positional arguments to the method, comprising the
     /// leading mandatory arguments followed by the trailing mandatory arguments.
     public let mandatory: [RbObject]
@@ -317,11 +320,11 @@ public struct RbMethodArgs {
 ///
 /// If you want to say "accept any number of arguments" then write
 /// `RbMethodArgsSpec(supportsSplat: true)` and access the arguments via `method.args.splatted`.
-public struct RbMethodArgsSpec {
+public struct RbMethodArgsSpec: Sendable {
     /// The number of leading mandatory positional arguments.
     public let leadingMandatoryCount: Int
     /// Default values for all optional positional arguments.
-    public let optionalValues: [() -> RbObject]
+    public let optionalValues: [@Sendable () -> RbObject]
     /// The number of optional positional arguments.
     public var optionalCount: Int {
         optionalValues.count
@@ -337,7 +340,7 @@ public struct RbMethodArgsSpec {
     /// Names of mandatory keyword arguments.
     public let mandatoryKeywords: Set<String>
     /// Names and default values of optional keyword arguments.
-    public let optionalKeywordValues: [String : () -> RbObject]
+    public let optionalKeywordValues: [String : @Sendable () -> RbObject]
     /// Does the method support keyword arguments?
     public var supportsKeywords: Bool {
         mandatoryKeywords.count > 0 || optionalKeywordValues.count > 0
@@ -360,6 +363,11 @@ public struct RbMethodArgsSpec {
 
     /// Create a new method arguments specification.
     ///
+    /// The default values here are evaluated lazily: each time the method is invoked and requires the
+    /// default argument because caller has not provided it, the `RbObjectConvertible.rubyObject`
+    /// is evaluated and provided to the method.  In the case of constant defaults this is unobservable but
+    /// does give correct behaviour if you actually supply something that turns into a Ruby expression.
+    ///
     /// - Parameters:
     ///   - leadingMandatoryCount: The number of leading mandatory positional arguments,
     ///     none by default.
@@ -373,18 +381,23 @@ public struct RbMethodArgsSpec {
     ///   - requiresBlock: Whether the method requires a block, `false` by default.  If this is
     ///     `true` then the method may or may not be called with a block.
     public init(leadingMandatoryCount: Int = 0,
-                optionalValues: [(any RbObjectConvertible)?] = [],
+                optionalValues: [(any RbObjectConvertible & Sendable)?] = [],
                 supportsSplat: Bool = false,
                 trailingMandatoryCount: Int = 0,
                 mandatoryKeywords: Set<String> = [],
-                optionalKeywordValues: [String: (any RbObjectConvertible)?] = [:],
+                optionalKeywordValues: [String: (any RbObjectConvertible & Sendable)?] = [:],
                 requiresBlock: Bool = false) {
         self.leadingMandatoryCount = leadingMandatoryCount
-        self.optionalValues = optionalValues.map { val in { val.rubyObject } }
+
+        func lazyEvaluation(_ o: (any RbObjectConvertible & Sendable)?) -> @Sendable () -> RbObject {
+            { o.map { $0.rubyObject } ?? .nilObject }
+        }
+
+        self.optionalValues = optionalValues.map { lazyEvaluation($0) }
         self.supportsSplat = supportsSplat
         self.trailingMandatoryCount = trailingMandatoryCount
         self.mandatoryKeywords = mandatoryKeywords
-        self.optionalKeywordValues = optionalKeywordValues.mapValues { val in { val.rubyObject } }
+        self.optionalKeywordValues = optionalKeywordValues.mapValues { lazyEvaluation($0) }
         self.requiresBlock = requiresBlock
     }
 
@@ -651,7 +664,7 @@ extension RbObject {
     ///   - method: The Swift method to call to fulfill the Ruby method.
     /// - Throws: `RbError.badIdentifier(type:id:)` if `name` is bad.
     ///           `RbError.badType(...)` if the object is not a class.
-    public func defineMethod<SwiftPeer: AnyObject, Return: RbObjectConvertible>(
+    public func defineMethod<SwiftPeer: AnyObject, Return: RbObjectConvertible & Sendable>(
                     _ name: String,
                     argsSpec: RbMethodArgsSpec = RbMethodArgsSpec(),
                     method: @escaping RbBoundMethodCallback<SwiftPeer, Return>) throws {

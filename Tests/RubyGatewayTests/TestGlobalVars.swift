@@ -17,7 +17,7 @@ class TestGlobalVars: XCTestCase {
             let initialValue = 22
             let newValue = 108
 
-            var modelValue = initialValue
+            nonisolated(unsafe) var modelValue = initialValue
 
             let gvarName = "$myVirtualGlobal"
 
@@ -46,7 +46,7 @@ class TestGlobalVars: XCTestCase {
             let initialIntValue = 100
             let targetStringValue = "Berry"
 
-            var wrappedObj = RbObject(initialIntValue)
+            nonisolated(unsafe) var wrappedObj = RbObject(initialIntValue)
             let gvarName = "$myGlobal"
 
             try Ruby.defineGlobalVar(gvarName,

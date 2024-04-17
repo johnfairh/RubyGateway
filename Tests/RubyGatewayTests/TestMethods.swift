@@ -43,7 +43,7 @@ class TestMethods: XCTestCase {
             let argCount = 1
             let argValue = "Fish"
             let retValue = 8.9
-            var visited = false
+            nonisolated(unsafe) var visited = false
 
             try Ruby.defineGlobalFunction(funcName, argsSpec: RbMethodArgsSpec(leadingMandatoryCount: argCount)) { _, method in
                 method.checkArgs()
@@ -65,7 +65,7 @@ class TestMethods: XCTestCase {
         doErrorFree {
             let funcName = "myGlobal"
             let retValue = 8.9
-            var visited = false
+            nonisolated(unsafe) var visited = false
 
             try Ruby.defineGlobalFunction(funcName) { _, method in
                 method.checkArgs()
@@ -104,7 +104,7 @@ class TestMethods: XCTestCase {
     func testGoodBlock() {
         doErrorFree {
             let funcName = "myGlobal"
-            var funcCalled = false
+            nonisolated(unsafe) var funcCalled = false
             var blockCalled = false
             let expectedBlockResult = 4.0
             let expectedFuncResult = "alldone"
@@ -140,7 +140,7 @@ class TestMethods: XCTestCase {
     func testErrorNoBlock() {
         doErrorFree {
             let funcName = "myGlobal"
-            var funcCalled = false
+            nonisolated(unsafe) var funcCalled = false
 
             try Ruby.defineGlobalFunction(funcName) { _, method in
                 funcCalled = true
@@ -159,8 +159,8 @@ class TestMethods: XCTestCase {
     func testManualBlock() {
         doErrorFree {
             let funcName = "myGlobal"
-            var funcCalled = false
-            var blockCalled = false
+            nonisolated(unsafe) var funcCalled = false
+            nonisolated(unsafe) var blockCalled = false
 
             try Ruby.defineGlobalFunction(funcName) { _, method in
                 let block = try method.captureBlock()
@@ -184,8 +184,8 @@ class TestMethods: XCTestCase {
     func testBlockArgs() {
         doErrorFree {
             let funcName = "myGlobal"
-            var funcCalled = false
-            var blockCalled = false
+            nonisolated(unsafe) var funcCalled = false
+            nonisolated(unsafe) var blockCalled = false
             let expectedBlockArg = 4.0
 
             try Ruby.defineGlobalFunction(funcName, argsSpec: RbMethodArgsSpec(requiresBlock: true)) { _, method in
@@ -284,7 +284,7 @@ class TestMethods: XCTestCase {
             // def f(a=3, b=4)
             let spec_f = RbMethodArgsSpec(optionalValues: [3, 4])
             let func_f = "f"
-            var expectedArgs_f: [RbObject] = []
+            nonisolated(unsafe) var expectedArgs_f: [RbObject] = []
             try Ruby.defineGlobalFunction(func_f, argsSpec: spec_f) { _, method in
                 method.checkArgs()
                 XCTAssertEqual(expectedArgs_f, method.args.optional)
@@ -311,7 +311,7 @@ class TestMethods: XCTestCase {
             // def f(*a)
             let spec_f = RbMethodArgsSpec(supportsSplat: true)
             let func_f = "f"
-            var expectedArgs_f: [RbObject] = []
+            nonisolated(unsafe) var expectedArgs_f: [RbObject] = []
             try Ruby.defineGlobalFunction(func_f, argsSpec: spec_f) { _, method in
                 method.checkArgs()
                 XCTAssertEqual(expectedArgs_f, method.args.splatted)
@@ -337,9 +337,9 @@ class TestMethods: XCTestCase {
                                           supportsSplat: true,
                                           trailingMandatoryCount: 1)
             let func_f = "f"
-            var a_val: RbObject = .nilObject
-            var c_val: RbObject = .nilObject
-            var b_count: Int = 0
+            nonisolated(unsafe) var a_val: RbObject = .nilObject
+            nonisolated(unsafe) var c_val: RbObject = .nilObject
+            nonisolated(unsafe) var b_count: Int = 0
             try Ruby.defineGlobalFunction(func_f, argsSpec: spec_f) { _, method in
                 method.checkArgs()
                 XCTAssertEqual(a_val, method.args.mandatory[0])
@@ -398,7 +398,7 @@ class TestMethods: XCTestCase {
             // def f(ar:)
             let spec_f = RbMethodArgsSpec(mandatoryKeywords: [argKey])
             let expectedVal = 211.4896
-            var called = false
+            nonisolated(unsafe) var called = false
 
             try Ruby.defineGlobalFunction(func_f, argsSpec: spec_f) { _, method in
                 method.checkArgs()
@@ -462,7 +462,7 @@ class TestMethods: XCTestCase {
             let f_opt_arg_def = "fish"
             let spec_f = RbMethodArgsSpec(optionalKeywordValues: [f_opt_arg_kw: f_opt_arg_def])
 
-            var expect_arg_val = ""
+            nonisolated(unsafe) var expect_arg_val = ""
             try Ruby.defineGlobalFunction(func_f, argsSpec: spec_f) { _, method in
                 method.checkArgs()
                 XCTAssertEqual(expect_arg_val, String(method.args.keyword[f_opt_arg_kw]!))
@@ -490,8 +490,8 @@ class TestMethods: XCTestCase {
                                           optionalValues: [b_def],
                                           optionalKeywordValues: [kw_c: kw_c_def])
 
-            var expect_a = ""
-            var expect_b = RbObject(b_def)
+            nonisolated(unsafe) var expect_a = ""
+            nonisolated(unsafe) var expect_b = RbObject(b_def)
 
             try Ruby.defineGlobalFunction(func_f, argsSpec: spec_f) { _, method in
                 method.checkArgs()

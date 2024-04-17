@@ -59,7 +59,6 @@ internal import RubyGatewayHelpers
 /// and `RbObject.defineSingletonMethod(...)`.
 ///
 public final class RbGateway: RbObjectAccess, @unchecked Sendable {
-
     /// The VM - not initialized until `setup()` is called.
     static let vm = RbVM()
 
@@ -164,7 +163,8 @@ public final class RbGateway: RbObjectAccess, @unchecked Sendable {
         try name.checkRubyInstanceVarName()
 
         let ivarWorkaroundName = "$RbGatewayTopSelfIvarWorkaround"
-        try defineGlobalVar(ivarWorkaroundName, get: { newValue.rubyObject })
+        let rubyObject = newValue.rubyObject
+        try defineGlobalVar(ivarWorkaroundName, get: { rubyObject })
         return try eval(ruby: "\(name) = \(ivarWorkaroundName)")
     }
 }
