@@ -30,7 +30,7 @@ low-level Ruby C API wrapper.
 
 * [Examples](#examples)
 * [Documentation](#documentation)
-* [Requirements](#requirement)
+* [Requirements](#requirements)
 * [Installation](#installation)
 * [Contributions](#contributions)
 * [License](#license)
