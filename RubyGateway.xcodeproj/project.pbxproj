@@ -143,6 +143,7 @@
 		02901339203ED8D60090C5C9 /* RbConversions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbConversions.swift; sourceTree = "<group>"; };
 		0290133B203EF0F60090C5C9 /* nonconvert.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = nonconvert.rb; sourceTree = "<group>"; };
 		0290133C203F42820090C5C9 /* TestMiscObjTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMiscObjTypes.swift; sourceTree = "<group>"; };
+		02A1D66C2BD1173700B07523 /* RubyGateway.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = RubyGateway.xcconfig; sourceTree = "<group>"; };
 		02ABDBA3216CF7BF00AFDB64 /* RbMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbMethod.swift; sourceTree = "<group>"; };
 		02ABDBA5216D060300AFDB64 /* TestMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMethods.swift; sourceTree = "<group>"; };
 		02C5C85020ECD87E007138A2 /* RbComplex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbComplex.swift; sourceTree = "<group>"; };
@@ -289,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
+				02A1D66C2BD1173700B07523 /* RubyGateway.xcconfig */,
 				OBJ_7 /* Sources */,
 				OBJ_12 /* Tests */,
 				OBJ_16 /* Dependencies */,
@@ -597,7 +599,6 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_CFLAGS = "-fdeclspec";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -654,13 +655,13 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_CFLAGS = "-fdeclspec";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
 		OBJ_3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 02A1D66C2BD1173700B07523 /* RubyGateway.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -732,7 +733,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(HOME)/.rbenv/versions/3.3.0/lib";
 				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fdeclspec";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_NAME = RubyGatewayTests;
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = RubyGatewayTests;
@@ -741,6 +742,7 @@
 		};
 		OBJ_4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 02A1D66C2BD1173700B07523 /* RubyGateway.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -810,7 +812,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(HOME)/.rbenv/versions/3.3.0/lib";
 				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fdeclspec";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_NAME = RubyGatewayTests;
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = RubyGatewayTests;
@@ -846,7 +848,7 @@
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++14";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fdeclspec -enable-experimental-feature AccessLevelOnImport";
+				OTHER_SWIFT_FLAGS = "$(inherited) -enable-experimental-feature AccessLevelOnImport";
 				PRODUCT_BUNDLE_IDENTIFIER = RubyGateway;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -887,7 +889,7 @@
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++14";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fdeclspec -enable-experimental-feature AccessLevelOnImport";
+				OTHER_SWIFT_FLAGS = "$(inherited) -enable-experimental-feature AccessLevelOnImport";
 				PRODUCT_BUNDLE_IDENTIFIER = RubyGateway;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";

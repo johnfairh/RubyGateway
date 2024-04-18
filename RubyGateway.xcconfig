@@ -1,0 +1,9 @@
+// Jump over to CRuby for the actual settings.
+// Relative include path means relative to the location of this file.
+#include? "CRuby/CRuby.xcconfig"
+
+// proof of concept...
+
+// Ruby 3 -fdeclspec
+OTHER_CFLAGS = $(inherited) -fdeclspec
+OTHER_SWIFT_FLAGS = $(inherited) -Xcc -fdeclspec
