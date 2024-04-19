@@ -36,7 +36,7 @@ jobs:
           cat Packages/CRuby/CRuby.pc
           cat Packages/CRuby/Sources/CRuby/module.modulemap
           cat Packages/CRuby/Sources/CRuby/ruby_headers.h
-      - name: Tests
+      - name: Tests (SPM)
         run: |
           export PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH
           swift test --enable-code-coverage -Xcc -fdeclspec
@@ -48,6 +48,8 @@ jobs:
         with:
           files: ./coverage.lcov
           verbose: true
+            #      - name: Tests (Xcodebuild)
+            #        run: xcodebuild test -scheme RubyGateway-Package
 
   linux:
     name: ubuntu latest

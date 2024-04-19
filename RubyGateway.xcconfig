@@ -7,3 +7,7 @@
 // Ruby 3 -fdeclspec
 OTHER_CFLAGS = $(inherited) -fdeclspec
 OTHER_SWIFT_FLAGS = $(inherited) -Xcc -fdeclspec
+
+HEADER_SEARCH_PATHS = $(inherited) /Users/johnf/.rbenv/versions/3.3.0/include/ruby-3.3.0/x86_64-darwin23 /Users/johnf/.rbenv/versions/3.3.0/include/ruby-3.3.0
+
+LIBRARY_SEARCH_PATHS = $(inherited) "/Users/johnf/.rbenv/versions/3.3.0/lib"

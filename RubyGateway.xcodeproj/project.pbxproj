@@ -594,8 +594,6 @@
 				HEADER_SEARCH_PATHS = (
 					"${SRCROOT}/CRuby/Sources/CRuby",
 					"${SRCROOT}/Sources/RubyGatewayHelpers/include",
-					"/Users/johnf/.rbenv/versions/3.3.0/include/ruby-3.3.0",
-					"/Users/johnf/.rbenv/versions/3.3.0/include/ruby-3.3.0/x86_64-darwin23",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -650,8 +648,6 @@
 				HEADER_SEARCH_PATHS = (
 					"${SRCROOT}/CRuby/Sources/CRuby",
 					"${SRCROOT}/Sources/RubyGatewayHelpers/include",
-					"/Users/johnf/.rbenv/versions/3.3.0/include/ruby-3.3.0",
-					"/Users/johnf/.rbenv/versions/3.3.0/include/ruby-3.3.0/x86_64-darwin23",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -722,16 +718,11 @@
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
-				HEADER_SEARCH_PATHS = (
-					"$(HOME)/.rbenv/versions/3.3.0/include/ruby-3.3.0/x86_64-darwin23",
-					"$(HOME)/.rbenv/versions/3.3.0/include/ruby-3.3.0",
-				);
 				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGatewayTests_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@loader_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "$(HOME)/.rbenv/versions/3.3.0/lib";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_NAME = RubyGatewayTests;
@@ -801,16 +792,11 @@
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
-				HEADER_SEARCH_PATHS = (
-					"$(HOME)/.rbenv/versions/3.3.0/include/ruby-3.3.0/x86_64-darwin23",
-					"$(HOME)/.rbenv/versions/3.3.0/include/ruby-3.3.0",
-				);
 				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGatewayTests_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@loader_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "$(HOME)/.rbenv/versions/3.3.0/lib";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_NAME = RubyGatewayTests;
@@ -831,18 +817,13 @@
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
-				HEADER_SEARCH_PATHS = (
-					"${SRCROOT}/CRuby/Sources/CRuby",
-					"/Users/johnf/.rbenv/versions/3.3.0/include/ruby-3.3.0/x86_64-darwin23",
-					"/Users/johnf/.rbenv/versions/3.3.0/include/ruby-3.3.0",
-				);
+				HEADER_SEARCH_PATHS = "${SRCROOT}/CRuby/Sources/CRuby";
 				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGateway_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "$(HOME)/.rbenv/versions/3.3.0/lib";
 				MACOSX_DEPLOYMENT_TARGET = 11.4;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++14";
@@ -872,18 +853,13 @@
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
-				HEADER_SEARCH_PATHS = (
-					"${SRCROOT}/CRuby/Sources/CRuby",
-					"/Users/johnf/.rbenv/versions/3.3.0/include/ruby-3.3.0/x86_64-darwin23",
-					"/Users/johnf/.rbenv/versions/3.3.0/include/ruby-3.3.0",
-				);
+				HEADER_SEARCH_PATHS = "${SRCROOT}/CRuby/Sources/CRuby";
 				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGateway_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "$(HOME)/.rbenv/versions/3.3.0/lib";
 				MACOSX_DEPLOYMENT_TARGET = 11.4;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++14";
