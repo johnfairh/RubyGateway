@@ -592,6 +592,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
 					"${SRCROOT}/CRuby/Sources/CRuby",
 					"${SRCROOT}/Sources/RubyGatewayHelpers/include",
 				);
@@ -646,6 +647,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
 					"${SRCROOT}/CRuby/Sources/CRuby",
 					"${SRCROOT}/Sources/RubyGatewayHelpers/include",
 				);
@@ -817,7 +819,10 @@
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
-				HEADER_SEARCH_PATHS = "${SRCROOT}/CRuby/Sources/CRuby";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${SRCROOT}/CRuby/Sources/CRuby",
+				);
 				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGateway_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -853,7 +858,10 @@
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
-				HEADER_SEARCH_PATHS = "${SRCROOT}/CRuby/Sources/CRuby";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${SRCROOT}/CRuby/Sources/CRuby",
+				);
 				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGateway_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
