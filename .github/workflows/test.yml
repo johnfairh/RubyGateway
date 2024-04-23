@@ -21,6 +21,8 @@ jobs:
         with:
           xcode-version: ${{ matrix.xcode }}
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
       - name: Ruby
         run: |
           gem install rouge
@@ -36,10 +38,10 @@ jobs:
           cat Packages/CRuby/CRuby.pc
           cat Packages/CRuby/Sources/CRuby/module.modulemap
           cat Packages/CRuby/Sources/CRuby/ruby_headers.h
-      - name: Tests
+      - name: Tests (SPM)
         run: |
           export PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH
-          swift test --enable-code-coverage -Xcc -fdeclspec
+          swift test --enable-code-coverage
       - name: Coverage generation
         run: |
           xcrun llvm-cov export -format lcov .build/debug/RubyGatewayPackageTests.xctest/Contents/MacOS/RubyGatewayPackageTests -instr-profile .build/debug/codecov/default.profdata -ignore-filename-regex "(Test|checkouts)" > coverage.lcov
@@ -48,6 +50,10 @@ jobs:
         with:
           files: ./coverage.lcov
           verbose: true
+      - name: Tests (Xcodebuild)
+        run: |
+          CRuby/cfg-cruby --mode custom --path `ruby -e 'puts RbConfig::TOPDIR'`
+          xcodebuild test -scheme RubyGateway-Package
 
   linux:
     name: ubuntu latest
@@ -58,13 +64,9 @@ jobs:
         rby:
           - short: '2.7'
           - short: '3.0'
-            extra_args: '-Xcc -fdeclspec'
           - short: '3.1'
-            extra_args: '-Xcc -fdeclspec'
           - short: '3.2'
-            extra_args: '-Xcc -fdeclspec'
           - short: '3.3'
-            extra_args: '-Xcc -fdeclspec'
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
@@ -92,4 +94,4 @@ jobs:
         run: |
           export PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH
           export LD_LIBRARY_PATH=${RB_PREFIX}/lib:$LD_LIBRARY_PATH
-          swift test ${{ matrix.rby.extra_args }}
+          swift test

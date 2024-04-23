@@ -158,27 +158,19 @@ log(object2_to_log, priority: 2)
 
 ## Requirements
 
-* Swift 5.4 or later, from swift.org or Xcode 12.5+
-* macOS (tested on 14.1) or Linux (tested on Ubuntu Bionic/18.04 on x86_64) with Clang 6.
+* Swift 5.9 or later, from swift.org or Xcode 15.3+
+* macOS (tested on 14.1) or Linux (tested on Ubuntu Jammy)
 * Ruby 2.6 or later including development files:
   * For macOS, these come with Xcode.
   * For Linux you may need to install a -dev package depending on how your Ruby
     is installed.
   * RubyGateway requires 'original' MRI/CRuby Ruby - no JRuby/Rubinius/etc.
 
-There's something wrong with the Ruby 3 Xcode project since Ruby 3.2: running
-tests in Xcode shows all kinds of weird errors that look like a linking problem 
-that is not present run normally in SPM.
-
 ## Installation
 
 For macOS, if you are happy to use the system Ruby then you just need to include
 the RubyGateway framework as a dependency.  If you are building on Linux or want
 to use a different Ruby then you also need to configure CRuby.
-
-If you are using Ruby 3 then you need to set the `-fdeclspec` Clang flag, either
-on the Swift PM command line (`swift build -Xcc -fdeclspec`) or in Xcode's
-_Other Swift Flags_ settings.
 
 ### Getting the framework
 
@@ -216,7 +208,7 @@ echo "import RubyGateway; print(Ruby.versionDescription)" > Sources/MyProject/ma
 swift package update
 swift package edit CRuby
 Packages/CRuby/cfg-cruby --mode rbenv --name 3.0.0
-PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH swift run -Xcc -fdeclspec
+PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH swift run
 ```
 
 ## Contributions
