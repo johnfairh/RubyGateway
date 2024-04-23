@@ -1,3 +1,11 @@
+## 6.0.0-pre1 - 23rd April 2024
+
+First release leading up to Swift 6.
+
+* Revamp for modern Swift including concurrency
+  checking, many technically-changed APIs
+* Update CRuby, introduce xcconfig
+
 ## 5.5.0 - 30th January 2024
 
 #### Enhancements
