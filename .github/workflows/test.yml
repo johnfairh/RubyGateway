@@ -39,7 +39,7 @@ jobs:
       - name: Tests (SPM)
         run: |
           export PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH
-          swift test --enable-code-coverage -Xcc -fdeclspec
+          swift test --enable-code-coverage
       - name: Coverage generation
         run: |
           xcrun llvm-cov export -format lcov .build/debug/RubyGatewayPackageTests.xctest/Contents/MacOS/RubyGatewayPackageTests -instr-profile .build/debug/codecov/default.profdata -ignore-filename-regex "(Test|checkouts)" > coverage.lcov
@@ -48,8 +48,8 @@ jobs:
         with:
           files: ./coverage.lcov
           verbose: true
-            #      - name: Tests (Xcodebuild)
-            #        run: xcodebuild test -scheme RubyGateway-Package
+      - name: Tests (Xcodebuild)
+        run: xcodebuild test -scheme RubyGateway-Package
 
   linux:
     name: ubuntu latest
@@ -94,4 +94,4 @@ jobs:
         run: |
           export PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH
           export LD_LIBRARY_PATH=${RB_PREFIX}/lib:$LD_LIBRARY_PATH
-          swift test ${{ matrix.rby.extra_args }}
+          swift test #${{ matrix.rby.extra_args }}
