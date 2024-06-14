@@ -267,7 +267,7 @@ class TestClassDef: XCTestCase {
         }
     }
 
-    class InvaderModel {
+    class InvaderModel: @unchecked Sendable {
         private var name = ""
 
         init() {

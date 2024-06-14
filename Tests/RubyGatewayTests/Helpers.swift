@@ -51,7 +51,7 @@ struct Helpers {
 
     /// Ruby files etc.
     private static let fixturesDir: String = {
-        URL(fileURLWithPath: #file).deletingLastPathComponent().path + "/Fixtures"
+        URL(fileURLWithPath: #filePath).deletingLastPathComponent().path + "/Fixtures"
     }()
 
     /// Get full path to fixture with name

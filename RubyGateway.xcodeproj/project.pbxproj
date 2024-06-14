@@ -419,7 +419,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 1530;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					022F3AB62036D4DD009E69BE = {
 						CreatedOnToolsVersion = 9.2;
@@ -707,6 +707,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
 				USE_HEADERMAP = NO;
 			};
 			name = Debug;
@@ -714,11 +715,15 @@
 		OBJ_39 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEAD_CODE_STRIPPING = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"${inherited}",
+					"${SRCROOT}/CRuby/Sources/CRuby",
+					"${SRCROOT}/Sources/RubyGatewayHelpers/include",
 				);
 				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGatewayTests_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -728,7 +733,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_NAME = RubyGatewayTests;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGET_NAME = RubyGatewayTests;
 			};
 			name = Debug;
@@ -781,6 +786,7 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
 				USE_HEADERMAP = NO;
 			};
 			name = Release;
@@ -788,11 +794,15 @@
 		OBJ_40 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEAD_CODE_STRIPPING = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"${inherited}",
+					"${SRCROOT}/CRuby/Sources/CRuby",
+					"${SRCROOT}/Sources/RubyGatewayHelpers/include",
 				);
 				INFOPLIST_FILE = RubyGateway.xcodeproj/RubyGatewayTests_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -802,7 +812,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_NAME = RubyGatewayTests;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGET_NAME = RubyGatewayTests;
 			};
 			name = Release;
@@ -841,7 +851,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "${SRCROOT}/CRuby/Sources/CRuby ${SRCROOT}/Sources/RubyGatewayHelpers";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGET_NAME = RubyGateway;
 			};
 			name = Debug;
@@ -879,7 +889,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "${SRCROOT}/CRuby/Sources/CRuby ${SRCROOT}/Sources/RubyGatewayHelpers";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGET_NAME = RubyGateway;
 			};
 			name = Release;
