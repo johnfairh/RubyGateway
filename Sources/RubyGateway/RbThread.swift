@@ -92,7 +92,8 @@ public enum RbThread {
         withoutActuallyEscaping(callback) { escapingCallback in
             let context = RbThreadContext(escapingCallback)
             context.withRaw { rawContext in
-                rb_thread_call_without_gvl(rbthread_callback, rawContext, nil, nil)
+                // Swift 6
+                rb_thread_call_without_gvl( { rbthread_callback(rawContext: $0) }, rawContext, nil, nil)
             }
         }
     }
@@ -126,12 +127,16 @@ public enum RbThread {
                     withoutActuallyEscaping(ubfFunc) { escapingUbfFunc in
                         let ubfContext = RbThreadContext(escapingUbfFunc)
                         ubfContext.withRaw { rawUbfContext in
-                            rb_thread_call_without_gvl(rbthread_callback, rawContext,
-                                                       rbthread_ubf_callback, rawUbfContext)
+                            // Swift 6
+                            rb_thread_call_without_gvl( { rbthread_callback(rawContext: $0) },
+                                                        rawContext,
+                                                        { rbthread_ubf_callback(rawContext: $0) },
+                                                        rawUbfContext)
                         }
                     }
                 case .io:
-                    rb_thread_call_without_gvl(rbthread_callback, rawContext, rbg_RUBY_UBF_IO(), nil)
+                    // Swift 6
+                    rb_thread_call_without_gvl( { rbthread_callback(rawContext: $0) }, rawContext, rbg_RUBY_UBF_IO(), nil)
                 }
             }
         }
@@ -146,7 +151,8 @@ public enum RbThread {
         withoutActuallyEscaping(callback) { escapingCallback in
             let context = RbThreadContext(escapingCallback)
             context.withRaw { rawContext in
-                rb_thread_call_with_gvl(rbthread_callback, rawContext)
+                // Swift 6
+                rb_thread_call_with_gvl( { rbthread_callback(rawContext: $0) }, rawContext)
             }
         }
     }

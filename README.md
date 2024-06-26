@@ -152,7 +152,7 @@ log(object2_to_log, priority: 2)
 
 ## Documentation
 
-* [User guide](https://johnfairh.github.io/RubyGateway/user-guide.html)
+* [User guide](https://johnfairh.github.io/RubyGateway/guides/user-guide.html)
 * [API documentation](https://johnfairh.github.io/RubyGateway)
 * [Docset for Dash](https://johnfairh.github.io/RubyGateway/docsets/RubyGateway.tgz)
 

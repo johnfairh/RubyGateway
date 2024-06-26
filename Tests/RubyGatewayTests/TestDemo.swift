@@ -15,7 +15,7 @@ class TestDemo: XCTestCase {
         doErrorFree {
             try Ruby.require(filename: "rouge")
             // Careful to avoid String methods that are unimplemented on Linux....
-            let swiftText = try String(contentsOfFile: URL(fileURLWithPath: #file).path, encoding: .utf8)
+            let swiftText = try String(contentsOfFile: URL(fileURLWithPath: #filePath).path, encoding: .utf8)
 
             let html = try Ruby.get("Rouge").call("highlight", args: [swiftText, "swift", "html"])
 
