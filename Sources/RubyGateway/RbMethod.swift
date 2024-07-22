@@ -31,9 +31,6 @@ internal import RubyGatewayHelpers
 // dynamic dispatch order.  So we can search this property looking for a match.
 // OK - not THAT bad!
 
-// XXX these guys all ought to be Sendable, but Swift is broken wrt Sendable and
-// XXX method references....
-
 /// The function signature for a Ruby method implemented as a Swift free function
 /// or closure.
 ///
@@ -46,7 +43,7 @@ internal import RubyGatewayHelpers
 ///
 /// See `RbBoundMethodCallback` and `RbBoundMethodVoidCallback` for use with
 /// custom Ruby classes that are bound to Swift types.
-public typealias RbMethodCallback = (RbObject, RbMethod) throws -> RbObject
+public typealias RbMethodCallback = @Sendable (RbObject, RbMethod) throws -> RbObject
 
 /// The function signature for a Ruby method implemented as a Swift method of
 /// a Swift bound object that returns a value.
@@ -62,8 +59,8 @@ public typealias RbMethodCallback = (RbObject, RbMethod) throws -> RbObject
 /// You can throw an `RbException` to raise a Ruby exception instead of returning
 /// normally from the method.  Throwing another type gets wrapped up in an
 /// `RbException` and raised as a Ruby runtime exception.
-public typealias RbBoundMethodCallback<SwiftPeer: AnyObject, Return: RbObjectConvertible & Sendable> =
-    (SwiftPeer) -> (RbMethod) throws -> Return
+public typealias RbBoundMethodCallback<SwiftPeer: AnyObject & Sendable, Return: RbObjectConvertible & Sendable> =
+    @Sendable (SwiftPeer) -> (RbMethod) throws -> Return
 
 /// The function signature for a Ruby method implemented as a Swift method of
 /// a Swift bound object that does not return a value.
@@ -78,8 +75,8 @@ public typealias RbBoundMethodCallback<SwiftPeer: AnyObject, Return: RbObjectCon
 /// You can throw an `RbException` to raise a Ruby exception instead of returning
 /// normally from the method.  Throwing another type gets wrapped up in an
 /// `RbException` and raised as a Ruby runtime exception.
-public typealias RbBoundMethodVoidCallback<SwiftPeer: AnyObject> =
-    (SwiftPeer) -> (RbMethod) throws -> Void
+public typealias RbBoundMethodVoidCallback<SwiftPeer: AnyObject & Sendable> =
+    @Sendable (SwiftPeer) -> (RbMethod) throws -> Void
 
 // MARK: - Dispatch gorpy implementation
 
@@ -258,7 +255,7 @@ public struct RbMethod: Sendable {
     /// Call the overridden version of the current method.
     ///
     /// The current active block, if any, is passed on to the superclass method.
-    /// There is no RubyBridge equivalent to Ruby's 'raw super' keyword, you must
+    /// There is no RubyGateway equivalent to Ruby's 'raw super' keyword, you must
     /// always explicitly specify the arguments to pass on.
     ///
     /// If there is no matching superclass method to call then Ruby raises a
@@ -667,7 +664,7 @@ extension RbObject {
     ///   - method: The Swift method to call to fulfill the Ruby method.
     /// - Throws: `RbError.badIdentifier(type:id:)` if `name` is bad.
     ///           `RbError.badType(...)` if the object is not a class.
-    public func defineMethod<SwiftPeer: AnyObject, Return: RbObjectConvertible & Sendable>(
+    public func defineMethod<SwiftPeer: AnyObject & Sendable, Return: RbObjectConvertible & Sendable>(
                     _ name: String,
                     argsSpec: RbMethodArgsSpec = RbMethodArgsSpec(),
                     method: @escaping RbBoundMethodCallback<SwiftPeer, Return>) throws {
@@ -710,7 +707,7 @@ extension RbObject {
     ///   - method: The Swift method to call to fulfill the Ruby method.
     /// - Throws: `RbError.badIdentifier(type:id:)` if `name` is bad.
     ///           `RbError.badType(...)` if the object is not a class.
-    public func defineMethod<SwiftPeer: AnyObject>(
+    public func defineMethod<SwiftPeer: AnyObject & Sendable>(
                     _ name: String,
                     argsSpec: RbMethodArgsSpec = RbMethodArgsSpec(),
                     method: @escaping RbBoundMethodVoidCallback<SwiftPeer>) throws {

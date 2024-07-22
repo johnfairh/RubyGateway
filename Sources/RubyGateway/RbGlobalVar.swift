@@ -97,7 +97,7 @@ extension RbGateway {
     /// - throws: `RbError.badIdentifier(type:id:)` if `name` is bad; some other kind of error if Ruby is
     ///           not working.
     public func defineGlobalVar<T: RbObjectConvertible>(_ name: String,
-                                                        get: @Sendable @escaping () -> T) throws {
+                                                        get: @escaping @Sendable () -> T) throws {
         try setup()
         try name.checkRubyGlobalVarName()
         RbGlobalVar.create(name: name, get: get, set: nil)
@@ -120,8 +120,8 @@ extension RbGateway {
     /// - throws: `RbError.badIdentifier(type:id:)` if `name` is bad; some other kind of error if Ruby is
     ///           not working.
     public func defineGlobalVar<T: RbObjectConvertible>(_ name: String,
-                                                        get: @Sendable @escaping () -> T,
-                                                        set: @Sendable @escaping (T) throws -> Void) throws {
+                                                        get: @escaping @Sendable () -> T,
+                                                        set: @escaping @Sendable (T) throws -> Void) throws {
         try setup()
         try name.checkRubyGlobalVarName()
         RbGlobalVar.create(name: name, get: get, set: set)

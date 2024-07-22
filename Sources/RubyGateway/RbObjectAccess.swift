@@ -273,13 +273,19 @@ extension RbObjectAccess {
         return try doCall(id: methodId, args: args, kwArgs: kwArgs)
     }
 
-    /// Call a Ruby object method passing Swift code as a block.
+    /// Call a Ruby object method passing Swift code as a block used immediately.
+    ///
+    /// This version is for something like `Enumerable#each` where the block is used
+    /// only in the context of this method and never again.  The Swift closure does not have
+    /// to be escaping or sendable.
+    ///
+    /// If the method you're calling retains the block in some way, associating it with the called
+    /// or returned object for future use, then the Swift closure must be both escaping and sendable
+    /// and you must call the method with `call(_:args:kwArgs:blockRetention:blockCall:)`.
     ///
     /// - parameter methodName: The name of the method to call.
     /// - parameter args: The positional arguments to the method.  None by default.
     /// - parameter kwArgs: The keyword arguments to the method.  None by default.
-    /// - parameter blockRetention: Should the `blockCall` closure be retained for
-    ///             longer than this call?  Default `.none`.  See `RbBlockRetention`.
     /// - parameter blockCall: Swift code to pass as a block to the method.
     /// - returns: The result of calling the method.
     /// - throws: `RbError.rubyException(_:)` if there is a Ruby exception.
@@ -290,8 +296,36 @@ extension RbObjectAccess {
     public func call(_ methodName: String,
                      args: [(any RbObjectConvertible)?] = [],
                      kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:],
-                     blockRetention: RbBlockRetention = .none,
-                     blockCall: @escaping RbBlockCallback) throws -> RbObject {
+                     blockCall: RbBlockCallback) throws -> RbObject {
+        try Ruby.setup()
+        let methodId = try Ruby.getID(for: methodName)
+        return try withoutActuallyEscaping(blockCall) { newBlockCall in
+            try doCall(id: methodId,
+                       args: args, kwArgs: kwArgs,
+                       blockRetention: .none,
+                       blockCall: newBlockCall)
+        }
+    }
+
+    /// Call a Ruby object method passing Swift code as a block.
+    ///
+    /// - parameter methodName: The name of the method to call.
+    /// - parameter args: The positional arguments to the method.  None by default.
+    /// - parameter kwArgs: The keyword arguments to the method.  None by default.
+    /// - parameter blockRetention: Should the `blockCall` closure be retained for
+    ///             longer than this call?  See `RbBlockRetention`.
+    /// - parameter blockCall: Swift code to pass as a block to the method.
+    /// - returns: The result of calling the method.
+    /// - throws: `RbError.rubyException(_:)` if there is a Ruby exception.
+    ///           `RbError.duplicateKwArg(_:)` if there are duplicate keywords in `kwArgs`.
+    ///
+    /// For a version that does not throw, see `failable`.
+    @discardableResult
+    public func call(_ methodName: String,
+                     args: [(any RbObjectConvertible)?] = [],
+                     kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:],
+                     blockRetention: RbBlockRetention,
+                     blockCall: @escaping @Sendable RbBlockCallback) throws -> RbObject {
         try Ruby.setup()
         let methodId = try Ruby.getID(for: methodName)
         return try doCall(id: methodId,
@@ -343,13 +377,19 @@ extension RbObjectAccess {
         }
     }
 
-    /// Call a Ruby object method using a symbol passing Swift code as a block.
+    /// Call a Ruby object method using a symbol passing Swift code as a block used immediately.
+    ///
+    /// This version is for something like `Enumerable#each` where the block is used
+    /// only in the context of this method and never again.  The Swift closure does not have
+    /// to be escaping or sendable.
+    ///
+    /// If the method you're calling retains the block in some way, associating it with the called
+    /// or returned object for future use, then the Swift closure must be both escaping and sendable
+    /// and you must call the method with `call(symbol:args:kwArgs:blockRetention:blockCall:)`.
     ///
     /// - parameter symbol: The symbol for the name of the method to call.
     /// - parameter args: The positional arguments to the method.  None by default.
     /// - parameter kwArgs: The keyword arguments to the method.  None by default.
-    /// - parameter blockRetention: Should the `blockCall` closure be retained for
-    ///             longer than this call?  Default `.none`.  See `RbBlockRetention`.
     /// - parameter blockCall: Swift code to pass as a block to the method.
     /// - returns: The result of calling the method.
     /// - throws: `RbError.rubyException(_:)` if there is a Ruby exception.
@@ -361,8 +401,35 @@ extension RbObjectAccess {
     public func call(symbol: any RbObjectConvertible,
                      args: [(any RbObjectConvertible)?] = [],
                      kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:],
-                     blockRetention: RbBlockRetention = .none,
-                     blockCall: @escaping RbBlockCallback) throws -> RbObject {
+                     blockCall: RbBlockCallback) throws -> RbObject {
+        try Ruby.setup()
+        return try withoutActuallyEscaping(blockCall) { realBlockCall in
+            try symbol.rubyObject.withSymbolId { methodId in
+                try doCall(id: methodId, args: args, kwArgs: kwArgs, blockRetention: .none, blockCall: realBlockCall)
+            }
+        }
+    }
+
+    /// Call a Ruby object method using a symbol passing Swift code as a block.
+    ///
+    /// - parameter symbol: The symbol for the name of the method to call.
+    /// - parameter args: The positional arguments to the method.  None by default.
+    /// - parameter kwArgs: The keyword arguments to the method.  None by default.
+    /// - parameter blockRetention: Should the `blockCall` closure be retained for
+    ///             longer than this call?  See `RbBlockRetention`.
+    /// - parameter blockCall: Swift code to pass as a block to the method.
+    /// - returns: The result of calling the method.
+    /// - throws: `RbError.rubyException(_:)` if there is a Ruby exception.
+    ///           `RbError.badType(_:)` if `symbol` is not a symbol.
+    ///           `RbError.duplicateKwArg(_:)` if there are duplicate keywords in `kwArgs`.
+    ///
+    /// For a version that does not throw, see `failable`.
+    @discardableResult
+    public func call(symbol: any RbObjectConvertible,
+                     args: [(any RbObjectConvertible)?] = [],
+                     kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:],
+                     blockRetention: RbBlockRetention,
+                     blockCall: @escaping @Sendable RbBlockCallback) throws -> RbObject {
         try Ruby.setup()
         return try symbol.rubyObject.withSymbolId { methodId in
             try doCall(id: methodId, args: args, kwArgs: kwArgs, blockRetention: blockRetention, blockCall: blockCall)
@@ -419,7 +486,7 @@ extension RbObjectAccess {
 
         // Do call - more complicated if block is involved
         return try argObjects.withRubyValues { argValues -> RbObject in
-            if let blockCall = blockCall {
+            if let blockCall {
                 let (context, value) =
                     try RbBlock.doBlockCall(value: getValue(), methodId: id,
                                             argValues: argValues,
@@ -434,7 +501,7 @@ extension RbObjectAccess {
                 case .returned: retObject.associate(object: context)
                 }
                 return retObject
-            } else if let blockObj = blockObj {
+            } else if let blockObj {
                 return RbObject(rubyValue: try blockObj.withRubyValue { blockValue in
                     try RbBlock.doBlockCall(value: getValue(), methodId: id,
                                             argValues: argValues,

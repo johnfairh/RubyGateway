@@ -66,7 +66,7 @@ public enum RbThread {
     /// - parameter callback: Callback to make on the new thread
     /// - returns: The Ruby `Thread` object, or `nil` if there was a problem.
     ///            See `RbError.history` for details of any error.
-    public static func create(callback: @Sendable @escaping () -> Void) -> RbObject? {
+    public static func create(callback: @escaping @Sendable () -> Void) -> RbObject? {
         RbObject(ofClass: "Thread", retainBlock: true) { args in
             callback()
             return .nilObject

@@ -61,6 +61,23 @@ extension RbFailableAccess {
         try? access.call(method, args: args, kwArgs: kwArgs)
     }
 
+    /// Call a method of a Ruby object passing Swift code as a block used immediately.
+    ///
+    /// This is a non-throwing version of `RbObjectAccess.call(_:args:kwArgs:blockCall:)`.
+    /// See `RbError.history` to retrieve error details.
+    ///
+    /// - parameter method: The name of the method to call.
+    /// - parameter args: The positional arguments to the method, none by default.
+    /// - parameter kwArgs: The keyword arguments to the method, none by default.
+    /// - parameter blockCall: Swift code to pass as a block to the method.
+    /// - returns: An `RbObject` for the result of the method, or `nil` if an error occurred.
+    public func call(_ method: String,
+                     args: [(any RbObjectConvertible)?] = [],
+                     kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:],
+                     blockCall: RbBlockCallback) -> RbObject? {
+        try? access.call(method, args: args, kwArgs: kwArgs, blockCall: blockCall)
+    }
+
     /// Call a method of a Ruby object passing Swift code as a block.
     ///
     /// This is a non-throwing version of `RbObjectAccess.call(_:args:kwArgs:blockRetention:blockCall:)`.
@@ -70,14 +87,14 @@ extension RbFailableAccess {
     /// - parameter args: The positional arguments to the method, none by default.
     /// - parameter kwArgs: The keyword arguments to the method, none by default.
     /// - parameter blockRetention: Should the `blockCall` closure be retained for
-    ///             longer than this call?  Default `.none`.  See `RbBlockRetention`.
+    ///             longer than this call?  See `RbBlockRetention`.
     /// - parameter blockCall: Swift code to pass as a block to the method.
     /// - returns: An `RbObject` for the result of the method, or `nil` if an error occurred.
     public func call(_ method: String,
                      args: [(any RbObjectConvertible)?] = [],
                      kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:],
-                     blockRetention: RbBlockRetention = .none,
-                     blockCall: @escaping RbBlockCallback) -> RbObject? {
+                     blockRetention: RbBlockRetention,
+                     blockCall: @escaping @Sendable RbBlockCallback) -> RbObject? {
         try? access.call(method, args: args, kwArgs: kwArgs, blockRetention: blockRetention, blockCall: blockCall)
     }
 
@@ -114,6 +131,24 @@ extension RbFailableAccess {
         try? access.call(symbol: symbol, args: args, kwArgs: kwArgs)
     }
 
+    /// Call a method of a Ruby object using a symbol passing Swift code as a block used immediately.
+    ///
+    /// This is a non-throwing version of `RbObjectAccess.call(symbol:args:kwArgs:blockCall:)`.
+    /// See `RbError.history` to retrieve error details.
+    ///
+    /// - parameter symbol: A symbol for the method to call.
+    /// - parameter args: The positional arguments to the method, none by default.
+    /// - parameter kwArgs: The keyword arguments to the method, none by default.
+    /// - parameter blockCall: Swift code to pass as a block to the method.
+    /// - returns: An `RbObject` for the result of the method, or `nil` if an error occurred.
+    @discardableResult
+    public func call(symbol: any RbObjectConvertible,
+                     args: [(any RbObjectConvertible)?] = [],
+                     kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:],
+                     blockCall: RbBlockCallback) -> RbObject? {
+        try? access.call(symbol: symbol, args: args, kwArgs: kwArgs, blockCall: blockCall)
+    }
+
     /// Call a method of a Ruby object using a symbol passing Swift code as a block.
     ///
     /// This is a non-throwing version of `RbObjectAccess.call(symbol:args:kwArgs:blockRetention:blockCall:)`.
@@ -123,7 +158,7 @@ extension RbFailableAccess {
     /// - parameter args: The positional arguments to the method, none by default.
     /// - parameter kwArgs: The keyword arguments to the method, none by default.
     /// - parameter blockRetention: Should the `blockCall` closure be retained for
-    ///             longer than this call?  Default `.none`.  See `RbBlockRetention`.
+    ///             longer than this call?  See `RbBlockRetention`.
     /// - parameter blockCall: Swift code to pass as a block to the method.
     /// - returns: An `RbObject` for the result of the method, or `nil` if an error occurred.
     @discardableResult
@@ -131,7 +166,7 @@ extension RbFailableAccess {
                      args: [(any RbObjectConvertible)?] = [],
                      kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:],
                      blockRetention: RbBlockRetention = .none,
-                     blockCall: @escaping RbBlockCallback) -> RbObject? {
+                     blockCall: @escaping @Sendable RbBlockCallback) -> RbObject? {
         try? access.call(symbol: symbol, args: args, kwArgs: kwArgs, blockRetention: blockRetention, blockCall: blockCall)
     }
 

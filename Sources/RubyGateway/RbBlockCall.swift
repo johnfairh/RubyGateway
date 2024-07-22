@@ -64,9 +64,9 @@ public typealias RbBlockCallback = ([RbObject]) throws -> RbObject
 /// `RbObjectAccess.call(_:args:kwArgs:blockRetention:blockCall:)`, RubyGateway
 /// needs some help to understand how Ruby will use the closure.
 ///
-/// The easiest thing to get wrong is using the default of `.none` when
-/// Ruby retains the block for use later.  This causes a hard crash in
-/// `RbBlockContext.from(raw:)` when Ruby tries to call the block.
+/// The easiest thing to get wrong is using `.none` when Ruby retains the
+/// block for use later.  This causes a hard crash in `RbBlockContext.from(raw:)`
+/// when Ruby tries to call the block.
 public enum RbBlockRetention {
     /// Do not retain the closure.  The default, appropriate when the block
     /// is used only during execution of the method it is passed to.  For

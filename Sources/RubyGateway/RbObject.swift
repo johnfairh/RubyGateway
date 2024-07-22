@@ -256,6 +256,11 @@ extension RbObject {
 
     /// Create an instance of a given Ruby class passing a Swift closure as a block.
     ///
+    /// This version is really for cases where Ruby retains the block rather than using
+    /// it only synchronously during the exection of the `new` method.  For the synchronous
+    /// case see `init(ofClass:args:kwArgs:blockCall:)` which does not require
+    /// an `@escapable` or `@Sendable` block closure.
+    ///
     /// Fails (returns `nil`) if anything goes wrong along the way - check `RbError.history` to
     /// find out what failed.
     ///
@@ -263,15 +268,14 @@ extension RbObject {
     ///             down into module/etc. scope.
     /// - parameter args: positional arguments to pass to `new` call for the object.  Default none.
     /// - parameter kwArgs: keyword arguments to pass to the `new` call for the object.  Default none.
-    /// - parameter retainBlock: Should `blockCall` be retained by the object?  Default `false`.  Set
-    ///             `true` if Ruby uses the block after this call.  For example creating a Proc object
-    ///             using `Proc#new`.
+    /// - parameter retainBlock: Should `blockCall` be retained by the object?  Set `true` if
+    ///             Ruby uses the block after this call.  For example creating a Proc object using `Proc#new`.
     /// - parameter blockCall: Swift code to pass as a block to the method.
     public convenience init?(ofClass className: String,
                              args: [(any RbObjectConvertible)?] = [],
                              kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:],
-                             retainBlock: Bool = false,
-                             blockCall: @escaping RbBlockCallback) {
+                             retainBlock: Bool,
+                             blockCall: @escaping @Sendable RbBlockCallback) {
         let retention: RbBlockRetention = retainBlock ? .returned : .none
         guard let obj = try? Ruby.get(className).call("new",
                                                       args: args, kwArgs: kwArgs,
@@ -282,12 +286,40 @@ extension RbObject {
         self.init(obj)
     }
 
+    /// Create an instance of a given Ruby class passing a Swift closure as a block.
+    ///
+    /// The closure is used only synchronously during the `new` method.  For a version appropriate
+    /// for use with things like `Proc#new` that retain the block, see `init(ofClass:args:kwArgs:retainBlock:blockCall:)`
+    ///
+    /// Fails (returns `nil`) if anything goes wrong along the way - check `RbError.history` to
+    /// find out what failed.
+    ///
+    /// - parameter ofClass: Name of the class to instantiate.  Can contain `::` to drill
+    ///             down into module/etc. scope.
+    /// - parameter args: positional arguments to pass to `new` call for the object.  Default none.
+    /// - parameter kwArgs: keyword arguments to pass to the `new` call for the object.  Default none.
+    /// - parameter blockCall: Swift code to pass as a block to the method.
+    public convenience init?(ofClass className: String,
+                             args: [(any RbObjectConvertible)?] = [],
+                             kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:],
+                             blockCall: RbBlockCallback) {
+        guard let obj = withoutActuallyEscaping(blockCall, do: { newBlockCall in
+            try? Ruby.get(className).call("new",
+                                          args: args, kwArgs: kwArgs,
+                                          blockRetention: .none,
+                                          blockCall: newBlockCall)
+        }) else {
+            return nil
+        }
+        self.init(obj)
+    }
+
     /// Create a Ruby Proc object from a Swift closure.
     ///
     /// - parameter blockCall: The callback for the proc.
     /// - warning: You must not allow this `RbObject` to be deallocated before Ruby has
     ///            finished with the block, or the process will crash when Ruby calls it.
-    public convenience init(blockCall: @escaping RbBlockCallback) {
+    public convenience init(blockCall: @escaping @Sendable RbBlockCallback) {
         if let obj = try? Ruby.get("Proc").call("new", blockRetention: .returned, blockCall: blockCall) {
             self.init(obj)
         } else {

@@ -168,7 +168,7 @@ extension RbGateway {
     ///           module. `RbError.rubyException(...)` if Ruby is unhappy with the definition,
     ///           for example when the class already exists with a different parent.
     @discardableResult
-    public func defineClass<SwiftPeer: AnyObject>(
+    public func defineClass<SwiftPeer: AnyObject & Sendable>(
                     _ name: String,
                     under: RbObject? = nil,
                     initializer: @escaping () -> SwiftPeer) throws -> RbObject {

@@ -530,7 +530,7 @@ Outside of the very first time, it's not possible to call Ruby on a random
 thread created either directly by your program or by the Swift concurrency /
 Dispatch runtime.
 
-A reasonable pattern is to call `RbGateway.setup()` during system startup on
+A reasonable pattern is to call some Ruby method during system startup on
 the Swift `@MainActor` and then treat Ruby calls as requiring isolation to
 that actor.  If you take calls _from_ Ruby on Ruby-created threads, and
 servicing these requires access to your Swift concurrency executors, then you
@@ -599,13 +599,11 @@ immediately crashes unless you are running inside `rb_protect()` or equivalent.
 
 ## Swift Concurrency
 
-Sendable annotations and checking are mostly complete.  The parts remaining are
-* `RbBlockCallback` - Swift doesn't understand @Sendable typealiases.
-* `RbMethodCallback` and related - Swift doesn't understand Sendable method
-  references.
+Sendable annotations and checking are thought to be complete.
 
-Despite the lack of `Sendable` requirement on these closure types they should
-be treated as such if you are using Ruby across multiple threads.
+That said it's probably possible to defeat these checks with enough effort
+because of the way Swift types are lost and reapplied either side of the C
+layer.
 
 ### Garbage collection
 
