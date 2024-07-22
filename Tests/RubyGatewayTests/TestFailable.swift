@@ -89,7 +89,7 @@ class TestFailable: XCTestCase {
             return
         }
 
-        if let res = inst.failable.call("always_raise", blockCall: { args in .nilObject }) {
+        if let res = inst.failable.call("always_raise", blockRetention: .none, blockCall: { args in .nilObject }) {
             XCTFail("Managed to avoid raise: \(res)")
             return
         }
@@ -103,7 +103,7 @@ class TestFailable: XCTestCase {
             return
         }
 
-        if let res = inst.failable.call(symbol: RbSymbol("always_raise"), blockCall: { args in .nilObject }) {
+        if let res = inst.failable.call(symbol: RbSymbol("always_raise"), blockRetention: .none, blockCall: { args in .nilObject }) {
             XCTFail("Managed to avoid raise: \(res)")
             return
         }

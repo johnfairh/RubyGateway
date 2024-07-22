@@ -103,3 +103,11 @@ class MethodsTest
         [1, "two", 3.0]
     end
 end
+
+class TestBlockClass
+    attr_accessor :value
+
+    def initialize
+        self.value = yield
+    end
+end

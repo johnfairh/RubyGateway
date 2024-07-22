@@ -176,7 +176,7 @@ class TestCallable: XCTestCase {
             XCTAssertEqual(expectedRes, String(res))
 
             // sym version
-            let res2 = try obj.call(symbol: RbSymbol("yielder"), kwArgs: ["value": 22]) { args in
+            let res2 = try obj.call(symbol: RbSymbol("yielder"), kwArgs: ["value": 22], blockRetention: .none) { args in
                 XCTAssertEqual(2, args.count)
                 XCTAssertEqual(22, Int(args[0]))
                 XCTAssertEqual("fish", String(args[1]))
