@@ -27,9 +27,7 @@ private enum RbGlobalVar {
 
     /// One-time init to register the callbacks
     private static let initOnce: Void = {
-        // Swift 6 breakage
-        rbg_register_gvar_callbacks( { rbobject_gvar_get_callback(id: $0) },
-                                     { rbobject_gvar_set_callback(id: $0, newValue: $1, returnValue: $2) })
+        rbg_register_gvar_callbacks(rbobject_gvar_get_callback, rbobject_gvar_set_callback)
     }()
 
     /// Callbacks + store - type-erased at this point

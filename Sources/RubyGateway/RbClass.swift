@@ -50,11 +50,7 @@ internal enum RbClassBinding {
 
     /// One-time init to register the callbacks
     private static let initOnce: Void = {
-        // Swift 6 breakage :(
-        rbg_register_object_binding_callbacks(
-            { rbbinding_alloc(className: $0) },
-            { rbbinding_free(className: $0, instance: $1) }
-        )
+        rbg_register_object_binding_callbacks(rbbinding_alloc, rbbinding_free)
     }()
 
     private static let bindings = LockedDictionary<String, any RbBoundClassProtocol>()

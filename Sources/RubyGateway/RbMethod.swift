@@ -140,10 +140,7 @@ private struct RbMethodExec {
 private struct RbMethodDispatch {
     /// One-time init to register the callbacks
     private static let initOnce: Void = {
-        // Swift 6 breakage
-        rbg_register_method_callback {
-            rbmethod_callback(symbol: $0, targetCount: $1, rawTargets: $2, rubySelf: $3, argc: $4, argv: $5, returnValue: $6)
-        }
+        rbg_register_method_callback(rbmethod_callback)
     }()
 
     /// List of all method callbacks

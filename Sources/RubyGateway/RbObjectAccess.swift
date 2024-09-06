@@ -54,6 +54,10 @@ internal import RubyGatewayHelpers
 ///     ...
 /// }
 /// ```
+///
+/// When passing a Swift function as a block there are two methods to choose from.  If the block is used
+/// only within the method execution you can provide a non-escaping, non-sendable function; if the block
+/// is persisted and used later then you must provide a retention rule and an escaping, sendable function.
 public class RbObjectAccess {
     /// Getter for the `VALUE` associated with this object
     private let getValue: () -> VALUE

@@ -92,8 +92,7 @@ public enum RbThread {
         withoutActuallyEscaping(callback) { escapingCallback in
             let context = RbThreadContext(escapingCallback)
             context.withRaw { rawContext in
-                // Swift 6
-                rb_thread_call_without_gvl( { rbthread_callback(rawContext: $0) }, rawContext, nil, nil)
+                rb_thread_call_without_gvl(rbthread_callback, rawContext, nil, nil)
             }
         }
     }
@@ -127,16 +126,14 @@ public enum RbThread {
                     withoutActuallyEscaping(ubfFunc) { escapingUbfFunc in
                         let ubfContext = RbThreadContext(escapingUbfFunc)
                         ubfContext.withRaw { rawUbfContext in
-                            // Swift 6
-                            rb_thread_call_without_gvl( { rbthread_callback(rawContext: $0) },
-                                                        rawContext,
-                                                        { rbthread_ubf_callback(rawContext: $0) },
-                                                        rawUbfContext)
+                            rb_thread_call_without_gvl(rbthread_callback,
+                                                       rawContext,
+                                                       rbthread_ubf_callback,
+                                                       rawUbfContext)
                         }
                     }
                 case .io:
-                    // Swift 6
-                    rb_thread_call_without_gvl( { rbthread_callback(rawContext: $0) }, rawContext, rbg_RUBY_UBF_IO(), nil)
+                    rb_thread_call_without_gvl(rbthread_callback, rawContext, rbg_RUBY_UBF_IO(), nil)
                 }
             }
         }
@@ -151,8 +148,7 @@ public enum RbThread {
         withoutActuallyEscaping(callback) { escapingCallback in
             let context = RbThreadContext(escapingCallback)
             context.withRaw { rawContext in
-                // Swift 6
-                rb_thread_call_with_gvl( { rbthread_callback(rawContext: $0) }, rawContext)
+                rb_thread_call_with_gvl(rbthread_callback, rawContext)
             }
         }
     }
