@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "RubyGateway"
-  s.version      = "5.5.0"
+  s.version      = "6.0.0"
   s.authors      = { "John Fairhurst" => "johnfairh@gmail.com" }
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.homepage     = "https://github.com/johnfairh/RubyGateway"
@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   s.documentation_url = "https://johnfairh.github.io/RubyGateway/"
   s.source_files  = 'Sources/RubyGateway/*swift', 'Sources/RubyGatewayHelpers/**/*.{h,m}'
   s.platform = :osx, '10.14'
-  s.swift_version = "5"
+  s.swift_version = "6"
   s.frameworks  = "Foundation"
   s.preserve_path = 'CRuby/*', 'RubyGatewayHelpers/*'
   s.pod_target_xcconfig = { 'SWIFT_INCLUDE_PATHS' => '"${PODS_ROOT}/RubyGateway/CRuby/Sources/CRuby" "${PODS_ROOT}/RubyGateway/RubyGatewayHelpers"',

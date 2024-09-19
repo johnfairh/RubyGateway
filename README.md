@@ -212,7 +212,7 @@ echo "import RubyGateway; print(Ruby.versionDescription)" > Sources/MyProject/ma
 swift package update
 swift package edit CRuby
 Packages/CRuby/cfg-cruby --mode rbenv --name 3.0.0
-PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH swift run
+PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH swift run -Xcc -fmodules
 ```
 
 ## Contributions

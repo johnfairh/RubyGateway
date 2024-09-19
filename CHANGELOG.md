@@ -1,3 +1,13 @@
+## 6.0.0 - 19th September 2024
+
+Swift 6 and concurrency support
+
+* More concurrency-correct API changes
+* Split "call-with-Swift-block" methods into two versions: one taking
+  a non-escaping non-sendable closure for immediate evaluation, and
+  the other taking a sendable, escaping closure for future use
+* Updated documentation for Linux workarounds
+
 ## 6.0.0-pre1 - 23rd April 2024
 
 First release leading up to Swift 6.
