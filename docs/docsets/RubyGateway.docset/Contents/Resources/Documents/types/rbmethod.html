@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/fw2020.css">
     
     
-   <title>RbMethod - RubyGateway 5.5.0 docs</title>
+   <title>RbMethod - RubyGateway 6.0.0 docs</title>
     
   </head>
   <body class="j2-swift " data-root-path="./../" data-doc-path="types/rbmethod.html" data-assets-path="../">
@@ -31,7 +31,7 @@
     
     <a href="../index.html">
     
-    RubyGateway 5.5.0 docs</a>
+    RubyGateway 6.0.0 docs</a>
   </div>
   
   <span class="navbar-text j2-coverage fw-slightly-bold small d-none d-lg-inline-block me-2">(100% documented)</span>
@@ -671,7 +671,7 @@
             
   <div class="j2-swift">
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
-    <pre><code class="language-swift">public struct RbMethod</code></pre>
+    <pre><code class="language-swift">public struct RbMethod: <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">Sendable</a></code></pre>
   </div>
 
 
@@ -1019,12 +1019,12 @@ instances and passes them to method callbacks.</p>
   
   
     <section id="yieldblockargskwargs" class="j2-item j2-swift">
-    <a name="//apple_ref/cpp/Method/func%20yieldBlock(args%3A%20%5BRbObjectConvertible%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20RbObjectConvertible%3F%3E)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="yieldblockargskwargs"></a>
-    <h4 class="visually-hidden">func yieldBlock(args: [RbObjectConvertible?], kwArgs: KeyValuePairs&lt;String, RbObjectConvertible?&gt;) -&gt; RbObject</h4>
+    <a name="//apple_ref/cpp/Method/func%20yieldBlock(args%3A%20%5B(any%20RbObjectConvertible)%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20(any%20RbObjectConvertible)%3F%3E)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="yieldblockargskwargs"></a>
+    <h4 class="visually-hidden">func yieldBlock(args: [(any RbObjectConvertible)?], kwArgs: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;) -&gt; RbObject</h4>
     
     
     <a class="j2-item-title" href="#_yieldblockargskwargs" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_yieldblockargskwargs"><code>
-        <span class="j2-swift"><span class="j2-item-secondary">func </span>yieldBlock<span class="j2-item-secondary">(</span>args<span class="j2-item-secondary">: [RbObjectConvertible?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, RbObjectConvertible?&gt;) -&gt; RbObject</span></span>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>yieldBlock<span class="j2-item-secondary">(</span>args<span class="j2-item-secondary">: [(any RbObjectConvertible)?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;) -&gt; RbObject</span></span>
         
       </code></a>
     <div class="collapse  j2-item-popopen-wrapper" id="_yieldblockargskwargs">
@@ -1054,8 +1054,8 @@ is raised.</p>
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
     <pre><code class="language-swift">@discardableResult
 public func yieldBlock(
-    args: [<a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?] = [],
-    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?&gt; = [:]
+    args: [(any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?] = [],
+    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, (any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?&gt; = [:]
 ) throws -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
   </div>
 
@@ -1172,12 +1172,12 @@ to store the block or do things to it.</p>
   
   
     <section id="callsuperargskwargs" class="j2-item j2-swift">
-    <a name="//apple_ref/cpp/Method/func%20callSuper(args%3A%20%5BRbObjectConvertible%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20RbObjectConvertible%3F%3E)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="callsuperargskwargs"></a>
-    <h4 class="visually-hidden">func callSuper(args: [RbObjectConvertible?], kwArgs: KeyValuePairs&lt;String, RbObjectConvertible?&gt;) -&gt; RbObject</h4>
+    <a name="//apple_ref/cpp/Method/func%20callSuper(args%3A%20%5B(any%20RbObjectConvertible)%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20(any%20RbObjectConvertible)%3F%3E)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="callsuperargskwargs"></a>
+    <h4 class="visually-hidden">func callSuper(args: [(any RbObjectConvertible)?], kwArgs: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;) -&gt; RbObject</h4>
     
     
     <a class="j2-item-title" href="#_callsuperargskwargs" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_callsuperargskwargs"><code>
-        <span class="j2-swift"><span class="j2-item-secondary">func </span>callSuper<span class="j2-item-secondary">(</span>args<span class="j2-item-secondary">: [RbObjectConvertible?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, RbObjectConvertible?&gt;) -&gt; RbObject</span></span>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>callSuper<span class="j2-item-secondary">(</span>args<span class="j2-item-secondary">: [(any RbObjectConvertible)?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;) -&gt; RbObject</span></span>
         
       </code></a>
     <div class="collapse  j2-item-popopen-wrapper" id="_callsuperargskwargs">
@@ -1195,7 +1195,7 @@ to store the block or do things to it.</p>
 
 <p>Call the overridden version of the current method.</p>
 <p>The current active block, if any, is passed on to the superclass method.
-There is no RubyBridge equivalent to Ruby’s ‘raw super’ keyword, you must
+There is no RubyGateway equivalent to Ruby’s ‘raw super’ keyword, you must
 always explicitly specify the arguments to pass on.</p>
 <p>If there is no matching superclass method to call then Ruby raises a
 <code>NoMethodError</code> that is thrown as an <a href="../types/rberror.html?swift#rubyexception_"><code>RbError.rubyException(_:)</code></a>.</p>
@@ -1209,8 +1209,8 @@ always explicitly specify the arguments to pass on.</p>
   <div class="j2-swift">
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
     <pre><code class="language-swift">public func callSuper(
-    args: [<a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?] = [],
-    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?&gt; = [:]
+    args: [(any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?] = [],
+    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, (any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?&gt; = [:]
 ) throws -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
   </div>
 
@@ -1345,7 +1345,7 @@ always explicitly specify the arguments to pass on.</p>
   <div class="col j2-footer small pt-2">
     <p>Distributed under the MIT license.  Maintained by <a href="mailto:johnfairh@gmail.com">John Fairhurst</a>.</p>
     
-    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external noopener">Bebop v1.10.1</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫</a>.</p>
+    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external noopener">Bebop v1.11.0</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫</a>.</p>
     
   </div>
 </footer>

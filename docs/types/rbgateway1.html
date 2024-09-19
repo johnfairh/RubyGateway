@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/fw2020.css">
     
     
-   <title>RbGateway - RubyGateway 5.5.0 docs</title>
+   <title>RbGateway - RubyGateway 6.0.0 docs</title>
     
   </head>
   <body class="j2-swift " data-root-path="./../" data-doc-path="types/rbgateway1.html" data-assets-path="../">
@@ -31,7 +31,7 @@
     
     <a href="../index.html">
     
-    RubyGateway 5.5.0 docs</a>
+    RubyGateway 6.0.0 docs</a>
   </div>
   
   <span class="navbar-text j2-coverage fw-slightly-bold small d-none d-lg-inline-block me-2">(100% documented)</span>
@@ -671,7 +671,7 @@
             
   <div class="j2-swift">
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
-    <pre><code class="language-swift">public final class RbGateway: <a href="../types/rbobjectaccess1.html?swift">RbObjectAccess</a></code></pre>
+    <pre><code class="language-swift">public final class RbGateway: <a href="../types/rbobjectaccess1.html?swift">RbObjectAccess</a>, <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">Sendable</a></code></pre>
   </div>
 
 
@@ -817,7 +817,7 @@ be re-setup.</p>
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbGateway.swift#L90-L92">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbGateway.swift#L89-L91">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -897,7 +897,7 @@ probably means the <code>ID</code> space is full, which is fairly unlikely.</p>
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbGateway.swift#L103-L105">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbGateway.swift#L102-L104">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -962,7 +962,7 @@ custom types.  It is not required for regular RubyGateway use.</p>
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbGateway.swift#L117-L122">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbGateway.swift#L116-L121">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -1055,7 +1055,7 @@ value if it doesn’t exist yet.</p>
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbGateway.swift#L144-L148">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbGateway.swift#L143-L147">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -1068,12 +1068,12 @@ value if it doesn’t exist yet.</p>
   
   
     <section id="setinstancevar_newvalue1" class="j2-item j2-swift">
-    <a name="//apple_ref/cpp/Method/func%20setInstanceVar(String,%20newValue%3A%20RbObjectConvertible%3F)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="setinstancevar_newvalue1"></a>
-    <h4 class="visually-hidden">func setInstanceVar(String, newValue: RbObjectConvertible?) -&gt; RbObject</h4>
+    <a name="//apple_ref/cpp/Method/func%20setInstanceVar(String,%20newValue%3A%20(any%20RbObjectConvertible)%3F)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="setinstancevar_newvalue1"></a>
+    <h4 class="visually-hidden">func setInstanceVar(String, newValue: (any RbObjectConvertible)?) -&gt; RbObject</h4>
     
     
     <a class="j2-item-title" href="#_setinstancevar_newvalue1" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_setinstancevar_newvalue1"><code>
-        <span class="j2-swift"><span class="j2-item-secondary">func </span>setInstanceVar<span class="j2-item-secondary">(String, </span>newValue<span class="j2-item-secondary">: RbObjectConvertible?) -&gt; RbObject</span></span>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>setInstanceVar<span class="j2-item-secondary">(String, </span>newValue<span class="j2-item-secondary">: (any RbObjectConvertible)?) -&gt; RbObject</span></span>
         
       </code></a>
     <div class="collapse  j2-item-popopen-wrapper" id="_setinstancevar_newvalue1">
@@ -1103,7 +1103,7 @@ value if it doesn’t exist yet.</p>
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
     <pre><code class="language-swift">@discardableResult
 public override func setInstanceVar(
-    _ name: <a href="../extensions/string.html?swift">String</a>, newValue: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?
+    _ name: <a href="../extensions/string.html?swift">String</a>, newValue: (any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?
 ) throws -&gt; <a href="../types/rbobject13.html?swift">RbObject</a></code></pre>
   </div>
 
@@ -1143,7 +1143,7 @@ public override func setInstanceVar(
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbGateway.swift#L162-L169">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbGateway.swift#L161-L169">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -1307,7 +1307,7 @@ directly to methods of the <code>SwiftPeer</code> class.</p>
   <div class="j2-swift">
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
     <pre><code class="language-swift">@discardableResult
-public func defineClass&lt;SwiftPeer: <a href="https://developer.apple.com/documentation/swift/anyobject?language=swift">AnyObject</a>&gt;(
+public func defineClass&lt;SwiftPeer: <a href="https://developer.apple.com/documentation/swift/anyobject?language=swift">AnyObject</a> &amp; <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">Sendable</a>&gt;(
     _ name: <a href="../extensions/string.html?swift">String</a>,
     under: <a href="../types/rbobject13.html?swift">RbObject</a>? = nil,
     initializer: @escaping () -&gt; SwiftPeer
@@ -2283,7 +2283,7 @@ as the closure return type.</p>
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
     <pre><code class="language-swift">public func defineGlobalVar&lt;T: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>&gt;(
     _ name: <a href="../extensions/string.html?swift">String</a>,
-    get: @escaping () -&gt; T) throws</code></pre>
+    get: @escaping <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">@Sendable</a> () -&gt; T) throws</code></pre>
   </div>
 
 
@@ -2320,7 +2320,7 @@ not working.</p>
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbGlobalVar.swift#L98-L103">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbGlobalVar.swift#L97-L102">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -2371,8 +2371,8 @@ if the provided Ruby value is the wrong shape.</p>
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
     <pre><code class="language-swift">public func defineGlobalVar&lt;T: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>&gt;(
     _ name: <a href="../extensions/string.html?swift">String</a>,
-    get: @escaping () -&gt; T,
-    set: @escaping (T) throws -&gt; <a href="https://developer.apple.com/documentation/swift/void?language=swift">Void</a>) throws</code></pre>
+    get: @escaping <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">@Sendable</a> () -&gt; T,
+    set: @escaping <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">@Sendable</a> (T) throws -&gt; <a href="https://developer.apple.com/documentation/swift/void?language=swift">Void</a>) throws</code></pre>
   </div>
 
 
@@ -2414,7 +2414,7 @@ not working.</p>
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbGlobalVar.swift#L121-L127">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbGlobalVar.swift#L120-L126">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -2522,7 +2522,7 @@ take any arguments.</p></td>
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbMethod.swift#L586-L592">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbMethod.swift#L596-L602">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -2629,7 +2629,7 @@ take any arguments.</p></td>
   <div class="col j2-footer small pt-2">
     <p>Distributed under the MIT license.  Maintained by <a href="mailto:johnfairh@gmail.com">John Fairhurst</a>.</p>
     
-    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external noopener">Bebop v1.10.1</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫</a>.</p>
+    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external noopener">Bebop v1.11.0</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫</a>.</p>
     
   </div>
 </footer>

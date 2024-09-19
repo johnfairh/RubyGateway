@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/fw2020.css">
     
     
-   <title>RbObject - RubyGateway 5.5.0 docs</title>
+   <title>RbObject - RubyGateway 6.0.0 docs</title>
     
   </head>
   <body class="j2-swift " data-root-path="./../" data-doc-path="types/rbobject13.html" data-assets-path="../">
@@ -31,7 +31,7 @@
     
     <a href="../index.html">
     
-    RubyGateway 5.5.0 docs</a>
+    RubyGateway 6.0.0 docs</a>
   </div>
   
   <span class="navbar-text j2-coverage fw-slightly-bold small d-none d-lg-inline-block me-2">(100% documented)</span>
@@ -671,7 +671,7 @@
             
   <div class="j2-swift">
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
-    <pre><code class="language-swift">public final class RbObject: <a href="../types/rbobjectaccess1.html?swift">RbObjectAccess</a>
+    <pre><code class="language-swift">public final class RbObject: <a href="../types/rbobjectaccess1.html?swift">RbObjectAccess</a>, <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">Sendable</a>
 
 extension RbObject: <a href="https://developer.apple.com/documentation/swift/customstringconvertible?language=swift">CustomStringConvertible</a>,
     <a href="https://developer.apple.com/documentation/swift/customdebugstringconvertible?language=swift">CustomDebugStringConvertible</a>,
@@ -1286,7 +1286,7 @@ it implements <code>[]</code>, <code>[]=</code>, and <code>length</code> like Ar
 </code></pre>
 <p>The only thing that can be assigned is the object’s corresponding
 <a href="../types/rbobjectcollection.html?swift"><code>RbObjectCollection</code></a> – assigning anything else will trap.  Use
-<a href="../types/rbobjectcollection.html?swift#rubyobject24"><code>RbObjectCollection.rubyObject</code></a> to obtain a collection’s underlying Ruby array.</p>
+<a href="../types/rbobjectcollection.html?swift#rubyobject25"><code>RbObjectCollection.rubyObject</code></a> to obtain a collection’s underlying Ruby array.</p>
 
 
 
@@ -1676,12 +1676,12 @@ for example if the operation creates a circular dependency.</p>
   
   
     <section id="init_4" class="j2-item j2-swift">
-    <a name="//apple_ref/cpp/Constructor/init(RbObjectConvertible)" class="dashAnchor j2-item-dash-anchor" data-item-id="init_4"></a>
-    <h4 class="visually-hidden">init(RbObjectConvertible)</h4>
+    <a name="//apple_ref/cpp/Constructor/init(any%20RbObjectConvertible)" class="dashAnchor j2-item-dash-anchor" data-item-id="init_4"></a>
+    <h4 class="visually-hidden">init(any RbObjectConvertible)</h4>
     
     
     <a class="j2-item-title" href="#_init_4" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_init_4"><code>
-        <span class="j2-swift">init<span class="j2-item-secondary">(RbObjectConvertible)</span></span>
+        <span class="j2-swift">init<span class="j2-item-secondary">(any RbObjectConvertible)</span></span>
         
       </code></a>
     <div class="collapse  j2-item-popopen-wrapper" id="_init_4">
@@ -1709,7 +1709,7 @@ to <a href="../types/rbobjectconvertible.html?swift"><code>RbObjectConvertible</
               
   <div class="j2-swift">
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
-    <pre><code class="language-swift">public convenience init(_ value: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)</code></pre>
+    <pre><code class="language-swift">public convenience init(_ value: any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)</code></pre>
   </div>
 
 
@@ -2407,7 +2407,7 @@ does not take any arguments.</p></td>
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbMethod.swift#L619-L624">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbMethod.swift#L629-L634">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -2465,7 +2465,9 @@ right.</p>
               
   <div class="j2-swift">
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
-    <pre><code class="language-swift">public func defineMethod&lt;SwiftPeer: <a href="https://developer.apple.com/documentation/swift/anyobject?language=swift">AnyObject</a>, Return: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>&gt;(
+    <pre><code class="language-swift">public func defineMethod&lt;
+    SwiftPeer: <a href="https://developer.apple.com/documentation/swift/anyobject?language=swift">AnyObject</a> &amp; <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">Sendable</a>, Return: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a> &amp; <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">Sendable</a>
+&gt;(
     _ name: <a href="../extensions/string.html?swift">String</a>,
     argsSpec: <a href="../types/rbmethodargsspec.html?swift">RbMethodArgsSpec</a> = <a href="../types/rbmethodargsspec.html?swift">RbMethodArgsSpec</a>(),
     method: @escaping <a href="../swift-method-apis.html?swift#rbboundmethodcallback">RbBoundMethodCallback</a>&lt;SwiftPeer, Return&gt;) throws</code></pre>
@@ -2511,7 +2513,7 @@ does not take any arguments.</p></td>
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbMethod.swift#L654-L664">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbMethod.swift#L664-L674">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -2572,7 +2574,7 @@ right.</p>
               
   <div class="j2-swift">
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
-    <pre><code class="language-swift">public func defineMethod&lt;SwiftPeer: <a href="https://developer.apple.com/documentation/swift/anyobject?language=swift">AnyObject</a>&gt;(
+    <pre><code class="language-swift">public func defineMethod&lt;SwiftPeer: <a href="https://developer.apple.com/documentation/swift/anyobject?language=swift">AnyObject</a> &amp; <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">Sendable</a>&gt;(
     _ name: <a href="../extensions/string.html?swift">String</a>,
     argsSpec: <a href="../types/rbmethodargsspec.html?swift">RbMethodArgsSpec</a> = <a href="../types/rbmethodargsspec.html?swift">RbMethodArgsSpec</a>(),
     method: @escaping <a href="../swift-method-apis.html?swift#rbboundmethodvoidcallback">RbBoundMethodVoidCallback</a>&lt;SwiftPeer&gt;) throws</code></pre>
@@ -2618,7 +2620,7 @@ does not take any arguments.</p></td>
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbMethod.swift#L697-L707">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbMethod.swift#L707-L717">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -2710,7 +2712,7 @@ does not take any arguments.</p></td>
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbMethod.swift#L722-L726">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbMethod.swift#L732-L736">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -2735,12 +2737,12 @@ does not take any arguments.</p></td>
   
   
     <section id="initofclassargskwargs" class="j2-item j2-swift">
-    <a name="//apple_ref/cpp/Constructor/init%3F(ofClass%3A%20String,%20args%3A%20%5BRbObjectConvertible%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20RbObjectConvertible%3F%3E)" class="dashAnchor j2-item-dash-anchor" data-item-id="initofclassargskwargs"></a>
-    <h4 class="visually-hidden">init?(ofClass: String, args: [RbObjectConvertible?], kwArgs: KeyValuePairs&lt;String, RbObjectConvertible?&gt;)</h4>
+    <a name="//apple_ref/cpp/Constructor/init%3F(ofClass%3A%20String,%20args%3A%20%5B(any%20RbObjectConvertible)%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20(any%20RbObjectConvertible)%3F%3E)" class="dashAnchor j2-item-dash-anchor" data-item-id="initofclassargskwargs"></a>
+    <h4 class="visually-hidden">init?(ofClass: String, args: [(any RbObjectConvertible)?], kwArgs: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;)</h4>
     
     
     <a class="j2-item-title" href="#_initofclassargskwargs" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_initofclassargskwargs"><code>
-        <span class="j2-swift">init<span class="j2-item-secondary">?(</span>ofClass<span class="j2-item-secondary">: String, </span>args<span class="j2-item-secondary">: [RbObjectConvertible?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, RbObjectConvertible?&gt;)</span></span>
+        <span class="j2-swift">init<span class="j2-item-secondary">?(</span>ofClass<span class="j2-item-secondary">: String, </span>args<span class="j2-item-secondary">: [(any RbObjectConvertible)?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;)</span></span>
         
       </code></a>
     <div class="collapse  j2-item-popopen-wrapper" id="_initofclassargskwargs">
@@ -2770,8 +2772,8 @@ find out what failed.</p>
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
     <pre><code class="language-swift">public convenience init?(
     ofClass className: <a href="../extensions/string.html?swift">String</a>,
-    args: [<a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?] = [],
-    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?&gt; = [:])</code></pre>
+    args: [(any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?] = [],
+    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, (any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?&gt; = [:])</code></pre>
   </div>
 
 
@@ -2822,12 +2824,12 @@ down into module/etc. scope.</p></td>
   
   
     <section id="initofclassargskwargsretainblockblockcall" class="j2-item j2-swift">
-    <a name="//apple_ref/cpp/Constructor/init%3F(ofClass%3A%20String,%20args%3A%20%5BRbObjectConvertible%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20RbObjectConvertible%3F%3E,%20retainBlock%3A%20Bool,%20blockCall%3A%20RbBlockCallback)" class="dashAnchor j2-item-dash-anchor" data-item-id="initofclassargskwargsretainblockblockcall"></a>
-    <h4 class="visually-hidden">init?(ofClass: String, args: [RbObjectConvertible?], kwArgs: KeyValuePairs&lt;String, RbObjectConvertible?&gt;, retainBlock: Bool, blockCall: RbBlockCallback)</h4>
+    <a name="//apple_ref/cpp/Constructor/init%3F(ofClass%3A%20String,%20args%3A%20%5B(any%20RbObjectConvertible)%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20(any%20RbObjectConvertible)%3F%3E,%20retainBlock%3A%20Bool,%20blockCall%3A%20RbBlockCallback)" class="dashAnchor j2-item-dash-anchor" data-item-id="initofclassargskwargsretainblockblockcall"></a>
+    <h4 class="visually-hidden">init?(ofClass: String, args: [(any RbObjectConvertible)?], kwArgs: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;, retainBlock: Bool, blockCall: RbBlockCallback)</h4>
     
     
     <a class="j2-item-title" href="#_initofclassargskwargsretainblockblockcall" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_initofclassargskwargsretainblockblockcall"><code>
-        <span class="j2-swift">init<span class="j2-item-secondary">?(</span>ofClass<span class="j2-item-secondary">: String, </span>args<span class="j2-item-secondary">: [RbObjectConvertible?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, RbObjectConvertible?&gt;, </span>retainBlock<span class="j2-item-secondary">: Bool, </span>blockCall<span class="j2-item-secondary">: RbBlockCallback)</span></span>
+        <span class="j2-swift">init<span class="j2-item-secondary">?(</span>ofClass<span class="j2-item-secondary">: String, </span>args<span class="j2-item-secondary">: [(any RbObjectConvertible)?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;, </span>retainBlock<span class="j2-item-secondary">: Bool, </span>blockCall<span class="j2-item-secondary">: RbBlockCallback)</span></span>
         
       </code></a>
     <div class="collapse  j2-item-popopen-wrapper" id="_initofclassargskwargsretainblockblockcall">
@@ -2844,6 +2846,10 @@ down into module/etc. scope.</p></td>
 
 
 <p>Create an instance of a given Ruby class passing a Swift closure as a block.</p>
+<p>This version is really for cases where Ruby retains the block rather than using
+it only synchronously during the exection of the <code>new</code> method.  For the synchronous
+case see <a href="../types/rbobject13.html?swift#initofclassargskwargsblockcall"><code>init(ofClass:args:kwArgs:blockCall:)</code></a> which does not require
+an <code>@escapable</code> or <a href="https://developer.apple.com/documentation/swift/sendable?language=swift" class="j2-swift"><code>Sendable</code></a><a href="https://developer.apple.com/documentation/swift/sendable?language=objc" class="j2-objc j2-secondary"><code>Sendable</code></a> block closure.</p>
 <p>Fails (returns <code>nil</code>) if anything goes wrong along the way - check <a href="../types/rberror.html?swift#history1"><code>RbError.history</code></a> to
 find out what failed.</p>
 
@@ -2857,10 +2863,10 @@ find out what failed.</p>
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
     <pre><code class="language-swift">public convenience init?(
     ofClass className: <a href="../extensions/string.html?swift">String</a>,
-    args: [<a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?] = [],
-    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?&gt; = [:],
-    retainBlock: <a href="../extensions/bool.html?swift">Bool</a> = false,
-    blockCall: @escaping <a href="../other-apis.html?swift#rbblockcallback">RbBlockCallback</a>)</code></pre>
+    args: [(any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?] = [],
+    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, (any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?&gt; = [:],
+    retainBlock: <a href="../extensions/bool.html?swift">Bool</a>,
+    blockCall: @escaping <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">@Sendable</a> <a href="../other-apis.html?swift#rbblockcallback">RbBlockCallback</a>)</code></pre>
   </div>
 
 
@@ -2889,9 +2895,8 @@ down into module/etc. scope.</p></td>
       
       <tr>
         <td><code>retainBlock</code></td>
-        <td><p>Should <code>blockCall</code> be retained by the object?  Default <code>false</code>.  Set
-<code>true</code> if Ruby uses the block after this call.  For example creating a Proc object
-using <code>Proc#new</code>.</p></td>
+        <td><p>Should <code>blockCall</code> be retained by the object?  Set <code>true</code> if
+Ruby uses the block after this call.  For example creating a Proc object using <code>Proc#new</code>.</p></td>
       </tr>
       
       <tr>
@@ -2910,7 +2915,102 @@ using <code>Proc#new</code>.</p></td>
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbObject.swift#L270-L283">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbObject.swift#L274-L287">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      </div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="initofclassargskwargsblockcall" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Constructor/init%3F(ofClass%3A%20String,%20args%3A%20%5B(any%20RbObjectConvertible)%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20(any%20RbObjectConvertible)%3F%3E,%20blockCall%3A%20RbBlockCallback)" class="dashAnchor j2-item-dash-anchor" data-item-id="initofclassargskwargsblockcall"></a>
+    <h4 class="visually-hidden">init?(ofClass: String, args: [(any RbObjectConvertible)?], kwArgs: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;, blockCall: RbBlockCallback)</h4>
+    
+    
+    <a class="j2-item-title" href="#_initofclassargskwargsblockcall" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_initofclassargskwargsblockcall"><code>
+        <span class="j2-swift">init<span class="j2-item-secondary">?(</span>ofClass<span class="j2-item-secondary">: String, </span>args<span class="j2-item-secondary">: [(any RbObjectConvertible)?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;, </span>blockCall<span class="j2-item-secondary">: RbBlockCallback)</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_initofclassargskwargsblockcall">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none presentation"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Create an instance of a given Ruby class passing a Swift closure as a block.</p>
+<p>The closure is used only synchronously during the <code>new</code> method.  For a version appropriate
+for use with things like <code>Proc#new</code> that retain the block, see <a href="../types/rbobject13.html?swift#initofclassargskwargsretainblockblockcall"><code>init(ofClass:args:kwArgs:retainBlock:blockCall:)</code></a></p>
+<p>Fails (returns <code>nil</code>) if anything goes wrong along the way - check <a href="../types/rberror.html?swift#history1"><code>RbError.history</code></a> to
+find out what failed.</p>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public convenience init?(
+    ofClass className: <a href="../extensions/string.html?swift">String</a>,
+    args: [(any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?] = [],
+    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, (any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?&gt; = [:],
+    blockCall: <a href="../other-apis.html?swift#rbblockcallback">RbBlockCallback</a>)</code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>ofClass</code></td>
+        <td><p>Name of the class to instantiate.  Can contain <code>::</code> to drill
+down into module/etc. scope.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>args</code></td>
+        <td><p>positional arguments to pass to <code>new</code> call for the object.  Default none.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>kwArgs</code></td>
+        <td><p>keyword arguments to pass to the <code>new</code> call for the object.  Default none.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>blockCall</code></td>
+        <td><p>Swift code to pass as a block to the method.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbObject.swift#L302-L315">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -2959,7 +3059,7 @@ finished with the block, or the process will crash when Ruby calls it.</p>
               
   <div class="j2-swift">
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
-    <pre><code class="language-swift">public convenience init(blockCall: @escaping <a href="../other-apis.html?swift#rbblockcallback">RbBlockCallback</a>)</code></pre>
+    <pre><code class="language-swift">public convenience init(blockCall: @escaping <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">@Sendable</a> <a href="../other-apis.html?swift#rbblockcallback">RbBlockCallback</a>)</code></pre>
   </div>
 
 
@@ -2986,7 +3086,7 @@ finished with the block, or the process will crash when Ruby calls it.</p>
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbObject.swift#L290-L296">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbObject.swift#L322-L328">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -3058,7 +3158,7 @@ finished with the block, or the process will crash when Ruby calls it.</p>
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbObject.swift#L307-L312">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbObject.swift#L339-L344">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -3118,7 +3218,7 @@ finished with the block, or the process will crash when Ruby calls it.</p>
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbObject.swift#L317-L325">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbObject.swift#L349-L357">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -3178,7 +3278,7 @@ finished with the block, or the process will crash when Ruby calls it.</p>
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbObject.swift#L328-L330">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbObject.swift#L360-L362">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -3255,7 +3355,7 @@ or if the <code>hash</code> call returns something that can’t be converted to 
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbObject.swift#L341-L357">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbObject.swift#L373-L389">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -3322,7 +3422,7 @@ or if the <code>hash</code> call returns something that can’t be converted to 
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbObject.swift#L364-L374">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbObject.swift#L396-L406">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -3387,7 +3487,7 @@ argument is less than that of the second argument.</p>
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbObject.swift#L381-L389">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbObject.swift#L413-L421">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -4295,16 +4395,16 @@ if the object does not support this.</p>
   
   
   
-    <section id="subscript_1" class="j2-item j2-swift">
-    <a name="//apple_ref/cpp/Method/subscript(args%3A%20RbObjectConvertible...)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="subscript_1"></a>
-    <h4 class="visually-hidden">subscript(args: RbObjectConvertible...) -&gt; RbObject</h4>
+    <section id="subscript_2" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/subscript(args%3A%20any%20RbObjectConvertible...)%20-%3E%20RbObject" class="dashAnchor j2-item-dash-anchor" data-item-id="subscript_2"></a>
+    <h4 class="visually-hidden">subscript(args: any RbObjectConvertible...) -&gt; RbObject</h4>
     
     
-    <a class="j2-item-title" href="#_subscript_1" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_subscript_1"><code>
-        <span class="j2-swift">subscript<span class="j2-item-secondary">(</span>args<span class="j2-item-secondary">: RbObjectConvertible...) -&gt; RbObject</span></span>
+    <a class="j2-item-title" href="#_subscript_2" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_subscript_2"><code>
+        <span class="j2-swift">subscript<span class="j2-item-secondary">(</span>args<span class="j2-item-secondary">: any RbObjectConvertible...) -&gt; RbObject</span></span>
         
       </code></a>
-    <div class="collapse  j2-item-popopen-wrapper" id="_subscript_1">
+    <div class="collapse  j2-item-popopen-wrapper" id="_subscript_2">
       <div class="j2-item-popopen">
         <div class="j2-item-popopen-pointer" role="none presentation"></div>
         <div class="j2-item-popopen-body">
@@ -4340,7 +4440,7 @@ if anything goes wrong - Swift can’t throw from subscripts yet.</p>
               
   <div class="j2-swift">
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
-    <pre><code class="language-swift">public subscript(args: RbObjectConvertible...) -&gt; <a href="../types/rbobject13.html?swift">RbObject</a> { get set }</code></pre>
+    <pre><code class="language-swift">public subscript(args: any RbObjectConvertible...) -&gt; <a href="../types/rbobject13.html?swift">RbObject</a> { get set }</code></pre>
   </div>
 
 
@@ -4480,7 +4580,7 @@ if anything goes wrong - Swift can’t throw from subscripts yet.</p>
   <div class="col j2-footer small pt-2">
     <p>Distributed under the MIT license.  Maintained by <a href="mailto:johnfairh@gmail.com">John Fairhurst</a>.</p>
     
-    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external noopener">Bebop v1.10.1</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫</a>.</p>
+    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external noopener">Bebop v1.11.0</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫</a>.</p>
     
   </div>
 </footer>

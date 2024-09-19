@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        xcode: ['16.0-beta']
+        xcode: ['16.0']
     steps:
       - uses: maxim-lobanov/setup-xcode@v1
         with:

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/fw2020.css">
     
     
-   <title>RbMethodArgsSpec - RubyGateway 5.5.0 docs</title>
+   <title>RbMethodArgsSpec - RubyGateway 6.0.0 docs</title>
     
   </head>
   <body class="j2-swift " data-root-path="./../" data-doc-path="types/rbmethodargsspec.html" data-assets-path="../">
@@ -31,7 +31,7 @@
     
     <a href="../index.html">
     
-    RubyGateway 5.5.0 docs</a>
+    RubyGateway 6.0.0 docs</a>
   </div>
   
   <span class="navbar-text j2-coverage fw-slightly-bold small d-none d-lg-inline-block me-2">(100% documented)</span>
@@ -671,7 +671,7 @@
             
   <div class="j2-swift">
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
-    <pre><code class="language-swift">public struct RbMethodArgsSpec</code></pre>
+    <pre><code class="language-swift">public struct RbMethodArgsSpec: <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">Sendable</a></code></pre>
   </div>
 
 
@@ -705,7 +705,7 @@ arguments are stored in the <code>args</code> property of the <a href="../types/
           
           
           <nav aria-label="item details" class="j2-main-item-nav">
-            <a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbMethod.swift#L320-L563">Show on GitHub</a>
+            <a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbMethod.swift#L320-L573">Show on GitHub</a>
           </nav>
           
           
@@ -784,12 +784,12 @@ arguments are stored in the <code>args</code> property of the <a href="../types/
   
   
     <section id="optionalvalues" class="j2-item j2-swift">
-    <a name="//apple_ref/cpp/Property/var%20optionalValues%3A%20%5B()%20-%3E%20RbObject%5D" class="dashAnchor j2-item-dash-anchor" data-item-id="optionalvalues"></a>
-    <h4 class="visually-hidden">var optionalValues: [() -&gt; RbObject]</h4>
+    <a name="//apple_ref/cpp/Property/var%20optionalValues%3A%20%5B@Sendable%20()%20-%3E%20RbObject%5D" class="dashAnchor j2-item-dash-anchor" data-item-id="optionalvalues"></a>
+    <h4 class="visually-hidden">var optionalValues: [@Sendable () -&gt; RbObject]</h4>
     
     
     <a class="j2-item-title" href="#_optionalvalues" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_optionalvalues"><code>
-        <span class="j2-swift"><span class="j2-item-secondary">var </span>optionalValues<span class="j2-item-secondary">: [() -&gt; RbObject]</span></span>
+        <span class="j2-swift"><span class="j2-item-secondary">var </span>optionalValues<span class="j2-item-secondary">: [@Sendable () -&gt; RbObject]</span></span>
         
       </code></a>
     <div class="collapse  j2-item-popopen-wrapper" id="_optionalvalues">
@@ -816,7 +816,7 @@ arguments are stored in the <code>args</code> property of the <a href="../types/
               
   <div class="j2-swift">
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
-    <pre><code class="language-swift">public let optionalValues: [() -&gt; <a href="../types/rbobject13.html?swift">RbObject</a>]</code></pre>
+    <pre><code class="language-swift">public let optionalValues: [<a href="https://developer.apple.com/documentation/swift/sendable?language=swift">@Sendable</a> () -&gt; <a href="../types/rbobject13.html?swift">RbObject</a>]</code></pre>
   </div>
 
 
@@ -1144,12 +1144,12 @@ arguments are stored in the <code>args</code> property of the <a href="../types/
   
   
     <section id="optionalkeywordvalues" class="j2-item j2-swift">
-    <a name="//apple_ref/cpp/Property/var%20optionalKeywordValues%3A%20%5BString%20%3A%20()%20-%3E%20RbObject%5D" class="dashAnchor j2-item-dash-anchor" data-item-id="optionalkeywordvalues"></a>
-    <h4 class="visually-hidden">var optionalKeywordValues: [String : () -&gt; RbObject]</h4>
+    <a name="//apple_ref/cpp/Property/var%20optionalKeywordValues%3A%20%5BString%20%3A%20@Sendable%20()%20-%3E%20RbObject%5D" class="dashAnchor j2-item-dash-anchor" data-item-id="optionalkeywordvalues"></a>
+    <h4 class="visually-hidden">var optionalKeywordValues: [String : @Sendable () -&gt; RbObject]</h4>
     
     
     <a class="j2-item-title" href="#_optionalkeywordvalues" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_optionalkeywordvalues"><code>
-        <span class="j2-swift"><span class="j2-item-secondary">var </span>optionalKeywordValues<span class="j2-item-secondary">: [String : () -&gt; RbObject]</span></span>
+        <span class="j2-swift"><span class="j2-item-secondary">var </span>optionalKeywordValues<span class="j2-item-secondary">: [String : @Sendable () -&gt; RbObject]</span></span>
         
       </code></a>
     <div class="collapse  j2-item-popopen-wrapper" id="_optionalkeywordvalues">
@@ -1176,7 +1176,7 @@ arguments are stored in the <code>args</code> property of the <a href="../types/
               
   <div class="j2-swift">
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
-    <pre><code class="language-swift">public let optionalKeywordValues: [<a href="../extensions/string.html?swift">String</a>: () -&gt; <a href="../types/rbobject13.html?swift">RbObject</a>]</code></pre>
+    <pre><code class="language-swift">public let optionalKeywordValues: [<a href="../extensions/string.html?swift">String</a>: <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">@Sendable</a> () -&gt; <a href="../types/rbobject13.html?swift">RbObject</a>]</code></pre>
   </div>
 
 
@@ -1324,12 +1324,12 @@ arguments are stored in the <code>args</code> property of the <a href="../types/
   
   
     <section id="initleadingmandatorycountoptionalvaluessupportssplattrailingmandatorycountmandatorykeywordsoptionalkeywordvaluesrequiresblock" class="j2-item j2-swift">
-    <a name="//apple_ref/cpp/Constructor/init(leadingMandatoryCount%3A%20Int,%20optionalValues%3A%20%5BRbObjectConvertible%3F%5D,%20supportsSplat%3A%20Bool,%20trailingMandatoryCount%3A%20Int,%20mandatoryKeywords%3A%20Set%3CString%3E,%20optionalKeywordValues%3A%20%5BString%20%3A%20RbObjectConvertible%3F%5D,%20requiresBlock%3A%20Bool)" class="dashAnchor j2-item-dash-anchor" data-item-id="initleadingmandatorycountoptionalvaluessupportssplattrailingmandatorycountmandatorykeywordsoptionalkeywordvaluesrequiresblock"></a>
-    <h4 class="visually-hidden">init(leadingMandatoryCount: Int, optionalValues: [RbObjectConvertible?], supportsSplat: Bool, trailingMandatoryCount: Int, mandatoryKeywords: Set&lt;String&gt;, optionalKeywordValues: [String : RbObjectConvertible?], requiresBlock: Bool)</h4>
+    <a name="//apple_ref/cpp/Constructor/init(leadingMandatoryCount%3A%20Int,%20optionalValues%3A%20%5B(any%20RbObjectConvertible%20&amp;%20Sendable)%3F%5D,%20supportsSplat%3A%20Bool,%20trailingMandatoryCount%3A%20Int,%20mandatoryKeywords%3A%20Set%3CString%3E,%20optionalKeywordValues%3A%20%5BString%20%3A%20(any%20RbObjectConvertible%20&amp;%20Sendable)%3F%5D,%20requiresBlock%3A%20Bool)" class="dashAnchor j2-item-dash-anchor" data-item-id="initleadingmandatorycountoptionalvaluessupportssplattrailingmandatorycountmandatorykeywordsoptionalkeywordvaluesrequiresblock"></a>
+    <h4 class="visually-hidden">init(leadingMandatoryCount: Int, optionalValues: [(any RbObjectConvertible &amp; Sendable)?], supportsSplat: Bool, trailingMandatoryCount: Int, mandatoryKeywords: Set&lt;String&gt;, optionalKeywordValues: [String : (any RbObjectConvertible &amp; Sendable)?], requiresBlock: Bool)</h4>
     
     
     <a class="j2-item-title" href="#_initleadingmandatorycountoptionalvaluessupportssplattrailingmandatorycountmandatorykeywordsoptionalkeywordvaluesrequiresblock" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_initleadingmandatorycountoptionalvaluessupportssplattrailingmandatorycountmandatorykeywordsoptionalkeywordvaluesrequiresblock"><code>
-        <span class="j2-swift">init<span class="j2-item-secondary">(</span>leadingMandatoryCount<span class="j2-item-secondary">: Int, </span>optionalValues<span class="j2-item-secondary">: [RbObjectConvertible?], </span>supportsSplat<span class="j2-item-secondary">: Bool, </span>trailingMandatoryCount<span class="j2-item-secondary">: Int, </span>mandatoryKeywords<span class="j2-item-secondary">: Set&lt;String&gt;, </span>optionalKeywordValues<span class="j2-item-secondary">: [String : RbObjectConvertible?], </span>requiresBlock<span class="j2-item-secondary">: Bool)</span></span>
+        <span class="j2-swift">init<span class="j2-item-secondary">(</span>leadingMandatoryCount<span class="j2-item-secondary">: Int, </span>optionalValues<span class="j2-item-secondary">: [(any RbObjectConvertible &amp; Sendable)?], </span>supportsSplat<span class="j2-item-secondary">: Bool, </span>trailingMandatoryCount<span class="j2-item-secondary">: Int, </span>mandatoryKeywords<span class="j2-item-secondary">: Set&lt;String&gt;, </span>optionalKeywordValues<span class="j2-item-secondary">: [String : (any RbObjectConvertible &amp; Sendable)?], </span>requiresBlock<span class="j2-item-secondary">: Bool)</span></span>
         
       </code></a>
     <div class="collapse  j2-item-popopen-wrapper" id="_initleadingmandatorycountoptionalvaluessupportssplattrailingmandatorycountmandatorykeywordsoptionalkeywordvaluesrequiresblock">
@@ -1346,7 +1346,10 @@ arguments are stored in the <code>args</code> property of the <a href="../types/
 
 
 <p>Create a new method arguments specification.</p>
-
+<p>The default values here are evaluated lazily: each time the method is invoked and requires the
+default argument because caller has not provided it, the <a href="../types/rbobjectconvertible.html?swift#rubyobject1"><code>RbObjectConvertible.rubyObject</code></a>
+is evaluated and provided to the method.  In the case of constant defaults this is unobservable but
+does give correct behaviour if you actually supply something that turns into a Ruby expression.</p>
 
 
 
@@ -1358,11 +1361,12 @@ arguments are stored in the <code>args</code> property of the <a href="../types/
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
     <pre><code class="language-swift">public init(
     leadingMandatoryCount: <a href="../extensions/int.html?swift">Int</a> = 0,
-    optionalValues: [<a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?] = [],
+    optionalValues: [(any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a> &amp; <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">Sendable</a>)?] = [],
     supportsSplat: <a href="../extensions/bool.html?swift">Bool</a> = false,
     trailingMandatoryCount: <a href="../extensions/int.html?swift">Int</a> = 0,
     mandatoryKeywords: <a href="../extensions/set.html?swift">Set</a>&lt;<a href="../extensions/string.html?swift">String</a>&gt; = [],
-    optionalKeywordValues: [<a href="../extensions/string.html?swift">String</a>: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?] = [:],
+    optionalKeywordValues: [<a href="../extensions/string.html?swift">String</a>: (any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a> &amp; <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">Sendable</a>)?] =
+        [:],
     requiresBlock: <a href="../extensions/bool.html?swift">Bool</a> = false)</code></pre>
   </div>
 
@@ -1424,7 +1428,7 @@ none by default.</p></td>
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbMethod.swift#L375-L389">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbMethod.swift#L380-L399">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -1500,7 +1504,7 @@ method must be passed.</p></td>
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbMethod.swift#L401-L403">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbMethod.swift#L411-L413">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -1595,7 +1599,7 @@ method must be passed.</p></td>
   <div class="col j2-footer small pt-2">
     <p>Distributed under the MIT license.  Maintained by <a href="mailto:johnfairh@gmail.com">John Fairhurst</a>.</p>
     
-    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external noopener">Bebop v1.10.1</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫</a>.</p>
+    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external noopener">Bebop v1.11.0</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫</a>.</p>
     
   </div>
 </footer>

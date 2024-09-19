@@ -64,15 +64,11 @@
     "name" : "-"
   },
   {
-    "context" : "index",
-    "name" : "-fdeclspec"
-  },
-  {
     "context" : "\/(RbObject, RbObject)",
     "name" : "\/"
   },
   {
-    "context" : "init(ofClass:args:kwArgs:retainBlock:blockCall:)",
+    "context" : "init(ofClass:args:kwArgs:blockCall:)",
     "name" : "::"
   },
   {
@@ -106,6 +102,14 @@
   {
     "context" : "setClassVar(_:newValue:)",
     "name" : "@@"
+  },
+  {
+    "context" : "User Guide",
+    "name" : "@MainActor"
+  },
+  {
+    "context" : "init(ofClass:args:kwArgs:retainBlock:blockCall:)",
+    "name" : "@escapable"
   },
   {
     "context" : "setInstanceVar(_:newValue:)",
@@ -150,6 +154,10 @@
   {
     "context" : "rubyObject",
     "name" : "Element"
+  },
+  {
+    "context" : "call(symbol:args:kwArgs:blockCall:)",
+    "name" : "Enumerable#each"
   },
   {
     "context" : "RbException",
@@ -317,11 +325,11 @@
   },
   {
     "context" : "User Guide",
-    "name" : "TestRbObject.testStackGc()"
+    "name" : "Task"
   },
   {
-    "context" : "create(callback:)",
-    "name" : "Thread"
+    "context" : "User Guide",
+    "name" : "TestRbObject.testStackGc()"
   },
   {
     "context" : "withRubyValue(call:)",
@@ -496,7 +504,7 @@
     "name" : "newElements"
   },
   {
-    "context" : "init(ofClass:args:kwArgs:retainBlock:blockCall:)",
+    "context" : "init(ofClass:args:kwArgs:blockCall:)",
     "name" : "new"
   },
   {
@@ -566,10 +574,6 @@
   {
     "context" : "replaceSubrange(_:with:)",
     "name" : "subrange"
-  },
-  {
-    "context" : "index",
-    "name" : "swift build -Xcc -fdeclspec"
   },
   {
     "context" : "call(symbol:args:kwArgs:block:)",

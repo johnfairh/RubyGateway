@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/fw2020.css">
     
     
-   <title>Other APIs - RubyGateway 5.5.0 docs</title>
+   <title>Other APIs - RubyGateway 6.0.0 docs</title>
     
   </head>
   <body class="j2-swift " data-root-path="./" data-doc-path="other-apis.html" data-assets-path="">
@@ -31,7 +31,7 @@
     
     <a href="index.html">
     
-    RubyGateway 5.5.0 docs</a>
+    RubyGateway 6.0.0 docs</a>
   </div>
   
   <span class="navbar-text j2-coverage fw-slightly-bold small d-none d-lg-inline-block me-2">(100% documented)</span>
@@ -741,7 +741,7 @@ exception and raise it.</li>
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbBlockCall.swift#L60">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbBlockCall.swift#L59">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -779,9 +779,9 @@ exception and raise it.</li>
 <p>When you pass a Swift closure as a block, for example using
 <a href="types/rbobjectaccess1.html?swift#call_argskwargsblockretentionblockcall1"><code>RbObjectAccess.call(_:args:kwArgs:blockRetention:blockCall:)</code></a>, RubyGateway
 needs some help to understand how Ruby will use the closure.</p>
-<p>The easiest thing to get wrong is using the default of <code>.none</code> when
-Ruby retains the block for use later.  This causes a hard crash in
-<code>RbBlockContext.from(raw:)</code> when Ruby tries to call the block.</p>
+<p>The easiest thing to get wrong is using <code>.none</code> when Ruby retains the
+block for use later.  This causes a hard crash in <code>RbBlockContext.from(raw:)</code>
+when Ruby tries to call the block.</p>
 
 
 
@@ -813,7 +813,7 @@ Ruby retains the block for use later.  This causes a hard crash in
             </span>
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbBlockCall.swift#L71-L85">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbBlockCall.swift#L70-L84">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -888,7 +888,7 @@ result to a Ruby block-based iteration like the Ruby <code>break</code> keyword.
             </span>
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbError.swift#L158-L168">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbError.swift#L157-L167">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -965,7 +965,7 @@ no need for either <code>RbProc</code> or <a href="types/rbobject13.html?swift">
             </span>
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbProc.swift#L27-L55">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbProc.swift#L26-L54">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -1075,7 +1075,7 @@ extension RbSymbol: <a href="https://developer.apple.com/documentation/swift/cus
 
 <p>This type provides a namespace for working with Ruby threads.</p>
 <p>You cannot call Ruby on arbitrary threads: only the very first thread
-where RubyGateway gets used or threads created by Ruby’s <code>Thread</code> class.</p>
+where RubyGateway gets used or threads created by Ruby’s <a href="https://developer.apple.com/documentation/foundation/thread?language=swift" class="j2-swift"><code>Thread</code></a><a href="https://developer.apple.com/documentation/foundation/thread?language=objc" class="j2-objc j2-secondary"><code>Thread</code></a> class.</p>
 <p>There is no way to ‘attach’ the Ruby runtime to a thread created by client
 code (eg. one accessed via libdispatch).</p>
 <p>Even when multiple Ruby threads are active, the VM executes just one at a
@@ -1116,7 +1116,7 @@ that is allowed to call Ruby using <a href="types/rbthread.html?swift#callwithgv
             </span>
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbThread.swift#L58-L153">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbThread.swift#L58-L155">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -1267,7 +1267,7 @@ that is allowed to call Ruby using <a href="types/rbthread.html?swift#callwithgv
   <div class="col j2-footer small pt-2">
     <p>Distributed under the MIT license.  Maintained by <a href="mailto:johnfairh@gmail.com">John Fairhurst</a>.</p>
     
-    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external noopener">Bebop v1.10.1</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫</a>.</p>
+    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external noopener">Bebop v1.11.0</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫</a>.</p>
     
   </div>
 </footer>

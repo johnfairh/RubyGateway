@@ -87,7 +87,7 @@
     "name" : "init(_:)",
     "parent_name" : "Float"
   },
-  "extensions\/float.html?swift#rubyobject23" : {
+  "extensions\/float.html?swift#rubyobject24" : {
     "abstract" : "A Ruby object for the number.",
     "name" : "rubyObject",
     "parent_name" : "Float"
@@ -115,7 +115,7 @@
     "name" : "init(_:)",
     "parent_name" : "Int8"
   },
-  "extensions\/int8.html?swift#rubyobject22" : {
+  "extensions\/int8.html?swift#rubyobject23" : {
     "abstract" : "A Ruby object for the number.",
     "name" : "rubyObject",
     "parent_name" : "Int8"
@@ -129,7 +129,7 @@
     "name" : "init(_:)",
     "parent_name" : "Int16"
   },
-  "extensions\/int16.html?swift#rubyobject21" : {
+  "extensions\/int16.html?swift#rubyobject22" : {
     "abstract" : "A Ruby object for the number.",
     "name" : "rubyObject",
     "parent_name" : "Int16"
@@ -143,7 +143,7 @@
     "name" : "init(_:)",
     "parent_name" : "Int32"
   },
-  "extensions\/int32.html?swift#rubyobject20" : {
+  "extensions\/int32.html?swift#rubyobject21" : {
     "abstract" : "A Ruby object for the number.",
     "name" : "rubyObject",
     "parent_name" : "Int32"
@@ -157,7 +157,7 @@
     "name" : "init(_:)",
     "parent_name" : "Int64"
   },
-  "extensions\/int64.html?swift#rubyobject19" : {
+  "extensions\/int64.html?swift#rubyobject20" : {
     "abstract" : "A Ruby object for the number.",
     "name" : "rubyObject",
     "parent_name" : "Int64"
@@ -227,7 +227,7 @@
     "name" : "init(_:)",
     "parent_name" : "UInt8"
   },
-  "extensions\/uint8.html?swift#rubyobject18" : {
+  "extensions\/uint8.html?swift#rubyobject19" : {
     "abstract" : "A Ruby object for the number.",
     "name" : "rubyObject",
     "parent_name" : "UInt8"
@@ -241,7 +241,7 @@
     "name" : "init(_:)",
     "parent_name" : "UInt16"
   },
-  "extensions\/uint16.html?swift#rubyobject17" : {
+  "extensions\/uint16.html?swift#rubyobject18" : {
     "abstract" : "A Ruby object for the number.",
     "name" : "rubyObject",
     "parent_name" : "UInt16"
@@ -255,7 +255,7 @@
     "name" : "init(_:)",
     "parent_name" : "UInt32"
   },
-  "extensions\/uint32.html?swift#rubyobject16" : {
+  "extensions\/uint32.html?swift#rubyobject17" : {
     "abstract" : "A Ruby object for the number.",
     "name" : "rubyObject",
     "parent_name" : "UInt32"
@@ -269,7 +269,7 @@
     "name" : "init(_:)",
     "parent_name" : "UInt64"
   },
-  "extensions\/uint64.html?swift#rubyobject15" : {
+  "extensions\/uint64.html?swift#rubyobject16" : {
     "abstract" : "A Ruby object for the number.",
     "name" : "rubyObject",
     "parent_name" : "UInt64"
@@ -459,6 +459,11 @@
     "name" : "call(_:args:kwArgs:block:)",
     "parent_name" : "RbFailableAccess"
   },
+  "types\/rbfailableaccess.html?swift#call_argskwargsblockcall" : {
+    "abstract" : "Call a method of a Ruby object passing Swift code as a block used immediately.",
+    "name" : "call(_:args:kwArgs:blockCall:)",
+    "parent_name" : "RbFailableAccess"
+  },
   "types\/rbfailableaccess.html?swift#call_argskwargsblockretentionblockcall" : {
     "abstract" : "Call a method of a Ruby object passing Swift code as a block.",
     "name" : "call(_:args:kwArgs:blockRetention:blockCall:)",
@@ -472,6 +477,11 @@
   "types\/rbfailableaccess.html?swift#callsymbolargskwargsblock" : {
     "abstract" : "Call a method of a Ruby object using a symbol passing a Ruby Proc as a block.",
     "name" : "call(symbol:args:kwArgs:block:)",
+    "parent_name" : "RbFailableAccess"
+  },
+  "types\/rbfailableaccess.html?swift#callsymbolargskwargsblockcall" : {
+    "abstract" : "Call a method of a Ruby object using a symbol passing Swift code as a block used immediately.",
+    "name" : "call(symbol:args:kwArgs:blockCall:)",
     "parent_name" : "RbFailableAccess"
   },
   "types\/rbfailableaccess.html?swift#callsymbolargskwargsblockretentionblockcall" : {
@@ -919,6 +929,11 @@
     "name" : "init(ofClass:args:kwArgs:)",
     "parent_name" : "RbObject"
   },
+  "types\/rbobject13.html?swift#initofclassargskwargsblockcall" : {
+    "abstract" : "Create an instance of a given Ruby class passing a Swift closure as a block.",
+    "name" : "init(ofClass:args:kwArgs:blockCall:)",
+    "parent_name" : "RbObject"
+  },
   "types\/rbobject13.html?swift#initofclassargskwargsretainblockblockcall" : {
     "abstract" : "Create an instance of a given Ruby class passing a Swift closure as a block.",
     "name" : "init(ofClass:args:kwArgs:retainBlock:blockCall:)",
@@ -1039,7 +1054,7 @@
     "name" : "rubyType",
     "parent_name" : "RbObject"
   },
-  "types\/rbobject13.html?swift#subscript_1" : {
+  "types\/rbobject13.html?swift#subscript_2" : {
     "abstract" : "Subscript operator, supports both get + set.",
     "name" : "subscript(_:)",
     "parent_name" : "RbObject"
@@ -1063,6 +1078,11 @@
     "name" : "call(_:args:kwArgs:block:)",
     "parent_name" : "RbObjectAccess"
   },
+  "types\/rbobjectaccess1.html?swift#call_argskwargsblockcall1" : {
+    "abstract" : "Call a Ruby object method passing Swift code as a block used immediately.",
+    "name" : "call(_:args:kwArgs:blockCall:)",
+    "parent_name" : "RbObjectAccess"
+  },
   "types\/rbobjectaccess1.html?swift#call_argskwargsblockretentionblockcall1" : {
     "abstract" : "Call a Ruby object method passing Swift code as a block.",
     "name" : "call(_:args:kwArgs:blockRetention:blockCall:)",
@@ -1076,6 +1096,11 @@
   "types\/rbobjectaccess1.html?swift#callsymbolargskwargsblock1" : {
     "abstract" : "Call a Ruby object method using a symbol passing a Ruby Proc as a block.",
     "name" : "call(symbol:args:kwArgs:block:)",
+    "parent_name" : "RbObjectAccess"
+  },
+  "types\/rbobjectaccess1.html?swift#callsymbolargskwargsblockcall1" : {
+    "abstract" : "Call a Ruby object method using a symbol passing Swift code as a block used immediately.",
+    "name" : "call(symbol:args:kwArgs:blockCall:)",
     "parent_name" : "RbObjectAccess"
   },
   "types\/rbobjectaccess1.html?swift#callsymbolargskwargsblockretentionblockcall1" : {
@@ -1167,7 +1192,7 @@
     "name" : "init(_:)",
     "parent_name" : "RbObjectCollection"
   },
-  "types\/rbobjectcollection.html?swift#init1" : {
+  "types\/rbobjectcollection.html?swift#init2" : {
     "abstract" : "Create an empty collection - an empty Ruby array.",
     "name" : "init()",
     "parent_name" : "RbObjectCollection"
@@ -1177,7 +1202,7 @@
     "name" : "replaceSubrange(_:with:)",
     "parent_name" : "RbObjectCollection"
   },
-  "types\/rbobjectcollection.html?swift#rubyobject24" : {
+  "types\/rbobjectcollection.html?swift#rubyobject25" : {
     "abstract" : "The Ruby object for the underlying array.",
     "name" : "rubyObject",
     "parent_name" : "RbObjectCollection"
@@ -1187,7 +1212,7 @@
     "name" : "startIndex",
     "parent_name" : "RbObjectCollection"
   },
-  "types\/rbobjectcollection.html?swift#subscript_" : {
+  "types\/rbobjectcollection.html?swift#subscript_1" : {
     "abstract" : "Accesses the element at the specified position.",
     "name" : "subscript(_:)",
     "parent_name" : "RbObjectCollection"
@@ -1220,7 +1245,7 @@
     "name" : "init(object:)",
     "parent_name" : "RbProc"
   },
-  "types\/rbproc.html?swift#rubyobject25" : {
+  "types\/rbproc.html?swift#rubyobject26" : {
     "abstract" : "A Ruby object for the Proc",
     "name" : "rubyObject",
     "parent_name" : "RbProc"
@@ -1254,7 +1279,7 @@
     "name" : "numerator",
     "parent_name" : "RbRational"
   },
-  "types\/rbrational.html?swift#rubyobject26" : {
+  "types\/rbrational.html?swift#rubyobject27" : {
     "abstract" : "Get a Ruby version of an RbRational.",
     "name" : "rubyObject",
     "parent_name" : "RbRational"
@@ -1273,7 +1298,7 @@
     "name" : "init(_:)",
     "parent_name" : "RbSymbol"
   },
-  "types\/rbsymbol.html?swift#rubyobject27" : {
+  "types\/rbsymbol.html?swift#rubyobject28" : {
     "abstract" : "A Ruby object for the symbol",
     "name" : "rubyObject",
     "parent_name" : "RbSymbol"

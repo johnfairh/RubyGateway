@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/fw2020.css">
     
     
-   <title>Swift Method APIs - RubyGateway 5.5.0 docs</title>
+   <title>Swift Method APIs - RubyGateway 6.0.0 docs</title>
     
   </head>
   <body class="j2-swift " data-root-path="./" data-doc-path="swift-method-apis.html" data-assets-path="">
@@ -31,7 +31,7 @@
     
     <a href="index.html">
     
-    RubyGateway 5.5.0 docs</a>
+    RubyGateway 6.0.0 docs</a>
   </div>
   
   <span class="navbar-text j2-coverage fw-slightly-bold small d-none d-lg-inline-block me-2">(100% documented)</span>
@@ -717,7 +717,7 @@ arguments are stored in the <code>args</code> property of the <a href="types/rbm
               
   <div class="j2-swift j2-always">
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
-    <pre><code class="language-swift">public struct RbMethodArgsSpec</code></pre>
+    <pre><code class="language-swift">public struct RbMethodArgsSpec: <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">Sendable</a></code></pre>
   </div>
 
 
@@ -739,7 +739,7 @@ arguments are stored in the <code>args</code> property of the <a href="types/rbm
             </span>
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbMethod.swift#L320-L563">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbMethod.swift#L320-L573">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -861,9 +861,9 @@ normally from the method.  Throwing another type gets wrapped up in an
   <div class="j2-swift j2-always">
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
     <pre><code class="language-swift">public typealias RbBoundMethodCallback&lt;
-    SwiftPeer: <a href="https://developer.apple.com/documentation/swift/anyobject?language=swift">AnyObject</a>, Return: <a href="types/rbobjectconvertible.html?swift">RbObjectConvertible</a>
+    SwiftPeer: <a href="https://developer.apple.com/documentation/swift/anyobject?language=swift">AnyObject</a> &amp; <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">Sendable</a>, Return: <a href="types/rbobjectconvertible.html?swift">RbObjectConvertible</a> &amp; <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">Sendable</a>
 &gt; =
-    (SwiftPeer) -&gt; (<a href="types/rbmethod.html?swift">RbMethod</a>) throws -&gt; Return</code></pre>
+    <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">@Sendable</a> (SwiftPeer) -&gt; (<a href="types/rbmethod.html?swift">RbMethod</a>) throws -&gt; Return</code></pre>
   </div>
 
 
@@ -931,8 +931,8 @@ normally from the method.  Throwing another type gets wrapped up in an
               
   <div class="j2-swift j2-always">
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
-    <pre><code class="language-swift">public typealias RbBoundMethodVoidCallback&lt;SwiftPeer: <a href="https://developer.apple.com/documentation/swift/anyobject?language=swift">AnyObject</a>&gt; =
-    (SwiftPeer) -&gt; (<a href="types/rbmethod.html?swift">RbMethod</a>) throws -&gt; <a href="https://developer.apple.com/documentation/swift/void?language=swift">Void</a></code></pre>
+    <pre><code class="language-swift">public typealias RbBoundMethodVoidCallback&lt;SwiftPeer: <a href="https://developer.apple.com/documentation/swift/anyobject?language=swift">AnyObject</a> &amp; <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">Sendable</a>&gt; =
+    <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">@Sendable</a> (SwiftPeer) -&gt; (<a href="types/rbmethod.html?swift">RbMethod</a>) throws -&gt; <a href="https://developer.apple.com/documentation/swift/void?language=swift">Void</a></code></pre>
   </div>
 
 
@@ -993,7 +993,7 @@ instances and passes them to method callbacks.</p>
               
   <div class="j2-swift j2-always">
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
-    <pre><code class="language-swift">public struct RbMethod</code></pre>
+    <pre><code class="language-swift">public struct RbMethod: <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">Sendable</a></code></pre>
   </div>
 
 
@@ -1060,7 +1060,7 @@ instances and passes them to method callbacks.</p>
               
   <div class="j2-swift j2-always">
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
-    <pre><code class="language-swift">public struct RbMethodArgs</code></pre>
+    <pre><code class="language-swift">public struct RbMethodArgs: <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">Sendable</a></code></pre>
   </div>
 
 
@@ -1166,7 +1166,7 @@ instances and passes them to method callbacks.</p>
   <div class="col j2-footer small pt-2">
     <p>Distributed under the MIT license.  Maintained by <a href="mailto:johnfairh@gmail.com">John Fairhurst</a>.</p>
     
-    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external noopener">Bebop v1.10.1</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫</a>.</p>
+    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external noopener">Bebop v1.11.0</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫</a>.</p>
     
   </div>
 </footer>
