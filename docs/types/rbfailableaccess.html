@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/fw2020.css">
     
     
-   <title>RbFailableAccess - RubyGateway 5.5.0 docs</title>
+   <title>RbFailableAccess - RubyGateway 6.0.0 docs</title>
     
   </head>
   <body class="j2-swift " data-root-path="./../" data-doc-path="types/rbfailableaccess.html" data-assets-path="../">
@@ -31,7 +31,7 @@
     
     <a href="../index.html">
     
-    RubyGateway 5.5.0 docs</a>
+    RubyGateway 6.0.0 docs</a>
   </div>
   
   <span class="navbar-text j2-coverage fw-slightly-bold small d-none d-lg-inline-block me-2">(100% documented)</span>
@@ -737,12 +737,12 @@ via <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
   
   
     <section id="call_argskwargs" class="j2-item j2-swift">
-    <a name="//apple_ref/cpp/Method/func%20call(String,%20args%3A%20%5BRbObjectConvertible%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20RbObjectConvertible%3F%3E)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="call_argskwargs"></a>
-    <h4 class="visually-hidden">func call(String, args: [RbObjectConvertible?], kwArgs: KeyValuePairs&lt;String, RbObjectConvertible?&gt;) -&gt; RbObject?</h4>
+    <a name="//apple_ref/cpp/Method/func%20call(String,%20args%3A%20%5B(any%20RbObjectConvertible)%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20(any%20RbObjectConvertible)%3F%3E)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="call_argskwargs"></a>
+    <h4 class="visually-hidden">func call(String, args: [(any RbObjectConvertible)?], kwArgs: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;) -&gt; RbObject?</h4>
     
     
     <a class="j2-item-title" href="#_call_argskwargs" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_call_argskwargs"><code>
-        <span class="j2-swift"><span class="j2-item-secondary">func </span>call<span class="j2-item-secondary">(String, </span>args<span class="j2-item-secondary">: [RbObjectConvertible?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, RbObjectConvertible?&gt;) -&gt; RbObject?</span></span>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>call<span class="j2-item-secondary">(String, </span>args<span class="j2-item-secondary">: [(any RbObjectConvertible)?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;) -&gt; RbObject?</span></span>
         
       </code></a>
     <div class="collapse  j2-item-popopen-wrapper" id="_call_argskwargs">
@@ -772,8 +772,8 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
     <pre><code class="language-swift">public func call(
     _ method: <a href="../extensions/string.html?swift">String</a>,
-    args: [<a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?] = [],
-    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?&gt; = [:]
+    args: [(any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?] = [],
+    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, (any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?&gt; = [:]
 ) -&gt; <a href="../types/rbobject13.html?swift">RbObject</a>?</code></pre>
   </div>
 
@@ -826,13 +826,109 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
   
   
   
+    <section id="call_argskwargsblockcall" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20call(String,%20args%3A%20%5B(any%20RbObjectConvertible)%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20(any%20RbObjectConvertible)%3F%3E,%20blockCall%3A%20RbBlockCallback)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="call_argskwargsblockcall"></a>
+    <h4 class="visually-hidden">func call(String, args: [(any RbObjectConvertible)?], kwArgs: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;, blockCall: RbBlockCallback) -&gt; RbObject?</h4>
+    
+    
+    <a class="j2-item-title" href="#_call_argskwargsblockcall" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_call_argskwargsblockcall"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>call<span class="j2-item-secondary">(String, </span>args<span class="j2-item-secondary">: [(any RbObjectConvertible)?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;, </span>blockCall<span class="j2-item-secondary">: RbBlockCallback) -&gt; RbObject?</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_call_argskwargsblockcall">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none presentation"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Call a method of a Ruby object passing Swift code as a block used immediately.</p>
+<p>This is a non-throwing version of <a href="../types/rbobjectaccess1.html?swift#call_argskwargsblockcall1"><code>RbObjectAccess.call(_:args:kwArgs:blockCall:)</code></a>.
+See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code></a> to retrieve error details.</p>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">public func call(
+    _ method: <a href="../extensions/string.html?swift">String</a>,
+    args: [(any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?] = [],
+    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, (any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?&gt; = [:],
+    blockCall: <a href="../other-apis.html?swift#rbblockcallback">RbBlockCallback</a>
+) -&gt; <a href="../types/rbobject13.html?swift">RbObject</a>?</code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>method</code></td>
+        <td><p>The name of the method to call.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>args</code></td>
+        <td><p>The positional arguments to the method, none by default.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>kwArgs</code></td>
+        <td><p>The keyword arguments to the method, none by default.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>blockCall</code></td>
+        <td><p>Swift code to pass as a block to the method.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+
+  <h5>Return Value</h5>
+  <p>An <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> for the result of the method, or <code>nil</code> if an error occurred.</p>
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L74-L79">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      </div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
     <section id="call_argskwargsblockretentionblockcall" class="j2-item j2-swift">
-    <a name="//apple_ref/cpp/Method/func%20call(String,%20args%3A%20%5BRbObjectConvertible%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20RbObjectConvertible%3F%3E,%20blockRetention%3A%20RbBlockRetention,%20blockCall%3A%20RbBlockCallback)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="call_argskwargsblockretentionblockcall"></a>
-    <h4 class="visually-hidden">func call(String, args: [RbObjectConvertible?], kwArgs: KeyValuePairs&lt;String, RbObjectConvertible?&gt;, blockRetention: RbBlockRetention, blockCall: RbBlockCallback) -&gt; RbObject?</h4>
+    <a name="//apple_ref/cpp/Method/func%20call(String,%20args%3A%20%5B(any%20RbObjectConvertible)%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20(any%20RbObjectConvertible)%3F%3E,%20blockRetention%3A%20RbBlockRetention,%20blockCall%3A%20RbBlockCallback)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="call_argskwargsblockretentionblockcall"></a>
+    <h4 class="visually-hidden">func call(String, args: [(any RbObjectConvertible)?], kwArgs: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;, blockRetention: RbBlockRetention, blockCall: RbBlockCallback) -&gt; RbObject?</h4>
     
     
     <a class="j2-item-title" href="#_call_argskwargsblockretentionblockcall" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_call_argskwargsblockretentionblockcall"><code>
-        <span class="j2-swift"><span class="j2-item-secondary">func </span>call<span class="j2-item-secondary">(String, </span>args<span class="j2-item-secondary">: [RbObjectConvertible?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, RbObjectConvertible?&gt;, </span>blockRetention<span class="j2-item-secondary">: RbBlockRetention, </span>blockCall<span class="j2-item-secondary">: RbBlockCallback) -&gt; RbObject?</span></span>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>call<span class="j2-item-secondary">(String, </span>args<span class="j2-item-secondary">: [(any RbObjectConvertible)?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;, </span>blockRetention<span class="j2-item-secondary">: RbBlockRetention, </span>blockCall<span class="j2-item-secondary">: RbBlockCallback) -&gt; RbObject?</span></span>
         
       </code></a>
     <div class="collapse  j2-item-popopen-wrapper" id="_call_argskwargsblockretentionblockcall">
@@ -862,10 +958,10 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
     <pre><code class="language-swift">public func call(
     _ method: <a href="../extensions/string.html?swift">String</a>,
-    args: [<a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?] = [],
-    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?&gt; = [:],
-    blockRetention: <a href="../types/rbblockretention.html?swift">RbBlockRetention</a> = .none,
-    blockCall: @escaping <a href="../other-apis.html?swift#rbblockcallback">RbBlockCallback</a>
+    args: [(any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?] = [],
+    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, (any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?&gt; = [:],
+    blockRetention: <a href="../types/rbblockretention.html?swift">RbBlockRetention</a>,
+    blockCall: @escaping <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">@Sendable</a> <a href="../other-apis.html?swift#rbblockcallback">RbBlockCallback</a>
 ) -&gt; <a href="../types/rbobject13.html?swift">RbObject</a>?</code></pre>
   </div>
 
@@ -895,7 +991,7 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
       <tr>
         <td><code>blockRetention</code></td>
         <td><p>Should the <code>blockCall</code> closure be retained for
-longer than this call?  Default <code>.none</code>.  See <a href="../types/rbblockretention.html?swift"><code>RbBlockRetention</code></a>.</p></td>
+longer than this call?  See <a href="../types/rbblockretention.html?swift"><code>RbBlockRetention</code></a>.</p></td>
       </tr>
       
       <tr>
@@ -917,7 +1013,7 @@ longer than this call?  Default <code>.none</code>.  See <a href="../types/rbblo
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L76-L82">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L93-L99">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -930,12 +1026,12 @@ longer than this call?  Default <code>.none</code>.  See <a href="../types/rbblo
   
   
     <section id="call_argskwargsblock" class="j2-item j2-swift">
-    <a name="//apple_ref/cpp/Method/func%20call(String,%20args%3A%20%5BRbObjectConvertible%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20RbObjectConvertible%3F%3E,%20block%3A%20RbObjectConvertible)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="call_argskwargsblock"></a>
-    <h4 class="visually-hidden">func call(String, args: [RbObjectConvertible?], kwArgs: KeyValuePairs&lt;String, RbObjectConvertible?&gt;, block: RbObjectConvertible) -&gt; RbObject?</h4>
+    <a name="//apple_ref/cpp/Method/func%20call(String,%20args%3A%20%5B(any%20RbObjectConvertible)%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20(any%20RbObjectConvertible)%3F%3E,%20block%3A%20any%20RbObjectConvertible)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="call_argskwargsblock"></a>
+    <h4 class="visually-hidden">func call(String, args: [(any RbObjectConvertible)?], kwArgs: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;, block: any RbObjectConvertible) -&gt; RbObject?</h4>
     
     
     <a class="j2-item-title" href="#_call_argskwargsblock" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_call_argskwargsblock"><code>
-        <span class="j2-swift"><span class="j2-item-secondary">func </span>call<span class="j2-item-secondary">(String, </span>args<span class="j2-item-secondary">: [RbObjectConvertible?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, RbObjectConvertible?&gt;, </span>block<span class="j2-item-secondary">: RbObjectConvertible) -&gt; RbObject?</span></span>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>call<span class="j2-item-secondary">(String, </span>args<span class="j2-item-secondary">: [(any RbObjectConvertible)?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;, </span>block<span class="j2-item-secondary">: any RbObjectConvertible) -&gt; RbObject?</span></span>
         
       </code></a>
     <div class="collapse  j2-item-popopen-wrapper" id="_call_argskwargsblock">
@@ -965,9 +1061,9 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
     <pre><code class="language-swift">public func call(
     _ method: <a href="../extensions/string.html?swift">String</a>,
-    args: [<a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?] = [],
-    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?&gt; = [:],
-    block: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>
+    args: [(any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?] = [],
+    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, (any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?&gt; = [:],
+    block: any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>
 ) -&gt; <a href="../types/rbobject13.html?swift">RbObject</a>?</code></pre>
   </div>
 
@@ -1013,7 +1109,7 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L94-L99">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L111-L116">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -1026,12 +1122,12 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
   
   
     <section id="callsymbolargskwargs" class="j2-item j2-swift">
-    <a name="//apple_ref/cpp/Method/func%20call(symbol%3A%20RbObjectConvertible,%20args%3A%20%5BRbObjectConvertible%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20RbObjectConvertible%3F%3E)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="callsymbolargskwargs"></a>
-    <h4 class="visually-hidden">func call(symbol: RbObjectConvertible, args: [RbObjectConvertible?], kwArgs: KeyValuePairs&lt;String, RbObjectConvertible?&gt;) -&gt; RbObject?</h4>
+    <a name="//apple_ref/cpp/Method/func%20call(symbol%3A%20any%20RbObjectConvertible,%20args%3A%20%5B(any%20RbObjectConvertible)%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20(any%20RbObjectConvertible)%3F%3E)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="callsymbolargskwargs"></a>
+    <h4 class="visually-hidden">func call(symbol: any RbObjectConvertible, args: [(any RbObjectConvertible)?], kwArgs: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;) -&gt; RbObject?</h4>
     
     
     <a class="j2-item-title" href="#_callsymbolargskwargs" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_callsymbolargskwargs"><code>
-        <span class="j2-swift"><span class="j2-item-secondary">func </span>call<span class="j2-item-secondary">(</span>symbol<span class="j2-item-secondary">: RbObjectConvertible, </span>args<span class="j2-item-secondary">: [RbObjectConvertible?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, RbObjectConvertible?&gt;) -&gt; RbObject?</span></span>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>call<span class="j2-item-secondary">(</span>symbol<span class="j2-item-secondary">: any RbObjectConvertible, </span>args<span class="j2-item-secondary">: [(any RbObjectConvertible)?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;) -&gt; RbObject?</span></span>
         
       </code></a>
     <div class="collapse  j2-item-popopen-wrapper" id="_callsymbolargskwargs">
@@ -1061,9 +1157,9 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
     <pre><code class="language-swift">@discardableResult
 public func call(
-    symbol: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>,
-    args: [<a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?] = [],
-    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?&gt; = [:]
+    symbol: any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>,
+    args: [(any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?] = [],
+    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, (any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?&gt; = [:]
 ) -&gt; <a href="../types/rbobject13.html?swift">RbObject</a>?</code></pre>
   </div>
 
@@ -1104,7 +1200,104 @@ public func call(
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L111-L115">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L128-L132">Show on GitHub</a></span>
+            
+          </nav>
+        </div>
+      </div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+    <section id="callsymbolargskwargsblockcall" class="j2-item j2-swift">
+    <a name="//apple_ref/cpp/Method/func%20call(symbol%3A%20any%20RbObjectConvertible,%20args%3A%20%5B(any%20RbObjectConvertible)%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20(any%20RbObjectConvertible)%3F%3E,%20blockCall%3A%20RbBlockCallback)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="callsymbolargskwargsblockcall"></a>
+    <h4 class="visually-hidden">func call(symbol: any RbObjectConvertible, args: [(any RbObjectConvertible)?], kwArgs: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;, blockCall: RbBlockCallback) -&gt; RbObject?</h4>
+    
+    
+    <a class="j2-item-title" href="#_callsymbolargskwargsblockcall" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_callsymbolargskwargsblockcall"><code>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>call<span class="j2-item-secondary">(</span>symbol<span class="j2-item-secondary">: any RbObjectConvertible, </span>args<span class="j2-item-secondary">: [(any RbObjectConvertible)?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;, </span>blockCall<span class="j2-item-secondary">: RbBlockCallback) -&gt; RbObject?</span></span>
+        
+      </code></a>
+    <div class="collapse  j2-item-popopen-wrapper" id="_callsymbolargskwargsblockcall">
+      <div class="j2-item-popopen">
+        <div class="j2-item-popopen-pointer" role="none presentation"></div>
+        <div class="j2-item-popopen-body">
+          
+            <div class="clearfix">
+              
+  
+
+
+              
+
+
+<p>Call a method of a Ruby object using a symbol passing Swift code as a block used immediately.</p>
+<p>This is a non-throwing version of <a href="../types/rbobjectaccess1.html?swift#callsymbolargskwargsblockcall1"><code>RbObjectAccess.call(symbol:args:kwArgs:blockCall:)</code></a>.
+See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code></a> to retrieve error details.</p>
+
+
+
+            </div>
+            <h5>Declaration</h5>
+            <div class="j2-item-declaration">
+              
+  <div class="j2-swift">
+    <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
+    <pre><code class="language-swift">@discardableResult
+public func call(
+    symbol: any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>,
+    args: [(any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?] = [],
+    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, (any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?&gt; = [:],
+    blockCall: <a href="../other-apis.html?swift#rbblockcallback">RbBlockCallback</a>
+) -&gt; <a href="../types/rbobject13.html?swift">RbObject</a>?</code></pre>
+  </div>
+
+
+
+            </div>
+            
+  <h5>Parameters</h5>
+  <table class="j2-param-table">
+    <tbody>
+      
+      <tr>
+        <td><code>symbol</code></td>
+        <td><p>A symbol for the method to call.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>args</code></td>
+        <td><p>The positional arguments to the method, none by default.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>kwArgs</code></td>
+        <td><p>The keyword arguments to the method, none by default.</p></td>
+      </tr>
+      
+      <tr>
+        <td><code>blockCall</code></td>
+        <td><p>Swift code to pass as a block to the method.</p></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+
+  <h5>Return Value</h5>
+  <p>An <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> for the result of the method, or <code>nil</code> if an error occurred.</p>
+
+
+          
+
+          <nav class="j2-item-nav" aria-label="item details">
+            
+            
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L145-L150">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -1117,12 +1310,12 @@ public func call(
   
   
     <section id="callsymbolargskwargsblockretentionblockcall" class="j2-item j2-swift">
-    <a name="//apple_ref/cpp/Method/func%20call(symbol%3A%20RbObjectConvertible,%20args%3A%20%5BRbObjectConvertible%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20RbObjectConvertible%3F%3E,%20blockRetention%3A%20RbBlockRetention,%20blockCall%3A%20RbBlockCallback)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="callsymbolargskwargsblockretentionblockcall"></a>
-    <h4 class="visually-hidden">func call(symbol: RbObjectConvertible, args: [RbObjectConvertible?], kwArgs: KeyValuePairs&lt;String, RbObjectConvertible?&gt;, blockRetention: RbBlockRetention, blockCall: RbBlockCallback) -&gt; RbObject?</h4>
+    <a name="//apple_ref/cpp/Method/func%20call(symbol%3A%20any%20RbObjectConvertible,%20args%3A%20%5B(any%20RbObjectConvertible)%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20(any%20RbObjectConvertible)%3F%3E,%20blockRetention%3A%20RbBlockRetention,%20blockCall%3A%20RbBlockCallback)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="callsymbolargskwargsblockretentionblockcall"></a>
+    <h4 class="visually-hidden">func call(symbol: any RbObjectConvertible, args: [(any RbObjectConvertible)?], kwArgs: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;, blockRetention: RbBlockRetention, blockCall: RbBlockCallback) -&gt; RbObject?</h4>
     
     
     <a class="j2-item-title" href="#_callsymbolargskwargsblockretentionblockcall" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_callsymbolargskwargsblockretentionblockcall"><code>
-        <span class="j2-swift"><span class="j2-item-secondary">func </span>call<span class="j2-item-secondary">(</span>symbol<span class="j2-item-secondary">: RbObjectConvertible, </span>args<span class="j2-item-secondary">: [RbObjectConvertible?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, RbObjectConvertible?&gt;, </span>blockRetention<span class="j2-item-secondary">: RbBlockRetention, </span>blockCall<span class="j2-item-secondary">: RbBlockCallback) -&gt; RbObject?</span></span>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>call<span class="j2-item-secondary">(</span>symbol<span class="j2-item-secondary">: any RbObjectConvertible, </span>args<span class="j2-item-secondary">: [(any RbObjectConvertible)?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;, </span>blockRetention<span class="j2-item-secondary">: RbBlockRetention, </span>blockCall<span class="j2-item-secondary">: RbBlockCallback) -&gt; RbObject?</span></span>
         
       </code></a>
     <div class="collapse  j2-item-popopen-wrapper" id="_callsymbolargskwargsblockretentionblockcall">
@@ -1152,11 +1345,11 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
     <pre><code class="language-swift">@discardableResult
 public func call(
-    symbol: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>,
-    args: [<a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?] = [],
-    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?&gt; = [:],
+    symbol: any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>,
+    args: [(any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?] = [],
+    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, (any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?&gt; = [:],
     blockRetention: <a href="../types/rbblockretention.html?swift">RbBlockRetention</a> = .none,
-    blockCall: @escaping <a href="../other-apis.html?swift#rbblockcallback">RbBlockCallback</a>
+    blockCall: @escaping <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">@Sendable</a> <a href="../other-apis.html?swift#rbblockcallback">RbBlockCallback</a>
 ) -&gt; <a href="../types/rbobject13.html?swift">RbObject</a>?</code></pre>
   </div>
 
@@ -1186,7 +1379,7 @@ public func call(
       <tr>
         <td><code>blockRetention</code></td>
         <td><p>Should the <code>blockCall</code> closure be retained for
-longer than this call?  Default <code>.none</code>.  See <a href="../types/rbblockretention.html?swift"><code>RbBlockRetention</code></a>.</p></td>
+longer than this call?  See <a href="../types/rbblockretention.html?swift"><code>RbBlockRetention</code></a>.</p></td>
       </tr>
       
       <tr>
@@ -1208,7 +1401,7 @@ longer than this call?  Default <code>.none</code>.  See <a href="../types/rbblo
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L130-L136">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L165-L171">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -1221,12 +1414,12 @@ longer than this call?  Default <code>.none</code>.  See <a href="../types/rbblo
   
   
     <section id="callsymbolargskwargsblock" class="j2-item j2-swift">
-    <a name="//apple_ref/cpp/Method/func%20call(symbol%3A%20RbObjectConvertible,%20args%3A%20%5BRbObjectConvertible%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20RbObjectConvertible%3F%3E,%20block%3A%20RbObjectConvertible)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="callsymbolargskwargsblock"></a>
-    <h4 class="visually-hidden">func call(symbol: RbObjectConvertible, args: [RbObjectConvertible?], kwArgs: KeyValuePairs&lt;String, RbObjectConvertible?&gt;, block: RbObjectConvertible) -&gt; RbObject?</h4>
+    <a name="//apple_ref/cpp/Method/func%20call(symbol%3A%20any%20RbObjectConvertible,%20args%3A%20%5B(any%20RbObjectConvertible)%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20(any%20RbObjectConvertible)%3F%3E,%20block%3A%20any%20RbObjectConvertible)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="callsymbolargskwargsblock"></a>
+    <h4 class="visually-hidden">func call(symbol: any RbObjectConvertible, args: [(any RbObjectConvertible)?], kwArgs: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;, block: any RbObjectConvertible) -&gt; RbObject?</h4>
     
     
     <a class="j2-item-title" href="#_callsymbolargskwargsblock" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_callsymbolargskwargsblock"><code>
-        <span class="j2-swift"><span class="j2-item-secondary">func </span>call<span class="j2-item-secondary">(</span>symbol<span class="j2-item-secondary">: RbObjectConvertible, </span>args<span class="j2-item-secondary">: [RbObjectConvertible?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, RbObjectConvertible?&gt;, </span>block<span class="j2-item-secondary">: RbObjectConvertible) -&gt; RbObject?</span></span>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>call<span class="j2-item-secondary">(</span>symbol<span class="j2-item-secondary">: any RbObjectConvertible, </span>args<span class="j2-item-secondary">: [(any RbObjectConvertible)?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;, </span>block<span class="j2-item-secondary">: any RbObjectConvertible) -&gt; RbObject?</span></span>
         
       </code></a>
     <div class="collapse  j2-item-popopen-wrapper" id="_callsymbolargskwargsblock">
@@ -1256,10 +1449,10 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
     <pre><code class="language-swift">@discardableResult
 public func call(
-    symbol: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>,
-    args: [<a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?] = [],
-    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?&gt; = [:],
-    block: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>
+    symbol: any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>,
+    args: [(any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?] = [],
+    kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, (any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?&gt; = [:],
+    block: any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>
 ) -&gt; <a href="../types/rbobject13.html?swift">RbObject</a>?</code></pre>
   </div>
 
@@ -1305,7 +1498,7 @@ public func call(
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L149-L154">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L184-L189">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -1393,7 +1586,7 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L167-L169">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L202-L204">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -1406,12 +1599,12 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
   
   
     <section id="setattribute_newvalue" class="j2-item j2-swift">
-    <a name="//apple_ref/cpp/Method/func%20setAttribute(String,%20newValue%3A%20RbObjectConvertible%3F)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="setattribute_newvalue"></a>
-    <h4 class="visually-hidden">func setAttribute(String, newValue: RbObjectConvertible?) -&gt; RbObject?</h4>
+    <a name="//apple_ref/cpp/Method/func%20setAttribute(String,%20newValue%3A%20(any%20RbObjectConvertible)%3F)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="setattribute_newvalue"></a>
+    <h4 class="visually-hidden">func setAttribute(String, newValue: (any RbObjectConvertible)?) -&gt; RbObject?</h4>
     
     
     <a class="j2-item-title" href="#_setattribute_newvalue" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_setattribute_newvalue"><code>
-        <span class="j2-swift"><span class="j2-item-secondary">func </span>setAttribute<span class="j2-item-secondary">(String, </span>newValue<span class="j2-item-secondary">: RbObjectConvertible?) -&gt; RbObject?</span></span>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>setAttribute<span class="j2-item-secondary">(String, </span>newValue<span class="j2-item-secondary">: (any RbObjectConvertible)?) -&gt; RbObject?</span></span>
         
       </code></a>
     <div class="collapse  j2-item-popopen-wrapper" id="_setattribute_newvalue">
@@ -1439,7 +1632,7 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
               
   <div class="j2-swift">
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
-    <pre><code class="language-swift">public func setAttribute(_ name: <a href="../extensions/string.html?swift">String</a>, newValue: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?)
+    <pre><code class="language-swift">public func setAttribute(_ name: <a href="../extensions/string.html?swift">String</a>, newValue: (any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?)
     -&gt; <a href="../types/rbobject13.html?swift">RbObject</a>?</code></pre>
   </div>
 
@@ -1475,7 +1668,7 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L179-L181">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L214-L216">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -1563,7 +1756,7 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L194-L196">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L229-L231">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -1639,7 +1832,7 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L205-L207">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L240-L242">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -1652,12 +1845,12 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
   
   
     <section id="setconstant_newvalue" class="j2-item j2-swift">
-    <a name="//apple_ref/cpp/Method/func%20setConstant(String,%20newValue%3A%20RbObjectConvertible%3F)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="setconstant_newvalue"></a>
-    <h4 class="visually-hidden">func setConstant(String, newValue: RbObjectConvertible?) -&gt; RbObject?</h4>
+    <a name="//apple_ref/cpp/Method/func%20setConstant(String,%20newValue%3A%20(any%20RbObjectConvertible)%3F)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="setconstant_newvalue"></a>
+    <h4 class="visually-hidden">func setConstant(String, newValue: (any RbObjectConvertible)?) -&gt; RbObject?</h4>
     
     
     <a class="j2-item-title" href="#_setconstant_newvalue" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_setconstant_newvalue"><code>
-        <span class="j2-swift"><span class="j2-item-secondary">func </span>setConstant<span class="j2-item-secondary">(String, </span>newValue<span class="j2-item-secondary">: RbObjectConvertible?) -&gt; RbObject?</span></span>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>setConstant<span class="j2-item-secondary">(String, </span>newValue<span class="j2-item-secondary">: (any RbObjectConvertible)?) -&gt; RbObject?</span></span>
         
       </code></a>
     <div class="collapse  j2-item-popopen-wrapper" id="_setconstant_newvalue">
@@ -1686,7 +1879,7 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
   <div class="j2-swift">
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
     <pre><code class="language-swift">@discardableResult
-public func setConstant(_ name: <a href="../extensions/string.html?swift">String</a>, newValue: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?)
+public func setConstant(_ name: <a href="../extensions/string.html?swift">String</a>, newValue: (any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?)
     -&gt; <a href="../types/rbobject13.html?swift">RbObject</a>?</code></pre>
   </div>
 
@@ -1722,7 +1915,7 @@ public func setConstant(_ name: <a href="../extensions/string.html?swift">String
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L218-L220">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L253-L255">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -1810,7 +2003,7 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L233-L235">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L268-L270">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -1823,12 +2016,12 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
   
   
     <section id="setinstancevar_newvalue" class="j2-item j2-swift">
-    <a name="//apple_ref/cpp/Method/func%20setInstanceVar(String,%20newValue%3A%20RbObjectConvertible%3F)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="setinstancevar_newvalue"></a>
-    <h4 class="visually-hidden">func setInstanceVar(String, newValue: RbObjectConvertible?) -&gt; RbObject?</h4>
+    <a name="//apple_ref/cpp/Method/func%20setInstanceVar(String,%20newValue%3A%20(any%20RbObjectConvertible)%3F)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="setinstancevar_newvalue"></a>
+    <h4 class="visually-hidden">func setInstanceVar(String, newValue: (any RbObjectConvertible)?) -&gt; RbObject?</h4>
     
     
     <a class="j2-item-title" href="#_setinstancevar_newvalue" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_setinstancevar_newvalue"><code>
-        <span class="j2-swift"><span class="j2-item-secondary">func </span>setInstanceVar<span class="j2-item-secondary">(String, </span>newValue<span class="j2-item-secondary">: RbObjectConvertible?) -&gt; RbObject?</span></span>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>setInstanceVar<span class="j2-item-secondary">(String, </span>newValue<span class="j2-item-secondary">: (any RbObjectConvertible)?) -&gt; RbObject?</span></span>
         
       </code></a>
     <div class="collapse  j2-item-popopen-wrapper" id="_setinstancevar_newvalue">
@@ -1857,7 +2050,7 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
   <div class="j2-swift">
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
     <pre><code class="language-swift">@discardableResult
-public func setInstanceVar(_ name: <a href="../extensions/string.html?swift">String</a>, newValue: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?)
+public func setInstanceVar(_ name: <a href="../extensions/string.html?swift">String</a>, newValue: (any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?)
     -&gt; <a href="../types/rbobject13.html?swift">RbObject</a>?</code></pre>
   </div>
 
@@ -1893,7 +2086,7 @@ public func setInstanceVar(_ name: <a href="../extensions/string.html?swift">Str
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L246-L248">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L281-L283">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -1982,7 +2175,7 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L263-L265">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L298-L300">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -1995,12 +2188,12 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
   
   
     <section id="setclassvar_newvalue" class="j2-item j2-swift">
-    <a name="//apple_ref/cpp/Method/func%20setClassVar(String,%20newValue%3A%20RbObjectConvertible%3F)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="setclassvar_newvalue"></a>
-    <h4 class="visually-hidden">func setClassVar(String, newValue: RbObjectConvertible?) -&gt; RbObject?</h4>
+    <a name="//apple_ref/cpp/Method/func%20setClassVar(String,%20newValue%3A%20(any%20RbObjectConvertible)%3F)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="setclassvar_newvalue"></a>
+    <h4 class="visually-hidden">func setClassVar(String, newValue: (any RbObjectConvertible)?) -&gt; RbObject?</h4>
     
     
     <a class="j2-item-title" href="#_setclassvar_newvalue" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_setclassvar_newvalue"><code>
-        <span class="j2-swift"><span class="j2-item-secondary">func </span>setClassVar<span class="j2-item-secondary">(String, </span>newValue<span class="j2-item-secondary">: RbObjectConvertible?) -&gt; RbObject?</span></span>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>setClassVar<span class="j2-item-secondary">(String, </span>newValue<span class="j2-item-secondary">: (any RbObjectConvertible)?) -&gt; RbObject?</span></span>
         
       </code></a>
     <div class="collapse  j2-item-popopen-wrapper" id="_setclassvar_newvalue">
@@ -2030,7 +2223,7 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
   <div class="j2-swift">
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
     <pre><code class="language-swift">@discardableResult
-public func setClassVar(_ name: <a href="../extensions/string.html?swift">String</a>, newValue: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?)
+public func setClassVar(_ name: <a href="../extensions/string.html?swift">String</a>, newValue: (any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?)
     -&gt; <a href="../types/rbobject13.html?swift">RbObject</a>?</code></pre>
   </div>
 
@@ -2066,7 +2259,7 @@ public func setClassVar(_ name: <a href="../extensions/string.html?swift">String
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L278-L280">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L313-L315">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -2154,7 +2347,7 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L293-L295">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L328-L330">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -2167,12 +2360,12 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
   
   
     <section id="setglobalvar_newvalue" class="j2-item j2-swift">
-    <a name="//apple_ref/cpp/Method/func%20setGlobalVar(String,%20newValue%3A%20RbObjectConvertible%3F)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="setglobalvar_newvalue"></a>
-    <h4 class="visually-hidden">func setGlobalVar(String, newValue: RbObjectConvertible?) -&gt; RbObject?</h4>
+    <a name="//apple_ref/cpp/Method/func%20setGlobalVar(String,%20newValue%3A%20(any%20RbObjectConvertible)%3F)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="setglobalvar_newvalue"></a>
+    <h4 class="visually-hidden">func setGlobalVar(String, newValue: (any RbObjectConvertible)?) -&gt; RbObject?</h4>
     
     
     <a class="j2-item-title" href="#_setglobalvar_newvalue" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_setglobalvar_newvalue"><code>
-        <span class="j2-swift"><span class="j2-item-secondary">func </span>setGlobalVar<span class="j2-item-secondary">(String, </span>newValue<span class="j2-item-secondary">: RbObjectConvertible?) -&gt; RbObject?</span></span>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>setGlobalVar<span class="j2-item-secondary">(String, </span>newValue<span class="j2-item-secondary">: (any RbObjectConvertible)?) -&gt; RbObject?</span></span>
         
       </code></a>
     <div class="collapse  j2-item-popopen-wrapper" id="_setglobalvar_newvalue">
@@ -2201,7 +2394,7 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
   <div class="j2-swift">
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
     <pre><code class="language-swift">@discardableResult
-public func setGlobalVar(_ name: <a href="../extensions/string.html?swift">String</a>, newValue: <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>?)
+public func setGlobalVar(_ name: <a href="../extensions/string.html?swift">String</a>, newValue: (any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?)
     -&gt; <a href="../types/rbobject13.html?swift">RbObject</a>?</code></pre>
   </div>
 
@@ -2237,7 +2430,7 @@ public func setGlobalVar(_ name: <a href="../extensions/string.html?swift">Strin
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L306-L308">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L341-L343">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -2326,7 +2519,7 @@ public func get(_ name: <a href="../extensions/string.html?swift">String</a>) -&
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L322-L324">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbFailableAccess.swift#L357-L359">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -2435,7 +2628,7 @@ public func get(_ name: <a href="../extensions/string.html?swift">String</a>) -&
   <div class="col j2-footer small pt-2">
     <p>Distributed under the MIT license.  Maintained by <a href="mailto:johnfairh@gmail.com">John Fairhurst</a>.</p>
     
-    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external noopener">Bebop v1.10.1</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫</a>.</p>
+    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external noopener">Bebop v1.11.0</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫</a>.</p>
     
   </div>
 </footer>

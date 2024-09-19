@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/fw2020.css">
     
     
-   <title>RbThread - RubyGateway 5.5.0 docs</title>
+   <title>RbThread - RubyGateway 6.0.0 docs</title>
     
   </head>
   <body class="j2-swift " data-root-path="./../" data-doc-path="types/rbthread.html" data-assets-path="../">
@@ -31,7 +31,7 @@
     
     <a href="../index.html">
     
-    RubyGateway 5.5.0 docs</a>
+    RubyGateway 6.0.0 docs</a>
   </div>
   
   <span class="navbar-text j2-coverage fw-slightly-bold small d-none d-lg-inline-block me-2">(100% documented)</span>
@@ -688,7 +688,7 @@
 
 <p>This type provides a namespace for working with Ruby threads.</p>
 <p>You cannot call Ruby on arbitrary threads: only the very first thread
-where RubyGateway gets used or threads created by Ruby’s <code>Thread</code> class.</p>
+where RubyGateway gets used or threads created by Ruby’s <a href="https://developer.apple.com/documentation/foundation/thread?language=swift" class="j2-swift"><code>Thread</code></a><a href="https://developer.apple.com/documentation/foundation/thread?language=objc" class="j2-objc j2-secondary"><code>Thread</code></a> class.</p>
 <p>There is no way to ‘attach’ the Ruby runtime to a thread created by client
 code (eg. one accessed via libdispatch).</p>
 <p>Even when multiple Ruby threads are active, the VM executes just one at a
@@ -709,7 +709,7 @@ that is allowed to call Ruby using <a href="../types/rbthread.html?swift#callwit
           
           
           <nav aria-label="item details" class="j2-main-item-nav">
-            <a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbThread.swift#L58-L153">Show on GitHub</a>
+            <a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbThread.swift#L58-L155">Show on GitHub</a>
           </nav>
           
           
@@ -750,7 +750,7 @@ that is allowed to call Ruby using <a href="../types/rbthread.html?swift#callwit
 
 
 <p>Create a Ruby thread.</p>
-<p>This is a simple wrapper around creating a Ruby <code>Thread</code> object.</p>
+<p>This is a simple wrapper around creating a Ruby <a href="https://developer.apple.com/documentation/foundation/thread?language=swift" class="j2-swift"><code>Thread</code></a><a href="https://developer.apple.com/documentation/foundation/thread?language=objc" class="j2-objc j2-secondary"><code>Thread</code></a> object.</p>
 <div class="j2-callout j2-callout-note aside aside-note">
 <div class="j2-callout-title aside-title" role="heading" aria-level="6">note</div>
 <p>You must retain the returned <a href="../types/rbobject13.html?swift"><code>RbObject</code></a> until the Ruby thread
@@ -766,7 +766,7 @@ prematurely.</p>
               
   <div class="j2-swift">
     <div class="j2-callout-title" role="heading" aria-level="6">Swift</div>
-    <pre><code class="language-swift">public static func create(callback: @escaping () -&gt; <a href="https://developer.apple.com/documentation/swift/void?language=swift">Void</a>) -&gt; <a href="../types/rbobject13.html?swift">RbObject</a>?</code></pre>
+    <pre><code class="language-swift">public static func create(callback: @escaping <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">@Sendable</a> () -&gt; <a href="https://developer.apple.com/documentation/swift/void?language=swift">Void</a>) -&gt; <a href="../types/rbobject13.html?swift">RbObject</a>?</code></pre>
   </div>
 
 
@@ -788,7 +788,7 @@ prematurely.</p>
 
 
   <h5>Return Value</h5>
-  <p>The Ruby <code>Thread</code> object, or <code>nil</code> if there was a problem.
+  <p>The Ruby <a href="https://developer.apple.com/documentation/foundation/thread?language=swift" class="j2-swift"><code>Thread</code></a><a href="https://developer.apple.com/documentation/foundation/thread?language=objc" class="j2-objc j2-secondary"><code>Thread</code></a> object, or <code>nil</code> if there was a problem.
 See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code></a> for details of any error.</p>
 
 
@@ -1055,7 +1055,7 @@ Ruby wants to interrupt the thread and get it back under GVL control.</p>
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbThread.swift#L120-L138">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbThread.swift#L120-L140">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -1117,7 +1117,7 @@ source code for more commentary.</p>
           <nav class="j2-item-nav" aria-label="item details">
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbThread.swift#L145-L152">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbThread.swift#L147-L154">Show on GitHub</a></span>
             
           </nav>
         </div>
@@ -1212,7 +1212,7 @@ source code for more commentary.</p>
   <div class="col j2-footer small pt-2">
     <p>Distributed under the MIT license.  Maintained by <a href="mailto:johnfairh@gmail.com">John Fairhurst</a>.</p>
     
-    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external noopener">Bebop v1.10.1</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫</a>.</p>
+    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external noopener">Bebop v1.11.0</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫</a>.</p>
     
   </div>
 </footer>

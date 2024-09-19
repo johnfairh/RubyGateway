@@ -27,9 +27,7 @@ private enum RbGlobalVar {
 
     /// One-time init to register the callbacks
     private static let initOnce: Void = {
-        // Swift 6 breakage
-        rbg_register_gvar_callbacks( { rbobject_gvar_get_callback(id: $0) },
-                                     { rbobject_gvar_set_callback(id: $0, newValue: $1, returnValue: $2) })
+        rbg_register_gvar_callbacks(rbobject_gvar_get_callback, rbobject_gvar_set_callback)
     }()
 
     /// Callbacks + store - type-erased at this point
@@ -97,7 +95,7 @@ extension RbGateway {
     /// - throws: `RbError.badIdentifier(type:id:)` if `name` is bad; some other kind of error if Ruby is
     ///           not working.
     public func defineGlobalVar<T: RbObjectConvertible>(_ name: String,
-                                                        get: @Sendable @escaping () -> T) throws {
+                                                        get: @escaping @Sendable () -> T) throws {
         try setup()
         try name.checkRubyGlobalVarName()
         RbGlobalVar.create(name: name, get: get, set: nil)
@@ -120,8 +118,8 @@ extension RbGateway {
     /// - throws: `RbError.badIdentifier(type:id:)` if `name` is bad; some other kind of error if Ruby is
     ///           not working.
     public func defineGlobalVar<T: RbObjectConvertible>(_ name: String,
-                                                        get: @Sendable @escaping () -> T,
-                                                        set: @Sendable @escaping (T) throws -> Void) throws {
+                                                        get: @escaping @Sendable () -> T,
+                                                        set: @escaping @Sendable (T) throws -> Void) throws {
         try setup()
         try name.checkRubyGlobalVarName()
         RbGlobalVar.create(name: name, get: get, set: set)

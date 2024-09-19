@@ -158,7 +158,7 @@ log(object2_to_log, priority: 2)
 
 ## Requirements
 
-* Swift 5.9 or later, from swift.org or Xcode 15.3+
+* Swift 6.0 or later, from swift.org or Xcode 16+
 * macOS (tested on 14.1) or Linux (tested on Ubuntu Jammy)
 * Ruby 2.6 or later including development files:
   * For macOS, these come with Xcode.
@@ -172,6 +172,10 @@ For macOS, if you are happy to use the system Ruby then you just need to include
 the RubyGateway framework as a dependency.  If you are building on Linux or want
 to use a different Ruby then you also need to configure CRuby.
 
+## Linux
+
+As of Swift 6, Apple have broken Swift PM such that you must pass "-Xcc -fmodules" to build the project.  Check the CI invocation for an example.
+
 ### Getting the framework
 
 Carthage for macOS:
@@ -181,7 +185,7 @@ github "johnfairh/RubyGateway"
 
 Swift package manager for macOS or Linux:
 ```
-.package(url: "https://github.com/johnfairh/RubyGateway", from: "5.5.0")
+.package(url: "https://github.com/johnfairh/RubyGateway", from: "6.0.0")
 ```
 
 CocoaPods for macOS:

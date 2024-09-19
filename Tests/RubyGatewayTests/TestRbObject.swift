@@ -74,7 +74,7 @@ class TestRbObject: XCTestCase {
             XCTFail("Managed to create object of odd class: \(obj)")
         }
 
-        if let obj = RbObject(ofClass: "DoesNotExist", retainBlock: false, blockCall: { args in .nilObject }) {
+        if let obj = RbObject(ofClass: "DoesNotExist", blockCall: { args in .nilObject }) {
             XCTFail("Managed to create object of odd class: \(obj)")
         }
     }
@@ -243,6 +243,28 @@ class TestRbObject: XCTestCase {
 
             try runGC()
             XCTAssertEqual(initialMTCount, try getMethodsTestHeapCount())
+        }
+    }
+
+    func testObjectCreationWithBlock() throws {
+        doErrorFree {
+            if let obj = RbObject(ofClass: "NotAClass", retainBlock: false, blockCall: { args in .nilObject }) {
+                XCTFail("Managed to create NotAClass instance: \(obj)")
+            }
+
+            if let obj = RbObject(ofClass: "NotAClass2", blockCall: { args in .nilObject }) {
+                XCTFail("Managed to create NotAClass2 instance: \(obj)")
+            }
+
+            try Ruby.require(filename: Helpers.fixturePath("methods.rb"))
+
+            guard let obj = RbObject(ofClass: "TestBlockClass", blockCall: { args in 22 }) else {
+                XCTFail("Can't create `TestBlockClass`")
+                return
+            }
+
+            let val = try obj.call("value")
+            XCTAssertEqual(22, val)
         }
     }
 }

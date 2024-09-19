@@ -50,11 +50,7 @@ internal enum RbClassBinding {
 
     /// One-time init to register the callbacks
     private static let initOnce: Void = {
-        // Swift 6 breakage :(
-        rbg_register_object_binding_callbacks(
-            { rbbinding_alloc(className: $0) },
-            { rbbinding_free(className: $0, instance: $1) }
-        )
+        rbg_register_object_binding_callbacks(rbbinding_alloc, rbbinding_free)
     }()
 
     private static let bindings = LockedDictionary<String, any RbBoundClassProtocol>()
@@ -168,7 +164,7 @@ extension RbGateway {
     ///           module. `RbError.rubyException(...)` if Ruby is unhappy with the definition,
     ///           for example when the class already exists with a different parent.
     @discardableResult
-    public func defineClass<SwiftPeer: AnyObject>(
+    public func defineClass<SwiftPeer: AnyObject & Sendable>(
                     _ name: String,
                     under: RbObject? = nil,
                     initializer: @escaping () -> SwiftPeer) throws -> RbObject {

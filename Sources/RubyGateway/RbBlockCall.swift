@@ -64,9 +64,9 @@ public typealias RbBlockCallback = ([RbObject]) throws -> RbObject
 /// `RbObjectAccess.call(_:args:kwArgs:blockRetention:blockCall:)`, RubyGateway
 /// needs some help to understand how Ruby will use the closure.
 ///
-/// The easiest thing to get wrong is using the default of `.none` when
-/// Ruby retains the block for use later.  This causes a hard crash in
-/// `RbBlockContext.from(raw:)` when Ruby tries to call the block.
+/// The easiest thing to get wrong is using `.none` when Ruby retains the
+/// block for use later.  This causes a hard crash in `RbBlockContext.from(raw:)`
+/// when Ruby tries to call the block.
 public enum RbBlockRetention {
     /// Do not retain the closure.  The default, appropriate when the block
     /// is used only during execution of the method it is passed to.  For
@@ -149,13 +149,8 @@ private func rbproc_value_block_callback(context: VALUE,
 internal enum RbBlock {
     /// One-time init to register the callbacks
     private static let initOnce: Void = {
-        // Swift 6 breakage, 'func's apparently don't work for C functions
-        rbg_register_pvoid_block_proc_callback { a, b, c, d, e in
-            rbproc_pvoid_block_callback(rawContext: a, argc: b, argv: c, blockArg: d, returnValue: e)
-        }
-        rbg_register_value_block_proc_callback { a, b, c, d, e in
-            rbproc_value_block_callback(context: a, argc: b, argv: c, blockArg: d, returnValue: e)
-        }
+        rbg_register_pvoid_block_proc_callback(rbproc_pvoid_block_callback)
+        rbg_register_value_block_proc_callback(rbproc_value_block_callback)
     }()
 
     /// Call a method on an object passing a Swift closure as its block
