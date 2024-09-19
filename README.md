@@ -172,6 +172,10 @@ For macOS, if you are happy to use the system Ruby then you just need to include
 the RubyGateway framework as a dependency.  If you are building on Linux or want
 to use a different Ruby then you also need to configure CRuby.
 
+## Linux
+
+As of Swift 6, Apple have broken Swift PM such that you must pass "-Xcc -fmodules" to build the project.  Check the CI invocation for an example.
+
 ### Getting the framework
 
 Carthage for macOS:
