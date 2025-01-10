@@ -21,6 +21,9 @@
 typedef unsigned long VALUE;
 typedef VALUE ID;
 
+/// Call `RUBY_INIT_STACK`
+void rbg_RUBY_INIT_STACK(void);
+
 /// Safely call `rb_load` and report exception status.
 void rbg_load_protect(VALUE fname, int wrap, int * _Nonnull status);
 

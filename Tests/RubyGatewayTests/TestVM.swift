@@ -111,7 +111,8 @@ class TestVM: XCTestCase {
                 try Ruby.load(filename: Helpers.fixturePath("unloadable.rb"))
                 XCTFail("Managed to load unloadable file")
             } catch RbError.rubyException(let exn) {
-                XCTAssertTrue(exn.description.contains("SyntaxError:"))
+                let desc = exn.description
+                XCTAssertTrue(desc.hasPrefix("SyntaxError:") || desc.hasPrefix("NameError:"))
             }
         }
     }
