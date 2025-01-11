@@ -58,8 +58,8 @@ jobs:
           xcodebuild test -scheme RubyGateway-Package
 
   linux:
-    name: ubuntu latest
-    runs-on: ubuntu-latest
+    name: ubuntu
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
