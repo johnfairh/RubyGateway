@@ -13,7 +13,7 @@ Swift Package Manager.
 * Users install just one thing (RubyGateway)
   * Users do not need any weird flags or settings.
 * Users get just the RubyGateway interface
-* Support Xcode/Carthage, SwiftPM (because Linux), CocoaPods.
+* Support Xcode/Carthage, SwiftPM (because Linux)
 
 Haven't managed to meet all these goals :-)
 
@@ -36,10 +36,6 @@ RubyGatewayHelpers is a static lib, RubyGateway depends on them both like
 the Xcode version.
 
 Everything is fine.
-
-## CocoaPods
-
-Too broken and poorly understood in 2024; RIP.
 
 ## Ruby 3 notes
 

@@ -1,3 +1,7 @@
+## 6.1.0 -- 11th January 2025
+
+* Support Ruby 3.4
+
 ## 6.0.0 - 19th September 2024
 
 Swift 6 and concurrency support

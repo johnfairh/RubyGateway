@@ -184,7 +184,7 @@ github "johnfairh/RubyGateway"
 
 Swift package manager for macOS or Linux:
 ```
-.package(url: "https://github.com/johnfairh/RubyGateway", from: "6.0.0")
+.package(url: "https://github.com/johnfairh/RubyGateway", from: "6.1.0")
 ```
 
 ### Configuring CRuby

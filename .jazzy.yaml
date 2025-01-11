@@ -1,7 +1,7 @@
 author: John Fairhurst
 author_url: http://github.com/johnfairh
 module: RubyGateway
-module_version: 6.0.0
+module_version: 6.1.0
 copyright: Distributed under the MIT license.  Maintained by [John Fairhurst](mailto:johnfairh@gmail.com).
 readme: README.md
 github_url: https://github.com/johnfairh/RubyGateway
@@ -15,8 +15,10 @@ products:
 xcodebuild_arguments:
     - "-project"
     - "RubyGateway.xcodeproj"
-    - "-target"
-    - "RubyGateway"
+    - "-scheme"
+    - "RubyGateway-Package"
+    - "-destination"
+    - "platform=OS X,arch=x86_64"
 sdk: macosx
 theme: fw2020
 documentation: SourceDocs/*md
