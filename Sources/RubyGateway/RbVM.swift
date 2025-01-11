@@ -109,6 +109,28 @@ final class RbVM : @unchecked Sendable {
             try RbError.raise(error: .setup("Has already been done (via C API?) for this process."))
         }
 
+        // What is going on with init_stack
+        // --------------------------------
+        // Line added for Ruby 3.4 because of ruby/ruby:9505 that took it out of `ruby_setup()`.
+        //
+        // This stack frame we're in now isn't very interesting except for defining the native thread
+        // that will become the Ruby "main thread".  Here is why it's OK to call this macro:
+        //
+        // `RUBY_INIT_STACK` declares a ‘stack’ variable and calls `vm.c:ruby_init_stack()` which
+        // stores that variable address in `native_main_thread_stack_top`, the only place that is set.
+        //
+        // `eval.c:ruby_setup()` -> `vm.c:Init_BareVM()` is the only place that refers to the static
+        // and passes to `thread.c:ruby_thread_init_stack()` for the current thread, which for platforms
+        // we care about[1] leads to `thread_pthread.c:native_thread_init_stack()`.  We only care about the
+        // “main thread” use-case at this point and go to`thread_pthread.c:native_thread_init_main_thread_stack()`.
+        // We only care about `MAINSTACKADDR_AVAILABLE` and so do not use the address to figure the
+        // stack layout for GC.  Then there is a sanity check which is the only place the address is
+        // used - as long as it is within the stack as reported by pthreads then we are good.
+        //
+        // [1] Brief eyeball the win32 version looks OK too.
+        //
+        rbg_RUBY_INIT_STACK()
+
         let setup_rc = ruby_setup()
         guard setup_rc == 0 else {
             try RbError.raise(error: .setup("ruby_setup() failed: \(setup_rc)"))

@@ -54,3 +54,8 @@ int rbg_qundef(void) { return RUBY_Qundef; }
 // These become inlines in Ruby 3 that get imported
 int rbg_RB_TEST(VALUE v) { return RB_TEST(v); }
 int rbg_RB_NIL_P(VALUE v) { return RB_NIL_P(v); }
+
+// See comment on call in RbVM.swift
+void rbg_RUBY_INIT_STACK(void) {
+    RUBY_INIT_STACK;
+}
