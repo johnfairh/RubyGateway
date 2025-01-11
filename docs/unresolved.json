@@ -325,10 +325,6 @@
   },
   {
     "context" : "User Guide",
-    "name" : "Task"
-  },
-  {
-    "context" : "User Guide",
     "name" : "TestRbObject.testStackGc()"
   },
   {

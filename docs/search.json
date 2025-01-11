@@ -106,20 +106,6 @@
     "name" : "rubyObject",
     "parent_name" : "Int"
   },
-  "extensions\/int8.html?swift" : {
-    "abstract" : "An 8-bit signed integer value type.",
-    "name" : "Int8"
-  },
-  "extensions\/int8.html?swift#init_24" : {
-    "abstract" : "Try to get an 8-bit signed integer representation of an RbObject.",
-    "name" : "init(_:)",
-    "parent_name" : "Int8"
-  },
-  "extensions\/int8.html?swift#rubyobject23" : {
-    "abstract" : "A Ruby object for the number.",
-    "name" : "rubyObject",
-    "parent_name" : "Int8"
-  },
   "extensions\/int16.html?swift" : {
     "abstract" : "A 16-bit signed integer value type.",
     "name" : "Int16"
@@ -161,6 +147,20 @@
     "abstract" : "A Ruby object for the number.",
     "name" : "rubyObject",
     "parent_name" : "Int64"
+  },
+  "extensions\/int8.html?swift" : {
+    "abstract" : "An 8-bit signed integer value type.",
+    "name" : "Int8"
+  },
+  "extensions\/int8.html?swift#init_24" : {
+    "abstract" : "Try to get an 8-bit signed integer representation of an RbObject.",
+    "name" : "init(_:)",
+    "parent_name" : "Int8"
+  },
+  "extensions\/int8.html?swift#rubyobject23" : {
+    "abstract" : "A Ruby object for the number.",
+    "name" : "rubyObject",
+    "parent_name" : "Int8"
   },
   "extensions\/range.html?swift" : {
     "abstract" : "These methods are available only when the range Bound type conforms to\nRbObjectConvertible.",
@@ -218,20 +218,6 @@
     "name" : "rubyObject",
     "parent_name" : "UInt"
   },
-  "extensions\/uint8.html?swift" : {
-    "abstract" : "An 8-bit unsigned integer value type.",
-    "name" : "UInt8"
-  },
-  "extensions\/uint8.html?swift#init_20" : {
-    "abstract" : "Try to get an 8-bit unsigned integer representation of an RbObject.",
-    "name" : "init(_:)",
-    "parent_name" : "UInt8"
-  },
-  "extensions\/uint8.html?swift#rubyobject19" : {
-    "abstract" : "A Ruby object for the number.",
-    "name" : "rubyObject",
-    "parent_name" : "UInt8"
-  },
   "extensions\/uint16.html?swift" : {
     "abstract" : "A 16-bit unsigned integer value type.",
     "name" : "UInt16"
@@ -273,6 +259,20 @@
     "abstract" : "A Ruby object for the number.",
     "name" : "rubyObject",
     "parent_name" : "UInt64"
+  },
+  "extensions\/uint8.html?swift" : {
+    "abstract" : "An 8-bit unsigned integer value type.",
+    "name" : "UInt8"
+  },
+  "extensions\/uint8.html?swift#init_20" : {
+    "abstract" : "Try to get an 8-bit unsigned integer representation of an RbObject.",
+    "name" : "init(_:)",
+    "parent_name" : "UInt8"
+  },
+  "extensions\/uint8.html?swift#rubyobject19" : {
+    "abstract" : "A Ruby object for the number.",
+    "name" : "rubyObject",
+    "parent_name" : "UInt8"
   },
   "other-apis.html?swift#rbblockcallback" : {
     "abstract" : "The type of a block implemented in Swift.",
@@ -879,13 +879,13 @@
     "name" : "include(module:)",
     "parent_name" : "RbObject"
   },
-  "types\/rbobject13.html?swift#init_4" : {
-    "abstract" : "Create an RbObject from a Swift type.",
+  "types\/rbobject13.html?swift#init_26" : {
+    "abstract" : "Create another Swift reference to an existing RbObject.",
     "name" : "init(_:)",
     "parent_name" : "RbObject"
   },
-  "types\/rbobject13.html?swift#init_26" : {
-    "abstract" : "Create another Swift reference to an existing RbObject.",
+  "types\/rbobject13.html?swift#init_4" : {
+    "abstract" : "Create an RbObject from a Swift type.",
     "name" : "init(_:)",
     "parent_name" : "RbObject"
   },
@@ -1187,14 +1187,14 @@
     "name" : "index(after:)",
     "parent_name" : "RbObjectCollection"
   },
-  "types\/rbobjectcollection.html?swift#init_27" : {
-    "abstract" : "Create a collection from an existing Ruby array object.",
-    "name" : "init(_:)",
-    "parent_name" : "RbObjectCollection"
-  },
   "types\/rbobjectcollection.html?swift#init2" : {
     "abstract" : "Create an empty collection - an empty Ruby array.",
     "name" : "init()",
+    "parent_name" : "RbObjectCollection"
+  },
+  "types\/rbobjectcollection.html?swift#init_27" : {
+    "abstract" : "Create a collection from an existing Ruby array object.",
+    "name" : "init(_:)",
     "parent_name" : "RbObjectCollection"
   },
   "types\/rbobjectcollection.html?swift#replacesubrange_with" : {
