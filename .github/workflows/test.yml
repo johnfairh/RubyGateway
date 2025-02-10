@@ -52,6 +52,10 @@ jobs:
           files: ./coverage.lcov
           token: ${{ secrets.CODECOV_TOKEN }}
           verbose: true
+      - name: Samples
+        run: |
+          export PKG_CONFIG_PATH=$(pwd)/Packages/CRuby:$PKG_CONFIG_PATH
+          swift run RubyThreadSample
       - name: Tests (Xcodebuild)
         run: |
           CRuby/cfg-cruby --mode custom --path `ruby -e 'puts RbConfig::TOPDIR'`

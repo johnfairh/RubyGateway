@@ -530,15 +530,22 @@ Outside of the very first time, it's not possible to call Ruby on a random
 thread created either directly by your program or by the Swift concurrency /
 Dispatch runtime.
 
-A reasonable pattern is to call some Ruby method during system startup on
-the Swift `@MainActor` and then treat Ruby calls as requiring isolation to
-that actor.  If you take calls _from_ Ruby on Ruby-created threads, and
-servicing these requires access to your Swift concurrency executors, then you
-have to start a `Task` to do this, blocking & then resuming the (Ruby) thread
-while that work happens.  You have to be really careful with the GVL here to
-avoid deadlocks or worse.
+The simplest pattern is to call some Ruby method during system startup on
+the Swift `MainActor` and then treat Ruby calls as requiring isolation to
+that actor.
 
-`RbThread` provides some static helpers for creating Ruby threads and
+Depending on the Ruby you're using, this may end up blocking your UI and so on.
+To avoid this, create a dedicated thread for Ruby and be sure to call Ruby only
+on that thread.  The easiest way to do this with Swift concurrency is to associate
+an executor with a thread and then your Ruby-calling actors with that executor.
+There's a sample of this pattern in the `Sources/RubyThreadSample` target.
+
+If you take calls _from_ Ruby on Ruby-created threads, and servicing these requires
+access to your Swift concurrency executors, then you have to start a `Task` to do
+this, blocking & then resuming the (Ruby) thread while that work happens.  You have
+to be really careful with the GVL here to avoid deadlocks or worse.
+
+`RbThread` provides some static helpers for creating further Ruby threads and
 relinquishing the GVL: consult the internet for further guidance.
 
 ## Caveats and Gotchas

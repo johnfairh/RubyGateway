@@ -146,6 +146,8 @@
 		02A1D66C2BD1173700B07523 /* RubyGateway.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = RubyGateway.xcconfig; sourceTree = "<group>"; };
 		02ABDBA3216CF7BF00AFDB64 /* RbMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbMethod.swift; sourceTree = "<group>"; };
 		02ABDBA5216D060300AFDB64 /* TestMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMethods.swift; sourceTree = "<group>"; };
+		02C143F52D5A0415009C99CF /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		02C143F62D5A0415009C99CF /* RubyExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RubyExecutor.swift; sourceTree = "<group>"; };
 		02C5C85020ECD87E007138A2 /* RbComplex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbComplex.swift; sourceTree = "<group>"; };
 		02C5C85220ECE51A007138A2 /* TestComplex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestComplex.swift; sourceTree = "<group>"; };
 		02C5C85420F0CD24007138A2 /* RbRational.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RbRational.swift; sourceTree = "<group>"; };
@@ -223,6 +225,16 @@
 			);
 			name = Fixtures;
 			path = Tests/RubyGatewayTests/Fixtures;
+			sourceTree = SOURCE_ROOT;
+		};
+		02C143F42D5A03C4009C99CF /* RubyThreadSample */ = {
+			isa = PBXGroup;
+			children = (
+				02C143F52D5A0415009C99CF /* main.swift */,
+				02C143F62D5A0415009C99CF /* RubyExecutor.swift */,
+			);
+			name = RubyThreadSample;
+			path = Sources/RubyThreadSample;
 			sourceTree = SOURCE_ROOT;
 		};
 		OBJ_12 /* Tests */ = {
@@ -304,6 +316,7 @@
 			children = (
 				OBJ_8 /* RubyGateway */,
 				022F3ABC2036D58C009E69BE /* RubyGatewayHelpers */,
+				02C143F42D5A03C4009C99CF /* RubyThreadSample */,
 			);
 			name = Sources;
 			sourceTree = SOURCE_ROOT;
@@ -419,7 +432,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					022F3AB62036D4DD009E69BE = {
 						CreatedOnToolsVersion = 9.2;

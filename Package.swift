@@ -12,7 +12,10 @@ let package = Package(
     products: [
         .library(
             name: "RubyGateway",
-            targets: ["RubyGateway", "RubyGatewayHelpers"])
+            targets: ["RubyGateway", "RubyGatewayHelpers"]),
+        .executable(
+            name: "RubyThreadSample",
+            targets: ["RubyThreadSample"])
     ],
     dependencies: [
         .package(url: "https://github.com/johnfairh/CRuby", from: "2.1.0"),
@@ -32,6 +35,9 @@ let package = Package(
         .testTarget(
             name: "RubyGatewayTests",
             dependencies: ["RubyGateway"],
-            exclude: ["Fixtures"])
+            exclude: ["Fixtures"]),
+        .executableTarget(
+            name: "RubyThreadSample",
+            dependencies: ["RubyGateway"])
     ]
 )
