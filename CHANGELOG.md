@@ -1,3 +1,9 @@
+## 6.1.1 -- 10th February 2025
+
+* More robust error handling (#55, #58)
+* Stop calling `ruby_cleanup` at exit on thread 0 (#56)
+* Add sample code showing how to bind ruby to a non-main thread
+
 ## 6.1.0 -- 11th January 2025
 
 * Support Ruby 3.4
