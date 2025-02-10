@@ -60,7 +60,7 @@ print(html)
 // Create an object.  Use keyword arguments with initializer
 let student = RbObject(ofClass: "Academy::Student", kwArgs: ["name": "barney"])!
 
-// Acess an attribute
+// Access an attribute
 print("Name is \(student.get("name"))")
 
 // Fix their name by poking an ivar
@@ -158,7 +158,7 @@ log(object2_to_log, priority: 2)
 ## Requirements
 
 * Swift 6.0 or later, from swift.org or Xcode 16+
-* macOS (tested on 14.1) or Linux (tested on Ubuntu Jammy)
+* macOS (tested on 15.3) or Linux (tested on Ubuntu Jammy)
 * Ruby 2.6 or later including development files:
   * For macOS, these come with Xcode.
   * For Linux you may need to install a -dev package depending on how your Ruby
