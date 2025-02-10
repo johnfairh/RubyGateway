@@ -15,9 +15,8 @@ internal import RubyGatewayHelpers
 /// instance `Ruby`.  Among other things this permits a dynamic member lookup
 /// programming style.
 ///
-/// The Ruby VM is initialized when the object is first accessed and is
-/// automatically stopped when the process ends.  The VM can be manually shut
-/// down before process exit by calling `RbGateway.cleanup()` but once this has
+/// The Ruby VM is initialized when the object is first accessed.  The VM can be manually
+/// shut down before process exit by calling `RbGateway.cleanup()` but once this has
 /// been done the VM cannot be restarted and subsequent calls to RubyGateway
 /// services will fail.
 ///
@@ -71,16 +70,14 @@ public final class RbGateway: RbObjectAccess, @unchecked Sendable {
     func setup() throws {
         if try RbGateway.vm.setup() {
             try! require(filename: "set")
-            // Work around Swift not calling static deinit...
-            atexit { RbGateway.vm.cleanup() }
         }
     }
 
     /// Explicitly shut down Ruby and release resources.
     /// This includes calling `END{}` code and procs registered by `Kernel.#at_exit`.
     ///
-    /// You generally don't need to call this: it happens automatically as part of
-    /// process exit.
+    /// You generally don't need to call this because most code does not rely on a clean process
+    /// exit.
     ///
     /// Once called you cannot continue to use Ruby in this process: the VM cannot
     /// be re-setup.

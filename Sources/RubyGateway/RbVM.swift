@@ -82,13 +82,6 @@ final class RbVM : @unchecked Sendable {
         }
     }
 
-    /// Shut down Ruby at process exit if possible
-    /// (Swift seems to not call this for static-scope objects so we don't get here
-    /// ... there's a compensating atexit() in `RbGateway.setup()`.)
-    deinit {
-        cleanup()
-    }
-
     /// Has Ruby ever been set up in this process?
     private var setupEver: Bool {
         rb_mKernel != 0
