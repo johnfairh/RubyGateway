@@ -214,7 +214,7 @@ public struct RbException: CustomStringConvertible, Error {
 
     /// The exception's message
     public var description: String {
-        let exceptionClass = try! exception.get("class")
+        let exceptionClass = (try? exception.get("class")) ?? "(Unknown Ruby exception type)"
         return "\(exceptionClass): \(exception)"
     }
 }
