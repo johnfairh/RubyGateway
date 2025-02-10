@@ -104,10 +104,6 @@
     "name" : "@@"
   },
   {
-    "context" : "User Guide",
-    "name" : "@MainActor"
-  },
-  {
     "context" : "init(ofClass:args:kwArgs:retainBlock:blockCall:)",
     "name" : "@escapable"
   },
@@ -220,6 +216,10 @@
     "name" : "Main APIs"
   },
   {
+    "context" : "User Guide",
+    "name" : "MainActor"
+  },
+  {
     "context" : "defineModule(_:under:)",
     "name" : "Math::Advanced"
   },
@@ -314,6 +314,10 @@
   {
     "context" : "io",
     "name" : "SIGVTALRM"
+  },
+  {
+    "context" : "User Guide",
+    "name" : "Sources\/RubyThreadSample"
   },
   {
     "context" : "description",

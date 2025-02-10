@@ -534,11 +534,12 @@ The simplest pattern is to call some Ruby method during system startup on
 the Swift `MainActor` and then treat Ruby calls as requiring isolation to
 that actor.
 
-Depending on the Ruby you're using, this may end up blocking your UI and so on.
-To avoid this, create a dedicated thread for Ruby and be sure to call Ruby only
-on that thread.  The easiest way to do this with Swift concurrency is to associate
-an executor with a thread and then your Ruby-calling actors with that executor.
-There's a sample of this pattern in the `Sources/RubyThreadSample` target.
+Depending on the actual Ruby code you run, this may end up blocking your UI and
+so on.  To avoid this, create a dedicated thread for Ruby and be sure to call
+Ruby only on that thread.  The easiest way to do this with Swift concurrency is
+to associate an executor with a thread and then your Ruby-calling actors with
+that executor.  There's a sample of this pattern in the `Sources/RubyThreadSample`
+target.
 
 If you take calls _from_ Ruby on Ruby-created threads, and servicing these requires
 access to your Swift concurrency executors, then you have to start a `Task` to do

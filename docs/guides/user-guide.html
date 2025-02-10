@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/fw2020.css">
     
     
-   <title>User Guide - RubyGateway 6.1.0 docs</title>
+   <title>User Guide - RubyGateway 6.1.1 docs</title>
     
   </head>
   <body class="j2-swift " data-root-path="./../" data-doc-path="guides/user-guide.html" data-assets-path="../">
@@ -31,7 +31,7 @@
     
     <a href="../index.html">
     
-    RubyGateway 6.1.0 docs</a>
+    RubyGateway 6.1.1 docs</a>
   </div>
   
   <span class="navbar-text j2-coverage fw-slightly-bold small d-none d-lg-inline-block me-2">(100% documented)</span>
@@ -1159,14 +1159,20 @@ then any other threads created by Ruby.</p>
 <p>Outside of the very first time, it’s not possible to call Ruby on a random
 thread created either directly by your program or by the Swift concurrency /
 Dispatch runtime.</p>
-<p>A reasonable pattern is to call some Ruby method during system startup on
-the Swift <code>@MainActor</code> and then treat Ruby calls as requiring isolation to
-that actor.  If you take calls <em>from</em> Ruby on Ruby-created threads, and
-servicing these requires access to your Swift concurrency executors, then you
-have to start a <a href="https://developer.apple.com/documentation/swift/task?language=swift" class="j2-swift"><code>Task</code></a><a href="https://developer.apple.com/documentation/swift/task?language=objc" class="j2-objc j2-secondary"><code>Task</code></a> to do this, blocking &amp; then resuming the (Ruby) thread
-while that work happens.  You have to be really careful with the GVL here to
-avoid deadlocks or worse.</p>
-<p><a href="../types/rbthread.html?swift"><code>RbThread</code></a> provides some static helpers for creating Ruby threads and
+<p>The simplest pattern is to call some Ruby method during system startup on
+the Swift <code>MainActor</code> and then treat Ruby calls as requiring isolation to
+that actor.</p>
+<p>Depending on the actual Ruby code you run, this may end up blocking your UI and
+so on.  To avoid this, create a dedicated thread for Ruby and be sure to call
+Ruby only on that thread.  The easiest way to do this with Swift concurrency is
+to associate an executor with a thread and then your Ruby-calling actors with
+that executor.  There’s a sample of this pattern in the <code>Sources/RubyThreadSample</code>
+target.</p>
+<p>If you take calls <em>from</em> Ruby on Ruby-created threads, and servicing these requires
+access to your Swift concurrency executors, then you have to start a <a href="https://developer.apple.com/documentation/swift/task?language=swift" class="j2-swift"><code>Task</code></a><a href="https://developer.apple.com/documentation/swift/task?language=objc" class="j2-objc j2-secondary"><code>Task</code></a> to do
+this, blocking &amp; then resuming the (Ruby) thread while that work happens.  You have
+to be really careful with the GVL here to avoid deadlocks or worse.</p>
+<p><a href="../types/rbthread.html?swift"><code>RbThread</code></a> provides some static helpers for creating further Ruby threads and
 relinquishing the GVL: consult the internet for further guidance.</p>
 <h2 class="j2-anchor j2-heading heading" id="caveats-and-gotchas">
 <span data-anchor-id="caveats-and-gotchas">

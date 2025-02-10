@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/fw2020.css">
     
     
-   <title>Main APIs - RubyGateway 6.1.0 docs</title>
+   <title>Main APIs - RubyGateway 6.1.1 docs</title>
     
   </head>
   <body class="j2-swift " data-root-path="./" data-doc-path="main-apis.html" data-assets-path="">
@@ -31,7 +31,7 @@
     
     <a href="index.html">
     
-    RubyGateway 6.1.0 docs</a>
+    RubyGateway 6.1.1 docs</a>
   </div>
   
   <span class="navbar-text j2-coverage fw-slightly-bold small d-none d-lg-inline-block me-2">(100% documented)</span>
@@ -706,9 +706,8 @@ classes, modules, and functions.</p>
 <p>You cannot instantiate this type.  Instead RubyGateway exports a public
 instance <code>Ruby</code>.  Among other things this permits a dynamic member lookup
 programming style.</p>
-<p>The Ruby VM is initialized when the object is first accessed and is
-automatically stopped when the process ends.  The VM can be manually shut
-down before process exit by calling <a href="types/rbgateway1.html?swift#cleanup"><code>RbGateway.cleanup()</code></a> but once this has
+<p>The Ruby VM is initialized when the object is first accessed.  The VM can be manually
+shut down before process exit by calling <a href="types/rbgateway1.html?swift#cleanup"><code>RbGateway.cleanup()</code></a> but once this has
 been done the VM cannot be restarted and subsequent calls to RubyGateway
 services will fail.</p>
 <p>The loadpath (where <code>require</code> looks) is set to the <code>lib/ruby</code> directories
@@ -778,7 +777,7 @@ and <a href="types/rbobject13.html?swift#definesingletonmethod_argsspecbody"><co
             </span>
             
             
-            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbGateway.swift#L61-L170">Show on GitHub</a></span>
+            <span class="j2-item-nav-item"><a href="https://github.com/johnfairh/RubyGateway/tree/main/Sources/RubyGateway/RbGateway.swift#L60-L167">Show on GitHub</a></span>
             
           </nav>
         </div>
