@@ -570,7 +570,7 @@ class TestMethods: XCTestCase {
     func testUserGuideFunctionExamples() {
         struct Logger {
             static nonisolated(unsafe) var logCount = 0
-            static nonisolated(unsafe) func log(message: String?, priority: Int? = nil) {
+            static nonisolated func log(message: String?, priority: Int? = nil) {
                 logCount = logCount + 1
             }
         }
