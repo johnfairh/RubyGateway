@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        xcode: ['16.3']
+        xcode: ['26.1.0-beta']
     steps:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
@@ -80,7 +80,7 @@ jobs:
           persist-credentials: false
       - uses: vapor/swiftly-action@v0.2
         with:
-          toolchain: "6.1"
+          toolchain: "6.2"
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.rby.short }}
