@@ -7,6 +7,7 @@
 
 import XCTest
 import CRuby
+import Foundation
 @testable /* Qtrue */ import RubyGateway
 
 /// Message send tests
@@ -224,7 +225,7 @@ class TestCallable: XCTestCase {
         doErrorFree {
             let obj = getNewMethodTest()
 
-            var counter = 0
+            nonisolated(unsafe) var counter = 0
 
             try obj.call("store_block", blockRetention: .self) { args in
                 counter += 1
@@ -247,3 +248,4 @@ class TestCallable: XCTestCase {
         }
     }
 }
+

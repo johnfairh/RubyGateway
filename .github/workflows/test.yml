@@ -11,11 +11,11 @@ on:
 jobs:
   macos:
     name: macOS Xcode Toolchain
-    runs-on: macos-15
+    runs-on: macos-26
     strategy:
       fail-fast: false
       matrix:
-        xcode: ['26.1']
+        xcode: ['26.5']
     steps:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
@@ -69,6 +69,7 @@ jobs:
       matrix:
         rby:
           - short: '2.7'
+            rouge: '-v 4.7.0'
           - short: '3.4'
           - short: '4.0'
     steps:
@@ -77,13 +78,13 @@ jobs:
           persist-credentials: false
       - uses: vapor/swiftly-action@v0.2
         with:
-          toolchain: "6.2"
+          toolchain: "6.3"
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.rby.short }}
       - name: Ruby
         run: |
-          gem install rouge
+          gem install rouge ${{ matrix.rby.rouge }}
           ruby --version
           which ruby
           echo "RB_PREFIX=$(ruby -e 'puts RbConfig::TOPDIR')" >> $GITHUB_ENV

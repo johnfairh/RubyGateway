@@ -9,6 +9,9 @@ import PackageDescription
 
 let package = Package(
     name: "RubyGateway",
+    platforms: [
+        .macOS("15.0"),
+    ],
     products: [
         .library(
             name: "RubyGateway",
