@@ -94,7 +94,7 @@ extension RbFailableAccess {
                      args: [(any RbObjectConvertible)?] = [],
                      kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:],
                      blockRetention: RbBlockRetention,
-                     blockCall: @escaping @Sendable RbBlockCallback) -> RbObject? {
+                     blockCall: @escaping RbSendableBlockCallback) -> RbObject? {
         try? access.call(method, args: args, kwArgs: kwArgs, blockRetention: blockRetention, blockCall: blockCall)
     }
 
@@ -166,7 +166,7 @@ extension RbFailableAccess {
                      args: [(any RbObjectConvertible)?] = [],
                      kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:],
                      blockRetention: RbBlockRetention = .none,
-                     blockCall: @escaping @Sendable RbBlockCallback) -> RbObject? {
+                     blockCall: @escaping RbSendableBlockCallback) -> RbObject? {
         try? access.call(symbol: symbol, args: args, kwArgs: kwArgs, blockRetention: blockRetention, blockCall: blockCall)
     }
 
