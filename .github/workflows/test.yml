@@ -69,6 +69,7 @@ jobs:
       matrix:
         rby:
           - short: '2.7'
+            rouge: '-v 4.7.0'
           - short: '3.4'
           - short: '4.0'
     steps:
@@ -83,7 +84,7 @@ jobs:
           ruby-version: ${{ matrix.rby.short }}
       - name: Ruby
         run: |
-          gem install rouge
+          gem install rouge ${{ matrix.rby.rouge }}
           ruby --version
           which ruby
           echo "RB_PREFIX=$(ruby -e 'puts RbConfig::TOPDIR')" >> $GITHUB_ENV
