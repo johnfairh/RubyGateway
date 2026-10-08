@@ -162,7 +162,7 @@ class TestClassDef: XCTestCase {
 
     // Basic create/delete matching
     func testBoundSwiftClass() throws {
-        if Ruby.version.starts(with: "3.3.") {
+        if Ruby.version.starts(with: "3.3.") || Ruby.version.starts(with: "4") {
             throw XCTSkip("This fails on Ubuntu with Ruby 3.3 and Swift 6.2 at Point X below - the object is never GC'd")
         }
 

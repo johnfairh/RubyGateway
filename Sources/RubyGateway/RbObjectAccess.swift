@@ -329,7 +329,7 @@ extension RbObjectAccess {
                      args: [(any RbObjectConvertible)?] = [],
                      kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:],
                      blockRetention: RbBlockRetention,
-                     blockCall: @escaping @Sendable RbBlockCallback) throws -> RbObject {
+                     blockCall: @escaping RbSendableBlockCallback) throws -> RbObject {
         try Ruby.setup()
         let methodId = try Ruby.getID(for: methodName)
         return try doCall(id: methodId,
@@ -433,7 +433,7 @@ extension RbObjectAccess {
                      args: [(any RbObjectConvertible)?] = [],
                      kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:],
                      blockRetention: RbBlockRetention,
-                     blockCall: @escaping @Sendable RbBlockCallback) throws -> RbObject {
+                     blockCall: @escaping RbSendableBlockCallback) throws -> RbObject {
         try Ruby.setup()
         return try symbol.rubyObject.withSymbolId { methodId in
             try doCall(id: methodId, args: args, kwArgs: kwArgs, blockRetention: blockRetention, blockCall: blockCall)

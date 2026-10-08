@@ -14,7 +14,7 @@ class TestProcs: XCTestCase {
     /// Manual proc creation
     func testManualProc() {
         doErrorFree {
-            var procHappened = false
+            nonisolated(unsafe) var procHappened = false
 
             guard let proc = (RbObject(ofClass: "Proc", retainBlock: true) { args in
                 procHappened = true

@@ -275,7 +275,7 @@ extension RbObject {
                              args: [(any RbObjectConvertible)?] = [],
                              kwArgs: KeyValuePairs<String, (any RbObjectConvertible)?> = [:],
                              retainBlock: Bool,
-                             blockCall: @escaping @Sendable RbBlockCallback) {
+                             blockCall: @escaping RbSendableBlockCallback) {
         let retention: RbBlockRetention = retainBlock ? .returned : .none
         guard let obj = try? Ruby.get(className).call("new",
                                                       args: args, kwArgs: kwArgs,
@@ -306,7 +306,6 @@ extension RbObject {
         guard let obj = withoutActuallyEscaping(blockCall, do: { newBlockCall in
             try? Ruby.get(className).call("new",
                                           args: args, kwArgs: kwArgs,
-                                          blockRetention: .none,
                                           blockCall: newBlockCall)
         }) else {
             return nil
@@ -319,7 +318,7 @@ extension RbObject {
     /// - parameter blockCall: The callback for the proc.
     /// - warning: You must not allow this `RbObject` to be deallocated before Ruby has
     ///            finished with the block, or the process will crash when Ruby calls it.
-    public convenience init(blockCall: @escaping @Sendable RbBlockCallback) {
+    public convenience init(blockCall: @escaping RbSendableBlockCallback) {
         if let obj = try? Ruby.get("Proc").call("new", blockRetention: .returned, blockCall: blockCall) {
             self.init(obj)
         } else {

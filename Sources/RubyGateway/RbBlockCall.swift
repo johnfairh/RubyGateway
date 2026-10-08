@@ -56,7 +56,15 @@ internal import RubyGatewayHelpers
 ///
 /// See `RbObjectAccess.call(_:args:kwArgs:blockRetention:blockCall:)` and
 /// `RbObject.init(blockCall:)`.
+///
+/// See `RbSendableBlockCallback` used in situations where the block is retained and called
+/// outside the context of a method call.
 public typealias RbBlockCallback = ([RbObject]) throws -> RbObject
+
+/// The type of a block implemented in Swift -- Sendable version
+///
+/// See `RbBlockCallback`.
+public typealias RbSendableBlockCallback = @Sendable ([RbObject]) throws -> RbObject
 
 /// Control over how Swift closures passed as blocks are retained.
 ///
