@@ -1,7 +1,7 @@
 author: John Fairhurst
 author_url: http://github.com/johnfairh
 module: RubyGateway
-module_version: 6.1.1
+module_version: 6.2.0
 copyright: Distributed under the MIT license.  Maintained by [John Fairhurst](mailto:johnfairh@gmail.com).
 readme: README.md
 github_url: https://github.com/johnfairh/RubyGateway
@@ -53,6 +53,7 @@ custom_categories:
       abstract: These types are used less often than those in [`Main APIs`](Main%20APIs.html).
       children:
           - RbBlockCallback
+          - RbSendableBlockCallback
           - RbBlockRetention
           - RbBreak
           - RbProc

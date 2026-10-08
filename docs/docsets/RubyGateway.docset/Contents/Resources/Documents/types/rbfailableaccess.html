@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/fw2020.css">
     
     
-   <title>RbFailableAccess - RubyGateway 6.1.1 docs</title>
+   <title>RbFailableAccess - RubyGateway 6.2.0 docs</title>
     
   </head>
   <body class="j2-swift " data-root-path="./../" data-doc-path="types/rbfailableaccess.html" data-assets-path="../">
@@ -31,7 +31,7 @@
     
     <a href="../index.html">
     
-    RubyGateway 6.1.1 docs</a>
+    RubyGateway 6.2.0 docs</a>
   </div>
   
   <span class="navbar-text j2-coverage fw-slightly-bold small d-none d-lg-inline-block me-2">(100% documented)</span>
@@ -291,6 +291,15 @@
     
 
   <a class="j2-nav-item" href="../other-apis.html?swift#rbblockcallback">RbBlockCallback</a>
+
+
+
+  </li>
+  
+  <li>
+    
+
+  <a class="j2-nav-item" href="../other-apis.html?swift#rbsendableblockcallback">RbSendableBlockCallback</a>
 
 
 
@@ -923,12 +932,12 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
   
   
     <section id="call_argskwargsblockretentionblockcall" class="j2-item j2-swift">
-    <a name="//apple_ref/cpp/Method/func%20call(String,%20args%3A%20%5B(any%20RbObjectConvertible)%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20(any%20RbObjectConvertible)%3F%3E,%20blockRetention%3A%20RbBlockRetention,%20blockCall%3A%20RbBlockCallback)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="call_argskwargsblockretentionblockcall"></a>
-    <h4 class="visually-hidden">func call(String, args: [(any RbObjectConvertible)?], kwArgs: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;, blockRetention: RbBlockRetention, blockCall: RbBlockCallback) -&gt; RbObject?</h4>
+    <a name="//apple_ref/cpp/Method/func%20call(String,%20args%3A%20%5B(any%20RbObjectConvertible)%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20(any%20RbObjectConvertible)%3F%3E,%20blockRetention%3A%20RbBlockRetention,%20blockCall%3A%20RbSendableBlockCallback)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="call_argskwargsblockretentionblockcall"></a>
+    <h4 class="visually-hidden">func call(String, args: [(any RbObjectConvertible)?], kwArgs: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;, blockRetention: RbBlockRetention, blockCall: RbSendableBlockCallback) -&gt; RbObject?</h4>
     
     
     <a class="j2-item-title" href="#_call_argskwargsblockretentionblockcall" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_call_argskwargsblockretentionblockcall"><code>
-        <span class="j2-swift"><span class="j2-item-secondary">func </span>call<span class="j2-item-secondary">(String, </span>args<span class="j2-item-secondary">: [(any RbObjectConvertible)?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;, </span>blockRetention<span class="j2-item-secondary">: RbBlockRetention, </span>blockCall<span class="j2-item-secondary">: RbBlockCallback) -&gt; RbObject?</span></span>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>call<span class="j2-item-secondary">(String, </span>args<span class="j2-item-secondary">: [(any RbObjectConvertible)?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;, </span>blockRetention<span class="j2-item-secondary">: RbBlockRetention, </span>blockCall<span class="j2-item-secondary">: RbSendableBlockCallback) -&gt; RbObject?</span></span>
         
       </code></a>
     <div class="collapse  j2-item-popopen-wrapper" id="_call_argskwargsblockretentionblockcall">
@@ -961,7 +970,7 @@ See <a href="../types/rberror.html?swift#history1"><code>RbError.history</code><
     args: [(any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?] = [],
     kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, (any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?&gt; = [:],
     blockRetention: <a href="../types/rbblockretention.html?swift">RbBlockRetention</a>,
-    blockCall: @escaping <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">@Sendable</a> <a href="../other-apis.html?swift#rbblockcallback">RbBlockCallback</a>
+    blockCall: @escaping <a href="../other-apis.html?swift#rbsendableblockcallback">RbSendableBlockCallback</a>
 ) -&gt; <a href="../types/rbobject13.html?swift">RbObject</a>?</code></pre>
   </div>
 
@@ -1310,12 +1319,12 @@ public func call(
   
   
     <section id="callsymbolargskwargsblockretentionblockcall" class="j2-item j2-swift">
-    <a name="//apple_ref/cpp/Method/func%20call(symbol%3A%20any%20RbObjectConvertible,%20args%3A%20%5B(any%20RbObjectConvertible)%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20(any%20RbObjectConvertible)%3F%3E,%20blockRetention%3A%20RbBlockRetention,%20blockCall%3A%20RbBlockCallback)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="callsymbolargskwargsblockretentionblockcall"></a>
-    <h4 class="visually-hidden">func call(symbol: any RbObjectConvertible, args: [(any RbObjectConvertible)?], kwArgs: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;, blockRetention: RbBlockRetention, blockCall: RbBlockCallback) -&gt; RbObject?</h4>
+    <a name="//apple_ref/cpp/Method/func%20call(symbol%3A%20any%20RbObjectConvertible,%20args%3A%20%5B(any%20RbObjectConvertible)%3F%5D,%20kwArgs%3A%20KeyValuePairs%3CString,%20(any%20RbObjectConvertible)%3F%3E,%20blockRetention%3A%20RbBlockRetention,%20blockCall%3A%20RbSendableBlockCallback)%20-%3E%20RbObject%3F" class="dashAnchor j2-item-dash-anchor" data-item-id="callsymbolargskwargsblockretentionblockcall"></a>
+    <h4 class="visually-hidden">func call(symbol: any RbObjectConvertible, args: [(any RbObjectConvertible)?], kwArgs: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;, blockRetention: RbBlockRetention, blockCall: RbSendableBlockCallback) -&gt; RbObject?</h4>
     
     
     <a class="j2-item-title" href="#_callsymbolargskwargsblockretentionblockcall" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="_callsymbolargskwargsblockretentionblockcall"><code>
-        <span class="j2-swift"><span class="j2-item-secondary">func </span>call<span class="j2-item-secondary">(</span>symbol<span class="j2-item-secondary">: any RbObjectConvertible, </span>args<span class="j2-item-secondary">: [(any RbObjectConvertible)?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;, </span>blockRetention<span class="j2-item-secondary">: RbBlockRetention, </span>blockCall<span class="j2-item-secondary">: RbBlockCallback) -&gt; RbObject?</span></span>
+        <span class="j2-swift"><span class="j2-item-secondary">func </span>call<span class="j2-item-secondary">(</span>symbol<span class="j2-item-secondary">: any RbObjectConvertible, </span>args<span class="j2-item-secondary">: [(any RbObjectConvertible)?], </span>kwArgs<span class="j2-item-secondary">: KeyValuePairs&lt;String, (any RbObjectConvertible)?&gt;, </span>blockRetention<span class="j2-item-secondary">: RbBlockRetention, </span>blockCall<span class="j2-item-secondary">: RbSendableBlockCallback) -&gt; RbObject?</span></span>
         
       </code></a>
     <div class="collapse  j2-item-popopen-wrapper" id="_callsymbolargskwargsblockretentionblockcall">
@@ -1349,7 +1358,7 @@ public func call(
     args: [(any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?] = [],
     kwArgs: <a href="https://developer.apple.com/documentation/swift/keyvaluepairs?language=swift">KeyValuePairs</a>&lt;<a href="../extensions/string.html?swift">String</a>, (any <a href="../types/rbobjectconvertible.html?swift">RbObjectConvertible</a>)?&gt; = [:],
     blockRetention: <a href="../types/rbblockretention.html?swift">RbBlockRetention</a> = .none,
-    blockCall: @escaping <a href="https://developer.apple.com/documentation/swift/sendable?language=swift">@Sendable</a> <a href="../other-apis.html?swift#rbblockcallback">RbBlockCallback</a>
+    blockCall: @escaping <a href="../other-apis.html?swift#rbsendableblockcallback">RbSendableBlockCallback</a>
 ) -&gt; <a href="../types/rbobject13.html?swift">RbObject</a>?</code></pre>
   </div>
 
@@ -2628,7 +2637,7 @@ public func get(_ name: <a href="../extensions/string.html?swift">String</a>) -&
   <div class="col j2-footer small pt-2">
     <p>Distributed under the MIT license.  Maintained by <a href="mailto:johnfairh@gmail.com">John Fairhurst</a>.</p>
     
-    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external noopener">Bebop v1.12.0</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫</a>.</p>
+    <p>Generated by <a class="link" href="https://github.com/johnfairh/Bebop" target="_blank" rel="external noopener">Bebop v1.13.0</a> using the FW2020 theme, based on technology from <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫</a>.</p>
     
   </div>
 </footer>

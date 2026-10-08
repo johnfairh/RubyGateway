@@ -158,7 +158,7 @@ log(object2_to_log, priority: 2)
 ## Requirements
 
 * Swift 6.0 or later, from swift.org or Xcode 16+
-* macOS (tested on 15.3) or Linux (tested on Ubuntu Jammy)
+* macOS (tested on 26.6) or Linux (tested on Ubuntu Jammy)
 * Ruby 2.6 or later including development files:
   * For macOS, these come with Xcode.
   * For Linux you may need to install a -dev package depending on how your Ruby
@@ -184,7 +184,7 @@ github "johnfairh/RubyGateway"
 
 Swift package manager for macOS or Linux:
 ```
-.package(url: "https://github.com/johnfairh/RubyGateway", from: "6.1.0")
+.package(url: "https://github.com/johnfairh/RubyGateway", from: "6.2.0")
 ```
 
 ### Configuring CRuby

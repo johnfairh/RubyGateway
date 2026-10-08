@@ -65,7 +65,7 @@
     "parent_name" : "Dictionary"
   },
   "extensions\/double.html?swift" : {
-    "abstract" : "A double-precision, floating-point value type.",
+    "abstract" : "A double-precision (64-bit), floating-point value type.",
     "name" : "Double"
   },
   "extensions\/double.html?swift#init_9" : {
@@ -79,7 +79,7 @@
     "parent_name" : "Double"
   },
   "extensions\/float.html?swift" : {
-    "abstract" : "A single-precision, floating-point value type.",
+    "abstract" : "A single-precision (32-bit), floating-point value type.",
     "name" : "Float"
   },
   "extensions\/float.html?swift#init_25" : {
@@ -277,6 +277,10 @@
   "other-apis.html?swift#rbblockcallback" : {
     "abstract" : "The type of a block implemented in Swift.",
     "name" : "RbBlockCallback"
+  },
+  "other-apis.html?swift#rbsendableblockcallback" : {
+    "abstract" : "The type of a block implemented in Swift – Sendable version",
+    "name" : "RbSendableBlockCallback"
   },
   "swift-method-apis.html?swift#rbboundmethodcallback" : {
     "abstract" : "The function signature for a Ruby method implemented as a Swift method of\na Swift bound object that returns a value.",

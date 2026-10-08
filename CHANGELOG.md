@@ -1,4 +1,8 @@
-## 6.1.1 -- 10th February 2025
+# 6.2.0 -- 8th October 2026
+
+* Support building with Swift 6.4
+
+# 6.1.1 -- 10th February 2025
 
 * More robust error handling (#55, #58)
 * Stop calling `ruby_cleanup` at exit on thread 0 (#56)
